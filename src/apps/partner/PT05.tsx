@@ -1,145 +1,106 @@
 import { useState } from 'react'
-import { BadgeCheck, Check, UserCheck, UserPlus, Users } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useDemo } from '@/lib/store'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { BadgeCheck, UserCheck, X } from 'lucide-react'
+import AgentAvatar from '@/components/smoothui/agent-avatar'
+import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Fade, Screen } from '@/components/phone/Screen'
-import { Avatar, Pill, SectionLabel } from '@/components/phone/Controls'
-import { partner, staff } from '@/data/seed'
+import { BodyArea, Screen } from '@/components/phone/Screen'
+import { ActionRow, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
+import { Pill } from '@/components/phone/Controls'
+import { staff } from '@/data/seed'
+import { useDemo } from '@/lib/store'
+import type { StaffMember } from '@/data/types'
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-}
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
 export function PT05() {
   const { notify } = useDemo()
-  const [approved, setApproved] = useState(false)
-  const pending = staff.find((s) => s.status === 'pending')
-  const active = staff.filter((s) => s.status === 'active')
-  const paused = staff.filter((s) => s.status === 'paused')
+  const [list, setList] = useState<StaffMember[]>(staff)
+  const pending = list.find((s) => s.status === 'pending')
+  const active = list.filter((s) => s.status === 'active')
+  const paused = list.filter((s) => s.status === 'paused')
+
+  const decide = (id: string, approve: boolean) => {
+    setList((prev) => prev.map((s) => (s.id === id ? { ...s, status: approve ? 'active' : 'paused' } : s)))
+    notify(
+      approve
+        ? { title: 'Staff approved', body: 'Kavitha Nair can now take Ayvaa sessions', kind: 'ok' }
+        : { title: 'Request declined', body: 'Kavitha Nair was notified', kind: 'warn' },
+    )
+  }
 
   return (
     <Screen>
-      <AppBar
-        title="Your staff on Ayvaa"
-        subtitle={`${partner.name} · six professionals`}
-        trailing={
-          <button
-            onClick={() => notify({ title: 'Invite staff', body: 'Invitation link ready to share with a professional', kind: 'info' })}
-            className="grid size-10.5 place-items-center rounded-full bg-tonal text-foreground/70"
-            aria-label="Add staff"
-          >
-            <UserPlus className="size-5" />
-          </button>
-        }
-      />
+      <AppBar title="Staff on Ayvaa" subtitle="Sunrise Multispeciality Hospital" />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
-          {pending && !approved && (
+          {pending && (
+            <motion.div variants={item}>
+              <ScreenCard className="border-l-4 border-l-primary">
+                <div className="flex items-center gap-3">
+                  <AgentAvatar seed={pending.name} size={46} />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-bold text-foreground">{pending.name}</div>
+                    <div className="text-xs font-medium text-muted-foreground">{pending.role} · wants to join Ayvaa</div>
+                  </div>
+                  <Pill tone="warn">Needs approval</Pill>
+                </div>
+                <div className="mt-3 rounded-[14px] bg-tonal p-3 text-[13px] font-medium text-foreground/80">{pending.note}</div>
+                <div className="mt-3 flex gap-2.5">
+                  <SmoothButton variant="outline" shape="pill" className="flex-1" onClick={() => decide(pending.id, false)}>
+                    <X className="size-4" /> Decline
+                  </SmoothButton>
+                  <SmoothButton variant="default" shape="pill" className="flex-1" onClick={() => decide(pending.id, true)}>
+                    <UserCheck className="size-4" /> Approve
+                  </SmoothButton>
+                </div>
+              </ScreenCard>
+            </motion.div>
+          )}
+          <motion.div variants={item}>
+            <SectionHeader label="Active staff" />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard className="p-2">
+              {active.map((s) => (
+                <div key={s.id} className="px-2 py-1.5">
+                  <ActionRow
+                    icon={BadgeCheck}
+                    title={s.name}
+                    subtitle={s.week ?? s.stats}
+                    onClick={() => notify({ title: 'Staff opened', body: `${s.name} · profile and sessions attached`, kind: 'info' })}
+                  />
+                </div>
+              ))}
+            </ScreenCard>
+          </motion.div>
+          {paused.length > 0 && (
             <>
               <motion.div variants={item}>
-                <SectionLabel>Needs your approval · one</SectionLabel>
+                <SectionHeader label="Paused" />
               </motion.div>
               <motion.div variants={item}>
-                <Card className="flex flex-col gap-3 rounded-[20px] border-l-4 border-l-primary p-4">
-                  <div className="flex items-center gap-3">
-                    <Avatar tone="brand">
-                      <Users className="size-5" />
-                    </Avatar>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-bold text-foreground">{pending.name}</span>
-                      <span className="block truncate text-xs font-medium text-muted-foreground">{pending.note}</span>
-                    </span>
-                  </div>
-                  <div className="flex gap-2">
-                    <Pill tone="ok">
-                      <Check className="size-3.5" />
-                      Ayvaa checks done
-                    </Pill>
-                    <Pill tone="warn">Your approval</Pill>
-                  </div>
-                  <div className="flex gap-2.5">
-                    <Button
-                      variant="secondary"
-                      onClick={() => notify({ title: 'Declined', body: `${pending.name} · reason required before the record is sealed`, kind: 'warn' })}
-                      className="h-13 flex-1 rounded-full text-[15px] font-bold"
-                    >
-                      Decline
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setApproved(true)
-                        notify({ title: 'Approved', body: `${pending.name} · now linked to ${partner.name} for referrals and billing`, kind: 'ok' })
-                      }}
-                      className="h-13 flex-[1.3] rounded-full text-[15px] font-bold"
-                    >
-                      <UserCheck className="size-5" />
-                      Approve
-                    </Button>
-                  </div>
-                </Card>
+                <ScreenCard className="p-2 opacity-70">
+                  {paused.map((s) => (
+                    <div key={s.id} className="px-2 py-1.5">
+                      <ActionRow
+                        icon={BadgeCheck}
+                        title={s.name}
+                        subtitle={s.note}
+                        onClick={() => notify({ title: 'Staff opened', body: `${s.name} · paused by your admin`, kind: 'info' })}
+                      />
+                    </div>
+                  ))}
+                </ScreenCard>
               </motion.div>
             </>
           )}
           <motion.div variants={item}>
-            <SectionLabel>Active staff</SectionLabel>
-          </motion.div>
-          <motion.div variants={item}>
-            <Card className="rounded-[20px] p-2">
-              {active.map((s, i) => (
-                <div key={s.id}>
-                  {i > 0 && <div className="mx-3 h-px bg-border" />}
-                  <div className="flex items-center gap-3 rounded-[14px] p-2">
-                    <Avatar tone="alt">
-                      <Users className="size-5" />
-                    </Avatar>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-bold text-foreground">
-                        {s.name} · {s.role.toLowerCase()}
-                      </span>
-                      <span className="block truncate text-xs font-medium text-muted-foreground">{s.week}</span>
-                    </span>
-                    <Pill tone="ok">Active</Pill>
-                  </div>
-                </div>
-              ))}
-            </Card>
-          </motion.div>
-          <motion.div variants={item}>
-            <SectionLabel>Paused</SectionLabel>
-          </motion.div>
-          <motion.div variants={item}>
-            <Card className="flex items-center gap-3 rounded-[20px] p-3 opacity-70">
-              <Avatar tone="alt">
-                <Users className="size-5" />
-              </Avatar>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-bold text-foreground">{paused[0].name}</span>
-                <span className="block truncate text-xs font-medium text-muted-foreground">{paused[0].note}</span>
-              </span>
-              <Pill tone="grey">Paused</Pill>
-            </Card>
-          </motion.div>
-          <motion.div variants={item}>
-            <Card className="flex items-start gap-3 rounded-[20px] border-0 bg-tonal p-4">
-              <BadgeCheck className="mt-0.5 size-5.5 shrink-0 text-primary" />
-              <p className="text-[13px] font-medium leading-[19px] text-muted-foreground">
-                Staff keep their own Ayvaa credentials. Your approval links them to {partner.name} for referrals and
-                corporate billing. Every change is logged.
-              </p>
-            </Card>
+            <InfoCard icon={BadgeCheck} body="Every staff member is verified by Ayvaa before their first session. You approve who joins under Sunrise." />
           </motion.div>
         </motion.div>
       </BodyArea>
-      <Fade />
     </Screen>
   )
 }

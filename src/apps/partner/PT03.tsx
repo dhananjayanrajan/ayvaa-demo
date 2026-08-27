@@ -1,102 +1,84 @@
-import { Cake, CheckCircle2, ClipboardList, FileText, Home, Mail, Pill, PersonStanding, Send, ShieldCheck, StickyNote } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useDemo } from '@/lib/store'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Send, ShieldCheck } from 'lucide-react'
+import SmoothButton from '@/components/smoothui/smooth-button'
+import AnimatedInput from '@/components/smoothui/animated-input'
+import AnimatedTags from '@/components/smoothui/animated-tags'
+import AnimatedFileUpload from '@/components/smoothui/animated-file-upload'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
-import { Chip, Field, SectionLabel } from '@/components/phone/Controls'
-import { referrals } from '@/data/seed'
+import { InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
+import { Field } from '@/components/phone/Controls'
+import { useDemo } from '@/lib/store'
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-}
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-}
-
-const categories = ['Elderly', 'Post-operative', 'Chronic', 'Pediatric', 'Palliative', 'Disability']
+const categories = ['Elderly care', 'Post-operative', 'Chronic care', 'Pediatric', 'Palliative', 'Disability']
 
 export function PT03() {
   const { notify } = useDemo()
-  const patient = referrals[0]
-
   return (
     <Screen>
-      <AppBar title="Refer a patient" />
+      <AppBar title="Refer a patient" subtitle="Sunrise Multispeciality Hospital" />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
-            <Card className="flex items-start gap-3 rounded-[20px] border-0 bg-tonal p-4">
-              <ShieldCheck className="mt-0.5 size-5.5 shrink-0 text-primary" />
-              <p className="text-[13px] font-medium leading-[19px] text-muted-foreground">
-                The patient&apos;s guardian approves everything before care starts. Ayvaa never begins care on a
-                referral alone.
-              </p>
-            </Card>
+            <InfoCard icon={ShieldCheck} body="Referrals are shared only with Ayvaa's care team. The guardian consents before any caregiver is matched." />
           </motion.div>
           <motion.div variants={item}>
-            <SectionLabel>Patient details</SectionLabel>
-          </motion.div>
-          <motion.div variants={item} className="flex flex-col gap-2">
-            <Field icon={PersonStanding} value={patient.name} />
-            <Field icon={Cake} value={`Age ${patient.age}`} />
-            <Field icon={Mail} hint="Guardian phone number" />
-            <Field icon={Home} hint="Home address for visits" />
+            <SectionHeader label="Patient details" />
           </motion.div>
           <motion.div variants={item}>
-            <SectionLabel>Care category needed</SectionLabel>
-          </motion.div>
-          <motion.div variants={item} className="flex flex-wrap gap-2">
-            {categories.map((c) => (
-              <Chip key={c} on={c === 'Post-operative'}>
-                {c}
-              </Chip>
-            ))}
+            <AnimatedInput label="Full name" placeholder="Patient's full name" />
           </motion.div>
           <motion.div variants={item}>
-            <SectionLabel>Discharge summary</SectionLabel>
+            <AnimatedInput label="Age" placeholder="Age" />
           </motion.div>
           <motion.div variants={item}>
-            <Card className="flex items-center gap-3 rounded-[20px] p-3">
-              <span className="grid size-11 shrink-0 place-items-center rounded-[14px] bg-error-bg text-destructive">
-                <FileText className="size-5" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-bold text-foreground">shanta-discharge.pdf</span>
-                <span className="block truncate text-xs font-medium text-muted-foreground">
-                  Attached from hospital records · shared with consent
-                </span>
-              </span>
-              <CheckCircle2 className="size-5 shrink-0 text-primary" />
-            </Card>
+            <AnimatedInput label="Guardian phone" placeholder="Guardian's mobile number" />
           </motion.div>
           <motion.div variants={item}>
-            <SectionLabel>Recommended care plan</SectionLabel>
+            <AnimatedInput label="Care address" placeholder="Area, Hyderabad" />
           </motion.div>
           <motion.div variants={item}>
-            <Card className="flex flex-col gap-2 rounded-[20px] p-3">
-              <Field icon={ClipboardList} value="Hip recovery · 6 weeks · 3 visits weekly" />
-              <Field icon={Pill} hint="Medication instructions · optional" />
-              <Field icon={StickyNote} hint="Notes for the care team · optional" />
-            </Card>
+            <SectionHeader label="Care category" />
+          </motion.div>
+          <motion.div variants={item}>
+            <AnimatedTags initialTags={categories} selectedTags={['Post-operative']} />
+          </motion.div>
+          <motion.div variants={item}>
+            <SectionHeader label="Discharge summary" />
+          </motion.div>
+          <motion.div variants={item}>
+            <AnimatedFileUpload
+              accept=".pdf"
+              onFilesSelected={(files) =>
+                notify({ title: 'File attached', body: `${files.length} file(s) ready to send`, kind: 'ok' })
+              }
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <SectionHeader label="Recommended plan" />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard className="flex flex-col gap-2.5">
+              <Field value="Post-operative care" hint="Plan" icon={ShieldCheck} />
+              <Field value="6 weeks · 3 visits a week" hint="Duration" icon={ShieldCheck} />
+              <Field value="Recovery assistant preferred" hint="Caregiver" icon={ShieldCheck} />
+            </ScreenCard>
           </motion.div>
         </motion.div>
       </BodyArea>
       <FootBar>
-        <Button
-          onClick={() => notify({ title: 'Referral sent', body: `${patient.name} · guardian gets a call within one hour`, kind: 'ok' })}
-          className="h-13 w-full rounded-full text-[15px] font-bold"
+        <SmoothButton
+          variant="default"
+          shape="pill"
+          size="lg"
+          className="w-full"
+          onClick={() => notify({ title: 'Referral sent', body: 'Ayvaa care team will reach the guardian within 2 hours', kind: 'ok' })}
         >
-          <Send className="size-5" />
-          Send referral to Ayvaa
-        </Button>
-        <div className="text-center text-xs font-medium text-muted-foreground">
-          The guardian gets a call within one hour to give consent.
-        </div>
+          <Send className="size-4" /> Send referral to Ayvaa
+        </SmoothButton>
       </FootBar>
     </Screen>
   )
