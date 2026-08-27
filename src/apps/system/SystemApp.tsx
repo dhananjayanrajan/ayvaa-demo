@@ -16,48 +16,49 @@ const tabs: Tab[] = [
   { id: 's03', label: 'Alerts', icon: BellRing },
 ]
 
-function Dock({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
+function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
   return (
-    <nav className="relative z-10 mx-3 mb-3 flex items-center gap-1 rounded-[26px] bg-[#0B231C]/90 p-1.5 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.65)] backdrop-blur-xl">
-      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[26px] border border-white/[0.08]" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent" />
-      {tabs.map((t) => {
-        const isActive = active === t.id
-        return (
-          <motion.button
-            key={t.id}
-            type="button"
-            whileTap={{ scale: 0.94 }}
-            onClick={() => onSelect(t.id)}
-            className="relative flex flex-1 flex-col items-center gap-1 rounded-[19px] px-2 py-2.5"
-          >
-            {isActive && (
-              <motion.span
-                layoutId="dock-active"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                className="absolute inset-0 rounded-[19px] bg-white/[0.08]"
-              />
-            )}
-            {isActive && (
-              <span aria-hidden className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/70 to-transparent" />
-            )}
-            <span className="relative flex h-5 items-center">
-              <t.icon
-                className={cn('h-[18px] w-[18px] transition-colors duration-200', isActive ? 'text-emerald-300' : 'text-emerald-100/35')}
-                strokeWidth={isActive ? 2.4 : 2}
-              />
-            </span>
-            <span
-              className={cn(
-                'relative text-[9px] font-extrabold uppercase tracking-[0.14em] transition-colors duration-200',
-                isActive ? 'text-emerald-200' : 'text-emerald-100/35',
-              )}
+    <nav className="relative z-10 shrink-0 border-t border-[#0B211B]/[0.06] bg-white/85 pb-2 pt-2 backdrop-blur-xl">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+      <div className="flex items-stretch gap-1 px-4">
+        {tabs.map((t) => {
+          const isActive = active === t.id
+          return (
+            <motion.button
+              key={t.id}
+              type="button"
+              whileTap={{ scale: 0.93 }}
+              onClick={() => onSelect(t.id)}
+              className="flex flex-1 flex-col items-center gap-1.5 py-1"
             >
-              {t.label}
-            </span>
-          </motion.button>
-        )
-      })}
+              <span className="relative flex h-8 w-16 items-center justify-center">
+                {isActive && (
+                  <motion.span
+                    layoutId="tabbar-chip"
+                    transition={{ type: 'spring', stiffness: 480, damping: 36 }}
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 shadow-[0_10px_20px_-10px_rgba(16,185,129,0.7)]"
+                  />
+                )}
+                <t.icon
+                  className={cn(
+                    'relative h-[17px] w-[17px] transition-colors duration-200',
+                    isActive ? 'text-white' : 'text-[#0B211B]/35',
+                  )}
+                  strokeWidth={isActive ? 2.4 : 2}
+                />
+              </span>
+              <span
+                className={cn(
+                  'text-[9.5px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200',
+                  isActive ? 'text-emerald-700' : 'text-[#0B211B]/35',
+                )}
+              >
+                {t.label}
+              </span>
+            </motion.button>
+          )
+        })}
+      </div>
     </nav>
   )
 }
@@ -96,7 +97,7 @@ export function SystemApp({ path }: { path: string }) {
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Care operations</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block rounded-full">
+      <div className="absolute bottom-6 right-6 hidden rounded-full bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
         System console
       </div>
 
@@ -123,7 +124,7 @@ export function SystemApp({ path }: { path: string }) {
                 {screen === 's03' && <S03 />}
               </motion.div>
             </AnimatePresence>
-            <Dock active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
+            <TabBar active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
           </PhoneFrame>
         </div>
       </motion.div>

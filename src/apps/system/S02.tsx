@@ -16,11 +16,10 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
-  Cta,
   Expand,
   Hero,
   Kicker,
@@ -272,15 +271,6 @@ export function S02() {
           </motion.div>
         </div>
       </BodyArea>
-      <FootBar>
-        <Cta
-          icon={Siren}
-          tone="warning"
-          onClick={() => notify({ title: 'Escalation policy', body: 'No acceptance by 9:45 AM · care team paged personally', kind: 'warn' })}
-        >
-          Open escalation policy
-        </Cta>
-      </FootBar>
     </Screen>
   )
 }

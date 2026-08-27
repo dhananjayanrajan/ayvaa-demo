@@ -7,7 +7,6 @@ import {
   CalendarPlus,
   CheckCircle2,
   CreditCard,
-  History,
   MapPin,
   Send,
   ShieldCheck,
@@ -16,11 +15,10 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
-  Cta,
   Hero,
   Kicker,
   LiveChip,
@@ -213,14 +211,6 @@ export function S01() {
           </motion.div>
         </div>
       </BodyArea>
-      <FootBar>
-        <Cta
-          icon={History}
-          onClick={() => notify({ title: 'System history', body: 'Full event log opened · 1,204 events this month', kind: 'info' })}
-        >
-          View full system history
-        </Cta>
-      </FootBar>
     </Screen>
   )
 }

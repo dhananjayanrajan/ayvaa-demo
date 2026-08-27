@@ -2,30 +2,28 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import {
   AlarmClock,
-  Ban,
   BellRing,
   CalendarCheck,
   Check,
   ChevronDown,
   CreditCard,
-  LayoutDashboard,
   Link2,
+  PauseCircle,
   Route,
   ScrollText,
   ShieldCheck,
   Smartphone,
-  SlidersHorizontal,
+  Siren,
   Stethoscope,
   TrendingUp,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
-  Cta,
   Expand,
   Hero,
   Kicker,
@@ -62,8 +60,8 @@ const destinations: { icon: LucideIcon; label: string; sub: string }[] = [
   { icon: Smartphone, label: "Family's phone", sub: 'Instant push' },
   { icon: Stethoscope, label: "Caregiver's app", sub: 'Live shift' },
   { icon: TrendingUp, label: "Partner's metrics", sub: 'Realtime' },
-  { icon: LayoutDashboard, label: 'Admin console', sub: 'Oversight' },
   { icon: ScrollText, label: 'Audit log', sub: 'Immutable record' },
+  { icon: Siren, label: 'Escalation pager', sub: 'Supervisors, in seconds' },
 ]
 
 function PushPreview({ title, body, time, onDark }: { title: string; body: string; time: string; onDark: boolean }) {
@@ -200,29 +198,42 @@ export function S03() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <Section label="Incident auto-linking" trailing={<Chip intent="danger">{incidentLinking.count}</Chip>} />
+              <Section label="Incident auto-linking" trailing={<Chip intent="danger">This week</Chip>} />
             </motion.div>
 
             <motion.div variants={rise}>
               <Card intent="danger">
-                <div className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Tile icon={Link2} tone="danger" />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-bold tracking-tight text-[#0B211B]">Auto-linked to care plans</div>
-                      <div className="truncate text-[11px] font-semibold text-rose-500/80">Supervisors notified in seconds</div>
+                <div className="p-5">
+                  <div className="flex items-start gap-3.5">
+                    <Tile icon={Link2} tone="danger" size="lg" />
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">
+                        {incidentLinking.count} incidents · auto-linked
+                      </div>
+                      <p className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/60">{incidentLinking.body}</p>
                     </div>
-                    <Chip intent="danger">{incidentLinking.count}</Chip>
                   </div>
-                  <p className="mt-3 text-[13px] font-medium leading-relaxed text-[#0B211B]/65">{incidentLinking.body}</p>
-                  <Panel intent="danger" className="mt-3 p-3">
-                    <p className="text-[12px] font-medium leading-relaxed text-[#0B211B]/75">{incidentLinking.paged}</p>
+
+                  <Panel intent="danger" className="mt-4 p-4">
+                    <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-600/70">
+                      <Siren className="h-3 w-3" strokeWidth={2.5} aria-hidden />
+                      What supervisors received
+                    </div>
+                    <p className="mt-2 text-[12.5px] font-medium leading-relaxed text-[#0B211B]/80">{incidentLinking.paged}</p>
+                    <div aria-hidden className="my-3 h-px bg-rose-500/10" />
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500/15">
+                        <PauseCircle className="h-3.5 w-3.5 text-rose-600" strokeWidth={2.4} aria-hidden />
+                      </span>
+                      <span className="min-w-0 flex-1 text-xs font-semibold leading-snug text-rose-600/90">
+                        {incidentLinking.paused}
+                      </span>
+                    </div>
                   </Panel>
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rose-500/15">
-                      <Ban className="h-3 w-3 text-rose-600" strokeWidth={2.5} aria-hidden />
-                    </span>
-                    <span className="min-w-0 flex-1 text-xs font-semibold leading-snug text-rose-600/85">{incidentLinking.paused}</span>
+
+                  <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-rose-600/60">
+                    <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
+                    Closed loop · no manual follow-up needed
                   </div>
                 </div>
               </Card>
@@ -276,14 +287,6 @@ export function S03() {
           </motion.div>
         </div>
       </BodyArea>
-      <FootBar>
-        <Cta
-          icon={SlidersHorizontal}
-          onClick={() => notify({ title: 'Notification rules', body: 'Quiet hours 21:00–07:00 · escalations always break through', kind: 'info' })}
-        >
-          Tune notification rules
-        </Cta>
-      </FootBar>
     </Screen>
   )
 }
