@@ -1,7 +1,22 @@
+import { RouterProvider, useRouter } from '@/lib/router'
+import { DemoProvider } from '@/lib/store'
+import { Toaster } from '@/components/ui/sonner'
+import { Launcher } from '@/presentation/Launcher'
+import { SystemApp } from '@/apps/system/SystemApp'
+
+function Routes() {
+  const { path } = useRouter()
+  if (path.startsWith('/system')) return <SystemApp path={path} />
+  return <Launcher />
+}
+
 export default function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
-      <p className="text-sm text-muted-foreground">Ayvaa application ready.</p>
-    </div>
+    <RouterProvider>
+      <DemoProvider>
+        <Routes />
+        <Toaster />
+      </DemoProvider>
+    </RouterProvider>
   )
 }

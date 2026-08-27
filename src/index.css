@@ -24,6 +24,48 @@
   --input: #e1ece7;
   --ring: #00a88e;
   --radius: 1rem;
+  --nav: #eaf2ee;
+  --tonal: #ebf3ef;
+  --mint: #c9efe4;
+  --brand-ink: #00584a;
+  --warn-bg: #fbefd6;
+  --warn-ink: #6b5312;
+  --error-bg: #fbddd9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-nav: var(--nav);
+  --color-tonal: var(--tonal);
+  --color-mint: var(--mint);
+  --color-brand-ink: var(--brand-ink);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-ink: var(--warn-ink);
+  --color-error-bg: var(--error-bg);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -33,5 +75,6 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Inter Variable', sans-serif;
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
