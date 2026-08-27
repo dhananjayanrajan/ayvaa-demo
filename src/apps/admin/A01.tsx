@@ -1,18 +1,34 @@
 import { motion } from 'motion/react'
-import { Activity, AlertTriangle, CalendarCheck, ShieldCheck } from 'lucide-react'
+import { Activity, AlertTriangle, CalendarCheck, Hourglass, ShieldCheck, UserCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, IconTile, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
 import { adminAttention, adminMetrics } from '@/data/seed'
+import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
+const attentionIcons = [Hourglass, UserCheck, ShieldCheck]
+
 export function A01() {
   const { navigate } = useRouter()
+  const { notify, dispatch } = useDemo()
+
+  const attentionActions = [
+    () =>
+      notify({
+        title: 'Dispatch round in progress',
+        body: `Round ${dispatch.round} · ${dispatch.waiting} offers waiting · expires ${dispatch.expiresAt}`,
+        kind: 'info',
+      }),
+    () => navigate('/admin/a03'),
+    () => navigate('/admin/a06'),
+  ]
+
   return (
     <Screen>
       <AppBar
@@ -47,16 +63,19 @@ export function A01() {
           </motion.div>
           <motion.div variants={item}>
             <ScreenCard className="p-2">
-              {adminAttention.map((a, i) => (
-                <div key={i} className="px-2 py-1.5">
-                  <ActionRow
-                    icon={AlertTriangle}
-                    title={a.title}
-                    subtitle={a.body}
-                    onClick={() => navigate(i === 1 ? '/admin/a03' : i === 2 ? '/admin/a06' : '/admin/a01')}
-                  />
-                </div>
-              ))}
+              {adminAttention.map((a, i) => {
+                const Icon = attentionIcons[i] ?? AlertTriangle
+                return (
+                  <div key={a.title} className="px-2 py-1.5">
+                    <ActionRow
+                      icon={Icon}
+                      title={a.title}
+                      subtitle={a.body}
+                      onClick={attentionActions[i]}
+                    />
+                  </div>
+                )
+              })}
             </ScreenCard>
           </motion.div>
           <motion.div variants={item}>

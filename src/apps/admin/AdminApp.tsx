@@ -1,6 +1,7 @@
 import { BarChart3, LayoutDashboard, ShieldCheck, Ticket, Users } from 'lucide-react'
-import { PhoneFrame, StatusBar } from '@/components/phone/PhoneFrame'
+import { PhoneFrame } from '@/components/phone/PhoneFrame'
 import { NavBar, type NavTab } from '@/components/phone/NavBar'
+import { useRouter } from '@/lib/router'
 import { A01 } from './A01'
 import { A02 } from './A02'
 import { A03 } from './A03'
@@ -22,11 +23,11 @@ const tabs: NavTab[] = [
 const withNav = ['a01', 'a04', 'a05', 'a08', 'a09']
 
 export function AdminApp({ path }: { path: string }) {
+  const { navigate } = useRouter()
   const screen = path.replace('/admin/', '')
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#EFF5F2] p-9">
       <PhoneFrame>
-        <StatusBar time="9:02" />
         {screen === 'a01' && <A01 />}
         {screen === 'a02' && <A02 />}
         {screen === 'a03' && <A03 />}
@@ -37,7 +38,7 @@ export function AdminApp({ path }: { path: string }) {
         {screen === 'a08' && <A08 />}
         {screen === 'a09' && <A09 />}
         {withNav.includes(screen) && (
-          <NavBar tabs={tabs} active={screen} onSelect={(id) => (window.location.hash = `/admin/${id}`)} />
+          <NavBar tabs={tabs} active={screen} onSelect={(id) => navigate(`/admin/${id}`)} />
         )}
       </PhoneFrame>
     </div>
