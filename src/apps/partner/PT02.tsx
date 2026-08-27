@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Building2, ReceiptText, UserPlus, Users } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Fade, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
 import { partner, referrals } from '@/data/seed'
@@ -68,9 +68,11 @@ export function PT02() {
               />
             </ScreenCard>
           </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of partnership" />
+          </motion.div>
         </motion.div>
       </BodyArea>
-      <Fade />
     </Screen>
   )
 }

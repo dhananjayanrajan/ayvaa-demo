@@ -4,7 +4,7 @@ import SmoothButton from '@/components/smoothui/smooth-button'
 import AnimatedProgressBar from '@/components/smoothui/animated-progress-bar'
 import AnimatedStepper from '@/components/smoothui/animated-stepper'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { latestVisit, referralJourney, referrals } from '@/data/seed'
@@ -64,6 +64,7 @@ export function PT04() {
           <motion.div variants={item}>
             <InfoCard icon={Eye} body="Visit summaries are shared with Sunrise only after the guardian consents. Nothing is visible before that." />
           </motion.div>
+          <EndOfScroll label="End of referral" />
         </motion.div>
       </BodyArea>
       <FootBar>

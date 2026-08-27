@@ -1,11 +1,10 @@
 import { motion } from 'motion/react'
 import { Send, ShieldCheck } from 'lucide-react'
 import SmoothButton from '@/components/smoothui/smooth-button'
-import AnimatedInput from '@/components/smoothui/animated-input'
 import AnimatedTags from '@/components/smoothui/animated-tags'
 import AnimatedFileUpload from '@/components/smoothui/animated-file-upload'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Field } from '@/components/phone/Controls'
 import { useDemo } from '@/lib/store'
@@ -29,16 +28,16 @@ export function PT03() {
             <SectionHeader label="Patient details" />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Full name" placeholder="Patient's full name" />
+            <Field label="Full name" value="Mrs. Shanta Iyer" hint="Patient's full name" onClick={() => notify({ title: 'Patient', body: 'Mrs. Shanta Iyer · 71 · referred by Dr. Venkatesh', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Age" placeholder="Age" />
+            <Field label="Age" value="71" hint="Age" onClick={() => notify({ title: 'Age', body: '71 years · post-operative hip recovery', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Guardian phone" placeholder="Guardian's mobile number" />
+            <Field label="Guardian phone" value="+91 98450 12345" hint="Guardian's mobile number" onClick={() => notify({ title: 'Guardian', body: 'Priya Sharma · daughter · primary contact', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Care address" placeholder="Area, Hyderabad" />
+            <Field label="Care address" value="Jubilee Hills, Hyderabad" hint="Area, Hyderabad" onClick={() => notify({ title: 'Care address', body: 'Jubilee Hills, Hyderabad · verified by Ayvaa', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
             <SectionHeader label="Care category" />
@@ -62,10 +61,13 @@ export function PT03() {
           </motion.div>
           <motion.div variants={item}>
             <ScreenCard className="flex flex-col gap-2.5">
-              <Field value="Post-operative care" hint="Plan" icon={ShieldCheck} />
-              <Field value="6 weeks · 3 visits a week" hint="Duration" icon={ShieldCheck} />
-              <Field value="Recovery assistant preferred" hint="Caregiver" icon={ShieldCheck} />
+              <Field value="Post-operative care" hint="Plan" icon={ShieldCheck} onClick={() => notify({ title: 'Plan', body: 'Post-operative care · clinical recommendation', kind: 'info' })} />
+              <Field value="6 weeks · 3 visits a week" hint="Duration" icon={ShieldCheck} onClick={() => notify({ title: 'Duration', body: '6 weeks · 3 visits a week', kind: 'info' })} />
+              <Field value="Recovery assistant preferred" hint="Caregiver" icon={ShieldCheck} onClick={() => notify({ title: 'Caregiver', body: 'Recovery assistant preferred by the family', kind: 'info' })} />
             </ScreenCard>
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of referral" />
           </motion.div>
         </motion.div>
       </BodyArea>

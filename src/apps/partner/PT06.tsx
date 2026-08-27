@@ -4,7 +4,7 @@ import AgentAvatar from '@/components/smoothui/agent-avatar'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import ReviewsCarousel from '@/components/smoothui/reviews-carousel'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard, ScreenCard, SectionHeader, StatRow } from '@/components/phone/ScreenBlocks'
 import { StatCard } from '@/components/phone/Controls'
 import { staff, staffFeedback } from '@/data/seed'
@@ -78,6 +78,7 @@ export function PT06() {
           <motion.div variants={item}>
             <InfoCard icon={Lock} body="Feedback is shown to partners only after the family approves sharing. Nothing is ever edited." />
           </motion.div>
+          <EndOfScroll label="End of performance" />
         </motion.div>
       </BodyArea>
       <FootBar>

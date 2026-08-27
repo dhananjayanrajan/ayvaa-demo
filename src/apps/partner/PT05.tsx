@@ -4,7 +4,7 @@ import { BadgeCheck, UserCheck, X } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { staff } from '@/data/seed'
@@ -99,6 +99,7 @@ export function PT05() {
           <motion.div variants={item}>
             <InfoCard icon={BadgeCheck} body="Every staff member is verified by Ayvaa before their first session. You approve who joins under Sunrise." />
           </motion.div>
+          <EndOfScroll label="End of staff" />
         </motion.div>
       </BodyArea>
     </Screen>

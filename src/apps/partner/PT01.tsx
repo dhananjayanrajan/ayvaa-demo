@@ -2,14 +2,12 @@ import { motion } from 'motion/react'
 import { ArrowRight, Eye, EyeOff, KeyRound, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
 import SmoothButton from '@/components/smoothui/smooth-button'
-import AnimatedInput from '@/components/smoothui/animated-input'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard } from '@/components/phone/ScreenBlocks'
 import { Field, Pill } from '@/components/phone/Controls'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
@@ -36,10 +34,10 @@ export function PT01() {
             </div>
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Organisation" defaultValue="Sunrise Multispeciality Hospital" icon={<KeyRound className="size-4" />} />
+            <Field label="Organisation" value="Sunrise Multispeciality Hospital" icon={KeyRound} onClick={() => notify({ title: 'Organisation', body: 'Sunrise Multispeciality Hospital · provisioned by admin', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedInput label="Work email" defaultValue="care.ops@sunrisehospitals.in" icon={<KeyRound className="size-4" />} />
+            <Field label="Work email" value="care.ops@sunrisehospitals.in" icon={KeyRound} onClick={() => notify({ title: 'Work email', body: 'care.ops@sunrisehospitals.in · access last used today', kind: 'info' })} />
           </motion.div>
           <motion.div variants={item}>
             <Field
@@ -83,6 +81,9 @@ export function PT01() {
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={ShieldCheck} body="Provisioned by your hospital admin. Every sign-in is logged and tied to your organisation." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of sign in" />
           </motion.div>
         </motion.div>
       </BodyArea>

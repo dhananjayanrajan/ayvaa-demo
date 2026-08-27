@@ -3,7 +3,7 @@ import { ClipboardCheck, Download, ReceiptText } from 'lucide-react'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import PriceFlow from '@/components/smoothui/price-flow'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { ActionRow, InfoCard, ScreenCard, SectionHeader, StatRow } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
@@ -86,6 +86,7 @@ export function PT07() {
               />
             </ScreenCard>
           </motion.div>
+          <EndOfScroll label="End of billing" />
         </motion.div>
       </BodyArea>
       <FootBar>
