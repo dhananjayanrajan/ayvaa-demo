@@ -1,5 +1,10 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Avatar as UIAvatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 export function Pill({
@@ -12,21 +17,15 @@ export function Pill({
   className?: string
 }) {
   const tones = {
-    ok: 'bg-mint text-brand-ink',
-    warn: 'bg-warn-bg text-warn-ink',
-    grey: 'bg-tonal text-foreground/70',
-    error: 'bg-destructive text-white',
+    ok: 'border-transparent bg-mint text-brand-ink',
+    warn: 'border-transparent bg-warn-bg text-warn-ink',
+    grey: 'border-transparent bg-tonal text-foreground/70',
+    error: 'border-transparent bg-destructive text-white',
   }
   return (
-    <span
-      className={cn(
-        'inline-flex h-[26px] shrink-0 items-center gap-1 rounded-full px-2.5 text-[11px] font-bold tracking-wide',
-        tones[tone],
-        className,
-      )}
-    >
+    <Badge variant="outline" className={cn('h-[26px] rounded-full px-2.5 text-[11px] font-bold tracking-wide', tones[tone], className)}>
       {children}
-    </span>
+    </Badge>
   )
 }
 
@@ -37,16 +36,17 @@ export function Chip({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { on?: boolean }) {
   return (
-    <button
+    <Button
+      variant={on ? 'default' : 'outline'}
       className={cn(
-        'inline-flex h-[34px] shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium transition-colors',
-        on ? 'border-transparent bg-mint font-bold text-brand-ink' : 'border-border bg-card text-foreground/70',
+        'h-[34px] rounded-full px-3.5 text-[13px] font-medium',
+        on && 'border-transparent bg-mint font-bold text-brand-ink hover:bg-mint',
         className,
       )}
       {...props}
     >
       {children}
-    </button>
+    </Button>
   )
 }
 
@@ -62,13 +62,17 @@ export function Field({
   className?: string
 }) {
   return (
-    <div className={cn('flex h-[54px] w-full items-center gap-2.5 rounded-full border border-border bg-card px-4', className)}>
-      {Icon && <Icon className="size-5 shrink-0 text-muted-foreground" />}
-      {value ? (
-        <span className="truncate text-sm font-medium text-foreground">{value}</span>
-      ) : (
-        <span className="truncate text-sm text-muted-foreground">{hint}</span>
-      )}
+    <div className={cn('relative flex h-[54px] w-full items-center', className)}>
+      {Icon && <Icon className="absolute left-4 z-1 size-5 text-muted-foreground" />}
+      <Input
+        readOnly
+        value={value ?? ''}
+        placeholder={hint}
+        className={cn(
+          'h-full rounded-full border-border bg-card pl-11 text-sm font-medium text-foreground placeholder:text-muted-foreground',
+          !value && 'font-normal',
+        )}
+      />
     </div>
   )
 }
@@ -79,12 +83,13 @@ export function Tile({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { icon: LucideIcon }) {
   return (
-    <button
-      className={cn('grid size-15 shrink-0 place-items-center rounded-[14px] bg-tonal text-foreground/70', className)}
+    <Button
+      variant="ghost"
+      className={cn('size-15 shrink-0 rounded-[14px] bg-tonal text-foreground/70 hover:bg-tonal', className)}
       {...props}
     >
       <Icon className="size-6" />
-    </button>
+    </Button>
   )
 }
 
@@ -118,11 +123,11 @@ export function StatCard({
     error: 'text-destructive/80',
   }
   return (
-    <div className={cn('flex-1 rounded-[20px] p-3.5', tones[tone], className)}>
+    <Card className={cn('flex-1 rounded-[20px] border-0 p-3.5 shadow-none', tones[tone], className)}>
       {Icon && <Icon className={cn('size-5.5', iconTones[tone])} />}
       <div className={cn('mt-1.5 text-xl font-bold', valueTones[tone])}>{value}</div>
       <div className={cn('mt-0.5 text-[11px] font-bold uppercase tracking-wide', labelTones[tone])}>{label}</div>
-    </div>
+    </Card>
   )
 }
 
@@ -174,8 +179,8 @@ export function Avatar({
     dark: 'bg-[#3A3F63] text-white',
   }
   return (
-    <span className={cn('grid size-[46px] shrink-0 place-items-center rounded-full text-sm font-bold', tones[tone], className)}>
-      {children ?? initials}
-    </span>
+    <UIAvatar className={cn('size-[46px]', className)}>
+      <AvatarFallback className={cn('text-sm font-bold', tones[tone])}>{children ?? initials}</AvatarFallback>
+    </UIAvatar>
   )
 }

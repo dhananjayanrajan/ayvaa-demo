@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
+import NotificationBadge from '@/components/smoothui/notification-badge'
 import { cn } from '@/lib/utils'
 
 export type NavTab = {
@@ -24,22 +25,24 @@ export function NavBar({
         const Icon = t.icon
         return (
           <button key={t.id} onClick={() => onSelect(t.id)} className="relative flex flex-1 flex-col items-center gap-1">
-            <span
-              className={cn(
-                'grid h-8 w-[62px] place-items-center rounded-full transition-colors',
-                on ? 'bg-mint text-brand-ink' : 'text-foreground/60',
-              )}
+            <NotificationBadge
+              variant="count"
+              count={t.count ?? 0}
+              showZero={false}
+              className="bg-destructive"
             >
-              <Icon className={cn('size-5', on && 'fill-current')} />
-            </span>
+              <span
+                className={cn(
+                  'grid h-8 w-[62px] place-items-center rounded-full transition-colors',
+                  on ? 'bg-mint text-brand-ink' : 'text-foreground/60',
+                )}
+              >
+                <Icon className={cn('size-5', on && 'fill-current')} />
+              </span>
+            </NotificationBadge>
             <span className={cn('text-[11px] font-bold tracking-wide', on ? 'text-brand-ink' : 'text-foreground/60')}>
               {t.label}
             </span>
-            {t.count ? (
-              <span className="absolute -top-0.5 right-[calc(50%-20px)] grid h-[17px] min-w-[17px] place-items-center rounded-full bg-destructive px-1 text-[10px] font-bold text-white">
-                {t.count}
-              </span>
-            ) : null}
           </button>
         )
       })}

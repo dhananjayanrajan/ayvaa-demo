@@ -28,7 +28,8 @@ export type DispatchState = {
 
 type DemoStore = {
   notifications: Notification[]
-  notify: (n: Omit<Notification, 'id' | 'read'>) => void
+  notify: (n: Omit<Notification, 'id' | 'read' | 'time'>) => void
+  dismiss: (id: string) => void
   markAllRead: () => void
   trail: TrailEvent[]
   pushTrail: (e: Omit<TrailEvent, 'id'>) => void
@@ -55,9 +56,18 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   })
   const [incidents, setIncidents] = useState(3)
 
-  const notify = (n: Omit<Notification, 'id' | 'read'>) => {
-    const item = { ...n, id: `n${++seq}`, read: false }
-    setNotifications((prev) => [item, ...prev])
+  const notify = (n: Omit<Notification, 'id' | 'read' | 'time'>) => {
+    const id = `n${++seq}`
+    const now = new Date()
+    const time = now.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' })
+    setNotifications((prev) => [{ ...n, id, time, read: false }, ...prev])
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((x) => x.id !== id))
+    }, 4000)
+  }
+
+  const dismiss = (id: string) => {
+    setNotifications((prev) => prev.filter((x) => x.id !== id))
   }
 
   const markAllRead = () => {
@@ -77,6 +87,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       value={{
         notifications,
         notify,
+        dismiss,
         markAllRead,
         trail,
         pushTrail,

@@ -6,7 +6,16 @@ export function Screen({ children, className }: { children: ReactNode; className
 }
 
 export function BodyArea({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-5', className)}>{children}</div>
+  return (
+    <div
+      className={cn(
+        'flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
 }
 
 export function FootBar({ children, className }: { children: ReactNode; className?: string }) {

@@ -1,6 +1,5 @@
 import { RouterProvider, useRouter } from '@/lib/router'
 import { DemoProvider } from '@/lib/store'
-import { Toaster } from '@/components/ui/sonner'
 import { Launcher } from '@/presentation/Launcher'
 import { SystemApp } from '@/apps/system/SystemApp'
 
@@ -15,7 +14,6 @@ export default function App() {
     <RouterProvider>
       <DemoProvider>
         <Routes />
-        <Toaster />
       </DemoProvider>
     </RouterProvider>
   )
