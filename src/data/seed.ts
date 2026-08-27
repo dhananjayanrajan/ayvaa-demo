@@ -359,6 +359,7 @@ export const approvals: Approval[] = [
       { label: 'Screening', state: 'running' },
       { label: 'Certificate', state: 'none' },
     ],
+    note: 'Approval unlocks automatically when all checks finish',
   },
 ]
 
@@ -460,3 +461,42 @@ export const incidentLinking = {
   paged: 'Supervisors paged: near fall · Mrs. Iyer (9:40 AM) · late dose · Mr. Rao (8:12 AM) · equipment fault (Monday).',
   paused: 'Care plans paused for the critical case until a supervisor closes it.',
 }
+
+export const flaggedAccount = {
+  name: 'Mr. Rao',
+  category: 'Patient',
+  flags: ['3 missed visits', '2 offers expired'],
+  body: 'Family contacted · re-dispatch widening · no charge',
+  actions: ['Contact family', 'Adjust area'],
+}
+
+export const recentActivity = [
+  { name: 'Sunrise Multispeciality Hospital', role: 'Partner', body: 'Added 2 staff accounts this week · all verified', pill: 'Healthy' },
+  { name: 'Priya Sharma', role: 'Guardian', body: 'Verified · 2 loved ones · paying · no flags', pill: 'None' },
+  { name: 'Lakshmi Reddy', role: 'RN', body: '98 sessions · 4.9 rating · licence renews soon', pill: 'Renewal' },
+]
+
+export const consentReview = {
+  name: 'Ramesh Sharma',
+  category: 'Elderly care',
+  due: 'Due March 20',
+  signed: 'Signed Jan 12 by Priya',
+  pauses: 'Pauses Mar 21',
+  reminded: 'Reminded Mar 6',
+  pills: ['Family reminded', 'Call queued'],
+  actions: ['View record', 'Call guardian'],
+}
+
+export const consentWithdrawal = {
+  name: 'Mr. Krishnamurthy',
+  category: 'Chronic care',
+  time: '8:52 AM',
+  body: 'Caregiver notified · visits cancelled · partial refund · sealed archive',
+  option: 'Records export available for 30 days',
+  action: 'Confirm closure checklist done',
+}
+
+export const deletionQueue = [
+  { label: '142 support tickets', detail: 'Auto-delete April 1', state: 'Scheduled' },
+  { label: '38 identity selfies', detail: 'Matched this week · deleted within 24h', state: 'Running' },
+]

@@ -55,14 +55,16 @@ export function Field({
   value,
   hint,
   className,
+  onClick,
 }: {
   icon?: LucideIcon
   value?: string
   hint?: string
   className?: string
+  onClick?: () => void
 }) {
-  return (
-    <div className={cn('relative flex h-[54px] w-full items-center', className)}>
+  const inner = (
+    <>
       {Icon && <Icon className="absolute left-4 z-1 size-5 text-muted-foreground" />}
       <Input
         readOnly
@@ -73,8 +75,16 @@ export function Field({
           !value && 'font-normal',
         )}
       />
-    </div>
+    </>
   )
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={cn('relative flex h-[54px] w-full items-center', className)}>
+        {inner}
+      </button>
+    )
+  }
+  return <div className={cn('relative flex h-[54px] w-full items-center', className)}>{inner}</div>
 }
 
 export function Tile({
@@ -111,15 +121,16 @@ export function StatCard({
   icon?: LucideIcon
   value: string
   label: string
-  tone?: 'default' | 'mint' | 'error'
+  tone?: 'default' | 'mint' | 'warn' | 'error'
   className?: string
 }) {
-  const tones = { default: 'bg-card', mint: 'bg-mint', error: 'bg-error-bg' }
-  const iconTones = { default: 'text-primary', mint: 'text-brand-ink', error: 'text-destructive' }
-  const valueTones = { default: 'text-foreground', mint: 'text-brand-ink', error: 'text-destructive' }
+  const tones = { default: 'bg-card', mint: 'bg-mint', warn: 'bg-warn-bg', error: 'bg-error-bg' }
+  const iconTones = { default: 'text-primary', mint: 'text-brand-ink', warn: 'text-warn-ink', error: 'text-destructive' }
+  const valueTones = { default: 'text-foreground', mint: 'text-brand-ink', warn: 'text-warn-ink', error: 'text-destructive' }
   const labelTones = {
     default: 'text-muted-foreground',
     mint: 'text-brand-ink/70',
+    warn: 'text-warn-ink/80',
     error: 'text-destructive/80',
   }
   return (

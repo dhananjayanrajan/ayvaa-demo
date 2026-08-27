@@ -175,6 +175,7 @@ export type Approval = {
   checks: { label: string; state: 'ok' | 'running' | 'none' }[]
   history?: string
   urgent?: boolean
+  note?: string
 }
 
 export type AuditEntry = {
