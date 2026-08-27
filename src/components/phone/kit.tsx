@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import type { Variants } from 'motion/react'
+import { ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
@@ -24,12 +25,11 @@ export const CARD_SHADOW =
 
 export const INTENT: Record<
   Intent,
-  { border: string; wash: string; rail: string; text: string; meter: string; dot: string }
+  { border: string; wash: string; text: string; meter: string; dot: string }
 > = {
   success: {
     border: 'border-emerald-600/[0.14]',
     wash: 'from-emerald-50 via-white to-white',
-    rail: 'from-emerald-500 to-teal-400',
     text: 'text-emerald-700',
     meter: 'from-emerald-500 to-teal-400',
     dot: 'text-emerald-500',
@@ -37,7 +37,6 @@ export const INTENT: Record<
   warning: {
     border: 'border-amber-500/[0.22]',
     wash: 'from-amber-50 via-white to-white',
-    rail: 'from-amber-400 to-orange-400',
     text: 'text-amber-700',
     meter: 'from-amber-400 to-orange-400',
     dot: 'text-amber-500',
@@ -45,7 +44,6 @@ export const INTENT: Record<
   danger: {
     border: 'border-rose-500/[0.2]',
     wash: 'from-rose-50 via-white to-white',
-    rail: 'from-rose-500 to-red-400',
     text: 'text-rose-600',
     meter: 'from-rose-500 to-red-400',
     dot: 'text-rose-500',
@@ -53,7 +51,6 @@ export const INTENT: Record<
   info: {
     border: 'border-sky-500/[0.2]',
     wash: 'from-sky-50 via-white to-white',
-    rail: 'from-sky-500 to-blue-400',
     text: 'text-sky-700',
     meter: 'from-sky-500 to-blue-400',
     dot: 'text-sky-500',
@@ -61,7 +58,6 @@ export const INTENT: Record<
   neutral: {
     border: 'border-[#0B211B]/[0.07]',
     wash: 'from-white via-white to-white',
-    rail: 'from-[#0B211B]/25 to-[#0B211B]/10',
     text: 'text-[#0B211B]',
     meter: 'from-[#0B211B]/45 to-[#0B211B]/25',
     dot: 'text-[#0B211B]/35',
@@ -69,7 +65,6 @@ export const INTENT: Record<
   live: {
     border: 'border-emerald-600/[0.14]',
     wash: 'from-emerald-50 via-white to-white',
-    rail: 'from-emerald-500 to-teal-400',
     text: 'text-emerald-700',
     meter: 'from-emerald-500 to-teal-400',
     dot: 'text-emerald-500',
@@ -108,6 +103,21 @@ const TILE_SIZE: Record<'sm' | 'md' | 'lg', { box: string; icon: string }> = {
   sm: { box: 'h-9 w-9 rounded-xl', icon: 'h-4 w-4' },
   md: { box: 'h-10 w-10 rounded-[14px]', icon: 'h-[18px] w-[18px]' },
   lg: { box: 'h-12 w-12 rounded-2xl', icon: 'h-5 w-5' },
+}
+
+const PANEL_TINT: Record<Intent, string> = {
+  success: 'bg-emerald-500/[0.07]',
+  warning: 'bg-amber-500/[0.07]',
+  danger: 'bg-rose-500/[0.07]',
+  info: 'bg-sky-500/[0.07]',
+  neutral: 'bg-[#0B211B]/[0.035]',
+  live: 'bg-emerald-500/[0.07]',
+}
+
+const CTA_TONE: Record<'success' | 'warning' | 'danger', string> = {
+  success: 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]',
+  warning: 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_18px_36px_-18px_rgba(234,88,12,0.6)]',
+  danger: 'bg-gradient-to-r from-rose-600 to-red-500 shadow-[0_18px_36px_-18px_rgba(225,29,72,0.6)]',
 }
 
 export function LiveDot({ className }: { className?: string }) {
@@ -186,12 +196,10 @@ export function LiveChip({ className }: { className?: string }) {
 
 export function Card({
   intent = 'neutral',
-  rail = false,
   className,
   children,
 }: {
   intent?: Intent
-  rail?: boolean
   className?: string
   children: ReactNode
 }) {
@@ -201,15 +209,21 @@ export function Card({
       {intent !== 'neutral' && intent !== 'live' && (
         <div aria-hidden className={cn('absolute inset-0 bg-gradient-to-br', t.wash)} />
       )}
-      {rail && (
-        <span
-          aria-hidden
-          className={cn('absolute bottom-3 left-0 top-3 w-1 rounded-r-full bg-gradient-to-b', t.rail)}
-        />
-      )}
       <div className="relative">{children}</div>
     </div>
   )
+}
+
+export function Panel({
+  intent = 'neutral',
+  className,
+  children,
+}: {
+  intent?: Intent
+  className?: string
+  children: ReactNode
+}) {
+  return <div className={cn('rounded-2xl', PANEL_TINT[intent], className)}>{children}</div>
 }
 
 export function Hero({ className, children }: { className?: string; children: ReactNode }) {
@@ -361,5 +375,37 @@ export function Ring({
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">{children}</div>
     </div>
+  )
+}
+
+export function Cta({
+  icon: Icon,
+  tone = 'success',
+  onClick,
+  children,
+}: {
+  icon?: LucideIcon
+  tone?: 'success' | 'warning' | 'danger'
+  onClick?: () => void
+  children: ReactNode
+}) {
+  return (
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.97 }}
+      onClick={onClick}
+      className={cn(
+        'group relative flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-2xl px-5 py-3.5 text-sm font-bold text-white',
+        CTA_TONE[tone],
+      )}
+    >
+      <span aria-hidden className="absolute inset-x-5 top-0 h-px bg-white/30" />
+      {Icon && <Icon className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />}
+      <span className="truncate">{children}</span>
+      <ArrowRight
+        className="h-4 w-4 shrink-0 opacity-80 transition-transform duration-200 group-hover:translate-x-0.5"
+        aria-hidden
+      />
+    </motion.button>
   )
 }
