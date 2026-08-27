@@ -6,7 +6,7 @@ import SmoothButton from '@/components/smoothui/smooth-button'
 import AnimatedTabs from '@/components/smoothui/animated-tabs'
 import AILoader from '@/components/smoothui/ai-loader'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { approvals } from '@/data/seed'
@@ -109,6 +109,9 @@ export function A03() {
               icon={Gavel}
               body="Every approval or rejection records who decided, when, and on what evidence. Rejections require a written reason."
             />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of approvals" />
           </motion.div>
         </motion.div>
       </BodyArea>

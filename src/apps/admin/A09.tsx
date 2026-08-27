@@ -5,16 +5,18 @@ import SmoothButton from '@/components/smoothui/smooth-button'
 import PriceFlow from '@/components/smoothui/price-flow'
 import AnimatedProgressBar from '@/components/smoothui/animated-progress-bar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
 import { analytics } from '@/data/seed'
 import { useDemo } from '@/lib/store'
+import { cn } from '@/lib/utils'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
 const weekColors = ['bg-tonal', 'bg-[#BFE5DA]', 'bg-tonal', 'bg-primary']
+const mixColors = ['bg-primary', 'bg-[#33739E]', 'bg-[#DBA800]', 'bg-brand-ink', 'bg-[#3A3F63]']
 
 export function A09() {
   const { notify } = useDemo()
@@ -55,11 +57,17 @@ export function A09() {
           <motion.div variants={item}>
             <ScreenCard className="flex flex-col gap-3">
               {analytics.weekly.map((v, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="w-12 text-xs font-bold text-muted-foreground">Wk {i + 1}</span>
+                <button
+                  key={i}
+                  onClick={() =>
+                    notify({ title: `Week ${i + 1}`, body: `${v} sessions · tap peers for a breakdown`, kind: 'info' })
+                  }
+                  className="flex items-center gap-3 text-left"
+                >
+                  <span className="w-12 shrink-0 text-xs font-bold text-muted-foreground">Wk {i + 1}</span>
                   <AnimatedProgressBar value={v} className="flex-1" barClassName={weekColors[i]} />
-                  <span className="w-8 text-right text-xs font-bold text-foreground">{v}</span>
-                </div>
+                  <span className="w-8 shrink-0 text-right text-xs font-bold text-foreground">{v}</span>
+                </button>
               ))}
             </ScreenCard>
           </motion.div>
@@ -68,17 +76,27 @@ export function A09() {
           </motion.div>
           <motion.div variants={item}>
             <ScreenCard className="flex flex-col gap-3">
-              {analytics.mix.map((m) => (
-                <div key={m.label} className="flex items-center gap-3">
+              {analytics.mix.map((m, i) => (
+                <button
+                  key={m.label}
+                  onClick={() =>
+                    notify({ title: m.label, body: `${m.value} of this month's sessions · ${m.label} care`, kind: 'info' })
+                  }
+                  className="flex items-center gap-3 text-left"
+                >
+                  <span className={cn('size-2.5 shrink-0 rounded-full', mixColors[i])} />
                   <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-foreground/80">{m.label}</span>
-                  <AnimatedProgressBar value={Number(m.value.replace('%', ''))} className="w-24" barClassName="bg-primary" />
-                  <span className="w-10 text-right text-xs font-bold text-foreground">{m.value}</span>
-                </div>
+                  <AnimatedProgressBar value={Number(m.value.replace('%', ''))} className="w-20" barClassName={mixColors[i]} />
+                  <span className="w-10 shrink-0 text-right text-xs font-bold text-foreground">{m.value}</span>
+                </button>
               ))}
             </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={TrendingUp} body={analytics.watch} />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of analytics" />
           </motion.div>
         </motion.div>
       </BodyArea>

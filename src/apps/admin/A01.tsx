@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Activity, AlertTriangle, CalendarCheck, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Fade, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, IconTile, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
 import { adminAttention, adminMetrics } from '@/data/seed'
@@ -69,9 +69,11 @@ export function A01() {
               <Pill tone="ok" className="bg-white/70">Live</Pill>
             </ScreenCard>
           </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of console" />
+          </motion.div>
         </motion.div>
       </BodyArea>
-      <Fade />
     </Screen>
   )
 }

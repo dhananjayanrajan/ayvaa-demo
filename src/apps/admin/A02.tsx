@@ -6,7 +6,7 @@ import Dialog from '@/components/smoothui/dialog'
 import Drawer from '@/components/smoothui/drawer'
 import DropdownMenu from '@/components/smoothui/dropdown-menu'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Textarea } from '@/components/ui/textarea'
@@ -120,6 +120,9 @@ export function A02() {
               icon={ShieldAlert}
               body="Closing resumes the care plan and notifies the family and caregiver."
             />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of incident" />
           </motion.div>
         </motion.div>
       </BodyArea>

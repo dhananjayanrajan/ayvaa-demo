@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { AlertTriangle, Building2, Eye, HeartHandshake, MapPin, Phone, Search, Stethoscope } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
@@ -6,7 +7,7 @@ import AnimatedTabs from '@/components/smoothui/animated-tabs'
 import SearchableDropdown from '@/components/smoothui/searchable-dropdown'
 import DropdownMenu from '@/components/smoothui/dropdown-menu'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { flaggedAccount, recentActivity } from '@/data/seed'
@@ -23,6 +24,8 @@ const iconMap: Record<string, typeof Eye> = {
 
 export function A04() {
   const { notify } = useDemo()
+  const [filter, setFilter] = useState('all')
+  const visible = filter === 'all' ? recentActivity : recentActivity.filter((a) => a.role.toLowerCase() === filter)
 
   return (
     <Screen>
@@ -56,15 +59,15 @@ export function A04() {
               ]}
               variant="pill"
               defaultTab="all"
-              onChange={(id) => notify({ title: 'Filter applied', body: `Showing ${id} accounts`, kind: 'info' })}
+              onChange={setFilter}
             />
           </motion.div>
-          <motion.div variants={item}>
+          <motion.div variants={item} className={filter === 'all' ? undefined : 'hidden'}>
             <ScreenCard tone="error">
               <div className="flex items-start gap-3">
                 <IconTile icon={AlertTriangle} tone="destructive" />
                 <div className="min-w-0 flex-1">
-                  <div className="text-sm font-bold text-destructive">{flaggedAccount.name} · flagged</div>
+                  <div className="truncate text-sm font-bold text-destructive">{flaggedAccount.name} · flagged</div>
                   <div className="mt-0.5 text-[13px] font-medium leading-snug text-destructive/80">
                     {flaggedAccount.body}
                   </div>
@@ -97,7 +100,10 @@ export function A04() {
           </motion.div>
           <motion.div variants={item}>
             <ScreenCard className="p-2">
-              {recentActivity.map((a, i) => {
+              {visible.length === 0 && (
+                <div className="px-2 py-6 text-center text-[13px] font-medium text-muted-foreground">No {filter} activity yet</div>
+              )}
+              {visible.map((a, i) => {
                 const Icon = iconMap[a.role] ?? Eye
                 return (
                   <div key={i} className="px-2 py-1.5">
@@ -115,6 +121,9 @@ export function A04() {
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={Eye} body="Every account view is logged with your name. Flagged accounts stay visible to supervisors only." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of accounts" />
           </motion.div>
         </motion.div>
       </BodyArea>

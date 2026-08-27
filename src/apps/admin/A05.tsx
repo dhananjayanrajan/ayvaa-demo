@@ -6,7 +6,7 @@ import SmoothButton from '@/components/smoothui/smooth-button'
 import AnimatedTabs from '@/components/smoothui/animated-tabs'
 import Pagination from '@/components/smoothui/pagination'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
@@ -29,6 +29,7 @@ export function A05() {
   const { notify } = useDemo()
   const { navigate } = useRouter()
   const [page, setPage] = useState(1)
+  const [range, setRange] = useState('today')
 
   return (
     <Screen>
@@ -58,11 +59,11 @@ export function A05() {
               ]}
               variant="pill"
               defaultTab="today"
-              onChange={(id) => notify({ title: 'Range changed', body: `Showing ${id} entries`, kind: 'info' })}
+              onChange={setRange}
             />
           </motion.div>
           <motion.div variants={item}>
-            <SectionHeader label="Live feed" />
+            <SectionHeader label={range === 'today' ? 'Live feed · today' : range === 'week' ? 'Live feed · this week' : 'Live feed · custom range'} />
           </motion.div>
           <motion.div variants={item}>
             <ScreenCard className="p-2">
@@ -71,14 +72,23 @@ export function A05() {
                 return (
                   <div key={e.id}>
                     {i > 0 && <Separator className="mx-3 my-2.5 bg-border/70" />}
-                    <div className="flex items-center gap-3 px-2 py-1.5">
+                    <button
+                      onClick={() =>
+                        notify(
+                          e.icon === 'error'
+                            ? { title: e.title, body: `${e.body} · flagged for review`, kind: 'warn' }
+                            : { title: e.title, body: `${e.body} · opened from ${range} log`, kind: 'info' },
+                        )
+                      }
+                      className="flex w-full items-center gap-3 px-2 py-1.5 text-left"
+                    >
                       <IconTile icon={Icon} tone={tone} size="sm" />
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-bold text-foreground">{e.title}</div>
                         <div className="truncate text-xs font-medium text-muted-foreground">{e.body}</div>
                       </div>
                       <Lock className="size-4 shrink-0 text-muted-foreground" />
-                    </div>
+                    </button>
                   </div>
                 )
               })}
@@ -89,6 +99,9 @@ export function A05() {
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={ShieldCheck} body="Entries are append-only. Nothing here can be edited or deleted — not by anyone." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of audit log" />
           </motion.div>
           <motion.div variants={item}>
             <SectionHeader label="Compliance tools" />

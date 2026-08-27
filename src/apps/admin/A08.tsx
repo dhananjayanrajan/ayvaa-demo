@@ -3,7 +3,7 @@ import { Link2, MessageSquare, UserCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Textarea } from '@/components/ui/textarea'
@@ -85,6 +85,9 @@ export function A08() {
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={Link2} body="Every escalation links to its records — sessions, receipts, messages. Decisions are logged with your name." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of escalations" />
           </motion.div>
         </motion.div>
       </BodyArea>

@@ -4,7 +4,7 @@ import AgentAvatar from '@/components/smoothui/agent-avatar'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import BasicAccordion from '@/components/smoothui/basic-accordion'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
@@ -49,20 +49,32 @@ export function A07() {
               {deletionQueue.map((d, i) => (
                 <div key={d.label}>
                   {i > 0 && <Separator className="mx-3 my-2.5 bg-border/70" />}
-                  <div className="flex items-center gap-3 px-2 py-1.5">
+                  <button
+                    onClick={() =>
+                      notify(
+                        d.state === 'Running'
+                          ? { title: d.label, body: `${d.detail} · shredding in progress`, kind: 'info' }
+                          : { title: d.label, body: `${d.detail} · scheduled for deletion`, kind: 'warn' },
+                      )
+                    }
+                    className="flex w-full items-center gap-3 px-2 py-1.5 text-left"
+                  >
                     <IconTile icon={Trash2} tone="error" size="sm" />
                     <div className="min-w-0 flex-1">
                       <div className="truncate text-sm font-bold text-foreground">{d.label}</div>
                       <div className="truncate text-xs font-medium text-muted-foreground">{d.detail}</div>
                     </div>
                     <Pill tone={d.state === 'Running' ? 'warn' : 'grey'}>{d.state}</Pill>
-                  </div>
+                  </button>
                 </div>
               ))}
             </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={KeyRound} body="Deletion is cryptographic — files are shredded and keys rotated. Nothing is recoverable." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of retention" />
           </motion.div>
         </motion.div>
       </BodyArea>

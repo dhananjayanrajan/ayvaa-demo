@@ -3,7 +3,7 @@ import { Ban, CalendarClock, FileCheck, Phone, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
 import { consentReview, consentTracking, consentWithdrawal } from '@/data/seed'
@@ -40,10 +40,10 @@ export function A06() {
                 <IconTile icon={CalendarClock} tone="warn" />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-foreground">{consentReview.name}</span>
+                    <span className="truncate text-sm font-bold text-foreground">{consentReview.name}</span>
                     <Pill tone="warn">{consentReview.due}</Pill>
                   </div>
-                  <div className="mt-0.5 text-[13px] font-medium text-muted-foreground">{consentReview.category}</div>
+                  <div className="mt-0.5 truncate text-[13px] font-medium text-muted-foreground">{consentReview.category}</div>
                 </div>
               </div>
               <div className="mt-3 flex flex-col gap-1.5">
@@ -101,6 +101,9 @@ export function A06() {
           </motion.div>
           <motion.div variants={item}>
             <InfoCard icon={ShieldCheck} body="Consents are re-confirmed every 90 days. Withdrawals stop care immediately and keep a sealed record." />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of consent tracking" />
           </motion.div>
         </motion.div>
       </BodyArea>
