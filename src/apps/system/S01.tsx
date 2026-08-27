@@ -9,23 +9,22 @@ import {
   CreditCard,
   History,
   MapPin,
-  MoveRight,
   Send,
   ShieldCheck,
   Zap,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
-import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
+  Cta,
   Hero,
   Kicker,
   LiveChip,
-  Ring,
+  Panel,
   Section,
   Stat,
   Tile,
@@ -58,7 +57,11 @@ const toneByTitle: Record<string, TileTone> = {
   'Payment captured': 'success',
 }
 
-const chain = ['Incident raised', 'Plan linked', 'Supervisors paged']
+const escalation: { label: string; sub: string }[] = [
+  { label: 'Incident raised', sub: 'Detected automatically' },
+  { label: 'Care plan linked', sub: 'Full context attached' },
+  { label: 'Supervisors paged', sub: 'Push + SMS fallback' },
+]
 
 export function S01() {
   const { notify } = useDemo()
@@ -170,26 +173,36 @@ export function S01() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <Card intent="warning" rail>
+              <Card intent="warning">
                 <div className="p-4">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-start gap-3">
                     <Tile icon={ShieldCheck} tone="warning" />
                     <div className="min-w-0 flex-1">
-                      <div className="text-sm font-bold tracking-tight text-[#0B211B]">Nothing slips through</div>
-                      <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                        If anything goes wrong, an incident is raised, linked to the care plan, and supervisors are notified within seconds.
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="truncate text-sm font-bold tracking-tight text-[#0B211B]">Nothing slips through</span>
+                        <Chip intent="warning" icon={Zap}>≤ 60 s</Chip>
                       </div>
+                      <p className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
+                        Any failure becomes an incident, links itself to the care plan and pages supervisors on its own.
+                      </p>
                     </div>
                   </div>
-                  <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
-                    {chain.map((s, idx) => (
-                      <span key={s} className="flex items-center gap-1.5">
-                        {idx > 0 && <MoveRight className="h-3 w-3 text-amber-500/70" aria-hidden />}
-                        <Chip intent="warning">{s}</Chip>
-                      </span>
-                    ))}
-                    <Chip intent="warning" icon={Zap} className="ml-auto">≤ 60 s</Chip>
-                  </div>
+                  <Panel intent="warning" className="mt-3.5 p-3.5">
+                    <div className="flex flex-col">
+                      {escalation.map((s, i) => (
+                        <div key={s.label} className="flex gap-3">
+                          <div className="flex flex-col items-center">
+                            <span aria-hidden className={cn('mt-1 h-2 w-2 shrink-0 rounded-full', i === escalation.length - 1 ? 'bg-amber-500' : 'bg-amber-400/80')} />
+                            {i < escalation.length - 1 && <span aria-hidden className="my-1 w-px flex-1 bg-amber-500/25" />}
+                          </div>
+                          <div className={cn('min-w-0 pb-3', i === escalation.length - 1 && 'pb-0')}>
+                            <div className="text-[13px] font-bold tracking-tight text-[#0B211B]">{s.label}</div>
+                            <div className="text-[11px] font-semibold text-amber-700/70">{s.sub}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Panel>
                 </div>
               </Card>
             </motion.div>
@@ -201,16 +214,12 @@ export function S01() {
         </div>
       </BodyArea>
       <FootBar>
-        <SmoothButton
-          variant="outline"
-          shape="pill"
-          size="lg"
-          className="w-full border-emerald-700/15 bg-white/85 text-[#0B211B] shadow-[0_10px_26px_-14px_rgba(11,33,27,0.35)] backdrop-blur"
+        <Cta
+          icon={History}
           onClick={() => notify({ title: 'System history', body: 'Full event log opened · 1,204 events this month', kind: 'info' })}
         >
-          <History className="h-4 w-4 text-emerald-600" aria-hidden />
           View full system history
-        </SmoothButton>
+        </Cta>
       </FootBar>
     </Screen>
   )

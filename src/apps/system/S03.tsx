@@ -20,17 +20,18 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
-import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
+  Cta,
   Expand,
   Hero,
   Kicker,
   LiveChip,
   LiveDot,
+  Panel,
   Section,
   Stat,
   Tile,
@@ -69,8 +70,10 @@ function PushPreview({ title, body, time, onDark }: { title: string; body: strin
   return (
     <div
       className={cn(
-        'rounded-2xl border p-3',
-        onDark ? 'border-white/10 bg-white/[0.06] backdrop-blur-sm' : 'border-[#0B211B]/[0.08] bg-[#0B231C] shadow-[0_16px_36px_-18px_rgba(6,40,30,0.55)]',
+        'rounded-2xl p-3',
+        onDark
+          ? 'bg-white/[0.07] backdrop-blur-sm'
+          : 'bg-[#0B231C] shadow-[0_18px_40px_-20px_rgba(6,40,30,0.6)]',
       )}
     >
       <div className="flex items-center gap-2.5">
@@ -125,7 +128,7 @@ export function S03() {
                       Every update landed on time — the system sent them itself.
                     </p>
                   </div>
-                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.05]">
+                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white/[0.06]">
                     <span aria-hidden className="absolute inset-0 rounded-full bg-emerald-400/10 blur-lg" />
                     <BellRing className="relative h-5 w-5 text-emerald-200" strokeWidth={2} aria-hidden />
                     <LiveDot className="absolute right-2.5 top-2.5 text-emerald-300" />
@@ -201,25 +204,25 @@ export function S03() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <Card intent="danger" rail>
+              <Card intent="danger">
                 <div className="p-4">
                   <div className="flex items-center gap-3">
                     <Tile icon={Link2} tone="danger" />
                     <div className="min-w-0 flex-1">
-                      <div className="text-sm font-bold tracking-tight text-[#0B211B]">Auto-linked to care plans</div>
-                      <div className="text-[11px] font-semibold text-rose-500/80">Supervisors notified in seconds</div>
+                      <div className="truncate text-sm font-bold tracking-tight text-[#0B211B]">Auto-linked to care plans</div>
+                      <div className="truncate text-[11px] font-semibold text-rose-500/80">Supervisors notified in seconds</div>
                     </div>
                     <Chip intent="danger">{incidentLinking.count}</Chip>
                   </div>
                   <p className="mt-3 text-[13px] font-medium leading-relaxed text-[#0B211B]/65">{incidentLinking.body}</p>
-                  <div className="mt-3 rounded-2xl border border-rose-500/15 border-l-2 border-l-rose-400 bg-white/80 p-3 text-[12px] font-medium leading-relaxed text-[#0B211B]/75">
-                    {incidentLinking.paged}
-                  </div>
-                  <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-rose-600/85">
+                  <Panel intent="danger" className="mt-3 p-3">
+                    <p className="text-[12px] font-medium leading-relaxed text-[#0B211B]/75">{incidentLinking.paged}</p>
+                  </Panel>
+                  <div className="mt-3 flex items-center gap-2">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rose-500/15">
-                      <Ban className="h-3 w-3" strokeWidth={2.5} aria-hidden />
+                      <Ban className="h-3 w-3 text-rose-600" strokeWidth={2.5} aria-hidden />
                     </span>
-                    {incidentLinking.paused}
+                    <span className="min-w-0 flex-1 text-xs font-semibold leading-snug text-rose-600/85">{incidentLinking.paused}</span>
                   </div>
                 </div>
               </Card>
@@ -247,7 +250,7 @@ export function S03() {
                         key={d.label}
                         whileHover={{ y: -2 }}
                         className={cn(
-                          'rounded-2xl border border-white/[0.08] bg-white/[0.05] p-3',
+                          'rounded-2xl bg-white/[0.06] p-3',
                           i === destinations.length - 1 && 'col-span-2',
                         )}
                       >
@@ -274,16 +277,12 @@ export function S03() {
         </div>
       </BodyArea>
       <FootBar>
-        <SmoothButton
-          variant="outline"
-          shape="pill"
-          size="lg"
-          className="w-full border-emerald-700/15 bg-white/85 text-[#0B211B] shadow-[0_10px_26px_-14px_rgba(11,33,27,0.35)] backdrop-blur"
+        <Cta
+          icon={SlidersHorizontal}
           onClick={() => notify({ title: 'Notification rules', body: 'Quiet hours 21:00–07:00 · escalations always break through', kind: 'info' })}
         >
-          <SlidersHorizontal className="h-4 w-4 text-emerald-600" aria-hidden />
           Tune notification rules
-        </SmoothButton>
+        </Cta>
       </FootBar>
     </Screen>
   )

@@ -15,17 +15,18 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
-import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import {
   Card,
   Chip,
+  Cta,
   Expand,
   Hero,
   Kicker,
   LiveChip,
   Meter,
+  Panel,
   Ring,
   Section,
   Tile,
@@ -59,7 +60,7 @@ const rules: { icon: LucideIcon; intent: Intent; title: string; body: string; no
     icon: AlertTriangle,
     intent: 'warning',
     title: 'Conflict reversal',
-    body: 'New conflict · offer reversed, session re-dispatched',
+    body: 'New conflict · offer reversed, re-dispatched',
     notifyBody: 'New conflict found · offer reversed, session re-dispatched',
     kind: 'warn',
   },
@@ -67,7 +68,7 @@ const rules: { icon: LucideIcon; intent: Intent; title: string; body: string; no
     icon: ScrollText,
     intent: 'info',
     title: 'Transparent logging',
-    body: 'Every outcome logged · visible to the family',
+    body: 'Every outcome logged · visible to family',
     notifyBody: 'Every outcome is logged and shown to the family transparently',
     kind: 'ok',
   },
@@ -76,7 +77,7 @@ const rules: { icon: LucideIcon; intent: Intent; title: string; body: string; no
 const failsafeSteps: { time: string; dot: string; text: string }[] = [
   { time: '9:45', dot: 'bg-amber-500', text: 'Care team paged personally' },
   { time: '9:46', dot: 'bg-sky-500', text: 'Wider radius re-broadcast' },
-  { time: '9:47', dot: 'bg-emerald-500', text: 'Family sees every step live' },
+  { time: '9:47', dot: 'bg-emerald-500', text: 'Family sees steps live' },
 ]
 
 export function S02() {
@@ -218,7 +219,7 @@ export function S02() {
                     </span>
                     <Tile icon={r.icon} tone={r.intent} size="sm" />
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[13px] font-bold tracking-tight text-[#0B211B]">{r.title}</span>
+                      <span className="block truncate text-[13px] font-bold tracking-tight text-[#0B211B]">{r.title}</span>
                       <span className="mt-0.5 block text-xs font-medium leading-snug text-[#0B211B]/55">{r.body}</span>
                     </span>
                     <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#0B211B]/20 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600" aria-hidden />
@@ -228,36 +229,38 @@ export function S02() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <Card intent="warning" rail>
+              <Card intent="warning">
                 <button
                   onClick={() => setOpenFailsafe((v) => !v)}
                   className="flex w-full items-center gap-3 p-4 text-left"
                 >
                   <Tile icon={Siren} tone="warning" />
                   <span className="min-w-0 flex-1">
-                    <span className="block text-sm font-bold tracking-tight text-[#0B211B]">The 9:45 failsafe</span>
+                    <span className="block truncate text-sm font-bold tracking-tight text-[#0B211B]">The 9:45 failsafe</span>
                     <span className="mt-0.5 block text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                      No acceptance by 9:45 AM · care team paged personally
+                      No acceptance by 9:45 · the team gets paged personally
                     </span>
                   </span>
-                  <motion.span animate={{ rotate: openFailsafe ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                  <motion.span animate={{ rotate: openFailsafe ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
                     <ChevronDown className="h-4 w-4 text-amber-600/70" aria-hidden />
                   </motion.span>
                 </button>
                 <Expand open={openFailsafe}>
                   <div className="px-4 pb-4">
-                    <div className="space-y-2.5 rounded-2xl border border-amber-500/15 bg-white/70 p-3.5">
-                      {failsafeSteps.map((s) => (
-                        <div key={s.time} className="flex items-center gap-2.5">
-                          <TimeChip>{s.time}</TimeChip>
-                          <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', s.dot)} />
-                          <span className="text-xs font-semibold text-[#0B211B]/75">{s.text}</span>
-                        </div>
-                      ))}
-                      <p className="border-t border-amber-500/10 pt-2.5 text-[11px] font-medium leading-relaxed text-[#0B211B]/50">
-                        The family watches each step on their re-dispatch screen.
+                    <Panel intent="warning" className="p-3.5">
+                      <div className="flex flex-col gap-2.5">
+                        {failsafeSteps.map((s) => (
+                          <div key={s.time} className="flex items-center gap-2.5">
+                            <TimeChip>{s.time}</TimeChip>
+                            <span aria-hidden className={cn('h-1.5 w-1.5 shrink-0 rounded-full', s.dot)} />
+                            <span className="min-w-0 flex-1 truncate text-xs font-semibold text-[#0B211B]/80">{s.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-3 text-[11px] font-medium leading-relaxed text-[#0B211B]/50">
+                        The family watches each step unfold on their re-dispatch screen.
                       </p>
-                    </div>
+                    </Panel>
                   </div>
                 </Expand>
               </Card>
@@ -270,16 +273,13 @@ export function S02() {
         </div>
       </BodyArea>
       <FootBar>
-        <SmoothButton
-          variant="outline"
-          shape="pill"
-          size="lg"
-          className="w-full border-emerald-700/15 bg-white/85 text-[#0B211B] shadow-[0_10px_26px_-14px_rgba(11,33,27,0.35)] backdrop-blur"
+        <Cta
+          icon={Siren}
+          tone="warning"
           onClick={() => notify({ title: 'Escalation policy', body: 'No acceptance by 9:45 AM · care team paged personally', kind: 'warn' })}
         >
-          <Siren className="h-4 w-4 text-amber-500" aria-hidden />
           Open escalation policy
-        </SmoothButton>
+        </Cta>
       </FootBar>
     </Screen>
   )

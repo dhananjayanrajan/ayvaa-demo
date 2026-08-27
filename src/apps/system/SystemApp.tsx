@@ -1,17 +1,66 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Activity, BellRing, Sparkles, Workflow } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
-import { NavBar } from '@/components/phone/NavBar'
 import { useRouter } from '@/lib/router'
 import { S01 } from './S01'
 import { S02 } from './S02'
 import { S03 } from './S03'
+import { cn } from '@/lib/utils'
 
-const tabs = [
+type Tab = { id: string; label: string; icon: LucideIcon }
+
+const tabs: Tab[] = [
   { id: 's01', label: 'Trail', icon: Activity },
   { id: 's02', label: 'Dispatch', icon: Workflow },
   { id: 's03', label: 'Alerts', icon: BellRing },
 ]
+
+function Dock({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
+  return (
+    <nav className="relative z-10 mx-3 mb-3 flex items-center gap-1 rounded-[26px] bg-[#0B231C]/90 p-1.5 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+      <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[26px] border border-white/[0.08]" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent" />
+      {tabs.map((t) => {
+        const isActive = active === t.id
+        return (
+          <motion.button
+            key={t.id}
+            type="button"
+            whileTap={{ scale: 0.94 }}
+            onClick={() => onSelect(t.id)}
+            className="relative flex flex-1 flex-col items-center gap-1 rounded-[19px] px-2 py-2.5"
+          >
+            {isActive && (
+              <motion.span
+                layoutId="dock-active"
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                className="absolute inset-0 rounded-[19px] bg-white/[0.08]"
+              />
+            )}
+            {isActive && (
+              <span aria-hidden className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/70 to-transparent" />
+            )}
+            <span className="relative flex h-5 items-center">
+              <t.icon
+                className={cn('h-[18px] w-[18px] transition-colors duration-200', isActive ? 'text-emerald-300' : 'text-emerald-100/35')}
+                strokeWidth={isActive ? 2.4 : 2}
+              />
+            </span>
+            <span
+              className={cn(
+                'relative text-[9px] font-extrabold uppercase tracking-[0.14em] transition-colors duration-200',
+                isActive ? 'text-emerald-200' : 'text-emerald-100/35',
+              )}
+            >
+              {t.label}
+            </span>
+          </motion.button>
+        )
+      })}
+    </nav>
+  )
+}
 
 export function SystemApp({ path }: { path: string }) {
   const { navigate } = useRouter()
@@ -43,11 +92,11 @@ export function SystemApp({ path }: { path: string }) {
         />
       </div>
 
-      <div className="absolute left-6 top-6 hidden items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-sm sm:flex">
+      <div className="absolute left-6 top-6 hidden items-center gap-2.5 rounded-full bg-white/[0.04] px-4 py-2 backdrop-blur-sm sm:flex">
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Care operations</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
+      <div className="absolute bottom-6 right-6 hidden bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block rounded-full">
         System console
       </div>
 
@@ -74,7 +123,7 @@ export function SystemApp({ path }: { path: string }) {
                 {screen === 's03' && <S03 />}
               </motion.div>
             </AnimatePresence>
-            <NavBar tabs={tabs} active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
+            <Dock active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
           </PhoneFrame>
         </div>
       </motion.div>
