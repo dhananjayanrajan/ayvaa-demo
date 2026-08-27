@@ -3,7 +3,7 @@ import { Check, ClipboardList, HeartPulse, Lock, Pill as PillIcon, ShieldAlert, 
 import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
+import { IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
 import { lovedOnes, sessions } from '@/data/seed'
