@@ -137,6 +137,8 @@ export type StaffMember = {
   role: string
   status: 'active' | 'pending' | 'paused'
   stats?: string
+  week?: string
+  since?: string
   note?: string
 }
 

@@ -261,11 +261,37 @@ export const referrals: Referral[] = [
 ]
 
 export const staff: StaffMember[] = [
-  { id: 'st1', name: 'Kavitha Nair', role: 'Nurse', status: 'pending', note: 'Licence verified · awaiting approval' },
-  { id: 'st2', name: 'Dr. Venkatesh', role: 'Physiotherapist', status: 'active', stats: '27 sessions · 4.9 · 100% on time · 9/11 goals · 2 incidents resolved · 96% notes helpful' },
-  { id: 'st3', name: 'Ravi Kumar', role: 'Nurse', status: 'active' },
-  { id: 'st4', name: 'Suresh Kumar', role: 'Recovery assistant', status: 'active' },
-  { id: 'st5', name: 'Divya Reddy', role: 'Nurse', status: 'paused', note: 'On leave until Mar 25' },
+  { id: 'st1', name: 'Kavitha Nair', role: 'Nurse', status: 'pending', note: 'Wants to join Ayvaa under Sunrise · licence verified' },
+  { id: 'st2', name: 'Dr. Venkatesh', role: 'Physiotherapist', status: 'active', stats: '27 sessions · 4.9 · 100% on time · 9/11 goals · 2 incidents resolved · 96% notes helpful', week: '9 sessions this week · taking referrals', since: 'with Sunrise since 2023' },
+  { id: 'st3', name: 'Ravi Kumar', role: 'Nurse', status: 'active', week: '6 sessions this week · post-operative care' },
+  { id: 'st4', name: 'Suresh Kumar', role: 'Recovery assistant', status: 'active', week: 'Recovery assistant · caring for Mrs. Shanta Iyer' },
+  { id: 'st5', name: 'Divya Reddy', role: 'Nurse', status: 'paused', note: 'On leave until March 25 · set by your admin' },
+]
+
+export const referralJourney = [
+  { title: 'Referral received', body: 'March 2 · discharge summary attached' },
+  { title: 'Guardian consented', body: 'March 3 · her son signed electronically' },
+  { title: 'Caregiver matched', body: 'Suresh Kumar · recovery assistant · March 4' },
+  { title: 'Visits underway', body: 'Latest summary available below' },
+]
+
+export const latestVisit = {
+  date: 'Tuesday, March 12 · visit 8',
+  quote: '"Walked 10 minutes with the frame. Wound clean and dry. Pain at 3 out of 10, down from 5."',
+  by: 'Suresh Kumar · shared with Sunrise by guardian consent',
+}
+
+export const staffFeedback = {
+  stars: 5,
+  quote: '"Dr. Venkatesh explained mother\u2019s knee exercises so clearly that we can help between visits."',
+  family: 'Iyer family · March 11',
+}
+
+export const usage = [
+  { label: 'Sessions delivered', value: '18' },
+  { label: 'Referred patients in care', value: '9' },
+  { label: 'Average per session', value: '₹5,200' },
+  { label: 'Projected month total', value: '₹2,39,200' },
 ]
 
 export const invoices: Invoice[] = [
