@@ -1,11 +1,12 @@
 import { motion } from 'motion/react'
-import { Building2, ReceiptText, UserPlus, Users } from 'lucide-react'
+import { Bell, Building2, ReceiptText, UserPlus, Users } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { ActionRow, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill, StatCard } from '@/components/phone/Controls'
-import { partner, referrals } from '@/data/seed'
+import { invoices, partner, referrals } from '@/data/seed'
+import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
@@ -13,12 +14,29 @@ const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
 export function PT02() {
   const { navigate } = useRouter()
+  const { notify, markAllRead } = useDemo()
+  const latestInvoice = invoices.find((i) => i.month === 'Feb') ?? invoices[0]
+
   return (
     <Screen>
       <AppBar
         title="Care partnership"
         subtitle={partner.location}
-        trailing={<AgentAvatar seed="sunrise" size={42} />}
+        trailing={
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                markAllRead()
+                notify({ title: 'All caught up', body: 'No new partner alerts today', kind: 'ok' })
+              }}
+              className="grid size-10.5 shrink-0 place-items-center rounded-full bg-tonal text-foreground/70 transition-colors hover:bg-mint"
+              aria-label="Notifications"
+            >
+              <Bell className="size-5" />
+            </button>
+            <AgentAvatar seed="sunrise" size={42} />
+          </div>
+        }
       />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
@@ -62,8 +80,8 @@ export function PT02() {
             <ScreenCard className="p-2">
               <ActionRow
                 icon={ReceiptText}
-                title="February invoice"
-                subtitle="₹2,18,400 · 42 sessions · paid Mar 5"
+                title={`${latestInvoice.month} invoice`}
+                subtitle={`${latestInvoice.amount} · ${latestInvoice.sessions} sessions · ${latestInvoice.status === 'paid' ? `paid ${latestInvoice.paidOn}` : 'projected'}`}
                 onClick={() => navigate('/partner/pt07')}
               />
             </ScreenCard>

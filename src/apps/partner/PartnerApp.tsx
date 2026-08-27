@@ -1,7 +1,7 @@
 import { Building2, ReceiptText, UserPlus, Users } from 'lucide-react'
 import { useRouter } from '@/lib/router'
 import { NavBar, type NavTab } from '@/components/phone/NavBar'
-import { PhoneFrame, StatusBar } from '@/components/phone/PhoneFrame'
+import { PhoneFrame } from '@/components/phone/PhoneFrame'
 import { PT01 } from './PT01'
 import { PT02 } from './PT02'
 import { PT03 } from './PT03'
@@ -17,7 +17,7 @@ const tabs: NavTab[] = [
   { id: 'pt07', label: 'Billing', icon: ReceiptText },
 ]
 
-const withNav = ['pt02', 'pt05', 'pt07']
+const withNav = ['pt02', 'pt03', 'pt05', 'pt07']
 
 export function PartnerApp({ path }: { path: string }) {
   const { navigate } = useRouter()
@@ -25,7 +25,6 @@ export function PartnerApp({ path }: { path: string }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#EFF5F2] p-9">
       <PhoneFrame>
-        <StatusBar time="9:02" />
         {screen === 'pt01' && <PT01 />}
         {screen === 'pt02' && <PT02 />}
         {screen === 'pt03' && <PT03 />}

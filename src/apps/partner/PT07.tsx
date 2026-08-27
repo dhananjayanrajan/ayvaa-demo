@@ -7,7 +7,7 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { ActionRow, InfoCard, ScreenCard, SectionHeader, StatRow } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
-import { invoices, usage } from '@/data/seed'
+import { invoices, partner, usage } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
@@ -15,17 +15,18 @@ const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
 export function PT07() {
   const { notify } = useDemo()
-  const feb = invoices[0]
+  const latest = invoices.find((i) => i.status === 'paid') ?? invoices[0]
+  const latestAmount = Number(latest.amount.replace(/[^\d]/g, ''))
   return (
     <Screen>
-      <AppBar title="Billing" subtitle="Sunrise Multispeciality Hospital" />
+      <AppBar title="Billing" subtitle={partner.name} />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
             <ScreenCard tone="mint">
               <div className="flex items-center justify-between">
-                <div className="text-[11px] font-bold uppercase tracking-wide text-brand-ink/70">February invoice</div>
-                <Pill tone="ok" className="bg-white/70">Paid Mar 5</Pill>
+                <div className="text-[11px] font-bold uppercase tracking-wide text-brand-ink/70">{latest.month} invoice</div>
+                <Pill tone="ok" className="bg-white/70">{latest.status === 'paid' ? `Paid ${latest.paidOn ?? ''}` : 'Projected'}</Pill>
               </div>
               <div className="mt-1 flex items-center gap-2">
                 <span className="grid size-10 place-items-center rounded-[14px] bg-white/70">
@@ -33,10 +34,10 @@ export function PT07() {
                 </span>
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-brand-ink">₹</span>
-                  <PriceFlow value={218400} className="text-3xl font-bold text-brand-ink" />
+                  <PriceFlow value={latestAmount} className="text-3xl font-bold text-brand-ink" />
                 </div>
               </div>
-              <div className="mt-1 text-[13px] font-medium text-brand-ink/80">{feb.sessions} sessions · settled in full</div>
+              <div className="mt-1 text-[13px] font-medium text-brand-ink/80">{latest.sessions} sessions · settled in full</div>
             </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
@@ -82,7 +83,7 @@ export function PT07() {
                 icon={ReceiptText}
                 title="Monthly usage report"
                 subtitle="Sessions · categories · caregiver hours"
-                onClick={() => notify({ title: 'Report queued', body: 'Usage report will be emailed to Sunrise', kind: 'info' })}
+                onClick={() => notify({ title: 'Report queued', body: `Usage report will be emailed to ${partner.name}`, kind: 'info' })}
               />
             </ScreenCard>
           </motion.div>
@@ -90,10 +91,10 @@ export function PT07() {
         </motion.div>
       </BodyArea>
       <FootBar>
-        <SmoothButton variant="outline" shape="pill" size="lg" className="flex-1" onClick={() => notify({ title: 'Invoice opened', body: 'February invoice PDF ready to download', kind: 'info' })}>
-          <Download className="size-4" /> February invoice
+        <SmoothButton variant="outline" shape="pill" size="lg" className="flex-1" onClick={() => notify({ title: 'Invoice opened', body: `${latest.month} invoice PDF ready to download`, kind: 'info' })}>
+          <Download className="size-4" /> {latest.month} invoice
         </SmoothButton>
-        <SmoothButton variant="soft" shape="pill" size="lg" className="flex-1" onClick={() => notify({ title: 'Report queued', body: 'Usage report will be emailed to Sunrise', kind: 'info' })}>
+        <SmoothButton variant="soft" shape="pill" size="lg" className="flex-1" onClick={() => notify({ title: 'Report queued', body: `Usage report will be emailed to ${partner.name}`, kind: 'info' })}>
           <ReceiptText className="size-4" /> Usage report
         </SmoothButton>
       </FootBar>

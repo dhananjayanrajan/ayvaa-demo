@@ -1,13 +1,15 @@
 import { motion } from 'motion/react'
-import { ArrowRight, Eye, EyeOff, KeyRound, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Building2, Eye, EyeOff, KeyRound, Mail, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
 import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard } from '@/components/phone/ScreenBlocks'
 import { Field, Pill } from '@/components/phone/Controls'
+import { partner } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
+
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
@@ -18,26 +20,32 @@ export function PT01() {
 
   return (
     <Screen>
-      <AppBar
-        title="ayvaa+"
-        subtitle="Partner access"
-        trailing={<Pill tone="ok">Secure</Pill>}
-      />
+      <AppBar title="ayvaa+" subtitle="Partner access" trailing={<Pill tone="ok">Secure</Pill>} />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
             <div className="px-1 pt-2">
               <div className="text-xl font-bold text-foreground">Sign in as your organisation</div>
               <div className="mt-1 text-[13px] font-medium text-muted-foreground">
-                Sunrise Multispeciality Hospital · Jubilee Hills
+                {partner.name} · {partner.location}
               </div>
             </div>
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Organisation" value="Sunrise Multispeciality Hospital" icon={KeyRound} onClick={() => notify({ title: 'Organisation', body: 'Sunrise Multispeciality Hospital · provisioned by admin', kind: 'info' })} />
+            <Field
+              label="Organisation"
+              value={partner.name}
+              icon={Building2}
+              onClick={() => notify({ title: 'Organisation', body: `${partner.name} · provisioned by admin`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Work email" value="care.ops@sunrisehospitals.in" icon={KeyRound} onClick={() => notify({ title: 'Work email', body: 'care.ops@sunrisehospitals.in · access last used today', kind: 'info' })} />
+            <Field
+              label="Work email"
+              value={partner.email}
+              icon={Mail}
+              onClick={() => notify({ title: 'Work email', body: `${partner.email} · access last used today`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
             <Field
@@ -54,7 +62,7 @@ export function PT01() {
               size="lg"
               className="w-full"
               onClick={() => {
-                notify({ title: 'Signed in', body: 'Welcome back, Sunrise care team', kind: 'ok' })
+                notify({ title: 'Signed in', body: `Welcome back, ${partner.name} care team`, kind: 'ok' })
                 navigate('/partner/pt02')
               }}
             >
@@ -88,7 +96,10 @@ export function PT01() {
         </motion.div>
       </BodyArea>
       <FootBar>
-        <button className="w-full text-center text-[13px] font-bold text-primary" onClick={() => notify({ title: 'Access request sent', body: 'Your hospital admin will approve provisioning', kind: 'info' })}>
+        <button
+          className="w-full text-center text-[13px] font-bold text-primary"
+          onClick={() => notify({ title: 'Access request sent', body: 'Your hospital admin will approve provisioning', kind: 'info' })}
+        >
           New here? Request partner access
         </button>
       </FootBar>

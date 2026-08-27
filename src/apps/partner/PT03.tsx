@@ -7,6 +7,7 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Field } from '@/components/phone/Controls'
+import { partner, referrals } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
@@ -16,9 +17,10 @@ const categories = ['Elderly care', 'Post-operative', 'Chronic care', 'Pediatric
 
 export function PT03() {
   const { notify } = useDemo()
+  const r = referrals[0]
   return (
     <Screen>
-      <AppBar title="Refer a patient" subtitle="Sunrise Multispeciality Hospital" />
+      <AppBar title="Refer a patient" subtitle={partner.name} />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
@@ -28,22 +30,42 @@ export function PT03() {
             <SectionHeader label="Patient details" />
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Full name" value="Mrs. Shanta Iyer" hint="Patient's full name" onClick={() => notify({ title: 'Patient', body: 'Mrs. Shanta Iyer · 71 · referred by Dr. Venkatesh', kind: 'info' })} />
+            <Field
+              label="Full name"
+              value={r.name}
+              hint="Patient's full name"
+              onClick={() => notify({ title: 'Patient', body: `${r.name} · ${r.age} · referred by ${r.by}`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Age" value="71" hint="Age" onClick={() => notify({ title: 'Age', body: '71 years · post-operative hip recovery', kind: 'info' })} />
+            <Field
+              label="Age"
+              value={String(r.age)}
+              hint="Age"
+              onClick={() => notify({ title: 'Age', body: `${r.age} years · ${r.condition.toLowerCase()}`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Guardian phone" value="+91 98450 12345" hint="Guardian's mobile number" onClick={() => notify({ title: 'Guardian', body: 'Priya Sharma · daughter · primary contact', kind: 'info' })} />
+            <Field
+              label="Guardian phone"
+              value="+91 98450 12345"
+              hint="Guardian's mobile number"
+              onClick={() => notify({ title: 'Guardian', body: 'Priya Sharma · daughter · primary contact', kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
-            <Field label="Care address" value="Jubilee Hills, Hyderabad" hint="Area, Hyderabad" onClick={() => notify({ title: 'Care address', body: 'Jubilee Hills, Hyderabad · verified by Ayvaa', kind: 'info' })} />
+            <Field
+              label="Care address"
+              value={partner.location}
+              hint="Area, Hyderabad"
+              onClick={() => notify({ title: 'Care address', body: `${partner.location} · verified by Ayvaa`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
             <SectionHeader label="Care category" />
           </motion.div>
           <motion.div variants={item}>
-            <AnimatedTags initialTags={categories} selectedTags={['Post-operative']} />
+            <AnimatedTags initialTags={categories} selectedTags={[r.condition === 'Hip recovery' ? 'Post-operative' : 'Elderly care']} />
           </motion.div>
           <motion.div variants={item}>
             <SectionHeader label="Discharge summary" />
@@ -51,9 +73,7 @@ export function PT03() {
           <motion.div variants={item}>
             <AnimatedFileUpload
               accept=".pdf"
-              onFilesSelected={(files) =>
-                notify({ title: 'File attached', body: `${files.length} file(s) ready to send`, kind: 'ok' })
-              }
+              onFilesSelected={(files) => notify({ title: 'File attached', body: `${files.length} file(s) ready to send`, kind: 'ok' })}
             />
           </motion.div>
           <motion.div variants={item}>
