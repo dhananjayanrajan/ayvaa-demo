@@ -1,114 +1,123 @@
-import { AlertTriangle, Building2, ChevronRight, Eye, Search, User } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useState } from 'react'
+import { AlertTriangle, Building2, Eye, HeartHandshake, MapPin, Phone, Search, Stethoscope } from 'lucide-react'
+import AgentAvatar from '@/components/smoothui/agent-avatar'
+import SmoothButton from '@/components/smoothui/smooth-button'
+import AnimatedTabs from '@/components/smoothui/animated-tabs'
+import SearchableDropdown from '@/components/smoothui/searchable-dropdown'
+import DropdownMenu from '@/components/smoothui/dropdown-menu'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Fade, Screen } from '@/components/phone/Screen'
-import { Avatar, Chip, Field, Pill } from '@/components/phone/Controls'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { useDemo } from '@/lib/store'
+import { BodyArea, Screen } from '@/components/phone/Screen'
+import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
+import { Pill } from '@/components/phone/Controls'
 import { flaggedAccount, recentActivity } from '@/data/seed'
+import { useDemo } from '@/lib/store'
 
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
+
+const iconMap: Record<string, typeof Eye> = {
+  Partner: Building2,
+  Guardian: HeartHandshake,
+  RN: Stethoscope,
 }
-
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-}
-
-const pillTone = { Healthy: 'ok', None: 'grey', Renewal: 'warn' } as const
 
 export function A04() {
   const { notify } = useDemo()
-  const [filter, setFilter] = useState('All accounts')
 
   return (
     <Screen>
-      <AppBar title="Accounts" subtitle="Patients · professionals · partners" />
+      <AppBar
+        title="Accounts"
+        subtitle="Patients · professionals · partners"
+        trailing={<AgentAvatar seed="ayvaa-accounts" size={42} />}
+      />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
-            <Field icon={Search} hint="Search by name, phone or licence" onClick={() => notify({ title: 'Search', body: 'Type to search across all verified accounts', kind: 'info' })} />
-          </motion.div>
-          <motion.div variants={item} className="flex gap-2">
-            {['All accounts', 'Patients', 'Professionals', 'Partners'].map((f) => (
-              <Chip key={f} on={filter === f} onClick={() => setFilter(f)}>
-                {f}
-              </Chip>
-            ))}
+            <SearchableDropdown
+              label="Search accounts"
+              placeholder="Name, phone, licence…"
+              items={[
+                { id: 'rao', label: 'Mr. Ramesh Rao', description: 'Patient · Banjara Hills', icon: <Search className="size-4" /> },
+                { id: 'iyer', label: 'Mrs. Shanta Iyer', description: 'Patient · Jubilee Hills', icon: <Search className="size-4" /> },
+                { id: 'deshmukh', label: 'Arjun Deshmukh', description: 'Professional · RN', icon: <Search className="size-4" /> },
+                { id: 'sunrise', label: 'Sunrise Multispeciality', description: 'Partner · Begumpet', icon: <Search className="size-4" /> },
+              ]}
+              onChange={(id) => notify({ title: 'Account opened', body: `Viewing ${id} · access logged`, kind: 'info' })}
+            />
           </motion.div>
           <motion.div variants={item}>
-            <Card className="rounded-[20px] border-border p-4">
-              <div className="flex items-center gap-3">
-                <span className="grid size-11 shrink-0 place-items-center rounded-[14px] bg-error-bg text-destructive">
-                  <AlertTriangle className="size-5" />
-                </span>
+            <AnimatedTabs
+              tabs={[
+                { id: 'all', label: 'All' },
+                { id: 'patients', label: 'Patients' },
+                { id: 'professionals', label: 'Professionals' },
+                { id: 'partners', label: 'Partners' },
+              ]}
+              variant="pill"
+              defaultTab="all"
+              onChange={(id) => notify({ title: 'Filter applied', body: `Showing ${id} accounts`, kind: 'info' })}
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard tone="error">
+              <div className="flex items-start gap-3">
+                <IconTile icon={AlertTriangle} tone="destructive" />
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-bold text-foreground">
-                    {flaggedAccount.name} · {flaggedAccount.category.toLowerCase()}
+                  <div className="text-sm font-bold text-destructive">{flaggedAccount.name} · flagged</div>
+                  <div className="mt-0.5 text-[13px] font-medium leading-snug text-destructive/80">
+                    {flaggedAccount.body}
                   </div>
-                  <div className="truncate text-xs font-medium text-muted-foreground">{flaggedAccount.body}</div>
                 </div>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {flaggedAccount.flags.map((f) => (
-                  <Pill key={f} tone="warn">
-                    {f}
-                  </Pill>
+                {flaggedAccount.flags.map((t) => (
+                  <Pill key={t} tone="warn">{t}</Pill>
                 ))}
               </div>
-              <div className="mt-3 flex gap-2">
-                {flaggedAccount.actions.map((a) => (
-                  <Button
-                    key={a}
-                    variant={a === 'Contact family' ? 'secondary' : 'default'}
-                    className="h-11 flex-1 rounded-full"
-                    onClick={() => notify({ title: a, body: `${flaggedAccount.name} · action queued for the care team`, kind: 'info' })}
-                  >
-                    {a}
-                  </Button>
-                ))}
-              </div>
-            </Card>
-          </motion.div>
-          <motion.div variants={item}>
-            <div className="px-1 text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Recent activity</div>
-            <Card className="rounded-[20px] border-border p-2">
-              {recentActivity.map((r) => (
-                <button
-                  key={r.name}
-                  onClick={() => notify({ title: r.name, body: `${r.role} · full record access is logged`, kind: 'info' })}
-                  className="flex w-full items-center gap-3 px-2 py-2.5 text-left"
+              <div className="mt-3 flex gap-2.5">
+                <SmoothButton variant="secondary" shape="pill" className="flex-1" onClick={() => notify({ title: 'Family contacted', body: 'Guardian called · outcome logged', kind: 'ok' })}>
+                  <Phone className="size-4" /> Contact family
+                </SmoothButton>
+                <DropdownMenu
+                  items={[
+                    { key: 'area', label: 'Adjust care area', icon: <MapPin className="size-4" />, onSelect: () => notify({ title: 'Area adjusted', body: 'Care area widened · new offers will reach more professionals', kind: 'info' }) },
+                    { key: 'pause', label: 'Pause account', icon: <AlertTriangle className="size-4" />, variant: 'destructive', onSelect: () => notify({ title: 'Account paused', body: 'No new offers until reactivated', kind: 'warn' }) },
+                  ]}
                 >
-                  <Avatar tone={r.role === 'Partner' ? 'alt' : r.role === 'Guardian' ? 'soft' : 'ink'}>
-                    {r.role === 'Partner' ? <Building2 className="size-5" /> : <User className="size-5" />}
-                  </Avatar>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-bold text-foreground">{r.name}</span>
-                    <span className="block truncate text-xs font-medium text-muted-foreground">{r.body}</span>
-                  </span>
-                  {r.pill !== 'None' && <Pill tone={pillTone[r.pill as keyof typeof pillTone]}>{r.pill}</Pill>}
-                  <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-                </button>
-              ))}
-            </Card>
+                  <SmoothButton variant="outline" shape="pill" className="flex-1">
+                    Adjust area
+                  </SmoothButton>
+                </DropdownMenu>
+              </div>
+            </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
-            <Card className="flex items-start gap-3 rounded-[20px] border-0 bg-tonal p-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-mint text-brand-ink">
-                <Eye className="size-5" />
-              </span>
-              <span className="text-xs font-medium leading-relaxed text-foreground/70">
-                Opening any account's records from here is logged with your name, the reason, and the exact records viewed.
-              </span>
-            </Card>
+            <SectionHeader label="Recent activity" />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard className="p-2">
+              {recentActivity.map((a, i) => {
+                const Icon = iconMap[a.role] ?? Eye
+                return (
+                  <div key={i} className="px-2 py-1.5">
+                    <ActionRow
+                      icon={Icon}
+                      title={a.name}
+                      subtitle={a.body}
+                      trailing={<Pill tone={a.pill === 'Healthy' ? 'ok' : a.pill === 'None' ? 'grey' : 'warn'}>{a.pill}</Pill>}
+                      onClick={() => notify({ title: 'Account opened', body: `${a.name} · access logged`, kind: 'info' })}
+                    />
+                  </div>
+                )
+              })}
+            </ScreenCard>
+          </motion.div>
+          <motion.div variants={item}>
+            <InfoCard icon={Eye} body="Every account view is logged with your name. Flagged accounts stay visible to supervisors only." />
           </motion.div>
         </motion.div>
       </BodyArea>
-      <Fade />
     </Screen>
   )
 }

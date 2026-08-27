@@ -1,132 +1,114 @@
-import { AlertTriangle, CheckCircle2, ChevronRight, Eye, FileDown, Gavel, Lock, ShieldCheck, UserCheck } from 'lucide-react'
-import { motion } from 'motion/react'
 import { useState } from 'react'
+import { motion } from 'motion/react'
+import { AlertTriangle, CheckCircle2, Download, Eye, Gavel, Lock, ShieldCheck, UserCheck } from 'lucide-react'
+import AgentAvatar from '@/components/smoothui/agent-avatar'
+import SmoothButton from '@/components/smoothui/smooth-button'
+import AnimatedTabs from '@/components/smoothui/animated-tabs'
+import Pagination from '@/components/smoothui/pagination'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
-import { Chip } from '@/components/phone/Controls'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { useDemo } from '@/lib/store'
+import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
+import { Pill } from '@/components/phone/Controls'
+import { Separator } from '@/components/ui/separator'
 import { auditEntries } from '@/data/seed'
+import { useDemo } from '@/lib/store'
+import { useRouter } from '@/lib/router'
 
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-}
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-}
-
-const iconMap = {
-  ok: { icon: CheckCircle2, cls: 'bg-mint text-brand-ink' },
-  view: { icon: Eye, cls: 'bg-tonal text-foreground/70' },
-  approve: { icon: UserCheck, cls: 'bg-mint text-brand-ink' },
-  error: { icon: AlertTriangle, cls: 'bg-error-bg text-destructive' },
-  gavel: { icon: Gavel, cls: 'bg-warn-bg text-warn-ink' },
+const iconMap: Record<string, { icon: typeof Eye; tone: 'mint' | 'tonal' | 'warn' | 'error' }> = {
+  ok: { icon: CheckCircle2, tone: 'mint' },
+  view: { icon: Eye, tone: 'tonal' },
+  approve: { icon: UserCheck, tone: 'mint' },
+  error: { icon: AlertTriangle, tone: 'error' },
+  gavel: { icon: Gavel, tone: 'warn' },
 }
 
 export function A05() {
   const { notify } = useDemo()
-  const [range, setRange] = useState('Today')
+  const { navigate } = useRouter()
+  const [page, setPage] = useState(1)
 
   return (
     <Screen>
-      <AppBar title="Audit log" subtitle="Every consequential action · immutable" />
+      <AppBar
+        title="Audit log"
+        subtitle="Every action · every access"
+        trailing={<AgentAvatar seed="ayvaa-audit" size={42} />}
+      />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
-            <Card className="flex items-center gap-3 rounded-[20px] border-0 bg-mint p-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white/70 text-brand-ink">
-                <ShieldCheck className="size-5" />
-              </span>
+            <ScreenCard tone="mint" className="flex items-center gap-3">
+              <IconTile icon={ShieldCheck} tone="white" />
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-bold text-brand-ink">Audit health 100 percent</div>
-                <div className="text-xs font-medium text-brand-ink/70">No gaps in the last 90 days · verified continuously</div>
+                <div className="text-sm font-bold text-brand-ink">Audit health · 100%</div>
+                <div className="mt-0.5 text-[13px] font-medium text-brand-ink/80">No gaps in the last 90 days</div>
               </div>
-            </Card>
-          </motion.div>
-          <motion.div variants={item} className="flex gap-2">
-            {['Today', 'This week', 'Custom'].map((r) => (
-              <Chip key={r} on={range === r} onClick={() => setRange(r)}>
-                {r}
-              </Chip>
-            ))}
+              <Pill tone="ok" className="bg-white/70">Healthy</Pill>
+            </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
-            <div className="px-1 text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Live feed</div>
-            <Card className="rounded-[20px] border-border p-2">
-              {auditEntries.map((e) => {
-                const meta = iconMap[e.icon]
-                const Icon = meta.icon
+            <AnimatedTabs
+              tabs={[
+                { id: 'today', label: 'Today' },
+                { id: 'week', label: 'This week' },
+                { id: 'custom', label: 'Custom' },
+              ]}
+              variant="pill"
+              defaultTab="today"
+              onChange={(id) => notify({ title: 'Range changed', body: `Showing ${id} entries`, kind: 'info' })}
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <SectionHeader label="Live feed" />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard className="p-2">
+              {auditEntries.map((e, i) => {
+                const { icon: Icon, tone } = iconMap[e.icon] ?? iconMap.view
                 return (
-                  <div key={e.id} className="flex items-center gap-3 px-2 py-2.5">
-                    <span className={`grid size-11 shrink-0 place-items-center rounded-[14px] ${meta.cls}`}>
-                      <Icon className="size-5" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-bold text-foreground">{e.title}</span>
-                      <span className="block truncate text-xs font-medium text-muted-foreground">{e.body}</span>
-                    </span>
-                    <Lock className="size-4 shrink-0 text-muted-foreground" />
+                  <div key={e.id}>
+                    {i > 0 && <Separator className="mx-3 my-2.5 bg-border/70" />}
+                    <div className="flex items-center gap-3 px-2 py-1.5">
+                      <IconTile icon={Icon} tone={tone} size="sm" />
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-sm font-bold text-foreground">{e.title}</div>
+                        <div className="truncate text-xs font-medium text-muted-foreground">{e.body}</div>
+                      </div>
+                      <Lock className="size-4 shrink-0 text-muted-foreground" />
+                    </div>
                   </div>
                 )
               })}
-            </Card>
+            </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
-            <Card className="flex items-start gap-3 rounded-[20px] border-0 bg-tonal p-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-mint text-brand-ink">
-                <ShieldCheck className="size-5" />
-              </span>
-              <span className="text-xs font-medium leading-relaxed text-foreground/70">
-                Entries cannot be edited or deleted by anyone, including administrators. Corrections are written as new entries.
-              </span>
-            </Card>
+            <Pagination page={page} totalPages={3} onPageChange={setPage} />
           </motion.div>
           <motion.div variants={item}>
-            <div className="px-1 text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Compliance tools</div>
-            <Card className="rounded-[20px] border-border p-2">
-              <button
-                onClick={() => (window.location.hash = '/admin/a06')}
-                className="flex w-full items-center gap-3 px-2 py-2.5 text-left"
-              >
-                <span className="grid size-11 shrink-0 place-items-center rounded-[14px] bg-tonal text-foreground/70">
-                  <CheckCircle2 className="size-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-bold text-foreground">Consent tracking</span>
-                  <span className="block truncate text-xs font-medium text-muted-foreground">Active · due · withdrawn records</span>
-                </span>
-                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-              </button>
-              <button
-                onClick={() => (window.location.hash = '/admin/a07')}
-                className="flex w-full items-center gap-3 px-2 py-2.5 text-left"
-              >
-                <span className="grid size-11 shrink-0 place-items-center rounded-[14px] bg-tonal text-foreground/70">
-                  <Lock className="size-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-bold text-foreground">Retention policies</span>
-                  <span className="block truncate text-xs font-medium text-muted-foreground">How long records live · enforced automatically</span>
-                </span>
-                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-              </button>
-            </Card>
+            <InfoCard icon={ShieldCheck} body="Entries are append-only. Nothing here can be edited or deleted — not by anyone." />
+          </motion.div>
+          <motion.div variants={item}>
+            <SectionHeader label="Compliance tools" />
+          </motion.div>
+          <motion.div variants={item}>
+            <ScreenCard className="p-2">
+              <div className="px-2 py-1.5">
+                <ActionRow icon={ShieldCheck} title="Consent tracking" subtitle="1,102 active · 18 due · 2 withdrawn" onClick={() => navigate('/admin/a06')} />
+              </div>
+              <div className="px-2 py-1.5">
+                <ActionRow icon={Lock} title="Retention policies" subtitle="7 policies · deletion queue running" onClick={() => navigate('/admin/a07')} />
+              </div>
+            </ScreenCard>
           </motion.div>
         </motion.div>
       </BodyArea>
       <FootBar>
-        <Button
-          variant="secondary"
-          className="h-13 w-full rounded-full"
-          onClick={() => notify({ title: 'Export started', body: "Today's audit log · 214 entries · sealed PDF", kind: 'ok' })}
-        >
-          <FileDown className="size-4" />
-          Export today's log
-        </Button>
+        <SmoothButton variant="outline" shape="pill" size="lg" className="w-full" onClick={() => notify({ title: 'Export queued', body: "Today's log will be emailed to you", kind: 'info' })}>
+          <Download className="size-4" /> Export today's log
+        </SmoothButton>
       </FootBar>
     </Screen>
   )

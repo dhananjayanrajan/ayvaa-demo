@@ -1,112 +1,93 @@
-import { Link2, MessageSquare, UserCheck } from 'lucide-react'
 import { motion } from 'motion/react'
+import { Link2, MessageSquare, UserCheck } from 'lucide-react'
+import AgentAvatar from '@/components/smoothui/agent-avatar'
+import SmoothButton from '@/components/smoothui/smooth-button'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Fade, Screen } from '@/components/phone/Screen'
+import { BodyArea, Screen } from '@/components/phone/Screen'
+import { ActionRow, IconTile, InfoCard, ScreenCard, SectionHeader } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
-import { useDemo } from '@/lib/store'
 import { escalatedTickets } from '@/data/seed'
+import { useDemo } from '@/lib/store'
 
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-}
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }
 
 export function A08() {
   const { notify } = useDemo()
-  const [primary, ...rest] = escalatedTickets
-
+  const [e1, e2, e3] = escalatedTickets
   return (
     <Screen>
-      <AppBar title="Escalated tickets" subtitle="Needs a human decision" />
+      <AppBar
+        title="Escalated tickets"
+        subtitle="Needs a human decision"
+        trailing={<AgentAvatar seed="ayvaa-tickets" size={42} />}
+      />
       <BodyArea>
         <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-3">
           <motion.div variants={item}>
-            <Card className="rounded-[20px] border-border p-4">
-              <div className="flex items-center justify-between gap-2">
-                <div className="min-w-0">
-                  <div className="truncate text-sm font-bold text-foreground">{primary.title}</div>
-                  <div className="truncate text-xs font-medium text-muted-foreground">{primary.meta}</div>
+            <ScreenCard className="border-l-4 border-l-primary">
+              <div className="flex items-start gap-3">
+                <IconTile icon={MessageSquare} tone="brand" />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-foreground">{e1.title}</span>
+                    <Pill tone="warn">{e1.waiting}</Pill>
+                  </div>
+                  <div className="mt-0.5 text-[13px] font-medium leading-snug text-muted-foreground">{e1.meta}</div>
                 </div>
-                <Pill tone="warn">{primary.waiting}</Pill>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {primary.chips.map((c) => (
-                  <Pill key={c} tone="grey">
-                    {c}
-                  </Pill>
+                {e1.chips.map((c) => (
+                  <Pill key={c} tone="grey">{c}</Pill>
                 ))}
               </div>
               <div className="mt-3 rounded-[14px] bg-tonal p-3">
-                <div className="text-xs font-medium leading-relaxed text-foreground/80">{primary.quote}</div>
-                <div className="mt-1.5 text-[11px] font-bold text-muted-foreground">{primary.quoteBy}</div>
+                <div className="text-[13px] font-medium leading-snug text-foreground/80">{e1.quote}</div>
+                <div className="mt-1.5 text-xs font-bold text-muted-foreground">{e1.quoteBy}</div>
               </div>
-              <div className="mt-3 text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Your decision</div>
-              <Textarea
-                defaultValue="Match a calmer nurse for Friday visits and reply to Priya with the new schedule."
-                className="mt-2 min-h-[72px] rounded-[14px] border-border bg-background text-sm"
-              />
-              <div className="mt-3 flex gap-2">
-                <Button
-                  variant="secondary"
-                  className="h-11 flex-1 rounded-full"
-                  onClick={() => notify({ title: 'Re-match queued', body: 'Quiet re-match · family not notified until confirmed', kind: 'info' })}
-                >
-                  <UserCheck className="size-4" />
-                  Re-match quietly
-                </Button>
-                <Button
-                  className="h-11 flex-1 rounded-full"
-                  onClick={() => notify({ title: 'Reply sent', body: 'Priya notified · reply logged on the ticket', kind: 'ok' })}
-                >
-                  <MessageSquare className="size-4" />
-                  Reply to family
-                </Button>
+              <div className="mt-3">
+                <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">Your decision</div>
+                <Textarea className="min-h-20 rounded-[14px] border-border bg-background text-[13px]" placeholder="Write a note for the care team…" />
               </div>
-            </Card>
+              <div className="mt-3 flex gap-2.5">
+                <SmoothButton variant="secondary" shape="pill" className="flex-1" onClick={() => notify({ title: 'Re-match queued', body: 'A calmer nurse will be offered Friday slot · family not told yet', kind: 'ok' })}>
+                  <UserCheck className="size-4" /> Re-match quietly
+                </SmoothButton>
+                <SmoothButton variant="default" shape="pill" className="flex-1" onClick={() => notify({ title: 'Reply sent', body: 'Priya Sharma notified · decision shared', kind: 'ok' })}>
+                  <MessageSquare className="size-4" /> Reply to family
+                </SmoothButton>
+              </div>
+            </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
-            <div className="px-1 text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Also escalated</div>
-            <Card className="rounded-[20px] border-border p-2">
-              {rest.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => notify({ title: t.title, body: t.meta, kind: 'info' })}
-                  className="flex w-full items-center gap-3 px-2 py-2.5 text-left"
-                >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-[14px] bg-tonal text-foreground/70">
-                    <Link2 className="size-5" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-bold text-foreground">{t.title}</span>
-                    <span className="block truncate text-xs font-medium text-muted-foreground">{t.meta}</span>
-                  </span>
-                  <Pill tone="grey">Open</Pill>
-                </button>
-              ))}
-            </Card>
+            <SectionHeader label="Also escalated" />
           </motion.div>
           <motion.div variants={item}>
-            <Card className="flex items-start gap-3 rounded-[20px] border-0 bg-tonal p-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-mint text-brand-ink">
-                <Link2 className="size-5" />
-              </span>
-              <span className="text-xs font-medium leading-relaxed text-foreground/70">
-                Every ticket carries links to its people, sessions and incidents, so decisions are made with the full record in
-                view.
-              </span>
-            </Card>
+            <ScreenCard className="p-2">
+              <div className="px-2 py-1.5">
+                <ActionRow
+                  icon={Link2}
+                  title={e2.title}
+                  subtitle={e2.meta}
+                  onClick={() => notify({ title: 'Ticket opened', body: `${e2.title} · linked receipts attached`, kind: 'info' })}
+                />
+              </div>
+              <div className="px-2 py-1.5">
+                <ActionRow
+                  icon={Link2}
+                  title={e3.title}
+                  subtitle={e3.meta}
+                  onClick={() => notify({ title: 'Ticket opened', body: `${e3.title} · usage report attached`, kind: 'info' })}
+                />
+              </div>
+            </ScreenCard>
+          </motion.div>
+          <motion.div variants={item}>
+            <InfoCard icon={Link2} body="Every escalation links to its records — sessions, receipts, messages. Decisions are logged with your name." />
           </motion.div>
         </motion.div>
       </BodyArea>
-      <Fade />
     </Screen>
   )
 }
