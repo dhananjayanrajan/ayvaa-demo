@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ayvaa Caregiver · Set 1 · Patient Auth and Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL@20..48,300..700,0..1" rel="stylesheet"/>
+<style>
+/* ============================================================
+   AYVAA DESIGN SYSTEM · locked for all 64 screens
+   ============================================================ */
+:root{
+  --c-bg:#F5FAF8; --c-card:#FFFFFF; --c-card-line:#E1ECE7;
+  --c-tonal:#EBF3EF; --c-mint:#C9EFE4; --c-nav:#EAF2EE;
+  --c-brand:#00A88E; --c-brand-ink:#00584A;
+  --c-error:#B4232A; --c-error-bg:#FBDDD9;
+  --c-warn-bg:#FBEFD6; --c-warn-ink:#6B5312;
+  --t-main:#182420; --t-body:#44534E; --t-faint:#75847F;
+  --r-card:20px; --r-tile:14px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{background:#EFF5F2}
+body{
+  font-family:'Roboto',sans-serif;color:var(--t-main);
+  min-height:100vh;padding:56px 36px 72px;
+  background:
+    radial-gradient(1100px 520px at 8% -8%, #DCF2EA 0%, transparent 55%),
+    radial-gradient(900px 600px at 108% 16%, #E9F3EE 0%, transparent 52%),
+    linear-gradient(165deg,#F1F7F4,#EAF1EE);
+}
+.material-symbols-rounded{font-size:24px;line-height:1;display:inline-block;font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24}
+.fill{font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24}
+
+/* type roles — locked */
+.t-display{font-size:24px;line-height:30px;font-weight:900;letter-spacing:-.3px;color:var(--t-main)}
+.t-title{font-size:16px;line-height:22px;font-weight:700;letter-spacing:-.1px;color:var(--t-main)}
+.t-body{font-size:14px;line-height:21px;font-weight:500;color:var(--t-body)}
+.t-sub{font-size:13px;line-height:19px;font-weight:400;color:var(--t-body)}
+.t-label{font-size:11px;line-height:14px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--t-faint)}
+.t-mini{font-size:12px;line-height:16px;font-weight:500;color:var(--t-body)}
+.on-mint{color:var(--c-brand-ink)}
+
+/* surfaces — locked */
+.card{background:var(--c-card);border:1px solid var(--c-card-line);border-radius:var(--r-card);padding:16px}
+.card-t{background:var(--c-tonal);border:none}
+.card-m{background:var(--c-mint);border:none}
+.card-e{background:var(--c-error-bg);border:none}
+.vline{height:1px;background:var(--c-card-line);margin:12px 0}
+
+/* controls — locked geometry */
+.btn{height:52px;width:100%;border:none;cursor:pointer;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center;gap:8px;font:700 15px/20px 'Roboto';letter-spacing:.1px}
+.btn .material-symbols-rounded{font-size:20px}
+.btn-primary{background:var(--c-brand);color:#fff}
+.btn-soft{background:#DCF3EC;color:var(--c-brand-ink)}
+.btn-quiet{background:var(--c-tonal);color:var(--t-main)}
+.iconbtn{width:42px;height:42px;border:none;cursor:pointer;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--c-tonal);color:var(--t-body)}
+.tile{height:60px;border-radius:var(--r-tile);border:none;cursor:pointer;background:var(--c-tonal);display:grid;place-items:center;color:var(--t-body)}
+.pill{height:26px;padding:0 10px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:4px;flex-shrink:0;font:700 11px/16px 'Roboto';letter-spacing:.2px}
+.pill .material-symbols-rounded{font-size:14px}
+.pill-ok{background:var(--c-mint);color:var(--c-brand-ink)}
+.pill-warn{background:var(--c-warn-bg);color:var(--c-warn-ink)}
+.pill-grey{background:var(--c-tonal);color:var(--t-body)}
+.chip{height:34px;padding:0 14px;border-radius:var(--r-pill);flex-shrink:0;border:1px solid var(--c-card-line);background:var(--c-card);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:500 13px/18px 'Roboto';color:var(--t-body)}
+.chip .material-symbols-rounded{font-size:17px}
+.chip-on{background:var(--c-mint);border-color:transparent;color:var(--c-brand-ink);font-weight:700}
+.field{height:54px;border-radius:var(--r-pill);width:100%;background:var(--c-card);border:1px solid var(--c-card-line);display:flex;align-items:center;gap:10px;padding:0 16px}
+.field .material-symbols-rounded{font-size:20px;color:var(--t-faint)}
+.field-value{font:500 14px/21px 'Roboto';color:var(--t-main)}
+.field-hint{font:400 14px/21px 'Roboto';color:var(--t-faint)}
+.avatar{width:46px;height:46px;border-radius:50%;flex-shrink:0;background:var(--c-brand);color:#fff;display:grid;place-items:center}
+.avatar.alt{background:#33739E}
+.avatar.soft{background:var(--c-mint);color:var(--c-brand-ink)}
+.checkbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--c-card-line);flex-shrink:0;display:grid;place-items:center;color:#fff}
+.checkbox.on{background:var(--c-brand);border-color:var(--c-brand)}
+.checkbox .material-symbols-rounded{font-size:16px}
+.bar{height:8px;border-radius:4px;background:var(--c-tonal)}
+.bar>div{height:100%;border-radius:4px;background:var(--c-brand)}
+.otp{display:flex;gap:10px;justify-content:center}
+.otp span{width:48px;height:60px;border-radius:var(--r-tile);background:var(--c-card);border:1px solid var(--c-card-line);display:grid;place-items:center;font:900 24px/30px 'Roboto';color:var(--t-main)}
+.otp span.on{border:2px solid var(--c-brand)}
+.otp span:focus{outline:none}
+
+/* phone frame — locked */
+.phone{width:372px;height:810px;border-radius:44px;flex-shrink:0;background:var(--c-bg);position:relative;overflow:hidden;box-shadow:0 32px 70px -22px rgba(8,46,38,.35),0 0 0 11px #10161a,0 0 0 13px #2b353b;display:flex;flex-direction:column}
+.statusbar{height:44px;padding:14px 26px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.statusbar span{font:600 13px/16px 'Roboto'}
+.sb-icons{display:flex;gap:5px;align-items:center}
+.sb-icons .material-symbols-rounded{font-size:16px;color:var(--t-main)}
+.screen{flex:1;display:flex;flex-direction:column;min-height:0}
+.appbar{height:68px;padding:0 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.appbar .grow{flex:1;min-width:0}
+.wordmark{display:flex;align-items:baseline;font-weight:900;font-size:20px;letter-spacing:-1px;color:#161B19;line-height:1}
+.wordmark em{font-style:normal;color:var(--c-brand);font-size:24px;margin-left:1px}
+.body-area{flex:1;min-height:0;overflow:hidden;padding:0 20px;display:flex;flex-direction:column;gap:12px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;gap:12px}
+.row-between{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.fade{position:absolute;left:0;right:0;bottom:104px;height:40px;background:linear-gradient(transparent,var(--c-bg));pointer-events:none;z-index:3}
+.footbar{padding:12px 20px 30px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
+.navbar{flex-shrink:0;height:92px;background:var(--c-nav);display:flex;align-items:flex-start;padding:10px 12px 0}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.nav-pill{width:62px;height:32px;border-radius:var(--r-pill);display:grid;place-items:center;color:var(--t-body)}
+.nav-tab span.nl{font:700 11px/14px 'Roboto';letter-spacing:.2px;color:var(--t-body)}
+.nav-tab.on .nav-pill{background:var(--c-mint);color:var(--c-brand-ink)}
+.nav-tab.on span.nl{color:var(--c-brand-ink)}
+.nav-count{position:absolute;top:-4px;right:calc(50% - 20px);min-width:17px;height:17px;border-radius:var(--r-pill);background:var(--c-error);color:#fff;font:700 10px/17px 'Roboto';text-align:center;padding:0 4px}
+
+/* presentation board */
+h1.pt{font-size:32px;font-weight:900;letter-spacing:-.6px;text-align:center;margin-bottom:8px}
+p.ps{text-align:center;color:var(--t-body);font:500 15px/22px 'Roboto';margin-bottom:48px}
+.board{display:flex;flex-wrap:wrap;gap:46px 38px;justify-content:center;max-width:1860px;margin:0 auto}
+.shot{display:flex;flex-direction:column;align-items:center;gap:14px}
+.shot>span{font:700 12px/16px 'Roboto';letter-spacing:2.4px;text-transform:uppercase;color:var(--t-faint);display:flex;align-items:center;gap:8px;text-align:center}
+.shot>span .material-symbols-rounded{font-size:17px;color:var(--c-brand)}
+</style>
+</head>
+<body>
+
+<h1 class="pt">Ayvaa <span style="color:var(--c-brand)">+</span> Set 1 · Auth and Dashboard</h1>
+<p class="ps">Screens P01 to P08 · rebuilt from scratch · one locked design system</p>
+
+<div class="board">
+
+<!-- ═════════ P01 · WELCOME & SIGN UP ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">person_add</span>P01 · Welcome and Sign Up</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:02</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="body-area" style="justify-content:center;gap:14px">
+
+        <div class="row" style="justify-content:center;margin-bottom:2px">
+          <div class="wordmark" style="font-size:34px;letter-spacing:-2px">ayvaa<em>+</em></div>
+        </div>
+
+        <div class="card card-m stack" style="align-items:center;gap:8px;padding:20px">
+          <div style="width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center">
+            <span class="material-symbols-rounded fill" style="font-size:38px;color:var(--c-brand)">volunteer_activism</span>
+          </div>
+          <div class="t-title on-mint">Care your family can trust</div>
+          <div class="t-sub on-mint" style="text-align:center;max-width:260px">Verified caregivers, checked visits and honest records for the people you love.</div>
+        </div>
+
+        <span class="t-label">Create your guardian account</span>
+        <div class="stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">person</span><span class="field-hint">Your full name</span></div>
+          <div class="field"><span class="material-symbols-rounded">mail</span><span class="field-hint">Email address</span></div>
+          <div class="field"><span class="material-symbols-rounded">call</span><span class="field-hint">Phone number</span></div>
+          <div class="field"><span class="material-symbols-rounded">lock</span><span class="field-hint">Create a password</span><span class="material-symbols-rounded" style="margin-left:auto">visibility</span></div>
+        </div>
+
+        <div class="row" style="align-items:flex-start;gap:10px;padding:0 4px">
+          <div class="checkbox on"><span class="material-symbols-rounded fill">check</span></div>
+          <span class="t-mini">I agree to the care terms and the family privacy promise.</span>
+        </div>
+
+        <button class="btn btn-primary">Create account</button>
+
+        <div class="row" style="gap:12px;align-items:center"><div style="flex:1;height:1px;background:var(--c-card-line)"></div><span class="t-mini">already with us?</span><div style="flex:1;height:1px;background:var(--c-card-line)"></div></div>
+        <button class="btn btn-soft">Sign in instead</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P02 · LOGIN ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">login</span>P02 · Login</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:12</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="body-area" style="justify-content:center;gap:14px">
+
+        <div class="row" style="justify-content:center;margin-bottom:2px">
+          <div class="wordmark" style="font-size:34px;letter-spacing:-2px">ayvaa<em>+</em></div>
+        </div>
+        <div class="stack" style="align-items:center;gap:4px">
+          <div class="t-title" style="font-size:20px">Welcome back</div>
+          <div class="t-sub">Sign in to keep your family's care on track</div>
+        </div>
+
+        <div class="stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">mail</span><span class="field-value">amara.okoye@gmail.com</span></div>
+          <div class="field"><span class="material-symbols-rounded">lock</span><span class="field-value">••••••••••</span><span class="material-symbols-rounded" style="margin-left:auto">visibility</span></div>
+        </div>
+
+        <div class="t-mini" style="text-align:right;color:var(--c-brand);font-weight:700;padding:0 4px">Forgot your password?</div>
+
+        <button class="btn btn-primary">Sign in</button>
+
+        <div class="row" style="gap:12px;align-items:center"><div style="flex:1;height:1px;background:var(--c-card-line)"></div><span class="t-mini">or</span><div style="flex:1;height:1px;background:var(--c-card-line)"></div></div>
+
+        <button class="btn btn-quiet"><span class="material-symbols-rounded fill">fingerprint</span>Unlock with your fingerprint</button>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:22px">shield_person</span>
+          <div class="t-sub">Your family's medical records stay sealed until your identity is verified.</div>
+        </div>
+
+        <div class="t-body" style="text-align:center">New to Ayvaa? <b style="color:var(--c-brand)">Create an account</b></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P03 · VERIFY IDENTITY · CODE ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">password</span>P03 · Verify · Code</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:14</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Verify it is you</div></div>
+        <span class="pill pill-grey">Step 1 of 2</span>
+      </div>
+      <div class="body-area" style="justify-content:center;gap:14px">
+
+        <div class="card card-m row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand-ink)">shield_person</span>
+          <div class="t-sub on-mint">Guardians verify once. This protects every medical record and consent in your family plan.</div>
+        </div>
+
+        <div class="stack" style="align-items:center;gap:4px">
+          <div class="t-title" style="font-size:20px">Enter your code</div>
+          <div class="t-sub">Six digits sent to 0803 ••• 4471</div>
+        </div>
+
+        <div class="otp"><span class="on">4</span><span class="on">7</span><span class="on">2</span><span class="on">9</span><span>·</span><span>·</span></div>
+
+        <div class="t-mini" style="text-align:center">Resend code in 00:42</div>
+
+        <button class="btn btn-primary">Verify and continue</button>
+
+        <span class="t-label">What comes next</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">photo_camera</span></div>
+            <div class="grow"><div class="t-title">A photo of your ID card</div><div class="t-mini">Takes under a minute</div></div>
+            <span class="pill pill-grey">Up next</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">sentiment_satisfied</span></div>
+            <div class="grow"><div class="t-title">A short selfie to match it</div><div class="t-mini">Deleted after matching, never stored</div></div>
+            <span class="pill pill-grey">After</span>
+          </div>
+        </div>
+
+        <div class="t-mini" style="text-align:center;color:var(--c-brand);font-weight:700">Did not get a code? Use email instead</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P04 · VERIFY IDENTITY · ID + SELFIE ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">badge</span>P04 · Verify · ID and Selfie</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:16</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Confirm your identity</div></div>
+        <span class="pill pill-grey">Step 2 of 2</span>
+      </div>
+      <div class="body-area">
+
+        <div class="card row">
+          <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+          <div class="grow">
+            <div class="t-title">Phone code verified</div>
+            <div class="t-mini">Completed at 9:15 AM</div>
+          </div>
+          <span class="pill pill-ok">Done</span>
+        </div>
+
+        <span class="t-label">Photo of your ID card</span>
+        <div class="card row">
+          <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+          <div class="grow">
+            <div class="t-title">National ID captured</div>
+            <div class="t-mini">Front and back · sharp and readable</div>
+          </div>
+          <span class="pill pill-ok">Done</span>
+        </div>
+
+        <span class="t-label">Match it with a selfie</span>
+        <div class="card stack" style="align-items:center;gap:10px;padding:22px 16px">
+          <div style="width:104px;height:104px;border-radius:50%;border:3px dashed var(--c-brand);display:grid;place-items:center;background:var(--c-tonal)">
+            <span class="material-symbols-rounded fill" style="font-size:44px;color:var(--c-brand)">photo_camera</span>
+          </div>
+          <div class="t-title">Take a live selfie</div>
+          <div class="t-sub" style="text-align:center;max-width:250px">Look straight ahead in good light. We compare it with your ID and delete the selfie right after.</div>
+          <button class="btn btn-primary" style="height:44px"><span class="material-symbols-rounded">camera</span>Open camera</button>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:22px">lock</span>
+          <div class="t-sub">Your ID is encrypted the moment it is captured. Every view of it, by anyone, is logged in the audit record.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-primary">Finish verification</button>
+        <div class="t-mini" style="text-align:center">Verification usually takes under two minutes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P05 · PASSWORD RECOVERY ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">lock_reset</span>P05 · Password Recovery</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:20</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Reset password</div></div>
+      </div>
+      <div class="body-area">
+
+        <div class="stack" style="gap:4px">
+          <div class="t-title" style="font-size:20px">Let's get you back in</div>
+          <div class="t-sub">We will send a secure reset link to your email.</div>
+        </div>
+
+        <div class="field"><span class="material-symbols-rounded">mail</span><span class="field-value">amara.okoye@gmail.com</span></div>
+
+        <button class="btn btn-primary">Send reset link</button>
+
+        <span class="t-label">What happened next</span>
+        <div class="card row">
+          <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">mark_email_read</span></div>
+          <div class="grow">
+            <div class="t-title">Reset link sent</div>
+            <div class="t-mini">Check your inbox · sent 9:21 AM · valid for 30 minutes</div>
+          </div>
+          <span class="pill pill-ok">Sent</span>
+        </div>
+
+        <span class="t-label">While you wait</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">schedule</span></div>
+            <div class="grow"><div class="t-title">Today's visits are unaffected</div><div class="t-mini">Ngozi's 2:00 PM visit proceeds as planned</div></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">shield_person</span></div>
+            <div class="grow"><div class="t-title">Your records stay sealed</div><div class="t-mini">Nobody can access them during a reset</div></div>
+          </div>
+        </div>
+
+        <div class="t-mini" style="text-align:center;color:var(--c-brand);font-weight:700">Open my mail app</div>
+        <div class="t-mini" style="text-align:center">Still stuck? The care team can verify you by phone.</div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-quiet">Back to sign in</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P06 · HOME DASHBOARD ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">dashboard</span>P06 · Home Dashboard</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:26</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <div class="avatar soft"><span class="material-symbols-rounded fill">person</span></div>
+        <div class="grow">
+          <div class="t-mini">Good morning</div>
+          <div class="t-title">Amara Okoye</div>
+        </div>
+        <button class="iconbtn" style="position:relative"><span class="material-symbols-rounded">notifications</span><span style="position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--c-error)"></span></button>
+      </div>
+      <div class="body-area">
+
+        <div class="field"><span class="material-symbols-rounded">search</span><span class="field-hint">Search care, nurses and medicine</span></div>
+
+        <div class="card card-m stack" style="gap:10px">
+          <div class="row-between">
+            <span class="t-label on-mint">Next home visit</span>
+            <span class="pill pill-ok" style="background:#fff"><span class="material-symbols-rounded fill">event_available</span>Today</span>
+          </div>
+          <div class="row">
+            <div class="avatar" style="background:#fff;color:var(--c-brand-ink)"><span class="material-symbols-rounded fill">medical_services</span></div>
+            <div class="grow">
+              <div class="t-title">Ngozi Adeyemi</div>
+              <div class="t-mini on-mint">Registered Nurse · Elderly care for Emeka</div>
+            </div>
+            <div class="tile" style="width:46px;height:46px;background:#fff;color:var(--c-brand-ink)"><span class="material-symbols-rounded fill">call</span></div>
+          </div>
+          <div class="row-between" style="border-top:1px solid rgba(0,88,74,.16);padding-top:10px">
+            <span class="t-mini on-mint" style="display:flex;gap:6px;align-items:center"><span class="material-symbols-rounded fill" style="font-size:17px">schedule</span>2:00 PM to 4:00 PM</span>
+            <span class="t-mini on-mint" style="display:flex;gap:6px;align-items:center"><span class="material-symbols-rounded fill" style="font-size:17px">repeat</span>Mon, Wed, Fri</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <div class="stack" style="gap:6px;align-items:center"><div class="tile" style="width:100%"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">add_circle</span></div><span class="t-mini">Book care</span></div>
+          <div class="stack" style="gap:6px;align-items:center"><div class="tile" style="width:100%"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">medication</span></div><span class="t-mini">Medicine</span></div>
+          <div class="stack" style="gap:6px;align-items:center"><div class="tile" style="width:100%"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">folder_shared</span></div><span class="t-mini">Records</span></div>
+          <div class="stack" style="gap:6px;align-items:center"><div class="tile" style="width:100%;background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded fill">e911_emergency</span></div><span class="t-mini">Emergency</span></div>
+        </div>
+
+        <div class="row-between">
+          <span class="t-label">Upcoming visits</span>
+          <span class="t-mini" style="color:var(--c-brand);font-weight:700">See all</span>
+        </div>
+
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Friday, March 8</div>
+              <div class="t-mini">Ngozi Adeyemi · 2:00 PM to 4:00 PM</div>
+            </div>
+            <span class="pill pill-ok">Confirmed</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Monday, March 11</div>
+              <div class="t-mini">Tunde Balogun · 10:00 AM to 12:00 PM</div>
+            </div>
+            <span class="pill pill-grey">Waiting</span>
+          </div>
+        </div>
+
+        <div class="card card-t row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand)">monitor_heart</span>
+          <div class="grow">
+            <div class="t-title">Care plan · week 6 of 9</div>
+            <div class="t-mini">On track · 38 visits completed</div>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">home</span></div><span class="nl">Home</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">calendar_month</span></div><span class="nl">Visits</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">favorite</span></div><span class="nl">Records</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">support_agent</span></div><span class="nl">Support</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person</span></div><span class="nl">Profile</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P07 · NOTIFICATIONS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">notifications</span>P07 · Notifications</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:30</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Notifications</div></div>
+        <button class="iconbtn"><span class="material-symbols-rounded">done_all</span></button>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">Today</span>
+        <div class="stack" style="gap:8px">
+          <div class="card card-m row">
+            <div class="tile" style="width:44px;height:44px;background:#fff;color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">event_available</span></div>
+            <div class="grow">
+              <div class="t-title">Ngozi confirmed today's visit</div>
+              <div class="t-mini on-mint">Accepted at 7:44 AM · arrives 2:00 PM</div>
+            </div>
+          </div>
+          <div class="card row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">medication</span></div>
+            <div class="grow">
+              <div class="t-title">Morning doses logged</div>
+              <div class="t-mini">Amlodipine and metformin · given 8:10 AM</div>
+            </div>
+            <span class="pill pill-grey">Read</span>
+          </div>
+          <div class="card row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">payments</span></div>
+            <div class="grow">
+              <div class="t-title">Receipt for Tuesday's visit</div>
+              <div class="t-mini">48,000 naira · saved to your records</div>
+            </div>
+            <span class="pill pill-grey">Read</span>
+          </div>
+        </div>
+
+        <span class="t-label">Yesterday</span>
+        <div class="stack" style="gap:8px">
+          <div class="card row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">summarize</span></div>
+            <div class="grow">
+              <div class="t-title">Visit summary ready</div>
+              <div class="t-mini">All five care steps completed and signed</div>
+            </div>
+            <span class="pill pill-grey">Read</span>
+          </div>
+          <div class="card row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">verified_user</span></div>
+            <div class="grow">
+              <div class="t-title">Consent review coming up</div>
+              <div class="t-mini">Re-confirm Emeka's care consent by March 20</div>
+            </div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+        </div>
+
+        <span class="t-label">This week</span>
+        <div class="stack" style="gap:8px">
+          <div class="card row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">star</span></div>
+            <div class="grow">
+              <div class="t-title">How was Monday's visit?</div>
+              <div class="t-mini">Your rating helps match the right caregivers</div>
+            </div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">home</span></div><span class="nl">Home</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">calendar_month</span></div><span class="nl">Visits</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">favorite</span></div><span class="nl">Records</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">support_agent</span></div><span class="nl">Support</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person</span></div><span class="nl">Profile</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P08 · SEARCH & SERVICE CATALOGUE ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">search</span>P08 · Search and Catalogue</span>
+  <div class="phone">
+    <div class="statusbar"><span>9:34</span><div class="sb-icons"><span class="material-symbols-rounded">signal_cellular_alt</span><span class="material-symbols-rounded">wifi</span><span class="material-symbols-rounded">battery_full</span></div></div>
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="field" style="height:44px"><span class="material-symbols-rounded">search</span><span class="field-value">home care</span><span class="material-symbols-rounded" style="margin-left:auto">close</span></div>
+      </div>
+      <div class="body-area">
+
+        <div class="row" style="gap:8px">
+          <span class="chip chip-on">All services</span>
+          <span class="chip">Elderly</span>
+          <span class="chip">Pediatric</span>
+          <span class="chip">Post-operative</span>
+        </div>
+        <div class="row" style="gap:8px">
+          <span class="chip">Chronic</span>
+          <span class="chip">Disability</span>
+          <span class="chip">Palliative</span>
+          <span class="chip">Special needs</span>
+        </div>
+
+        <div class="row-between">
+          <span class="t-label">12 services found</span>
+          <span class="t-mini" style="color:var(--c-brand);font-weight:700">Sort · nearest first</span>
+        </div>
+
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:22px">elderly</span></div>
+            <div class="grow">
+              <div class="t-title">Elderly home care</div>
+              <div class="t-mini">Daily living, mobility and companionship</div>
+            </div>
+            <span class="pill pill-grey">From 40,000</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:22px">medical_services</span></div>
+            <div class="grow">
+              <div class="t-title">Certified nursing care</div>
+              <div class="t-mini">Vitals, medication and wound management</div>
+            </div>
+            <span class="pill pill-grey">From 48,000</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:22px">personal_injury</span></div>
+            <div class="grow">
+              <div class="t-title">Post-operative recovery</div>
+              <div class="t-mini">Dressing changes and recovery assistance</div>
+            </div>
+            <span class="pill pill-grey">From 45,000</span>
+          </div>
+        </div>
+
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px"><span class="material-symbols-rounded fill" style="font-size:22px">physical_therapy</span></div>
+            <div class="grow">
+              <div class="t-title">Physiotherapy at home</div>
+              <div class="t-mini">Hospital-affiliated therapists</div>
+            </div>
+            <span class="pill pill-grey">From 55,000</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px"><span class="material-symbols-rounded fill" style="font-size:22px">child_care</span></div>
+            <div class="grow">
+              <div class="t-title">Pediatric care</div>
+              <div class="t-mini">Guardian-consented care for children</div>
+            </div>
+            <span class="pill pill-grey">From 42,000</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:46px;height:46px"><span class="material-symbols-rounded fill" style="font-size:22px">psychology</span></div>
+            <div class="grow">
+              <div class="t-title">Palliative support</div>
+              <div class="t-mini">Comfort-focused specialist care</div>
+            </div>
+            <span class="pill pill-grey">From 60,000</span>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:22px">smart_toy</span>
+          <div class="t-sub">Not sure what you need? Describe your situation and we will match the right service and caregiver.</div>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">home</span></div><span class="nl">Home</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">calendar_month</span></div><span class="nl">Visits</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">favorite</span></div><span class="nl">Records</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">support_agent</span></div><span class="nl">Support</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person</span></div><span class="nl">Profile</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

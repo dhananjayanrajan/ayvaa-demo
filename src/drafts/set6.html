@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ayvaa Caregiver · Set 6 · Partner</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL@20..48,300..700,0..1" rel="stylesheet"/>
+<style>
+/* ============================================================
+   AYVAA DESIGN SYSTEM · locked for all 64 screens · no status bar
+   ============================================================ */
+:root{
+  --c-bg:#F5FAF8; --c-card:#FFFFFF; --c-card-line:#E1ECE7;
+  --c-tonal:#EBF3EF; --c-mint:#C9EFE4; --c-nav:#EAF2EE;
+  --c-brand:#00A88E; --c-brand-ink:#00584A;
+  --c-error:#B4232A; --c-error-bg:#FBDDD9;
+  --c-warn-bg:#FBEFD6; --c-warn-ink:#6B5312;
+  --t-main:#182420; --t-body:#44534E; --t-faint:#75847F;
+  --r-card:20px; --r-tile:14px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{background:#EFF5F2}
+body{
+  font-family:'Roboto',sans-serif;color:var(--t-main);
+  min-height:100vh;padding:56px 36px 72px;
+  background:
+    radial-gradient(1100px 520px at 8% -8%, #DCF2EA 0%, transparent 55%),
+    radial-gradient(900px 600px at 108% 16%, #E9F3EE 0%, transparent 52%),
+    linear-gradient(165deg,#F1F7F4,#EAF1EE);
+}
+.material-symbols-rounded{font-size:24px;line-height:1;display:inline-block;font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24}
+.fill{font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24}
+
+.t-display{font-size:24px;line-height:30px;font-weight:900;letter-spacing:-.3px;color:var(--t-main)}
+.t-title{font-size:16px;line-height:22px;font-weight:700;letter-spacing:-.1px;color:var(--t-main)}
+.t-body{font-size:14px;line-height:21px;font-weight:500;color:var(--t-body)}
+.t-sub{font-size:13px;line-height:19px;font-weight:400;color:var(--t-body)}
+.t-label{font-size:11px;line-height:14px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--t-faint)}
+.t-mini{font-size:12px;line-height:16px;font-weight:500;color:var(--t-body)}
+.on-mint{color:var(--c-brand-ink)}
+
+.card{background:var(--c-card);border:1px solid var(--c-card-line);border-radius:var(--r-card);padding:16px}
+.card-t{background:var(--c-tonal);border:none}
+.card-m{background:var(--c-mint);border:none}
+.card-e{background:var(--c-error-bg);border:none}
+.vline{height:1px;background:var(--c-card-line);margin:12px 0}
+
+.btn{height:52px;width:100%;border:none;cursor:pointer;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center;gap:8px;font:700 15px/20px 'Roboto';letter-spacing:.1px}
+.btn .material-symbols-rounded{font-size:20px}
+.btn-primary{background:var(--c-brand);color:#fff}
+.btn-soft{background:#DCF3EC;color:var(--c-brand-ink)}
+.btn-quiet{background:var(--c-tonal);color:var(--t-main)}
+.btn-danger{background:var(--c-error);color:#fff}
+.iconbtn{width:42px;height:42px;border:none;cursor:pointer;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--c-tonal);color:var(--t-body)}
+.tile{height:60px;border-radius:var(--r-tile);border:none;cursor:pointer;background:var(--c-tonal);display:grid;place-items:center;color:var(--t-body)}
+.pill{height:26px;padding:0 10px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:4px;flex-shrink:0;font:700 11px/16px 'Roboto';letter-spacing:.2px}
+.pill .material-symbols-rounded{font-size:14px}
+.pill-ok{background:var(--c-mint);color:var(--c-brand-ink)}
+.pill-warn{background:var(--c-warn-bg);color:var(--c-warn-ink)}
+.pill-grey{background:var(--c-tonal);color:var(--t-body)}
+.chip{height:34px;padding:0 14px;border-radius:var(--r-pill);flex-shrink:0;border:1px solid var(--c-card-line);background:var(--c-card);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:500 13px/18px 'Roboto';color:var(--t-body)}
+.chip .material-symbols-rounded{font-size:17px}
+.chip-on{background:var(--c-mint);border-color:transparent;color:var(--c-brand-ink);font-weight:700}
+.field{height:54px;border-radius:var(--r-pill);width:100%;background:var(--c-card);border:1px solid var(--c-card-line);display:flex;align-items:center;gap:10px;padding:0 16px}
+.field .material-symbols-rounded{font-size:20px;color:var(--t-faint)}
+.field-value{font:500 14px/21px 'Roboto';color:var(--t-main)}
+.field-hint{font:400 14px/21px 'Roboto';color:var(--t-faint)}
+.avatar{width:46px;height:46px;border-radius:50%;flex-shrink:0;background:var(--c-brand);color:#fff;display:grid;place-items:center}
+.avatar.alt{background:#33739E}
+.avatar.soft{background:var(--c-mint);color:var(--c-brand-ink)}
+.avatar.dark{background:#3A3F63}
+.checkbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--c-card-line);flex-shrink:0;display:grid;place-items:center;color:#fff}
+.checkbox.on{background:var(--c-brand);border-color:var(--c-brand)}
+.checkbox .material-symbols-rounded{font-size:16px}
+.bar{height:8px;border-radius:4px;background:var(--c-tonal)}
+.bar>div{height:100%;border-radius:4px;background:var(--c-brand)}
+.switch{width:48px;height:28px;border-radius:var(--r-pill);background:#CBD9D3;position:relative;flex-shrink:0}
+.switch::after{content:'';position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#fff}
+.switch-on{background:var(--c-brand)}
+.switch-on::after{left:auto;right:4px}
+
+.phone{width:372px;height:810px;border-radius:44px;flex-shrink:0;background:var(--c-bg);position:relative;overflow:hidden;box-shadow:0 32px 70px -22px rgba(8,46,38,.35),0 0 0 11px #10161a,0 0 0 13px #2b353b;display:flex;flex-direction:column}
+.screen{flex:1;display:flex;flex-direction:column;min-height:0}
+.appbar{height:68px;padding:0 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.appbar .grow{flex:1;min-width:0}
+.wordmark{display:flex;align-items:baseline;font-weight:900;font-size:20px;letter-spacing:-1px;color:#161B19;line-height:1}
+.wordmark em{font-style:normal;color:var(--c-brand);font-size:24px;margin-left:1px}
+.body-area{flex:1;min-height:0;overflow:hidden;padding:0 20px;display:flex;flex-direction:column;gap:12px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;gap:12px}
+.row-between{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.fade{position:absolute;left:0;right:0;bottom:104px;height:40px;background:linear-gradient(transparent,var(--c-bg));pointer-events:none;z-index:3}
+.footbar{padding:12px 20px 30px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
+.navbar{flex-shrink:0;height:92px;background:var(--c-nav);display:flex;align-items:flex-start;padding:10px 12px 0}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.nav-pill{width:62px;height:32px;border-radius:var(--r-pill);display:grid;place-items:center;color:var(--t-body)}
+.nav-tab span.nl{font:700 11px/14px 'Roboto';letter-spacing:.2px;color:var(--t-body)}
+.nav-tab.on .nav-pill{background:var(--c-mint);color:var(--c-brand-ink)}
+.nav-tab.on span.nl{color:var(--c-brand-ink)}
+.nav-count{position:absolute;top:-4px;right:calc(50% - 20px);min-width:17px;height:17px;border-radius:var(--r-pill);background:var(--c-error);color:#fff;font:700 10px/17px 'Roboto';text-align:center;padding:0 4px}
+.dim{position:absolute;inset:0;background:rgba(15,26,22,.45);z-index:8}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:9;background:var(--c-card);border-radius:24px 24px 0 0;padding:10px 20px 30px;display:flex;flex-direction:column;gap:12px;box-shadow:0 -10px 40px rgba(0,0,0,.22)}
+.sheet-handle{width:34px;height:4px;border-radius:2px;background:#CBD9D3;margin:0 auto}
+
+h1.pt{font-size:32px;font-weight:900;letter-spacing:-.6px;text-align:center;margin-bottom:8px}
+p.ps{text-align:center;color:var(--t-body);font:500 15px/22px 'Roboto';margin-bottom:48px}
+.board{display:flex;flex-wrap:wrap;gap:46px 38px;justify-content:center;max-width:1860px;margin:0 auto}
+.shot{display:flex;flex-direction:column;align-items:center;gap:14px}
+.shot>span{font:700 12px/16px 'Roboto';letter-spacing:2.4px;text-transform:uppercase;color:var(--t-faint);display:flex;align-items:center;gap:8px;text-align:center}
+.shot>span .material-symbols-rounded{font-size:17px;color:var(--c-brand)}
+</style>
+</head>
+<body>
+
+<h1 class="pt">Ayvaa <span style="color:var(--c-brand)">+</span> Set 6 · Partner</h1>
+<p class="ps">Screens PT01 to PT07 · hospitals and agencies · one locked design system</p>
+
+<div class="board">
+
+<!-- ═════════ PT01 · INSTITUTIONAL LOGIN ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">apartment</span>PT01 · Institutional Login</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="body-area" style="justify-content:center;gap:14px">
+
+        <div class="row" style="justify-content:center;margin-bottom:2px">
+          <div class="wordmark" style="font-size:34px;letter-spacing:-2px">ayvaa<em>+</em></div>
+        </div>
+        <div class="stack" style="align-items:center;gap:4px">
+          <span class="pill pill-grey"><span class="material-symbols-rounded fill">apartment</span>Partner access</span>
+          <div class="t-title" style="font-size:20px;margin-top:4px">Sign in as an organisation</div>
+          <div class="t-sub">Referrals, staff and billing for your institution</div>
+        </div>
+
+        <div class="stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">apartment</span><span class="field-value">St Agnes Hospital, Lagos</span></div>
+          <div class="field"><span class="material-symbols-rounded">mail</span><span class="field-value">care.ops@stagnes.org.ng</span></div>
+          <div class="field"><span class="material-symbols-rounded">lock</span><span class="field-hint">Work password</span><span class="material-symbols-rounded" style="margin-left:auto">visibility</span></div>
+        </div>
+
+        <button class="btn btn-primary">Sign in securely</button>
+
+        <div class="row" style="gap:12px;align-items:center"><div style="flex:1;height:1px;background:var(--c-card-line)"></div><span class="t-mini">or</span><div style="flex:1;height:1px;background:var(--c-card-line)"></div></div>
+
+        <button class="btn btn-quiet"><span class="material-symbols-rounded fill">key</span>Sign in with hospital SSO</button>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:22px">admin_panel_settings</span>
+          <div class="t-sub">Partner accounts are provisioned by your organisation's administrator. Individual staff sign in through this same door with their own roles.</div>
+        </div>
+
+        <div class="t-body" style="text-align:center">Want your hospital on Ayvaa? <b style="color:var(--c-brand)">Apply for partnership</b></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT02 · PARTNER DASHBOARD HUB ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">domain</span>PT02 · Partner Dashboard</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <div class="avatar dark"><span class="material-symbols-rounded fill">apartment</span></div>
+        <div class="grow">
+          <div class="t-mini">St Agnes Hospital · partner account</div>
+          <div class="t-title">Care partnership</div>
+        </div>
+        <button class="iconbtn" style="position:relative"><span class="material-symbols-rounded">notifications</span><span style="position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--c-error)"></span></button>
+      </div>
+      <div class="body-area">
+
+        <div class="row" style="gap:8px">
+          <div class="card card-m grow" style="flex:1;padding:14px">
+            <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand-ink)">person_add</span>
+            <div class="t-title" style="margin-top:6px;font-size:20px">14</div>
+            <div class="t-label" style="margin-top:2px">Patients referred</div>
+          </div>
+          <div class="card grow" style="flex:1;padding:14px">
+            <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">task_alt</span>
+            <div class="t-title" style="margin-top:6px;font-size:20px">9</div>
+            <div class="t-label" style="margin-top:2px">In active care</div>
+          </div>
+        </div>
+        <div class="row" style="gap:8px">
+          <div class="card grow" style="flex:1;padding:14px">
+            <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">group</span>
+            <div class="t-title" style="margin-top:6px;font-size:20px">6</div>
+            <div class="t-label" style="margin-top:2px">Your staff on Ayvaa</div>
+          </div>
+          <div class="card grow" style="flex:1;padding:14px">
+            <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">receipt_long</span>
+            <div class="t-title" style="margin-top:6px;font-size:20px">42</div>
+            <div class="t-label" style="margin-top:2px">Sessions this month</div>
+          </div>
+        </div>
+
+        <div class="card card-m row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand-ink)">person_add</span>
+          <div class="grow">
+            <div class="t-title">Refer a patient for home care</div>
+            <div class="t-mini on-mint">Send a discharge straight into Ayvaa care</div>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--c-brand-ink)">chevron_right</span>
+        </div>
+
+        <div class="row-between">
+          <span class="t-label">Referred patients</span>
+          <span class="t-mini" style="color:var(--c-brand);font-weight:700">See all</span>
+        </div>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">elderly</span></div>
+            <div class="grow">
+              <div class="t-title">Mrs. Efunroye · hip recovery</div>
+              <div class="t-mini">Referred March 2 · care active with Ayvaa</div>
+            </div>
+            <span class="pill pill-ok">Week 2 of 6</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">personal_injury</span></div>
+            <div class="grow">
+              <div class="t-title">Mr. Sulaimon · stroke rehab</div>
+              <div class="t-mini">Referred February 20 · matching in progress</div>
+            </div>
+            <span class="pill pill-warn">Matching</span>
+          </div>
+        </div>
+
+        <div class="card row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand)">receipt_long</span>
+          <div class="grow">
+            <div class="t-title">February invoice ready</div>
+            <div class="t-mini">42 sessions under your corporate plan</div>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">domain</span></div><span class="nl">Hub</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person_add</span></div><span class="nl">Referrals</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">group</span></div><span class="nl">Staff</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">receipt_long</span></div><span class="nl">Billing</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT03 · REFERRAL FORM ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">person_add</span>PT03 · Refer a Patient</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Refer a patient</div></div>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:22px">verified_user</span>
+          <div class="t-sub">The patient's guardian approves everything before care starts. Ayvaa never begins care on a referral alone.</div>
+        </div>
+
+        <span class="t-label">Patient details</span>
+        <div class="stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">person</span><span class="field-value">Mrs. Efunroye Adebanjo</span></div>
+          <div class="field"><span class="material-symbols-rounded">cake</span><span class="field-value">Age 71</span></div>
+          <div class="field"><span class="material-symbols-rounded">call</span><span class="field-hint">Guardian phone number</span></div>
+          <div class="field"><span class="material-symbols-rounded">home</span><span class="field-hint">Home address for visits</span></div>
+        </div>
+
+        <span class="t-label">Care category needed</span>
+        <div class="stack" style="gap:8px">
+          <div class="row" style="gap:8px">
+            <span class="chip">Elderly</span>
+            <span class="chip chip-on">Post-operative</span>
+            <span class="chip">Chronic</span>
+          </div>
+          <div class="row" style="gap:8px">
+            <span class="chip">Pediatric</span>
+            <span class="chip">Palliative</span>
+            <span class="chip">Disability</span>
+          </div>
+        </div>
+
+        <span class="t-label">Discharge summary</span>
+        <div class="card row">
+          <div class="tile" style="width:44px;height:44px;background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded fill" style="font-size:20px">picture_as_pdf</span></div>
+          <div class="grow">
+            <div class="t-title">efunroye-discharge.pdf</div>
+            <div class="t-mini">Attached from hospital records · shared with consent</div>
+          </div>
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand)">check_circle</span>
+        </div>
+
+        <span class="t-label">Recommended care plan</span>
+        <div class="card stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">clinical_notes</span><span class="field-value">Hip recovery · 6 weeks · 3 visits weekly</span></div>
+          <div class="field"><span class="material-symbols-rounded">medication</span><span class="field-hint">Medication instructions · optional</span></div>
+          <div class="field"><span class="material-symbols-rounded">edit_note</span><span class="field-hint">Notes for the care team · optional</span></div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-primary"><span class="material-symbols-rounded">send</span>Send referral to Ayvaa</button>
+        <div class="t-mini" style="text-align:center">The guardian gets a call within one hour to give consent.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT04 · REFERRED PATIENT PROGRESS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">query_stats</span>PT04 · Referral Progress</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Mrs. Efunroye Adebanjo</div>
+          <div class="t-mini">Referred March 2 by Dr. Bello · hip recovery</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-m stack">
+          <div class="row-between">
+            <div>
+              <span class="t-label on-mint">Recovery progress</span>
+              <div class="t-display on-mint">Week 2 of 6</div>
+            </div>
+            <span class="pill pill-ok" style="background:#fff"><span class="material-symbols-rounded fill">trending_up</span>On track</span>
+          </div>
+          <div class="bar" style="background:rgba(255,255,255,.65)"><div style="width:33%"></div></div>
+          <div class="t-mini on-mint">8 of 18 planned visits completed · consent signed by her son</div>
+        </div>
+
+        <span class="t-label">Referral journey</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+            <div class="grow">
+              <div class="t-title">Referral received</div>
+              <div class="t-mini">March 2 · discharge summary attached</div>
+            </div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+            <div class="grow">
+              <div class="t-title">Guardian consented</div>
+              <div class="t-mini">March 3 · her son signed electronically</div>
+            </div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+            <div class="grow">
+              <div class="t-title">Caregiver matched</div>
+              <div class="t-mini">Tunde Balogun · recovery assistant · March 4</div>
+            </div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar" style="background:var(--c-brand)"><span class="material-symbols-rounded fill">home_health</span></div>
+            <div class="grow">
+              <div class="t-title">Visits underway</div>
+              <div class="t-mini">Latest summary available below</div>
+            </div>
+            <span class="pill pill-ok">Now</span>
+          </div>
+        </div>
+
+        <span class="t-label">Latest visit summary · shared with you</span>
+        <div class="card stack" style="gap:0">
+          <div class="row-between">
+            <span class="t-title">Tuesday, March 12 · visit 8</span>
+            <span class="pill pill-ok">All steps done</span>
+          </div>
+          <div class="t-sub">"Walked 10 minutes with the frame. Wound clean and dry. Pain at 3 out of 10, down from 5."</div>
+          <div class="t-mini">Tunde Balogun · shared with St Agnes by guardian consent</div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">visibility</span>
+          <div class="t-sub">You see progress because the guardian allowed it. Every document you open from this page is logged in the audit record.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <div class="row" style="gap:10px">
+          <button class="btn btn-quiet" style="flex:1"><span class="material-symbols-rounded">description</span>Discharge file</button>
+          <button class="btn btn-soft" style="flex:1.4"><span class="material-symbols-rounded">forum</span>Message care team</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT05 · STAFF ACCOUNT MANAGEMENT ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">group</span>PT05 · Staff Management</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <div class="grow">
+          <div class="t-title">Your staff on Ayvaa</div>
+          <div class="t-mini">St Agnes Hospital · six professionals</div>
+        </div>
+        <button class="iconbtn"><span class="material-symbols-rounded">person_add</span></button>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">Needs your approval · one</span>
+        <div class="card stack" style="border-left:4px solid var(--c-brand)">
+          <div class="row">
+            <div class="avatar"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Nurse Ifeoma Nwosu</div>
+              <div class="t-mini">Wants to join Ayvaa under St Agnes · licence verified</div>
+            </div>
+          </div>
+          <div class="row" style="gap:8px">
+            <span class="pill pill-ok"><span class="material-symbols-rounded fill">check</span>Ayvaa checks done</span>
+            <span class="pill pill-warn">Your approval</span>
+          </div>
+          <div class="row" style="gap:10px">
+            <button class="btn btn-quiet" style="flex:1">Decline</button>
+            <button class="btn btn-primary" style="flex:1.3"><span class="material-symbols-rounded">how_to_reg</span>Approve</button>
+          </div>
+        </div>
+
+        <span class="t-label">Active staff</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Dr. Bello · physiotherapist</div>
+              <div class="t-mini">9 sessions this week · taking referrals</div>
+            </div>
+            <span class="pill pill-ok">Active</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Nurse Chuka Okafor</div>
+              <div class="t-mini">6 sessions this week · post-operative care</div>
+            </div>
+            <span class="pill pill-ok">Active</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">person</span></div>
+            <div class="grow">
+              <div class="t-title">Tunde Balogun</div>
+              <div class="t-mini">Recovery assistant · caring for Mrs. Efunroye</div>
+            </div>
+            <span class="pill pill-ok">Active</span>
+          </div>
+        </div>
+
+        <span class="t-label">Paused</span>
+        <div class="card row" style="opacity:.7">
+          <div class="avatar alt"><span class="material-symbols-rounded fill">person</span></div>
+          <div class="grow">
+            <div class="t-title">Nurse Ada Nnamdi</div>
+            <div class="t-mini">On leave until March 25 · set by your admin</div>
+          </div>
+          <span class="pill pill-grey">Paused</span>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:20px;color:var(--c-brand)">badge</span>
+          <div class="t-sub">Staff keep their own Ayvaa credentials. Your approval links them to St Agnes for referrals and corporate billing. Every change is logged.</div>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">domain</span></div><span class="nl">Hub</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person_add</span></div><span class="nl">Referrals</span></div>
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">group</span></div><span class="nl">Staff</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">receipt_long</span></div><span class="nl">Billing</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT06 · STAFF PERFORMANCE ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">insights</span>PT06 · Staff Performance</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Dr. Bello</div>
+          <div class="t-mini">Physiotherapist · with St Agnes since 2023</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="card row">
+          <div class="avatar alt" style="width:58px;height:58px"><span class="material-symbols-rounded fill" style="font-size:30px">person</span></div>
+          <div class="grow">
+            <div class="t-title">Performance this month</div>
+            <div class="t-mini">March 1 to March 13 · verified by Ayvaa</div>
+          </div>
+        </div>
+
+        <div class="row" style="gap:8px">
+          <div class="card grow" style="flex:1;padding:14px;text-align:center">
+            <div class="t-title">27</div>
+            <div class="t-label" style="margin-top:4px">Sessions</div>
+          </div>
+          <div class="card grow" style="flex:1;padding:14px;text-align:center">
+            <div class="t-title">4.9</div>
+            <div class="t-label" style="margin-top:4px">Family rating</div>
+          </div>
+          <div class="card grow" style="flex:1;padding:14px;text-align:center">
+            <div class="t-title">100 %</div>
+            <div class="t-label" style="margin-top:4px">On time</div>
+          </div>
+        </div>
+
+        <span class="t-label">Quality indicators</span>
+        <div class="card stack" style="gap:0">
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Visits verified on first attempt</span>
+            <span class="field-value" style="font-weight:700">27 of 27</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Care plan goals met</span>
+            <span class="field-value" style="font-weight:700">9 of 11</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Incidents raised by him</span>
+            <span class="field-value" style="font-weight:700">2 · both resolved</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Notes rated helpful by families</span>
+            <span class="field-value" style="font-weight:700">96 %</span>
+          </div>
+        </div>
+
+        <span class="t-label">Recent family feedback</span>
+        <div class="card card-t">
+          <div class="row" style="gap:6px;margin-bottom:6px">
+            <span class="material-symbols-rounded fill" style="font-size:17px;color:#DBA800">star</span><span class="material-symbols-rounded fill" style="font-size:17px;color:#DBA800">star</span><span class="material-symbols-rounded fill" style="font-size:17px;color:#DBA800">star</span><span class="material-symbols-rounded fill" style="font-size:17px;color:#DBA800">star</span><span class="material-symbols-rounded fill" style="font-size:17px;color:#DBA800">star</span>
+          </div>
+          <div class="t-sub">"Dr. Bello explained mother's knee exercises so clearly that we can help between visits."</div>
+          <div class="t-mini" style="margin-top:6px">Kalu family · March 11</div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:20px;color:var(--c-brand)">lock</span>
+          <div class="t-sub">These numbers come from verified session records, not self-reporting. They update live as visits are signed off.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-soft"><span class="material-symbols-rounded">assignment</span>Export performance report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ PT07 · CORPORATE BILLING ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">receipt_long</span>PT07 · Corporate Billing</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <div class="grow">
+          <div class="t-title">Billing</div>
+          <div class="t-mini">St Agnes Hospital · corporate plan</div>
+        </div>
+        <button class="iconbtn"><span class="material-symbols-rounded">download</span></button>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-m stack">
+          <div class="row-between">
+            <div>
+              <span class="t-label on-mint">February invoice</span>
+              <div class="t-display on-mint">2,184,000 naira</div>
+            </div>
+            <div style="width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center">
+              <span class="material-symbols-rounded fill" style="font-size:32px;color:var(--c-brand)">receipt_long</span>
+            </div>
+          </div>
+          <div class="t-mini on-mint">42 sessions · corporate rate · paid March 5</div>
+        </div>
+
+        <span class="t-label">Usage this month · March so far</span>
+        <div class="card stack" style="gap:0">
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Sessions delivered</span>
+            <span class="field-value" style="font-weight:700">18</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Referred patients in care</span>
+            <span class="field-value" style="font-weight:700">9</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Average per session</span>
+            <span class="field-value" style="font-weight:700">52,000 naira</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-body" style="color:var(--t-main)">Projected month total</span>
+            <span class="field-value" style="font-weight:700">2,392,000 naira</span>
+          </div>
+        </div>
+
+        <span class="t-label">Invoice history</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">check</span></div>
+            <div class="grow">
+              <div class="t-title">February 2024</div>
+              <div class="t-mini">42 sessions · paid March 5</div>
+            </div>
+            <div style="text-align:right"><div class="t-title">2,184,000</div><div class="t-mini">naira</div></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">check</span></div>
+            <div class="grow">
+              <div class="t-title">January 2024</div>
+              <div class="t-mini">37 sessions · paid February 4</div>
+            </div>
+            <div style="text-align:right"><div class="t-title">1,924,000</div><div class="t-mini">naira</div></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">schedule</span></div>
+            <div class="grow">
+              <div class="t-title">March 2024</div>
+              <div class="t-mini">Invoice ready April 1</div>
+            </div>
+            <span class="pill pill-grey">Open</span>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:20px;color:var(--c-brand)">fact_check</span>
+          <div class="t-sub">Every line on your invoice maps to one verified, signed off session. You can open any session's record from the invoice itself.</div>
+        </div>
+
+        <div class="card row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand)">summarize</span>
+          <div class="grow">
+            <div class="t-title">Monthly usage report</div>
+            <div class="t-mini">Sessions per department · PDF and spreadsheet</div>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <div class="row" style="gap:10px">
+          <button class="btn btn-quiet" style="flex:1"><span class="material-symbols-rounded">download</span>February invoice</button>
+          <button class="btn btn-soft" style="flex:1"><span class="material-symbols-rounded">query_stats</span>Usage report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ayvaa Caregiver · Set 4 · Money, Support, Profile and Edge States</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL@20..48,300..700,0..1" rel="stylesheet"/>
+<style>
+/* ============================================================
+   AYVAA DESIGN SYSTEM · locked for all 64 screens · no status bar
+   ============================================================ */
+:root{
+  --c-bg:#F5FAF8; --c-card:#FFFFFF; --c-card-line:#E1ECE7;
+  --c-tonal:#EBF3EF; --c-mint:#C9EFE4; --c-nav:#EAF2EE;
+  --c-brand:#00A88E; --c-brand-ink:#00584A;
+  --c-error:#B4232A; --c-error-bg:#FBDDD9;
+  --c-warn-bg:#FBEFD6; --c-warn-ink:#6B5312;
+  --t-main:#182420; --t-body:#44534E; --t-faint:#75847F;
+  --r-card:20px; --r-tile:14px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{background:#EFF5F2}
+body{
+  font-family:'Roboto',sans-serif;color:var(--t-main);
+  min-height:100vh;padding:56px 36px 72px;
+  background:
+    radial-gradient(1100px 520px at 8% -8%, #DCF2EA 0%, transparent 55%),
+    radial-gradient(900px 600px at 108% 16%, #E9F3EE 0%, transparent 52%),
+    linear-gradient(165deg,#F1F7F4,#EAF1EE);
+}
+.material-symbols-rounded{font-size:24px;line-height:1;display:inline-block;font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24}
+.fill{font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24}
+
+.t-display{font-size:24px;line-height:30px;font-weight:900;letter-spacing:-.3px;color:var(--t-main)}
+.t-title{font-size:16px;line-height:22px;font-weight:700;letter-spacing:-.1px;color:var(--t-main)}
+.t-body{font-size:14px;line-height:21px;font-weight:500;color:var(--t-body)}
+.t-sub{font-size:13px;line-height:19px;font-weight:400;color:var(--t-body)}
+.t-label{font-size:11px;line-height:14px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--t-faint)}
+.t-mini{font-size:12px;line-height:16px;font-weight:500;color:var(--t-body)}
+.on-mint{color:var(--c-brand-ink)}
+
+.card{background:var(--c-card);border:1px solid var(--c-card-line);border-radius:var(--r-card);padding:16px}
+.card-t{background:var(--c-tonal);border:none}
+.card-m{background:var(--c-mint);border:none}
+.card-e{background:var(--c-error-bg);border:none}
+.vline{height:1px;background:var(--c-card-line);margin:12px 0}
+
+.btn{height:52px;width:100%;border:none;cursor:pointer;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center;gap:8px;font:700 15px/20px 'Roboto';letter-spacing:.1px}
+.btn .material-symbols-rounded{font-size:20px}
+.btn-primary{background:var(--c-brand);color:#fff}
+.btn-soft{background:#DCF3EC;color:var(--c-brand-ink)}
+.btn-quiet{background:var(--c-tonal);color:var(--t-main)}
+.btn-danger{background:var(--c-error);color:#fff}
+.iconbtn{width:42px;height:42px;border:none;cursor:pointer;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--c-tonal);color:var(--t-body)}
+.tile{height:60px;border-radius:var(--r-tile);border:none;cursor:pointer;background:var(--c-tonal);display:grid;place-items:center;color:var(--t-body)}
+.pill{height:26px;padding:0 10px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:4px;flex-shrink:0;font:700 11px/16px 'Roboto';letter-spacing:.2px}
+.pill .material-symbols-rounded{font-size:14px}
+.pill-ok{background:var(--c-mint);color:var(--c-brand-ink)}
+.pill-warn{background:var(--c-warn-bg);color:var(--c-warn-ink)}
+.pill-grey{background:var(--c-tonal);color:var(--t-body)}
+.chip{height:34px;padding:0 14px;border-radius:var(--r-pill);flex-shrink:0;border:1px solid var(--c-card-line);background:var(--c-card);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:500 13px/18px 'Roboto';color:var(--t-body)}
+.chip .material-symbols-rounded{font-size:17px}
+.chip-on{background:var(--c-mint);border-color:transparent;color:var(--c-brand-ink);font-weight:700}
+.field{height:54px;border-radius:var(--r-pill);width:100%;background:var(--c-card);border:1px solid var(--c-card-line);display:flex;align-items:center;gap:10px;padding:0 16px}
+.field .material-symbols-rounded{font-size:20px;color:var(--t-faint)}
+.field-value{font:500 14px/21px 'Roboto';color:var(--t-main)}
+.field-hint{font:400 14px/21px 'Roboto';color:var(--t-faint)}
+.avatar{width:46px;height:46px;border-radius:50%;flex-shrink:0;background:var(--c-brand);color:#fff;display:grid;place-items:center}
+.avatar.alt{background:#33739E}
+.avatar.soft{background:var(--c-mint);color:var(--c-brand-ink)}
+.checkbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--c-card-line);flex-shrink:0;display:grid;place-items:center;color:#fff}
+.checkbox.on{background:var(--c-brand);border-color:var(--c-brand)}
+.checkbox .material-symbols-rounded{font-size:16px}
+.bar{height:8px;border-radius:4px;background:var(--c-tonal)}
+.bar>div{height:100%;border-radius:4px;background:var(--c-brand)}
+.switch{width:48px;height:28px;border-radius:var(--r-pill);background:#CBD9D3;position:relative;flex-shrink:0}
+.switch::after{content:'';position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#fff}
+.switch-on{background:var(--c-brand)}
+.switch-on::after{left:auto;right:4px}
+
+.phone{width:372px;height:810px;border-radius:44px;flex-shrink:0;background:var(--c-bg);position:relative;overflow:hidden;box-shadow:0 32px 70px -22px rgba(8,46,38,.35),0 0 0 11px #10161a,0 0 0 13px #2b353b;display:flex;flex-direction:column}
+.screen{flex:1;display:flex;flex-direction:column;min-height:0}
+.appbar{height:68px;padding:0 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.appbar .grow{flex:1;min-width:0}
+.body-area{flex:1;min-height:0;overflow:hidden;padding:0 20px;display:flex;flex-direction:column;gap:12px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;gap:12px}
+.row-between{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.fade{position:absolute;left:0;right:0;bottom:104px;height:40px;background:linear-gradient(transparent,var(--c-bg));pointer-events:none;z-index:3}
+.footbar{padding:12px 20px 30px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
+.navbar{flex-shrink:0;height:92px;background:var(--c-nav);display:flex;align-items:flex-start;padding:10px 12px 0}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.nav-pill{width:62px;height:32px;border-radius:var(--r-pill);display:grid;place-items:center;color:var(--t-body)}
+.nav-tab span.nl{font:700 11px/14px 'Roboto';letter-spacing:.2px;color:var(--t-body)}
+.nav-tab.on .nav-pill{background:var(--c-mint);color:var(--c-brand-ink)}
+.nav-tab.on span.nl{color:var(--c-brand-ink)}
+.dim{position:absolute;inset:0;background:rgba(15,26,22,.45);z-index:8}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:9;background:var(--c-card);border-radius:24px 24px 0 0;padding:10px 20px 30px;display:flex;flex-direction:column;gap:12px;box-shadow:0 -10px 40px rgba(0,0,0,.22)}
+.sheet-handle{width:34px;height:4px;border-radius:2px;background:#CBD9D3;margin:0 auto}
+
+h1.pt{font-size:32px;font-weight:900;letter-spacing:-.6px;text-align:center;margin-bottom:8px}
+p.ps{text-align:center;color:var(--t-body);font:500 15px/22px 'Roboto';margin-bottom:48px}
+.board{display:flex;flex-wrap:wrap;gap:46px 38px;justify-content:center;max-width:1860px;margin:0 auto}
+.shot{display:flex;flex-direction:column;align-items:center;gap:14px}
+.shot>span{font:700 12px/16px 'Roboto';letter-spacing:2.4px;text-transform:uppercase;color:var(--t-faint);display:flex;align-items:center;gap:8px;text-align:center}
+.shot>span .material-symbols-rounded{font-size:17px;color:var(--c-brand)}
+</style>
+</head>
+<body>
+
+<h1 class="pt">Ayvaa <span style="color:var(--c-brand)">+</span> Set 4 · Money, Support, Profile and Edge States</h1>
+<p class="ps">Screens P23 to P33 · completes the patient application</p>
+
+<div class="board">
+
+<!-- ═════════ P23 · BILLING HISTORY & STATEMENTS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">account_balance_wallet</span>P23 · Billing History</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Payments</div>
+          <div class="t-mini">Recurring plan for Emeka Okoye</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-m stack">
+          <div class="row-between">
+            <div>
+              <span class="t-label on-mint">Spent this month</span>
+              <div class="t-display on-mint">576,000 naira</div>
+            </div>
+            <div style="width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center">
+              <span class="material-symbols-rounded fill" style="font-size:32px;color:var(--c-brand)">account_balance_wallet</span>
+            </div>
+          </div>
+          <div class="t-mini on-mint">Twelve visits at 48,000 naira each · no pending charges</div>
+        </div>
+
+        <span class="t-label">March receipts</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">check</span></div>
+            <div class="grow">
+              <div class="t-title">Wednesday, March 13</div>
+              <div class="t-mini">Ngozi Adeyemi · elderly care visit</div>
+            </div>
+            <div style="text-align:right"><div class="t-title">48,000</div><div class="t-mini">naira</div></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">check</span></div>
+            <div class="grow">
+              <div class="t-title">Tuesday, March 12</div>
+              <div class="t-mini">Ngozi Adeyemi · elderly care visit</div>
+            </div>
+            <div style="text-align:right"><div class="t-title">48,000</div><div class="t-mini">naira</div></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">schedule</span></div>
+            <div class="grow">
+              <div class="t-title">Friday, March 15</div>
+              <div class="t-mini">Charged only after the visit is done</div>
+            </div>
+            <span class="pill pill-grey">Planned</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill">undo</span></div>
+            <div class="grow">
+              <div class="t-title">Monday, March 4 refund</div>
+              <div class="t-mini">Missed visit · returned to card in 3 days</div>
+            </div>
+            <div style="text-align:right"><div class="t-title" style="color:var(--c-brand)">+48,000</div></div>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:20px;color:var(--c-brand)">lock</span>
+          <div class="t-sub">Every charge links to exactly one signed off visit. Nothing is ever billed for missed time.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <div class="row" style="gap:10px">
+          <button class="btn btn-quiet" style="flex:1"><span class="material-symbols-rounded">download</span>March statement</button>
+          <button class="btn btn-soft" style="flex:1"><span class="material-symbols-rounded">credit_card</span>Payment methods</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P24 · PAYMENT METHODS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">credit_card</span>P24 · Payment Methods</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Payment methods</div>
+          <div class="t-mini">Charged only after completed visits</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">Your cards</span>
+        <div class="card stack" style="border-left:4px solid var(--c-brand)">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-mint);color:var(--c-brand-ink)"><span class="material-symbols-rounded fill" style="font-size:20px">credit_card</span></div>
+            <div class="grow">
+              <div class="t-title">Visa ending 4921</div>
+              <div class="t-mini">Expires August 2026 · Amara Okoye</div>
+            </div>
+            <span class="pill pill-ok">Default</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between">
+            <span class="t-mini" style="color:var(--c-brand);font-weight:700">Set as default</span>
+            <span class="t-mini" style="color:var(--c-brand);font-weight:700">Edit card</span>
+          </div>
+        </div>
+
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">credit_card</span></div>
+            <div class="grow">
+              <div class="t-title">Mastercard ending 7703</div>
+              <div class="t-mini">Expires February 2027 · Amara Okoye</div>
+            </div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">more_vert</span>
+          </div>
+        </div>
+
+        <span class="t-label">Add a new card</span>
+        <div class="stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">policy</span><span class="field-hint">Card number</span></div>
+          <div class="row" style="gap:8px">
+            <div class="field" style="flex:1"><span class="field-hint">MM / YY</span></div>
+            <div class="field" style="flex:1"><span class="field-hint">CVV</span></div>
+          </div>
+          <div class="field"><span class="material-symbols-rounded">person</span><span class="field-hint">Name on card</span></div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">shield_person</span>
+          <div class="t-sub">Card details are encrypted and never shown to caregivers or partners. Removing a card does not affect past receipts.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-primary"><span class="material-symbols-rounded">add_card</span>Save new card</button>
+        <button class="btn btn-quiet">Remove Mastercard 7703</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P25 · SUPPORT TAB & OPEN REQUESTS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">support_agent</span>P25 · Support Tab</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <div class="grow">
+          <div class="t-title">Support</div>
+          <div class="t-mini">We reply within minutes, day or night</div>
+        </div>
+        <button class="iconbtn"><span class="material-symbols-rounded">call</span></button>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-m row">
+          <div class="avatar" style="background:#fff;color:var(--c-brand-ink)"><span class="material-symbols-rounded fill">chat</span></div>
+          <div class="grow">
+            <div class="t-title">Message our care team</div>
+            <div class="t-mini on-mint">One thread keeps your whole history</div>
+          </div>
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--c-brand-ink)">chevron_right</span>
+        </div>
+
+        <span class="t-label">Open request · one</span>
+        <div class="card stack">
+          <div class="row-between">
+            <span class="t-title">Change Friday start time</span>
+            <span class="pill pill-warn"><span class="material-symbols-rounded fill">hourglass_top</span>Resolving</span>
+          </div>
+          <div class="t-sub">Requested to move Friday's visit from 2:00 PM to 10:00 AM.</div>
+          <div class="row-between t-mini">
+            <span>Updated today at 12:20 PM</span>
+            <span style="color:var(--c-brand);font-weight:700">Open conversation</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary"><span class="material-symbols-rounded">add_circle</span>Open a new request</button>
+
+        <span class="t-label">Common requests</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">event_repeat</span></div>
+            <div class="grow"><div class="t-title">Reschedule a visit</div><div class="t-mini">Move one date or the whole series</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">person_search</span></div>
+            <div class="grow"><div class="t-title">Request a different caregiver</div><div class="t-mini">We match quietly and never disrupt care</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">credit_card</span></div>
+            <div class="grow"><div class="t-title">Billing question</div><div class="t-mini">Receipts, charges and plan pricing</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+        </div>
+
+        <button class="btn btn-danger"><span class="material-symbols-rounded">e911_emergency</span>Raise urgent safety concern</button>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">home</span></div><span class="nl">Home</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">calendar_month</span></div><span class="nl">Visits</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">favorite</span></div><span class="nl">Records</span></div>
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">support_agent</span></div><span class="nl">Support</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">person</span></div><span class="nl">Profile</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P26 · TICKET CREATION ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">edit_note</span>P26 · Open a New Request</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow"><div class="t-title">Open a new request</div></div>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">What is this about</span>
+        <div class="row" style="gap:8px">
+          <span class="chip chip-on">Scheduling</span>
+          <span class="chip">Caregiver</span>
+          <span class="chip">Billing</span>
+        </div>
+        <div class="row" style="gap:8px">
+          <span class="chip">Records</span>
+          <span class="chip">Something else</span>
+        </div>
+
+        <span class="t-label">Link to a visit · optional</span>
+        <div class="card row">
+          <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">event_available</span></div>
+          <div class="grow">
+            <div class="t-title">Wednesday, March 13 · 2:00 PM</div>
+            <div class="t-mini">Ngozi Adeyemi · completed visit</div>
+          </div>
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand)">check_circle</span>
+        </div>
+        <div class="field"><span class="material-symbols-rounded">search</span><span class="field-hint">Link a different visit or report</span></div>
+
+        <span class="t-label">Tell us what you need</span>
+        <div style="border:1px solid var(--c-card-line);border-radius:var(--r-tile);padding:14px 16px;display:flex;gap:10px;min-height:110px">
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">edit_note</span>
+          <span class="t-sub">Please move all Friday visits to 10:00 AM going forward, starting this week. Thank you.</span>
+        </div>
+
+        <span class="t-label">Attach photos · optional</span>
+        <div class="field" style="justify-content:center">
+          <span class="material-symbols-rounded" style="color:var(--c-brand)">add_photo_alternate</span>
+          <span class="field-value" style="color:var(--c-brand);font-weight:700">Add photos to this request</span>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">history_edu</span>
+          <div class="t-sub">Your request and every reply is kept as a permanent record, linked to the visit you choose.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-primary"><span class="material-symbols-rounded">send</span>Submit request</button>
+        <div class="t-mini" style="text-align:center">The care team usually replies within five minutes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P27 · SUPPORT CONVERSATION ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">forum</span>P27 · Support Conversation</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Ayvaa care team</div>
+          <div class="t-mini">Change Friday start time · usually replies in 5 min</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="stack" style="gap:8px;width:100%">
+          <div class="card card-t" style="max-width:280px;padding:12px 16px">
+            <div class="t-sub">Good afternoon Amara. We received your request to move Friday's visit earlier.</div>
+            <div class="t-mini" style="margin-top:4px">Chidera · care team · 12:05 PM</div>
+          </div>
+          <div class="card card-t" style="max-width:280px;padding:12px 16px">
+            <div class="t-sub">Ngozi has confirmed she can come at 10:00 AM on Friday instead. Her other visits that day were rearranged.</div>
+            <div class="t-mini" style="margin-top:4px">Chidera · care team · 12:08 PM</div>
+          </div>
+        </div>
+
+        <div class="stack" style="gap:8px;width:100%;align-items:flex-end">
+          <div class="card card-m" style="max-width:250px;padding:12px 16px">
+            <div class="t-sub on-mint">That works perfectly. Please make it permanent for all Fridays.</div>
+            <div class="t-mini on-mint" style="text-align:right;margin-top:4px">You · 12:14 PM</div>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:20px;color:var(--c-brand)">task_alt</span>
+          <div class="grow t-sub"><b style="color:var(--t-main)">Update:</b> all Friday visits now start at 10:00 AM. Your consent record and visit log were updated automatically at 12:20 PM.</div>
+        </div>
+
+        <div class="stack" style="gap:8px;width:100%">
+          <div class="card card-t" style="max-width:280px;padding:12px 16px">
+            <div class="t-sub">Anything else we can help with? You can also ask about billing, caregivers or documents any time.</div>
+            <div class="t-mini" style="margin-top:4px">Chidera · care team · 12:22 PM</div>
+          </div>
+          <div class="row" style="gap:8px">
+            <span class="chip chip-on"><span class="material-symbols-rounded fill">check</span>Resolved</span>
+            <span class="chip">Still needs help</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <div class="field"><span class="material-symbols-rounded">attach_file</span><span class="field-hint">Write a message…</span><span class="material-symbols-rounded" style="color:var(--c-brand);margin-left:auto">send</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P28 · PROFILE · PERSONAL INFO & EDIT ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">manage_accounts</span>P28 · Profile and Edit</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">menu</span></button>
+        <div class="grow"><div class="t-title">Profile</div></div>
+        <button class="iconbtn"><span class="material-symbols-rounded">edit</span></button>
+      </div>
+      <div class="body-area">
+
+        <div class="card row">
+          <div class="avatar soft" style="width:58px;height:58px"><span class="material-symbols-rounded fill" style="color:var(--c-brand);font-size:30px">person</span></div>
+          <div class="grow">
+            <div class="t-title">Amara Okoye</div>
+            <div class="t-mini">Guardian account · joined January 2024</div>
+          </div>
+          <span class="pill pill-ok"><span class="material-symbols-rounded fill">shield_person</span>Verified</span>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">edit</span>
+          <div class="t-sub"><b style="color:var(--t-main)">Editing your details.</b> Name and phone changes are verified again before they take effect, and every change is logged.</div>
+        </div>
+
+        <span class="t-label">Personal information</span>
+        <div class="card stack" style="gap:8px">
+          <div class="field"><span class="material-symbols-rounded">person</span><span class="field-value">Amara Okoye</span></div>
+          <div class="field"><span class="material-symbols-rounded">mail</span><span class="field-value">amara.okoye@gmail.com</span></div>
+          <div class="field"><span class="material-symbols-rounded">call</span><span class="field-value">0803 000 4471</span></div>
+          <div class="field"><span class="material-symbols-rounded">home</span><span class="field-value">14 Adeniyi Avenue, Ikeja, Lagos</span></div>
+        </div>
+
+        <span class="t-label">Account</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">family_restroom</span></div>
+            <div class="grow"><div class="t-title">Loved ones on your plan</div><div class="t-mini">Two people · Emeka and Ada</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">tune</span></div>
+            <div class="grow"><div class="t-title">Notifications and privacy</div><div class="t-mini">Reminders, location and consent controls</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">lock_reset</span></div>
+            <div class="grow"><div class="t-title">Change password</div><div class="t-mini">Last changed 3 months ago</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary"><span class="material-symbols-rounded">save</span>Save changes</button>
+        <button class="btn btn-quiet" style="color:var(--c-error)">Sign out</button>
+
+      </div>
+      <div class="fade"></div>
+      <nav class="navbar">
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">home</span></div><span class="nl">Home</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">calendar_month</span></div><span class="nl">Visits</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">favorite</span></div><span class="nl">Records</span></div>
+        <div class="nav-tab"><div class="nav-pill"><span class="material-symbols-rounded">support_agent</span></div><span class="nl">Support</span></div>
+        <div class="nav-tab on"><div class="nav-pill"><span class="material-symbols-rounded fill">person</span></div><span class="nl">Profile</span></div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P29 · NOTIFICATION & PRIVACY SETTINGS ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">tune</span>P29 · Notifications and Privacy</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Notifications and privacy</div>
+          <div class="t-mini">You stay in control of every alert</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">Notifications</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">notifications</span></div>
+            <div class="grow"><div class="t-title">Visit reminders</div><div class="t-mini">Thirty minutes before each visit</div></div>
+            <div class="switch switch-on"></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">medication</span></div>
+            <div class="grow"><div class="t-title">Dose updates</div><div class="t-mini">When the nurse records a dose</div></div>
+            <div class="switch switch-on"></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">receipt_long</span></div>
+            <div class="grow"><div class="t-title">Payment receipts</div><div class="t-mini">After every completed visit</div></div>
+            <div class="switch switch-on"></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">campaign</span></div>
+            <div class="grow"><div class="t-title">Ayvaa news and offers</div><div class="t-mini">At most one message per month</div></div>
+            <div class="switch"></div>
+          </div>
+        </div>
+
+        <span class="t-label">Privacy</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">location_on</span></div>
+            <div class="grow"><div class="t-title">Live location sharing</div><div class="t-mini">Show arrivals during home visits</div></div>
+            <div class="switch switch-on"></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">group</span></div>
+            <div class="grow"><div class="t-title">Relative view access</div><div class="t-mini">Chidera (sister) can see visit summaries</div></div>
+            <div class="switch switch-on"></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">privacy_tip</span></div>
+            <div class="grow"><div class="t-title">Consent controls</div><div class="t-mini">Review what caregivers may do</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px"><span class="material-symbols-rounded fill" style="font-size:20px">history</span></div>
+            <div class="grow"><div class="t-title">Who viewed my records</div><div class="t-mini">Full access log · last view today 10:02 AM</div></div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">lock</span>
+          <div class="t-sub">Turning location sharing off does not stop visit verification. Arrivals are still checked without showing your address to anyone new.</div>
+        </div>
+
+      </div>
+      <div class="fade"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P30 · LOVED ONES MANAGEMENT ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">family_restroom</span>P30 · Loved Ones</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Loved ones</div>
+          <div class="t-mini">People under your family plan</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="card stack">
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">elderly</span></div>
+            <div class="grow">
+              <div class="t-title">Emeka Okoye</div>
+              <div class="t-mini">Father · age 78 · elderly care</div>
+            </div>
+            <span class="pill pill-ok">Care active</span>
+          </div>
+          <div class="vline"></div>
+          <div class="row-between t-mini">
+            <span>Ngozi Adeyemi · Mon, Wed, Fri</span>
+            <span style="color:var(--c-brand);font-weight:700">Manage care</span>
+          </div>
+        </div>
+
+        <div class="card stack">
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">child_care</span></div>
+            <div class="grow">
+              <div class="t-title">Ada Okoye</div>
+              <div class="t-mini">Daughter · age 6 · pediatric care</div>
+            </div>
+            <span class="pill pill-warn">Setup pending</span>
+          </div>
+          <div class="vline"></div>
+          <div class="t-sub">Complete her health details and sign the guardian consent to begin booking visits.</div>
+          <button class="btn btn-primary" style="height:44px">Finish setup<span class="material-symbols-rounded">arrow_forward</span></button>
+        </div>
+
+        <span class="t-label">Guardian consent for Ada</span>
+        <div class="card card-m stack" style="gap:8px">
+          <div class="row"><div class="checkbox on" style="border-color:var(--c-brand-ink)"><span class="material-symbols-rounded fill">check</span></div><span class="t-mini on-mint">I am the legal guardian of Ada Okoye</span></div>
+          <div class="row"><div class="checkbox" style="border-color:var(--c-brand-ink)"></div><span class="t-mini on-mint">I consent to pediatric care visits at home</span></div>
+          <div class="row"><div class="checkbox" style="border-color:var(--c-brand-ink)"></div><span class="t-mini on-mint">I consent to medication management</span></div>
+        </div>
+
+        <span class="t-label">Add someone new</span>
+        <div class="field" style="justify-content:center">
+          <span class="material-symbols-rounded" style="color:var(--c-brand)">person_add</span>
+          <span class="field-value" style="color:var(--c-brand);font-weight:700">Add a loved one to this plan</span>
+        </div>
+
+        <button class="btn btn-soft"><span class="material-symbols-rounded">group_add</span>Invite relative with view access</button>
+
+      </div>
+      <div class="fade"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P31a · INCIDENT REPORT MODAL ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">emergency_share</span>P31a · Incident Report Modal</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Visit in progress</div>
+          <div class="t-mini">Guided walk · third step of five</div>
+        </div>
+      </div>
+      <div class="body-area" style="filter:blur(1.5px);opacity:.55">
+        <div class="card row">
+          <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">check</span></div>
+          <div class="grow"><div class="t-title">Arrival verified</div><div class="t-mini">Location matched at 2:02 PM</div></div>
+        </div>
+      </div>
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sheet-handle"></div>
+        <div class="row">
+          <div class="tile" style="width:46px;height:46px;background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded fill">report</span></div>
+          <div class="grow">
+            <div class="t-title">Report an incident</div>
+            <div class="t-mini">Links automatically to this visit and care plan</div>
+          </div>
+        </div>
+        <div class="row" style="gap:8px">
+          <button class="btn btn-quiet" style="height:40px">Minor</button>
+          <button class="btn btn-quiet" style="height:40px">Moderate</button>
+          <button class="btn" style="height:40px;background:var(--c-error-bg);color:var(--c-error)">Critical</button>
+        </div>
+        <div class="row" style="gap:8px">
+          <span class="chip chip-on">Near fall</span>
+          <span class="chip">Medication</span>
+          <span class="chip">Equipment</span>
+        </div>
+        <div style="border:1px solid var(--c-card-line);border-radius:var(--r-tile);padding:14px 16px;display:flex;gap:10px;min-height:86px">
+          <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">edit_note</span>
+          <span class="t-sub">Describe what happened, who was present, and what was done immediately after.</span>
+        </div>
+        <div class="field" style="justify-content:center">
+          <span class="material-symbols-rounded" style="color:var(--c-brand)">add_photo_alternate</span>
+          <span class="field-value" style="color:var(--c-brand);font-weight:700">Attach photos or vitals reading</span>
+        </div>
+        <button class="btn btn-danger"><span class="material-symbols-rounded">send</span>Submit critical incident</button>
+        <div class="t-mini" style="text-align:center">Supervisors are notified within seconds of submission.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P31b · RELIABILITY · RE-DISPATCH STATE ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">autorenew</span>P31b · Re-dispatch in Progress</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Friday's visit needs a nurse</div>
+          <div class="t-mini">March 15 · 10:00 AM · we are on it</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <div class="card card-e row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-error)">hourglass_empty</span>
+          <div class="grow">
+            <div class="t-title" style="color:var(--c-error)">First offer expired</div>
+            <div class="t-mini" style="color:var(--c-error)">No nurse accepted within 30 minutes · re-dispatch started automatically at 8:15 AM</div>
+          </div>
+        </div>
+
+        <div class="card card-m row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand-ink)">autorenew</span>
+          <div class="grow">
+            <div class="t-title">Re-dispatch in progress</div>
+            <div class="t-mini on-mint">New offers sent to 8 nearby nurses at 8:16 AM</div>
+          </div>
+          <span class="pill pill-ok" style="background:#fff"><span class="material-symbols-rounded fill">sensors</span>Live</span>
+        </div>
+
+        <span class="t-label">What happens next</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">person_search</span></div>
+            <div class="grow">
+              <div class="t-title">Widening the search</div>
+              <div class="t-mini">If no one accepts by 9:00 AM, we search 10 km instead of 5 km</div>
+            </div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar alt"><span class="material-symbols-rounded fill">support_agent</span></div>
+            <div class="grow">
+              <div class="t-title">Care team joins at 9:00 AM</div>
+              <div class="t-mini">A coordinator personally finds a replacement nurse</div>
+            </div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="avatar soft"><span class="material-symbols-rounded fill" style="color:var(--c-brand)">payments</span></div>
+            <div class="grow">
+              <div class="t-title">You pay nothing if it fails</div>
+              <div class="t-mini">Automatic full refund, like your March 4 visit</div>
+            </div>
+            <span class="pill pill-ok">Guaranteed</span>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">notifications_active</span>
+          <div class="t-sub">You will be notified the moment a nurse accepts, and again when the visit is confirmed. No action is needed from you.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <div class="row" style="gap:10px">
+          <button class="btn btn-quiet" style="flex:1">Cancel visit</button>
+          <button class="btn btn-primary" style="flex:1.4"><span class="material-symbols-rounded">support_agent</span>Talk to care team</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P32 · EMERGENCY ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">e911_emergency</span>P32 · Emergency Actions</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn" style="background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded">close</span></button>
+        <div class="grow">
+          <div class="t-title" style="color:var(--c-error)">Emergency help</div>
+          <div class="t-mini">For Emeka Okoye · stay calm, help is here</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <button class="btn btn-danger" style="height:64px;border-radius:32px"><span class="material-symbols-rounded">call</span>Call 199 · Ambulance now</button>
+
+        <span class="t-label">Immediate help</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded fill" style="font-size:20px">medical_services</span></div>
+            <div class="grow">
+              <div class="t-title">Ngozi Adeyemi is on site now</div>
+              <div class="t-mini">Your nurse · first aid trained · call her first</div>
+            </div>
+            <div class="tile" style="width:46px;height:46px;background:var(--c-error);color:#fff"><span class="material-symbols-rounded fill">call</span></div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <div class="tile" style="width:44px;height:44px;background:var(--c-error-bg);color:var(--c-error)"><span class="material-symbols-rounded fill">e911_emergency</span></div>
+            <div class="grow">
+              <div class="t-title">Nearest hospital · 2.1 km</div>
+              <div class="t-mini">St Agnes · 24 hour emergency · your records ready</div>
+            </div>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">directions</span>
+          </div>
+        </div>
+
+        <span class="t-label">While you wait</span>
+        <div class="card stack" style="gap:0">
+          <div class="row">
+            <span class="material-symbols-rounded fill" style="font-size:19px;color:var(--c-brand)">bloodtype</span>
+            <div class="grow t-body">Blood type O positive · noted on his care record</div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <span class="material-symbols-rounded fill" style="font-size:19px;color:var(--c-brand)">allergies</span>
+            <div class="grow t-body">Allergic to penicillin · shown to every caregiver</div>
+          </div>
+          <div class="vline"></div>
+          <div class="row">
+            <span class="material-symbols-rounded fill" style="font-size:19px;color:var(--c-brand)">contact_emergency</span>
+            <div class="grow t-body">Emergency contacts auto-notified: Chidera (sister), Dr. Bello</div>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">history_edu</span>
+          <div class="t-sub">Opening this screen and calling for help is logged with the time, so there is a record of exactly what happened.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-quiet">I am safe · close this screen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ P33 · RESCHEDULE VISIT ═════════ -->
+<div class="shot">
+  <span><span class="material-symbols-rounded fill">edit_calendar</span>P33 · Reschedule Visit</span>
+  <div class="phone">
+    <div class="screen">
+      <div class="appbar">
+        <button class="iconbtn"><span class="material-symbols-rounded">arrow_back</span></button>
+        <div class="grow">
+          <div class="t-title">Reschedule visit</div>
+          <div class="t-mini">Friday, March 15 · 10:00 AM with Ngozi</div>
+        </div>
+      </div>
+      <div class="body-area">
+
+        <span class="t-label">Pick a new date</span>
+        <div class="card">
+          <div class="row-between" style="margin-bottom:12px">
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_left</span>
+            <span class="t-title">March 2024</span>
+            <span class="material-symbols-rounded" style="font-size:20px;color:var(--t-faint)">chevron_right</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center">
+            <span class="t-label">M</span><span class="t-label">T</span><span class="t-label">W</span><span class="t-label">T</span><span class="t-label">F</span><span class="t-label">S</span><span class="t-label">S</span>
+            <span class="t-mini">11</span><span class="t-mini">12</span><span class="t-mini">13</span><span class="t-mini">14</span>
+            <span style="height:34px;border-radius:var(--r-pill);background:var(--c-brand);color:#fff;display:grid;place-items:center;font:700 12px/16px 'Roboto'">15</span>
+            <span class="t-mini">16</span><span class="t-mini">17</span>
+            <span class="t-mini">18</span><span class="t-mini">19</span><span class="t-mini">20</span>
+            <span style="height:34px;border-radius:var(--r-pill);background:var(--c-mint);color:var(--c-brand-ink);display:grid;place-items:center;font:700 12px/16px 'Roboto'">21</span>
+            <span class="t-mini">22</span><span class="t-mini">23</span><span class="t-mini">24</span>
+          </div>
+        </div>
+
+        <span class="t-label">Pick a new time · Thursday, March 21</span>
+        <div class="row" style="gap:8px">
+          <button class="btn btn-quiet" style="height:40px">9:00 AM</button>
+          <button class="btn btn-primary" style="height:40px">10:00 AM</button>
+          <button class="btn btn-quiet" style="height:40px">1:00 PM</button>
+        </div>
+        <div class="row" style="gap:8px">
+          <button class="btn btn-quiet" style="height:40px">3:00 PM</button>
+          <button class="btn btn-quiet" style="height:40px">4:00 PM</button>
+          <button class="btn btn-quiet" style="height:40px">5:00 PM</button>
+        </div>
+
+        <div class="card card-m row">
+          <span class="material-symbols-rounded fill" style="color:var(--c-brand-ink)">check_circle</span>
+          <div class="grow">
+            <div class="t-title">Ngozi is free at 10:00 AM</div>
+            <div class="t-mini on-mint">Availability re-checked just now · no new offer needed</div>
+          </div>
+        </div>
+
+        <div class="card card-t row" style="align-items:flex-start">
+          <span class="material-symbols-rounded fill" style="font-size:22px;color:var(--c-brand)">event_repeat</span>
+          <div class="t-sub">This moves only Friday, March 15. Your regular Monday, Wednesday, Friday series stays unchanged. The change is logged in your visit history.</div>
+        </div>
+
+      </div>
+      <div class="footbar">
+        <button class="btn btn-primary"><span class="material-symbols-rounded">event_available</span>Confirm new time</button>
+        <button class="btn btn-quiet">Cancel reschedule</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
