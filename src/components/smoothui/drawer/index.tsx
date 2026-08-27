@@ -159,7 +159,6 @@ export default function Drawer({
 
   return (
     <DrawerPrimitive
-      direction={side}
       onOpenChange={(next) => {
         if (!next && isAnimatingOut) {
           return; // Ignore vaul's close during our exit animation

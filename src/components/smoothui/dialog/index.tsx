@@ -214,12 +214,15 @@ export default function Dialog({
         {isOpen ? (
           <DialogRadix.Portal forceMount>
             {/* Backdrop with blur + opacity fade */}
-            <DialogRadix.Overlay forceMount render={<motion.div animate={{ opacity: 1 }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" data-slot="dialog-overlay" exit={{ opacity: 0 }} initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }} transition={{
+            <DialogRadix.Overlay forceMount asChild>
+              <motion.div animate={{ opacity: 1 }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" data-slot="dialog-overlay" exit={{ opacity: 0 }} initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }} transition={{
                                         duration: shouldReduceMotion ? 0 : BACKDROP_DURATION,
-                                      }} />}></DialogRadix.Overlay>
+                                      }} />
+            </DialogRadix.Overlay>
 
             {/* Content panel — spring scale + translateY entrance */}
-            <DialogRadix.Content forceMount render={<motion.div animate={
+            <DialogRadix.Content forceMount asChild>
+              <motion.div animate={
                                         shouldReduceMotion
                                           ? { opacity: 1 }
                                           : {
@@ -247,7 +250,7 @@ export default function Dialog({
                                               opacity: 0,
                                               transform: "translate(-50%, -48%) scale(0.95)",
                                             }
-                                      } onAnimationComplete={handleAnimationComplete} transition={shouldReduceMotion ? { duration: 0 } : SPRING_PANEL} />}>{/* Staggered content sections */}{title || description ? (
+                                      } onAnimationComplete={handleAnimationComplete} transition={shouldReduceMotion ? { duration: 0 } : SPRING_PANEL} >{/* Staggered content sections */}{title || description ? (
                                         <StaggerChild
                                           index={0}
                                           shouldReduceMotion={shouldReduceMotion}
@@ -278,7 +281,7 @@ export default function Dialog({
                                           onClick={() => handleOpenChange(false)}
                                           shouldReduceMotion={shouldReduceMotion}
                                         />
-                                      ) : null}</DialogRadix.Content>
+                                      ) : null}</motion.div></DialogRadix.Content>
           </DialogRadix.Portal>
         ) : null}
       </AnimatePresence>
@@ -344,12 +347,15 @@ export function AlertDialog({
         {isOpen ? (
           <AlertDialogRadix.Portal forceMount>
             {/* Backdrop */}
-            <AlertDialogRadix.Overlay forceMount render={<motion.div animate={{ opacity: 1 }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" data-slot="alert-dialog-overlay" exit={{ opacity: 0 }} initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }} transition={{
+            <AlertDialogRadix.Overlay forceMount asChild>
+              <motion.div animate={{ opacity: 1 }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" data-slot="alert-dialog-overlay" exit={{ opacity: 0 }} initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }} transition={{
                                         duration: shouldReduceMotion ? 0 : BACKDROP_DURATION,
-                                      }} />}></AlertDialogRadix.Overlay>
+                                      }} />
+            </AlertDialogRadix.Overlay>
 
             {/* Content panel */}
-            <AlertDialogRadix.Content forceMount render={<motion.div animate={
+            <AlertDialogRadix.Content forceMount asChild>
+              <motion.div animate={
                                         shouldReduceMotion
                                           ? { opacity: 1 }
                                           : {
@@ -377,7 +383,7 @@ export function AlertDialog({
                                               opacity: 0,
                                               transform: "translate(-50%, -48%) scale(0.95)",
                                             }
-                                      } onAnimationComplete={handleAnimationComplete} transition={shouldReduceMotion ? { duration: 0 } : SPRING_PANEL} />}>{title || description ? (
+                                      } onAnimationComplete={handleAnimationComplete} transition={shouldReduceMotion ? { duration: 0 } : SPRING_PANEL} >{title || description ? (
                                         <StaggerChild
                                           index={0}
                                           shouldReduceMotion={shouldReduceMotion}
@@ -407,7 +413,7 @@ export function AlertDialog({
                                         >
                                           <AlertDialogFooter>{footer}</AlertDialogFooter>
                                         </StaggerChild>
-                                      ) : null}</AlertDialogRadix.Content>
+                                      ) : null}</motion.div></AlertDialogRadix.Content>
           </AlertDialogRadix.Portal>
         ) : null}
       </AnimatePresence>
