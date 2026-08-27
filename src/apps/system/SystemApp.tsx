@@ -1,5 +1,5 @@
 import { Activity, BellRing, Workflow } from 'lucide-react'
-import { PhoneFrame, StatusBar } from '@/components/phone/PhoneFrame'
+import { PhoneFrame } from '@/components/phone/PhoneFrame'
 import { NavBar } from '@/components/phone/NavBar'
 import { useRouter } from '@/lib/router'
 import { S01 } from './S01'
@@ -18,7 +18,6 @@ export function SystemApp({ path }: { path: string }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#EFF5F2] p-9">
       <PhoneFrame>
-        <StatusBar time="2:02" />
         {screen === 's01' && <S01 />}
         {screen === 's02' && <S02 />}
         {screen === 's03' && <S03 />}
