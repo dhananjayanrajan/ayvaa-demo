@@ -66,6 +66,9 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: var(--primary);
+  --color-brand-secondary: var(--brand-ink);
+  --color-smooth-900: var(--foreground);
 }
 
 * {
@@ -77,4 +80,11 @@ body {
   color: var(--foreground);
   font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

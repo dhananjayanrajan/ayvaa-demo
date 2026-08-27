@@ -117,12 +117,14 @@ export function StatCard({
   label,
   tone = 'default',
   className,
+  onClick,
 }: {
   icon?: LucideIcon
   value: string
   label: string
   tone?: 'default' | 'mint' | 'warn' | 'error'
   className?: string
+  onClick?: () => void
 }) {
   const tones = { default: 'bg-card', mint: 'bg-mint', warn: 'bg-warn-bg', error: 'bg-error-bg' }
   const iconTones = { default: 'text-primary', mint: 'text-brand-ink', warn: 'text-warn-ink', error: 'text-destructive' }
@@ -133,13 +135,22 @@ export function StatCard({
     warn: 'text-warn-ink/80',
     error: 'text-destructive/80',
   }
-  return (
-    <Card className={cn('flex-1 rounded-[20px] border-0 p-3.5 shadow-none', tones[tone], className)}>
+  const inner = (
+    <>
       {Icon && <Icon className={cn('size-5.5', iconTones[tone])} />}
       <div className={cn('mt-1.5 text-xl font-bold', valueTones[tone])}>{value}</div>
       <div className={cn('mt-0.5 text-[11px] font-bold uppercase tracking-wide', labelTones[tone])}>{label}</div>
-    </Card>
+    </>
   )
+  const cls = cn('flex-1 rounded-[20px] border-0 p-3.5 text-left shadow-none', tones[tone], className)
+  if (onClick) {
+    return (
+      <button onClick={onClick} className={cls}>
+        {inner}
+      </button>
+    )
+  }
+  return <Card className={cls}>{inner}</Card>
 }
 
 export function ListRow({
