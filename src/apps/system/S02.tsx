@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { AlertTriangle, Ban, BellRing, CheckCircle2, Hourglass, RefreshCw } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, Screen } from '@/components/phone/Screen'
+import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { IconTile, InfoCard, ScreenCard } from '@/components/phone/ScreenBlocks'
 import { Pill } from '@/components/phone/Controls'
 import { Separator } from '@/components/ui/separator'
@@ -58,6 +58,7 @@ export function S02() {
                   Offers re-sent to 8 nurses at 8:16 AM · search widened to 10 km at 9:00 AM
                 </div>
               </div>
+              <Pill tone="ok" className="bg-white/90">Round 2</Pill>
             </ScreenCard>
           </motion.div>
           <motion.div variants={item}>
@@ -69,18 +70,29 @@ export function S02() {
                 return (
                   <div key={o.id}>
                     {i > 0 && <Separator className="mx-3 my-2.5 bg-border/70" />}
-                    <div className="flex items-center gap-3 px-2 py-1.5">
+                    <button
+                      onClick={() =>
+                        notify(
+                          o.state === 'waiting'
+                            ? { title: 'Offer still open', body: `${count} nurses deciding · expires ${dispatch.expiresAt}`, kind: 'info' }
+                            : o.state === 'declined'
+                              ? { title: 'Offer declined', body: 'Nurse declined · slot re-offered in round two', kind: 'warn' }
+                              : { title: 'Re-checking availability', body: 'Conflict found · availability re-verified now', kind: 'info' },
+                        )
+                      }
+                      className="flex w-full items-center gap-3 px-2 py-1.5 text-left"
+                    >
                       <IconTile icon={Icon} tone={s.tile} />
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-bold text-foreground">
+                        <div className="truncate text-sm font-bold text-foreground">
                           {count} {o.label.replace(/^\d+ /, '')}
                         </div>
-                        <div className="mt-0.5 text-xs font-medium leading-snug text-muted-foreground">
+                        <div className="mt-0.5 truncate text-xs font-medium leading-snug text-muted-foreground">
                           {o.state === 'waiting' ? `Expire ${dispatch.expiresAt} · ${left} minutes remaining` : o.detail}
                         </div>
                       </div>
                       {o.state === 'recheck' && <Pill tone="warn">Checking</Pill>}
-                    </div>
+                    </button>
                   </div>
                 )
               })}
@@ -90,18 +102,27 @@ export function S02() {
             <ScreenCard>
               <div className="text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">Re-check rules</div>
               <div className="mt-3 flex flex-col gap-3">
-                <div className="flex items-center gap-3">
+                <button
+                  onClick={() => notify({ title: 'Rule: instant acceptance', body: 'Free in the window · acceptance confirmed instantly', kind: 'ok' })}
+                  className="flex items-center gap-3 text-left"
+                >
                   <IconTile icon={CheckCircle2} tone="mint" />
-                  <span className="text-[13px] font-medium text-foreground/80">Free in the window · acceptance confirmed instantly</span>
-                </div>
-                <div className="flex items-center gap-3">
+                  <span className="min-w-0 flex-1 text-[13px] font-medium text-foreground/80">Free in the window · acceptance confirmed instantly</span>
+                </button>
+                <button
+                  onClick={() => notify({ title: 'Rule: conflict reversal', body: 'New conflict found · offer reversed, session re-dispatched', kind: 'warn' })}
+                  className="flex items-center gap-3 text-left"
+                >
                   <IconTile icon={AlertTriangle} tone="warn" />
-                  <span className="text-[13px] font-medium text-foreground/80">New conflict found · offer reversed, session re-dispatched</span>
-                </div>
-                <div className="flex items-center gap-3">
+                  <span className="min-w-0 flex-1 text-[13px] font-medium text-foreground/80">New conflict found · offer reversed, session re-dispatched</span>
+                </button>
+                <button
+                  onClick={() => notify({ title: 'Rule: transparent logging', body: 'Every outcome is logged and shown to the family transparently', kind: 'ok' })}
+                  className="flex items-center gap-3 text-left"
+                >
                   <IconTile icon={CheckCircle2} tone="mint" />
-                  <span className="text-[13px] font-medium text-foreground/80">Every outcome is logged and shown to the family transparently</span>
-                </div>
+                  <span className="min-w-0 flex-1 text-[13px] font-medium text-foreground/80">Every outcome is logged and shown to the family transparently</span>
+                </button>
               </div>
             </ScreenCard>
           </motion.div>
@@ -110,6 +131,9 @@ export function S02() {
               icon={BellRing}
               body="At 9:45 AM with no acceptance, the care team is paged personally. The family sees each step on their re-dispatch screen."
             />
+          </motion.div>
+          <motion.div variants={item}>
+            <EndOfScroll label="End of dispatch view" />
           </motion.div>
         </motion.div>
       </BodyArea>

@@ -17,7 +17,7 @@ export function Pill({
   className?: string
 }) {
   const tones = {
-    ok: 'border-transparent bg-mint text-brand-ink',
+    ok: 'border-transparent bg-[#DCF3EC] text-brand-ink',
     warn: 'border-transparent bg-warn-bg text-warn-ink',
     grey: 'border-transparent bg-tonal text-foreground/70',
     error: 'border-transparent bg-destructive text-white',
@@ -51,19 +51,21 @@ export function Chip({
 }
 
 export function Field({
+  label,
   icon: Icon,
   value,
   hint,
   className,
   onClick,
 }: {
+  label?: string
   icon?: LucideIcon
   value?: string
   hint?: string
   className?: string
   onClick?: () => void
 }) {
-  const inner = (
+  const input = (
     <>
       {Icon && <Icon className="absolute left-4 z-1 size-5 text-muted-foreground" />}
       <Input
@@ -71,20 +73,27 @@ export function Field({
         value={value ?? ''}
         placeholder={hint}
         className={cn(
-          'h-full rounded-full border-border bg-card pl-11 text-sm font-medium text-foreground placeholder:text-muted-foreground',
+          'h-full rounded-full border-0 bg-card pl-11 text-sm font-medium text-foreground shadow-none placeholder:text-muted-foreground',
           !value && 'font-normal',
         )}
       />
     </>
   )
-  if (onClick) {
-    return (
-      <button type="button" onClick={onClick} className={cn('relative flex h-[54px] w-full items-center', className)}>
-        {inner}
-      </button>
-    )
-  }
-  return <div className={cn('relative flex h-[54px] w-full items-center', className)}>{inner}</div>
+  const box = <div className={cn('relative flex h-[54px] w-full items-center', className)}>{input}</div>
+  const control = onClick ? (
+    <button type="button" onClick={onClick} className="w-full text-left">
+      {box}
+    </button>
+  ) : (
+    box
+  )
+  if (!label) return control
+  return (
+    <div className="flex w-full flex-col gap-1.5">
+      <span className="text-[11px] font-bold uppercase tracking-[0.9px] text-muted-foreground">{label}</span>
+      {control}
+    </div>
+  )
 }
 
 export function Tile({

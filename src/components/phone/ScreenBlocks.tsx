@@ -14,7 +14,7 @@ export function ScreenCard({
   children: ReactNode
 }) {
   const tones = {
-    default: 'border-border bg-card',
+    default: 'border-0 bg-card',
     tonal: 'border-0 bg-tonal',
     mint: 'border-0 bg-mint',
     warn: 'border-0 bg-warn-bg',
