@@ -24,11 +24,13 @@ export function EscalationHeroCard() {
             animate={{ opacity: [1, 0.8, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Chip intent="warning" light dot className="border-transparent">
+            <Chip intent="warning" light dot className="border-0 ring-0 shadow-none">
               Waiting {e1.waiting}
             </Chip>
           </motion.div>
-          <Chip intent="neutral" light className="border-transparent">Human decision required</Chip>
+          <Chip intent="neutral" light className="border-0 ring-0 shadow-none">
+            Human decision required
+          </Chip>
         </div>
       </WarnHero>
     </motion.div>

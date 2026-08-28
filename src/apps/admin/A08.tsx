@@ -17,6 +17,7 @@ import { AccountabilityCard } from '@/components/admin/escalations/Accountabilit
 
 export function A08() {
   const { notify } = useDemo()
+  const alsoEscalated = escalatedTickets.length - 1
 
   return (
     <Screen>
@@ -34,7 +35,7 @@ export function A08() {
             <EscalationTicketCard notify={notify} />
 
             <motion.div variants={rise}>
-              <Section label="Also escalated" trailing={<Chip intent="neutral">2 more</Chip>} />
+              <Section label="Also escalated" trailing={<Chip intent="neutral">{alsoEscalated} more</Chip>} />
             </motion.div>
 
             <RelatedTicketsList notify={notify} />

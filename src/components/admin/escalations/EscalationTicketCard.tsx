@@ -91,7 +91,9 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
                 <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-100/50">
                   {e1.quoteBy}
                 </span>
-                <Chip intent="success" icon={CheckCircle2}>Verbatim</Chip>
+                <Chip intent="success" icon={CheckCircle2} className="border-transparent ring-0 shadow-none">
+                  Verbatim
+                </Chip>
               </div>
             </div>
           </div>
@@ -102,7 +104,7 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
               value={note}
               onChange={(e) => handleNoteChange(e.target.value)}
               placeholder="Write a note for the care team…"
-              className="mt-2.5 min-h-24 w-full resize-none rounded-2xl border border-[#0B211B]/[0.08] bg-white p-3.5 text-[13px] font-medium leading-relaxed text-[#0B211B] shadow-inner placeholder:text-[#0B211B]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30"
+              className="mt-2.5 min-h-24 w-full resize-none rounded-2xl border-0 bg-white p-3.5 text-[13px] font-medium leading-relaxed text-[#0B211B] shadow-inner placeholder:text-[#0B211B]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30"
             />
             <div className="mt-2.5 flex items-center justify-between gap-2">
               <span className="min-w-0 truncate text-[10px] font-bold text-[#0B211B]/40">
