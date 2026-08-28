@@ -1,55 +1,80 @@
 import { motion } from 'motion/react'
-import { Check } from 'lucide-react'
+import { Check, Info } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface Category {
   label: string
   icon: LucideIcon
+  description: string
 }
 
 interface PartnerCareCategoryGridProps {
   categories: Category[]
   selected: string
   onSelect: (label: string) => void
+  onInfo?: (category: Category) => void
 }
 
-export function PartnerCareCategoryGrid({ categories, selected, onSelect }: PartnerCareCategoryGridProps) {
+export function PartnerCareCategoryGrid({
+  categories,
+  selected,
+  onSelect,
+  onInfo,
+}: PartnerCareCategoryGridProps) {
   return (
     <div className="grid grid-cols-2 gap-2.5">
       {categories.map((c) => {
         const active = selected === c.label
         return (
-          <motion.button
+          <div
             key={c.label}
-            type="button"
-            whileTap={{ scale: 0.96 }}
-            onClick={() => onSelect(c.label)}
             className={cn(
-              'relative flex items-center gap-2.5 rounded-2xl p-3.5 text-left transition-all',
-              active
-                ? 'bg-emerald-500/[0.12] ring-2 ring-emerald-500/60 shadow-[0_10px_24px_-14px_rgba(16,185,129,0.8)]'
-                : 'bg-white ring-1 ring-inset ring-[#0B211B]/[0.08] hover:ring-[#0B211B]/[0.18]',
+              'relative flex items-center gap-2.5 rounded-2xl p-3.5 text-left transition-colors',
+              active ? 'bg-emerald-500/[0.12]' : 'bg-white hover:bg-[#0B211B]/[0.03]',
             )}
           >
-            <span
-              className={cn(
-                'flex h-8 w-8 shrink-0 items-center justify-center rounded-xl',
-                active
-                  ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_6px_14px_-6px_rgba(16,185,129,0.8)]'
-                  : 'bg-[#0B211B]/[0.05] text-[#0B211B]/55',
-              )}
+            {active && (
+              <motion.span
+                layoutId="care-category-active"
+                className="absolute inset-0 rounded-2xl ring-2 ring-emerald-500/60 shadow-[0_10px_24px_-14px_rgba(16,185,129,0.8)]"
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => onSelect(c.label)}
+              className="relative flex min-w-0 flex-1 items-center gap-2.5 text-left"
             >
-              <c.icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-            </span>
-            <span
-              className={cn(
-                'min-w-0 flex-1 text-[12px] font-bold leading-tight tracking-tight',
-                active ? 'text-emerald-800' : 'text-[#0B211B]/70',
-              )}
-            >
-              {c.label}
-            </span>
+              <span
+                className={cn(
+                  'flex h-8 w-8 shrink-0 items-center justify-center rounded-xl',
+                  active
+                    ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_6px_14px_-6px_rgba(16,185,129,0.8)]'
+                    : 'bg-[#0B211B]/[0.05] text-[#0B211B]/55',
+                )}
+              >
+                <c.icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+              </span>
+              <span
+                className={cn(
+                  'min-w-0 flex-1 text-[12px] font-bold leading-tight tracking-tight',
+                  active ? 'text-emerald-800' : 'text-[#0B211B]/70',
+                )}
+              >
+                {c.label}
+              </span>
+            </button>
+            {onInfo && (
+              <button
+                type="button"
+                onClick={() => onInfo(c)}
+                className="relative grid h-6 w-6 shrink-0 place-items-center rounded-full text-[#0B211B]/30 hover:text-[#0B211B]/60"
+                aria-label={`Info about ${c.label}`}
+              >
+                <Info className="h-3.5 w-3.5" />
+              </button>
+            )}
             {active && (
               <motion.span
                 initial={{ scale: 0 }}
@@ -59,7 +84,7 @@ export function PartnerCareCategoryGrid({ categories, selected, onSelect }: Part
                 <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
               </motion.span>
             )}
-          </motion.button>
+          </div>
         )
       })}
     </div>

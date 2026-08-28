@@ -1,19 +1,21 @@
 import { motion } from 'motion/react'
-import { ShieldCheck } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { ShieldCheck, Phone } from 'lucide-react'
 
 interface RxRow {
   label: string
   value: string
+  detail: string
 }
 
 interface PartnerClinicalRecommendationProps {
   referredBy: string
+  referredPhone: string
   rxRows: RxRow[]
-  onRxClick: (label: string, value: string) => void
+  onRxInfo: (row: RxRow) => void
+  onCallDoctor: () => void
 }
 
-function RxRow({
+function RxRowItem({
   label,
   value,
   onClick,
@@ -23,18 +25,24 @@ function RxRow({
   onClick: () => void
 }) {
   return (
-    <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onClick} className="flex w-full items-baseline text-left">
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.985 }}
+      onClick={onClick}
+      className="flex w-full items-baseline gap-3 text-left"
+    >
       <span className="shrink-0 text-[12.5px] font-bold text-emerald-100/50">{label}</span>
-      <span aria-hidden className="mx-2.5 min-w-0 flex-1 -translate-y-1 border-b border-dotted border-white/20" />
-      <span className="shrink-0 text-[13px] font-extrabold tracking-tight text-white">{value}</span>
+      <span className="min-w-0 flex-1 text-right text-[13px] font-extrabold tracking-tight text-white">{value}</span>
     </motion.button>
   )
 }
 
 export function PartnerClinicalRecommendation({
   referredBy,
+  referredPhone,
   rxRows,
-  onRxClick,
+  onRxInfo,
+  onCallDoctor,
 }: PartnerClinicalRecommendationProps) {
   return (
     <div className="relative overflow-hidden rounded-[24px] bg-[#0B231C] p-5 shadow-[0_24px_56px_-26px_rgba(6,40,30,0.75)]">
@@ -46,11 +54,11 @@ export function PartnerClinicalRecommendation({
         <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">Signed by {referredBy}</div>
         <div className="mt-3 flex flex-col gap-3.5">
           {rxRows.map((row) => (
-            <RxRow
+            <RxRowItem
               key={row.label}
               label={row.label}
               value={row.value}
-              onClick={() => onRxClick(row.label, row.value)}
+              onClick={() => onRxInfo(row)}
             />
           ))}
         </div>
@@ -62,6 +70,14 @@ export function PartnerClinicalRecommendation({
             Guardian signs consent before any matching begins.
           </span>
         </div>
+        <button
+          type="button"
+          onClick={onCallDoctor}
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-white/[0.08] py-2.5 text-xs font-bold text-emerald-100/80"
+        >
+          <Phone className="h-3.5 w-3.5" />
+          Call {referredBy} · {referredPhone}
+        </button>
       </div>
     </div>
   )

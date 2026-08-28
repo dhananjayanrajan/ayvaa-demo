@@ -6,20 +6,39 @@ import { cn } from '@/lib/utils'
 
 type StepState = 'done' | 'current' | 'todo'
 
-interface WizardStep {
+export interface WizardStep {
   label: string
   state: StepState
+  description: string
 }
 
 interface PartnerReferralWizardHeroProps {
   steps: WizardStep[]
   ready: number
   total: number
+  onStepClick?: (step: WizardStep) => void
 }
 
-function HeroStep({ label, state }: { label: string; state: StepState }) {
+function HeroStep({
+  label,
+  state,
+  onClick,
+}: {
+  label: string
+  state: StepState
+  onClick?: () => void
+}) {
+  const isClickable = Boolean(onClick)
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1.5">
+    <motion.button
+      type="button"
+      whileTap={isClickable ? { scale: 0.95 } : undefined}
+      onClick={onClick}
+      className={cn(
+        'flex min-w-0 flex-col items-center gap-1.5',
+        isClickable ? 'cursor-pointer' : 'cursor-default',
+      )}
+    >
       {state === 'done' ? (
         <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-400 text-[#0B231C]">
           <Check className="h-3 w-3" strokeWidth={4} aria-hidden />
@@ -40,11 +59,17 @@ function HeroStep({ label, state }: { label: string; state: StepState }) {
       >
         {label}
       </span>
-    </div>
+    </motion.button>
   )
 }
 
-export function PartnerReferralWizardHero({ steps, ready, total }: PartnerReferralWizardHeroProps) {
+export function PartnerReferralWizardHero({
+  steps,
+  ready,
+  total,
+  onStepClick,
+}: PartnerReferralWizardHeroProps) {
+  const percentage = Math.round((ready / total) * 100)
   return (
     <div className="relative overflow-hidden rounded-[26px] border border-emerald-200/10 bg-[#0B231C] p-5 shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]">
       <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-emerald-400/25 blur-3xl" />
@@ -61,9 +86,12 @@ export function PartnerReferralWizardHero({ steps, ready, total }: PartnerReferr
               <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">continuity of care</span>
             </h2>
           </div>
-          <Chip intent="live" light dot className="mt-1 shrink-0">
-            {ready}/{total}
-          </Chip>
+          <div className="flex flex-col items-end gap-1">
+            <Chip intent="live" light dot className="border-transparent">
+              {ready}/{total}
+            </Chip>
+            <span className="text-[10px] font-bold text-emerald-100/40">{percentage}% complete</span>
+          </div>
         </div>
 
         <div className="mt-5 flex items-start">
@@ -75,7 +103,11 @@ export function PartnerReferralWizardHero({ steps, ready, total }: PartnerReferr
                   className={cn('mt-2.5 h-px flex-1', s.state === 'todo' ? 'bg-white/15' : 'bg-emerald-300/50')}
                 />
               )}
-              <HeroStep label={s.label} state={s.state} />
+              <HeroStep
+                label={s.label}
+                state={s.state}
+                onClick={onStepClick ? () => onStepClick(s) : undefined}
+              />
             </Fragment>
           ))}
         </div>
@@ -84,7 +116,7 @@ export function PartnerReferralWizardHero({ steps, ready, total }: PartnerReferr
           <motion.div
             className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-300"
             initial={{ width: 0 }}
-            animate={{ width: `${(ready / total) * 100}%` }}
+            animate={{ width: `${percentage}%` }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
           />
         </div>
