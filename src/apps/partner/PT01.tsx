@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { motion } from 'motion/react'
-import { ArrowRight, Building2, Eye, EyeOff, Fingerprint, KeyRound, Lock, Mail, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Building2, Fingerprint, KeyRound, Lock, ShieldCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Chip, Hero, Kicker, LiveDot, Tile, rise, stagger } from '@/components/phone/kit'
-import type { TileTone } from '@/components/phone/kit'
+import { Chip, Hero, Kicker, LiveDot, rise, stagger } from '@/components/phone/kit'
+import { PartnerCredentialCard } from '@/components/partner/PartnerCredentialCard'
 import { partner } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -16,41 +15,9 @@ const trust: { icon: LucideIcon; label: string }[] = [
   { icon: KeyRound, label: 'Fully logged' },
 ]
 
-function CredentialRow({
-  icon,
-  tone,
-  label,
-  value,
-  mono = false,
-  onClick,
-  trailing,
-}: {
-  icon: LucideIcon
-  tone: TileTone
-  label: string
-  value: string
-  mono?: boolean
-  onClick: () => void
-  trailing?: React.ReactNode
-}) {
-  return (
-    <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onClick} className="group flex w-full items-center gap-3 px-4 py-3.5 text-left">
-      <Tile icon={icon} tone={tone} />
-      <span className="min-w-0 flex-1">
-        <span className="block text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40">{label}</span>
-        <span className={`mt-0.5 block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B] ${mono ? 'font-mono tracking-normal' : ''}`}>
-          {value}
-        </span>
-      </span>
-      {trailing}
-    </motion.button>
-  )
-}
-
 export function PT01() {
   const { notify } = useDemo()
   const { navigate } = useRouter()
-  const [showPass, setShowPass] = useState(false)
 
   return (
     <Screen>
@@ -96,54 +63,11 @@ export function PT01() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <div className="relative overflow-hidden rounded-3xl border border-[#0B211B]/[0.06] bg-white shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
-                <CredentialRow
-                  icon={Building2}
-                  tone="neutral"
-                  label="Organisation"
-                  value={partner.name}
-                  onClick={() => notify({ title: 'Organisation', body: `${partner.name} · provisioned by admin`, kind: 'info' })}
-                />
-                <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-                <CredentialRow
-                  icon={Mail}
-                  tone="info"
-                  label="Work email"
-                  value={partner.email}
-                  onClick={() => notify({ title: 'Work email', body: `${partner.email} · access last used today`, kind: 'info' })}
-                />
-                <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-                <CredentialRow
-                  icon={KeyRound}
-                  tone="success"
-                  label="Password"
-                  value={showPass ? 'sunrise-care-2026' : '••••••••••'}
-                  mono
-                  onClick={() => setShowPass((v) => !v)}
-                  trailing={
-                    <motion.span
-                      whileTap={{ scale: 0.9 }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={showPass ? 'Hide password' : 'Show password'}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setShowPass((v) => !v)
-                      }}
-                      onKeyDown={(e) => e.key === 'Enter' && setShowPass((v) => !v)}
-                      className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
-                    >
-                      {showPass ? <EyeOff className="h-4 w-4" aria-hidden /> : <Eye className="h-4 w-4" aria-hidden />}
-                    </motion.span>
-                  }
-                />
-                <div className="flex items-center justify-between bg-[#0B211B]/[0.03] px-4 py-3">
-                  <span className="min-w-0 truncate text-[10.5px] font-semibold text-[#0B211B]/50">
-                    Two-factor is enforced by your organisation
-                  </span>
-                  <Chip intent="success">2FA on</Chip>
-                </div>
-              </div>
+              <PartnerCredentialCard
+                partnerName={partner.name}
+                partnerEmail={partner.email}
+                onNotify={notify}
+              />
             </motion.div>
 
             <motion.div variants={rise}>
