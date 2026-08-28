@@ -72,21 +72,21 @@ export const INTENT: Record<
 }
 
 const CHIP_TINT: Record<Intent, string> = {
-  success: 'border-emerald-600/20 bg-emerald-500/[0.12] text-emerald-700',
-  warning: 'border-amber-500/25 bg-amber-400/[0.16] text-amber-700',
-  danger: 'border-rose-500/25 bg-rose-500/[0.12] text-rose-600',
-  info: 'border-sky-500/25 bg-sky-500/[0.12] text-sky-700',
-  neutral: 'border-[#0B211B]/10 bg-[#0B211B]/[0.045] text-[#0B211B]/55',
-  live: 'border-emerald-500/30 bg-emerald-500/[0.14] text-emerald-700',
+  success: 'border border-emerald-600/20 bg-emerald-500/[0.12] text-emerald-700',
+  warning: 'border border-amber-500/25 bg-amber-400/[0.16] text-amber-700',
+  danger: 'border border-rose-500/25 bg-rose-500/[0.12] text-rose-600',
+  info: 'border border-sky-500/25 bg-sky-500/[0.12] text-sky-700',
+  neutral: 'border border-[#0B211B]/10 bg-[#0B211B]/[0.045] text-[#0B211B]/55',
+  live: 'border border-emerald-500/30 bg-emerald-500/[0.14] text-emerald-700',
 }
 
 const CHIP_LIGHT: Record<Intent, string> = {
-  success: 'border-emerald-300/25 bg-emerald-400/15 text-emerald-100',
-  warning: 'border-amber-300/25 bg-amber-400/15 text-amber-100',
-  danger: 'border-rose-300/25 bg-rose-400/15 text-rose-100',
-  info: 'border-sky-300/25 bg-sky-400/15 text-sky-100',
-  neutral: 'border-white/15 bg-white/[0.07] text-emerald-50/70',
-  live: 'border-emerald-300/30 bg-emerald-400/20 text-emerald-100',
+  success: 'bg-emerald-400/15 text-emerald-100',
+  warning: 'bg-amber-400/15 text-amber-100',
+  danger: 'bg-rose-400/15 text-rose-100',
+  info: 'bg-sky-400/15 text-sky-100',
+  neutral: 'bg-white/[0.07] text-emerald-50/70',
+  live: 'bg-emerald-400/20 text-emerald-100',
 }
 
 const TILE_TONE: Record<Exclude<TileTone, 'live'>, string> = {
@@ -174,7 +174,7 @@ export function Chip({
   return (
     <span
       className={cn(
-        'inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-[3px] text-[10px] font-bold tracking-wide',
+        'inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-[3px] text-[10px] font-bold tracking-wide',
         light ? CHIP_LIGHT[intent] : CHIP_TINT[intent],
         className,
       )}

@@ -91,7 +91,7 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
                 <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-100/50">
                   {e1.quoteBy}
                 </span>
-                <Chip intent="success" icon={CheckCircle2} className="border-transparent ring-0 shadow-none">
+                <Chip intent="success" icon={CheckCircle2}>
                   Verbatim
                 </Chip>
               </div>
