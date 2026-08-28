@@ -20,9 +20,14 @@ export function EscalationHeroCard() {
           The system did its part — a human now closes the loop.
         </p>
         <div className="mt-4 flex flex-wrap gap-1.5">
-          <Chip intent="warning" light dot className="border-transparent">
-            Waiting {e1.waiting}
-          </Chip>
+          <motion.div
+            animate={{ opacity: [1, 0.8, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <Chip intent="warning" light dot className="border-transparent">
+              Waiting {e1.waiting}
+            </Chip>
+          </motion.div>
           <Chip intent="neutral" light className="border-transparent">Human decision required</Chip>
         </div>
       </WarnHero>

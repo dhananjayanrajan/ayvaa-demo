@@ -27,15 +27,19 @@ export function AccountabilityCard() {
         </div>
         <div className="mt-4 overflow-hidden rounded-2xl bg-white/[0.06]">
           {guarantees.map((r, i) => (
-            <div key={r.text}>
+            <motion.div
+              key={r.text}
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
+              className="group transition-colors duration-200"
+            >
               {i > 0 && <div aria-hidden className="mx-3.5 h-px bg-white/[0.07]" />}
               <div className="flex items-center gap-3 px-3.5 py-3">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[10px] bg-amber-400/15 text-amber-200">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[10px] bg-amber-400/15 text-amber-200 transition-transform duration-200 group-hover:scale-110">
                   <r.icon className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden />
                 </span>
                 <span className="min-w-0 flex-1 text-[12.5px] font-semibold leading-snug text-amber-50/80">{r.text}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </WarnHero>
