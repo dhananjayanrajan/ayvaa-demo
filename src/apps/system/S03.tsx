@@ -16,7 +16,7 @@ import {
 } from '@/components/phone/kit'
 import { autoNotifications } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { NotificationPushPreview } from '@/components/system/NotificationPushPreview'
+import { PushPreview } from '@/components/phone/PushPreview'
 import { NotificationFeed } from '@/components/system/NotificationFeed'
 import { IncidentLinkingCard } from '@/components/system/IncidentLinkingCard'
 import { EventFanOutCard } from '@/components/system/EventFanOutCard'
@@ -70,7 +70,7 @@ export function S03() {
 
                 {first && (
                   <div className="mt-4">
-                    <NotificationPushPreview title={first.title} body={first.body} time="now" onDark />
+                    <PushPreview title={first.title} body={first.body} time="now" onDark />
                   </div>
                 )}
               </Hero>

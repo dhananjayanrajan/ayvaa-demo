@@ -1,14 +1,14 @@
 import { BellRing } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-interface NotificationPushPreviewProps {
+interface PushPreviewProps {
   title: string
   body: string
   time: string
   onDark: boolean
 }
 
-export function NotificationPushPreview({ title, body, time, onDark }: NotificationPushPreviewProps) {
+export function PushPreview({ title, body, time, onDark }: PushPreviewProps) {
   return (
     <div
       className={cn(

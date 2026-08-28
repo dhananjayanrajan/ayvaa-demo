@@ -19,7 +19,7 @@ import {
 } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
 import { autoNotifications } from '@/data/seed'
-import { NotificationPushPreview } from '@/components/system/NotificationPushPreview'
+import { PushPreview } from '@/components/phone/PushPreview'
 
 type NotifyFn = (payload: {
   title: string
@@ -82,7 +82,7 @@ export function NotificationFeed({ notify }: NotificationFeedProps) {
               </motion.button>
               <Expand open={open}>
                 <div className="px-3.5 pb-3.5">
-                  <NotificationPushPreview title={n.title} body={n.body} time={n.time} onDark={false} />
+                  <PushPreview title={n.title} body={n.body} time={n.time} onDark={false} />
                   <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-emerald-600/70">
                     <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
                     Automatic push · delivered to family + caregiver
