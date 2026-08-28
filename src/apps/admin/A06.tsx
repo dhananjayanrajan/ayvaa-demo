@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
@@ -16,9 +17,11 @@ import { useDemo } from '@/lib/store'
 import { DueReviewCard } from '@/components/admin/consent/DueReviewCard'
 import { WithdrawalCard } from '@/components/admin/consent/WithdrawalCard'
 import { ConsentLifecycleCard } from '@/components/admin/consent/ConsentLifecycleCard'
+import { ConsentRecordSheet } from '@/components/admin/sheets/ConsentRecordSheet'
 
 export function A06() {
   const { notify } = useDemo()
+  const [recordSheetOpen, setRecordSheetOpen] = useState(false)
 
   return (
     <Screen>
@@ -59,7 +62,7 @@ export function A06() {
               <Section label="Due for review" trailing={<Chip intent="warning" dot>1 needs action</Chip>} />
             </motion.div>
 
-            <DueReviewCard notify={notify} />
+            <DueReviewCard notify={notify} onViewRecord={() => setRecordSheetOpen(true)} />
 
             <motion.div variants={rise}>
               <Section label="Withdrawn" trailing={<Chip intent="danger">{consentTracking.withdrawn}</Chip>} />
@@ -75,6 +78,12 @@ export function A06() {
           </motion.div>
         </div>
       </BodyArea>
+
+      <ConsentRecordSheet
+        open={recordSheetOpen}
+        onClose={() => setRecordSheetOpen(false)}
+        notify={notify}
+      />
     </Screen>
   )
 }

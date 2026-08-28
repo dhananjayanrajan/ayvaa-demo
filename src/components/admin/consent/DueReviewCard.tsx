@@ -1,6 +1,7 @@
-import { motion } from 'motion/react'
-import { CalendarClock, FileText, Phone } from 'lucide-react'
-import { Card, Chip, Meter, Panel, Tile, rise } from '@/components/phone/kit'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { CalendarClock, ChevronDown, FileText, Phone } from 'lucide-react'
+import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
 import { Overline } from '@/components/admin/ui/Overline'
 import { TonalButton } from '@/components/admin/ui/TonalButton'
 import { CycleStep } from '@/components/admin/consent/CycleStep'
@@ -10,24 +11,38 @@ type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | '
 
 interface DueReviewCardProps {
   notify: NotifyFn
+  onViewRecord: () => void
 }
 
-export function DueReviewCard({ notify }: DueReviewCardProps) {
-  const facts: [string, string][] = [
-    ['Signed', consentReview.signed],
-    ['Pauses', consentReview.pauses],
-    ['Reminded', consentReview.reminded],
+const CYCLE_DAYS = 90
+const ELAPSED_DAYS = 78
+
+const reminderHistory = [
+  { date: 'Mar 28', note: 'Reminder sent via push + SMS' },
+  { date: 'Mar 21', note: 'Guardian acknowledged' },
+  { date: 'Mar 14', note: 'Email reminder opened' },
+]
+
+export function DueReviewCard({ notify, onViewRecord }: DueReviewCardProps) {
+  const [historyOpen, setHistoryOpen] = useState(false)
+  const daysLeft = CYCLE_DAYS - ELAPSED_DAYS
+  const progress = ELAPSED_DAYS / CYCLE_DAYS
+
+  const facts = [
+    { key: 'Signed', value: consentReview.signed },
+    { key: 'Pauses', value: consentReview.pauses },
+    { key: 'Reminded', value: consentReview.reminded },
   ]
 
-  const dueSteps: { label: string; sub: string; done: boolean }[] = [
-    { label: 'Signed', sub: String(consentReview.signed), done: true },
+  const dueSteps = [
+    { label: 'Signed', sub: consentReview.signed, done: true },
     { label: 'Reminded', sub: `${consentReview.reminded}x`, done: true },
     { label: 'Due now', sub: consentReview.due, done: false },
   ]
 
   return (
     <motion.div variants={rise}>
-      <Card intent="warning">
+      <Card intent="warning" className="bg-gradient-to-br from-amber-50 via-white to-orange-50">
         <div aria-hidden className="h-1 w-full bg-gradient-to-r from-amber-400 to-orange-400" />
         <div className="p-5">
           <div className="flex items-start gap-3.5">
@@ -44,9 +59,18 @@ export function DueReviewCard({ notify }: DueReviewCardProps) {
           <div className="mt-4">
             <div className="flex items-center justify-between gap-2">
               <Overline>90-day cycle</Overline>
-              <span className="shrink-0 text-[10px] font-extrabold tabular-nums text-amber-700">Day 78 of 90</span>
+              <span className="shrink-0 text-[10px] font-extrabold tabular-nums text-amber-700">
+                {daysLeft} days left
+              </span>
             </div>
-            <Meter value={78 / 90} intent="warning" delay={0.2} className="mt-2" />
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${progress * 100}%` }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="mt-2 h-2 overflow-hidden rounded-full bg-amber-500/20"
+            >
+              <div className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-400" />
+            </motion.div>
 
             <div className="mt-4 flex items-start justify-between">
               {dueSteps.map((s) => (
@@ -57,10 +81,10 @@ export function DueReviewCard({ notify }: DueReviewCardProps) {
 
           <Panel intent="neutral" className="mt-4">
             <div className="grid grid-cols-3 divide-x divide-[#0B211B]/[0.06]">
-              {facts.map(([k, v]) => (
-                <div key={k} className="flex min-w-0 flex-col items-center gap-1 px-2 py-3">
-                  <span className="max-w-full truncate text-[14px] font-extrabold tabular-nums leading-none text-[#0B211B]">{v}</span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/45">{k}</span>
+              {facts.map((f) => (
+                <div key={f.key} className="flex min-w-0 flex-col items-center gap-1 px-2 py-3">
+                  <span className="max-w-full truncate text-[14px] font-extrabold tabular-nums leading-none text-[#0B211B]">{f.value}</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/45">{f.key}</span>
                 </div>
               ))}
             </div>
@@ -74,13 +98,48 @@ export function DueReviewCard({ notify }: DueReviewCardProps) {
             ))}
           </div>
 
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setHistoryOpen((v) => !v)}
+            className="mt-4 flex w-full items-center justify-between rounded-2xl bg-[#0B211B]/[0.04] px-4 py-3 text-left transition-colors hover:bg-[#0B211B]/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50"
+          >
+            <span className="text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#0B211B]/60">
+              Recent reminders
+            </span>
+            <motion.span animate={{ rotate: historyOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+              <ChevronDown className="h-4 w-4 text-[#0B211B]/40" aria-hidden />
+            </motion.span>
+          </motion.button>
+
+          <AnimatePresence>
+            {historyOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="mt-2 rounded-2xl bg-[#0B211B]/[0.03] p-3">
+                  {reminderHistory.map((r, i) => (
+                    <div key={r.date} className={i > 0 ? 'mt-2 border-t border-[#0B211B]/[0.05] pt-2' : ''}>
+                      <div className="flex items-baseline justify-between gap-3">
+                        <span className="text-[11.5px] font-bold text-[#0B211B]">{r.date}</span>
+                        <span className="break-words text-[11px] font-medium text-[#0B211B]/55">{r.note}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <div className="mt-4 flex gap-2.5">
             <TonalButton
               tone="neutral"
               icon={FileText}
-              onClick={() =>
-                notify({ title: 'Record opened', body: `${consentReview.name} · consent history attached`, kind: 'info' })
-              }
+              onClick={onViewRecord}
             >
               View record
             </TonalButton>
