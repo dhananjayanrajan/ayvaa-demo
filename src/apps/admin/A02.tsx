@@ -25,7 +25,7 @@ import { PhotoViewSheet } from '@/components/admin/sheets/PhotoViewSheet'
 import { EscalateSheet } from '@/components/admin/sheets/EscalateSheet'
 import { CloseSheet } from '@/components/admin/sheets/CloseSheet'
 import { TonalButton } from '@/components/admin/ui/TonalButton'
-import { SheetHeader } from '@/components/admin/ui/SheetHeader'
+import { BottomSheet } from '@/components/admin/ui/BottomSheet'
 
 type Sheet = 'none' | 'photo' | 'escalate' | 'close'
 
@@ -83,19 +83,6 @@ export function A02() {
       </FootBar>
 
       <AnimatePresence>
-        {sheet !== 'none' && (
-          <motion.div
-            key="dim"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSheet('none')}
-            className="absolute inset-0 z-40 bg-[rgba(15,26,22,0.5)] backdrop-blur-[2px]"
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
         {sheet === 'photo' && (
           <motion.div
             key="photo"
@@ -112,52 +99,33 @@ export function A02() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {(sheet === 'escalate' || sheet === 'close') && (
-          <motion.div
-            key="sheet"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-            className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] border-t border-white/40 bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-          >
-            <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
+      <BottomSheet
+        open={sheet === 'escalate'}
+        onClose={() => setSheet('none')}
+        icon={ShieldAlert}
+        title="Escalate this incident"
+        subtitle="Choose who takes it next"
+      >
+        <EscalateSheet
+          onClose={() => setSheet('none')}
+          notify={notify}
+        />
+      </BottomSheet>
 
-            {sheet === 'escalate' ? (
-              <>
-                <SheetHeader
-                  icon={ShieldAlert}
-                  tone="warning"
-                  title="Escalate this incident"
-                  sub="Choose who takes it next"
-                  onClose={() => setSheet('none')}
-                />
-                <EscalateSheet
-                  onClose={() => setSheet('none')}
-                  notify={notify}
-                />
-              </>
-            ) : (
-              <>
-                <SheetHeader
-                  icon={CheckCircle2}
-                  tone="success"
-                  title="Close this incident?"
-                  sub="Closing resumes the care plan and notifies the family and caregiver."
-                  onClose={() => setSheet('none')}
-                />
-                <CloseSheet
-                  onClose={() => setSheet('none')}
-                  notify={notify}
-                  onConfirm={() => navigate('/admin/a01')}
-                  decision={inc.decision}
-                />
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <BottomSheet
+        open={sheet === 'close'}
+        onClose={() => setSheet('none')}
+        icon={CheckCircle2}
+        title="Close this incident?"
+        subtitle="Closing resumes the care plan and notifies the family and caregiver."
+      >
+        <CloseSheet
+          onClose={() => setSheet('none')}
+          notify={notify}
+          onConfirm={() => navigate('/admin/a01')}
+          decision={inc.decision}
+        />
+      </BottomSheet>
     </Screen>
   )
 }

@@ -7,9 +7,10 @@ import {
   Stethoscope,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Card, Chip, Tile, rise } from '@/components/phone/kit'
+import { Card, Chip, rise } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { recentActivity } from '@/data/seed'
+import { ListRow } from '@/components/admin/ui/ListRow'
 
 const iconMap: Record<string, LucideIcon> = {
   Partner: Building2,
@@ -65,22 +66,15 @@ export function RecentActivityList({ filter, notify }: RecentActivityListProps) 
             return (
               <div key={i}>
                 {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.985 }}
+                <ListRow
+                  icon={Icon}
+                  tone={s.tile}
+                  title={a.name}
+                  subtitle={a.body}
                   onClick={() => notify({ title: 'Account opened', body: `${a.name} · access logged`, kind: 'info' })}
-                  className="group flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors duration-200 hover:bg-[#0B211B]/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-                >
-                  <Tile icon={Icon} tone={s.tile} />
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[13.5px] font-bold leading-snug tracking-tight text-[#0B211B]">{a.name}</div>
-                    <div className="mt-0.5 line-clamp-2 text-xs font-medium leading-relaxed text-[#0B211B]/55">{a.body}</div>
-                  </div>
-                  <span className="flex shrink-0 items-center gap-1.5 pt-0.5">
-                    <Chip intent={s.intent}>{a.pill}</Chip>
-                  </span>
-                </motion.button>
+                  trailing={<Chip intent={s.intent}>{a.pill}</Chip>}
+                  showChevron={false}
+                />
               </div>
             )
           })

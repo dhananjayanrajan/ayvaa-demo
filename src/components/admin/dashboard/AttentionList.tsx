@@ -1,11 +1,12 @@
 import { motion } from 'motion/react'
-import { ChevronRight, Hourglass, ShieldCheck, UserCheck } from 'lucide-react'
+import { Hourglass, ShieldCheck, UserCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Card, Tile, rise } from '@/components/phone/kit'
+import { Card, rise } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
 import { adminAttention } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
+import { ListRow } from '@/components/admin/ui/ListRow'
 
 export function AttentionList() {
   const { notify, dispatch } = useDemo()
@@ -32,26 +33,13 @@ export function AttentionList() {
         {attention.map((a, i) => (
           <div key={adminAttention[i].title}>
             {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.985 }}
+            <ListRow
+              icon={a.icon}
+              tone={a.tone}
+              title={adminAttention[i].title}
+              subtitle={adminAttention[i].body}
               onClick={a.onClick}
-              className="group flex w-full items-center gap-3 px-4 py-3.5 text-left"
-            >
-              <Tile icon={a.icon} tone={a.tone} />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[13.5px] font-bold leading-snug tracking-tight text-[#0B211B]">
-                  {adminAttention[i].title}
-                </span>
-                <span className="mt-0.5 block line-clamp-2 text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                  {adminAttention[i].body}
-                </span>
-              </span>
-              <ChevronRight
-                className="h-3.5 w-3.5 shrink-0 text-[#0B211B]/20 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600"
-                aria-hidden
-              />
-            </motion.button>
+            />
           </div>
         ))}
       </Card>

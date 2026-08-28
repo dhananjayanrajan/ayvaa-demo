@@ -8,8 +8,9 @@ import {
   UserCheck,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Card, Chip, Section, Tile, rise } from '@/components/phone/kit'
+import { Card, Chip, Section, rise } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
+import { ListRow } from '@/components/admin/ui/ListRow'
 
 const iconMap: Record<string, { icon: LucideIcon; tone: TileTone }> = {
   ok: { icon: CheckCircle2, tone: 'success' },
@@ -45,13 +46,15 @@ export function AuditEntryList({ entries, totalEntries, rangeLabel, notify }: Au
       <motion.div variants={rise}>
         <Card>
           {entries.map((e, i) => {
-            const { icon: Icon, tone } = iconMap[e.icon] ?? iconMap.view
+            const { icon, tone } = iconMap[e.icon] ?? iconMap.view
             return (
               <div key={e.id}>
                 {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.985 }}
+                <ListRow
+                  icon={icon}
+                  tone={tone}
+                  title={e.title}
+                  subtitle={e.body}
                   onClick={() =>
                     notify(
                       e.icon === 'error'
@@ -59,17 +62,13 @@ export function AuditEntryList({ entries, totalEntries, rangeLabel, notify }: Au
                         : { title: e.title, body: `${e.body} · opened from ${rangeLabel} log`, kind: 'info' },
                     )
                   }
-                  className="group flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors duration-200 hover:bg-[#0B211B]/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-                >
-                  <Tile icon={Icon} tone={tone} size="sm" />
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-[13px] font-bold leading-snug tracking-tight text-[#0B211B]">{e.title}</span>
-                    <span className="mt-0.5 block truncate text-[11.5px] font-medium text-[#0B211B]/55">{e.body}</span>
-                  </span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/35 transition-colors group-hover:bg-[#0B211B]/[0.08]">
-                    <Lock className="h-3 w-3" strokeWidth={2.4} aria-hidden />
-                  </span>
-                </motion.button>
+                  trailing={
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/35 transition-colors group-hover:bg-[#0B211B]/[0.08]">
+                      <Lock className="h-3 w-3" strokeWidth={2.4} aria-hidden />
+                    </span>
+                  }
+                  showChevron={false}
+                />
               </div>
             )
           })}
