@@ -8,10 +8,10 @@ import type { StaffMember } from '@/data/types'
 interface StaffListProps {
   members: StaffMember[]
   variant: 'active' | 'paused'
-  onStaffClick: (member: StaffMember) => void
+  onOpenStaff: (member: StaffMember) => void
 }
 
-export function StaffList({ members, variant, onStaffClick }: StaffListProps) {
+export function StaffList({ members, variant, onOpenStaff }: StaffListProps) {
   return (
     <Card>
       {members.map((s, i) => (
@@ -28,10 +28,10 @@ export function StaffList({ members, variant, onStaffClick }: StaffListProps) {
           <motion.button
             type="button"
             whileTap={{ scale: 0.985 }}
-            onClick={() => onStaffClick(s)}
+            onClick={() => onOpenStaff(s)}
             className={cn(
-              'group flex w-full items-center gap-3 px-4 py-3.5 text-left',
-              variant === 'paused' && 'opacity-60',
+              'group flex w-full items-center gap-3 px-4 py-3.5 text-left outline-none transition-colors',
+              'focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2',
             )}
           >
             {variant === 'active' ? (
