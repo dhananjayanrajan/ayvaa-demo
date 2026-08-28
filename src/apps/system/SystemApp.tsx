@@ -1,7 +1,9 @@
+import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Activity, BellRing, Sparkles, Workflow } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
+import { Splash } from '@/components/phone/Splash'
 import { useRouter } from '@/lib/router'
 import { S01 } from './S01'
 import { S02 } from './S02'
@@ -66,6 +68,11 @@ function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) =
 export function SystemApp({ path }: { path: string }) {
   const { navigate } = useRouter()
   const screen = path.replace('/system/', '') || 's01'
+  const bootRef = useRef(true)
+
+  useEffect(() => {
+    bootRef.current = false
+  }, [])
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#07130F] p-6 sm:p-9">
@@ -110,6 +117,7 @@ export function SystemApp({ path }: { path: string }) {
         <div aria-hidden className="pointer-events-none absolute -inset-10 rounded-[96px] bg-emerald-400/[0.14] blur-3xl" />
         <div className="relative">
           <PhoneFrame>
+            <Splash key={screen} boot={bootRef.current} />
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={screen}
