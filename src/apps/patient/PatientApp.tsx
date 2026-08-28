@@ -50,7 +50,22 @@ const tabs: Tab[] = [
   { id: 'p28', label: 'Profile', icon: User },
 ]
 
-const withNav = ['p06', 'p13', 'p15', 'p21', 'p25', 'p28']
+const withNav = [
+  'p06',
+  'p07',
+  'p13',
+  'p14',
+  'p15',
+  'p17',
+  'p19',
+  'p20',
+  'p21',
+  'p23',
+  'p25',
+  'p28',
+  'p29',
+  'p30',
+]
 
 function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
   return (
