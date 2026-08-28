@@ -36,22 +36,31 @@ export function RevenueHero() {
             {analytics.delta}
           </Chip>
         </div>
-        <p className="mt-1.5 text-pretty break-words text-[12px] font-medium leading-relaxed text-emerald-100/55">{rangeSessions}</p>
+        <p className="mt-1.5 text-[12px] font-medium leading-relaxed text-emerald-100/55">{rangeSessions}</p>
 
         <div className="mt-3 flex w-fit gap-1 rounded-full bg-white/[0.07] p-1">
-          {(['week', 'month'] as Range[]).map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRange(r)}
-              className={cn(
-                'rounded-full px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.1em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60',
-                range === r ? 'bg-emerald-400 text-emerald-950' : 'text-emerald-100/60 hover:text-white',
-              )}
-            >
-              {r === 'week' ? 'Week' : 'Month'}
-            </button>
-          ))}
+          {(['week', 'month'] as Range[]).map((r) => {
+            const active = range === r
+            return (
+              <motion.button
+                key={r}
+                type="button"
+                onClick={() => setRange(r)}
+                className="relative rounded-full px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.1em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
+              >
+                {active && (
+                  <motion.span
+                    layoutId="a09-revenue-range"
+                    transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500"
+                  />
+                )}
+                <span className={cn('relative block', active ? 'text-white' : 'text-emerald-100/60')}>
+                  {r === 'week' ? 'Week' : 'Month'}
+                </span>
+              </motion.button>
+            )
+          })}
         </div>
 
         <Sparkline data={sparkData} />

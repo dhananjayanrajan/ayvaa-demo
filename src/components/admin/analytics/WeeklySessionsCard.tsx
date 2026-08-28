@@ -77,19 +77,28 @@ export function WeeklySessionsCard() {
 
           <div className="mt-3 flex items-center justify-between gap-3">
             <div className="flex rounded-full bg-[#0B211B]/[0.05] p-1">
-              {(['total', 'avg'] as Mode[]).map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => setMode(m)}
-                  className={cn(
-                    'rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40',
-                    mode === m ? 'bg-emerald-500 text-white' : 'text-[#0B211B]/45 hover:text-[#0B211B]',
-                  )}
-                >
-                  {m === 'total' ? 'Total' : 'Avg/day'}
-                </button>
-              ))}
+              {(['total', 'avg'] as Mode[]).map((m) => {
+                const active = mode === m
+                return (
+                  <motion.button
+                    key={m}
+                    type="button"
+                    onClick={() => setMode(m)}
+                    className="relative rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="a09-weekly-mode"
+                        transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500"
+                      />
+                    )}
+                    <span className={cn('relative block', active ? 'text-white' : 'text-[#0B211B]/45')}>
+                      {m === 'total' ? 'Total' : 'Avg/day'}
+                    </span>
+                  </motion.button>
+                )
+              })}
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#0B211B]/40">
               {mode === 'total' ? `${totalSum} total` : `${avgSum} avg/day`}

@@ -36,19 +36,28 @@ export function CategoryMixCard() {
           <div className="flex items-center justify-between gap-2">
             <span className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#0B211B]/40">Sort by</span>
             <div className="flex rounded-full bg-[#0B211B]/[0.05] p-1">
-              {(['value', 'name'] as SortMode[]).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => setSortMode(mode)}
-                  className={cn(
-                    'rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40',
-                    sortMode === mode ? 'bg-emerald-500 text-white' : 'text-[#0B211B]/45 hover:text-[#0B211B]',
-                  )}
-                >
-                  {mode}
-                </button>
-              ))}
+              {(['value', 'name'] as SortMode[]).map((mode) => {
+                const active = sortMode === mode
+                return (
+                  <motion.button
+                    key={mode}
+                    type="button"
+                    onClick={() => setSortMode(mode)}
+                    className="relative rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.08em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="a09-mix-sort"
+                        transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500"
+                      />
+                    )}
+                    <span className={cn('relative block', active ? 'text-white' : 'text-[#0B211B]/45')}>
+                      {mode}
+                    </span>
+                  </motion.button>
+                )
+              })}
             </div>
           </div>
 
