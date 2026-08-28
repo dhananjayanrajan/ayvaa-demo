@@ -24,7 +24,7 @@ import { DecisionNoteCard } from '@/components/admin/incident/DecisionNoteCard'
 import { PhotoViewSheet } from '@/components/admin/sheets/PhotoViewSheet'
 import { EscalateSheet } from '@/components/admin/sheets/EscalateSheet'
 import { CloseSheet } from '@/components/admin/sheets/CloseSheet'
-import { SheetButton } from '@/components/admin/ui/SheetButton'
+import { TonalButton } from '@/components/admin/ui/TonalButton'
 import { SheetHeader } from '@/components/admin/ui/SheetHeader'
 
 type Sheet = 'none' | 'photo' | 'escalate' | 'close'
@@ -73,12 +73,12 @@ export function A02() {
 
       <FootBar>
         <div className="flex gap-2.5">
-          <SheetButton tone="danger" icon={ArrowUpRight} onClick={() => setSheet('escalate')}>
+          <TonalButton tone="danger" icon={ArrowUpRight} onClick={() => setSheet('escalate')}>
             Escalate higher
-          </SheetButton>
-          <SheetButton tone="success" icon={CheckCircle2} onClick={() => setSheet('close')}>
+          </TonalButton>
+          <TonalButton tone="success" icon={CheckCircle2} onClick={() => setSheet('close')}>
             Close incident
-          </SheetButton>
+          </TonalButton>
         </div>
       </FootBar>
 

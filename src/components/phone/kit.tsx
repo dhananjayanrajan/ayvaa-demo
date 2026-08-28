@@ -72,12 +72,12 @@ export const INTENT: Record<
 }
 
 const CHIP_TINT: Record<Intent, string> = {
-  success: 'border border-emerald-600/20 bg-emerald-500/[0.12] text-emerald-700',
-  warning: 'border border-amber-500/25 bg-amber-400/[0.16] text-amber-700',
-  danger: 'border border-rose-500/25 bg-rose-500/[0.12] text-rose-600',
-  info: 'border border-sky-500/25 bg-sky-500/[0.12] text-sky-700',
-  neutral: 'border border-[#0B211B]/10 bg-[#0B211B]/[0.045] text-[#0B211B]/55',
-  live: 'border border-emerald-500/30 bg-emerald-500/[0.14] text-emerald-700',
+  success: 'bg-emerald-500/[0.12] text-emerald-700',
+  warning: 'bg-amber-400/[0.16] text-amber-700',
+  danger: 'bg-rose-500/[0.12] text-rose-600',
+  info: 'bg-sky-500/[0.12] text-sky-700',
+  neutral: 'bg-[#0B211B]/[0.045] text-[#0B211B]/55',
+  live: 'bg-emerald-500/[0.14] text-emerald-700',
 }
 
 const CHIP_LIGHT: Record<Intent, string> = {
