@@ -30,15 +30,16 @@ type NotifyFn = (payload: { title: string; body: string; kind: 'info' | 'warn' }
 
 interface AuditEntryListProps {
   entries: AuditEntry[]
+  totalEntries: number
   rangeLabel: string
   notify: NotifyFn
 }
 
-export function AuditEntryList({ entries, rangeLabel, notify }: AuditEntryListProps) {
+export function AuditEntryList({ entries, totalEntries, rangeLabel, notify }: AuditEntryListProps) {
   return (
     <>
       <motion.div variants={rise}>
-        <Section label={rangeLabel} trailing={<Chip intent="neutral">{entries.length} entries</Chip>} />
+        <Section label={rangeLabel} trailing={<Chip intent="neutral">{totalEntries} entries</Chip>} />
       </motion.div>
 
       <motion.div variants={rise}>
@@ -58,14 +59,14 @@ export function AuditEntryList({ entries, rangeLabel, notify }: AuditEntryListPr
                         : { title: e.title, body: `${e.body} · opened from ${rangeLabel} log`, kind: 'info' },
                     )
                   }
-                  className="group flex w-full items-center gap-3 px-4 py-3.5 text-left"
+                  className="group flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors duration-200 hover:bg-[#0B211B]/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
                 >
                   <Tile icon={Icon} tone={tone} size="sm" />
                   <span className="min-w-0 flex-1">
                     <span className="block text-[13px] font-bold leading-snug tracking-tight text-[#0B211B]">{e.title}</span>
                     <span className="mt-0.5 block truncate text-[11.5px] font-medium text-[#0B211B]/55">{e.body}</span>
                   </span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/35">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/35 transition-colors group-hover:bg-[#0B211B]/[0.08]">
                     <Lock className="h-3 w-3" strokeWidth={2.4} aria-hidden />
                   </span>
                 </motion.button>

@@ -21,13 +21,17 @@ const ranges = [
   { id: 'custom', label: 'Custom' },
 ]
 
+const PAGE_SIZE = 4
+
 export function A05() {
   const { notify } = useDemo()
   const [page, setPage] = useState(1)
   const [range, setRange] = useState('today')
 
-  const entries = range === 'week' ? auditEntries.slice(0, 4) : range === 'today' ? auditEntries : []
-  const totalPages = range === 'today' ? 3 : 2
+  const allEntries = range === 'week' ? auditEntries.slice(0, 8) : range === 'today' ? auditEntries : []
+  const totalEntries = allEntries.length
+  const totalPages = Math.max(1, Math.ceil(totalEntries / PAGE_SIZE))
+  const pageEntries = allEntries.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
   const rangeLabel = range === 'today' ? 'Live feed · today' : 'Live feed · this week'
 
   return (
@@ -42,7 +46,7 @@ export function A05() {
           <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <LedgerChainHero todayCount={auditEntries.length} />
+              <LedgerChainHero todayCount={totalEntries} />
             </motion.div>
 
             <motion.div variants={rise}>
@@ -59,7 +63,12 @@ export function A05() {
 
             {range !== 'custom' ? (
               <>
-                <AuditEntryList entries={entries} rangeLabel={rangeLabel} notify={notify} />
+                <AuditEntryList
+                  entries={pageEntries}
+                  totalEntries={totalEntries}
+                  rangeLabel={rangeLabel}
+                  notify={notify}
+                />
                 <motion.div variants={rise}>
                   <Card>
                     <Pager page={page} totalPages={totalPages} onPageChange={setPage} layoutId="a05-page" />
