@@ -14,9 +14,9 @@ import {
   stagger,
 } from '@/components/phone/kit'
 import { adminAttention, adminMetrics } from '@/data/seed'
-import { IncidentOverviewCard } from '@/components/admin/IncidentOverviewCard'
-import { AttentionList } from '@/components/admin/AttentionList'
-import { LiveSessionsCard } from '@/components/admin/LiveSessionsCard'
+import { IncidentOverviewCard } from '@/components/admin/dashboard/IncidentOverviewCard'
+import { AttentionList } from '@/components/admin/dashboard/AttentionList'
+import { LiveSessionsCard } from '@/components/admin/dashboard/LiveSessionsCard'
 
 export function A01() {
   return (
