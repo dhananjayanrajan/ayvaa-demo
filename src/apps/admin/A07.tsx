@@ -29,7 +29,7 @@ export function A07() {
       />
       <BodyArea>
         <div className="relative">
-          <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-sky-400/[0.12] blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.12] blur-3xl" />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
               <VaultHeroCard />
@@ -45,7 +45,7 @@ export function A07() {
               <Section label="Deletion queue" trailing={<Chip intent="warning" dot={running > 0}>{deletionQueue.length} items</Chip>} />
             </motion.div>
 
-            <DeletionQueueList notify={notify} />
+            <DeletionQueueList />
 
             <CryptoDeletionCard />
 
@@ -60,7 +60,7 @@ export function A07() {
           type="button"
           whileTap={{ scale: 0.97 }}
           onClick={() => notify({ title: 'Policy export queued', body: 'Full retention policy will be emailed to you', kind: 'info' })}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(2,132,199,0.7)]"
+          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.7)]"
         >
           <Download className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
           Export policy
