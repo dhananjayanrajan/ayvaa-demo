@@ -27,17 +27,44 @@ import { PartnerStatsHero } from '@/components/partner/PartnerStatsHero'
 import { PartnerReferralCard } from '@/components/partner/PartnerReferralCard'
 import { PartnerQuickActions } from '@/components/partner/PartnerQuickActions'
 import { ReferredPatientList } from '@/components/partner/ReferredPatientList'
+import { PartnerAlertsSheet, type AlertItem } from '@/components/partner/PartnerAlertsSheet'
+import { PartnerStatsSheet } from '@/components/partner/PartnerStatsSheet'
+import { PartnerReferralSheet } from '@/components/partner/PartnerReferralSheet'
+import { PartnerStaffSheet } from '@/components/partner/PartnerStaffSheet'
+import { PartnerBillingSheet } from '@/components/partner/PartnerBillingSheet'
+import { PartnerSessionsSheet } from '@/components/partner/PartnerSessionsSheet'
+import { PartnerBillingCard } from '@/components/partner/PartnerBillingCard'
 
-const alerts: { icon: LucideIcon; tone: TileTone; title: string; body: string; time: string }[] = [
+const initialAlerts: AlertItem[] = [
   { icon: CheckCircle2, tone: 'success', title: 'Offer accepted', body: 'Ramesh Rao · caregiver confirmed for Friday', time: '8:12 AM' },
   { icon: ReceiptText, tone: 'ink', title: 'Invoice settled', body: 'Feb statement paid in full · PDF ready', time: 'Yesterday' },
   { icon: X, tone: 'warning', title: 'Staff request', body: 'Kavitha Nair wants to join under Sunrise', time: 'Mon' },
 ]
 
+type SheetType = 'stats' | 'referral' | 'staff' | 'billing' | 'sessions' | 'alerts' | null
+
 export function PT02() {
   const { navigate } = useRouter()
   const { notify, markAllRead } = useDemo()
-  const [sheetOpen, setSheetOpen] = useState(false)
+  const [activeSheet, setActiveSheet] = useState<SheetType>(null)
+  const [alerts, setAlerts] = useState<AlertItem[]>(initialAlerts)
+
+  const closeSheet = () => setActiveSheet(null)
+
+  const handleMarkAllRead = () => {
+    markAllRead()
+    setAlerts([])
+    notify({ title: 'All caught up', body: 'No new partner alerts today', kind: 'ok' })
+    closeSheet()
+  }
+
+  const weeklySessions = [4, 6, 5, 7, 8, 6, 9]
+
+  const staffList = [
+    { name: 'Dr. Meera Krishnan', role: 'Physician', seed: 'meera' },
+    { name: 'Kavitha Nair', role: 'Care Coordinator', seed: 'kavitha' },
+    { name: 'Ramesh Rao', role: 'Caregiver', seed: 'ramesh' },
+  ]
 
   return (
     <Screen>
@@ -49,12 +76,12 @@ export function PT02() {
             <motion.button
               type="button"
               whileTap={{ scale: 0.92 }}
-              onClick={() => setSheetOpen(true)}
+              onClick={() => setActiveSheet('alerts')}
               className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/60"
               aria-label="Notifications"
             >
               <Bell className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-amber-500 ring-2 ring-[#F4F8F6]" />
+              {alerts.length > 0 && <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-amber-500 ring-2 ring-[#F4F8F6]" />}
             </motion.button>
             <AgentAvatar seed="sunrise" size={42} />
           </div>
@@ -65,25 +92,29 @@ export function PT02() {
           <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <PartnerStatsHero partner={partner} referrals={referrals} />
+              <PartnerStatsHero
+                partner={partner}
+                referrals={referrals}
+                onOpenActivity={() => setActiveSheet('stats')}
+              />
             </motion.div>
 
             <motion.div variants={rise}>
-              <PartnerReferralCard onStartReferral={() => navigate('/partner/pt03')} />
+              <PartnerReferralCard onOpenOptions={() => setActiveSheet('referral')} />
             </motion.div>
 
             <motion.div variants={rise}>
               <PartnerQuickActions
                 staffCount={partner.staffOnAyvaa}
                 sessionsCount={partner.sessionsThisMonth}
-                onStaffClick={() => navigate('/partner/pt05')}
-                onBillingClick={() => navigate('/partner/pt07')}
-                onSessionsClick={() => notify({ title: 'Sessions', body: `${partner.sessionsThisMonth} verified sessions this month`, kind: 'info' })}
+                onStaffClick={() => setActiveSheet('staff')}
+                onBillingClick={() => setActiveSheet('billing')}
+                onSessionsClick={() => setActiveSheet('sessions')}
               />
             </motion.div>
 
             <motion.div variants={rise}>
-              <Section label="Referred patients" trailing={<Chip intent="neutral">{referrals.length} tracked</Chip>} />
+              <Section label="Referred patients" trailing={<Chip intent="neutral" className="border-transparent">{referrals.length} tracked</Chip>} />
             </motion.div>
 
             <motion.div variants={rise}>
@@ -91,30 +122,15 @@ export function PT02() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <Section label="Billing" trailing={<Chip intent="success">Up to date</Chip>} />
+              <Section label="Billing" trailing={<Chip intent="success" className="border-transparent">Up to date</Chip>} />
             </motion.div>
 
             <motion.div variants={rise}>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.985 }}
-                onClick={() => navigate('/partner/pt07')}
-                className="group block w-full text-left"
-              >
-                <Card>
-                  <div className="flex items-center gap-3.5 p-4">
-                    <Tile icon={ReceiptText} tone="ink" size="lg" />
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">February invoice</div>
-                      <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">31 sessions · paid Feb 28</div>
-                    </div>
-                    <div className="flex shrink-0 flex-col items-end gap-1.5">
-                      <span className="font-mono text-[14px] font-black tabular-nums tracking-tight text-[#0B211B]">₹96,400</span>
-                      <Chip intent="success">Paid</Chip>
-                    </div>
-                  </div>
-                </Card>
-              </motion.button>
+              <PartnerBillingCard
+                invoiceAmount="₹96,400"
+                invoiceSessions="31 sessions · paid Feb 28"
+                onViewBilling={() => navigate('/partner/pt07')}
+              />
             </motion.div>
 
             <motion.div variants={rise}>
@@ -125,80 +141,82 @@ export function PT02() {
       </BodyArea>
 
       <AnimatePresence>
-        {sheetOpen && (
+        {activeSheet && (
           <motion.div
             key="dim"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSheetOpen(false)}
+            onClick={closeSheet}
             className="absolute inset-0 z-40 bg-[rgba(15,26,22,0.5)] backdrop-blur-[2px]"
           />
         )}
       </AnimatePresence>
 
       <AnimatePresence>
-        {sheetOpen && (
-          <motion.div
-            key="alerts"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-            className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-          >
-            <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
+        {activeSheet === 'stats' && (
+          <PartnerStatsSheet weeklySessions={weeklySessions} onClose={closeSheet} />
+        )}
 
-            <div className="flex items-start gap-3">
-              <Tile icon={Bell} tone="warning" size="lg" />
-              <div className="min-w-0 flex-1">
-                <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Partner alerts</div>
-                <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">Everything that moved while you were away</div>
-              </div>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.92 }}
-                onClick={() => setSheetOpen(false)}
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
-                aria-label="Close alerts"
-              >
-                <X className="h-4 w-4" aria-hidden />
-              </motion.button>
-            </div>
+        {activeSheet === 'referral' && (
+          <PartnerReferralSheet
+            onClose={closeSheet}
+            onNewReferral={() => {
+              closeSheet()
+              navigate('/partner/pt03')
+            }}
+            onContinueDraft={() => {
+              closeSheet()
+              notify({ title: 'Draft not available', body: 'No drafts saved yet', kind: 'info' })
+            }}
+            onViewRecent={() => {
+              closeSheet()
+              navigate('/partner/pt04')
+            }}
+          />
+        )}
 
-            <div className="flex flex-col">
-              {alerts.map((a, i) => (
-                <div key={a.title}>
-                  {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-                  <div className="flex items-center gap-3 px-1 py-3.5">
-                    <Tile icon={a.icon} tone={a.tone} />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">{a.title}</div>
-                      <div className="mt-0.5 truncate text-xs font-medium text-[#0B211B]/55">{a.body}</div>
-                    </div>
-                    <TimeChip>{a.time}</TimeChip>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {activeSheet === 'staff' && (
+          <PartnerStaffSheet
+            staffList={staffList}
+            staffCount={partner.staffOnAyvaa}
+            onClose={closeSheet}
+            onViewAllStaff={() => {
+              closeSheet()
+              navigate('/partner/pt05')
+            }}
+          />
+        )}
 
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.97 }}
-              onClick={() => {
-                markAllRead()
-                setSheetOpen(false)
-                notify({ title: 'All caught up', body: 'No new partner alerts today', kind: 'ok' })
-              }}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"
-            >
-              <CheckCircle2 className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-              Mark all as read
-            </motion.button>
-            <p className="text-center text-[10.5px] font-semibold text-[#0B211B]/45">
-              Alerts are quiet between 9 PM and 8 AM unless urgent.
-            </p>
-          </motion.div>
+        {activeSheet === 'billing' && (
+          <PartnerBillingSheet
+            invoiceAmount="₹96,400"
+            invoiceSessions="31 sessions · paid Feb 28"
+            onClose={closeSheet}
+            onViewBilling={() => {
+              closeSheet()
+              navigate('/partner/pt07')
+            }}
+          />
+        )}
+
+        {activeSheet === 'sessions' && (
+          <PartnerSessionsSheet
+            sessionsCount={partner.sessionsThisMonth}
+            onClose={closeSheet}
+            onViewHistory={() => {
+              closeSheet()
+              notify({ title: 'Sessions', body: `${partner.sessionsThisMonth} verified sessions this month`, kind: 'info' })
+            }}
+          />
+        )}
+
+        {activeSheet === 'alerts' && (
+          <PartnerAlertsSheet
+            alerts={alerts}
+            onClose={closeSheet}
+            onMarkAllRead={handleMarkAllRead}
+          />
         )}
       </AnimatePresence>
     </Screen>
