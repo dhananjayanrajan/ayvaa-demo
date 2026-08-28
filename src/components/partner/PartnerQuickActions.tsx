@@ -21,6 +21,8 @@ function QuickTile({
     <motion.button
       type="button"
       whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       onClick={onClick}
       className="flex min-w-0 flex-1 flex-col items-start gap-2.5 rounded-2xl bg-[#0B211B]/[0.04] p-3.5 transition-colors hover:bg-[#0B211B]/[0.07]"
     >

@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { LiveDot, Chip } from '@/components/phone/kit'
-import { UserPlus } from 'lucide-react'
+import { UserPlus, BarChart3 } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { cn } from '@/lib/utils'
 
@@ -14,9 +14,10 @@ interface PartnerStatsHeroProps {
     sessionsThisMonth: number
   }
   referrals: { status: 'active' | 'matching' }[]
+  onOpenActivity: () => void
 }
 
-export function PartnerStatsHero({ partner, referrals }: PartnerStatsHeroProps) {
+export function PartnerStatsHero({ partner, referrals, onOpenActivity }: PartnerStatsHeroProps) {
   const activeCount = referrals.filter((r) => r.status === 'active').length
   const matchingCount = referrals.length - activeCount
 
@@ -45,25 +46,25 @@ export function PartnerStatsHero({ partner, referrals }: PartnerStatsHeroProps) 
               Care partner since 2024
             </div>
           </div>
-          <Chip intent="live" light dot>
+          <Chip intent="live" light dot className="border-transparent">
             Live
           </Chip>
         </div>
 
-        <div className="mt-5 flex items-end gap-5">
+        <div className="mt-5 flex items-start justify-between gap-5">
           <div className="min-w-0 shrink">
-            <span className="bg-gradient-to-br from-emerald-200 via-teal-200 to-emerald-300 bg-clip-text text-[54px] font-black leading-none tracking-tighter text-transparent">
+            <span className="block bg-gradient-to-br from-emerald-200 via-teal-200 to-emerald-300 bg-clip-text text-[54px] font-black leading-none tracking-tighter text-transparent">
               {partner.activeCare}
             </span>
-            <div className="mt-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-emerald-100/45">
+            <span className="mt-1.5 block text-[10px] font-extrabold uppercase tracking-[0.16em] text-emerald-100/45">
               patients in care
-            </div>
+            </span>
             <Chip intent="success" light icon={UserPlus} className="mt-2.5 border-transparent">
               +2 this week
             </Chip>
           </div>
 
-          <div className="flex min-w-0 flex-1 flex-col gap-3 pb-0.5">
+          <div className="flex min-w-0 flex-1 flex-col gap-3 pt-1">
             {rail.map((m) => (
               <div key={m.label}>
                 <div className="flex items-baseline justify-between gap-2">
@@ -88,7 +89,16 @@ export function PartnerStatsHero({ partner, referrals }: PartnerStatsHeroProps) 
           </div>
         </div>
 
-        <div className="mt-4 flex items-center rounded-2xl bg-white/[0.06] px-3.5 py-3">
+        <button
+          type="button"
+          onClick={onOpenActivity}
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white/[0.06] px-3.5 py-3 text-[11px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/70 transition-colors hover:bg-white/[0.1]"
+        >
+          <BarChart3 className="h-4 w-4" strokeWidth={2.2} />
+          View weekly activity
+        </button>
+
+        <div className="mt-3 flex items-center rounded-2xl bg-white/[0.06] px-3.5 py-3">
           <div className="flex min-w-0 items-center gap-1.5">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300" />
             <span className="truncate text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/60">
