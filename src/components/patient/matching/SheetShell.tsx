@@ -29,7 +29,7 @@ export function SheetShell({ icon: Icon, title, subtitle, tone = 'info', onClose
             <Icon className="h-5 w-5" strokeWidth={2.2} aria-hidden />
           </span>
           <div className="min-w-0 flex-1 pt-0.5">
-            <div className="truncate text-[15px] font-extrabold tracking-tight text-[#0B211B]">{title}</div>
+            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{title}</div>
             <div className="mt-0.5 text-xs font-medium leading-snug text-[#0B211B]/55">{subtitle}</div>
           </div>
           <button
