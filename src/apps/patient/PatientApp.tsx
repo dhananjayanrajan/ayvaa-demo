@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { CalendarDays, HeartPulse, Home, LifeBuoy, Sparkles, User } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
+import { ScreenshotButton } from '@/components/phone/ScreenshotButton'
 import { Splash } from '@/components/phone/Splash'
 import { useRouter } from '@/lib/router'
 import { P01 } from './P01'
@@ -120,6 +121,7 @@ export function PatientApp({ path }: { path: string }) {
   const { navigate } = useRouter()
   const screen = path.replace('/patient/', '') || 'p01'
   const bootRef = useRef(true)
+  const frameRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     bootRef.current = false
@@ -155,8 +157,8 @@ export function PatientApp({ path }: { path: string }) {
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Family app</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden rounded-full bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
-        Guardian view
+      <div className="absolute bottom-6 right-6 hidden sm:block">
+        <ScreenshotButton targetRef={frameRef} fileName={`ayvaa-patient-${screen}`} expandPx={13} cornerRadiusPx={57} />
       </div>
 
       <motion.div
@@ -167,58 +169,60 @@ export function PatientApp({ path }: { path: string }) {
       >
         <div aria-hidden className="pointer-events-none absolute -inset-10 rounded-[96px] bg-emerald-400/[0.14] blur-3xl" />
         <div className="relative">
-          <PhoneFrame>
-            <Splash key={screen} boot={bootRef.current} />
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={screen}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.24, ease: 'easeOut' }}
-                className="flex h-full min-h-0 flex-1 flex-col"
-              >
-                {screen === 'p01' && <P01 />}
-                {screen === 'p02' && <P02 />}
-                {screen === 'p03' && <P03 />}
-                {screen === 'p04' && <P04 />}
-                {screen === 'p05' && <P05 />}
-                {screen === 'p06' && <P06 />}
-                {screen === 'p07' && <P07 />}
-                {screen === 'p08' && <P08 />}
-                {screen === 'p09' && <P09 />}
-                {screen === 'p10' && <P10 />}
-                {screen === 'p11' && <P11 />}
-                {screen === 'p12' && <P12 />}
-                {screen === 'p13' && <P13 />}
-                {screen === 'p14' && <P14 />}
-                {screen === 'p15' && <P15 />}
-                {screen === 'p16' && <P16 />}
-                {screen === 'p17' && <P17 />}
-                {screen === 'p18' && <P18 />}
-                {screen === 'p19' && <P19 />}
-                {screen === 'p20' && <P20 />}
-                {screen === 'p21' && <P21 />}
-                {screen === 'p22' && <P22 />}
-                {screen === 'p23' && <P23 />}
-                {screen === 'p24' && <P24 />}
-                {screen === 'p25' && <P25 />}
-                {screen === 'p26' && <P26 />}
-                {screen === 'p27' && <P27 />}
-                {screen === 'p28' && <P28 />}
-                {screen === 'p29' && <P29 />}
-                {screen === 'p30' && <P30 />}
-                {screen === 'p31' && <P31 />}
-                {screen === 'p31b' && <P31b />}
-                {screen === 'p32' && <P32 />}
-                {screen === 'p33' && <P33 />}
-                {screen === 'p34' && <P34 />}
-              </motion.div>
-            </AnimatePresence>
-            {withNav.includes(screen) && (
-              <TabBar active={screen} onSelect={(id) => navigate(`/patient/${id}`)} />
-            )}
-          </PhoneFrame>
+          <div ref={frameRef} className="relative">
+            <PhoneFrame>
+              <Splash key={screen} boot={bootRef.current} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={screen}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  className="flex h-full min-h-0 flex-1 flex-col"
+                >
+                  {screen === 'p01' && <P01 />}
+                  {screen === 'p02' && <P02 />}
+                  {screen === 'p03' && <P03 />}
+                  {screen === 'p04' && <P04 />}
+                  {screen === 'p05' && <P05 />}
+                  {screen === 'p06' && <P06 />}
+                  {screen === 'p07' && <P07 />}
+                  {screen === 'p08' && <P08 />}
+                  {screen === 'p09' && <P09 />}
+                  {screen === 'p10' && <P10 />}
+                  {screen === 'p11' && <P11 />}
+                  {screen === 'p12' && <P12 />}
+                  {screen === 'p13' && <P13 />}
+                  {screen === 'p14' && <P14 />}
+                  {screen === 'p15' && <P15 />}
+                  {screen === 'p16' && <P16 />}
+                  {screen === 'p17' && <P17 />}
+                  {screen === 'p18' && <P18 />}
+                  {screen === 'p19' && <P19 />}
+                  {screen === 'p20' && <P20 />}
+                  {screen === 'p21' && <P21 />}
+                  {screen === 'p22' && <P22 />}
+                  {screen === 'p23' && <P23 />}
+                  {screen === 'p24' && <P24 />}
+                  {screen === 'p25' && <P25 />}
+                  {screen === 'p26' && <P26 />}
+                  {screen === 'p27' && <P27 />}
+                  {screen === 'p28' && <P28 />}
+                  {screen === 'p29' && <P29 />}
+                  {screen === 'p30' && <P30 />}
+                  {screen === 'p31' && <P31 />}
+                  {screen === 'p31b' && <P31b />}
+                  {screen === 'p32' && <P32 />}
+                  {screen === 'p33' && <P33 />}
+                  {screen === 'p34' && <P34 />}
+                </motion.div>
+              </AnimatePresence>
+              {withNav.includes(screen) && (
+                <TabBar active={screen} onSelect={(id) => navigate(`/patient/${id}`)} />
+              )}
+            </PhoneFrame>
+          </div>
         </div>
       </motion.div>
     </div>

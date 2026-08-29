@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { BarChart3, LayoutDashboard, ShieldCheck, Sparkles, Ticket, Users } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
+import { ScreenshotButton } from '@/components/phone/ScreenshotButton'
 import { Splash } from '@/components/phone/Splash'
 import { useRouter } from '@/lib/router'
 import { A01 } from './A01'
@@ -79,6 +80,7 @@ export function AdminApp({ path }: { path: string }) {
   const { navigate } = useRouter()
   const screen = path.replace('/admin/', '') || 'a01'
   const bootRef = useRef(true)
+  const frameRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     bootRef.current = false
@@ -114,8 +116,8 @@ export function AdminApp({ path }: { path: string }) {
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Admin console</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden rounded-full bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
-        Operations HQ
+      <div className="absolute bottom-6 right-6 hidden sm:block">
+        <ScreenshotButton targetRef={frameRef} fileName={`ayvaa-admin-${screen}`} expandPx={13} cornerRadiusPx={57} />
       </div>
 
       <motion.div
@@ -126,32 +128,34 @@ export function AdminApp({ path }: { path: string }) {
       >
         <div aria-hidden className="pointer-events-none absolute -inset-10 rounded-[96px] bg-emerald-400/[0.14] blur-3xl" />
         <div className="relative">
-          <PhoneFrame>
-            <Splash key={screen} boot={bootRef.current} />
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={screen}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.24, ease: 'easeOut' }}
-                className="flex h-full min-h-0 flex-1 flex-col"
-              >
-                {screen === 'a01' && <A01 />}
-                {screen === 'a02' && <A02 />}
-                {screen === 'a03' && <A03 />}
-                {screen === 'a04' && <A04 />}
-                {screen === 'a05' && <A05 />}
-                {screen === 'a06' && <A06 />}
-                {screen === 'a07' && <A07 />}
-                {screen === 'a08' && <A08 />}
-                {screen === 'a09' && <A09 />}
-              </motion.div>
-            </AnimatePresence>
-            {withNav.includes(screen) && (
-              <TabBar active={screen} onSelect={(id) => navigate(`/admin/${id}`)} />
-            )}
-          </PhoneFrame>
+          <div ref={frameRef} className="relative">
+            <PhoneFrame>
+              <Splash key={screen} boot={bootRef.current} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={screen}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  className="flex h-full min-h-0 flex-1 flex-col"
+                >
+                  {screen === 'a01' && <A01 />}
+                  {screen === 'a02' && <A02 />}
+                  {screen === 'a03' && <A03 />}
+                  {screen === 'a04' && <A04 />}
+                  {screen === 'a05' && <A05 />}
+                  {screen === 'a06' && <A06 />}
+                  {screen === 'a07' && <A07 />}
+                  {screen === 'a08' && <A08 />}
+                  {screen === 'a09' && <A09 />}
+                </motion.div>
+              </AnimatePresence>
+              {withNav.includes(screen) && (
+                <TabBar active={screen} onSelect={(id) => navigate(`/admin/${id}`)} />
+              )}
+            </PhoneFrame>
+          </div>
         </div>
       </motion.div>
     </div>

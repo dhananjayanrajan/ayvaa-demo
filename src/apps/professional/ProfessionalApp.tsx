@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { BadgeCheck, CalendarDays, Mail, Sparkles, Wallet } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
+import { ScreenshotButton } from '@/components/phone/ScreenshotButton'
 import { Splash } from '@/components/phone/Splash'
 import { useRouter } from '@/lib/router'
 import { PR01 } from './PR01'
@@ -81,6 +82,7 @@ export function ProfessionalApp({ path }: { path: string }) {
   const { navigate } = useRouter()
   const screen = path.replace('/professional/', '') || 'pr01'
   const bootRef = useRef(true)
+  const frameRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     bootRef.current = false
@@ -116,8 +118,8 @@ export function ProfessionalApp({ path }: { path: string }) {
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Professional</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden rounded-full bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
-        For caregivers
+      <div className="absolute bottom-6 right-6 hidden sm:block">
+        <ScreenshotButton targetRef={frameRef} fileName={`ayvaa-professional-${screen}`} expandPx={13} cornerRadiusPx={57} />
       </div>
 
       <motion.div
@@ -128,35 +130,37 @@ export function ProfessionalApp({ path }: { path: string }) {
       >
         <div aria-hidden className="pointer-events-none absolute -inset-10 rounded-[96px] bg-emerald-400/[0.14] blur-3xl" />
         <div className="relative">
-          <PhoneFrame>
-            <Splash key={screen} boot={bootRef.current} />
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={screen}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.24, ease: 'easeOut' }}
-                className="flex h-full min-h-0 flex-1 flex-col"
-              >
-                {screen === 'pr01' && <PR01 />}
-                {screen === 'pr02' && <PR02 />}
-                {screen === 'pr03' && <PR03 />}
-                {screen === 'pr04' && <PR04 />}
-                {screen === 'pr05' && <PR05 />}
-                {screen === 'pr06' && <PR06 />}
-                {screen === 'pr07' && <PR07 />}
-                {screen === 'pr08' && <PR08 />}
-                {screen === 'pr09' && <PR09 />}
-                {screen === 'pr10' && <PR10 />}
-                {screen === 'pr11' && <PR11 />}
-                {screen === 'pr12' && <PR12 />}
-              </motion.div>
-            </AnimatePresence>
-            {withNav.includes(screen) && (
-              <TabBar active={screen} onSelect={(id) => navigate(`/professional/${id}`)} />
-            )}
-          </PhoneFrame>
+          <div ref={frameRef} className="relative">
+            <PhoneFrame>
+              <Splash key={screen} boot={bootRef.current} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={screen}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  className="flex h-full min-h-0 flex-1 flex-col"
+                >
+                  {screen === 'pr01' && <PR01 />}
+                  {screen === 'pr02' && <PR02 />}
+                  {screen === 'pr03' && <PR03 />}
+                  {screen === 'pr04' && <PR04 />}
+                  {screen === 'pr05' && <PR05 />}
+                  {screen === 'pr06' && <PR06 />}
+                  {screen === 'pr07' && <PR07 />}
+                  {screen === 'pr08' && <PR08 />}
+                  {screen === 'pr09' && <PR09 />}
+                  {screen === 'pr10' && <PR10 />}
+                  {screen === 'pr11' && <PR11 />}
+                  {screen === 'pr12' && <PR12 />}
+                </motion.div>
+              </AnimatePresence>
+              {withNav.includes(screen) && (
+                <TabBar active={screen} onSelect={(id) => navigate(`/professional/${id}`)} />
+              )}
+            </PhoneFrame>
+          </div>
         </div>
       </motion.div>
     </div>

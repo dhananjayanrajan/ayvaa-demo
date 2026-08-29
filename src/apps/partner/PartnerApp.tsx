@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Building2, ReceiptText, Sparkles, UserPlus, Users } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
+import { ScreenshotButton } from '@/components/phone/ScreenshotButton'
 import { Splash } from '@/components/phone/Splash'
 import { useRouter } from '@/lib/router'
 import { PT01 } from './PT01'
@@ -76,6 +77,7 @@ export function PartnerApp({ path }: { path: string }) {
   const { navigate } = useRouter()
   const screen = path.replace('/partner/', '') || 'pt02'
   const bootRef = useRef(true)
+  const frameRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     bootRef.current = false
@@ -111,8 +113,8 @@ export function PartnerApp({ path }: { path: string }) {
         <Sparkles className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
         <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-50/70">Ayvaa · Partner portal</span>
       </div>
-      <div className="absolute bottom-6 right-6 hidden rounded-full bg-white/[0.04] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50/40 backdrop-blur-sm sm:block">
-        Care network
+      <div className="absolute bottom-6 right-6 hidden sm:block">
+        <ScreenshotButton targetRef={frameRef} fileName={`ayvaa-partner-${screen}`} expandPx={13} cornerRadiusPx={57} />
       </div>
 
       <motion.div
@@ -123,30 +125,32 @@ export function PartnerApp({ path }: { path: string }) {
       >
         <div aria-hidden className="pointer-events-none absolute -inset-10 rounded-[96px] bg-emerald-400/[0.14] blur-3xl" />
         <div className="relative">
-          <PhoneFrame>
-            <Splash key={screen} boot={bootRef.current} />
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={screen}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.24, ease: 'easeOut' }}
-                className="flex h-full min-h-0 flex-1 flex-col"
-              >
-                {screen === 'pt01' && <PT01 />}
-                {screen === 'pt02' && <PT02 />}
-                {screen === 'pt03' && <PT03 />}
-                {screen === 'pt04' && <PT04 />}
-                {screen === 'pt05' && <PT05 />}
-                {screen === 'pt06' && <PT06 />}
-                {screen === 'pt07' && <PT07 />}
-              </motion.div>
-            </AnimatePresence>
-            {withNav.includes(screen) && (
-              <TabBar active={screen} onSelect={(id) => navigate(`/partner/${id}`)} />
-            )}
-          </PhoneFrame>
+          <div ref={frameRef} className="relative">
+            <PhoneFrame>
+              <Splash key={screen} boot={bootRef.current} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={screen}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  className="flex h-full min-h-0 flex-1 flex-col"
+                >
+                  {screen === 'pt01' && <PT01 />}
+                  {screen === 'pt02' && <PT02 />}
+                  {screen === 'pt03' && <PT03 />}
+                  {screen === 'pt04' && <PT04 />}
+                  {screen === 'pt05' && <PT05 />}
+                  {screen === 'pt06' && <PT06 />}
+                  {screen === 'pt07' && <PT07 />}
+                </motion.div>
+              </AnimatePresence>
+              {withNav.includes(screen) && (
+                <TabBar active={screen} onSelect={(id) => navigate(`/partner/${id}`)} />
+              )}
+            </PhoneFrame>
+          </div>
         </div>
       </motion.div>
     </div>
