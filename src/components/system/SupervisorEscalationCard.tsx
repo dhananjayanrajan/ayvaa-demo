@@ -55,13 +55,13 @@ export function SupervisorEscalationCard({ notify, live, delivered }: Supervisor
           </div>
 
           <Panel intent="warning" className="mt-4 p-4">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-[0_8px_16px_-8px_rgba(245,158,11,0.6)]">
                 <UserRound className="h-4 w-4" strokeWidth={2.2} aria-hidden />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-[13px] font-bold text-[#0B211B]">{onCall.name}</div>
-                <div className="truncate text-[11px] font-medium text-[#0B211B]/50">
+                <div className="break-words text-[13px] font-bold leading-snug text-[#0B211B]">{onCall.name}</div>
+                <div className="break-words text-[11px] font-medium leading-snug text-[#0B211B]/50">
                   {onCall.role} · {onCall.window}
                 </div>
               </div>
@@ -117,7 +117,7 @@ export function SupervisorEscalationCard({ notify, live, delivered }: Supervisor
                       <PhoneCall className="h-3 w-3 text-[#0B211B]/45" strokeWidth={2.2} aria-hidden />
                     )}
                   </span>
-                  <span className="min-w-0 flex-1 truncate text-[11px] font-semibold text-[#0B211B]/60">
+                  <span className="min-w-0 flex-1 break-words text-[11px] font-semibold leading-snug text-[#0B211B]/60">
                     {e.label}
                   </span>
                   <span className="shrink-0 text-[11px] font-bold text-[#0B211B]/80">{e.value}</span>

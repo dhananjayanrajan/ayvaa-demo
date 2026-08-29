@@ -45,7 +45,7 @@ export function DeliveryHealthCard({ pushes, latency, live }: DeliveryHealthCard
                 delivered
               </span>
             </Ring>
-            <div className="flex min-w-0 flex-1 items-center justify-between gap-2">
+            <div className="grid min-w-0 flex-1 grid-cols-3 gap-1">
               <Stat label="Avg latency" value={latency} />
               <Stat label="Destinations" value="5/5" dot="bg-emerald-400" />
               <Stat label="Pushes / day" value={pushes.toLocaleString('en-IN')} />
@@ -66,12 +66,12 @@ export function DeliveryHealthCard({ pushes, latency, live }: DeliveryHealthCard
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#0B211B]/[0.05]">
                   <r.icon className="h-3 w-3 text-[#0B211B]/55" strokeWidth={2.2} aria-hidden />
                 </span>
-                <span className="shrink-0 text-[11px] font-semibold text-[#0B211B]/55">
-                  {r.label}
-                </span>
-                <span className="min-w-0 flex-1 text-right text-[11px] font-bold leading-snug text-[#0B211B]/80">
-                  {r.value}
-                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[11px] font-semibold text-[#0B211B]/55">{r.label}</div>
+                  <div className="mt-0.5 break-words text-[11px] font-bold leading-snug text-[#0B211B]/80">
+                    {r.value}
+                  </div>
+                </div>
               </div>
             ))}
           </div>

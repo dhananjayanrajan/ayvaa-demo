@@ -116,8 +116,8 @@ export function LiveFanOutCard({ run }: LiveFanOutCardProps) {
                       )}
                     </span>
                     <div className="min-w-0">
-                      <div className="truncate text-[11px] font-bold text-white">{d.label}</div>
-                      <div className="truncate text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">
+                      <div className="break-words text-[11px] font-bold leading-snug text-white">{d.label}</div>
+                      <div className="break-words text-[9px] font-bold uppercase leading-snug tracking-[0.14em] text-emerald-100/40">
                         {s === 'done' ? 'Delivered' : s === 'delivering' ? 'Sending…' : d.sub}
                       </div>
                     </div>
