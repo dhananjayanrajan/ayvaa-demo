@@ -104,7 +104,7 @@ export function P09() {
     <Screen>
       <AppBar
         title="Book care"
-        subtitle="Step 1 of 3 · care details"
+        subtitle="Details flow straight into caregiver matching"
         onBack={() => navigate('/patient/p06')}
       />
       <BodyArea>
@@ -125,6 +125,8 @@ export function P09() {
                 category={category}
                 days={days}
                 windowLabel={win.label}
+                durationLabel={dur.label}
+                cadence={cadence}
                 onOpenWho={() => setSheet('who')}
                 onOpenTime={() => setSheet('time')}
               />

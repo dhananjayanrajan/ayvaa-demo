@@ -1,9 +1,46 @@
 import { motion } from 'motion/react'
-import { CalendarDays } from 'lucide-react'
-import { Hero } from '@/components/phone/kit'
+import { ChevronRight } from 'lucide-react'
+import { AccentHero } from '@/components/admin/ui/AccentHero'
 import type { Estimate } from '@/data/patientBooking'
-import { WizardStepper } from './WizardStepper'
-import { ContextPills } from './ContextPills'
+
+interface BookingHeroProps {
+  estimate: Estimate
+  summaryLine: string
+  lovedFirstName: string
+  category: string
+  days: string[]
+  windowLabel: string
+  durationLabel: string
+  cadence: 'visit' | 'week'
+  onOpenWho: () => void
+  onOpenTime: () => void
+}
+
+function StatCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
+      <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</div>
+      <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">{value}</div>
+    </div>
+  )
+}
+
+function TapCell({ label, value, onClick }: { label: string; value: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${label}: ${value}`}
+      className="flex w-full items-center justify-between gap-3 rounded-2xl bg-emerald-400/[0.14] px-3.5 py-2.5 text-left transition-colors duration-300 hover:bg-emerald-400/[0.2]"
+    >
+      <span className="min-w-0">
+        <span className="block text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</span>
+        <span className="mt-1 block truncate text-[12.5px] font-extrabold leading-none text-white">{value}</span>
+      </span>
+      <ChevronRight className="h-4 w-4 shrink-0 text-emerald-200/70" aria-hidden />
+    </button>
+  )
+}
 
 export function BookingHero({
   estimate,
@@ -12,57 +49,55 @@ export function BookingHero({
   category,
   days,
   windowLabel,
+  durationLabel,
+  cadence,
   onOpenWho,
   onOpenTime,
-}: {
-  estimate: Estimate
-  summaryLine: string
-  lovedFirstName: string
-  category: string
-  days: string[]
-  windowLabel: string
-  onOpenWho: () => void
-  onOpenTime: () => void
-}) {
+}: BookingHeroProps) {
+  const daysValue = days.length > 0 ? days.join(', ') : 'Not set'
+  const visitsValue = cadence === 'week' ? `${estimate.visitCount} per week` : 'Single visit'
+  const priceLabel = cadence === 'week' ? 'Est. weekly total' : 'Est. total'
+
   return (
-    <Hero>
-      <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/60">
-        <CalendarDays className="h-3 w-3 text-emerald-300/80" aria-hidden />
-        New request, live estimate
+    <AccentHero tone="emerald">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">New care request</span>
+        <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">Step 1 of 3</span>
       </div>
 
-      <div className="mt-3 flex items-baseline gap-1.5">
-        <span className="text-[18px] font-extrabold text-emerald-200/80">₹</span>
+      <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
+        Care for{' '}
+        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">{lovedFirstName}</span>
+      </h2>
+      <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">{summaryLine}</p>
+
+      <div className="mt-5 grid grid-cols-2 gap-2">
+        <StatCell label="Category" value={category} />
+        <StatCell label="Days" value={daysValue} />
+      </div>
+
+      <div className="mt-2 flex flex-col gap-2">
+        <TapCell label="Receiving care" value={lovedFirstName} onClick={onOpenWho} />
+        <TapCell label="Time window" value={windowLabel} onClick={onOpenTime} />
+      </div>
+
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        <StatCell label="Visits" value={visitsValue} />
+        <StatCell label="Session length" value={durationLabel} />
+      </div>
+
+      <div className="mt-2 flex items-center justify-between gap-3 rounded-2xl bg-white/[0.04] px-3.5 py-2.5">
+        <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{priceLabel}</span>
         <motion.span
           key={estimate.weekly}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.28, ease: 'easeOut' }}
-          className="text-[36px] font-extrabold leading-none tracking-tight text-white"
+          className="truncate text-[12.5px] font-extrabold tabular-nums leading-none text-white"
         >
-          {estimate.weekly.toLocaleString('en-IN')}
+          ₹{estimate.weekly.toLocaleString('en-IN')}
         </motion.span>
-        <span className="text-[12px] font-bold text-emerald-100/50">per week</span>
       </div>
-
-      <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">
-        {summaryLine}
-      </p>
-
-      <div className="mt-4">
-        <ContextPills
-          lovedFirstName={lovedFirstName}
-          category={category}
-          days={days}
-          windowLabel={windowLabel}
-          onOpenWho={onOpenWho}
-          onOpenTime={onOpenTime}
-        />
-      </div>
-
-      <div className="mt-5">
-        <WizardStepper activeIndex={0} />
-      </div>
-    </Hero>
+    </AccentHero>
   )
 }
