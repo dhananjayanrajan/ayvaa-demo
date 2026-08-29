@@ -34,6 +34,8 @@ dist-ssr
 coverage
 .agents
 skills-lock.json
+REDESIGN.md
+ANTI-DESIGN.md
 
 # Local agentic checkup loops
 loops
