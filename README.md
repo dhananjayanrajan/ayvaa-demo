@@ -53,20 +53,29 @@ Connected to the Ayvaa healthcare ecosystem, enabling patients and guardians to 
 
 ## Product Coverage
 
-The platform currently defines **65 primary UI surfaces** (62 role-specific screens + 3 system surfaces) covering **77 workflows** across all user groups.  
-An additional **~75 screen templates** are planned to handle minor actions, edge states, and secondary flows, bringing the total to approximately **140 distinct UI surfaces**.
+The platform defines **77 core workflows** across all user groups and system operations.
+
+**Screen inventory:**
+
+- **65 existing screens** (built in current scope)  
+- **98 additional screen templates** identified to complete all workflows, edge cases, and CRUD operations  
+- **Total planned UI surfaces: 163**
+
+**Current status:**  
+- 2 workflows fully covered by existing screens  
+- 75 workflows partially covered (existing + new screens required for full completeness)
 
 Detailed documentation:
 
 - [Complete Workflow List](./docs/workflow-list.md)  
-- [Complete Screen Plan (64 screens)](./docs/screen-plan.md)  
+- [Complete Screen Plan (table format)](./docs/screen-plan.md)  
 - [Workflow / Screen Coverage Matrix](./docs/coverage-matrix.md)
 
 ---
 
 ## Technology Stack
 
-- **Frontend**: React, Vite, TypeScript (assumed, based on repo structure)  
+- **Frontend**: React, Vite, TypeScript  
 - **Backend**: [To be defined] – event-driven, transactional, with audit and encryption services.  
 - **Database**: [To be defined] – supports immutable audit logs and role-based access.  
 - **Real-time**: WebSockets / SSE for live updates and dispatch.  
