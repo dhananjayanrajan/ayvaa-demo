@@ -330,6 +330,34 @@ export const incidents: Incident[] = [
     planPaused: true,
     decision: 'Reviewed the photo and vitals. Family informed at 10:05 AM. Recommend removing the rug and adding a balance exercise to the plan before resuming.',
   },
+  {
+    id: 'i2',
+    patient: 'Mr. Rao',
+    severity: 'minor',
+    raised: '8:12 AM',
+    by: 'Sunita Verma',
+    summary:
+      'Morning dose logged 40 minutes late. Caregiver flagged it immediately. Dose given on arrival and vitals stable. No missed dose — timing slip only.',
+    tags: ['Late dose', 'Flagged on time'],
+    linkedVisit: 'Visit of March 13 · 8:00 AM · task 1 of 5',
+    linkedPlan: 'Diabetes care plan · week 2 of 6 · on track',
+    planPaused: false,
+    decision: 'Reviewed the log. Timing slip only — no missed dose. Supervisor closed the case at 8:40 AM. Reminder cadence tightened for morning visits.',
+  },
+  {
+    id: 'i3',
+    patient: 'Equipment fault',
+    severity: 'minor',
+    raised: 'Monday',
+    by: 'Kavya (care team)',
+    summary:
+      'Blood-pressure cuff reported faulty during a morning check. Unit quarantined and a replacement dispatched the same day. No readings were relied upon from the faulty unit.',
+    tags: ['Equipment fault', 'Replaced'],
+    linkedVisit: 'Visit of March 16 · 9:00 AM · task 2 of 5',
+    linkedPlan: 'General care plan · week 1 of 6 · unaffected',
+    planPaused: false,
+    decision: 'Faulty unit quarantined and replaced same day. No readings relied upon. Supervisor closed the case. Supplier notified for batch review.',
+  },
 ]
 
 export const approvals: Approval[] = [
