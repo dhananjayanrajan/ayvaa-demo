@@ -1,63 +1,167 @@
 import { motion } from 'motion/react'
-import { Check, Link2, PauseCircle, Siren, UserRound } from 'lucide-react'
-import { Card, Chip, Tile, rise } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Check, Link2, PauseCircle, Siren } from 'lucide-react'
+import { rise } from '@/components/phone/kit'
 import { incidentLinking } from '@/data/seed'
 
 interface IncidentLinkingCardProps {
   delivered?: boolean
 }
 
+const baseIncidents = [
+  { title: 'Near fall', detail: 'Mrs. Iyer · Ward B', time: '9:40 AM', tag: 'Fall risk' },
+  { title: 'Late dose', detail: 'Mr. Rao · Wing 2', time: '8:12 AM', tag: 'Medication' },
+  { title: 'Equipment fault', detail: 'Lift · Block A', time: 'Monday', tag: 'Equipment' },
+]
+
+const liveIncident = {
+  title: 'Pager escalation',
+  detail: 'All supervisors notified',
+  time: '9:41 AM',
+  tag: 'Live',
+}
+
+function ChainNode({ label, state }: { label: string; state: 'linked' | 'paused' }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.07] py-1 pl-1.5 pr-2.5">
+      <span
+        className={`flex h-3.5 w-3.5 items-center justify-center rounded-full ${
+          state === 'linked' ? 'bg-emerald-400' : 'bg-rose-400'
+        }`}
+      >
+        {state === 'linked' ? (
+          <Check className="h-2 w-2 text-emerald-950" strokeWidth={4} aria-hidden />
+        ) : (
+          <PauseCircle className="h-2 w-2 text-rose-950" strokeWidth={3.5} aria-hidden />
+        )}
+      </span>
+      <span className="text-[10px] font-bold text-white/80">{label}</span>
+    </span>
+  )
+}
+
 export function IncidentLinkingCard({ delivered = false }: IncidentLinkingCardProps) {
-  const count = delivered ? '4 incidents linked automatically' : incidentLinking.count
+  const incidents = delivered ? [liveIncident, ...baseIncidents] : baseIncidents
+  const count = delivered ? incidents.length : incidentLinking.count
+
   return (
     <motion.div variants={rise}>
-      <Card intent="danger">
-        <div aria-hidden className="h-1 w-full bg-gradient-to-r from-rose-500 to-red-500" />
-        <div className="p-5">
-          <div className="flex items-start gap-3.5">
-            <Tile icon={Link2} tone="danger" size="lg" />
-            <div className="min-w-0 flex-1 pt-0.5">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
-                  {count}
-                </span>
-                <Chip intent="danger" dot>Auto-linked</Chip>
-              </div>
-              <p className="mt-1 text-pretty text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                {incidentLinking.body}
-              </p>
+      <div className="relative overflow-hidden rounded-[26px] border border-rose-200/10 bg-[#230D14] shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-rose-500/25 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose-300/40 to-transparent"
+        />
+        <div className="relative p-5">
+          <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-rose-200/50">
+            <Link2 className="h-3 w-3" aria-hidden />
+            Incident linking · auto-attached
+          </div>
+          <h3 className="mt-2 text-balance break-words text-[19px] font-extrabold leading-snug tracking-tight text-white">
+            {count} incidents{' '}
+            <span className="bg-gradient-to-r from-rose-300 to-orange-200 bg-clip-text text-transparent">
+              linked automatically
+            </span>
+          </h3>
+          <p className="mt-1.5 text-pretty break-words text-[12px] font-medium leading-relaxed text-rose-100/60">
+            {incidentLinking.body}
+          </p>
+
+          <div className="mt-4 flex items-center gap-2.5 rounded-2xl bg-rose-400/[0.12] px-3.5 py-3">
+            <span aria-hidden className="relative flex h-2 w-2 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-300 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-rose-300" />
+            </span>
+            <span className="min-w-0 flex-1 text-[11px] font-extrabold uppercase tracking-[0.12em] text-rose-100">
+              Escalates to supervisors in 60 seconds
+            </span>
+          </div>
+
+          <div className="mt-3 rounded-2xl bg-white/[0.06] p-4">
+            <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-200/60">
+              Incident timeline
+            </div>
+            <div className="mt-3 flex flex-col">
+              {incidents.map((inc, i) => {
+                const last = i === incidents.length - 1
+                const live = inc.tag === 'Live'
+                return (
+                  <div key={inc.title} className="flex gap-3">
+                    <div className="flex flex-col items-center">
+                      <span className="relative grid h-5 w-5 shrink-0 place-items-center">
+                        {live ? (
+                          <span aria-hidden className="absolute h-5 w-5 animate-ping rounded-full bg-rose-400/40" />
+                        ) : null}
+                        <span
+                          className={`h-2.5 w-2.5 rounded-full ${live ? 'bg-rose-300' : 'bg-rose-400/80'}`}
+                        />
+                      </span>
+                      {!last && <span aria-hidden className="my-1 w-px flex-1 bg-white/15" />}
+                    </div>
+                    <div className={`min-w-0 flex-1 ${last ? 'pb-0.5' : 'pb-4'}`}>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="min-w-0 truncate text-[13px] font-bold leading-snug tracking-tight text-white">
+                          {inc.title}
+                        </span>
+                        <span className="shrink-0 text-[10px] font-extrabold tabular-nums text-rose-100/45">
+                          {inc.time}
+                        </span>
+                      </div>
+                      <div className="mt-1 flex items-center justify-between gap-2">
+                        <span className="min-w-0 truncate text-[11px] font-medium text-rose-100/55">
+                          {inc.detail}
+                        </span>
+                        <span className="shrink-0 rounded-full bg-white/[0.07] px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.1em] text-rose-100/60">
+                          {inc.tag}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.035] p-4">
-            <Overline icon={Siren}>What supervisors received</Overline>
-            <div className="mt-2.5 space-y-2.5">
-              <div className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500/15">
-                  <UserRound className="h-3 w-3 text-rose-600" strokeWidth={2.4} aria-hidden />
-                </span>
-                <span className="min-w-0 flex-1 text-pretty text-[12.5px] font-semibold leading-snug text-[#0B211B]/80">
-                  {incidentLinking.paged}
-                </span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500/15">
-                  <PauseCircle className="h-3 w-3 text-rose-600" strokeWidth={2.4} aria-hidden />
-                </span>
-                <span className="min-w-0 flex-1 text-pretty text-[12.5px] font-semibold leading-snug text-rose-600/90">
+          <div className="mt-3 rounded-2xl bg-white/[0.06] p-4">
+            <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-200/60">
+              {incidentLinking.paged}
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <ChainNode label="Session record" state="linked" />
+              <ChainNode label="Care plan" state="paused" />
+              <ChainNode label="Audit trail" state="linked" />
+            </div>
+            <div className="mt-3 flex items-center gap-1.5 border-t border-white/[0.08] pt-2.5">
+              <Check className="h-3 w-3 shrink-0 text-emerald-400" strokeWidth={3.5} aria-hidden />
+              <span className="text-[10.5px] font-semibold text-rose-100/50">
+                Closed loop · every incident lands in all three records
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-2xl bg-rose-400/[0.1] p-4">
+            <div className="flex items-start gap-3">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-rose-400/[0.16]">
+                <Siren className="h-3.5 w-3.5 text-rose-200" strokeWidth={2.2} aria-hidden />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-200/60">
+                  Care plan impact
+                </div>
+                <p className="mt-1 break-words text-[12.5px] font-medium leading-relaxed text-white/85">
                   {incidentLinking.paused}
-                </span>
+                </p>
               </div>
             </div>
-          </div>
-
-          <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-rose-600/60">
-            <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
-            Closed loop · no manual follow-up needed
           </div>
         </div>
-      </Card>
+      </div>
     </motion.div>
   )
 }
