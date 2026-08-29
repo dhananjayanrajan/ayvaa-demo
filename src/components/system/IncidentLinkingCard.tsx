@@ -13,7 +13,12 @@ import {
 } from '@/components/phone/kit'
 import { incidentLinking } from '@/data/seed'
 
-export function IncidentLinkingCard() {
+interface IncidentLinkingCardProps {
+  delivered?: boolean
+}
+
+export function IncidentLinkingCard({ delivered = false }: IncidentLinkingCardProps) {
+  const count = delivered ? '4 incidents linked automatically' : incidentLinking.count
   return (
     <motion.div variants={rise}>
       <Card intent="danger">
@@ -22,7 +27,7 @@ export function IncidentLinkingCard() {
             <Tile icon={Link2} tone="danger" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">
-                {incidentLinking.count} incidents · auto-linked
+                {count} incidents · auto-linked
               </div>
               <p className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/60">{incidentLinking.body}</p>
             </div>

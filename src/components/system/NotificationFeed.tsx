@@ -7,6 +7,7 @@ import {
   ChevronDown,
   CreditCard,
   ShieldCheck,
+  Siren,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import {
@@ -41,18 +42,29 @@ const toneByTitle: Record<string, TileTone> = {
   'Receipt pushes': 'ink',
 }
 
-interface NotificationFeedProps {
-  notify: NotifyFn
+const liveAlert = {
+  id: 'live-alert',
+  time: '9:41 AM',
+  title: 'Incident alert',
+  body: 'Near fall · Mrs. Iyer · pushed to family, caregiver, partner, audit and pager',
+  state: 'sent',
 }
 
-export function NotificationFeed({ notify }: NotificationFeedProps) {
+interface NotificationFeedProps {
+  notify: NotifyFn
+  delivered?: boolean
+}
+
+export function NotificationFeed({ notify, delivered = false }: NotificationFeedProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const rows = delivered ? [liveAlert, ...autoNotifications] : autoNotifications
 
   return (
     <motion.div variants={rise}>
       <Card>
-        {autoNotifications.map((n, i) => {
-          const Icon = icons[n.title] ?? AlarmClock
+        {rows.map((n, i) => {
+          const Icon = n.title === 'Incident alert' ? Siren : (icons[n.title] ?? AlarmClock)
+          const tone = n.title === 'Incident alert' ? 'danger' : (toneByTitle[n.title] ?? 'success')
           const open = expandedId === n.id
           return (
             <div key={n.id}>
@@ -65,16 +77,20 @@ export function NotificationFeed({ notify }: NotificationFeedProps) {
                 }}
                 className="group flex w-full items-start gap-3 px-3.5 py-3 text-left"
               >
-                <Tile icon={Icon} tone={toneByTitle[n.title] ?? 'success'} />
+                <Tile icon={Icon} tone={tone} />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <TimeChip>{n.time}</TimeChip>
-                    <span className="truncate text-[13px] font-bold tracking-tight text-[#0B211B]">{n.title}</span>
+                    <span className="min-w-0 flex-1 break-words text-[13px] font-bold tracking-tight text-[#0B211B]">
+                      {n.title}
+                    </span>
                   </div>
-                  <div className="mt-1 line-clamp-2 text-xs font-medium leading-relaxed text-[#0B211B]/55">{n.body}</div>
+                  <div className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/55">{n.body}</div>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-1.5">
-                  <Chip intent="success" icon={Check}>Sent</Chip>
+                  <Chip intent={n.title === 'Incident alert' ? 'danger' : 'success'} icon={Check}>
+                    {n.title === 'Incident alert' ? 'Delivered' : 'Sent'}
+                  </Chip>
                   <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
                     <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/25" aria-hidden />
                   </motion.span>
