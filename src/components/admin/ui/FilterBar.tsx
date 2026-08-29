@@ -38,7 +38,7 @@ export function FilterBar({ value, onChange, layoutId = 'filter-bar', items = de
             )}
             <span
               className={cn(
-                'relative block truncate text-[10px] font-extrabold uppercase tracking-[0.08em]',
+                'relative block truncate text-[9px] font-extrabold uppercase tracking-[0.16em]',
                 active ? 'text-white' : 'text-[#0B211B]/45',
               )}
             >

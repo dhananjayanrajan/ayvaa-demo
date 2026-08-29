@@ -7,6 +7,11 @@ interface EmptyFilterStateProps {
 }
 
 export function EmptyFilterState({ filter }: EmptyFilterStateProps) {
+  const label =
+    filter === 'approved' ? 'No approved decisions' :
+    filter === 'rejected' ? 'No rejected decisions' :
+    'Nothing pending'
+
   return (
     <motion.div variants={rise}>
       <Card>
@@ -16,7 +21,7 @@ export function EmptyFilterState({ filter }: EmptyFilterStateProps) {
               <Inbox className="h-5 w-5" strokeWidth={2.2} aria-hidden />
             </span>
             <div className="min-w-0">
-              <p className="text-[13.5px] font-bold tracking-tight text-[#0B211B]/70">No {filter} decisions here</p>
+              <p className="text-[13.5px] font-bold tracking-tight text-[#0B211B]/70">{label}</p>
               <p className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/45">
                 Every decision lands in the audit log
               </p>

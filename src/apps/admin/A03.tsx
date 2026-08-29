@@ -21,10 +21,11 @@ import { EmptyFilterState } from '@/components/admin/approvals/EmptyFilterState'
 export function A03() {
   const { notify } = useDemo()
   const [filter, setFilter] = useState('awaiting')
-  const [list, setList] = useState<Approval[]>(approvals)
+  const [list] = useState<Approval[]>(approvals)
+  const [decisions, setDecisions] = useState<Record<string, 'approved' | 'rejected'>>({})
 
   const decide = (id: string, approve: boolean) => {
-    setList((prev) => prev.filter((a) => a.id !== id))
+    setDecisions((prev) => ({ ...prev, [id]: approve ? 'approved' : 'rejected' }))
     notify(
       approve
         ? { title: 'Professional approved', body: 'Decision recorded with your name and evidence', kind: 'ok' }
@@ -32,11 +33,20 @@ export function A03() {
     )
   }
 
+  const pendingCount = list.filter((a) => !decisions[a.id]).length
+
+  const visible = list.filter((a) => {
+    if (filter === 'awaiting') return !decisions[a.id]
+    if (filter === 'approved') return decisions[a.id] === 'approved'
+    if (filter === 'rejected') return decisions[a.id] === 'rejected'
+    return false
+  })
+
   return (
     <Screen>
       <AppBar
         title="Approve professionals"
-        subtitle={`Awaiting decisions · ${list.length}`}
+        subtitle={`Awaiting decisions · ${pendingCount}`}
         trailing={<AgentAvatar seed="ayvaa-approvals" size={42} />}
       />
       <BodyArea>
@@ -54,7 +64,7 @@ export function A03() {
                   Licence, identity and history are verified before you ever see the file.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
-                  <Chip intent="neutral" light>{list.length} awaiting</Chip>
+                  <Chip intent="neutral" light>{pendingCount} awaiting</Chip>
                   <Chip intent="success" light>Auto checks live</Chip>
                 </div>
               </Hero>
@@ -64,12 +74,16 @@ export function A03() {
               <FilterBar value={filter} onChange={setFilter} />
             </motion.div>
 
-            {filter === 'awaiting' &&
-              list.map((a) => (
-                <ApprovalCard key={a.id} a={a} onDecide={decide} />
-              ))}
+            {visible.map((a) => (
+              <ApprovalCard
+                key={a.id}
+                a={a}
+                onDecide={decide}
+                decision={decisions[a.id]}
+              />
+            ))}
 
-            {filter !== 'awaiting' && <EmptyFilterState filter={filter} />}
+            {visible.length === 0 && <EmptyFilterState filter={filter} />}
 
             <GovernanceCard />
 
