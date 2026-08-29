@@ -10,6 +10,7 @@ import { S02 } from './S02'
 import { S03 } from './S03'
 import { S04 } from './S04'
 import { S05 } from './S05'
+import { S06 } from './S06'
 import { cn } from '@/lib/utils'
 
 type Tab = { id: string; label: string; icon: LucideIcon }
@@ -136,6 +137,7 @@ export function SystemApp({ path }: { path: string }) {
                 {screen === 's03' && <S03 />}
                 {screen === 's04' && <S04 />}
                 {screen === 's05' && <S05 />}
+                {screen === 's06' && <S06 />}
               </motion.div>
             </AnimatePresence>
             <TabBar active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
