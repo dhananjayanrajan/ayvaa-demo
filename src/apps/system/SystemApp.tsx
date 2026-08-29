@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Activity, BellRing, Sparkles, Workflow } from 'lucide-react'
+import { Activity, BellRing, Database, Sparkles, Workflow } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhoneFrame } from '@/components/phone/PhoneFrame'
 import { Splash } from '@/components/phone/Splash'
@@ -8,6 +8,7 @@ import { useRouter } from '@/lib/router'
 import { S01 } from './S01'
 import { S02 } from './S02'
 import { S03 } from './S03'
+import { S04 } from './S04'
 import { cn } from '@/lib/utils'
 
 type Tab = { id: string; label: string; icon: LucideIcon }
@@ -16,6 +17,7 @@ const tabs: Tab[] = [
   { id: 's01', label: 'Trail', icon: Activity },
   { id: 's02', label: 'Dispatch', icon: Workflow },
   { id: 's03', label: 'Alerts', icon: BellRing },
+  { id: 's04', label: 'Ledger', icon: Database },
 ]
 
 function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
@@ -130,6 +132,7 @@ export function SystemApp({ path }: { path: string }) {
                 {screen === 's01' && <S01 />}
                 {screen === 's02' && <S02 />}
                 {screen === 's03' && <S03 />}
+                {screen === 's04' && <S04 />}
               </motion.div>
             </AnimatePresence>
             <TabBar active={screen} onSelect={(id) => navigate(`/system/${id}`)} />
