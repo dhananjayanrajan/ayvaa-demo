@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { ScrollText } from 'lucide-react'
+import { ChevronRight, FileClock, ScrollText, Wallet } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { Card, Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
+import { useRouter } from '@/lib/router'
 import { TransactionHero } from '@/components/system/TransactionHero'
 import { TransactionStepList } from '@/components/system/TransactionStepList'
 import { FailureDrillCard } from '@/components/system/FailureDrillCard'
@@ -50,6 +51,7 @@ const POST_COMMIT_COPY: Record<PostCommitState, { title: string; body: string; k
 
 export function S04() {
   const { notify, pushTrail } = useDemo()
+  const { navigate } = useRouter()
   const [phase, setPhase] = useState<TransactionPhase>('idle')
   const [failureAt, setFailureAt] = useState(0)
   const [writingStep, setWritingStep] = useState<number | null>(null)
@@ -282,6 +284,58 @@ export function S04() {
 
             {phase === 'rolled-back' && <RollbackTraceCard failedAt={failedAt} />}
             {postCommitState === 'failed' && <PostCommitRetryCard />}
+
+            <motion.div variants={rise}>
+              <Section label="Deeper records" trailing={<Chip intent="info">Audit tools</Chip>} />
+            </motion.div>
+
+            <motion.div variants={rise}>
+              <Card>
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: 0.985 }}
+                  onClick={() => navigate('/system/s06')}
+                  className="group flex w-full items-center gap-3 px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-500/40"
+                >
+                  <Tile icon={FileClock} tone="ink" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">
+                      Access log & diff viewer
+                    </span>
+                    <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/55">
+                      Every read, change and seal · proof you can replay
+                    </span>
+                  </span>
+                  <Chip intent="info" className="border-transparent">
+                    Open
+                  </Chip>
+                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#0B211B]/20 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600" aria-hidden />
+                </motion.button>
+
+                <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
+
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: 0.985 }}
+                  onClick={() => navigate('/system/s07')}
+                  className="group flex w-full items-center gap-3 px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-500/40"
+                >
+                  <Tile icon={Wallet} tone="ink" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">
+                      Payment status & refunds
+                    </span>
+                    <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/55">
+                      Capture, retry and the refund guarantee · live
+                    </span>
+                  </span>
+                  <Chip intent="info" className="border-transparent">
+                    Open
+                  </Chip>
+                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#0B211B]/20 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600" aria-hidden />
+                </motion.button>
+              </Card>
+            </motion.div>
 
             <motion.div variants={rise}>
               <Panel intent="info" className="flex items-start gap-3 p-4">
