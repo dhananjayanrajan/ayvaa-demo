@@ -10,8 +10,8 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
-import { accessEntries } from '@/data/systemAuditLog'
-import type { AccessEntry, AccessKind } from '@/data/systemAuditLog'
+import { accessEntries } from '@/data/system/auditLog'
+import type { AccessEntry, AccessKind } from '@/data/system/auditLog'
 import { cn } from '@/lib/utils'
 
 const KIND_ICON: Record<AccessKind, LucideIcon> = {

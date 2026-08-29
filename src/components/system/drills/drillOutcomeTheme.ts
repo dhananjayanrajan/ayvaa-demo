@@ -1,5 +1,5 @@
 import type { Intent, TileTone } from '@/components/phone/kit'
-import type { DrillOutcome } from '@/data/systemTransactions'
+import type { DrillOutcome } from '@/data/system/transactions'
 
 export type OutcomeTheme = {
   intent: Intent

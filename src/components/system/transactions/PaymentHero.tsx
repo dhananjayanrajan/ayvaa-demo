@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Landmark } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
-import { paymentMeta } from '@/data/systemPayments'
-import type { PaymentPhase } from '@/data/systemPayments'
+import { paymentMeta } from '@/data/system/payments'
+import type { PaymentPhase } from '@/data/system/payments'
 import { cn } from '@/lib/utils'
 
 type HeroTheme = {

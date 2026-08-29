@@ -14,12 +14,12 @@ import {
   rise,
   stagger,
 } from '@/components/phone/kit'
-import { autoNotifications } from '@/data/seed'
+import { autoNotifications } from '@/data/system/notifications'
 import { useDemo } from '@/lib/store'
 import { PushPreview } from '@/components/phone/PushPreview'
-import { NotificationFeed } from '@/components/system/NotificationFeed'
-import { IncidentLinkingCard } from '@/components/system/IncidentLinkingCard'
-import { EventFanOutCard } from '@/components/system/EventFanOutCard'
+import { NotificationFeed } from '@/components/system/notifications/NotificationFeed'
+import { IncidentLinkingCard } from '@/components/system/escalations/IncidentLinkingCard'
+import { EventFanOutCard } from '@/components/system/drills/EventFanOutCard'
 
 export function S03() {
   const { notify } = useDemo()

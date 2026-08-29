@@ -12,8 +12,8 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, LiveDot, Tile } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
-import { postCommitStep, transactionSteps } from '@/data/systemTransactions'
-import type { PostCommitState, StepVisual, TransactionStep } from '@/data/systemTransactions'
+import { postCommitStep, transactionSteps } from '@/data/system/transactions'
+import type { PostCommitState, StepVisual, TransactionStep } from '@/data/system/transactions'
 import { cn } from '@/lib/utils'
 
 const ICONS: Record<string, LucideIcon> = {

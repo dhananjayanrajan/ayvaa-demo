@@ -19,10 +19,10 @@ import {
   rise,
   stagger,
 } from '@/components/phone/kit'
-import { systemTrail } from '@/data/seed'
+import { systemTrail } from '@/data/system/executionTrail'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
-import { ExecutionTrail } from '@/components/system/ExecutionTrail'
+import { ExecutionTrail } from '@/components/system/execution/ExecutionTrail'
 
 const escalation: { label: string; sub: string }[] = [
   { label: 'Incident raised', sub: 'Detected automatically' },

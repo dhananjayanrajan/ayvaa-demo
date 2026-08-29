@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ShieldCheck, Undo2 } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
-import { transactionMeta, transactionSteps } from '@/data/systemTransactions'
+import { transactionMeta, transactionSteps } from '@/data/system/transactions'
 
 interface RollbackTraceCardProps {
   failedAt: number

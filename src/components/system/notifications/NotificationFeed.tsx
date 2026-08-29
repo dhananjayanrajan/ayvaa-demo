@@ -14,7 +14,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Expand, Tile, rise } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
-import { autoNotifications } from '@/data/seed'
+import { autoNotifications } from '@/data/system/notifications'
 import { PushPreview } from '@/components/phone/PushPreview'
 
 type NotifyFn = (payload: {

@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Chip, Meter } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
-import { transactionMeta } from '@/data/systemTransactions'
-import type { TransactionPhase } from '@/data/systemTransactions'
+import { transactionMeta } from '@/data/system/transactions'
+import type { TransactionPhase } from '@/data/system/transactions'
 import { cn } from '@/lib/utils'
 
 const TOTAL_WRITES = 4

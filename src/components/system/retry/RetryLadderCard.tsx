@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, Loader2 } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
-import { retryLadder } from '@/data/systemPayments'
+import { retryLadder } from '@/data/system/payments'
 import { cn } from '@/lib/utils'
 
 interface RetryLadderCardProps {

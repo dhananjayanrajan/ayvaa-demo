@@ -7,20 +7,20 @@ import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { TransactionHero } from '@/components/system/TransactionHero'
-import { TransactionStepList } from '@/components/system/TransactionStepList'
-import { FailureDrillCard } from '@/components/system/FailureDrillCard'
-import { FailureDrillSheet } from '@/components/system/FailureDrillSheet'
-import { RollbackTraceCard } from '@/components/system/RollbackTraceCard'
-import { PostCommitRetryCard } from '@/components/system/PostCommitRetryCard'
-import { transactionSteps } from '@/data/systemTransactions'
+import { TransactionHero } from '@/components/system/transactions/TransactionHero'
+import { TransactionStepList } from '@/components/system/transactions/TransactionStepList'
+import { FailureDrillCard } from '@/components/system/drills/FailureDrillCard'
+import { FailureDrillSheet } from '@/components/system/drills/FailureDrillSheet'
+import { RollbackTraceCard } from '@/components/system/transactions/RollbackTraceCard'
+import { PostCommitRetryCard } from '@/components/system/retry/PostCommitRetryCard'
+import { transactionSteps } from '@/data/system/transactions'
 import type {
   DrillRun,
   PostCommitState,
   StepVisual,
   TransactionPhase,
   TransactionStep,
-} from '@/data/systemTransactions'
+} from '@/data/system/transactions'
 
 const WRITE_MS = 850
 const FAIL_MS = 750

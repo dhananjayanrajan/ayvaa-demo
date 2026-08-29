@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { FlaskConical, Loader2, Play, RotateCcw, TriangleAlert } from 'lucide-react'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
 import { BottomSheet } from '@/components/admin/ui/BottomSheet'
-import { OUTCOME_THEMES } from '@/components/system/drillOutcomeTheme'
-import type { TransactionPhase, DrillRun } from '@/data/systemTransactions'
+import { OUTCOME_THEMES } from '@/components/system/drills/drillOutcomeTheme'
+import type { TransactionPhase, DrillRun } from '@/data/system/transactions'
 import { cn } from '@/lib/utils'
 
 const OPTIONS = [

@@ -7,12 +7,12 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { LiveFanOutCard } from '@/components/system/LiveFanOutCard'
-import { DeliveryHealthCard } from '@/components/system/DeliveryHealthCard'
-import { NotificationFeed } from '@/components/system/NotificationFeed'
-import { IncidentLinkingCard } from '@/components/system/IncidentLinkingCard'
-import { IncidentTimelineCard } from '@/components/system/IncidentTimelineCard'
-import { SupervisorEscalationCard } from '@/components/system/SupervisorEscalationCard'
+import { LiveFanOutCard } from '@/components/system/drills/LiveFanOutCard'
+import { DeliveryHealthCard } from '@/components/system/drills/DeliveryHealthCard'
+import { NotificationFeed } from '@/components/system/notifications/NotificationFeed'
+import { IncidentLinkingCard } from '@/components/system/escalations/IncidentLinkingCard'
+import { IncidentTimelineCard } from '@/components/system/escalations/IncidentTimelineCard'
+import { SupervisorEscalationCard } from '@/components/system/escalations/SupervisorEscalationCard'
 
 const FANOUT_MS = 5 * 420 + 260
 

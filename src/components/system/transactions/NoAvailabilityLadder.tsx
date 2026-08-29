@@ -13,8 +13,8 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Tile, TimeChip } from '@/components/phone/kit'
-import { ladderSteps } from '@/data/systemRecheck'
-import type { LadderPhase } from '@/data/systemRecheck'
+import { ladderSteps } from '@/data/system/recheck'
+import type { LadderPhase } from '@/data/system/recheck'
 import { cn } from '@/lib/utils'
 
 const STEP_ICONS: LucideIcon[] = [Hourglass, Send, Route, Users]

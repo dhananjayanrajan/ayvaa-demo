@@ -11,8 +11,8 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
-import { probeSteps, recheckSubject } from '@/data/systemRecheck'
-import type { RecheckPhase } from '@/data/systemRecheck'
+import { probeSteps, recheckSubject } from '@/data/system/recheck'
+import type { RecheckPhase } from '@/data/system/recheck'
 import { cn } from '@/lib/utils'
 
 const PROBE_ICONS: Record<string, LucideIcon> = {

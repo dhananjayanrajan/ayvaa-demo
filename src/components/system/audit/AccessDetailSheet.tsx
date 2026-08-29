@@ -19,7 +19,7 @@ import { Overline } from '@/components/admin/ui/Overline'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
-import type { AccessEntry, AccessKind } from '@/data/systemAuditLog'
+import type { AccessEntry, AccessKind } from '@/data/system/auditLog'
 import { cn } from '@/lib/utils'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void

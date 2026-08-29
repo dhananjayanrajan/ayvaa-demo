@@ -6,12 +6,12 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, LiveChip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
-import { RecheckHero } from '@/components/system/RecheckHero'
-import { RecheckResolutionCard } from '@/components/system/RecheckResolutionCard'
-import { ReversedOfferTraceCard } from '@/components/system/ReversedOfferTraceCard'
-import { NoAvailabilityLadder } from '@/components/system/NoAvailabilityLadder'
-import { recheckSubject } from '@/data/systemRecheck'
-import type { LadderPhase, RecheckPhase } from '@/data/systemRecheck'
+import { RecheckHero } from '@/components/system/recheck/RecheckHero'
+import { RecheckResolutionCard } from '@/components/system/recheck/RecheckResolutionCard'
+import { ReversedOfferTraceCard } from '@/components/system/transactions/ReversedOfferTraceCard'
+import { NoAvailabilityLadder } from '@/components/system/transactions/NoAvailabilityLadder'
+import { recheckSubject } from '@/data/system/recheck'
+import type { LadderPhase, RecheckPhase } from '@/data/system/recheck'
 
 const PROBE_MS = 780
 const LADDER_MS = 950

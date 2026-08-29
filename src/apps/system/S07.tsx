@@ -8,12 +8,12 @@ import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
-import { PaymentHero } from '@/components/system/PaymentHero'
-import { CaptureChainCard } from '@/components/system/CaptureChainCard'
-import { RetryLadderCard } from '@/components/system/RetryLadderCard'
-import { RefundCard } from '@/components/system/RefundCard'
-import { paymentMeta, retryLadder } from '@/data/systemPayments'
-import type { PaymentPhase } from '@/data/systemPayments'
+import { PaymentHero } from '@/components/system/transactions/PaymentHero'
+import { CaptureChainCard } from '@/components/system/audit/CaptureChainCard'
+import { RetryLadderCard } from '@/components/system/retry/RetryLadderCard'
+import { RefundCard } from '@/components/system/transactions/RefundCard'
+import { paymentMeta, retryLadder } from '@/data/system/payments'
+import type { PaymentPhase } from '@/data/system/payments'
 
 const STEP_MS = 650
 const RETRY_MS = 900

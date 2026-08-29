@@ -17,7 +17,7 @@ import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { Overline } from '@/components/admin/ui/Overline'
-import { scheduleDiff } from '@/data/systemAuditLog'
+import { scheduleDiff } from '@/data/system/auditLog'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
 

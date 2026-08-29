@@ -7,8 +7,8 @@ import {
 } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
 import { auditEntries } from '@/data/seed'
-import { chainNode } from '@/data/systemAuditLog'
-import type { ChainPhase } from '@/components/system/AuditHero'
+import { chainNode } from '@/data/system/auditLog'
+import type { ChainPhase } from '@/components/system/audit/AuditHero'
 import { cn } from '@/lib/utils'
 
 const HASH_FRAGMENTS = ['a94f…c31d', '7b2e…9a08', 'e1c5…44f7', '39d8…b6a2', 'c07a…18e9']

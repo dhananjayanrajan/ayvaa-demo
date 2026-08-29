@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ScrollText, UserCheck, Users } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
-import { reversalEvents } from '@/data/systemRecheck'
+import { reversalEvents } from '@/data/system/recheck'
 
 interface ReversedOfferTraceCardProps {
   onEventTap: (title: string, body: string) => void

@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Chip } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
-import { recheckSubject } from '@/data/systemRecheck'
-import type { RecheckPhase } from '@/data/systemRecheck'
+import { recheckSubject } from '@/data/system/recheck'
+import type { RecheckPhase } from '@/data/system/recheck'
 import { cn } from '@/lib/utils'
 
 type HeroTheme = {
