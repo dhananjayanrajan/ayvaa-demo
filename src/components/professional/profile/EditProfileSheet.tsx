@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { Check, Loader2, Pencil } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { SheetShell } from '@/components/professional/payouts/SheetShell'
-import { cn } from '@/lib/utils'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
 
 type Status = 'idle' | 'saving' | 'saved'
 
@@ -56,29 +56,15 @@ export function EditProfileSheet({ name, role, onClose, onSave }: Props) {
         subtitle="Families see these on your public card"
         onClose={onClose}
         footer={
-          <button
-            type="button"
-            onClick={save}
-            disabled={!dirty || status !== 'idle'}
-            aria-disabled={!dirty || status !== 'idle'}
-            className={cn(
-              'flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-colors duration-300',
-              status === 'saved'
-                ? 'bg-emerald-500 shadow-[0_18px_36px_-18px_rgba(16,185,129,0.85)]'
-                : status === 'saving'
-                  ? 'cursor-wait bg-[#0B211B]/[0.25]'
-                  : dirty
-                    ? 'bg-gradient-to-r from-blue-600 to-sky-500 shadow-[0_18px_36px_-18px_rgba(37,99,235,0.6)]'
-                    : 'cursor-not-allowed bg-[#0B211B]/[0.15] text-white/60',
-            )}
-          >
-            {status === 'saving' ? (
-              <Loader2 className="h-4 w-4 shrink-0 animate-spin text-white/70" strokeWidth={2.4} aria-hidden />
-            ) : status === 'saved' ? (
-              <Check className="h-4 w-4 shrink-0" strokeWidth={2.8} aria-hidden />
-            ) : null}
-            {status === 'saving' ? 'Saving…' : status === 'saved' ? 'Profile updated' : 'Save changes'}
-          </button>
+          <LifecycleButton
+            phase={status}
+            tone="accent"
+            gated={!dirty}
+            idleLabel="Save changes"
+            workingLabel="Saving…"
+            doneLabel="Profile updated"
+            onPress={save}
+          />
         }
       >
         <div className="flex flex-col gap-3.5">

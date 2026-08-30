@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { Award, Check, FileImage, FileText, Loader2, Upload } from 'lucide-react'
-import { SheetShell } from '@/components/professional/payouts/SheetShell'
+import { Award, Check, FileImage, FileText, Upload } from 'lucide-react'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton, CtaNote } from '@/components/phone/LifecycleButton'
 import { cn } from '@/lib/utils'
 
 type Status = 'idle' | 'verifying' | 'added'
@@ -64,40 +65,17 @@ export function CertificationUploadSheet({ category, onClose, onAdded }: Props) 
         onClose={onClose}
         footer={
           <div className="flex flex-col gap-2.5">
-            <button
-              type="button"
-              onClick={verify}
-              disabled={!file || status !== 'idle'}
-              aria-disabled={!file || status !== 'idle'}
-              className={cn(
-                'flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-colors duration-300',
-                status === 'added'
-                  ? 'bg-emerald-500 shadow-[0_18px_36px_-18px_rgba(16,185,129,0.85)]'
-                  : status === 'verifying'
-                    ? 'cursor-wait bg-[#0B211B]/[0.25]'
-                    : file
-                      ? 'bg-gradient-to-r from-blue-600 to-sky-500 shadow-[0_18px_36px_-18px_rgba(37,99,235,0.6)]'
-                      : 'cursor-not-allowed bg-[#0B211B]/[0.15] text-white/60',
-              )}
-            >
-              {status === 'verifying' ? (
-                <Loader2 className="h-4 w-4 shrink-0 animate-spin text-white/70" strokeWidth={2.4} aria-hidden />
-              ) : status === 'added' ? (
-                <Check className="h-4 w-4 shrink-0" strokeWidth={2.8} aria-hidden />
-              ) : (
-                <Upload className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-              )}
-              {status === 'verifying'
-                ? 'Verifying with Ayvaa…'
-                : status === 'added'
-                  ? 'Submitted for review'
-                  : file
-                    ? 'Verify certification'
-                    : 'Choose a file first'}
-            </button>
-            <p className="text-center text-[10.5px] font-semibold text-[#0B211B]/45">
-              Photo or PDF. Documents stay sealed with Ayvaa.
-            </p>
+            <LifecycleButton
+              phase={status}
+              tone="accent"
+              idleIcon={Upload}
+              gated={!file}
+              idleLabel={file ? 'Verify certification' : 'Choose a file first'}
+              workingLabel="Verifying with Ayvaa…"
+              doneLabel="Submitted for review"
+              onPress={verify}
+            />
+            <CtaNote className="font-semibold">Photo or PDF. Documents stay sealed with Ayvaa.</CtaNote>
           </div>
         }
       >
