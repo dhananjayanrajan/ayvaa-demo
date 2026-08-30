@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { CalendarClock, ChevronDown, FileText, Phone } from 'lucide-react'
 import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
 import { Overline } from '@/components/admin/ui/Overline'
-import { TonalButton } from '@/components/admin/ui/TonalButton'
+import { StaticButton } from '@/components/phone/LifecycleButton'
 import { CycleStep } from '@/components/admin/consent/CycleStep'
 import { consentReview } from '@/data/seed'
 
@@ -136,20 +136,20 @@ export function DueReviewCard({ notify, onViewRecord }: DueReviewCardProps) {
           </AnimatePresence>
 
           <div className="mt-4 flex gap-2.5">
-            <TonalButton
+            <StaticButton
               tone="neutral"
               icon={FileText}
               onClick={onViewRecord}
             >
               View record
-            </TonalButton>
-            <TonalButton
-              tone="primary"
+            </StaticButton>
+            <StaticButton
+              tone="success"
               icon={Phone}
               onClick={() => notify({ title: 'Guardian called', body: 'Priya Sharma reached · review scheduled', kind: 'ok' })}
             >
               Call guardian
-            </TonalButton>
+            </StaticButton>
           </div>
         </div>
       </Card>

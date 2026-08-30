@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
-import { Check, Loader2, Share2 } from 'lucide-react'
+import { Share2 } from 'lucide-react'
+import { IconLifecycleButton } from '@/components/phone/LifecycleButton'
 import { summaryShareText } from '@/data/patientVisitSummary'
 import { useDemo } from '@/lib/store'
-import { cn } from '@/lib/utils'
-
-type Phase = 'idle' | 'working' | 'done'
 
 export function ShareSummaryButton() {
   const { notify } = useDemo()
-  const [phase, setPhase] = useState<Phase>('idle')
+  const [phase, setPhase] = useState<'idle' | 'working' | 'done'>('idle')
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
   useEffect(() => () => timers.current.forEach(clearTimeout), [])
 
@@ -27,19 +24,12 @@ export function ShareSummaryButton() {
   }
 
   return (
-    <motion.button
-      type="button"
-      whileTap={{ scale: 0.92 }}
-      onClick={share}
-      aria-label="Share visit summary"
-      className={cn(
-        'grid h-10 w-10 shrink-0 place-items-center rounded-full transition-colors',
-        phase === 'done' ? 'bg-emerald-500/[0.14] text-emerald-700' : 'bg-[#0B211B]/[0.05] text-[#0B211B]/60',
-      )}
-    >
-      {phase === 'idle' && <Share2 className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />}
-      {phase === 'working' && <Loader2 className="h-[18px] w-[18px] animate-spin" aria-hidden />}
-      {phase === 'done' && <Check className="h-[18px] w-[18px]" strokeWidth={2.6} aria-hidden />}
-    </motion.button>
+    <IconLifecycleButton
+      phase={phase}
+      icon={Share2}
+      revert
+      ariaLabel="Share visit summary"
+      onPress={share}
+    />
   )
 }

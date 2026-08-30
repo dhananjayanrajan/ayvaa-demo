@@ -1,37 +1,15 @@
-import { motion } from 'motion/react'
-import { Check, Loader2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
 
 export type CreateState = 'idle' | 'working' | 'done'
 
-export function CreateButton({
-  state,
-  onPress,
-}: {
-  state: CreateState
-  onPress: () => void
-}) {
-  const working = state === 'working'
-  const done = state === 'done'
+export function CreateButton({ state, onPress }: { state: CreateState; onPress: () => void }) {
   return (
-    <motion.button
-      type="button"
-      whileTap={state === 'idle' ? { scale: 0.97 } : undefined}
-      onClick={onPress}
-      disabled={state !== 'idle'}
-      aria-disabled={state !== 'idle'}
-      className={cn(
-        'flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-extrabold tracking-tight transition-colors duration-300',
-        done
-          ? 'bg-emerald-500 text-white shadow-[0_18px_36px_-18px_rgba(16,185,129,0.8)]'
-          : working
-            ? 'cursor-wait bg-emerald-600/60 text-white/80'
-            : 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]',
-      )}
-    >
-      {working && <Loader2 className="h-4 w-4 shrink-0 animate-spin" aria-hidden />}
-      {done && <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />}
-      {state === 'idle' ? 'Create my account' : working ? 'Creating your account' : 'Account created'}
-    </motion.button>
+    <LifecycleButton
+      phase={state}
+      idleLabel="Create my account"
+      workingLabel="Creating your account"
+      doneLabel="Account created"
+      onPress={onPress}
+    />
   )
 }
