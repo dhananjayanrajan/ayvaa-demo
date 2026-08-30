@@ -242,11 +242,55 @@ export function Hero({ className, children }: { className?: string; children: Re
   )
 }
 
-export function Kicker({ children }: { children: ReactNode }) {
+export function Kicker({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
+    <div
+      className={cn(
+        'flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50',
+        className,
+      )}
+    >
       {children}
     </div>
+  )
+}
+
+export type BadgeTone = 'amber' | 'emerald' | 'rose' | 'neutral' | 'sky'
+
+export function MiniBadge({
+  icon: Icon,
+  children,
+  tone = 'neutral',
+  dark = false,
+  className,
+}: {
+  icon: LucideIcon
+  children: ReactNode
+  tone?: BadgeTone
+  dark?: boolean
+  className?: string
+}) {
+  const tint = dark
+    ? {
+        amber: 'bg-amber-400/[0.15] text-amber-200',
+        emerald: 'bg-emerald-400/[0.15] text-emerald-200',
+        rose: 'bg-rose-400/[0.15] text-rose-200',
+        neutral: 'bg-white/[0.08] text-white/70',
+        sky: 'bg-sky-400/[0.15] text-sky-200',
+      }[tone]
+    : {
+        amber: 'bg-amber-500/[0.12] text-amber-700',
+        emerald: 'bg-emerald-500/[0.12] text-emerald-700',
+        rose: 'bg-rose-500/[0.12] text-rose-700',
+        neutral: 'bg-[#0B211B]/[0.05] text-[#0B211B]/55',
+        sky: 'bg-sky-500/[0.12] text-sky-700',
+      }[tone]
+
+  return (
+    <span className={cn('inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5', tint, className)}>
+      <Icon className="h-3 w-3" strokeWidth={2.4} aria-hidden />
+      <span className="text-[9px] font-extrabold uppercase tracking-[0.12em]">{children}</span>
+    </span>
   )
 }
 

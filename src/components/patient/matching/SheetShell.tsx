@@ -6,14 +6,15 @@ interface SheetShellProps {
   icon: LucideIcon
   title: string
   subtitle: string
-  tone?: 'info' | 'success'
+  tone?: 'info' | 'success' | 'danger'
   onClose: () => void
   footer: ReactNode
   children: ReactNode
 }
 
 export function SheetShell({ icon: Icon, title, subtitle, tone = 'info', onClose, footer, children }: SheetShellProps) {
-  const tint = tone === 'success' ? 'bg-emerald-500/[0.14] text-emerald-700' : 'bg-sky-500/[0.12] text-sky-700'
+  const tint =
+    tone === 'success' ? 'bg-emerald-500/[0.14] text-emerald-700' : tone === 'danger' ? 'bg-rose-500/[0.12] text-rose-700' : 'bg-sky-500/[0.12] text-sky-700'
   return (
     <motion.div
       initial={{ y: '100%' }}
