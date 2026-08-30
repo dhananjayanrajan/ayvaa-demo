@@ -1,5 +1,6 @@
 import { BadgeCheck } from 'lucide-react'
 import { Card, Tile } from '@/components/phone/kit'
+import { FactRows } from '@/components/patient/plan/FactRows'
 import { RATED_VISIT } from '@/data/patientRating'
 
 const recordRows = [
@@ -25,15 +26,8 @@ export function VisitRecordCard() {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-col gap-2.5">
-          {recordRows.map((row) => (
-            <div key={row.label} className="flex items-baseline justify-between gap-3">
-              <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40">
-                {row.label}
-              </span>
-              <span className="text-right text-[12.5px] font-bold tabular-nums text-[#0B211B]/80">{row.value}</span>
-            </div>
-          ))}
+        <div className="mt-4">
+          <FactRows rows={recordRows} tone="light" />
         </div>
       </div>
     </Card>
