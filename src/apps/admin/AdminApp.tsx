@@ -23,6 +23,7 @@ import { A14 } from './A14'
 import { A15 } from './A15'
 import { A16 } from './A16'
 import { A17 } from './A17'
+import { A18 } from './A18'
 import { cn } from '@/lib/utils'
 
 type Tab = { id: string; label: string; icon: LucideIcon }
@@ -165,6 +166,7 @@ export function AdminApp({ path }: { path: string }) {
                   {screen === 'a15' && <A15 />}
                   {screen === 'a16' && <A16 />}
                   {screen === 'a17' && <A17 />}
+                  {screen === 'a18' && <A18 />}
                 </motion.div>
               </AnimatePresence>
               {withNav.includes(screen) && (
