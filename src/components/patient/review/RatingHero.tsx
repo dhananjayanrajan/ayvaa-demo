@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ChevronRight, Star } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { RATED_VISIT, ratingLabel } from '@/data/patientRating'
 
 interface RatingHeroProps {
@@ -15,35 +16,21 @@ interface RatingHeroProps {
 export function RatingHero({ submitted, stars, highlightCount, note, onOpenSheet }: RatingHeroProps) {
   return (
     <AccentHero tone={submitted ? 'emerald' : 'amber'}>
-      <div className="flex items-center justify-between gap-3">
-        <span
-          className={
-            submitted
-              ? 'text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50'
-              : 'text-[9px] font-extrabold uppercase tracking-[0.22em] text-amber-200/50'
-          }
-        >
-          Private feedback
-        </span>
-        {submitted ? (
-          <StatusPill tone="emerald" label="Sealed" />
-        ) : (
-          <StatusPill tone="amber" label="Awaiting rating" live />
-        )}
-      </div>
+      <HeroTopRow
+        label="Private feedback"
+        labelClass={submitted ? 'text-emerald-200/50' : 'text-amber-200/50'}
+        trailing={
+          submitted ? (
+            <StatusPill tone="emerald" label="Sealed" />
+          ) : (
+            <StatusPill tone="amber" label="Awaiting rating" live />
+          )
+        }
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
         How was {RATED_VISIT.caregiver.first}&apos;s visit{' '}
-        <span
-          className={
-            submitted
-              ? 'bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent'
-              : 'bg-gradient-to-r from-amber-300 to-orange-200 bg-clip-text text-transparent'
-          }
-        >
-          today
-        </span>
-        ?
+        <HeroHighlight tone={submitted ? 'emerald' : 'amber'}>today</HeroHighlight>?
       </h2>
       <p className="mt-1 text-[11.5px] font-semibold leading-snug text-white/55">
         {submitted
@@ -52,18 +39,8 @@ export function RatingHero({ submitted, stars, highlightCount, note, onOpenSheet
       </p>
 
       <div className="mt-4 grid grid-cols-2 gap-2">
-        <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-          <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-white/40">Visit</div>
-          <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">
-            {RATED_VISIT.dateLabel}
-          </div>
-        </div>
-        <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-          <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-white/40">Caregiver</div>
-          <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none text-white">
-            {RATED_VISIT.caregiver.first}
-          </div>
-        </div>
+        <StatCell label="Visit" value={RATED_VISIT.dateLabel} labelClass="text-white/40" />
+        <StatCell label="Caregiver" value={RATED_VISIT.caregiver.first} labelClass="text-white/40" />
       </div>
 
       {submitted ? (

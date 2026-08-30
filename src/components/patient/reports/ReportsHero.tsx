@@ -1,5 +1,6 @@
 import { Lock } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { REPORTS, totalReportedVisits } from '@/data/patientReports'
 import { cn } from '@/lib/utils'
 
@@ -8,19 +9,18 @@ export function ReportsHero() {
 
   return (
     <AccentHero tone="emerald">
-      <div className="flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
-          <Lock className="h-3 w-3" aria-hidden />
-          Sealed archive
-        </span>
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">
-          {REPORTS.length} reports
-        </span>
-      </div>
+      <HeroTopRow
+        icon={Lock}
+        label="Sealed archive"
+        trailing={
+          <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">
+            {REPORTS.length} reports
+          </span>
+        }
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        Three months,{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">steadily better</span>
+        Three months, <HeroHighlight>steadily better</HeroHighlight>
       </h2>
       <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">
         Written by the caregiver, sealed when written, never edited after.

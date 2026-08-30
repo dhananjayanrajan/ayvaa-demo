@@ -2,6 +2,7 @@ import { BadgeCheck, Stethoscope } from 'lucide-react'
 import { Ring } from '@/components/phone/kit'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow } from '@/components/phone/HeroCells'
 import { initialsOf, type OfferState } from '@/data/patientMatching'
 
 interface ProfileHeroProps {
@@ -19,16 +20,19 @@ export function ProfileHero({ name, role, years, rating, visits, onTime, offer }
 
   return (
     <AccentHero tone={tone}>
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-white/50">Ayvaa verified caregiver</span>
-        {offer === 'accepted' ? (
-          <StatusPill tone="emerald" label="Accepted" />
-        ) : offer === 'pending' ? (
-          <StatusPill tone="amber" label="Offer out" live />
-        ) : (
-          <StatusPill tone="sky" label="Available" />
-        )}
-      </div>
+      <HeroTopRow
+        label="Ayvaa verified caregiver"
+        labelClass="text-white/50"
+        trailing={
+          offer === 'accepted' ? (
+            <StatusPill tone="emerald" label="Accepted" />
+          ) : offer === 'pending' ? (
+            <StatusPill tone="amber" label="Offer out" live />
+          ) : (
+            <StatusPill tone="sky" label="Available" />
+          )
+        }
+      />
 
       <div className="mt-4 flex items-start gap-4">
         <div className="relative shrink-0">
