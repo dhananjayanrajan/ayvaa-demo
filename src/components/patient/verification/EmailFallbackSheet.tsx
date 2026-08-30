@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Mail } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { EmailCodeButton } from './EmailCodeButton'
 import type { EmailSendState } from './EmailCodeButton'
 import { emailFallbackSubtitle } from '@/data/patientVerification'
@@ -21,7 +21,7 @@ export function EmailFallbackSheet({
   return (
     <SheetShell
       icon={Mail}
-      tileTone={sendState === 'done' ? 'success' : 'info'}
+      tone={sendState === 'done' ? 'success' : 'info'}
       title={sendState === 'done' ? 'Code sent by email' : 'Get the code by email'}
       subtitle={sendState === 'done' ? 'Check your inbox for the six digits' : emailFallbackSubtitle}
       onClose={onClose}

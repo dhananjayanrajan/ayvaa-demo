@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Check, Loader2, ReceiptText } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { FactRows } from '@/components/patient/plan/FactRows'
 import { payment, paymentBreakdown, paymentMethodLabel } from '@/data/patientVisitSummary'
 import { useDemo } from '@/lib/store'

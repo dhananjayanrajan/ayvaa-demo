@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { BadgeCheck, Check, Loader2, Quote, Scale, ShieldCheck, Star } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { RATED_VISIT, buildFeedbackRows, ratingLabel } from '@/data/patientRating'
 import { StarPicker } from './StarPicker'
 import { HighlightTags } from './HighlightTags'

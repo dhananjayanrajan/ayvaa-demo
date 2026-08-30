@@ -20,7 +20,7 @@ import { StatusPill } from '@/components/patient/matching/StatusPill'
 import { CredentialCard } from '@/components/patient/onboarding/CredentialCard'
 import { CredentialRow } from '@/components/patient/onboarding/CredentialRow'
 import { SectionHeader } from '@/components/patient/onboarding/SectionHeader'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
@@ -394,7 +394,7 @@ export function A13() {
           <SheetShell
             key="suspend-sheet"
             icon={ShieldAlert}
-            tileTone="info"
+            tone="info"
             title="Suspend account"
             subtitle={user.name}
             onClose={() => setSuspendSheetOpen(false)}

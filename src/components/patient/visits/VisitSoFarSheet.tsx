@@ -1,5 +1,5 @@
 import { Clock } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { LIVE_VISIT, formatElapsed, type LedgerRow } from '@/data/patientLiveVisit'
 import { cn } from '@/lib/utils'
 

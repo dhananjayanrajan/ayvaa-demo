@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Lock, MessageSquare, Send } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { RX_MESSAGES } from '@/data/patientPrescriptions'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'

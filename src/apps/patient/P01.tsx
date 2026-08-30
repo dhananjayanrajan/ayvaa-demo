@@ -17,7 +17,7 @@ import { ConsentBlock } from '@/components/patient/onboarding/ConsentBlock'
 import { PrimaryAction } from '@/components/patient/onboarding/PrimaryAction'
 import { SignInAction } from '@/components/patient/onboarding/SignInAction'
 import { AftercarePanel } from '@/components/patient/onboarding/AftercarePanel'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { ReviewSummary } from '@/components/patient/onboarding/ReviewSummary'
 import { CreateButton } from '@/components/patient/onboarding/CreateButton'
 import type { CreateState } from '@/components/patient/onboarding/CreateButton'
@@ -230,7 +230,7 @@ export function P01() {
           <SheetShell
             key="sheet"
             icon={sheetHeader.icon}
-            tileTone={sheetHeader.tileTone}
+            tone={sheetHeader.tileTone}
             title={sheetHeader.title}
             subtitle={sheetHeader.subtitle}
             onClose={closeSheet}

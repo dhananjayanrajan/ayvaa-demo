@@ -1,5 +1,5 @@
 import { ScrollText } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { consentScopeRows } from '@/data/patientReview'
 import { useRouter } from '@/lib/router'
 

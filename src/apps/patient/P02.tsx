@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { CalendarDays, CheckCircle2, MailCheck, ReceiptText } from 'lucide-react'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Section, rise, stagger } from '@/components/phone/kit'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { DigestHero } from '@/components/patient/auth/DigestHero'
 import { BiometricUnlock } from '@/components/patient/auth/BiometricUnlock'
 import type { ScanState } from '@/components/patient/auth/BiometricUnlock'
@@ -217,7 +217,7 @@ export function P02() {
           <SheetShell
             key="digest-sheet"
             icon={digestSheet.icon}
-            tileTone={digestSheet.tileTone}
+            tone={digestSheet.tileTone}
             title={digestSheet.title}
             subtitle={digestSheet.subtitle}
             onClose={closeDigest}
@@ -265,7 +265,7 @@ export function P02() {
           <SheetShell
             key="forgot-sheet"
             icon={MailCheck}
-            tileTone={sendState === 'done' ? 'success' : 'info'}
+            tone={sendState === 'done' ? 'success' : 'info'}
             title={sendState === 'done' ? 'Reset link sent' : 'Reset your password'}
             subtitle={
               sendState === 'done'

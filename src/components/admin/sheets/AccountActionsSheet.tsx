@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { AlertTriangle, MapPin, SlidersHorizontal } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
-import { BottomSheet } from '@/components/admin/ui/BottomSheet'
+import { BottomSheet } from '@/components/phone/SheetShell'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void
 

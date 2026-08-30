@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { BadgeCheck, Bell, CalendarDays, Check, ChevronRight, Clock, Eye, HeartPulse, Loader2, MessageSquare, Package, Pill, RefreshCw, ShoppingCart } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { FactRows } from '@/components/patient/plan/FactRows'
 import { Card, Meter, MiniBadge } from '@/components/phone/kit'
 import type { Prescription } from '@/data/patientPrescriptions'

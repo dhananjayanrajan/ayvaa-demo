@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Eye, PenLine, ScrollText, ShieldAlert, ShieldCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { TimeChip } from '@/components/phone/kit'
 import {
   AUDIT_FILTERS,

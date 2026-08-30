@@ -25,7 +25,7 @@ import { PhotoViewSheet } from '@/components/admin/sheets/PhotoViewSheet'
 import { EscalateSheet } from '@/components/admin/sheets/EscalateSheet'
 import { CloseSheet } from '@/components/admin/sheets/CloseSheet'
 import { TonalButton } from '@/components/admin/ui/TonalButton'
-import { BottomSheet } from '@/components/admin/ui/BottomSheet'
+import { BottomSheet } from '@/components/phone/SheetShell'
 
 type Sheet = 'none' | 'photo' | 'escalate' | 'close'
 
