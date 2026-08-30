@@ -154,3 +154,9 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - No rewires: GuaranteesCard, NextStepsCard (info-row lists already on kit Tile+Chip), SafetyCard (kit Expand with distinct compact header), SentCard (composition of consolidated siblings), CreateAccountCard (navigator, ListRow pass), PasswordCard (CredentialRow composition, F10 territory)
 - B9 patient sweep totals: 5 new canonicals (ExpandRow, QuotePanel + prior HeroCells/LifecycleButton family adoption), 20+ hand-rolled twins collapsed across visits, review, meds, dashboard, reports, recovery
 - Verified: npx tsc --noEmit clean at every stage gate
+
+## B10 (part 1) — Partner cards
+
+- PartnerPatientHero: last partner emerald hand-rolled hero shell → kit Hero (hairline added per shell unification); useCountUp hook and four-band progress theme preserved as genuinely custom
+- Kept with reasons: PartnerCarePathway (state-machine journey accordion with connector rails), PartnerRecoveryTrajectory (animated SVG chart with play-state, F8-adjacent), StaffList (variant-mode avatar list; chevron-translate violation flagged for ListRow pass), PartnerBillingCard + PartnerReferralCard (navigator cards, ListRow pass; PartnerReferralCard whileHover scale flagged for F4 sweep)
+- Verified: npx tsc --noEmit clean
