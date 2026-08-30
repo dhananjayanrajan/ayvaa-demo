@@ -2,12 +2,13 @@ import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type PillTone = 'sky' | 'amber' | 'emerald'
+type PillTone = 'sky' | 'amber' | 'emerald' | 'rose'
 
 const pillTones: Record<PillTone, { bg: string; text: string; dot: string }> = {
   sky: { bg: 'bg-sky-300', text: 'text-[#082535]', dot: 'bg-[#082535]/70' },
   amber: { bg: 'bg-amber-300', text: 'text-[#2B1D05]', dot: 'bg-[#2B1D05]/70' },
   emerald: { bg: 'bg-emerald-300', text: 'text-[#04241A]', dot: 'bg-[#04241A]/70' },
+  rose: { bg: 'bg-rose-300', text: 'text-[#2B0813]', dot: 'bg-[#2B0813]/70' },
 }
 
 interface StatusPillProps {
@@ -37,8 +38,12 @@ export function StatusPill({ tone, label, live = false, icon, className }: Statu
           transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
-      {icon && <Icon className="h-3 w-3" strokeWidth={3} aria-hidden />}
+      {icon && <PillIcon Icon={icon} />}
       {label}
     </span>
   )
+}
+
+function PillIcon({ Icon }: { Icon: LucideIcon }) {
+  return <Icon className="h-3 w-3" strokeWidth={3} aria-hidden />
 }
