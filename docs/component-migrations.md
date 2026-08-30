@@ -105,3 +105,19 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - professional/sheets/SheetFooterNote.tsx → wrapper over CtaNote | visual preserved
 - Deferred with reasons: DarkTimeChip (single consumer, hub edit not worth risk — F3 residual), HighlightTags (F12 tag picker, merges with CausePicker), SectionHeader vs kit Section (state-driven vs static, genuinely different), ListRow (F5), FilterBar (F9)
 - Verified: npx tsc --noEmit clean; stale StatusPill references zero
+
+## Ledger correction — retraction of false corruption records
+
+- Earlier entries blaming pre-existing repo corruption (EditProfileSheet role card, AccessDetailSheet header class, and an implied B8-row set) are retracted: arbiter diff against disk proved the files are intact and compiling; the garbling occurred in the read channel between terminal and agent context
+- Lesson recorded: tsc clean over the full include set means every file compiles, imported or not — no file can be silently broken on disk; suspected corruption is a channel problem until git diff proves otherwise
+- Read protocol amended: batch reads capped at 6 files; any pasted body that looks mangled is suspect by default and gets a sed spot-check before it drives any decision
+
+## B8 — Rows
+
+- components/phone/ExpandRow.tsx → new | canonical expandable row (Tile header, trailing slot, rotating chevron, AnimatePresence expansion, dense/compact modes, fresh entrance) | replaces 3 hand-rolled twins
+- MedRow, StepRow, DocRow → rewired onto ExpandRow; scheduled/todo flat variants preserved inline; Med/Step fact panels onto FactRows light (label tone /45→/40 flagged); DocRow chevron moved to canonical slot (position unchanged)
+- Kept with reasons: PayoutRow, EarningRow (distinct amount-column variants), PreferenceRow, AddCertificationRow, CertificationRow (fresh state fan-out), ChecklistRow (4-state machine), FieldTaskRow (card-embedded action)
+- admin/ui ListRow: promotion to phone deferred — requires hover-scale/chevron-translate violation fixes alongside consumer migration, own pass
+- Divider punch list for screen phase: hairline separators in AuditEntryList, RecentActivityList, DeletionQueueList, ReferredPatientList violate no-divider rule; removal is a visual change deferred to rebuild phase
+- Read protocol: 6-file cap held; both part reads arrived clean after spot-checks
+- Verified: npx tsc --noEmit clean
