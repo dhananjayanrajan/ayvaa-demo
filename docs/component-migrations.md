@@ -88,3 +88,11 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Normalizations flagged: button weight font-extrabold→font-bold across seven consumers; done-state emerald-500+shadow→solid emerald-600; ContinueButton blocked tone to canonical gated values
 - Incidents: ConnectButton corrupted twice mid-message (recovered via git checkout + dedicated single-file re-emit); CreateButton heredoc silently never ran (caught by git status cross-check, re-emitted as sole block); TonalButton rename required a second sed because the first path-swap had already rewritten the import line (lesson: grep current state before crafting sed full-line matches)
 - Verified: npx tsc --noEmit clean; TonalButton references zero
+
+## B6 (part 2) — Professional/partner/system buttons onto canonical lifecycle primitives
+
+- Rewired: SaveAvailabilityButton (disabled→gated), WithdrawButton (accent tone), ExportHistoryButton (gray working tone→canonical emerald-600/60), SaveSheetButton (disabled→gated), FinishBar (skip branch preserved as static motion.button), EditProfileButton + IncidentButton (StaticButton neutral), FailureDrillSheet footer (LifecycleButton, destructive→danger tone, whileHover scale dropped per no-hover-motion rule)
+- Deferred with reasons: SubmitButton (ctaClass arrives pre-computed from severity config — severity→tone map is an F4 follow-up), SignOffButton (flex-[1.4] row ratio conflicts with w-full base), DayToggle (F10 merge with FilterToggleRow), CheckTile + PartnerQuickActions (F10/F12), PhotoAttach/SeveritySelector/CausePicker (F10/F12)
+- Normalizations flagged: disabled-idle opacity-45 → canonical gated treatment; done states emerald-500+shadow → solid emerald-600
+- Pre-existing A05.tsx modification (Pager import re-point from part 1 sed) included in commit
+- Verified: npx tsc --noEmit clean

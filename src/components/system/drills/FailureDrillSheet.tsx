@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { FlaskConical, Loader2, Play, RotateCcw, TriangleAlert } from 'lucide-react'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { BottomSheet } from '@/components/phone/SheetShell'
 import { OUTCOME_THEMES } from '@/components/system/drills/drillOutcomeTheme'
 import type { TransactionPhase, DrillRun } from '@/data/system/transactions'
@@ -46,6 +47,8 @@ export function FailureDrillSheet({
     phase === 'running' || phase === 'failing' || phase === 'rolling-back'
   const destructive = selected > 0
   const outcome = lastRun ? OUTCOME_THEMES[lastRun.outcome] : null
+  const idleIcon = lastRun ? RotateCcw : destructive ? TriangleAlert : Play
+  const idleLabel = lastRun ? 'Run again' : destructive ? 'Run until it fails' : 'Run the transaction'
 
   return (
     <BottomSheet
@@ -151,44 +154,16 @@ export function FailureDrillSheet({
         </Chip>
       </div>
 
-      <motion.button
-        type="button"
-        whileHover={busy ? undefined : { scale: 1.01 }}
-        whileTap={busy ? undefined : { scale: 0.97 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        onClick={onRun}
-        disabled={busy}
-        className={cn(
-          'mt-4 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50',
-          busy
-            ? 'cursor-wait bg-[#0B211B]/[0.35]'
-            : destructive
-              ? 'bg-gradient-to-r from-rose-600 to-red-500 shadow-[0_18px_36px_-18px_rgba(225,29,72,0.6)]'
-              : 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]',
-        )}
-      >
-        {busy ? (
-          <>
-            <Loader2 className="h-4 w-4 shrink-0 animate-spin" aria-hidden />
-            Transaction in motion
-          </>
-        ) : lastRun ? (
-          <>
-            <RotateCcw className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-            Run again
-          </>
-        ) : destructive ? (
-          <>
-            <TriangleAlert className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-            Run until it fails
-          </>
-        ) : (
-          <>
-            <Play className="h-4 w-4 shrink-0 fill-current" aria-hidden />
-            Run the transaction
-          </>
-        )}
-      </motion.button>
+      <LifecycleButton
+        phase={busy ? 'working' : 'idle'}
+        tone={destructive ? 'danger' : 'success'}
+        className="mt-4"
+        idleIcon={idleIcon}
+        idleLabel={idleLabel}
+        workingLabel="Transaction in motion"
+        doneLabel="Run complete"
+        onPress={onRun}
+      />
     </BottomSheet>
   )
 }
