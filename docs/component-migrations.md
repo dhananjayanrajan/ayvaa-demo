@@ -132,3 +132,10 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Kept with reasons: MissedCard, LiveVisitCard, SessionLedgerCard (sub-line TimeCell), VitalsCard, PatientCard, CaregiverNoteCard, ReviewMatchCard, ConsentCard (unique compositions); PaymentCard, PlanCard, UpcomingCard (navigator cards deferred to ListRow promotion pass)
 - CompletedCard chevron removal flagged: rotation cue gone from trailing slot; user may request restoration
 - Verified: npx tsc --noEmit clean at both gates
+
+## B9 (part 3) — Meds and catalogue cards
+
+- RefillCard, DueDoseCard: hand-rolled amber lifecycle CTAs → LifecycleButton tone=warning (two more twins killed; now 15+ lifecycle implementations retired project-wide)
+- DueDoseCard detail button → StaticButton neutral (hover tint matched exactly)
+- Kept with reasons: MedLogCard (composite header + grouped MedRow sections), ServiceList (cause-aware dual empty states with remedies — F9 pattern exemplar), ServiceRow (price-column row variant), SettingsCard (navigator, ListRow pass)
+- Verified: npx tsc --noEmit clean
