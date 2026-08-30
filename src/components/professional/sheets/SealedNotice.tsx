@@ -1,13 +1,10 @@
 import { Lock } from 'lucide-react'
-import { Panel, Tile } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 
 export function SealedNotice() {
   return (
-    <Panel intent="info" className="flex items-start gap-3 p-4">
-      <Tile icon={Lock} tone="info" />
-      <p className="min-w-0 flex-1 pt-0.5 text-pretty text-xs font-medium leading-relaxed text-[#0B211B]/65">
-        Tap a sheet to record. Entries open as sheets and are sealed once the visit is signed off.
-      </p>
-    </Panel>
+    <NoteStrip intent="info" icon={Lock}>
+      Tap a sheet to record. Entries open as sheets and are sealed once the visit is signed off.
+    </NoteStrip>
   )
 }
