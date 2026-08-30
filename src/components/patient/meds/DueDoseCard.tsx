@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'motion/react'
-import { AlertTriangle, BellRing, Check, Loader2, ScrollText } from 'lucide-react'
+import { AlertTriangle, BellRing, ScrollText } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
+import { LifecycleButton, StaticButton } from '@/components/phone/LifecycleButton'
 import { formatWindow, type MedDose } from '@/data/patientMeds'
 import { cn } from '@/lib/utils'
 
@@ -81,47 +81,18 @@ export function DueDoseCard({ med, stepIndex, stepsTotal, nurseFirst, nudgePhase
         )}
 
         <div className="mt-4 flex gap-2.5">
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.97 }}
-            onClick={onDetail}
-            className="flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-[#0B211B]/[0.05] py-3.5 text-[13px] font-bold text-[#0B211B]/75 transition-colors hover:bg-[#0B211B]/[0.08]"
-          >
-            <ScrollText className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-            <span className="truncate">Detail</span>
-          </motion.button>
-          <motion.button
-            type="button"
-            whileTap={nudgePhase === 'idle' ? { scale: 0.97 } : undefined}
-            onClick={onNudge}
-            disabled={nudgePhase !== 'idle'}
-            aria-disabled={nudgePhase !== 'idle'}
-            className={cn(
-              'flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-[13px] font-bold text-white transition-colors',
-              nudgePhase === 'done'
-                ? 'bg-emerald-600'
-                : nudgePhase === 'working'
-                  ? 'cursor-wait bg-amber-500/60'
-                  : 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_18px_36px_-18px_rgba(245,158,11,0.75)]',
-            )}
-          >
-            {nudgePhase === 'working' ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                <span className="truncate">Notifying…</span>
-              </>
-            ) : nudgePhase === 'done' ? (
-              <>
-                <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-                <span className="truncate">Nurse notified</span>
-              </>
-            ) : (
-              <>
-                <BellRing className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-                <span className="truncate">Nudge {nurseFirst}</span>
-              </>
-            )}
-          </motion.button>
+          <StaticButton tone="neutral" icon={ScrollText} className="flex-1" onClick={onDetail}>
+            Detail
+          </StaticButton>
+          <LifecycleButton
+            phase={nudgePhase}
+            tone="warning"
+            idleIcon={BellRing}
+            idleLabel={`Nudge ${nurseFirst}`}
+            workingLabel="Notifying…"
+            doneLabel="Nurse notified"
+            onPress={onNudge}
+          />
         </div>
       </div>
     </Card>

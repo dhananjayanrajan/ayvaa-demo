@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Check, Loader2, Syringe } from 'lucide-react'
+import { Check, Syringe } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { useDemo } from '@/lib/store'
-import { cn } from '@/lib/utils'
 
 interface RefillCardProps {
   medName: string
@@ -49,35 +49,15 @@ export function RefillCard({ medName, dose, dosesLeft, eveningWindow }: RefillCa
           </div>
         </div>
 
-        <motion.button
-          type="button"
-          whileTap={phase === 'idle' ? { scale: 0.985 } : undefined}
-          onClick={request}
-          disabled={phase !== 'idle'}
-          aria-disabled={phase !== 'idle'}
-          className={cn(
-            'mt-4 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-[13px] font-bold text-white transition-colors',
-            phase === 'done'
-              ? 'bg-emerald-600'
-              : phase === 'working'
-                ? 'cursor-wait bg-amber-500/60'
-                : 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_18px_36px_-18px_rgba(245,158,11,0.75)]',
-          )}
-        >
-          {phase === 'working' ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-              <span className="truncate">Sending request…</span>
-            </>
-          ) : phase === 'done' ? (
-            <>
-              <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-              <span className="truncate">Refill requested</span>
-            </>
-          ) : (
-            <span className="truncate">Request refill</span>
-          )}
-        </motion.button>
+        <LifecycleButton
+          phase={phase}
+          tone="warning"
+          className="mt-4"
+          idleLabel="Request refill"
+          workingLabel="Sending request…"
+          doneLabel="Refill requested"
+          onPress={request}
+        />
 
         <AnimatePresence>
           {phase === 'done' && (
