@@ -148,3 +148,9 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - FactRows light adoption: LatestReportCard highlights, ReportsListCard expansion highlights
 - Incident: LatestReportCard required three emits to land (missing Quote import, then silent bg-white drift caught by grep gate) — dual grep+tsc verification protocol adopted for any file with a mid-message re-emit
 - Verified: npx tsc --noEmit clean; disk state confirmed by grep counts 1/1 before commit
+
+## B9 (part 5, close) — Recovery/verification/auth cards
+
+- No rewires: GuaranteesCard, NextStepsCard (info-row lists already on kit Tile+Chip), SafetyCard (kit Expand with distinct compact header), SentCard (composition of consolidated siblings), CreateAccountCard (navigator, ListRow pass), PasswordCard (CredentialRow composition, F10 territory)
+- B9 patient sweep totals: 5 new canonicals (ExpandRow, QuotePanel + prior HeroCells/LifecycleButton family adoption), 20+ hand-rolled twins collapsed across visits, review, meds, dashboard, reports, recovery
+- Verified: npx tsc --noEmit clean at every stage gate
