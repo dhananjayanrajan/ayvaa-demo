@@ -104,7 +104,7 @@ export function StateDiffCard({ verifyPhase }: StateDiffCardProps) {
             <Tile icon={FilePenLine} tone={t.tile} size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+                <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                   {scheduleDiff.title}
                 </span>
                 <Chip intent={t.chipIntent} dot={t.chipDot} className="border-transparent">

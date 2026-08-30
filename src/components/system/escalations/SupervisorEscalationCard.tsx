@@ -45,7 +45,7 @@ export function SupervisorEscalationCard({ notify, live, delivered }: Supervisor
           <div className="flex items-start gap-3.5">
             <Tile icon={ShieldAlert} tone="warning" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
-              <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">
+              <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                 Supervisor escalation
               </div>
               <p className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/60">

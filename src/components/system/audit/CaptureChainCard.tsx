@@ -89,7 +89,7 @@ export function CaptureChainCard({
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
               Capture chain
             </div>
             <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
@@ -107,7 +107,7 @@ export function CaptureChainCard({
             const Icon = STEP_ICONS[step.icon]
             const last = i === captureSteps.length - 1
             return (
-              <div key={step.title} className="flex gap-3.5">
+              <div key={step.title} className="flex gap-3">
                 <div className="flex flex-col items-center">
                   <span
                     className={cn(

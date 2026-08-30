@@ -7,6 +7,7 @@ import {
   Expand,
   Panel,
   TimeChip,
+  Tile,
   rise,
 } from '@/components/phone/kit'
 import { incidents } from '@/data/seed'
@@ -50,9 +51,7 @@ export function IncidentTimelineCard({ notify, delivered }: IncidentTimelineCard
       <Card>
         <div className="p-5 pb-2">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-500/[0.12]">
-              <Siren className="h-4 w-4 text-rose-600" strokeWidth={2.2} aria-hidden />
-            </span>
+            <Tile icon={Siren} tone="danger" />
             <div className="min-w-0 flex-1">
               <div className="text-[13px] font-extrabold tracking-tight text-[#0B211B]">
                 Incident timeline
@@ -77,7 +76,7 @@ export function IncidentTimelineCard({ notify, delivered }: IncidentTimelineCard
             />
             <div className="flex flex-col">
               {delivered && (
-                <div className="relative flex gap-3.5">
+                <div className="relative flex gap-3">
                   <div className="relative z-10 flex w-[30px] shrink-0 justify-center pt-4">
                     <span
                       aria-hidden
@@ -107,7 +106,7 @@ export function IncidentTimelineCard({ notify, delivered }: IncidentTimelineCard
                 const meta = severityMeta[inc.severity]
                 const open = expandedId === inc.id
                 return (
-                  <div key={inc.id} className="relative flex gap-3.5">
+                  <div key={inc.id} className="relative flex gap-3">
                     <div className="relative z-10 flex w-[30px] shrink-0 justify-center pt-4">
                       <span
                         aria-hidden

@@ -96,7 +96,7 @@ export function NoAvailabilityLadder({ phase, completed, onPlay, onStepTap }: No
                 <div className="flex flex-col items-center">
                   <span
                     className={cn(
-                      'relative grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300',
+                      'relative grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors duration-300',
                       state === 'done' && 'bg-emerald-500 text-white',
                       state === 'now' && 'bg-amber-400 text-white',
                       state === 'pending' && 'bg-[#0B211B]/[0.06] text-[#0B211B]/30',

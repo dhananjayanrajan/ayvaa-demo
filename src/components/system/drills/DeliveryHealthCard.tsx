@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Activity, Clock3, Moon, TimerReset } from 'lucide-react'
-import { Card, Chip, Meter, Ring, rise } from '@/components/phone/kit'
+import { Card, Chip, Meter, Ring, Tile, rise } from '@/components/phone/kit'
 
 const rules = [
   { icon: TimerReset, label: 'Reminder cadence', value: '30 min before each visit' },
@@ -40,11 +40,9 @@ export function DeliveryHealthCard({ pushes, latency, live }: DeliveryHealthCard
       <Card intent="success">
         <div className="p-5">
           <div className="flex items-start gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/[0.12]">
-              <Activity className="h-[18px] w-[18px] text-emerald-600" strokeWidth={2.2} aria-hidden />
-            </span>
+            <Tile icon={Activity} tone="success" />
             <div className="min-w-0 flex-1 pt-0.5">
-              <div className="text-[14px] font-extrabold leading-tight tracking-tight text-[#0B211B]">
+              <div className="text-sm font-extrabold leading-tight tracking-tight text-[#0B211B]">
                 Delivery health
               </div>
               <div className="mt-1 truncate text-[11px] font-medium text-[#0B211B]/50">
@@ -101,7 +99,7 @@ export function DeliveryHealthCard({ pushes, latency, live }: DeliveryHealthCard
             </div>
           </div>
 
-          <div className="mt-5 space-y-3.5">
+          <div className="mt-5 space-y-3">
             {rules.map((r) => (
               <div key={r.label} className="flex items-center gap-3">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0B211B]/[0.05]">

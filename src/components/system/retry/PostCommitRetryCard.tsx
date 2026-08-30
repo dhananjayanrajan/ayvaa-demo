@@ -14,10 +14,10 @@ export function PostCommitRetryCard() {
       <Card intent="warning">
         <div aria-hidden className="h-1 w-full bg-gradient-to-r from-amber-400 to-orange-400" />
         <div className="p-5">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <Tile icon={Send} tone="warning" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
-              <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+              <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                 Dispatch failed after commit
               </div>
               <p className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/60">

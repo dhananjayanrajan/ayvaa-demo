@@ -72,8 +72,8 @@ const liveAlert = {
 function MetaRow({ Icon, label, children }: { Icon: LucideIcon; label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#0B211B]/[0.05]">
-        <Icon className="h-3 w-3 text-[#0B211B]/45" strokeWidth={2.2} aria-hidden />
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0B211B]/[0.05]">
+        <Icon className="h-3.5 w-3.5 text-[#0B211B]/45" strokeWidth={2.2} aria-hidden />
       </span>
       <div className="min-w-0 flex-1 pt-0.5">
         <div className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#0B211B]/40">
@@ -118,13 +118,13 @@ export function NotificationFeed({ notify, delivered = false }: NotificationFeed
   return (
     <motion.div variants={rise}>
       <Card>
-        <div className="p-2.5">
+        <div className="p-4">
           <div className="mb-2 flex items-center justify-between rounded-2xl bg-[#0B231C] px-4 py-3">
             <div>
               <div className="text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-100/40">
                 Feeds active
               </div>
-              <div className="mt-1 text-[15px] font-extrabold leading-none text-white">
+              <div className="mt-1 text-sm font-extrabold leading-none text-white">
                 {rows.length} automations
               </div>
             </div>
@@ -140,7 +140,7 @@ export function NotificationFeed({ notify, delivered = false }: NotificationFeed
                     className="h-1.5 w-1.5 rounded-full bg-emerald-400"
                   />
                 ) : null}
-                <span className="text-[15px] font-extrabold tabular-nums leading-none text-emerald-300">
+                <span className="text-sm font-extrabold tabular-nums leading-none text-emerald-300">
                   {totalDestinations}
                 </span>
                 <span className="text-[11px] font-bold text-emerald-100/50">reached</span>
@@ -166,7 +166,7 @@ export function NotificationFeed({ notify, delivered = false }: NotificationFeed
                     if (!open) notify({ title: n.title, body: `${n.time} · ${n.body}`, kind: 'ok' })
                   }}
                   aria-expanded={open}
-                  className="flex w-full items-start gap-3 rounded-2xl p-2 text-left transition-colors hover:bg-[#0B211B]/[0.02]"
+                  className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-[#0B211B]/[0.02]"
                 >
                   <Tile icon={Icon} tone={tone} />
                   <div className="min-w-0 flex-1">
@@ -199,7 +199,7 @@ export function NotificationFeed({ notify, delivered = false }: NotificationFeed
                   <motion.div
                     initial={false}
                     animate={{ opacity: open ? 1 : 0 }}
-                    className="px-2 pb-3 pt-1"
+                    className="px-3 pb-3 pt-1"
                   >
                     <div className="rounded-2xl bg-[#0B211B]/[0.03] p-3">
                       <PushPreview title={n.title} body={n.body} time={n.time} onDark={false} />

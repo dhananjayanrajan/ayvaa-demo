@@ -145,13 +145,13 @@ export function AccessDetailSheet({ entry, flagged, onClose, onFlag, notify }: A
         </motion.button>
       }
     >
-      <div className={cn('flex items-start gap-3.5 rounded-2xl p-4', kind.banner)}>
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[16px] bg-white text-[14px] font-black tracking-tight text-brand-ink">
+      <div className={cn('flex items-start gap-3 rounded-2xl p-4', kind.banner)}>
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[14px] font-black tracking-tight text-brand-ink">
           {initialsOf(entry.who)}
         </span>
         <div className="min-w-0 flex-1 pt-0.5">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
               {entry.who}
             </span>
             <Chip intent={kind.intent} className="border-transparent">

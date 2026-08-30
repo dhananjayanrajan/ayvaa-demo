@@ -76,7 +76,7 @@ export function S02() {
                       <RefreshCw className="h-3 w-3 animate-spin text-emerald-300/70 [animation-duration:3s]" aria-hidden />
                       Round two · live
                     </Kicker>
-                    <h2 className="mt-1.5 text-[17px] font-extrabold leading-snug tracking-tight text-white">
+                    <h2 className="mt-2 text-[19px] font-extrabold leading-snug tracking-tight text-white">
                       Matching continues{' '}
                       <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">automatically</span>
                     </h2>

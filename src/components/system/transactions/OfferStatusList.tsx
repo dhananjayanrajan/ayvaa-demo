@@ -52,7 +52,7 @@ export function OfferStatusList({ waiting, declined, recheck, mmss, expiresAt, n
           const count = countOf(o.state as OfferState)
           return (
             <div key={o.id}>
-              {i > 0 && <div aria-hidden className="mx-3.5 h-px bg-[#0B211B]/[0.05]" />}
+              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <motion.button
                 whileTap={{ scale: 0.985 }}
                 onClick={() =>
@@ -64,7 +64,7 @@ export function OfferStatusList({ waiting, declined, recheck, mmss, expiresAt, n
                         : { title: 'Re-checking availability', body: 'Conflict found · availability re-verified now', kind: 'info' },
                   )
                 }
-                className="group flex w-full items-center gap-3 px-3.5 py-3 text-left"
+                className="group flex w-full items-center gap-3 px-4 py-3 text-left"
               >
                 <Tile icon={s.icon} tone={s.tile} />
                 <div className="min-w-0 flex-1">

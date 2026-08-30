@@ -28,7 +28,7 @@ export function RefundCard({ onTap }: RefundCardProps) {
         <div className="p-5">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+              <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                 Refund issued
               </div>
               <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
@@ -38,7 +38,7 @@ export function RefundCard({ onTap }: RefundCardProps) {
                 {refund.visitCause}
               </div>
             </div>
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[14px] bg-sky-500/[0.1] text-sky-600">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-sky-500/[0.1] text-sky-600">
               <Undo2 className="h-5 w-5" strokeWidth={2.2} aria-hidden />
             </span>
           </div>

@@ -90,7 +90,7 @@ export function RecheckResolutionCard({ phase, probeIndex, onRun, onRowTap }: Re
           </div>
         </div>
 
-        <div className="mt-3.5 rounded-2xl bg-[#0B211B]/[0.035] px-3.5 py-3">
+        <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.035] px-3.5 py-3">
           <div className="flex flex-col gap-2">
             <div className="flex items-start gap-2.5">
               <CalendarClock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden />
@@ -142,7 +142,7 @@ export function RecheckResolutionCard({ phase, probeIndex, onRun, onRowTap }: Re
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="mt-3 flex items-start gap-2.5 rounded-2xl bg-sky-500/[0.08] px-3.5 py-3"
+            className="mt-4 flex items-start gap-2.5 rounded-2xl bg-sky-500/[0.08] px-3.5 py-3"
           >
             <SearchCheck className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" strokeWidth={2.4} aria-hidden />
             <p className="min-w-0 flex-1 text-[11.5px] font-semibold leading-relaxed text-sky-700">
@@ -156,7 +156,7 @@ export function RecheckResolutionCard({ phase, probeIndex, onRun, onRowTap }: Re
             type="button"
             whileTap={{ scale: 0.97 }}
             onClick={onRun}
-            className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
           >
             <ScanSearch className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
             Run availability re-check

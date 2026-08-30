@@ -69,7 +69,7 @@ export function ExecutionTrail({ trail, notify }: ExecutionTrailProps) {
           const now = e.state === 'now'
           const last = i === total - 1
           return (
-            <div key={e.id} className="flex items-stretch gap-3 px-3.5">
+            <div key={e.id} className="flex items-stretch gap-3 px-4">
               <div className="flex flex-col items-center py-3">
                 <Tile icon={Icon} tone={now ? 'live' : (toneByTitle[e.title] ?? 'neutral')} />
                 {!last && (

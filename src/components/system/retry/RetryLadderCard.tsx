@@ -16,7 +16,7 @@ export function RetryLadderCard({ current, onTap }: RetryLadderCardProps) {
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
               The bank did not answer
             </div>
             <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
@@ -39,7 +39,7 @@ export function RetryLadderCard({ current, onTap }: RetryLadderCardProps) {
                 type="button"
                 whileTap={{ scale: 0.985 }}
                 onClick={() => onTap(step.time, step.head, step.detail)}
-                className="flex w-full gap-3.5 text-left outline-none focus-visible:outline-none"
+                className="flex w-full gap-3 text-left outline-none focus-visible:outline-none"
               >
                 <div className="flex flex-col items-center">
                   <span
