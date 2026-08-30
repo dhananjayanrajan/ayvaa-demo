@@ -61,3 +61,30 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Not yet rewired, scheduled B5 Stage 4: ProfileHero, ReportsHero, RatingHero (read with batch 1 of the remaining heroes)
 - Repair incident: BookingHero corrupted mid-emit during Stage 2 (4 bad blocks), repaired from git show HEAD reference in a dedicated exchange; garbage file Stage2Test.tsx created and deleted; protocol updated — each heredoc final, no mid-message corrections
 - Verified: npx tsc --noEmit clean at every stage gate
+
+## B5 (continued) — Admin/partner/system/professional heroes onto canonical shells
+
+- components/phone/kit.tsx → Hero gains tone prop (emerald/amber/rose) | canonical hero shells now cover the three static hues; emerald byte-identical, amber/rose are hue swaps incl. border/shadow/orbs/hairline
+- components/phone/PhaseHero.tsx → new | phase-driven hero shell with transition-colors duration-500 baked in + PHASE_THEME map (emerald/amber/rose/sky/blue/blueDeep/emeraldBright) | replaces 6 hand-rolled phase shells
+- components/admin/escalations/WarnHero.tsx → deleted | merged into kit Hero tone=amber | zero remaining consumers (grep-verified)
+- IncidentHero's local shell component and admin WatchHero/VaultHeroCard inlined shells → kit Hero tones
+- System trio (AuditHero, RecheckHero, TransactionHero) + PaymentHero + EarningsHero + DossierHero → PhaseHero with theme maps reduced to PHASE_THEME keys
+- Partner emerald hand-rolls (PartnerStatsHero, BillingHero, PartnerReferralWizardHero) → kit Hero; StaffHero theme-mapped shells → PhaseHero with shells normalized #3A2A0B/#4A1A1A to canonical #241B0C/#230D14
+- Normalizations flagged: StaffHero shell hues to canonical values; PaymentHero per-phase inline boxShadow → single PhaseHero shadow; orb opacities unified; AvailabilityHero clock icon tint inherits; EarningsHero/DossierHero hairlines onto theme values; DossierHero resolved state amber→PHASE_THEME.amber
+- Untouched with reasons: PerformanceHero, CheckInHero, OnboardingHero, SessionSummaryHero (already on kit Hero); professional ProfileHero (distinct bottom-band composition, not a Hero clone); RevenueHero/LedgerChainHero/RecheckHero divide-x stat strips deferred to F8
+- Corruption incidents this batch: 2 (kit.tsx double-emit, restored via git checkout before any consumer ran on it; one bad append to PhaseHero superseded by full clean re-emit in the same exchange). Protocol hardened: canonical hub files get their own message, one block, no sibling emits
+- Verified: npx tsc --noEmit clean at every stage gate
+
+## B6 (part 1) — Patient buttons onto canonical lifecycle primitives
+
+- components/phone/LifecycleButton.tsx → extended | IconLifecycleButton (round/square icon-only lifecycle, revert vs hold done states, size prop), QuietLifecycleButton (half-width tint lifecycle), StaticButton (static CTA, success/neutral/amber/danger) | full re-emit, prior API unchanged
+- components/admin/ui/Pager.tsx → moved to components/phone/Pager.tsx | content byte-identical, imports repointed
+- components/admin/ui/TonalButton.tsx → deleted | consumers A02 + DueReviewCard renamed to StaticButton with tone primary→success; hover-scale dropped per no-hover-motion rule
+- Full-width lifecycle CTAs rewired: ContinueButton (gated blocked state), MatchButton, CreateButton, SendLinkButton, ConnectButton (solid→LifecycleButton, soft→QuietLifecycleButton with self-owned phase+notify)
+- Icon-only lifecycle rewired: MarkAllReadButton (done-state hold), DownloadAllButton (hold), ShareButton (revert), ShareSummaryButton (revert with working phase and clipboard write preserved)
+- SentActions call button → QuietLifecycleButton; mail link stays motion.a
+- Static CTAs rewired: SignInAction (neutral), RatingCta (amber), AddVisitButton (success)
+- PrimaryAction untouched: 15px/py-4 sizing is a legitimate distinct variant, not dedup
+- Normalizations flagged: button weight font-extrabold→font-bold across seven consumers; done-state emerald-500+shadow→solid emerald-600; ContinueButton blocked tone to canonical gated values
+- Incidents: ConnectButton corrupted twice mid-message (recovered via git checkout + dedicated single-file re-emit); CreateButton heredoc silently never ran (caught by git status cross-check, re-emitted as sole block); TonalButton rename required a second sed because the first path-swap had already rewritten the import line (lesson: grep current state before crafting sed full-line matches)
+- Verified: npx tsc --noEmit clean; TonalButton references zero
