@@ -139,3 +139,12 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - DueDoseCard detail button → StaticButton neutral (hover tint matched exactly)
 - Kept with reasons: MedLogCard (composite header + grouped MedRow sections), ServiceList (cause-aware dual empty states with remedies — F9 pattern exemplar), ServiceRow (price-column row variant), SettingsCard (navigator, ListRow pass)
 - Verified: npx tsc --noEmit clean
+
+## B9 (part 4) — Dashboard and reports cards
+
+- components/phone/QuotePanel.tsx → new | dark quote panel (kicker, serif quote, author footer, badge slot) | replaces 2 hand-rolled quote blocks (CaregiverNoteCard was the first known instance; LatestReportCard conclusion + ReportsListCard expansion adopted)
+- MedicationCard, RecoveryCard: two more hand-rolled hero shells → kit Hero (amber/emerald tones); footer button pairs preserved as statics
+- ReportsListCard ReportRow: seventh ExpandRow twin collapsed; chevron in canonical slot
+- FactRows light adoption: LatestReportCard highlights, ReportsListCard expansion highlights
+- Incident: LatestReportCard required three emits to land (missing Quote import, then silent bg-white drift caught by grep gate) — dual grep+tsc verification protocol adopted for any file with a mid-message re-emit
+- Verified: npx tsc --noEmit clean; disk state confirmed by grep counts 1/1 before commit
