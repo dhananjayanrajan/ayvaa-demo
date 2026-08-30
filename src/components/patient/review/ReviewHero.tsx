@@ -1,26 +1,21 @@
 import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { REVIEW_SCHEDULE, REVIEW_WEEK, activeDayNames } from '@/data/patientReview'
-
-function StatCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-      <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</div>
-      <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">{value}</div>
-    </div>
-  )
-}
 
 export function ReviewHero({ guardianFirstName }: { guardianFirstName: string }) {
   return (
     <AccentHero tone="emerald">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">Final check</span>
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">Step 3 of 3</span>
-      </div>
+      <HeroTopRow
+        label="Final check"
+        trailing={
+          <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">
+            Step 3 of 3
+          </span>
+        }
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        One tap and{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">care begins</span>
+        One tap and <HeroHighlight>care begins</HeroHighlight>
       </h2>
       <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">
         {guardianFirstName} is approving a recurring plan, charged only after each completed visit.

@@ -13,15 +13,12 @@ export function CatalogueHero({
 }) {
   return (
     <Hero>
-      <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/60">
-        <Search className="h-3 w-3 text-emerald-300/80" aria-hidden />
+      <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
+        <Search className="h-3 w-3" aria-hidden />
         Service catalogue
       </div>
       <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        {matchCount} services match,{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">
-          all caregiver-verified
-        </span>
+        {matchCount} services match, <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">all caregiver-verified</span>
       </h2>
       <p className="mt-1 text-pretty text-[12px] font-medium leading-relaxed text-emerald-100/70">
         Every category is delivered by licence-checked professionals near you.

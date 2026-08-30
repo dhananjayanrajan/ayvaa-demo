@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
-import { ChevronRight } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { HeroTopRow, HeroHighlight, StatCell, TapCell } from '@/components/phone/HeroCells'
 import type { Estimate } from '@/data/patientBooking'
 
 interface BookingHeroProps {
@@ -14,32 +14,6 @@ interface BookingHeroProps {
   cadence: 'visit' | 'week'
   onOpenWho: () => void
   onOpenTime: () => void
-}
-
-function StatCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-      <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</div>
-      <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">{value}</div>
-    </div>
-  )
-}
-
-function TapCell({ label, value, onClick }: { label: string; value: string; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={`${label}: ${value}`}
-      className="flex w-full items-center justify-between gap-3 rounded-2xl bg-emerald-400/[0.14] px-3.5 py-2.5 text-left transition-colors duration-300 hover:bg-emerald-400/[0.2]"
-    >
-      <span className="min-w-0">
-        <span className="block text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</span>
-        <span className="mt-1 block truncate text-[12.5px] font-extrabold leading-none text-white">{value}</span>
-      </span>
-      <ChevronRight className="h-4 w-4 shrink-0 text-emerald-200/70" aria-hidden />
-    </button>
-  )
 }
 
 export function BookingHero({
@@ -60,14 +34,17 @@ export function BookingHero({
 
   return (
     <AccentHero tone="emerald">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">New care request</span>
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">Step 1 of 3</span>
-      </div>
+      <HeroTopRow
+        label="New care request"
+        trailing={
+          <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] tabular-nums text-emerald-100/40">
+            Step 1 of 3
+          </span>
+        }
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        Care for{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">{lovedFirstName}</span>
+        Care for <HeroHighlight>{lovedFirstName}</HeroHighlight>
       </h2>
       <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">{summaryLine}</p>
 

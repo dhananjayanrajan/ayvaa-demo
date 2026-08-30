@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { CalendarClock, PhoneCall, ShieldCheck } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { Meter } from '@/components/phone/kit'
 import { CONSENT } from '@/data/patientConsent'
 import { cn } from '@/lib/utils'
@@ -11,30 +12,30 @@ const HERO_TONE = {
     pillTone: 'emerald' as const,
     pillLabel: 'Active',
     pillLive: false,
+    highlight: 'emerald' as const,
     panel: 'bg-emerald-400/[0.12]',
     panelValue: 'text-emerald-200',
     meter: 'success' as const,
-    gradient: 'from-emerald-300 to-teal-200',
     hint: 'Sealed record, renewing automatically on review',
   },
   pending: {
     pillTone: 'amber' as const,
     pillLabel: 'Changes pending',
     pillLive: true,
+    highlight: 'amber' as const,
     panel: 'bg-amber-400/[0.12]',
     panelValue: 'text-amber-200',
     meter: 'warning' as const,
-    gradient: 'from-amber-300 to-orange-200',
     hint: 'Your edits take effect only after you seal them',
   },
   withdrawal: {
     pillTone: 'rose' as const,
     pillLabel: 'Withdrawal pending',
     pillLive: true,
+    highlight: 'rose' as const,
     panel: 'bg-rose-400/[0.14]',
     panelValue: 'text-rose-200',
     meter: 'danger' as const,
-    gradient: 'from-rose-300 to-red-200',
     hint: 'Care stops once the supervisor call confirms your request',
   },
 }
@@ -70,17 +71,14 @@ export function ConsentHero({
 
   return (
     <AccentHero tone={withdrawalRequested ? 'rose' : pending ? 'amber' : 'emerald'}>
-      <div className="flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
-          <ShieldCheck className="h-3 w-3" aria-hidden />
-          Consent ledger
-        </span>
-        <StatusPill tone={tone.pillTone} label={tone.pillLabel} live={tone.pillLive} />
-      </div>
+      <HeroTopRow
+        icon={ShieldCheck}
+        label="Consent ledger"
+        trailing={<StatusPill tone={tone.pillTone} label={tone.pillLabel} live={tone.pillLive} />}
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        {patientFirst}&apos;s care,{' '}
-        <span className={cn('bg-gradient-to-r bg-clip-text text-transparent', tone.gradient)}>on your terms</span>
+        {patientFirst}&apos;s care, <HeroHighlight tone={tone.highlight}>on your terms</HeroHighlight>
       </h2>
       <p className="mt-1 text-[11.5px] font-semibold leading-snug text-white/55">{tone.hint}</p>
 

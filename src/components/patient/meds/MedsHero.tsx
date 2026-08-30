@@ -1,6 +1,7 @@
 import { Pill } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { Meter } from '@/components/phone/kit'
 import type { PartCell } from '@/data/patientMeds'
 import { cn } from '@/lib/utils'
@@ -21,33 +22,24 @@ export function MedsHero({ patientFirst, sealedCount, total, complete, partCells
 
   return (
     <AccentHero tone={complete ? 'emerald' : 'amber'}>
-      <div className="flex items-center justify-between gap-3">
-        <span
-          className={cn(
-            'flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em]',
-            complete ? 'text-emerald-200/50' : 'text-amber-200/50',
-          )}
-        >
-          <Pill className="h-3 w-3" aria-hidden />
-          {patientFirst}&apos;s doses today
-        </span>
-        {complete ? (
-          <StatusPill tone="emerald" label="Day complete" />
-        ) : (
-          <StatusPill tone="amber" label="In progress" live />
-        )}
-      </div>
+      <HeroTopRow
+        icon={Pill}
+        label={`${patientFirst}'s doses today`}
+        labelClass={complete ? 'text-emerald-200/50' : 'text-amber-200/50'}
+        trailing={
+          complete ? (
+            <StatusPill tone="emerald" label="Day complete" />
+          ) : (
+            <StatusPill tone="amber" label="In progress" live />
+          )
+        }
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
         {sealedCount} of {total} doses taken,{' '}
-        <span
-          className={cn(
-            'bg-gradient-to-r bg-clip-text text-transparent',
-            complete ? 'from-emerald-300 to-teal-200' : 'from-amber-300 to-orange-200',
-          )}
-        >
+        <HeroHighlight tone={complete ? 'emerald' : 'amber'}>
           {complete ? 'day sealed' : `${total - sealedCount} to go`}
-        </span>
+        </HeroHighlight>
       </h2>
       <p className="mt-1 text-[11.5px] font-semibold leading-snug text-white/55">
         Round by round, sealed as they happen

@@ -1,16 +1,8 @@
 import { ShieldCheck } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { USUAL_CAREGIVER, confirmedCount, missedVisits, upcomingVisits } from '@/data/patientVisits'
-
-function StatCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-      <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</div>
-      <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">{value}</div>
-    </div>
-  )
-}
 
 export function VisitsHero() {
   const upcoming = upcomingVisits()
@@ -19,19 +11,14 @@ export function VisitsHero() {
 
   return (
     <AccentHero tone="emerald">
-      <div className="flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
-          <ShieldCheck className="h-3 w-3" aria-hidden />
-          This week
-        </span>
-        <StatusPill tone="emerald" label="GPS verified" />
-      </div>
+      <HeroTopRow
+        icon={ShieldCheck}
+        label="This week"
+        trailing={<StatusPill tone="emerald" label="GPS verified" />}
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        {upcoming.length} visits ahead,{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">
-          {confirmed} confirmed
-        </span>
+        {upcoming.length} visits ahead, <HeroHighlight>{confirmed} confirmed</HeroHighlight>
       </h2>
       <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">
         Weekly plan with {USUAL_CAREGIVER}, Monday to Friday.

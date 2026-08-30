@@ -3,6 +3,7 @@ import { ChevronRight, Eye, Lock, PenLine, ShieldAlert, ShieldCheck } from 'luci
 import type { LucideIcon } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { DarkTimeChip } from './DarkTimeChip'
 import type { AuditEntry, AuditFilter, AuditKind } from '@/data/patientRecords'
 import { cn } from '@/lib/utils'
@@ -87,19 +88,14 @@ export function VaultHero({ latest, recording, viewCount, changeCount, deniedCou
 
   return (
     <AccentHero tone={recording ? 'sky' : 'emerald'}>
-      <div className="flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
-          <ShieldCheck className="h-3 w-3" aria-hidden />
-          Records vault
-        </span>
-        <StatusPill tone={tone.pillTone} label={tone.pillLabel} live={tone.pillLive} />
-      </div>
+      <HeroTopRow
+        icon={ShieldCheck}
+        label="Records vault"
+        trailing={<StatusPill tone={tone.pillTone} label={tone.pillLabel} live={tone.pillLive} />}
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        Consent gates the vault,{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">
-          the ledger remembers
-        </span>
+        Consent gates the vault, <HeroHighlight>the ledger remembers</HeroHighlight>
       </h2>
       <p className="mt-1 text-[11.5px] font-semibold leading-snug text-white/55">{tone.hint}</p>
 

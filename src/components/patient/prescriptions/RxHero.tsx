@@ -1,6 +1,7 @@
 import { Check, Clock, Lock, ShieldCheck, ShoppingCart } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { Kicker, Meter, MiniBadge } from '@/components/phone/kit'
+import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
+import { Meter, MiniBadge } from '@/components/phone/kit'
 import { RX_LEDGER_STRIP, activeOf, lowOf, type Prescription } from '@/data/patientPrescriptions'
 import { cn } from '@/lib/utils'
 
@@ -10,8 +11,7 @@ const TONE: Record<
   HeroTone,
   {
     kicker: string
-    icon: string
-    gradient: string
+    highlight: 'emerald' | 'sky' | 'gold' | 'rose'
     stockBg: string
     stockLabel: string
     stockValue: string
@@ -25,8 +25,7 @@ const TONE: Record<
 > = {
   emerald: {
     kicker: 'text-emerald-200/50',
-    icon: 'text-emerald-300/80',
-    gradient: 'from-emerald-300 to-teal-200',
+    highlight: 'emerald',
     stockBg: 'bg-emerald-400/[0.1]',
     stockLabel: 'text-emerald-100/50',
     stockValue: 'text-emerald-200',
@@ -39,8 +38,7 @@ const TONE: Record<
   },
   sky: {
     kicker: 'text-sky-200/50',
-    icon: 'text-sky-300/80',
-    gradient: 'from-sky-300 to-cyan-200',
+    highlight: 'sky',
     stockBg: 'bg-sky-400/[0.1]',
     stockLabel: 'text-sky-100/50',
     stockValue: 'text-sky-200',
@@ -53,8 +51,7 @@ const TONE: Record<
   },
   amber: {
     kicker: 'text-amber-200/50',
-    icon: 'text-amber-300/80',
-    gradient: 'from-amber-300 to-yellow-200',
+    highlight: 'gold',
     stockBg: 'bg-amber-400/[0.1]',
     stockLabel: 'text-amber-100/50',
     stockValue: 'text-amber-200',
@@ -67,8 +64,7 @@ const TONE: Record<
   },
   rose: {
     kicker: 'text-rose-200/50',
-    icon: 'text-rose-300/80',
-    gradient: 'from-rose-300 to-red-200',
+    highlight: 'rose',
     stockBg: 'bg-rose-400/[0.1]',
     stockLabel: 'text-rose-100/50',
     stockValue: 'text-rose-200',
@@ -97,22 +93,21 @@ export function RxHero({ prescriptions, refilled }: { prescriptions: Prescriptio
 
   return (
     <AccentHero tone={tone}>
-      <Kicker className={t.kicker}>
-        <span className="flex w-full items-center justify-between gap-2">
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className={cn('h-3 w-3', t.icon)} aria-hidden />
-            Rx ledger
-          </span>
+      <HeroTopRow
+        icon={ShieldCheck}
+        label="Rx ledger"
+        labelClass={t.kicker}
+        trailing={
           <MiniBadge icon={ShieldCheck} tone={t.badge} dark>
             Verified
           </MiniBadge>
-        </span>
-      </Kicker>
+        }
+      />
       <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
         {active.length} active,{' '}
-        <span className={cn('bg-gradient-to-r bg-clip-text text-transparent', t.gradient)}>
+        <HeroHighlight tone={t.highlight}>
           {stocked ? 'all stocked' : lowCount === 1 ? '1 needs refill' : `${lowCount} need refill`}
-        </span>
+        </HeroHighlight>
       </h2>
 
       <div className={cn('mt-4 rounded-2xl p-3.5', t.stockBg)}>

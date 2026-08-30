@@ -12,8 +12,8 @@ export function FeedHero({
 }) {
   return (
     <Hero>
-      <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/60">
-        <BellRing className="h-3 w-3 text-emerald-300/80" aria-hidden />
+      <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
+        <BellRing className="h-3 w-3" aria-hidden />
         Notification feed, today
       </div>
       <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">

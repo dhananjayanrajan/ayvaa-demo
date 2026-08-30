@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { BellRing } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
 import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { formatElapsed } from '@/data/patientLiveVisit'
 import { cn } from '@/lib/utils'
 
@@ -13,15 +14,6 @@ interface LiveVisitHeroProps {
   windowMinutes: number
   notifyAtSignOff: boolean
   onToggleNotify: () => void
-}
-
-function StatCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
-      <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">{label}</div>
-      <div className="mt-1 truncate text-[12.5px] font-extrabold leading-none tabular-nums text-white">{value}</div>
-    </div>
-  )
 }
 
 export function LiveVisitHero({
@@ -37,14 +29,13 @@ export function LiveVisitHero({
 
   return (
     <AccentHero tone="emerald">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">Visit in progress</span>
-        <StatusPill tone="emerald" label="Live" live />
-      </div>
+      <HeroTopRow
+        label="Visit in progress"
+        trailing={<StatusPill tone="emerald" label="Live" live />}
+      />
 
       <h2 className="mt-1.5 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-        Care underway with{' '}
-        <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">{patientFirst}</span>
+        Care underway with <HeroHighlight>{patientFirst}</HeroHighlight>
       </h2>
       <p className="mt-1.5 text-pretty text-[11.5px] font-semibold leading-snug text-emerald-100/70">
         Logged step by step and sealed as it happens.

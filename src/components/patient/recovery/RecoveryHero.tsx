@@ -1,14 +1,12 @@
 import { motion } from 'motion/react'
 import { MailCheck } from 'lucide-react'
+import { Hero } from '@/components/phone/kit'
 import { guardian } from '@/data/seed'
 
 export function RecoveryHero() {
   return (
-    <div className="relative overflow-hidden rounded-[26px] bg-[#0B231C] p-5 shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]">
-      <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-emerald-400/25 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-teal-300/15 blur-3xl" />
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent" />
-      <div className="relative flex flex-col items-center pt-2 text-center">
+    <Hero>
+      <div className="flex flex-col items-center pt-2 text-center">
         <motion.span
           className="relative grid h-20 w-20 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-200"
           animate={{ scale: [1, 1.05, 1] }}
@@ -35,6 +33,6 @@ export function RecoveryHero() {
           </div>
         </div>
       </div>
-    </div>
+    </Hero>
   )
 }
