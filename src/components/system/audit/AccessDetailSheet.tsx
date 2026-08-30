@@ -14,8 +14,10 @@ import {
   ShieldCheck,
   Smartphone,
 } from 'lucide-react'
-import { BottomSheet } from '@/components/admin/ui/BottomSheet'
+import { BottomSheet } from '@/components/phone/SheetShell'
 import { Overline } from '@/components/admin/ui/Overline'
+import { FactTile, FactTileGrid } from '@/components/phone/FactTile'
+import { MiniTimeline } from '@/components/phone/MiniTimeline'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
@@ -45,26 +47,6 @@ const sealTimeline = [
   { title: 'Sealed instantly', note: 'Hashed and chained before the screen finished loading', done: true },
   { title: 'Patient-visible', note: 'This exact entry appears in the family audit log today', done: true },
 ]
-
-function Fact({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof Eye
-  label: string
-  value: string
-}) {
-  return (
-    <div className="rounded-xl bg-white p-3">
-      <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0B211B]/40">
-        <Icon className="h-3 w-3 shrink-0" aria-hidden />
-        {label}
-      </div>
-      <div className="mt-1 break-words text-[14px] font-extrabold leading-tight text-[#0B211B]">{value}</div>
-    </div>
-  )
-}
 
 interface AccessDetailSheetProps {
   entry: AccessEntry | null
@@ -151,7 +133,7 @@ export function AccessDetailSheet({ entry, flagged, onClose, onFlag, notify }: A
         </span>
         <div className="min-w-0 flex-1 pt-0.5">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <span className="text-[13.5px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
               {entry.who}
             </span>
             <Chip intent={kind.intent} className="border-transparent">
@@ -165,12 +147,12 @@ export function AccessDetailSheet({ entry, flagged, onClose, onFlag, notify }: A
 
       <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.03] p-4">
         <Overline icon={BadgeCheck}>Access details</Overline>
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          <Fact icon={Eye} label="Kind" value={kind.chipLabel} />
-          <Fact icon={Clock} label="When" value={entry.time} />
-          <Fact icon={ShieldCheck} label="Status" value="Sealed" />
-          <Fact icon={FileCheck2} label="Retention" value="10 years" />
-        </div>
+        <FactTileGrid className="mt-3">
+          <FactTile icon={Eye} label="Kind" value={kind.chipLabel} />
+          <FactTile icon={Clock} label="When" value={entry.time} />
+          <FactTile icon={ShieldCheck} label="Status" value="Sealed" />
+          <FactTile icon={FileCheck2} label="Retention" value="10 years" />
+        </FactTileGrid>
       </div>
 
       <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.03] p-4">
@@ -222,29 +204,7 @@ export function AccessDetailSheet({ entry, flagged, onClose, onFlag, notify }: A
 
       <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.03] p-4">
         <Overline>Seal trail</Overline>
-        <div className="mt-3 flex flex-col">
-          {sealTimeline.map((item, i) => {
-            const last = i === sealTimeline.length - 1
-            return (
-              <div key={item.title} className="flex gap-3">
-                <div className="flex flex-col items-center">
-                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
-                    <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
-                  </span>
-                  {!last && <span aria-hidden className="my-1 w-px flex-1 bg-[#0B211B]/10" />}
-                </div>
-                <div className={last ? 'min-w-0 flex-1 pb-0.5' : 'min-w-0 flex-1 pb-4'}>
-                  <div className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">
-                    {item.title}
-                  </div>
-                  <div className="mt-0.5 break-words text-[11px] font-medium text-[#0B211B]/55">
-                    {item.note}
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+        <MiniTimeline className="mt-3" items={sealTimeline} />
       </div>
 
       <div className="mt-4 flex gap-2.5">
