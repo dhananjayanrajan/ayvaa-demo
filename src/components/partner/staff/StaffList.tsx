@@ -42,7 +42,7 @@ export function StaffList({ members, variant, onOpenStaff }: StaffListProps) {
                 </span>
               </span>
             ) : (
-              <AgentAvatar seed={s.name} size={40} />
+              <AgentAvatar seed={s.name} size={44} />
             )}
             <span className="min-w-0 flex-1">
               <span

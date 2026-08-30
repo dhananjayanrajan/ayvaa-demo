@@ -45,7 +45,7 @@ export function PartnerClinicalRecommendation({
   onCallDoctor,
 }: PartnerClinicalRecommendationProps) {
   return (
-    <div className="relative overflow-hidden rounded-[24px] bg-[#0B231C] p-5 shadow-[0_24px_56px_-26px_rgba(6,40,30,0.75)]">
+    <div className="relative overflow-hidden rounded-[26px] bg-[#0B231C] p-5 shadow-[0_24px_56px_-26px_rgba(6,40,30,0.75)]">
       <div aria-hidden className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
       <span aria-hidden className="pointer-events-none absolute right-4 top-1 select-none font-serif text-[56px] leading-none text-emerald-300/20">
         Rx

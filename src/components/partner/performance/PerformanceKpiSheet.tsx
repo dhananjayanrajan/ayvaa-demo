@@ -40,7 +40,7 @@ export function PerformanceKpiSheet({ kpi, onClose }: PerformanceKpiSheetProps) 
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="relative rounded-t-3xl bg-white p-5 shadow-2xl"
+            className="relative rounded-t-[28px] bg-white p-5 pb-7 shadow-2xl"
           >
             <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-[#0B211B]/10" />
             <div className="flex items-start gap-4">
@@ -48,13 +48,13 @@ export function PerformanceKpiSheet({ kpi, onClose }: PerformanceKpiSheetProps) 
                 <kpi.icon className="h-6 w-6" strokeWidth={2.4} aria-hidden />
               </span>
               <div className="min-w-0 flex-1">
-                <h3 className="text-[17px] font-extrabold tracking-tight text-[#0B211B]">{kpi.label}</h3>
+                <h3 className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">{kpi.label}</h3>
                 <p className="mt-1 text-2xl font-extrabold tabular-nums text-[#0B211B]">{kpi.value}</p>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
                 aria-label="Close details"
               >
                 <X className="h-4 w-4" aria-hidden />

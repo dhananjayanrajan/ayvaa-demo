@@ -10,10 +10,10 @@ export function PartnerReferralCard({ onOpenOptions }: PartnerReferralCardProps)
   return (
     <Card intent="success">
       <div className="p-4">
-        <div className="flex items-center gap-3.5">
+        <div className="flex items-center gap-3">
           <Tile icon={UserPlus} tone="live" size="lg" />
           <div className="min-w-0 flex-1">
-            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
               Refer a patient for home care
             </div>
             <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">

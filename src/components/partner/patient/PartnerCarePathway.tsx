@@ -107,7 +107,7 @@ export function PartnerCarePathway({ journey, latestVisit }: PartnerCarePathwayP
                   type="button"
                   onClick={() => setExpandedId(open ? null : stepId)}
                   className={cn(
-                    'relative z-10 flex w-full items-start gap-3.5 p-3 text-left transition-colors rounded-xl',
+                    'relative z-10 flex w-full items-start gap-3 p-3 text-left transition-colors rounded-xl',
                     isNow && 'bg-amber-500/[0.04]'
                   )}
                 >

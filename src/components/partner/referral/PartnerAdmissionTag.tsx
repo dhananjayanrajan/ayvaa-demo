@@ -20,7 +20,7 @@ const barcode = [3, 1, 2, 1, 1, 3, 2, 1, 3, 1, 2, 2, 1, 1, 3, 1, 2, 1, 3, 2, 1, 
 
 export function PartnerAdmissionTag({ patient, onCopyRef, onViewDetails }: PartnerAdmissionTagProps) {
   return (
-    <div className="relative overflow-hidden rounded-[24px] bg-[#0B231C] shadow-[0_24px_56px_-26px_rgba(6,40,30,0.75)]">
+    <div className="relative overflow-hidden rounded-[26px] bg-[#0B231C] shadow-[0_24px_56px_-26px_rgba(6,40,30,0.75)]">
       <div aria-hidden className="pointer-events-none absolute -left-10 -top-12 h-36 w-36 rounded-full bg-teal-400/15 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -right-10 -bottom-12 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl" />
       <div className="relative p-5">

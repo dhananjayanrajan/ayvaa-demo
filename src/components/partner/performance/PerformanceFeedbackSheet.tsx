@@ -31,7 +31,7 @@ export function PerformanceFeedbackSheet({ feedback, onClose }: PerformanceFeedb
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="relative rounded-t-3xl bg-white p-5 shadow-2xl"
+            className="relative rounded-t-[28px] bg-white p-5 pb-7 shadow-2xl"
           >
             <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-[#0B211B]/10" />
             <div className="flex items-start gap-4">
@@ -39,7 +39,7 @@ export function PerformanceFeedbackSheet({ feedback, onClose }: PerformanceFeedb
                 {feedback.family.slice(0, 1)}
               </span>
               <div className="min-w-0 flex-1">
-                <h3 className="truncate text-[17px] font-extrabold tracking-tight text-[#0B211B]">{feedback.family}</h3>
+                <h3 className="truncate text-[15px] font-extrabold tracking-tight text-[#0B211B]">{feedback.family}</h3>
                 <p className="mt-0.5 text-[12px] font-semibold text-[#0B211B]/50">Verified family feedback · {feedback.date}</p>
                 <div className="mt-2 flex items-center gap-2">
                   <Stars />
@@ -51,7 +51,7 @@ export function PerformanceFeedbackSheet({ feedback, onClose }: PerformanceFeedb
               <button
                 type="button"
                 onClick={onClose}
-                className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
                 aria-label="Close feedback details"
               >
                 <X className="h-4 w-4" aria-hidden />

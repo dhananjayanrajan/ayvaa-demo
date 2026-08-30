@@ -39,12 +39,12 @@ export function StaffApprovalCard({ member, onApprove, onDecline }: StaffApprova
           </Chip>
         </div>
 
-        <div className="mt-4 flex items-center gap-3.5">
+        <div className="mt-4 flex items-center gap-3">
           <span className="rounded-full ring-4 ring-amber-500/20">
             <AgentAvatar seed={member.name} size={52} />
           </span>
           <div className="min-w-0 flex-1">
-            <div className="truncate text-[15px] font-extrabold tracking-tight text-[#0B211B]">{member.name}</div>
+            <div className="truncate text-sm font-extrabold tracking-tight text-[#0B211B]">{member.name}</div>
             <div className="truncate text-xs font-semibold text-[#0B211B]/55">{member.role}</div>
           </div>
         </div>

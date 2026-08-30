@@ -69,7 +69,7 @@ export function PartnerPatientHero({ patient, onInfo }: PartnerPatientHeroProps)
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">Patient chart</div>
-            <h2 className="mt-1.5 truncate text-[20px] font-extrabold leading-tight tracking-tight text-white">{patient.name}</h2>
+            <h2 className="mt-1.5 truncate text-[19px] font-extrabold leading-tight tracking-tight text-white">{patient.name}</h2>
             <div className="mt-0.5">
               <p className="text-[11.5px] font-semibold text-emerald-100/55">
                 {patient.condition} · age {patient.age}

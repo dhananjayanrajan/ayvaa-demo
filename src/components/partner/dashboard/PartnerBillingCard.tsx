@@ -17,10 +17,10 @@ export function PartnerBillingCard({ invoiceAmount, invoiceSessions, onViewBilli
       className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2"
     >
       <Card>
-        <div className="flex items-center gap-3.5 p-4">
+        <div className="flex items-center gap-3 p-4">
           <Tile icon={ReceiptText} tone="emerald" size="lg" />
           <div className="min-w-0 flex-1">
-            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">February invoice</div>
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">February invoice</div>
             <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">{invoiceSessions}</div>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1.5">

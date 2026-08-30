@@ -95,7 +95,7 @@ export function CareGoalsCard({ data }: CareGoalsCardProps) {
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       className="overflow-hidden"
                     >
-                      <p className="ml-6.5 mt-1 text-[11px] font-medium leading-relaxed text-[#0B211B]/55">
+                      <p className="ml-6 mt-1 text-[11px] font-medium leading-relaxed text-[#0B211B]/55">
                         {g.note}
                       </p>
                     </motion.div>

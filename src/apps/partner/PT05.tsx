@@ -59,7 +59,7 @@ export function PT05() {
       <BodyArea>
         <div className="relative">
           <div aria-hidden className={`pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full blur-3xl ${tintMap[filter]}`} />
-          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-5 pt-1">
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
               <StaffHero
                 activeMembers={active}

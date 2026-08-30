@@ -26,7 +26,7 @@ export function PerformanceHero({ data, activeMonth, onMonthChange, onOpenFeedba
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">Performance · {data.month}</div>
-          <h2 className="mt-1.5 text-[18px] font-extrabold leading-tight tracking-tight text-white">Dr. Venkatesh</h2>
+          <h2 className="mt-1.5 text-[19px] font-extrabold leading-tight tracking-tight text-white">Dr. Venkatesh</h2>
           <p className="mt-0.5 text-[11.5px] font-semibold text-emerald-100/55">Physiotherapist · Sunrise panel</p>
           <p className="text-[10.5px] font-medium text-emerald-100/40">{data.week}</p>
         </div>

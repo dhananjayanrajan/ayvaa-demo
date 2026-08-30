@@ -23,13 +23,13 @@ export function StatementCarousel({ invoices, onSelect }: StatementCarouselProps
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={() => onSelect(inv)}
             className={cn(
-              'w-[148px] shrink-0 snap-start rounded-3xl p-4 text-left outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-emerald-500/40',
+              'w-[148px] shrink-0 snap-start rounded-2xl p-4 text-left outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-emerald-500/40',
               i === 0 ? 'bg-[#0B231C] shadow-[0_20px_44px_-24px_rgba(6,40,30,0.7)]' : 'bg-white ring-1 ring-inset ring-[#0B211B]/[0.08]',
             )}
           >
             <div className="flex items-center justify-between">
               <ReceiptText
-                className={cn('h-4.5 w-4.5', i === 0 ? 'text-emerald-300' : paid ? 'text-emerald-600' : 'text-[#0B211B]/35')}
+                className={cn('h-4 w-4', i === 0 ? 'text-emerald-300' : paid ? 'text-emerald-600' : 'text-[#0B211B]/35')}
                 strokeWidth={2.2}
                 aria-hidden
               />

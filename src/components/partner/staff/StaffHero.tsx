@@ -106,7 +106,7 @@ export function StaffHero({ activeMembers, pendingCount, pausedCount, activeFilt
   const theme = themeMap[currentFilter]
 
   return (
-    <div className={cn('relative overflow-hidden rounded-3xl p-5 shadow-xl', theme.cardBg)}>
+    <div className={cn('relative overflow-hidden rounded-[26px] p-5 shadow-xl', theme.cardBg)}>
       <div
         aria-hidden
         className={cn('pointer-events-none absolute -right-8 -top-12 h-48 w-48 rounded-full blur-3xl', theme.tint)}
