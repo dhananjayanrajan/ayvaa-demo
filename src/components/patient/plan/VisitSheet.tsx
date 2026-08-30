@@ -1,5 +1,6 @@
 import { HeartPulse, MapPin, ScrollText } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { FactRows } from './FactRows'
 import { CAREGIVER, GOALS_LOGGED, VITALS, visitFacts, type VisitDay } from '@/data/patientCarePlan'
 import { useRouter } from '@/lib/router'
@@ -44,32 +45,18 @@ export function VisitSheet({ day, onOpenCaregiver, onClose }: VisitSheetProps) {
         </div>
       }
     >
-      <div className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4">
-        <div aria-hidden className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full bg-emerald-400/20 blur-3xl" />
-        <div className="relative">
-          <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">Vitals recorded</div>
-          <div className="mt-3">
-            <FactRows rows={VITALS} />
-          </div>
-          <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-emerald-400/[0.12] px-3 py-2.5">
-            <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-emerald-100">All goals logged</span>
-            <span className="text-[10px] font-bold tabular-nums text-emerald-200/70">
-              {GOALS_LOGGED.done} of {GOALS_LOGGED.total}
-            </span>
-          </div>
+      <DarkPanel kicker="Vitals recorded">
+        <FactRows rows={VITALS} />
+        <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-emerald-400/[0.12] px-3 py-2.5">
+          <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-emerald-100">All goals logged</span>
+          <span className="text-[10px] font-bold tabular-nums text-emerald-200/70">
+            {GOALS_LOGGED.done} of {GOALS_LOGGED.total}
+          </span>
         </div>
-      </div>
+      </DarkPanel>
 
-      <div className="mt-3 overflow-hidden rounded-2xl bg-[#0B211B]/[0.03]">
-        {visitFacts(day).map((row, i) => (
-          <div key={row.label}>
-            {i > 0 && <div aria-hidden className="mx-3.5 h-px bg-[#0B211B]/[0.05]" />}
-            <div className="flex items-baseline justify-between gap-3 px-3.5 py-3">
-              <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40">{row.label}</span>
-              <span className="truncate text-[12.5px] font-bold tabular-nums text-[#0B211B]/80">{row.value}</span>
-            </div>
-          </div>
-        ))}
+      <div className="mt-3 rounded-2xl bg-[#0B211B]/[0.03] p-4">
+        <FactRows rows={visitFacts(day)} tone="light" />
       </div>
     </SheetShell>
   )

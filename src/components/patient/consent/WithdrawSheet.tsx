@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Check, Gavel, Loader2, PhoneCall, ScrollText } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { Check, Gavel, PhoneCall, ScrollText } from 'lucide-react'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { CONSENT, WITHDRAW_CONSEQUENCES } from '@/data/patientConsent'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
@@ -55,41 +57,17 @@ export function WithdrawSheet({ onRequested, onClose }: WithdrawSheetProps) {
       onClose={onClose}
       footer={
         <div className="flex flex-col gap-2.5">
-          <motion.button
+          <LifecycleButton
+            phase={phase}
+            tone="danger"
+            idleIcon={Gavel}
+            idleLabel="Yes, withdraw everything"
+            workingLabel="Requesting withdrawal…"
+            doneLabel="Withdrawal requested"
+            onPress={request}
+          />
+          <button
             type="button"
-            whileTap={phase === 'idle' ? { scale: 0.97 } : undefined}
-            onClick={request}
-            disabled={phase !== 'idle'}
-            aria-disabled={phase !== 'idle'}
-            className={cn(
-              'flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-colors',
-              phase === 'done'
-                ? 'bg-emerald-600'
-                : phase === 'working'
-                  ? 'cursor-wait bg-rose-500/60'
-                  : 'bg-gradient-to-r from-rose-600 to-red-500 shadow-[0_18px_36px_-18px_rgba(225,29,72,0.6)]',
-            )}
-          >
-            {phase === 'working' ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                <span className="truncate">Requesting withdrawal…</span>
-              </>
-            ) : phase === 'done' ? (
-              <>
-                <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-                <span className="truncate">Withdrawal requested</span>
-              </>
-            ) : (
-              <>
-                <Gavel className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-                <span className="truncate">Yes, withdraw everything</span>
-              </>
-            )}
-          </motion.button>
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.97 }}
             onClick={onClose}
             disabled={phase === 'working'}
             aria-disabled={phase === 'working'}
@@ -99,17 +77,13 @@ export function WithdrawSheet({ onRequested, onClose }: WithdrawSheetProps) {
             )}
           >
             Keep consent active
-          </motion.button>
+          </button>
         </div>
       }
     >
       <div className="flex flex-col gap-5 pb-2">
-        <div className="rounded-2xl bg-[#230D14] p-4">
-          <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-200/60">
-            <ScrollText className="h-3 w-3" aria-hidden />
-            What happens immediately
-          </div>
-          <div className="mt-3 flex flex-col gap-3">
+        <DarkPanel tone="rose" kicker="What happens immediately" kickerIcon={ScrollText} glow={false}>
+          <div className="flex flex-col gap-3">
             {WITHDRAW_CONSEQUENCES.map((line) => (
               <div key={line} className="flex items-start gap-2.5">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-300" aria-hidden />
@@ -119,7 +93,7 @@ export function WithdrawSheet({ onRequested, onClose }: WithdrawSheetProps) {
               </div>
             ))}
           </div>
-        </div>
+        </DarkPanel>
 
         <div className="flex items-start gap-2.5 rounded-2xl bg-[#0B211B]/[0.03] px-4 py-3.5">
           <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-[#0B211B]/50" strokeWidth={2.4} aria-hidden />

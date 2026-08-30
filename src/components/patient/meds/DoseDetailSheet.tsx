@@ -1,8 +1,8 @@
-import { motion } from 'motion/react'
-import { AlertTriangle, BellRing, Check, Loader2, Pill, ShieldCheck } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { AlertTriangle, BellRing, Pill, ShieldCheck } from 'lucide-react'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { buildDoseFacts, type MedDose } from '@/data/patientMeds'
-import { cn } from '@/lib/utils'
 
 type NudgePhase = 'idle' | 'working' | 'done'
 
@@ -24,47 +24,23 @@ export function DoseDetailSheet({ med, nurseFirst, nudgePhase, onNudge, onClose 
       onClose={onClose}
       footer={
         <div>
-          <motion.button
-            type="button"
-            whileTap={nudgePhase === 'idle' ? { scale: 0.97 } : undefined}
-            onClick={onNudge}
-            disabled={nudgePhase !== 'idle'}
-            aria-disabled={nudgePhase !== 'idle'}
-            className={cn(
-              'flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-[13px] font-bold text-white transition-colors',
-              nudgePhase === 'done'
-                ? 'bg-emerald-600'
-                : nudgePhase === 'working'
-                  ? 'cursor-wait bg-amber-500/60'
-                  : 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_18px_36px_-18px_rgba(245,158,11,0.75)]',
-            )}
-          >
-            {nudgePhase === 'working' ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                <span className="truncate">Notifying…</span>
-              </>
-            ) : nudgePhase === 'done' ? (
-              <>
-                <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-                <span className="truncate">Nurse notified</span>
-              </>
-            ) : (
-              <>
-                <BellRing className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-                <span className="truncate">Nudge {nurseFirst}</span>
-              </>
-            )}
-          </motion.button>
+          <LifecycleButton
+            phase={nudgePhase}
+            tone="warning"
+            idleIcon={BellRing}
+            idleLabel={`Nudge ${nurseFirst}`}
+            workingLabel="Notifying…"
+            doneLabel="Nurse notified"
+            onPress={onNudge}
+          />
           <p className="mt-2 text-center text-[10px] font-bold text-[#0B211B]/45">
             Given only after verification against the prescription
           </p>
         </div>
       }
     >
-      <div className="rounded-2xl bg-[#241A0B] p-4">
-        <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-amber-200/50">Dose record</div>
-        <div className="mt-3 flex flex-col gap-2.5">
+      <DarkPanel tone="amber" kicker="Dose record">
+        <div className="flex flex-col gap-2.5">
           {buildDoseFacts(med).map((row) => (
             <div key={row.label} className="flex items-baseline justify-between gap-3">
               <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-amber-100/45">
@@ -78,7 +54,7 @@ export function DoseDetailSheet({ med, nurseFirst, nudgePhase, onNudge, onClose 
           <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-amber-100/45">Instruction</div>
           <p className="mt-1 text-[11.5px] font-medium leading-snug text-amber-50/80">{med.instruction}</p>
         </div>
-      </div>
+      </DarkPanel>
 
       {med.interaction && (
         <div className="mt-3 rounded-2xl bg-rose-500/[0.08] px-4 py-3.5">

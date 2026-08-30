@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
-import { Check, Clock, Droplets, HeartPulse, Loader2, Pill, Plus, ShieldCheck, Stethoscope } from 'lucide-react'
+import { Check, Clock, Droplets, HeartPulse, Pill, Plus, ShieldCheck, Stethoscope } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { Meter, MiniBadge } from '@/components/phone/kit'
 import { PRESCRIBERS, RX_SCHEDULES, newPrescription, type Prescription } from '@/data/patientPrescriptions'
 import { useDemo } from '@/lib/store'
@@ -99,37 +100,14 @@ export function AddPrescriptionSheet({
       tone={phase === 'done' ? 'success' : 'info'}
       onClose={onClose}
       footer={
-        <motion.button
-          type="button"
-          whileTap={phase === 'idle' && ready ? { scale: 0.985 } : undefined}
-          onClick={submit}
-          disabled={phase !== 'idle' || !ready}
-          aria-disabled={phase !== 'idle' || !ready}
-          className={cn(
-            'flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-bold text-white transition-colors',
-            phase === 'done'
-              ? 'bg-emerald-600'
-              : phase === 'working'
-                ? 'cursor-wait bg-emerald-600/60'
-                : ready
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]'
-                  : 'cursor-not-allowed bg-[#0B211B]/[0.08] text-[#0B211B]/40',
-          )}
-        >
-          {phase === 'idle' && (ready ? 'Add prescription' : 'Fill medication and dose first')}
-          {phase === 'working' && (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-              Adding…
-            </>
-          )}
-          {phase === 'done' && (
-            <>
-              <Check className="h-4 w-4" strokeWidth={2.6} aria-hidden />
-              Added
-            </>
-          )}
-        </motion.button>
+        <LifecycleButton
+          phase={phase}
+          gated={!ready}
+          idleLabel={ready ? 'Add prescription' : 'Fill medication and dose first'}
+          workingLabel="Adding…"
+          doneLabel="Added"
+          onPress={submit}
+        />
       }
     >
       <div className="flex flex-col gap-3 pb-2">
@@ -244,56 +222,48 @@ export function AddPrescriptionSheet({
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl bg-[#0B231C]">
-          <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/20 blur-3xl" />
-          <div className="relative p-4">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
-                Ledger preview
+        <DarkPanel kicker="Ledger preview" kickerTrailing={
+          <MiniBadge icon={Clock} tone="amber" dark>
+            Awaiting nurse check
+          </MiniBadge>
+        }>
+          <div className="flex items-center gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-400/[0.16]">
+              <HeartPulse className="h-5 w-5 text-emerald-200" strokeWidth={2.2} aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[14px] font-extrabold tracking-tight text-white">
+                {name.trim() || 'New medication'}
               </span>
-              <MiniBadge icon={Clock} tone="amber" dark>
-                Awaiting nurse check
-              </MiniBadge>
-            </div>
-
-            <div className="mt-3 flex items-center gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-400/[0.16]">
-                <HeartPulse className="h-5 w-5 text-emerald-200" strokeWidth={2.2} aria-hidden />
+              <span className="mt-0.5 block truncate text-[11px] font-semibold text-emerald-100/55">
+                {dose.trim() || 'Dose pending'}
               </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[14px] font-extrabold tracking-tight text-white">
-                  {name.trim() || 'New medication'}
-                </span>
-                <span className="mt-0.5 block truncate text-[11px] font-semibold text-emerald-100/55">
-                  {dose.trim() || 'Dose pending'}
-                </span>
-              </span>
-            </div>
+            </span>
+          </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="rounded-xl bg-white/[0.06] px-3 py-2">
-                <div className="text-[8px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">Schedule</div>
-                <div className="mt-0.5 truncate text-[11px] font-extrabold text-white">{schedule}</div>
-              </div>
-              <div className="rounded-xl bg-white/[0.06] px-3 py-2">
-                <div className="text-[8px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">Prescriber</div>
-                <div className="mt-0.5 truncate text-[11px] font-extrabold text-white">{prescriber}</div>
-              </div>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-white/[0.06] px-3 py-2">
+              <div className="text-[8px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">Schedule</div>
+              <div className="mt-0.5 truncate text-[11px] font-extrabold text-white">{schedule}</div>
             </div>
-
-            <div className="mt-3">
-              <div className="flex items-center justify-between text-[9px] font-extrabold uppercase tracking-[0.14em]">
-                <span className={filled === 2 ? 'text-emerald-100/60' : 'text-amber-200/70'}>
-                  {ready ? 'Ready for the nurse' : 'Details missing'}
-                </span>
-                <span className={cn('tabular-nums', ready ? 'text-emerald-200' : 'text-amber-200')}>
-                  {Math.round((filled / 2) * 100)}%
-                </span>
-              </div>
-              <Meter value={filled / 2} intent={ready ? 'success' : 'warning'} delay={0.2} className="mt-2" />
+            <div className="rounded-xl bg-white/[0.06] px-3 py-2">
+              <div className="text-[8px] font-bold uppercase tracking-[0.14em] text-emerald-100/40">Prescriber</div>
+              <div className="mt-0.5 truncate text-[11px] font-extrabold text-white">{prescriber}</div>
             </div>
           </div>
-        </div>
+
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-[9px] font-extrabold uppercase tracking-[0.14em]">
+              <span className={filled === 2 ? 'text-emerald-100/60' : 'text-amber-200/70'}>
+                {ready ? 'Ready for the nurse' : 'Details missing'}
+              </span>
+              <span className={cn('tabular-nums', ready ? 'text-emerald-200' : 'text-amber-200')}>
+                {Math.round((filled / 2) * 100)}%
+              </span>
+            </div>
+            <Meter value={filled / 2} intent={ready ? 'success' : 'warning'} delay={0.2} className="mt-2" />
+          </div>
+        </DarkPanel>
       </div>
     </SheetShell>
   )

@@ -1,9 +1,9 @@
-import { motion } from 'motion/react'
 import { Check, Clock } from 'lucide-react'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { LifecycleButton } from '@/components/phone/LifecycleButton'
+import { OptionRow } from '@/components/phone/OptionRow'
 import { fmtINR, timeWindows } from '@/data/patientBooking'
 import type { DurationOption, TimeWindow } from '@/data/patientBooking'
-import { cn } from '@/lib/utils'
 import { Radio } from './Radio'
 
 export function TimeSheet({
@@ -25,66 +25,38 @@ export function TimeSheet({
   onSet: () => void
   onClose: () => void
 }) {
+  const durationLabel = durationOptions.find((d) => d.option.id === duration)?.option.label
   return (
     <SheetShell
       icon={Clock}
-      tileTone="info"
+      tone="info"
       title="Visit window and duration"
       subtitle={`${visitCount} ${visitCount === 1 ? 'visit' : 'visits'}, caregivers matched to this exact window`}
       onClose={onClose}
       footer={
-        <motion.button
-          type="button"
-          whileTap={{ scale: 0.97 }}
-          onClick={onSet}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-[13px] font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"
-        >
-          <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-          Set {win.label.toLowerCase()}, {durationOptions.find((d) => d.option.id === duration)?.option.label}
-        </motion.button>
+        <LifecycleButton
+          phase="idle"
+          idleIcon={Check}
+          idleLabel={`Set ${win.label.toLowerCase()}, ${durationLabel}`}
+          workingLabel="Setting"
+          doneLabel="Set"
+          onPress={onSet}
+        />
       }
     >
       <div className="flex flex-col gap-2">
         {timeWindows.map((w) => {
           const active = win.id === w.id
-          const Icon = w.icon
           return (
-            <motion.button
+            <OptionRow
               key={w.id}
-              type="button"
-              whileTap={{ scale: 0.985 }}
-              onClick={() => onWindow(w.id)}
-              aria-pressed={active}
-              className={cn(
-                'flex items-center gap-3 rounded-2xl px-4 py-3.5 text-left transition-colors',
-                active ? 'bg-emerald-500/[0.08]' : 'bg-[#0B211B]/[0.03] hover:bg-[#0B211B]/[0.055]',
-              )}
-            >
-              <span
-                className={cn(
-                  'grid h-9 w-9 shrink-0 place-items-center rounded-xl',
-                  active
-                    ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_6px_14px_-6px_rgba(16,185,129,0.8)]'
-                    : 'bg-[#0B211B]/[0.05] text-[#0B211B]/55',
-                )}
-              >
-                <Icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span
-                  className={cn(
-                    'block text-[13px] font-bold leading-snug tracking-tight',
-                    active ? 'text-emerald-800' : 'text-[#0B211B]/70',
-                  )}
-                >
-                  {w.label}
-                </span>
-                <span className="block text-[11px] font-bold tabular-nums leading-snug text-[#0B211B]/45">
-                  {w.time}
-                </span>
-              </span>
-              <Radio active={active} />
-            </motion.button>
+              selected={active}
+              onSelect={() => onWindow(w.id)}
+              icon={w.icon}
+              title={w.label}
+              sub={w.time}
+              trailing={<Radio active={active} />}
+            />
           )
         })}
       </div>
@@ -101,32 +73,14 @@ export function TimeSheet({
         {durationOptions.map(({ option, weekly }) => {
           const active = duration === option.id
           return (
-            <motion.button
+            <OptionRow
               key={option.id}
-              type="button"
-              whileTap={{ scale: 0.985 }}
-              onClick={() => onDuration(option.id)}
-              aria-pressed={active}
-              className={cn(
-                'flex items-center gap-3 rounded-2xl px-4 py-3.5 text-left transition-colors',
-                active ? 'bg-emerald-500/[0.08]' : 'bg-[#0B211B]/[0.03] hover:bg-[#0B211B]/[0.055]',
-              )}
-            >
-              <span className="min-w-0 flex-1">
-                <span
-                  className={cn(
-                    'block text-[13px] font-bold leading-snug tracking-tight',
-                    active ? 'text-emerald-800' : 'text-[#0B211B]/70',
-                  )}
-                >
-                  {option.label}
-                </span>
-                <span className="block text-pretty text-[10.5px] font-semibold leading-snug text-[#0B211B]/40">
-                  {visitCount > 1 ? `${fmtINR(weekly)} per week` : fmtINR(option.price)}
-                </span>
-              </span>
-              <Radio active={active} />
-            </motion.button>
+              selected={active}
+              onSelect={() => onDuration(option.id)}
+              title={option.label}
+              sub={visitCount > 1 ? `${fmtINR(weekly)} per week` : fmtINR(option.price)}
+              trailing={<Radio active={active} />}
+            />
           )
         })}
       </div>

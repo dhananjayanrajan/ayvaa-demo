@@ -1,5 +1,6 @@
 import { ScrollText, ShieldCheck, ShieldOff } from 'lucide-react'
-import { SheetShell } from '@/components/patient/matching/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { FactRows } from './FactRows'
 import { consentScopeRows } from '@/data/patientCarePlan'
 import { useRouter } from '@/lib/router'
@@ -58,15 +59,9 @@ export function ConsentSheet({ onClose }: ConsentSheetProps) {
         </div>
       }
     >
-      <div className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4">
-        <div aria-hidden className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full bg-emerald-400/20 blur-3xl" />
-        <div className="relative">
-          <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">Consent scope</div>
-          <div className="mt-3">
-            <FactRows rows={consentScopeRows()} />
-          </div>
-        </div>
-      </div>
+      <DarkPanel kicker="Consent scope">
+        <FactRows rows={consentScopeRows()} />
+      </DarkPanel>
 
       <p className="mt-3 pb-2 text-[11px] font-medium leading-relaxed text-[#0B211B]/50">
         Withdrawing pauses care at the next visit boundary. Every access to these records is in your audit log.

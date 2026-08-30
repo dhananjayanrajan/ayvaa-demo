@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { MapPin } from 'lucide-react'
-import { SheetShell } from '@/components/patient/onboarding/SheetShell'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { CallButton } from './CallButton'
 import { liveSteps } from '@/data/patientDashboard'
 import { useRouter } from '@/lib/router'
@@ -18,7 +19,7 @@ export function LiveVisitSheet({
   return (
     <SheetShell
       icon={MapPin}
-      tileTone="success"
+      tone="success"
       title={`Live with ${lovedFirstName}`}
       subtitle={`${caregiverFullName}, arrived 2:04 PM and leaves around 4:00 PM`}
       onClose={onClose}
@@ -41,42 +42,36 @@ export function LiveVisitSheet({
         </div>
       }
     >
-      <div className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4">
-        <div aria-hidden className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full bg-emerald-400/20 blur-3xl" />
-        <div className="relative">
-          <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/60">
-            Care steps
-          </div>
-          <div className="mt-3 flex flex-col gap-3">
-            {liveSteps.map((step) => (
-              <div key={step.key} className="flex items-center justify-between gap-3">
-                <span className="min-w-0 text-[12.5px] font-bold tracking-tight text-emerald-50/90">
-                  {step.label}
-                </span>
-                <span
-                  className={
-                    step.state === 'done'
-                      ? 'shrink-0 text-[11.5px] font-bold text-emerald-300'
-                      : step.state === 'active'
-                        ? 'shrink-0 rounded-full bg-emerald-400/[0.16] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-200'
-                        : 'shrink-0 text-[11.5px] font-bold text-emerald-100/40'
-                  }
-                >
-                  {step.state === 'done'
-                    ? 'Done'
+      <DarkPanel kicker="Care steps">
+        <div className="flex flex-col gap-3">
+          {liveSteps.map((step) => (
+            <div key={step.key} className="flex items-center justify-between gap-3">
+              <span className="min-w-0 text-[12.5px] font-bold tracking-tight text-emerald-50/90">
+                {step.label}
+              </span>
+              <span
+                className={
+                  step.state === 'done'
+                    ? 'shrink-0 text-[11.5px] font-bold text-emerald-300'
                     : step.state === 'active'
-                      ? 'In progress'
-                      : 'Pending'}
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-pretty text-[11px] font-medium leading-relaxed text-emerald-100/60">
-            Each step is written to the visit record as the nurse completes it, with vitals and
-            medication entries sealed on sign-off.
-          </p>
+                      ? 'shrink-0 rounded-full bg-emerald-400/[0.16] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-200'
+                      : 'shrink-0 text-[11.5px] font-bold text-emerald-100/40'
+                }
+              >
+                {step.state === 'done'
+                  ? 'Done'
+                  : step.state === 'active'
+                    ? 'In progress'
+                    : 'Pending'}
+              </span>
+            </div>
+          ))}
         </div>
-      </div>
+        <p className="mt-4 text-pretty text-[11px] font-medium leading-relaxed text-emerald-100/60">
+          Each step is written to the visit record as the nurse completes it, with vitals and
+          medication entries sealed on sign-off.
+        </p>
+      </DarkPanel>
     </SheetShell>
   )
 }
