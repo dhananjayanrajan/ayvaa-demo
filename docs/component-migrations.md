@@ -96,3 +96,12 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Normalizations flagged: disabled-idle opacity-45 → canonical gated treatment; done states emerald-500+shadow → solid emerald-600
 - Pre-existing A05.tsx modification (Pager import re-point from part 1 sed) included in commit
 - Verified: npx tsc --noEmit clean
+
+## B7 — Status, chips, and notices
+
+- components/phone/NoteStrip.tsx → new | Panel+Tile+paragraph canonical note strip | replaces 9 byte-identical hand-rolls (RecheckNote, ConsentNote, VerificationNote, ReliabilityNotice, PayPolicyNotice, SafetyNotice, PrivacyNotice, 2x SealedNotice)
+- Domain note components retained as thin wrappers over NoteStrip (per-domain icon, intent, text preserved; zero consumer changes)
+- components/patient/matching/StatusPill.tsx → promoted to components/phone/StatusPill.tsx | content unchanged | absolute and relative imports repointed (MatchHero, MatchCard relative-import blind spot caught by targeted grep)
+- professional/sheets/SheetFooterNote.tsx → wrapper over CtaNote | visual preserved
+- Deferred with reasons: DarkTimeChip (single consumer, hub edit not worth risk — F3 residual), HighlightTags (F12 tag picker, merges with CausePicker), SectionHeader vs kit Section (state-driven vs static, genuinely different), ListRow (F5), FilterBar (F9)
+- Verified: npx tsc --noEmit clean; stale StatusPill references zero

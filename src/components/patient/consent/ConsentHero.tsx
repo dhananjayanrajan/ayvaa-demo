@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { CalendarClock, PhoneCall, ShieldCheck } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { Meter } from '@/components/phone/kit'
 import { CONSENT } from '@/data/patientConsent'

@@ -1,6 +1,6 @@
 import { useRouter } from '@/lib/router'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { initialsOf } from '@/data/patientMatching'
 import { REVIEW_MATCH } from '@/data/patientReview'
 import { BadgeCheck, ChevronRight, Send, Star } from 'lucide-react'

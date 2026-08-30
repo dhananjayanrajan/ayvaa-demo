@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, Send } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { dispatchSteps } from '@/data/patientReview'
 
 export function DispatchSequence() {

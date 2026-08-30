@@ -1,7 +1,7 @@
 import { BadgeCheck, Stethoscope } from 'lucide-react'
 import { Ring } from '@/components/phone/kit'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow } from '@/components/phone/HeroCells'
 import { initialsOf, type OfferState } from '@/data/patientMatching'
 

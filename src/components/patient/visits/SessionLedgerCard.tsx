@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Footprints, MapPin } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { SESSION_LEDGER } from '@/data/patientVisitSummary'
 
 function TimeCell({ label, value, sub }: { label: string; value: string; sub: string }) {

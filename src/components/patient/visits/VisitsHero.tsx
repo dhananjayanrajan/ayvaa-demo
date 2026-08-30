@@ -1,6 +1,6 @@
 import { ShieldCheck } from 'lucide-react'
 import { AccentHero } from '@/components/admin/ui/AccentHero'
-import { StatusPill } from '@/components/patient/matching/StatusPill'
+import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { USUAL_CAREGIVER, confirmedCount, missedVisits, upcomingVisits } from '@/data/patientVisits'
 
