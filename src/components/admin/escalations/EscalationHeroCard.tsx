@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
-import { Chip, rise } from '@/components/phone/kit'
-import { WarnHero } from '@/components/admin/escalations/WarnHero'
+import { Chip, Hero, rise } from '@/components/phone/kit'
 import { escalatedTickets } from '@/data/seed'
 
 export function EscalationHeroCard() {
@@ -8,7 +7,7 @@ export function EscalationHeroCard() {
 
   return (
     <motion.div variants={rise}>
-      <WarnHero>
+      <Hero tone="amber">
         <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-amber-200/50">
           Escalation · judgment call
         </div>
@@ -32,7 +31,7 @@ export function EscalationHeroCard() {
             Human decision required
           </Chip>
         </div>
-      </WarnHero>
+      </Hero>
     </motion.div>
   )
 }
