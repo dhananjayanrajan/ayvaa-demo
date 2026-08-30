@@ -226,17 +226,51 @@ export function Panel({
   return <div className={cn('rounded-2xl', PANEL_TINT[intent], className)}>{children}</div>
 }
 
-export function Hero({ className, children }: { className?: string; children: ReactNode }) {
+const HERO_TONE: Record<
+  'emerald' | 'amber' | 'rose',
+  { border: string; shell: string; orbA: string; orbB: string; hairline: string; shadow: string }
+> = {
+  emerald: {
+    border: 'border-emerald-200/10',
+    shell: 'bg-[#0B231C]',
+    orbA: 'bg-emerald-400/25',
+    orbB: 'bg-teal-300/15',
+    hairline: 'via-emerald-200/40',
+    shadow: 'shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]',
+  },
+  amber: {
+    border: 'border-amber-200/10',
+    shell: 'bg-[#241A0B]',
+    orbA: 'bg-amber-400/25',
+    orbB: 'bg-orange-400/10',
+    hairline: 'via-amber-200/40',
+    shadow: 'shadow-[0_28px_64px_-30px_rgba(60,42,8,0.7)]',
+  },
+  rose: {
+    border: 'border-rose-200/10',
+    shell: 'bg-[#230D14]',
+    orbA: 'bg-rose-500/25',
+    orbB: 'bg-orange-400/10',
+    hairline: 'via-rose-300/40',
+    shadow: 'shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]',
+  },
+}
+
+export function Hero({
+  tone = 'emerald',
+  className,
+  children,
+}: {
+  tone?: 'emerald' | 'amber' | 'rose'
+  className?: string
+  children: ReactNode
+}) {
+  const t = HERO_TONE[tone]
   return (
-    <div
-      className={cn(
-        'relative overflow-hidden rounded-[26px] border border-emerald-200/10 bg-[#0B231C] shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]',
-        className,
-      )}
-    >
-      <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-emerald-400/25 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-teal-300/15 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 to-transparent" />
+    <div className={cn('relative overflow-hidden rounded-[26px] border', t.border, t.shell, t.shadow, className)}>
+      <div aria-hidden className={cn('pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full blur-3xl', t.orbA)} />
+      <div aria-hidden className={cn('pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full blur-3xl', t.orbB)} />
+      <div aria-hidden className={cn('pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent', t.hairline)} />
       <div className="relative p-5">{children}</div>
     </div>
   )
