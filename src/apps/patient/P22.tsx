@@ -1,225 +1,227 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import {
-  CalendarDays,
-  Check,
-  ChevronDown,
-  ChevronRight,
-  Gavel,
-  Lock,
-  MapPin,
-  ScrollText,
-  ShieldCheck,
-  X,
-} from 'lucide-react'
+import { Clock, ShieldCheck, Undo2 } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Expand, Hero, Kicker, Meter, Panel, Section, Stat, Tile, rise, stagger } from '@/components/phone/kit'
-import { consent, guardian, lovedOnes } from '@/data/seed'
-import { useDemo } from '@/lib/store'
+import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
-import { cn } from '@/lib/utils'
+import { useDemo } from '@/lib/store'
+import { CONSENT, LOCATION_DEFAULT, SCOPES, changeCountOf } from '@/data/patientConsent'
+import { ConsentHero } from '@/components/patient/consent/ConsentHero'
+import { ScopesCard } from '@/components/patient/consent/ScopesCard'
+import { WithdrawCard } from '@/components/patient/consent/WithdrawCard'
+import { WithdrawSheet } from '@/components/patient/consent/WithdrawSheet'
 
-const scopeDetail: Record<string, string> = {
-  'Personal care': 'Mobility, meals, hygiene and companionship during every visit',
-  'Medication management': 'Nurse gives and records prescribed doses with three-point verification',
-  'Health monitoring': 'Vitals logged each visit and shared with your care team',
-}
+type SealPhase = 'idle' | 'working' | 'done'
 
 export function P22() {
   const { notify } = useDemo()
   const { navigate } = useRouter()
-  const father = lovedOnes[0]
-  const [scopes, setScopes] = useState<string[]>(consent.covers)
-  const [location, setLocation] = useState(consent.locationTracking)
+  const [grantedIds, setGrantedIds] = useState<string[]>(SCOPES.map((s) => s.id))
+  const [location, setLocation] = useState(LOCATION_DEFAULT)
+  const [edits, setEdits] = useState(0)
+  const [sealPhase, setSealPhase] = useState<SealPhase>('idle')
+  const [withdrawRequested, setWithdrawRequested] = useState(false)
   const [withdrawOpen, setWithdrawOpen] = useState(false)
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+  useEffect(() => () => timers.current.forEach(clearTimeout), [])
 
-  const toggleScope = (s: string) =>
-    setScopes((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))
+  const locked = withdrawRequested || sealPhase !== 'idle'
+  const pending = changeCountOf(grantedIds, location)
 
-  const daysLeft = 23
+  const toggleScope = (id: string) => {
+    if (locked) return
+    setGrantedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
+
+  const toggleLocation = () => {
+    if (locked) return
+    setLocation((v) => !v)
+  }
+
+  const undoChanges = () => {
+    if (locked || pending === 0) return
+    setGrantedIds(SCOPES.map((s) => s.id))
+    setLocation(LOCATION_DEFAULT)
+    notify({
+      title: 'Changes undone',
+      body: 'Back to the consent as it was last sealed',
+      kind: 'info',
+    })
+  }
+
+  const seal = () => {
+    if (sealPhase !== 'idle' || pending === 0 || withdrawRequested) return
+    setSealPhase('working')
+    timers.current.push(
+      setTimeout(() => {
+        setSealPhase('done')
+        setEdits((n) => n + 1)
+        notify({
+          title: 'Consent sealed',
+          body: `${SCOPES.filter((s) => grantedIds.includes(s.id)).length} scopes approved, sealed and logged`,
+          kind: 'ok',
+        })
+      }, 1100),
+    )
+    timers.current.push(setTimeout(() => setSealPhase('idle'), 2400))
+  }
 
   return (
     <Screen>
       <AppBar
         title="Care consent"
-        subtitle={`${father.name} · sealed record`}
+        subtitle={`${CONSENT.patientFirst}, sealed record`}
         onBack={() => navigate('/patient/p21')}
       />
       <BodyArea>
         <div className="relative">
-          <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl"
+          />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <Hero>
-                <div className="flex items-start justify-between gap-3">
-                  <Kicker>Consent ledger · sealed</Kicker>
-                  <Chip intent="success" light icon={Lock} className="shrink-0 border-transparent">
-                    Active
-                  </Chip>
-                </div>
-                <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-                  {father.name.split(' ')[0]}'s care,{' '}
-                  <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">on your terms</span>
-                </h2>
-
-                <div className="mt-4 rounded-2xl bg-white/[0.06] p-3.5">
-                  <div className="flex items-center justify-between text-[9px] font-extrabold uppercase tracking-[0.14em] text-emerald-100/50">
-                    <span>90-day cycle</span>
-                    <span className="text-emerald-200">renewal due {consent.reviewDue}</span>
-                  </div>
-                  <Meter value={(90 - daysLeft) / 90} intent="success" delay={0.2} className="mt-2.5" />
-                  <div className="mt-2 flex items-center justify-between font-mono text-[10px] font-bold text-emerald-100/45">
-                    <span>Signed {consent.signed}</span>
-                    <span>{daysLeft} days left</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 grid grid-cols-3 divide-x divide-white/[0.08]">
-                  <Stat label="Scopes" value={scopes.length} dot="bg-emerald-300" />
-                  <Stat label="Signed by" value="You" dot="bg-teal-300" />
-                  <Stat label="Edits" value="0" dot="bg-sky-300/80" />
-                </div>
-              </Hero>
+              <ConsentHero
+                patientFirst={CONSENT.patientFirst}
+                grantedCount={grantedIds.length}
+                totalScopes={SCOPES.length}
+                edits={edits}
+                pending={pending > 0}
+                withdrawalRequested={withdrawRequested}
+              />
             </motion.div>
 
             <motion.div variants={rise}>
               <Section
                 label="What you are approving"
-                trailing={<Chip intent={scopes.length === consent.covers.length ? 'success' : 'warning'}>{scopes.length} active</Chip>}
+                trailing={
+                  withdrawRequested ? (
+                    <Chip intent="danger" dot>
+                      Locked
+                    </Chip>
+                  ) : pending > 0 ? (
+                    <Chip intent="warning" dot>
+                      {pending} pending
+                    </Chip>
+                  ) : (
+                    <Chip intent="success">As sealed</Chip>
+                  )
+                }
               />
             </motion.div>
 
             <motion.div variants={rise}>
-              <Card>
-                {consent.covers.map((s, i) => {
-                  const on = scopes.includes(s)
-                  return (
-                    <div key={s}>
-                      {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-                      <motion.button
-                        type="button"
-                        whileTap={{ scale: 0.985 }}
-                        onClick={() => toggleScope(s)}
-                        className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
-                      >
-                        <span
-                          className={cn(
-                            'grid h-[22px] w-[22px] shrink-0 place-items-center rounded-lg transition-colors',
-                            on ? 'bg-emerald-500 text-white' : 'bg-[#0B211B]/[0.1] text-transparent',
-                          )}
-                        >
-                          <Check className="h-3.5 w-3.5" strokeWidth={3.5} aria-hidden />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <div className="truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">{s}</div>
-                          <div className="mt-0.5 truncate text-[11px] font-semibold text-[#0B211B]/45">{scopeDetail[s]}</div>
-                        </div>
-                        <Chip intent={on ? 'success' : 'neutral'} dot={!on}>
-                          {on ? 'Granted' : 'Revoked'}
-                        </Chip>
-                      </motion.button>
-                    </div>
-                  )
-                })}
+              <ScopesCard
+                grantedIds={grantedIds}
+                location={location}
+                disabled={locked}
+                onToggleScope={toggleScope}
+                onToggleLocation={toggleLocation}
+              />
+            </motion.div>
 
-                <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-
-                <div className="flex items-center gap-3 px-4 py-3.5">
-                  <span
-                    className={cn(
-                      'grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors',
-                      location ? 'bg-emerald-500/[0.12] text-emerald-600' : 'bg-[#0B211B]/[0.05] text-[#0B211B]/40',
-                    )}
-                  >
-                    <MapPin className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+            <AnimatePresence>
+              {withdrawRequested ? (
+                <motion.div
+                  key="withdraw-strip"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  className="flex items-start gap-2.5 rounded-xl bg-rose-500/[0.1] px-3.5 py-3"
+                >
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-rose-500 text-white">
+                    <Clock className="h-3 w-3" strokeWidth={2.8} aria-hidden />
                   </span>
-                  <div className="min-w-0 flex-1">
-                    <div className={cn('truncate text-[13.5px] font-bold tracking-tight', location ? 'text-[#0B211B]' : 'text-[#0B211B]/50')}>
-                      Location tracking during visits
-                    </div>
-                    <div className="mt-0.5 truncate text-[11px] font-semibold text-[#0B211B]/45">
-                      Optional · verifies arrivals on the visit log
-                    </div>
+                  <span className="min-w-0 break-words text-[10.5px] font-bold leading-snug text-rose-700">
+                    Consent edits are locked until the withdrawal is confirmed or cancelled.
+                  </span>
+                </motion.div>
+              ) : pending > 0 ? (
+                <motion.div
+                  key="pending-block"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  className="flex flex-col gap-2"
+                >
+                  <div className="flex items-start gap-2.5 rounded-xl bg-amber-500/[0.12] px-3.5 py-3">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber-500 text-white">
+                      <Clock className="h-3 w-3" strokeWidth={2.8} aria-hidden />
+                    </span>
+                    <span className="min-w-0 break-words text-[10.5px] font-bold leading-snug text-amber-800">
+                      {pending} {pending === 1 ? 'change waits' : 'changes wait'} to be sealed. Care keeps running on
+                      the sealed version until then.
+                    </span>
                   </div>
-                  <button
+                  <motion.button
                     type="button"
-                    onClick={() => {
-                      setLocation((v) => !v)
-                      notify({
-                        title: location ? 'Location tracking off' : 'Location tracking on',
-                        body: location ? 'Arrivals will show as unverified' : 'Arrivals verify against the care address',
-                        kind: 'info',
-                      })
-                    }}
-                    aria-label="Toggle location tracking"
-                    className={cn(
-                      'relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200',
-                      location ? 'bg-emerald-500' : 'bg-[#0B211B]/[0.15]',
-                    )}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={undoChanges}
+                    className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-[#0B211B]/[0.05] py-3 text-[12.5px] font-bold text-[#0B211B]/70 transition-colors duration-200 hover:bg-[#0B211B]/[0.09]"
                   >
-                    <span
-                      className={cn(
-                        'absolute top-1 h-5 w-5 rounded-full bg-white shadow-[0_2px_6px_rgba(11,33,27,0.3)] transition-all duration-200',
-                        location ? 'left-6' : 'left-1',
-                      )}
-                    />
-                  </button>
-                </div>
-              </Card>
+                    <Undo2 className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
+                    <span className="truncate">Undo {pending} {pending === 1 ? 'change' : 'changes'}</span>
+                  </motion.button>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+
+            <motion.div variants={rise}>
+              <Section label="Ending consent" />
             </motion.div>
 
             <motion.div variants={rise}>
-              <Panel intent="info" className="flex items-start gap-3 p-4">
-                <Tile icon={CalendarDays} tone="info" />
-                <p className="min-w-0 flex-1 pt-0.5 text-pretty text-xs font-medium leading-relaxed text-[#0B211B]/65">
-                  Consent is re-confirmed every {consent.cycleDays} days. Care pauses automatically if a review is missed, so nothing
-                  happens without your approval.
-                </p>
-              </Panel>
+              <WithdrawCard
+                requested={withdrawRequested}
+                onOpen={() => setWithdrawOpen(true)}
+                onCancel={() => setWithdrawRequested(false)}
+              />
             </motion.div>
 
             <motion.div variants={rise}>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.985 }}
-                onClick={() => setWithdrawOpen(true)}
-                className="block w-full text-left"
-              >
-                <Card intent="danger">
-                  <div className="flex items-center gap-3.5 p-4">
-                    <Tile icon={Gavel} tone="danger" size="lg" />
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">Withdraw consent</div>
-                      <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">
-                        Stops all care immediately · sealed record kept
-                      </div>
-                    </div>
-                    <ChevronRight className="h-4 w-4 shrink-0 text-rose-500/60" aria-hidden />
-                  </div>
-                </Card>
-              </motion.button>
-            </motion.div>
-
-            <motion.div variants={rise}>
-              <EndOfScroll label="Ayvaa consent · sealed record" />
+              <EndOfScroll label="Ayvaa consent, sealed record" />
             </motion.div>
           </motion.div>
         </div>
       </BodyArea>
       <FootBar>
-        <motion.button
-          type="button"
-          whileTap={{ scale: 0.97 }}
-          onClick={() => {
-            notify({ title: 'Consent re-confirmed', body: `${scopes.length} scopes approved · sealed and logged`, kind: 'ok' })
-            navigate('/patient/p21')
-          }}
-          className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"
-        >
-          <ShieldCheck className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-          Re-confirm and seal
-        </motion.button>
+        {sealPhase === 'done' ? (
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setSealPhase('idle')}
+            className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-emerald-500 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(16,185,129,0.8)]"
+          >
+            <ShieldCheck className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
+            <span className="truncate">Consent sealed, keep editing</span>
+          </motion.button>
+        ) : (
+          <motion.button
+            type="button"
+            whileTap={pending > 0 && sealPhase === 'idle' && !withdrawRequested ? { scale: 0.97 } : undefined}
+            onClick={seal}
+            disabled={pending === 0 || sealPhase !== 'idle' || withdrawRequested}
+            aria-disabled={pending === 0 || sealPhase !== 'idle' || withdrawRequested}
+            className={`flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-colors ${
+              sealPhase === 'working'
+                ? 'cursor-wait bg-emerald-600/60 text-white/80'
+                : pending === 0 || withdrawRequested
+                  ? 'cursor-not-allowed bg-[#0B211B]/[0.06] text-[#0B211B]/30'
+                  : 'bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]'
+            }`}
+          >
+            {sealPhase === 'working' && <Clock className="h-4 w-4 shrink-0 animate-pulse" aria-hidden />}
+            {sealPhase === 'idle' && <ShieldCheck className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />}
+            {withdrawRequested
+              ? 'Sealing locked during withdrawal'
+              : pending === 0
+                ? 'No pending changes to seal'
+                : sealPhase === 'idle'
+                  ? `Seal ${pending} ${pending === 1 ? 'change' : 'changes'}`
+                  : 'Sealing your consent'}
+          </motion.button>
+        )}
       </FootBar>
 
       <AnimatePresence>
@@ -229,6 +231,7 @@ export function P22() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={() => setWithdrawOpen(false)}
             className="absolute inset-0 z-40 bg-[rgba(15,26,22,0.5)] backdrop-blur-[2px]"
           />
@@ -237,76 +240,11 @@ export function P22() {
 
       <AnimatePresence>
         {withdrawOpen && (
-          <motion.div
-            key="sheet"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-            className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-          >
-            <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
-
-            <div className="flex items-start gap-3">
-              <Tile icon={Gavel} tone="danger" size="lg" />
-              <div className="min-w-0 flex-1">
-                <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Withdraw all consent?</div>
-                <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                  This stops all care for {father.name} immediately. A supervisor will call you to confirm before the final seal.
-                </div>
-              </div>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.92 }}
-                onClick={() => setWithdrawOpen(false)}
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
-                aria-label="Keep consent"
-              >
-                <X className="h-4 w-4" aria-hidden />
-              </motion.button>
-            </div>
-
-            <div className="rounded-3xl bg-[#230D14] p-4">
-              <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.18em] text-rose-200/60">
-                <ScrollText className="h-3 w-3" aria-hidden />
-                What happens immediately
-              </div>
-              <div className="mt-3 flex flex-col gap-2.5">
-                {[
-                  'Today\'s remaining visit is cancelled',
-                  'Caregivers lose all access within minutes',
-                  'A sealed withdrawal record enters the audit trail',
-                  'Records stay yours · nothing is deleted',
-                ].map((e) => (
-                  <div key={e} className="flex items-center gap-2.5">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-300" />
-                    <span className="min-w-0 flex-1 text-[12px] font-semibold leading-snug text-rose-50/85">{e}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.97 }}
-              onClick={() => {
-                setWithdrawOpen(false)
-                notify({ title: 'Withdrawal started', body: 'A supervisor will call within 10 minutes to confirm', kind: 'warn' })
-              }}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-rose-600 to-red-500 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(225,29,72,0.6)]"
-            >
-              <Gavel className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-              Yes, withdraw everything
-            </motion.button>
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.97 }}
-              onClick={() => setWithdrawOpen(false)}
-              className="w-full rounded-2xl bg-[#0B211B]/[0.05] py-3.5 text-sm font-bold text-[#0B211B]/70"
-            >
-              Keep consent active
-            </motion.button>
-          </motion.div>
+          <WithdrawSheet
+            key="withdraw-sheet"
+            onRequested={() => setWithdrawRequested(true)}
+            onClose={() => setWithdrawOpen(false)}
+          />
         )}
       </AnimatePresence>
     </Screen>
