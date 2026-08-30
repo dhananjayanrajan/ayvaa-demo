@@ -14,7 +14,7 @@ export function SessionRecordCard({ session, onOpen }: Props) {
       type="button"
       whileTap={{ scale: 0.985 }}
       onClick={onOpen}
-      className="block w-full rounded-3xl bg-white p-5 text-left shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)] transition-shadow hover:shadow-[0_1px_2px_rgba(11,33,27,0.06),0_24px_52px_-22px_rgba(11,33,27,0.35)]"
+      className="block w-full rounded-2xl bg-white p-5 text-left shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)] transition-shadow hover:shadow-[0_1px_2px_rgba(11,33,27,0.06),0_24px_52px_-22px_rgba(11,33,27,0.35)]"
     >
       <div className="flex items-center justify-between gap-3">
         <span className="font-mono text-[15px] font-extrabold tabular-nums tracking-tight text-[#0B211B]">{session.date}</span>

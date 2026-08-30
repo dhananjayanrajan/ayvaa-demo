@@ -28,7 +28,7 @@ export function OnboardingHero({ name, role, licence, initials }: OnboardingHero
         </span>
         <div className="min-w-0 flex-1">
           <Kicker>Onboarding · final step</Kicker>
-          <h2 className="mt-1.5 text-[18px] font-extrabold leading-tight tracking-tight text-white">
+          <h2 className="mt-1.5 text-[19px] font-extrabold leading-tight tracking-tight text-white">
             {name}
           </h2>
           <p className="mt-0.5 text-[12px] font-semibold leading-snug text-emerald-100/55">

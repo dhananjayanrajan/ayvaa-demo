@@ -43,7 +43,7 @@ export function SessionDetailSheet({ session, onClose, onCall, onDirections }: S
         <div className="flex items-start gap-3">
           <Tile icon={Icon} tone="success" size="lg" />
           <div className="min-w-0 flex-1">
-            <h3 className="text-[17px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{session.title}</h3>
+            <h3 className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{session.title}</h3>
             <div className="mt-1 flex items-center gap-2">
               <span className="text-[11px] font-bold text-[#0B211B]/50">{session.time}</span>
               <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-700">Confirmed</span>

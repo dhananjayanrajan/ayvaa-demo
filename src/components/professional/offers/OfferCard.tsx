@@ -96,7 +96,7 @@ export function OfferCard({ offer, onAccept, onDecline }: OfferCardProps) {
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <div className={cn('text-[15px] font-extrabold leading-snug tracking-tight', theme.title)}>
+            <div className={cn('text-sm font-extrabold leading-snug tracking-tight', theme.title)}>
               {offer.title}
             </div>
             <div className={cn('mt-0.5 text-xs font-semibold', theme.body)}>

@@ -34,11 +34,11 @@ export function LiveSessionCard({
   return (
     <Card intent="success" className="overflow-hidden">
       <div className="p-5">
-        <div className="flex items-start gap-3.5">
+        <div className="flex items-start gap-3">
           <Tile icon={Activity} tone="success" size="lg" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{title}</span>
+              <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">{title}</span>
               <Chip intent="success" dot>Live</Chip>
             </div>
             <p className="mt-1 text-pretty text-xs font-medium leading-relaxed text-[#0B211B]/60">{detail}</p>

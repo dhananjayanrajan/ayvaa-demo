@@ -1,7 +1,6 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Landmark } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
-import { cn } from '@/lib/utils'
 
 type Props = {
   bankName: string
@@ -15,7 +14,7 @@ type Props = {
 export function AccountCard({ bankName, last4, holder, verified, extraCount, onPress }: Props) {
   return (
     <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onPress} className="block w-full text-left">
-      <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0B231C] via-[#123B2E] to-[#0F5138] p-5 shadow-[0_24px_56px_-26px_rgba(6,40,30,0.8)]">
+      <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-br from-[#0B231C] via-[#123B2E] to-[#0F5138] p-5 shadow-[0_24px_56px_-26px_rgba(6,40,30,0.8)]">
         <div aria-hidden className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl" />
         <div className="relative">
           <div className="flex items-start gap-3">

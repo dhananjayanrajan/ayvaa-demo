@@ -17,7 +17,7 @@ export function NotesPanel({ note, quickTags, tags, onToggleTag, onPressNote }: 
         type="button"
         whileTap={{ scale: 0.985 }}
         onClick={onPressNote}
-        className="relative overflow-hidden rounded-3xl bg-[#0B231C] p-4 text-left shadow-[0_20px_44px_-24px_rgba(6,40,30,0.7)]"
+        className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4 text-left shadow-[0_20px_44px_-24px_rgba(6,40,30,0.7)]"
       >
         <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
         <div className="relative">

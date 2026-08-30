@@ -10,7 +10,7 @@ export function ArrivalTimelineCard() {
         {WITHDRAWAL_STEPS.map((st, i) => {
           const last = i === WITHDRAWAL_STEPS.length - 1
           return (
-            <div key={st.title} className="flex gap-3.5">
+            <div key={st.title} className="flex gap-3">
               <div className="flex flex-col items-center">
                 <span
                   className={cn(

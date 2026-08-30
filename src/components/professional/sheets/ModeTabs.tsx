@@ -40,7 +40,7 @@ export function ModeTabs({ mode, saved, onSelect }: Props) {
             />
             <span
               className={cn(
-                'relative text-[10px] font-extrabold uppercase tracking-[0.08em]',
+                'relative text-[9px] font-extrabold uppercase tracking-[0.12em]',
                 active ? 'text-white' : 'text-[#0B211B]/45',
               )}
             >

@@ -17,7 +17,7 @@ export function DayEditorCard({ day, onToggle, onSelectWindow }: Props) {
       <div className="p-5">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0">
-            <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">{day.day}</div>
+            <div className="text-sm font-extrabold tracking-tight text-[#0B211B]">{day.day}</div>
             <div className="mt-0.5 text-xs font-semibold text-[#0B211B]/50">
               {day.off ? 'No offers will be sent' : `Offers matched · ${day.hours}`}
             </div>

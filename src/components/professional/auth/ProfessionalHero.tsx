@@ -25,7 +25,7 @@ export function ProfessionalHero({ scanning, onUnlock }: ProfessionalHeroProps) 
           </div>
         </div>
 
-        <div className="mt-5 flex flex-col items-center gap-3 rounded-3xl bg-white/[0.05] px-4 py-6">
+        <div className="mt-5 flex flex-col items-center gap-3 rounded-2xl bg-white/[0.05] px-4 py-6">
           <motion.button
             type="button"
             whileTap={{ scale: 0.94 }}

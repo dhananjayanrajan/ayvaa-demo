@@ -80,7 +80,7 @@ export function ConfirmWithdrawSheet({ amount, bankName, last4, sessions, onClos
       }
     >
       <div className="flex flex-col gap-3.5">
-        <div className="relative overflow-hidden rounded-3xl bg-[#0B231C] p-4">
+        <div className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4">
           <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
           <div className="relative">
             <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">Amount</div>

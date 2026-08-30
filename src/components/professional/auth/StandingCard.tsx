@@ -13,7 +13,7 @@ interface StandingCardProps {
 
 export function StandingCard({ onViewCredentials }: StandingCardProps) {
   return (
-    <div className="rounded-3xl border border-[#0B211B]/[0.06] bg-white shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
+    <div className="rounded-2xl border border-[#0B211B]/[0.06] bg-white shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
       <div className="p-4">
         <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-[#0B211B]/40">Your standing</div>
         <div className="mt-3 grid grid-cols-3 gap-2">

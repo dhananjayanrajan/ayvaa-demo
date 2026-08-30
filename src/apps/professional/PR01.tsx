@@ -45,7 +45,7 @@ export function PR01() {
       <BodyArea>
         <div className="relative">
           <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
-          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-5 pt-1">
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
               <ProfessionalHero scanning={scanning} onUnlock={unlock} />
             </motion.div>

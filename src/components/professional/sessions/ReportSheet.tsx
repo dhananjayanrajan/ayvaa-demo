@@ -40,7 +40,7 @@ export function ReportSheet({ open, onClose, onSubmit }: ReportSheetProps) {
         <div className="flex items-start gap-3">
           <Tile icon={FileText} tone="warning" size="lg" />
           <div className="min-w-0 flex-1">
-            <h3 className="text-[17px] font-extrabold tracking-tight text-[#0B211B]">Field task report</h3>
+            <h3 className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Field task report</h3>
             <p className="mt-0.5 text-xs font-medium text-[#0B211B]/55">Complete the report to maintain dispatch priority.</p>
           </div>
           <button

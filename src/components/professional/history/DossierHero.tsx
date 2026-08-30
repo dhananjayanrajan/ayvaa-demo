@@ -62,7 +62,7 @@ export function DossierHero({ sessions, totals, sinceMonth, chartId, onOpenSessi
           </Chip>
         </div>
 
-        <div className="mt-4 flex items-center gap-3.5">
+        <div className="mt-4 flex items-center gap-3">
           <span className="grid h-[52px] w-[52px] shrink-0 place-items-center rounded-[18px] bg-gradient-to-br from-emerald-400/30 to-teal-400/20 text-[15px] font-black tabular-nums tracking-tight text-emerald-100">
             RS
           </span>

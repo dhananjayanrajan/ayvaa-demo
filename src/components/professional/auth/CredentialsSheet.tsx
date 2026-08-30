@@ -50,7 +50,7 @@ export function CredentialsSheet({ onClose }: CredentialsSheetProps) {
           </motion.button>
         </div>
 
-        <div className="rounded-3xl bg-[#0B231C] p-4">
+        <div className="rounded-2xl bg-[#0B231C] p-4">
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.12] text-emerald-100">
               <BadgeCheck className="h-5 w-5" strokeWidth={2.2} aria-hidden />

@@ -25,12 +25,12 @@ export function MonthTimeline({ monthFull, sessions, openId, onToggle }: Props) 
       </motion.div>
 
       <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
-        <div className="rounded-3xl bg-white p-4 shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
           {sessions.map((s, i) => {
             const last = i === sessions.length - 1
             const open = openId === s.id
             return (
-              <div key={s.id} className="flex gap-3.5">
+              <div key={s.id} className="flex gap-3">
                 <div className="flex flex-col items-center">
                   <span
                     className={cn(

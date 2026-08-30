@@ -46,7 +46,7 @@ export function PR03() {
       <BodyArea>
         <div className="relative">
           <div aria-hidden className={`pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full blur-3xl ${topTint}`} />
-          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-5 pt-1">
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
               <OffersHero
                 activeCount={accepting ? active.length : 0}

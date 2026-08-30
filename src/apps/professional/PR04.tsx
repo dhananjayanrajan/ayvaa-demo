@@ -56,7 +56,7 @@ export function PR04() {
               hasLive ? 'bg-emerald-400/[0.16]' : 'bg-amber-400/[0.16]'
             }`}
           />
-          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-5 pt-1">
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
               <DayFilterBar value={selectedDay} onChange={setSelectedDay} />
             </motion.div>

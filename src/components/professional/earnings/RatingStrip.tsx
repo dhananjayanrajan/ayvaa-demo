@@ -7,7 +7,7 @@ type Props = {
 
 export function RatingStrip({ rating, count }: Props) {
   return (
-    <div className="flex items-center justify-between rounded-3xl bg-amber-500/[0.08] px-5 py-4">
+    <div className="flex items-center justify-between rounded-2xl bg-amber-500/[0.08] px-5 py-4">
       <div className="flex items-center gap-2.5">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-amber-400/20 text-amber-600">
           <Star className="h-4 w-4" strokeWidth={2.4} aria-hidden />

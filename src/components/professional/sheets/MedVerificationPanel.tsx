@@ -49,7 +49,7 @@ export function MedVerificationPanel({ checks, allChecked, saved, scanned, verif
               >
                 <span
                   className={cn(
-                    'grid h-[22px] w-[22px] shrink-0 place-items-center rounded-lg transition-colors',
+                    'grid h-5 w-5 shrink-0 place-items-center rounded-lg transition-colors',
                     on ? 'bg-emerald-500 text-white' : 'bg-[#0B211B]/[0.1] text-transparent',
                   )}
                 >

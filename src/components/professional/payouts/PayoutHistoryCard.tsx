@@ -10,18 +10,18 @@ type Props = {
 export function PayoutHistoryCard({ payouts, onPressPayout }: Props) {
   return (
     <Card>
-      <div className="flex flex-col gap-1 p-3">
-        {payouts.map((p) => (
+      {payouts.map((p, i) => (
+        <div key={p.date}>
+          {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
           <PayoutRow
-            key={p.date}
             date={p.date}
             sessions={p.sessions}
             amount={p.amount}
             paid={p.status === 'paid'}
             onPress={() => onPressPayout(p)}
           />
-        ))}
-      </div>
+        </div>
+      ))}
     </Card>
   )
 }

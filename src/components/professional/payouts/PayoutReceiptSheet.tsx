@@ -86,7 +86,7 @@ export function PayoutReceiptSheet({ date, amount, sessions, paid, bankName, las
         </button>
       }
     >
-      <div className="relative overflow-hidden rounded-3xl bg-[#0B231C] p-4">
+      <div className="relative overflow-hidden rounded-2xl bg-[#0B231C] p-4">
         <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
         <div className="relative">
           <div className="flex items-start justify-between gap-3">

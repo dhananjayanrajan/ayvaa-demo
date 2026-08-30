@@ -14,10 +14,10 @@ export function PayoutLinkCard({ bank, account, payoutCount, onPress }: Props) {
     <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onPress} className="group block w-full text-left">
       <Card>
         <div className="p-5 pb-4">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <Tile icon={Landmark} tone="ink" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
-              <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">Payout history & withdrawal</div>
+              <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">Payout history & withdrawal</div>
               <div className="mt-1 text-xs font-medium text-[#0B211B]/55">Your bank, payouts and withdrawals</div>
             </div>
             <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-[#0B211B]/20 transition-transform group-hover:translate-x-0.5" aria-hidden />

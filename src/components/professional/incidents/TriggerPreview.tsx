@@ -9,7 +9,7 @@ type Props = {
 
 export function TriggerPreview({ config, severity }: Props) {
   return (
-    <div className={cn('relative overflow-hidden rounded-3xl p-4', config.panel.bg)}>
+    <div className={cn('relative overflow-hidden rounded-2xl p-4', config.panel.bg)}>
       <div aria-hidden className={cn('pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full blur-3xl', config.panel.glow)} />
       <div className="relative">
         <div className="flex items-center justify-between gap-2">

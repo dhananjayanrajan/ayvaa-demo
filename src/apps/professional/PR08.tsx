@@ -114,11 +114,14 @@ export function PR08() {
         onBack={resumeVisit}
       />
       <BodyArea>
-        <motion.div variants={stagger} initial="hidden" animate="show" className="flex flex-col gap-4 pt-1">
-          <motion.div variants={rise}>
-            <IncidentHero config={cfg} />
+        <div className="relative">
+          <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-rose-400/[0.14] blur-3xl" />
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
+            <motion.div variants={rise}>
+              <IncidentHero config={cfg} />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </BodyArea>
 
       <AnimatePresence>
@@ -174,7 +177,7 @@ export function PR08() {
           {submitted ? (
             <SubmittedPanel severity={severity} config={cfg} photo={photo?.name ?? null} />
           ) : (
-            <div className="flex flex-col gap-3.5">
+            <div className="flex flex-col gap-3">
               <SeveritySelector severities={SEVERITIES} severity={severity} onSelect={pickSeverity} />
 
               <TriggerPreview config={cfg} severity={severity} />
