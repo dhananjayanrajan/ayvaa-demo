@@ -33,7 +33,7 @@ function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) =
   return (
     <nav className="relative z-10 shrink-0 border-t border-[#0B211B]/[0.06] bg-white/85 pb-2 pt-2 backdrop-blur-xl">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
-      <div className="flex items-stretch gap-0.5 px-3">
+      <div className="flex items-stretch gap-1 px-4">
         {tabs.map((t) => {
           const isActive = active === t.id
           return (
@@ -44,7 +44,7 @@ function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) =
               onClick={() => onSelect(t.id)}
               className="flex flex-1 flex-col items-center gap-1.5 py-1"
             >
-              <span className="relative flex h-8 w-14 items-center justify-center">
+              <span className="relative flex h-8 w-16 items-center justify-center">
                 {isActive && (
                   <motion.span
                     layoutId="admin-tab-chip"
@@ -62,7 +62,7 @@ function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) =
               </span>
               <span
                 className={cn(
-                  'text-[8.5px] font-extrabold uppercase tracking-[0.08em] transition-colors duration-200',
+                  'text-[9.5px] font-extrabold uppercase tracking-[0.12em] transition-colors duration-200',
                   isActive ? 'text-emerald-700' : 'text-[#0B211B]/35',
                 )}
               >

@@ -23,7 +23,7 @@ export function WatchHero() {
             <TrendingUp className="h-3 w-3" aria-hidden />
             Watchlist · week over week
           </div>
-          <h3 className="mt-2 text-balance break-words text-[17px] font-extrabold leading-snug tracking-tight text-white">
+          <h3 className="mt-2 text-balance break-words text-[19px] font-extrabold leading-snug tracking-tight text-white">
             One trend is{' '}
             <span className="bg-gradient-to-r from-amber-200 to-orange-100 bg-clip-text text-transparent">creeping up</span>
           </h3>

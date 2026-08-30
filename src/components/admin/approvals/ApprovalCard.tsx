@@ -137,11 +137,11 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
         <div aria-hidden className={cn('pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r to-transparent transition-colors duration-500', theme.hairline)} />
 
         <div className="relative p-5">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <AgentAvatar seed={a.name} size={52} />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-white">{a.name}</span>
+                <span className="text-sm font-extrabold leading-snug tracking-tight text-white">{a.name}</span>
                 {a.urgent && !decision && (
                   <Chip intent="warning" light dot>
                     {a.waiting}

@@ -25,10 +25,10 @@ export function InfoListCard({ accent = 'emerald', icon, title, subtitle, items,
 
   return (
     <AccentHero tone={accent}>
-      <div className="flex items-start gap-3.5">
+      <div className="flex items-start gap-3">
         <Tile icon={icon} tone="white" size="lg" />
         <div className="min-w-0 flex-1 pt-0.5">
-          <div className="text-[15px] font-extrabold leading-snug tracking-tight text-white">{title}</div>
+          <div className="text-sm font-extrabold leading-snug tracking-tight text-white">{title}</div>
           <p className={cn('mt-1 text-pretty text-xs font-medium leading-relaxed', accent === 'emerald' ? 'text-emerald-100/55' : 'text-amber-100/55')}>
             {subtitle}
           </p>

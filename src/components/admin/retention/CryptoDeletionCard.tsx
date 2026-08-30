@@ -17,12 +17,12 @@ export function CryptoDeletionCard() {
         <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-teal-400/10 blur-3xl" />
 
         <div className="relative">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-emerald-700 shadow-[0_10px_20px_-12px_rgba(5,40,30,0.8)]">
               <KeyRound className="h-5 w-5" strokeWidth={2.2} aria-hidden />
             </span>
             <div className="min-w-0 flex-1 pt-0.5">
-              <div className="text-[15px] font-extrabold leading-snug tracking-tight text-white">Cryptographic deletion</div>
+              <div className="text-sm font-extrabold leading-snug tracking-tight text-white">Cryptographic deletion</div>
               <p className="mt-1 text-pretty text-xs font-medium leading-relaxed text-emerald-100/55">
                 Nothing is recoverable — not by us, not by anyone.
               </p>

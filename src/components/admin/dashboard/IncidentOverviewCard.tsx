@@ -18,7 +18,7 @@ export function IncidentOverviewCard() {
           <div className="flex items-center gap-3 p-4">
             <Tile icon={AlertTriangle} tone="danger" size="lg" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+              <span className="block text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                 {adminMetrics.openIncidents} open incidents
               </span>
               <span className="mt-0.5 block text-xs font-medium text-[#0B211B]/55">

@@ -10,7 +10,7 @@ export function LiveSessionsCard() {
         <div className="flex items-center gap-3 p-5">
           <Tile icon={Activity} tone="live" size="lg" />
           <div className="min-w-0 flex-1">
-            <div className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
               {adminMetrics.liveSessions} sessions live right now
             </div>
             <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">

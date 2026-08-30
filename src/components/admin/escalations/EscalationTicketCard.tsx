@@ -56,11 +56,11 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
       <Card>
         <div aria-hidden className="h-1 w-full bg-gradient-to-r from-amber-400 to-orange-400" />
         <div className="p-5">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <Tile icon={MessageSquare} tone="warning" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{e1.title}</span>
+                <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">{e1.title}</span>
                 <Chip intent="warning" dot>{e1.waiting}</Chip>
               </div>
               <p className="mt-1 text-pretty text-xs font-medium leading-relaxed text-[#0B211B]/55">{e1.meta}</p>

@@ -20,11 +20,11 @@ export function FlaggedAccountCard({ notify, onMoreActions }: FlaggedAccountCard
     <motion.div variants={rise}>
       <Card intent="danger">
         <div className="p-5">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <Tile icon={AlertTriangle} tone="danger" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
+                <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
                   {flaggedAccount.name}
                 </span>
                 <Chip intent="danger" dot>Flagged</Chip>

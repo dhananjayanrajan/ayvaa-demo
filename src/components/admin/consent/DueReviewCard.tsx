@@ -45,11 +45,11 @@ export function DueReviewCard({ notify, onViewRecord }: DueReviewCardProps) {
       <Card intent="warning" className="bg-gradient-to-br from-amber-50 via-white to-orange-50">
         <div aria-hidden className="h-1 w-full bg-gradient-to-r from-amber-400 to-orange-400" />
         <div className="p-5">
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             <Tile icon={CalendarClock} tone="warning" size="lg" />
             <div className="min-w-0 flex-1 pt-0.5">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{consentReview.name}</span>
+                <span className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">{consentReview.name}</span>
                 <Chip intent="warning" dot>{consentReview.due}</Chip>
               </div>
               <p className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">{consentReview.category}</p>
