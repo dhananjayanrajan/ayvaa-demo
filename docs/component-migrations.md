@@ -121,3 +121,14 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Divider punch list for screen phase: hairline separators in AuditEntryList, RecentActivityList, DeletionQueueList, ReferredPatientList violate no-divider rule; removal is a visual change deferred to rebuild phase
 - Read protocol: 6-file cap held; both part reads arrived clean after spot-checks
 - Verified: npx tsc --noEmit clean
+
+## B9 (parts 1-2) — Patient visit and review cards
+
+- ExpandRow gains hideChevron prop (full re-emit, sole file in stage, gate held) | CompletedCard rewires with chip-only trailing
+- CareDeliveredCard: fifth ExpandRow twin collapsed (chevron in canonical slot, rotation preserved)
+- CaregiverCard: quiet update button → QuietLifecycleButton; dark live-status block → DarkPanel glow={false} (original had no orb — preserved difference)
+- BookingRecordCard, VisitRecordCard, SummaryCard: hand-rolled fact rows → FactRows (dark on hero, light in cards)
+- Incident: CaregiverCard first emit carried invalid as-never icon casts, caught and re-emitted clean in same exchange — protocol allows one immediate full re-emit ONLY when the re-emit is complete and verified; repeated in-message patching remains forbidden
+- Kept with reasons: MissedCard, LiveVisitCard, SessionLedgerCard (sub-line TimeCell), VitalsCard, PatientCard, CaregiverNoteCard, ReviewMatchCard, ConsentCard (unique compositions); PaymentCard, PlanCard, UpcomingCard (navigator cards deferred to ListRow promotion pass)
+- CompletedCard chevron removal flagged: rotation cue gone from trailing slot; user may request restoration
+- Verified: npx tsc --noEmit clean at both gates
