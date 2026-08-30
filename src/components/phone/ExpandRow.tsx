@@ -16,6 +16,7 @@ export function ExpandRow({
   onToggle,
   dense = true,
   fresh = false,
+  hideChevron = false,
   className,
   children,
 }: {
@@ -28,6 +29,7 @@ export function ExpandRow({
   onToggle?: () => void
   dense?: boolean
   fresh?: boolean
+  hideChevron?: boolean
   className?: string
   children?: ReactNode
 }) {
@@ -61,9 +63,11 @@ export function ExpandRow({
           )}
         </span>
         {trailing}
-        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
-          <ChevronDown className={cn(dense ? 'h-3.5 w-3.5 text-[#0B211B]/30' : 'h-4 w-4 text-[#0B211B]/40')} aria-hidden />
-        </motion.span>
+        {!hideChevron && (
+          <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
+            <ChevronDown className={cn(dense ? 'h-3.5 w-3.5 text-[#0B211B]/30' : 'h-4 w-4 text-[#0B211B]/40')} aria-hidden />
+          </motion.span>
+        )}
       </button>
 
       <AnimatePresence initial={false}>

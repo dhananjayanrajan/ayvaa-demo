@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
-import { Check, Loader2, MessageSquare, Phone, Radio } from 'lucide-react'
-import { Card } from '@/components/phone/kit'
+import { MessageSquare, Phone, Radio } from 'lucide-react'
+import { Card, LiveDot } from '@/components/phone/kit'
+import { DarkPanel } from '@/components/phone/DarkPanel'
+import { QuietLifecycleButton } from '@/components/phone/LifecycleButton'
 import { ConnectButton } from './ConnectButton'
 import { LIVE_VISIT, formatElapsed } from '@/data/patientLiveVisit'
 import { useDemo } from '@/lib/store'
-import { cn } from '@/lib/utils'
 
 interface CaregiverCardProps {
   elapsedSeconds: number
@@ -58,13 +58,10 @@ export function CaregiverCard({ elapsedSeconds }: CaregiverCardProps) {
           </div>
         </div>
 
-        <div className="mt-3 rounded-2xl bg-[#0B231C] p-4">
+        <DarkPanel className="mt-3" glow={false}>
           <div className="flex items-center justify-between gap-3">
             <span className="flex min-w-0 items-center gap-2">
-              <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden>
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-300" />
-              </span>
+              <LiveDot className="text-emerald-300" />
               <span className="truncate text-[12px] font-bold text-emerald-50/85">With {LIVE_VISIT.patientFirst} now</span>
             </span>
             <span className="shrink-0 text-[15px] font-extrabold leading-none tabular-nums text-emerald-200">
@@ -75,7 +72,7 @@ export function CaregiverCard({ elapsedSeconds }: CaregiverCardProps) {
             <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100/45">On site since</span>
             <span className="text-right text-[12px] font-bold tabular-nums text-emerald-50/90">{LIVE_VISIT.startedAt}</span>
           </div>
-        </div>
+        </DarkPanel>
 
         <div className="mt-4 flex gap-2.5">
           <ConnectButton
@@ -98,40 +95,16 @@ export function CaregiverCard({ elapsedSeconds }: CaregiverCardProps) {
           />
         </div>
 
-        <motion.button
-          type="button"
-          whileTap={requestPhase === 'idle' ? { scale: 0.985 } : undefined}
-          onClick={requestUpdate}
-          disabled={requestPhase !== 'idle'}
-          aria-disabled={requestPhase !== 'idle'}
-          className={cn(
-            'mt-2.5 flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-[12.5px] font-extrabold transition-colors',
-            requestPhase === 'done'
-              ? 'bg-emerald-500/[0.16] text-emerald-800'
-              : requestPhase === 'working'
-                ? 'cursor-wait bg-emerald-500/[0.06] text-emerald-700/50'
-                : 'bg-[#0B211B]/[0.05] text-[#0B211B]/75 hover:bg-[#0B211B]/[0.08]',
-          )}
-        >
-          {requestPhase === 'idle' && (
-            <>
-              <Radio className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-              Ask for a quick update
-            </>
-          )}
-          {requestPhase === 'working' && (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-              Sending request…
-            </>
-          )}
-          {requestPhase === 'done' && (
-            <>
-              <Check className="h-4 w-4 shrink-0" strokeWidth={2.6} aria-hidden />
-              Update requested
-            </>
-          )}
-        </motion.button>
+        <QuietLifecycleButton
+          phase={requestPhase}
+          className="mt-2.5"
+          idleIcon={Radio}
+          idleLabel="Ask for a quick update"
+          workingLabel="Sending request…"
+          doneLabel="Update requested"
+          doneTone="tint"
+          onPress={requestUpdate}
+        />
       </div>
     </Card>
   )
