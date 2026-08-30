@@ -22,6 +22,7 @@ import { A13 } from './A13'
 import { A14 } from './A14'
 import { A15 } from './A15'
 import { A16 } from './A16'
+import { A17 } from './A17'
 import { cn } from '@/lib/utils'
 
 type Tab = { id: string; label: string; icon: LucideIcon }
@@ -34,7 +35,7 @@ const tabs: Tab[] = [
   { id: 'a09', label: 'Analytics', icon: BarChart3 },
 ]
 
-const withNav = ['a01', 'a03', 'a04', 'a05', 'a06', 'a08', 'a09', 'a10', 'a11', 'a16']
+const withNav = ['a01', 'a03', 'a04', 'a05', 'a06', 'a08', 'a09', 'a10', 'a11', 'a16', 'a17']
 
 function TabBar({ active, onSelect }: { active: string; onSelect: (id: string) => void }) {
   return (
@@ -163,6 +164,7 @@ export function AdminApp({ path }: { path: string }) {
                   {screen === 'a14' && <A14 />}
                   {screen === 'a15' && <A15 />}
                   {screen === 'a16' && <A16 />}
+                  {screen === 'a17' && <A17 />}
                 </motion.div>
               </AnimatePresence>
               {withNav.includes(screen) && (
