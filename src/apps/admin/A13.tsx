@@ -16,7 +16,7 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { Card, Panel, Tile } from '@/components/phone/kit'
 import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
-import { CredentialCard } from '@/components/patient/onboarding/CredentialCard'
+import { CredentialCard } from '@/components/phone/CredentialCard'
 import { Field } from '@/components/phone/Field'
 import { SectionHeader } from '@/components/patient/onboarding/SectionHeader'
 import { SheetShell } from '@/components/phone/SheetShell'
