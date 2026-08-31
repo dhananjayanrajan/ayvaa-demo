@@ -311,3 +311,12 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   ruled by constraint)
 - NEXT per sequence: placement-debt batch — promote FactRows (patient/plan → phone/) and
   AccentHero (admin/ui → phone/), then B10 close (30 unread cards)
+
+---
+# Revision 11 — placement debts RESOLVED; phone/ now owns all cross-role primitives
+
+- Promoted: FactRows (patient/plan → phone/), AccentHero (admin/ui → phone/); 51 consumer
+  files re-pointed, zero content changes, TSC clean
+- Canonical library now 23 files (21 prior + FactRows + AccentHero)
+- Placement-debt register: EMPTY
+- NEXT per sequence: B10 close — 30 unread cards (professional 18, partner 12)

@@ -1,5 +1,5 @@
 import { Card } from '@/components/phone/kit'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { bookingRows } from '@/data/patientReview'
 
 export function SummaryCard() {

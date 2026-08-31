@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Radio } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { useRouter } from '@/lib/router'
 import { LIVE_VISIT } from '@/data/patientVisits'

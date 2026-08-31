@@ -1,5 +1,5 @@
 import { Lock } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { REPORTS, totalReportedVisits } from '@/data/patientReports'
 import { cn } from '@/lib/utils'

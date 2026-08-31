@@ -1,7 +1,7 @@
 import { ScrollText, ShieldCheck, ShieldOff } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { DarkPanel } from '@/components/phone/DarkPanel'
-import { FactRows } from './FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { consentScopeRows } from '@/data/patientCarePlan'
 import { useRouter } from '@/lib/router'
 

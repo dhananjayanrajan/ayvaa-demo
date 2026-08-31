@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Eye, Lock, PenLine, ShieldAlert, ShieldCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { DarkTimeChip } from './DarkTimeChip'

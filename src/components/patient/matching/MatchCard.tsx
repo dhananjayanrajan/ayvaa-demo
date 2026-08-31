@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { BadgeCheck, Briefcase, Hourglass, Loader2, MapPin, Send, Star } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { initialsOf, type MatchCaregiver, type OfferState } from '@/data/patientMatching'
 

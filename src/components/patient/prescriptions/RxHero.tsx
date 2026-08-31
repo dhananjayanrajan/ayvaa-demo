@@ -1,5 +1,5 @@
 import { Check, Clock, Lock, ShieldCheck, ShoppingCart } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
 import { Meter, MiniBadge } from '@/components/phone/kit'
 import { RX_LEDGER_STRIP, activeOf, lowOf, type Prescription } from '@/data/patientPrescriptions'

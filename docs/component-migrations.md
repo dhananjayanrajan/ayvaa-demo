@@ -341,3 +341,18 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - F2 FINAL: all role heroes processed — on kit Hero / PhaseHero / AccentHero compositions,
   keep-ruled, or domain-genuine (professional ProfileHero bottom-band)
 - Verified: EntrySheetsHero on PhaseHero by grep; npx tsc --noEmit clean
+
+## Placement-debt batch — FactRows + AccentHero promoted to phone/
+
+- patient/plan/FactRows.tsx → phone/FactRows.tsx | content unchanged | 17 consumers re-pointed
+  (3 relative plan siblings, 11 patient absolute, 3 professional payouts absolute)
+- admin/ui/AccentHero.tsx → phone/AccentHero.tsx | content unchanged | 34 consumers re-pointed
+  (5 admin screens, 28 patient components incl. the whole hero population, InfoListCard)
+- Both placement debts from the audit §3 note resolved; the canonical library now owns every
+  cross-role primitive. FactRows' tone prop (dark/light) unchanged
+- Incident: terminal crashed after the batch completed but before the gates ran — full
+  state-inspection recovery (moves verified on disk, 53 modified files match the consumer map
+  exactly, re-point counts 17/34 on target, retired-path residue zero, tsc silent) proved the
+  work complete; no repair was needed. Lesson: the post-state inspection pattern from Command 39
+  is now the standard crash-recovery procedure
+- Verified: TSC CLEAN (formal gate); retired-path sweep zero; counts 17/34 exact

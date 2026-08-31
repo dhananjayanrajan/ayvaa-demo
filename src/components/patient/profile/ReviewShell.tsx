@@ -1,5 +1,5 @@
 import { Quote, Star } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { initialsOf } from '@/data/patientMatching'
 import type { Review } from '@/data/patientCaregiverProfile'
 

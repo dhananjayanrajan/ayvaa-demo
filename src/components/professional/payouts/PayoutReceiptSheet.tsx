@@ -4,7 +4,7 @@ import { Chip } from '@/components/phone/kit'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { DarkPanel } from '@/components/phone/DarkPanel'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 
 type Status = 'idle' | 'generating' | 'saved'
 

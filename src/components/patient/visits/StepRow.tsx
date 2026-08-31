@@ -1,7 +1,7 @@
 import { BadgeCheck } from 'lucide-react'
 import { Chip, Tile, TimeChip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import type { VisitStep } from '@/data/patientLiveVisit'
 
 interface StepRowProps {

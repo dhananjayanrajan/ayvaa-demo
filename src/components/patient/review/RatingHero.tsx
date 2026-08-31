@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Star } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { RATED_VISIT, ratingLabel } from '@/data/patientRating'

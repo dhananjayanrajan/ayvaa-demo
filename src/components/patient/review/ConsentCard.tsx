@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Check, ChevronRight, ShieldCheck } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { OfferMeter } from '@/components/patient/matching/OfferMeter'
 import { CONSENT_ITEMS, REVIEW_GUARDIAN, consentProgress, type ConsentId } from '@/data/patientReview'
 import { cn } from '@/lib/utils'

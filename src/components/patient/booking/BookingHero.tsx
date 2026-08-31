@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroTopRow, HeroHighlight, StatCell, TapCell } from '@/components/phone/HeroCells'
 import type { Estimate } from '@/data/patientBooking'
 

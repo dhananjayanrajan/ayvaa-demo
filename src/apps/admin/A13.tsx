@@ -15,7 +15,7 @@ import {
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Card, Panel, Tile } from '@/components/phone/kit'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { CredentialCard } from '@/components/patient/onboarding/CredentialCard'
 import { CredentialRow } from '@/components/patient/onboarding/CredentialRow'

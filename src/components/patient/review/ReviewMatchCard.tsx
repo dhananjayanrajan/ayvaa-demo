@@ -1,5 +1,5 @@
 import { useRouter } from '@/lib/router'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { initialsOf } from '@/data/patientMatching'
 import { REVIEW_MATCH } from '@/data/patientReview'

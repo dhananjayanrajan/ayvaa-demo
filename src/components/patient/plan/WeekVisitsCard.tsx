@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { CAREGIVER, WEEK, completedVisits, maxVisitMinutes } from '@/data/patientCarePlan'
 import { cn } from '@/lib/utils'
 

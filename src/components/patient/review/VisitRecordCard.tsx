@@ -1,6 +1,6 @@
 import { BadgeCheck } from 'lucide-react'
 import { Card, Tile } from '@/components/phone/kit'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { RATED_VISIT } from '@/data/patientRating'
 
 const recordRows = [

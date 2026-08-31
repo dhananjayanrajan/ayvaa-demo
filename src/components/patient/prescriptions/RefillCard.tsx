@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Check, Clock, Loader2, Pill as PillIcon, ShoppingCart } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { MiniBadge } from '@/components/phone/kit'
 import type { Prescription } from '@/data/patientPrescriptions'
 import { useDemo } from '@/lib/store'

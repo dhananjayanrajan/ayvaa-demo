@@ -1,7 +1,7 @@
 import { CalendarCheck, Quote } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
 import { QuotePanel } from '@/components/phone/QuotePanel'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { useRouter } from '@/lib/router'
 import { DownloadReportButton } from './DownloadReportButton'
 import { REPORTS_LATEST } from '@/data/patientReports'

@@ -1,7 +1,7 @@
 import { HeartPulse, MapPin, ScrollText } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { DarkPanel } from '@/components/phone/DarkPanel'
-import { FactRows } from './FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { CAREGIVER, GOALS_LOGGED, VITALS, visitFacts, type VisitDay } from '@/data/patientCarePlan'
 import { useRouter } from '@/lib/router'
 

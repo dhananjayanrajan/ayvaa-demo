@@ -1,4 +1,4 @@
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { REVIEW_SCHEDULE, REVIEW_WEEK, activeDayNames } from '@/data/patientReview'
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { CalendarClock, Check, ChevronDown, Loader2, ShieldOff } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { CONSENT_CYCLE, consentScopeRows, consentSteps } from '@/data/patientCarePlan'
 import { useDemo } from '@/lib/store'

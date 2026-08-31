@@ -1,7 +1,7 @@
 import { Lock } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroTopRow } from '@/components/phone/HeroCells'
-import { FactRows } from '@/components/patient/plan/FactRows'
+import { FactRows } from '@/components/phone/FactRows'
 import { recordRows } from '@/data/patientReview'
 
 export function BookingRecordCard() {

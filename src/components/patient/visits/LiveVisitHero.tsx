@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { BellRing } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow, HeroHighlight, StatCell } from '@/components/phone/HeroCells'
 import { formatElapsed } from '@/data/patientLiveVisit'

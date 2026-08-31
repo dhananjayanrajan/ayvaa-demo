@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Gavel, PhoneCall, ShieldCheck } from 'lucide-react'
-import { AccentHero } from '@/components/admin/ui/AccentHero'
+import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { CONSENT } from '@/data/patientConsent'
 import { useDemo } from '@/lib/store'
