@@ -57,7 +57,6 @@ export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: P
         value={partnerName}
         onClick={() => onNotify({ title: 'Organisation', body: `${partnerName} · provisioned by admin`, kind: 'info' })}
       />
-      <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
       <CredentialRow
         icon={Mail}
         tone="info"
@@ -65,7 +64,6 @@ export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: P
         value={partnerEmail}
         onClick={() => onNotify({ title: 'Work email', body: `${partnerEmail} · access last used today`, kind: 'info' })}
       />
-      <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
       <CredentialRow
         icon={KeyRound}
         tone="success"

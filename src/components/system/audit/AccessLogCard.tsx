@@ -108,13 +108,12 @@ export function AccessLogCard({ filter, flagged, onFilter, onEntryTap }: AccessL
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          {visible.map((entry, i) => {
+          {visible.map((entry) => {
             const Icon = KIND_ICON[entry.kind]
             const chip = KIND_CHIP[entry.kind]
             const isFlagged = flagged.includes(entry.id)
             return (
               <div key={entry.id}>
-                {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
                 <Row
                   icon={Icon}
                   tone={KIND_TILE[entry.kind]}

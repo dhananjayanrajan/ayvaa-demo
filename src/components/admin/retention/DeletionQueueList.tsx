@@ -61,14 +61,13 @@ export function DeletionQueueList() {
   return (
     <motion.div variants={rise}>
       <Card>
-        {queue.map((item, i) => {
+        {queue.map((item) => {
           const isRunning = item.state === 'Running'
           const isExpanded = expandedItem === item.label
           const progress = item.progress ?? 0
 
           return (
             <div key={item.label}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <div className="px-4 py-3.5">
                 <div className="flex items-center gap-3">
                   <Tile

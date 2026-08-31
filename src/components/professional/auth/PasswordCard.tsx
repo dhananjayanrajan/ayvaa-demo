@@ -92,7 +92,6 @@ export function PasswordCard({ email, showPass, onTogglePass, onSignIn, onForgot
           value={email}
           onClick={handleForgot}
         />
-        <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
         <AuthRow
           icon={KeyRound}
           tone="success"

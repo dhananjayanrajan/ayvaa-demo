@@ -62,7 +62,7 @@ export function ReferredPatientList({ referrals, onSelectReferral }: ReferredPat
 
       <Card>
         <AnimatePresence mode="popLayout">
-          {filtered.map((r, i) => {
+          {filtered.map((r) => {
             const active = r.status === 'active'
             return (
               <motion.div
@@ -73,7 +73,6 @@ export function ReferredPatientList({ referrals, onSelectReferral }: ReferredPat
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.2 }}
               >
-                {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
                 <Row
                   leading={<AgentAvatar seed={r.name} size={44} />}
                   title={`${r.name} · ${r.age}`}

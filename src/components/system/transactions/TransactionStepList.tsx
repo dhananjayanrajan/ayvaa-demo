@@ -134,7 +134,6 @@ export function TransactionStepList({
         const Icon = ICONS[step.icon]
         return (
           <div key={step.id}>
-            {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
             <Row
               align="start"
               padding="px-4 py-3.5"

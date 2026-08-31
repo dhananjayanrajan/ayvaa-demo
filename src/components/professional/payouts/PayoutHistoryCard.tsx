@@ -10,9 +10,8 @@ type Props = {
 export function PayoutHistoryCard({ payouts, onPressPayout }: Props) {
   return (
     <Card>
-      {payouts.map((p, i) => (
+      {payouts.map((p) => (
         <div key={p.date}>
-          {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
           <PayoutRow
             date={p.date}
             sessions={p.sessions}

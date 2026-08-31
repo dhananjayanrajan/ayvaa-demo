@@ -21,8 +21,7 @@ export function StaffList({ members, variant, onOpenStaff }: StaffListProps) {
               aria-hidden
               className={cn(
                 'h-px',
-                variant === 'active' ? 'mx-4 bg-[#0B211B]/[0.05]' : 'border-t border-[#0B211B]/[0.05]',
-              )}
+                              )}
             />
           )}
           <Row

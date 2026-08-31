@@ -30,9 +30,8 @@ export function PartnerAlertsSheet({ alerts, onClose, onMarkAllRead }: PartnerAl
     >
       {alerts.length > 0 ? (
         <div className="flex flex-col">
-          {alerts.map((a, i) => (
+          {alerts.map((a) => (
             <div key={a.title}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <Row
                 icon={a.icon}
                 tone={a.tone}

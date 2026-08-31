@@ -136,7 +136,6 @@ export function AccountSearch({ onSelect }: AccountSearchProps) {
                   className={cn(
                     'flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-150',
                     i === activeIndex ? 'bg-emerald-500/[0.08]' : 'hover:bg-[#0B211B]/[0.03]',
-                    i > 0 && 'border-t border-[#0B211B]/[0.05]',
                   )}
                 >
                   <Tile icon={a.icon} tone={a.tone} size="sm" />

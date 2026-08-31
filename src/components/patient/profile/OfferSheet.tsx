@@ -100,9 +100,8 @@ export function OfferSheet({ firstName, rows, onSent, onClose }: OfferSheetProps
       }
     >
       <div className="overflow-hidden rounded-2xl bg-[#0B211B]/[0.03]">
-        {rows.map((row, i) => (
+        {rows.map((row) => (
           <div key={row.label}>
-            {i > 0 && <div aria-hidden className="mx-3.5 h-px bg-[#0B211B]/[0.05]" />}
             <div className="flex items-baseline justify-between gap-3 px-3.5 py-3">
               <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40">
                 {row.label}

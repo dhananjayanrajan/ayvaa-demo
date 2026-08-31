@@ -29,7 +29,7 @@ function CompletedRow({ visitId }: { visitId: string }) {
       icon={Check}
       tone="success"
       dense={false}
-      hideChevron
+
       open={open}
       onToggle={() => setOpen((v) => !v)}
       title={

@@ -31,7 +31,6 @@ export function RetentionPeriodsList() {
           const purged = purgedTypes.includes(policy.type)
           return (
             <div key={policy.type}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <Row
                 icon={FileText}
                 tone={periodTones[i % periodTones.length]}

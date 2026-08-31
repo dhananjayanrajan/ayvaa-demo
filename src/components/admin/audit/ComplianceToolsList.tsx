@@ -18,7 +18,6 @@ export function ComplianceToolsList() {
             onClick={() => navigate('/admin/a06')}
           />
         </div>
-        <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
         <div>
           <ListRow
             icon={Lock}

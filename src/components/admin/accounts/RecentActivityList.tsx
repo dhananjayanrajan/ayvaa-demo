@@ -65,7 +65,6 @@ export function RecentActivityList({ filter, notify }: RecentActivityListProps) 
             const s = statusStyle[a.pill] ?? { tile: 'warning' as TileTone, intent: 'warning' as Intent }
             return (
               <div key={i}>
-                {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
                 <ListRow
                   icon={Icon}
                   tone={s.tile}

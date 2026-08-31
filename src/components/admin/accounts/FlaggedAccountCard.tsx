@@ -46,8 +46,7 @@ export function FlaggedAccountCard({ notify, onMoreActions }: FlaggedAccountCard
             </div>
           </Panel>
 
-          <div aria-hidden className="my-4 h-px bg-[#0B211B]/[0.06]" />
-
+          
           <div className="flex gap-2.5">
             <motion.button
               type="button"

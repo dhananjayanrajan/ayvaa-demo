@@ -12,7 +12,6 @@ import {
 } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'
 import type { Intent } from '@/components/phone/kit'
-import { cn } from '@/lib/utils'
 
 type NotifyFn = (payload: {
   title: string
@@ -73,7 +72,7 @@ export function RecheckRulesList({ notify }: RecheckRulesListProps) {
             subtitleClassName="text-xs text-[#0B211B]/55"
             surface="none"
             padding="none"
-            className={cn('py-3', i > 0 && 'border-t border-[#0B211B]/[0.05]')}
+            className='py-3'
             hoverClassName=""
             onClick={() => notify({ title: `Rule: ${r.title.toLowerCase()}`, body: r.notifyBody, kind: r.kind })}
           />

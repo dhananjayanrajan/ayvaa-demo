@@ -45,11 +45,10 @@ export function AuditEntryList({ entries, totalEntries, rangeLabel, notify }: Au
 
       <motion.div variants={rise}>
         <Card>
-          {entries.map((e, i) => {
+          {entries.map((e) => {
             const { icon, tone } = iconMap[e.icon] ?? iconMap.view
             return (
               <div key={e.id}>
-                {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
                 <ListRow
                   icon={icon}
                   tone={tone}

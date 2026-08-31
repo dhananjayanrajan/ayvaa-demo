@@ -26,9 +26,8 @@ export function PartnerStaffSheet({ staffList, staffCount, onClose, onViewAllSta
       height="auto"
     >
       <div className="flex flex-col">
-        {staffList.map((staff, i) => (
+        {staffList.map((staff) => (
           <div key={staff.name}>
-            {i > 0 && <div className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
             <Row
               leading={
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700">

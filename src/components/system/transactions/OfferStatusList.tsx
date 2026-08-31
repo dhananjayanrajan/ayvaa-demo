@@ -51,7 +51,6 @@ export function OfferStatusList({ waiting, declined, recheck, mmss, expiresAt, n
           const count = countOf(o.state as OfferState)
           return (
             <div key={o.id}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <Row
                 icon={s.icon}
                 tone={s.tile}

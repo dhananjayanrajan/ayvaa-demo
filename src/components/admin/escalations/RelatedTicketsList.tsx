@@ -18,7 +18,6 @@ export function RelatedTicketsList({ notify }: RelatedTicketsListProps) {
       <Card>
         {[e2, e3].map((e, i) => (
           <div key={e.title}>
-            {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
             <ListRow
               icon={Link2}
               title={e.title}

@@ -21,7 +21,6 @@ export function LinkedRecordsCard({ inc }: LinkedRecordsCardProps) {
           </div>
           <Chip intent="success">Sealed</Chip>
         </div>
-        <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
         <div className="flex items-start gap-3 p-4">
           <Tile icon={ShieldAlert} tone="warning" />
           <div className="min-w-0 flex-1">

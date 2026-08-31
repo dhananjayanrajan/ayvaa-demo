@@ -272,7 +272,7 @@ export function CaptureChainCard({
 
         <Row
           leading={
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-mint text-brand-ink">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-emerald-400/[0.12] text-emerald-600">
               <Wallet className="h-4 w-4" strokeWidth={2.2} aria-hidden />
             </span>
           }

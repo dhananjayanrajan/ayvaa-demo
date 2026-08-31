@@ -50,9 +50,8 @@ export function DevicesSheet({ onClose, onSignOutOthers }: DevicesSheetProps) {
         </div>
 
         <div className="flex flex-col">
-          {devices.map((d, i) => (
+          {devices.map((d) => (
             <div key={d.name}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <div className="flex items-center gap-3 px-1 py-3.5">
                 <Tile icon={d.icon} tone={d.current ? 'success' : 'neutral'} />
                 <div className="min-w-0 flex-1">

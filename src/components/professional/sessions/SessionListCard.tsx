@@ -32,12 +32,11 @@ export function SessionListCard({ sessions, onSessionClick }: SessionListCardPro
           No sessions for this day.
         </div>
       ) : (
-        sessions.map((s, i) => {
+        sessions.map((s) => {
           const Icon = sessionIcon(s.title)
           const tone = sessionTone(s.title)
           return (
             <div key={s.id}>
-              {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
               <Row
                 icon={Icon}
                 tone={tone}
