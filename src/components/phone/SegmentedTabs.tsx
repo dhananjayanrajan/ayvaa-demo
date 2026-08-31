@@ -42,8 +42,23 @@ interface SegmentedTabsProps {
 const SHELL: Record<SegTone, string> = {
   emerald: 'bg-[#0B211B]/[0.06]',
   emeraldSolid: 'bg-[#0B211B]/[0.06]',
-  dark: 'bg-[#0B211B]/[0.06]',
+  dark: 'bg-[#0B211B]/[0.05]',
   white: 'bg-[#0B211B]/[0.05]',
+}
+
+// dark/white originals used `flex gap-1` (no items-center); emerald/emeraldSolid used `flex items-center gap-1`
+const SHELL_ALIGN: Record<SegTone, string> = {
+  emerald: 'items-center',
+  emeraldSolid: 'items-center',
+  dark: '',
+  white: '',
+}
+
+const SPRING: Record<SegTone, { stiffness: number; damping: number }> = {
+  emerald: { stiffness: 480, damping: 38 },
+  emeraldSolid: { stiffness: 480, damping: 38 },
+  dark: { stiffness: 420, damping: 34 },
+  white: { stiffness: 500, damping: 40 },
 }
 
 const BUTTON: Record<SegTone, string> = {
@@ -115,14 +130,18 @@ export function SegmentedTabs({
       ? cn('font-extrabold uppercase', LABEL_SIZE[labelSize], TRACKING[tracking])
       : 'text-[12px] font-bold'
 
+  const labelTransition = tone === 'white' ? 'transition-colors duration-200' : ''
+
   return (
     <div
       role={role ? 'tablist' : undefined}
-      className={cn('flex items-center gap-1 rounded-full p-1', SHELL[tone], className)}
+      className={cn('flex gap-1 rounded-full p-1', SHELL_ALIGN[tone], SHELL[tone], className)}
     >
       {tabs.map((tab) => {
         const active = value === tab.id
         const Icon = tab.icon
+        // dark tone colors the button (so the baseline count span inherits it), matching the original
+        const labelSpanColor = tone === 'dark' ? '' : labelColor(tone, active)
         return (
           <motion.button
             key={tab.id}
@@ -131,12 +150,17 @@ export function SegmentedTabs({
             aria-selected={role ? active : undefined}
             whileTap={whileTap ? { scale: 0.95 } : undefined}
             onClick={() => onChange(tab.id)}
-            className={cn('relative flex-1 rounded-full', BUTTON[tone])}
+            className={cn(
+              'relative flex-1 rounded-full',
+              BUTTON[tone],
+              twoLine && 'transition-colors',
+              tone === 'dark' && labelColor(tone, active),
+            )}
           >
             {active && (
               <motion.span
                 layoutId={layoutId}
-                transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                transition={{ type: 'spring', stiffness: SPRING[tone].stiffness, damping: SPRING[tone].damping }}
                 className={cn('absolute inset-0 rounded-full', PILL[tone])}
               />
             )}
@@ -161,12 +185,12 @@ export function SegmentedTabs({
                 </span>
               </span>
             ) : count === 'inline' ? (
-              <span className={cn('relative block truncate', labelCls, labelColor(tone, active), labelClassName)}>
+              <span className={cn('relative block truncate', labelCls, labelTransition, labelSpanColor, labelClassName)}>
                 {tab.label} · {tab.count}
               </span>
             ) : count === 'baseline' ? (
               <span className="relative flex items-baseline justify-center gap-1">
-                <span className={cn('relative', labelCls, labelColor(tone, active), labelClassName)}>{tab.label}</span>
+                <span className={cn('relative', labelCls, labelTransition, labelSpanColor, labelClassName)}>{tab.label}</span>
                 <span className="relative text-[10px] font-extrabold tabular-nums opacity-60">{tab.count}</span>
               </span>
             ) : (
@@ -178,7 +202,7 @@ export function SegmentedTabs({
                     aria-hidden
                   />
                 )}
-                <span className={cn('relative', labelCls, labelColor(tone, active), labelClassName)}>{tab.label}</span>
+                <span className={cn('relative', labelCls, labelTransition, labelSpanColor, labelClassName)}>{tab.label}</span>
                 {count === 'badge' && tab.count !== undefined && (
                   <span
                     className={cn(
