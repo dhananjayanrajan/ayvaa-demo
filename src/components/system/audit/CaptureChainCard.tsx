@@ -26,18 +26,6 @@ const STEP_ICONS: Record<CaptureIcon, LucideIcon> = {
 
 type StepVisual = 'pending' | 'active' | 'done' | 'failed'
 
-function ReceiptRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between gap-3">
-      <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.12em] text-emerald-100/45">
-        {label}
-      </span>
-      <span className="min-w-0 truncate text-right font-mono text-[12.5px] font-bold text-emerald-50/90">
-        {value}
-      </span>
-    </div>
-  )
-}
 
 interface CaptureChainCardProps {
   phase: PaymentPhase
@@ -255,12 +243,12 @@ export function CaptureChainCard({
                   </span>
                 </div>
                 <div aria-hidden className="my-3 h-px bg-white/[0.08]" />
-                <ReceiptRow label="Visit" value={paymentMeta.session} />
+<FactRows mono labelClassName="text-[10px]" rows={[{ label: "Visit", value: paymentMeta.session }]} />
                 <div className="mt-2">
-                  <ReceiptRow label="Card" value={`${paymentMeta.card} ··${paymentMeta.cardLast4}`} />
+<FactRows mono labelClassName="text-[10px]" rows={[{ label: "Card", value: `${paymentMeta.card} ··${paymentMeta.cardLast4}` }]} />
                 </div>
                 <div className="mt-2">
-                  <ReceiptRow label="Charges" value="One" />
+<FactRows mono labelClassName="text-[10px]" rows={[{ label: "Charges", value: "One" }]} />
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-emerald-400/[0.12] px-3 py-2.5">
                   <span className="flex min-w-0 items-center gap-1.5">

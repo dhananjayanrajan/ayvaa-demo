@@ -344,3 +344,23 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - NEXT per sequence: B12 (F9 filters/tabs/empty states) — FilterTabs ×3, EmptyFilterState
   pair, EmptyMatches, EmptyTabState, CaughtUpCard, ActiveFilterStrip, FilterBar, VisitTabs,
   DayFilterBar, ModeTabs, EmptyOffersCard ruling
+
+---
+# Revision 14 — DOCTRINE REVERSAL: rework begins
+
+- All keep-rulings from B9–B11 (and content-layer keeps inside B3–B8) relabeled:
+  PENDING DECOMPOSITION. F6 "closed" status retracted — families close only under the
+  new composition rule
+- Canonical tier stands (25 files). Shell layers of completed batches stand
+- Replaced batch chain: universal-by-universal global sweeps, dependency order
+- Sweep 1: Row (in progress)
+
+---
+# Revision 15 — Sweep 1 (Row) stage 1 COMPLETE
+
+- NEW canonical: phone/Row (346 lines, v4) — library now 26 files
+- Extended: FactRows (mono + className overrides)
+- 11 conversions: 7 file-row wrappers + ListRow adapter + 4 local hand-rolls killed (3 hosts
+  rewritten, 1 via FactRows)
+- Reclassified: ResendRow→F4; Delivery/CallStrip→StatusStrip(F3); onboarding CredentialRow→Field(F10)
+- NEXT: Sweep 1 stage 2 (corpus adoption), then StepList/Timeline sweep

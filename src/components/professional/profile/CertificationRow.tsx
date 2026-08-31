@@ -1,7 +1,5 @@
-import { motion } from 'motion/react'
 import { Award } from 'lucide-react'
-import { Chip, Tile } from '@/components/phone/kit'
-import { cn } from '@/lib/utils'
+import { Row } from '@/components/phone/Row'
 
 type Props = {
   name: string
@@ -14,27 +12,24 @@ const statusText = (valid: boolean) =>
 
 export function CertificationRow({ name, valid, isNew }: Props) {
   return (
-    <motion.div
-      initial={isNew ? { opacity: 0, y: 10, scale: 0.98 } : false}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className={cn(
-        'flex items-center gap-3 rounded-2xl px-2 py-3',
-        isNew && 'bg-emerald-500/[0.06]',
-      )}
-    >
-      <Tile icon={Award} tone={isNew ? 'success' : 'neutral'} />
-      <div className="min-w-0 flex-1 pt-0.5">
-        <div className="truncate text-[13px] font-extrabold tracking-tight text-[#0B211B]">{name}</div>
-        <div className="mt-0.5 truncate text-[10.5px] font-semibold text-[#0B211B]/45">{statusText(valid)}</div>
-      </div>
-      <Chip
-        intent={isNew ? 'live' : valid ? 'success' : 'warning'}
-        dot={isNew || !valid}
-        className="shrink-0 whitespace-nowrap"
-      >
-        {isNew ? 'Just added' : valid ? 'Valid' : 'In review'}
-      </Chip>
-    </motion.div>
+    <Row
+      icon={Award}
+      tone={isNew ? 'success' : 'neutral'}
+      title={name}
+      titleClassName="text-[13px] font-extrabold"
+      subtitle={statusText(valid)}
+      subtitleClassName="truncate text-[10.5px] font-semibold text-[#0B211B]/45"
+      chip={{
+        label: isNew ? 'Just added' : valid ? 'Valid' : 'In review',
+        intent: isNew ? 'live' : valid ? 'success' : 'warning',
+        dot: isNew || !valid,
+      }}
+      bodyClassName="pt-0.5"
+      fresh={isNew}
+      surface={isNew ? 'tint' : 'none'}
+      surfaceTone={isNew ? 'rounded-2xl bg-emerald-500/[0.06]' : undefined}
+      className={isNew ? undefined : 'rounded-2xl px-2 py-3'}
+      showChevron={false}
+    />
   )
 }

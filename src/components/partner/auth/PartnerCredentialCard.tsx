@@ -1,40 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Building2, Eye, EyeOff, KeyRound, Mail } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { Chip, Tile } from '@/components/phone/kit'
+import { Chip } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import type { TileTone } from '@/components/phone/kit'
-
-function CredentialRow({
-  icon,
-  tone,
-  label,
-  value,
-  mono = false,
-  onClick,
-  trailing,
-}: {
-  icon: LucideIcon
-  tone: TileTone
-  label: string
-  value: string
-  mono?: boolean
-  onClick: () => void
-  trailing?: React.ReactNode
-}) {
-  return (
-    <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onClick} className="group flex w-full items-center gap-3 px-4 py-3.5 text-left">
-      <Tile icon={icon} tone={tone} />
-      <span className="min-w-0 flex-1">
-        <span className="block text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40">{label}</span>
-        <span className={`mt-0.5 block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B] ${mono ? 'font-mono tracking-normal' : ''}`}>
-          {value}
-        </span>
-      </span>
-      {trailing}
-    </motion.button>
-  )
-}
 
 interface PartnerCredentialCardProps {
   partnerName: string
@@ -45,31 +14,61 @@ interface PartnerCredentialCardProps {
 export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: PartnerCredentialCardProps) {
   const [showPass, setShowPass] = useState(false)
 
+  const credentialRow = ({
+    icon,
+    tone,
+    label,
+    value,
+    mono = false,
+    onClick,
+    trailing,
+  }: {
+    icon: Parameters<typeof Row>[0] extends { icon?: infer I } ? I : never
+    tone: TileTone
+    label: string
+    value: string
+    mono?: boolean
+    onClick: () => void
+    trailing?: React.ReactNode
+  }) => (
+    <Row
+      icon={icon}
+      tone={tone}
+      label={label}
+      title={value}
+      titleClassName={mono ? 'font-mono tracking-normal' : undefined}
+      onClick={onClick}
+      trailing={trailing}
+      hoverClassName="hover:bg-transparent"
+      showChevron={false}
+    />
+  )
+
   return (
     <div className="relative overflow-hidden rounded-2xl border border-[#0B211B]/[0.06] bg-white shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
-      <CredentialRow
-        icon={Building2}
-        tone="neutral"
-        label="Organisation"
-        value={partnerName}
-        onClick={() => onNotify({ title: 'Organisation', body: `${partnerName} · provisioned by admin`, kind: 'info' })}
-      />
+      {credentialRow({
+        icon: Building2,
+        tone: 'neutral',
+        label: 'Organisation',
+        value: partnerName,
+        onClick: () => onNotify({ title: 'Organisation', body: `${partnerName} · provisioned by admin`, kind: 'info' }),
+      })}
       <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-      <CredentialRow
-        icon={Mail}
-        tone="info"
-        label="Work email"
-        value={partnerEmail}
-        onClick={() => onNotify({ title: 'Work email', body: `${partnerEmail} · access last used today`, kind: 'info' })}
-      />
+      {credentialRow({
+        icon: Mail,
+        tone: 'info',
+        label: 'Work email',
+        value: partnerEmail,
+        onClick: () => onNotify({ title: 'Work email', body: `${partnerEmail} · access last used today`, kind: 'info' }),
+      })}
       <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-      <CredentialRow
-        icon={KeyRound}
-        tone="success"
-        label="Password"
-        value={showPass ? 'sunrise-care-2026' : '••••••••••'}
-        mono
-        onClick={() => setShowPass((v) => !v)}
+      {credentialRow({
+        icon: KeyRound,
+        tone: 'success',
+        label: 'Password',
+        value: showPass ? 'sunrise-care-2026' : '••••••••••',
+        mono: true,
+        onClick: () => setShowPass((v) => !v),
         trailing={
           <motion.span
             whileTap={{ scale: 0.9 }}
@@ -85,8 +84,8 @@ export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: P
           >
             {showPass ? <EyeOff className="h-4 w-4" aria-hidden /> : <Eye className="h-4 w-4" aria-hidden />}
           </motion.span>
-        }
-      />
+        },
+      })}
       <div className="flex items-center justify-between bg-[#0B211B]/[0.03] px-4 py-3">
         <span className="min-w-0 truncate text-[10.5px] font-semibold text-[#0B211B]/50">
           Two-factor is enforced by your organisation

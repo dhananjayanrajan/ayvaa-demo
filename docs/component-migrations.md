@@ -461,3 +461,89 @@ Terminal stability issue on this machine logged for awareness
 - B11/F6c FINAL: 39 of 39 read, all keep-ruled + 1 promotion. F6 family (cards/panels) CLOSED
   across all roles: B9 patient + B10 prof/partner + B11 admin/system
 - Verified: TSC CLEAN; Overline retired-path sweep zero; 9 consumers on new path
+
+## DOCTRINE CORRECTION — supersedes the single-caller keep doctrine (user ruling)
+
+- RETRACTED: the "merge only where ≥2 implementations do the same job / no abstractions for
+  one caller / bolt-on economics" guardrail inherited from the original audit. It was applied
+  as gospel across B9–B11, producing ~130 keep-rulings that answered the wrong question
+- THE GOAL, correctly read: every component was intentionally built unique. Uniqueness is the
+  expected input to abstraction, not a reason to skip it. The task is to decompose every
+  component into universal primitives with rich variant APIs + thin specific compositions
+- New family-close rule: a specific component is done only when it is pure composition —
+  arrangement + data, zero hand-rolled pattern instances (rows, step lists, fact rows,
+  stat strips, shells, quotes, empty states, tabs, options, action pairs)
+- Two-tier end state: universal components in phone/ covering the full observed variation
+  space; specific components as thin compositions
+- REWORK METHOD: universal-by-universal global sweeps in dependency order (Row → StepList/
+  Timeline → FactRows/StatStrip → PhaseShell → Quote → EmptyState → Tabs/Filters → Options/
+  Actions → Identity → clinical residuals). Each universal is designed once against the whole
+  corpus, then adopted corpus-wide in one sweep with tsc + grep adoption-count gates. This
+  supersedes the remaining batch chain (F3/F4/F5 residuals, B12–B17) and re-opens the content
+  layers of B3–B11 keep-rulings; shell layers and existing canonicals stand
+- Hard constraint unchanged: identical rendered output; abstraction via variant props, never
+  redesign
+- Sweep 1: ROW — begins now
+
+## Sweep 1 (Row) — evidence batch 1: F5 unread files
+
+- Reading ReceiptRow, ResendRow, DigestRow, CredentialRow (patient/onboarding), DeliveryStrip,
+  CallStrip — the never-read F5 members — plus held evidence from B8/B10/B11 to define the
+  Row variation space before any emit
+
+## Sweep 1 (Row) — stage 1: universal built, file tier converted (11 conversions)
+
+### Universal
+- components/phone/Row.tsx → NEW (v4, 346 lines) | full observed variation space as props:
+  leading (Tile / custom / liveDot badge) · label slot · title · subtitle · metaLabel/metaValue/
+  metaNote (stacked or inline) · trailing (chip / amount columns / time / ReactNode) · expandable
+  (chevron in title OR trailing) + expansion + wrapSurface · surface (none/inset/live/tint) ·
+  dark · fresh · hoverClassName override · exact-compat className overrides at every slot
+  (tile/title/subtitle/label/trailing/expansion). Designed corpus-wide, not per-caller
+- components/phone/FactRows.tsx → extended (v3) | mono variant (right-aligned mono values,
+  0.12em tracking) + labelClassName/valueClassName exact-compat overrides; defaults preserve
+  all 17 existing consumers byte-identically
+
+### Converted to Row (file wrappers — paths + signatures preserved, zero consumer edits)
+admin/ui/ListRow (5 admin consumers unchanged) · professional EarningRow, PayoutRow,
+CertificationRow, PendingSessionRow, PreferenceRow · patient ReceiptRow (planned + live/refund
+branches, expansion, wrapSurface), DigestRow (dark, custom leading, reviewed/live/time trailing)
+
+### Local hand-rolls killed
+- PartnerCredentialCard: private CredentialRow → Row (label slot + trailing eye-toggle)
+- patient/profile CredentialCard: private CredentialRow → Row (chevronInTrailing, expansion)
+- professional PasswordCard: AuthRow → Row (label slot; whileHover 1.005 dropped — punch list;
+  eye-toggle motion.span whileTap dropped, micro-motion, rebuild-phase restorable)
+- system CaptureChainCard: private ReceiptRow → FactRows mono labelClassName (read ruled OUT
+  plain FactRows: 0.12em tracking + mono right value + 10px label deltas — hub grew instead)
+
+### Reclassifications (from evidence reads)
+- ResendRow → F4 status/action strip (3-state: sending/countdown/pill) — Actions sweep
+- DeliveryStrip + CallStrip → identical animated strips — StatusStrip universal (F3 sweep)
+- onboarding CredentialRow → Field universal base (Forms sweep); cross-role (P01/A13/
+  PasswordCard) — promotion debt noted for that sweep
+
+### Incidents + corrections (all self-caught at gates, pre-green)
+- Row hub v1→v4: Tile className leak; bodyClassName unapplied; metaNote/metaInline/wrapSurface/
+  hoverClassName/label/chevronInTrailing added as wrapper requirements surfaced (the variation
+  space teaching the universal — doctrine working as intended)
+- ReceiptRow adapter: missing items-start gap-3.5 p-4 caught at disk-proof review
+- DigestRow: whileTapDisabled grep false-positive (matched prop name); fix verified by deletion
+- CaptureChainCard: malformed two-step sed deliberately staged, inspected, then superseded by
+  surgical repair — staging-check-before-trust protocol added
+- PartnerCredentialCard adapter: TileTone typing via Parameters<> inference; verified by tsc
+- ListRow: Tile group-hover:scale-105 deliberately not reproduced (punch list); adapters add
+  focus-visible ring the originals lacked (ledgered micro-additions)
+- v3 padding interaction caught pre-emit for CertificationRow (adapter fix, not hub)
+
+### Verified
+- TSC CLEAN at every hub gate (v1–v4, FactRows v2/v3) and after every conversion stage
+- 11/11 conversions on Row/FactRows by grep; zero local hand-roll references remain
+- Corpus-wide regression: all 17 pre-existing FactRows consumers unaffected (mono/overrides
+  default-off)
+
+### NEXT — Sweep 1 stage 2: corpus adoption
+Navigator cards (PaymentCard, PlanCard, UpcomingCard, CreateAccountCard, SettingsCard,
+PartnerBillingCard, PartnerReferralCard — deferred since B8/B9), list interiors (ServiceRow,
+MedRow, DocRow, EntryRow, StepRow, ChecklistRow, FieldTaskRow, AddCertificationRow, staff/
+referral/alert/device rows inside B10–B11 keeps), sheet option rows (partner referral options)

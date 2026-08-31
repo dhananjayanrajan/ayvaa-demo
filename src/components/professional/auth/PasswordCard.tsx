@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import { ArrowRight, Eye, EyeOff, KeyRound, Loader2, Mail } from 'lucide-react'
-import { Chip, LiveDot, Tile } from '@/components/phone/kit'
+import { Chip, LiveDot } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { cn } from '@/lib/utils'
 import type { ReactNode } from 'react'
 
-interface AuthRowProps {
+function AuthRow({ icon, tone, label, value, mono, onClick, trailing }: {
   icon: LucideIcon
   tone: 'info' | 'success'
   label: string
@@ -14,32 +14,20 @@ interface AuthRowProps {
   mono?: boolean
   onClick: () => void
   trailing?: ReactNode
-}
-
-function AuthRow({ icon, tone, label, value, mono, onClick, trailing }: AuthRowProps) {
+}) {
   return (
-    <motion.button
-      type="button"
-      whileTap={{ scale: 0.985 }}
-      whileHover={{ scale: 1.005 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+    <Row
+      icon={icon}
+      tone={tone}
+      label={label}
+      labelClassName="font-extrabold"
+      title={value}
+      titleClassName={mono ? 'mt-0.5 font-mono tracking-normal' : 'mt-0.5'}
       onClick={onClick}
-      className="flex w-full items-center gap-3 px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-    >
-      <Tile icon={icon} tone={tone} />
-      <span className="min-w-0 flex-1">
-        <span className="block text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40">{label}</span>
-        <span
-          className={cn(
-            'mt-0.5 block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]',
-            mono && 'font-mono tracking-normal',
-          )}
-        >
-          {value}
-        </span>
-      </span>
-      {trailing}
-    </motion.button>
+      trailing={trailing}
+      hoverClassName="hover:bg-transparent"
+      showChevron={false}
+    />
   )
 }
 
@@ -113,8 +101,7 @@ export function PasswordCard({ email, showPass, onTogglePass, onSignIn, onForgot
           mono
           onClick={onTogglePass}
           trailing={
-            <motion.span
-              whileTap={{ scale: 0.9 }}
+            <span
               role="button"
               tabIndex={0}
               aria-label={showPass ? 'Hide password' : 'Show password'}
@@ -126,16 +113,13 @@ export function PasswordCard({ email, showPass, onTogglePass, onSignIn, onForgot
               className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
             >
               {showPass ? <EyeOff className="h-4 w-4" aria-hidden /> : <Eye className="h-4 w-4" aria-hidden />}
-            </motion.span>
+            </span>
           }
         />
       </div>
       <div className="p-4 pt-3">
-        <motion.button
+        <button
           type="button"
-          whileTap={signInLoading ? undefined : { scale: 0.97 }}
-          whileHover={signInLoading ? undefined : { scale: 1.01 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           onClick={handleSignIn}
           disabled={signInLoading}
           className={cn(
@@ -154,14 +138,14 @@ export function PasswordCard({ email, showPass, onTogglePass, onSignIn, onForgot
               <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
             </>
           )}
-        </motion.button>
+        </button>
       </div>
       <div className="flex items-center justify-between bg-[#0B211B]/[0.03] px-4 py-3">
         <span className="flex min-w-0 items-center gap-1.5">
           <LiveDot className="text-emerald-500" />
           <span className="truncate text-[10.5px] font-semibold text-[#0B211B]/55">Fingerprint is your default unlock</span>
         </span>
-        <Chip intent="success" className="border-transparent">Biometrics on</Chip>
+        <Chip intent="success">Biometrics on</Chip>
       </div>
     </div>
   )
