@@ -190,8 +190,8 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 1. ~~Confirm Category C disposition (stage 0)~~ — RESOLVED: park (Stage 15 workstream).
 2. ~~Verify the two navigator-card chevron states (stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-7 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
-   6b02662). Stage 8 (Quote variants normalization) IN PROGRESS — normalize QuotePanel
-   variants across corpus (EscalationTicketCard inline quote, NotePanel footer-anatomy
-   decision, FamilyFeedbackCard quote carousel), real gate + grep proofs, ledger, large commit.
+4. Current position: Stages 0-8 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
+   6b02662, e75c366). Stage 9 (EmptyState universal) NEXT — build cause-aware EmptyState
+   (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty states),
+   real gate + grep proofs, ledger, large commit.
 5. Hold every rule in §1 and §2. The rules exist because each one was paid for.
