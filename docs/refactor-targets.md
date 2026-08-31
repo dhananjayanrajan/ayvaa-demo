@@ -219,7 +219,7 @@ icon strokeWidth 2.8/2.6→3.
 **CLOSED (commit e75c366):** QuotePanel extended (bare/headerTrailing/glyph/footer/className);
 7 quote blocks normalized. Keep-ruled: ReviewShell, RecordSheet (orphan), PartnerClinicalRecommendation.
 
-### Stage 9 — EmptyState universal ⏳ REDO under NORMALIZATION MANDATE
+### Stage 9 — EmptyState universal ✅ CLOSED (REDO under NORMALIZATION MANDATE)
 
 | Step | Detail |
 |------|--------|
@@ -227,9 +227,15 @@ icon strokeWidth 2.8/2.6→3.
 | 9.2 | Sweep corpus adopting it — **as REAL NORMALIZATION**: delete pure-config wrappers and inline at call sites, consolidate same-family files, normalize folders/names/imports (NOT nesting-doll re-exports) |
 | 9.3 | Real gate + grep proofs + ledger + commit |
 
-**IN PROGRESS (REDO):** universal `phone/EmptyState.tsx` built and verified. The initial sweep
-produced nesting-doll wrappers (EmptyFilterState ×2, EmptyMatches, EmptyTabState, EmptyOffersCard
-as thin re-exports) — being redone as real normalization per the NORMALIZATION MANDATE.
+**CLOSED (REDO):** universal `phone/EmptyState.tsx` built (tones emerald/amber/neutral; badge
+round/square/soft × sm/md/lg; containers card/plain/dashed/soft/bare; spacing gap/margin; gaps
+sm/md; paddings sm/md/lg/dashed/none; action pill/full; chip). Deleted pure-config wrappers
+(professional/history/EmptyFilterState → inlined PR12, professional/offers/EmptyOffersCard →
+inlined PR03). Kept genuine domain composition (admin EmptyFilterState, EmptyMatches,
+EmptyTabState). Inline conversions (ServiceList, SearchSheet). Ruled out (SessionListCard,
+AccessLogCard). Hard-constraint Tailwind v4 source-order fix (removed color from title/body
+defaults). 7 consumers. Gate discrepancy ledgered: app gate = 47 errors, clean baseline also 47
+(earlier '33' stale).
 
 ### Stage 10 — Tabs/Filters universal
 
@@ -338,5 +344,5 @@ as thin re-exports) — being redone as real normalization per the NORMALIZATION
 1. ~~Confirm Category C disposition (Stage 0)~~ — RESOLVED: park.
 2. ~~Verify the two navigator-card chevron states (Stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (Stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-8 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366). Stage 9 (EmptyState universal) IN PROGRESS as a REDO under the NORMALIZATION MANDATE — delete pure-config wrappers and inline, consolidate same-family files, normalize folders/names/imports.
+4. Current position: Stages 0-9 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366, 0337ae8, 5a86937). Stage 9 (EmptyState universal) CLOSED as a REDO under the NORMALIZATION MANDATE. Stage 10 (Tabs/Filters universal) NEXT.
 5. Hold every rule in `refactor-rules.md` §1 and §2. The rules exist because each one was paid for.

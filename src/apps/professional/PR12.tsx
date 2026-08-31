@@ -10,7 +10,7 @@ import { useRouter } from '@/lib/router'
 import { DossierHero } from '@/components/professional/history/DossierHero'
 import { FilterTabs } from '@/components/professional/history/FilterTabs'
 import { MonthTimeline } from '@/components/professional/history/MonthTimeline'
-import { EmptyFilterState } from '@/components/professional/history/EmptyFilterState'
+import { EmptyState } from '@/components/phone/EmptyState'
 import { SealedNotice } from '@/components/professional/history/SealedNotice'
 import { ExportHistoryButton, type ExportStatus } from '@/components/professional/history/ExportHistoryButton'
 import { SearchSheet } from '@/components/professional/history/SearchSheet'
@@ -106,7 +106,17 @@ export function PR12() {
 
             {groups.length === 0 ? (
               <motion.div variants={rise}>
-                <EmptyFilterState />
+                <EmptyState
+                  container="plain"
+                  icon={Search}
+                  tone="neutral"
+                  badge="round"
+                  size="lg"
+                  title="Nothing matches this filter"
+                  titleClassName="text-[14px] font-extrabold tracking-tight text-[#0B211B]/70"
+                  body="Try All to see the full history"
+                  bodyClassName="text-xs text-[#0B211B]/45"
+                />
               </motion.div>
             ) : (
               groups.map((g) => (

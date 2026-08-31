@@ -493,3 +493,34 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Gate standing: 33 errors, pure Category C (baseline unchanged).
 - NEXT: Stage 9 REDO — normalize the EmptyState family (delete pure-config wrappers, inline at
   call sites, consolidate, fix imports).
+
+---
+# Revision 26 — Sweep 5 (EmptyState) CLOSED (REDO under NORMALIZATION MANDATE)
+
+- Built universal `phone/EmptyState.tsx` (229 lines) covering full observed variation space:
+  tones emerald/amber/neutral; snip badge shapes round/square/soft × sizes sm/md/lg; snip containers
+  card/plain/dashed/soft/bare; snip spacing gap/margin; snip gaps sm/md; snip paddings sm/md/lg/dashed/none;
+  snip optional action (pill/full) + chip. Cause-aware via consumer composition.
+- **Hard-constraint fix (Tailwind v4 source-order):** removed color from title/body defaults
+  (were `text-[#0B211B]/70` + `/45`). Tailwind v4 sorts `.text-[#0B211B]` (full) BEFORE
+  `.text-[#0B211B]/70`, so the /70 default overrode consumers' full-opacity overrides. Now
+  defaults are `font-bold`/`font-medium` only; snip every consumer specifies exact color explicitly.
+  Rendered output byte-identical to originals.
+- **Deleted pure-config wrappers (inlined at call sites):**
+  - professional/history/EmptyFilterState.tsx → inlined PR12.tsx:107
+  - professional/offers/EmptyOffersCard.tsx → inlined PR03.tsx:74
+- **Kept genuine domain composition:** admin/approvals/EmptyFilterState (label-by-filter + Card
+  + rise), patient/matching/EmptyMatches (language + MATCH_REQUEST.radius), patient/visits/
+  EmptyTabState (cause-aware, 3 callers).
+- **Inline conversions (direct universal use):** patient/catalogue/ServiceList (bare,
+  cause-aware filteredOut/search), professional/history/SearchSheet (soft, two variants).
+- **Ruled out (no force-fit):** professional/sessions/SessionListCard (bare text-only line —
+  EmptyState font-bold would override needed font-medium), system/audit/AccessLogCard
+  (horizontal inline row — EmptyState is vertical-only). CaughtUpCard already canonical
+  PhaseHero (Stage 6), not an empty state.
+- **7 consumers:** PR12, PR03, ServiceList, EmptyMatches, EmptyTabState, SearchSheet, admin
+  EmptyFilterState. Grep: EmptyOffersCard=0, professional EmptyFilterState=0.
+- **Gate discrepancy ledgered:** app gate = 47 errors (git-stash verified clean baseline is
+  ALSO 47; snip docs' earlier '33' was stale). My changes add ZERO new errors. Category C workstream
+  (Stage 15) scope is 47, not 33.
+- NEXT: Stage 10 — Tabs/Filters universal.

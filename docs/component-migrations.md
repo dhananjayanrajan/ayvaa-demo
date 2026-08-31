@@ -823,3 +823,46 @@ components themselves: folders, file names, and every import. Concretely:
 (EmptyFilterState ×2, EmptyMatches, EmptyTabState, EmptyOffersCard as thin re-exports). These
 are being REDONE as real normalization. All prior stages (0-8) are subject to the same
 normalization lens at final certification (B18): any thin wrapper left behind is a defect.
+
+## Sweep 5 (EmptyState) — CLOSED (REDO under NORMALIZATION MANDATE)
+
+Hub: phone/EmptyState.tsx — cause-aware universal (icon/tone/badge/size/title/body/action/
+actionStyle/chip/chipIntent/container/spacing/gap/padding/className/titleClassName/bodyClassName).
+Container chrome: card/plain/dashed/soft/bare. Badge shapes round/square/soft × sm/md/lg with
+tone maps. Action pill/full. Chip optional.
+
+NORMALIZATION (not nesting dolls):
+- DELETED professional/history/EmptyFilterState.tsx (pure-config wrapper, zero domain logic) —
+  config INLINED at PR12.tsx:107 (EmptyState container=plain icon=Search tone=neutral badge=round
+  size=lg title='Nothing matches this filter' titleClassName='text-[14px] font-extrabold
+  tracking-tight text-[#0B211B]/70' body='Try All to see the full history' bodyClassName='text-xs
+  text-[#0B211B]/45'). Grep-verified zero consumers.
+- DELETED professional/offers/EmptyOffersCard.tsx (pure-config wrapper, zero domain logic) —
+  config INLINED at PR03.tsx:74 (EmptyState container=card spacing=gap padding=lg icon=CheckCircle2
+  tone=emerald badge=round size=lg title='No open offers right now' titleClassName='text-[14px]
+  font-extrabold tracking-tight text-[#0B211B]/70' body='You will be the first to know when one
+  matches your windows' bodyClassName='text-xs leading-relaxed text-[#0B211B]/45'). Grep-verified
+  zero consumers.
+- KEPT (genuine domain composition — data + domain logic): admin/approvals/EmptyFilterState
+  (label-by-filter + Card + rise), patient/matching/EmptyMatches (language + MATCH_REQUEST.radius),
+  patient/visits/EmptyTabState (cause-aware, 3 callers: P15, CompletedCard, UpcomingCard).
+- INLINE conversions (direct universal use, no wrapper): patient/catalogue/ServiceList (bare,
+  cause-aware filteredOut/search), professional/history/SearchSheet (soft, two variants).
+- RULED OUT (different patterns, no force-fit): professional/sessions/SessionListCard (bare
+  text-only line — EmptyState default font-bold would override needed font-medium in Tailwind v4
+  sort order), system/audit/AccessLogCard (horizontal inline row — EmptyState is vertical-only).
+  patient/notifications/CaughtUpCard already canonical PhaseHero (Stage 6), not an empty state.
+
+HARD-CONSTRAINT FIX (Tailwind v4 source-order): EmptyState title/body defaults previously baked
+`text-[#0B211B]/70` + `text-[#0B211B]/45`. Tailwind v4 sorts `.text-[#0B211B]` (full) BEFORE
+`.text-[#0B211B]/70`, so the /70 default would override consumers' full-opacity overrides
+(EmptyMatches/EmptyTabState) — a real output bug. FIX: removed color from title/body defaults
+(now `font-bold` / `font-medium` only); every consumer now specifies its exact color explicitly.
+Verified all 7 consumers carry explicit title/body colors; rendered output byte-identical to
+originals.
+
+GATE DISCREPANCY (ledgered): docs claimed 33 Category C errors; actual clean baseline (git stash
+verified) is 47. My changes add ZERO new errors (stash == unstash == 47). The "33" figure in
+prior docs is stale/inaccurate; corrected here. Category C workstream (Stage 15) scope is 47, not 33.
+
+Gate: app exit 2 = 47 pre-existing Category C (zero from EmptyState or converted files); node exit 0.

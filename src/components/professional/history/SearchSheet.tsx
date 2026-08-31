@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { Search, X } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
+import { EmptyState } from '@/components/phone/EmptyState'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { groupByMonth, searchSessions, type HistorySession } from '@/data/historyData'
 
@@ -65,17 +66,29 @@ export function SearchSheet({ sessions, query, onQueryChange, onClose, onOpenSes
         }
       >
         {!searching && (
-          <div className="flex flex-col items-center gap-2 rounded-2xl bg-[#0B211B]/[0.03] px-5 py-8 text-center">
-            <p className="text-[13px] font-bold text-[#0B211B]/60">Type to search this patient history</p>
-            <p className="text-[11px] font-medium text-[#0B211B]/40">Every visit, note and incident is covered</p>
-          </div>
+          <EmptyState
+            container="soft"
+            spacing="gap"
+            gap="sm"
+            padding="sm"
+            title="Type to search this patient history"
+            titleClassName="text-[13px] text-[#0B211B]/60"
+            body="Every visit, note and incident is covered"
+            bodyClassName="text-[11px] text-[#0B211B]/40"
+          />
         )}
 
         {searching && results.length === 0 && (
-          <div className="flex flex-col items-center gap-2 rounded-2xl bg-[#0B211B]/[0.03] px-5 py-8 text-center">
-            <p className="text-[13px] font-bold text-[#0B211B]/60">No records match {query}</p>
-            <p className="text-[11px] font-medium text-[#0B211B]/40">Search covers dates, care notes and incidents</p>
-          </div>
+          <EmptyState
+            container="soft"
+            spacing="gap"
+            gap="sm"
+            padding="sm"
+            title={`No records match ${query}`}
+            titleClassName="text-[13px] text-[#0B211B]/60"
+            body="Search covers dates, care notes and incidents"
+            bodyClassName="text-[11px] text-[#0B211B]/40"
+          />
         )}
 
         {searching &&

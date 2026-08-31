@@ -80,10 +80,10 @@ built and swept (Stage 4, 13 timelines + RecheckRulesList→Row). StatStrip adde
 swept (Stage 5, 7 divide-x strips). PhaseShell consolidation closed (Stage 6): slate theme +
 10 shells onto PhaseHero + ProfilePreviewSheet sheet gap closed + IncidentLinkingCard
 timeline→StepList. StatusStrip universal closed (Stage 7). Quote variants closed (Stage 8).
-Gate standing: 33 errors, pure Category C (baseline unchanged). Current position: Stage 9
-(EmptyState universal) — REDO under the NORMALIZATION MANDATE (see §3): the initial Stage 9
-sweep produced nesting-doll wrappers and is being redone as real folder/file/import
-normalization.
+EmptyState universal closed (Stage 9, REDO under NORMALIZATION MANDATE): pure-config wrappers
+deleted + inlined, genuine domain compositions kept, inline empties converted, Tailwind v4
+source-order hard-constraint fix. Gate standing: 47 errors, pure Category C (baseline unchanged;
+earlier '33' was stale — see §8). Current position: Stage 10 (Tabs/Filters universal).
 
 ---
 
@@ -325,14 +325,17 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
 
 ---
 
-## 8. IN-FLIGHT WORK — Stage 9: EmptyState universal (REDO under NORMALIZATION MANDATE)
+## 8. IN-FLIGHT WORK — Stage 9: EmptyState universal ✅ CLOSED (REDO under NORMALIZATION MANDATE)
 
-**Stages 0-8 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366).
-Current position: Stage 9 — EmptyState universal, being REDONE because the initial sweep
-produced nesting-doll wrappers (see §3 NORMALIZATION MANDATE). The universal
-`phone/EmptyState.tsx` is built and verified; the sweep must now NORMALIZE the family —
-delete pure-config wrappers and inline at call sites, consolidate same-family files, fix
-folders/names/imports — instead of leaving thin re-export wrappers.
+**Stages 0-9 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366,
+0337ae8, 5a86937). Stage 9 CLOSED as a REDO under the NORMALIZATION MANDATE (§3):
+universal `phone/EmptyState.tsx` built; pure-config wrappers (professional/history/EmptyFilterState,
+professional/offers/EmptyOffersCard) DELETED + inlined at call sites (PR12, PR03); genuine domain
+compositions kept (admin EmptyFilterState, EmptyMatches, EmptyTabState); inline empties converted
+(ServiceList, SearchSheet); ruled out (SessionListCard, AccessLogCard); hard-constraint Tailwind v4
+source-order fix (color removed from title/body defaults). 7 consumers. Gate discrepancy ledgered:
+app gate = 47 errors, clean baseline also 47 (earlier '33' stale). Current position: Stage 10
+(Tabs/Filters universal).
 
 **Evidence read (Stage 7):**
 - ConfirmStrip (phone/, canonical): single-line animated emerald strip — Check icon badge
@@ -376,15 +379,14 @@ ledger + coverage, large commit.
 
 ## 10. THE REMAINING ROAD (after Stage 9)
 
-EmptyState (REDO under normalization) → Tabs/Filters (3× FilterTabs, VisitTabs,
-DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) → Options/Actions (ResendRow, SubmitButton
-severity map, quick-reply chips, referral option rows) → Field (forms; onboarding CredentialRow
-promotion) → Identity (avatars, CaptureTile, SelfieCaptureCard, CredentialCards, TrustCell,
-SkillsCloud) → clinical residuals (MedVerificationPanel, VitalsPanel, NotesPanel,
-ExecutionTrail-adjacent) → Category C workstream (Stage 15) → **final certification (§3)** →
-screen rebuilding resumes. EVERY remaining stage applies the NORMALIZATION MANDATE (§3): delete
-pure-config wrappers and inline, consolidate same-family files, normalize folders/names/imports —
-not nesting-doll re-exports.
+Tabs/Filters (3× FilterTabs, VisitTabs, DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) →
+Options/Actions (ResendRow, SubmitButton severity map, quick-reply chips, referral option rows) →
+Field (forms; onboarding CredentialRow promotion) → Identity (avatars, CaptureTile,
+SelfieCaptureCard, CredentialCards, TrustCell, SkillsCloud) → clinical residuals
+(MedVerificationPanel, VitalsPanel, NotesPanel, ExecutionTrail-adjacent) → Category C workstream
+(Stage 15) → **final certification (§3)** → screen rebuilding resumes. EVERY remaining stage
+applies the NORMALIZATION MANDATE (§3): delete pure-config wrappers and inline, consolidate
+same-family files, normalize folders/names/imports — not nesting-doll re-exports.
 
 ---
 
@@ -394,10 +396,11 @@ not nesting-doll re-exports.
 2. ~~Get the user's ruling on Category C~~ — RESOLVED: park (Stage 0).
 3. ~~Verify the two navigator-card chevron states~~ — RESOLVED (Stage 1).
 4. ~~Resume Row sweep stage 2, next tranche: the list interiors~~ — CLOSED (Stages 1-3).
-5. Current position: Stages 0-8 CLOSED. Resume Stage 9 (EmptyState universal) as a REDO under
-   the NORMALIZATION MANDATE (§3): the universal is built; delete pure-config wrappers and
-   inline at call sites, consolidate same-family files, normalize folders/names/imports, real
-   gate + grep proofs, ledger, large commit.
+5. Current position: Stages 0-9 CLOSED. Resume Stage 10 (Tabs/Filters universal) under the
+   NORMALIZATION MANDATE (§3): build the universal against the full variation space, then
+   NORMALIZE the family — delete pure-config wrappers and inline at call sites, consolidate
+   same-family files, normalize folders/names/imports, real gate + grep proofs, ledger, large
+   commit.
 6. Hold every rule in §4. The rules exist because each one was paid for.
 
 ---

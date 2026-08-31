@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { X } from 'lucide-react'
+import { CheckCircle2, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { OffersHero } from '@/components/professional/offers/OffersHero'
 import { OfferCard } from '@/components/professional/offers/OfferCard'
-import { EmptyOffersCard } from '@/components/professional/offers/EmptyOffersCard'
+import { EmptyState } from '@/components/phone/EmptyState'
 import { AcceptedOffersCard } from '@/components/professional/offers/AcceptedOffersCard'
 import { DeclinedOffersCard } from '@/components/professional/offers/DeclinedOffersCard'
 import { DeclineOfferSheet } from '@/components/professional/offers/DeclineOfferSheet'
@@ -73,7 +73,19 @@ export function PR03() {
                 ))
               ) : (
                 <motion.div variants={rise}>
-                  <EmptyOffersCard />
+                  <EmptyState
+                    container="card"
+                    spacing="gap"
+                    padding="lg"
+                    icon={CheckCircle2}
+                    tone="emerald"
+                    badge="round"
+                    size="lg"
+                    title="No open offers right now"
+                    titleClassName="text-[14px] font-extrabold tracking-tight text-[#0B211B]/70"
+                    body="You will be the first to know when one matches your windows"
+                    bodyClassName="text-xs leading-relaxed text-[#0B211B]/45"
+                  />
                 </motion.div>
               )
             ) : (

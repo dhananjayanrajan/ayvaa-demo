@@ -1,7 +1,7 @@
-import { motion } from 'motion/react'
 import { Search, SlidersHorizontal } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { TileTone } from '@/components/phone/kit'
+import { EmptyState } from '@/components/phone/EmptyState'
 import type { Service } from '@/data/services'
 import { ServiceRow } from './ServiceRow'
 
@@ -37,51 +37,30 @@ export function ServiceList({
         </div>
       )}
       {items.length === 0 ? (
-        <div className="flex flex-col items-center gap-2 px-5 py-8 text-center">
-          <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#0B211B]/[0.05] text-[#0B211B]/35">
-            {filteredOut ? (
-              <SlidersHorizontal className="h-5 w-5" strokeWidth={2.2} aria-hidden />
-            ) : (
-              <Search className="h-5 w-5" strokeWidth={2.2} aria-hidden />
-            )}
-          </span>
-          {filteredOut ? (
-            <>
-              <span className="text-[13px] font-bold tracking-tight text-[#0B211B]/70">
-                Your filters hide every service
-              </span>
-              <span className="text-pretty text-[11px] font-medium leading-snug text-[#0B211B]/45">
-                The budget cap or another preference excludes this category. Loosen a filter to see
-                more care.
-              </span>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.96 }}
-                onClick={onClearFilters}
-                className="mt-1 rounded-full bg-emerald-500/10 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.1em] text-emerald-700"
-              >
-                Clear all filters
-              </motion.button>
-            </>
-          ) : (
-            <>
-              <span className="text-[13px] font-bold tracking-tight text-[#0B211B]/70">
-                Nothing matches "{query}"
-              </span>
-              <span className="text-pretty text-[11px] font-medium text-[#0B211B]/45">
-                Try a different word or clear the category
-              </span>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.96 }}
-                onClick={onReset}
-                className="mt-1 rounded-full bg-emerald-500/10 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.1em] text-emerald-700"
-              >
-                Reset search
-              </motion.button>
-            </>
-          )}
-        </div>
+        <EmptyState
+          container="bare"
+          spacing="gap"
+          gap="sm"
+          padding="sm"
+          icon={filteredOut ? SlidersHorizontal : Search}
+          tone="emerald"
+          badge="soft"
+          size="sm"
+          title={filteredOut ? 'Your filters hide every service' : `Nothing matches "${query}"`}
+          titleClassName="text-[13px] tracking-tight text-[#0B211B]/70"
+          body={
+            filteredOut
+              ? 'The budget cap or another preference excludes this category. Loosen a filter to see more care.'
+              : 'Try a different word or clear the category'
+          }
+          bodyClassName="text-[11px] leading-snug text-[#0B211B]/45"
+          action={
+            filteredOut
+              ? { label: 'Clear all filters', onClick: onClearFilters }
+              : { label: 'Reset search', onClick: onReset }
+          }
+          actionStyle="pill"
+        />
       ) : (
         <div className="flex flex-col gap-2">
           {items.map((item) => (

@@ -214,9 +214,10 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 1. ~~Confirm Category C disposition (stage 0)~~ — RESOLVED: park (Stage 15 workstream).
 2. ~~Verify the two navigator-card chevron states (stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-8 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
-   6b02662, e75c366). Stage 9 (EmptyState universal) NEXT as a REDO under the NORMALIZATION
-   MANDATE (§1.11, §3): the universal is built; delete pure-config wrappers and inline at call
-   sites, consolidate same-family files, normalize folders/names/imports, real gate + grep
-   proofs, ledger, large commit.
+4. Current position: Stages 0-9 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
+   6b02662, e75c366, 0337ae8, 5a86937). Stage 9 (EmptyState universal) CLOSED as a REDO
+   under the NORMALIZATION MANDATE (§1.11, §3): universal `phone/EmptyState.tsx` built; pure-config
+   wrappers (professional EmptyFilterState, EmptyOffersCard) deleted + inlined at call sites;
+   genuine domain compositions kept; inline empties converted; hard-constraint Tailwind v4
+   source-order fix applied. Stage 10 (Tabs/Filters universal) NEXT.
 5. Hold every rule in §1 and §2. The rules exist because each one was paid for.
