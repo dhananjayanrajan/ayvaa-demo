@@ -226,3 +226,26 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Punch list additions (visual, rebuild phase): PartnerAlertsSheet row dividers; hover states on
   referral rows
 - Verified: 6/6 on canonical by grep; npx tsc --noEmit clean
+
+## F1 finish — Partner sheets, batch 2 of 3 (6 sheets)
+
+- components/phone/SheetShell.tsx → extended | height gains 'scroll' mode (max-h-[88%]
+  content-height-with-scroll: grabber band pt-4, scrollable interior px-5 pb-7 pt-3 holding
+  header AND button inline) | existing 'full'/'auto' paths byte-identical; TSC clean at hub
+  gate before any consumer ran. Justified by ≥2 implementations (both billing sheets share
+  the idiom); auto sheets untouched by it
+- Rewired height="auto": PartnerSessionsSheet, PartnerStaffSheet (canonical Tile header),
+  PartnerStatsSheet (surface-only — custom emerald-circle leading kept as children, InfoSheet
+  precedent), StaffDetailSheet (canonical surface inside preserved self-owned black/40 dim +
+  fade wrapper per B4 EditProfile/CertificationUpload precedent — canonical dim would add
+  backdrop-blur, a visual change)
+- Rewired height="scroll": BillingInvoiceSheet, BillingUsageReportSheet (the max-h-88% idiom
+  the mode was built from)
+- Consumers: zero screen edits — all six keep paths and export signatures; PT02/PT05/PT07
+  import lines unchanged
+- Normalizations flagged: hand-rolled spring bounce 0.12/0.45s → canonical 380/40 (batch-1
+  precedent); StaffDetail 300/30 → 380/40; whileHover scales dropped on billing close buttons
+  and download/email buttons (no-hover-motion rule, B6 precedent); whileTap kept
+- Preserved differences: StaffDetail self-owned dim (no blur); staff rows keep sky-circle
+  leading; StaffSheet hairline dividers kept (divider punch list)
+- Verified: 6/6 on canonical by grep; npx tsc --noEmit clean

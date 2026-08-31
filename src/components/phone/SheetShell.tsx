@@ -15,7 +15,7 @@ export type SheetProps = {
   title?: string
   subtitle?: string
   sub?: string
-  height?: 'full' | 'auto'
+  height?: 'full' | 'auto' | 'scroll'
   onClose: () => void
   footer?: ReactNode
   children: ReactNode
@@ -82,7 +82,7 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, ch
   subtitle?: string
   onClose: () => void
   footer?: ReactNode
-  height?: 'full' | 'auto'
+  height?: 'full' | 'auto' | 'scroll'
   children: ReactNode
 }) {
   if (height === 'auto') {
@@ -100,6 +100,25 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, ch
         )}
         {children}
         {footer}
+      </motion.div>
+    )
+  }
+  if (height === 'scroll') {
+    return (
+      <motion.div
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={SHEET_SPRING}
+        className="absolute inset-x-0 bottom-0 z-50 flex max-h-[88%] flex-col rounded-t-[28px] bg-white shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
+      >
+        <div className="shrink-0 px-5 pt-4">
+          <div aria-hidden className="mx-auto h-1.5 w-10 rounded-full bg-[#0B211B]/15" />
+        </div>
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pb-7 pt-3">
+          {children}
+          {footer}
+        </div>
       </motion.div>
     )
   }

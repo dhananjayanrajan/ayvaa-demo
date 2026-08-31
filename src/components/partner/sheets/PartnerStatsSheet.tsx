@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { BarChart3, X } from 'lucide-react'
+import { SheetShell } from '@/components/phone/SheetShell'
 
 interface PartnerStatsSheetProps {
   weeklySessions: number[]
@@ -10,17 +11,9 @@ export function PartnerStatsSheet({ weeklySessions, onClose }: PartnerStatsSheet
   const maxSessions = Math.max(...weeklySessions)
 
   return (
-    <motion.div
-      key="stats-sheet"
-      initial={{ y: '100%' }}
-      animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-      className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-    >
-      <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
+    <SheetShell onClose={onClose} height="auto">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
           <BarChart3 className="h-5 w-5" strokeWidth={2.2} />
         </div>
         <div className="min-w-0 flex-1">
@@ -59,6 +52,6 @@ export function PartnerStatsSheet({ weeklySessions, onClose }: PartnerStatsSheet
           {weeklySessions.reduce((a, b) => a + b, 0)}
         </span>
       </div>
-    </motion.div>
+    </SheetShell>
   )
 }

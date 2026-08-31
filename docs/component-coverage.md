@@ -245,3 +245,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   PartnerSessionsSheet, PartnerStaffSheet, PartnerStatsSheet, StaffDetailSheet,
   BillingInvoiceSheet, BillingUsageReportSheet, PerformanceFeedbackSheet, PerformanceKpiSheet
 - Canonical change: SheetShell gains height ('full' | 'auto') — superset API, no consumer breakage
+
+---
+# Revision 5 — F1 partner sheets batch 2 (12 of 14)
+
+- Rewired: PartnerSessionsSheet, PartnerStaffSheet, PartnerStatsSheet (auto);
+  StaffDetailSheet (auto, self-owned dim preserved); BillingInvoiceSheet,
+  BillingUsageReportSheet (scroll)
+- Canonical change: SheetShell height now 'full' | 'auto' | 'scroll'
+- F1 now 33 of 58 processed (31 rewired, 2 keep-ruled); partner 12 of 14; remaining partner:
+  PerformanceFeedbackSheet, PerformanceKpiSheet; then professional 7, patient 12, admin 3
