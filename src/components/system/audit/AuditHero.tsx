@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { Chip } from '@/components/phone/kit'
+import { Chip, StatStrip } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
 import { PHASE_THEME, PhaseHero } from '@/components/phone/PhaseHero'
 import { cn } from '@/lib/utils'
@@ -170,35 +170,14 @@ export function AuditHero({ phase, verifiedCount, totalCount }: AuditHeroProps) 
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-        <div className="flex flex-col gap-1.5 px-3 first:pl-0">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full transition-colors duration-500', t.statDot)} />
-            12
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Accesses
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full transition-colors duration-500', t.statDot)} />
-            3
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Changes
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full transition-colors duration-500', t.statDot)} />
-            0
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Tampered
-          </div>
-        </div>
-      </div>
+      <StatStrip
+        className="mt-5"
+        cells={[
+          { key: 'accesses', value: 12, label: 'Accesses', dot: cn('transition-colors duration-500', t.statDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'changes', value: 3, label: 'Changes', dot: cn('transition-colors duration-500', t.statDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'tampered', value: 0, label: 'Tampered', dot: cn('transition-colors duration-500', t.statDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+        ]}
+      />
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         {t.chips.map((c) => (

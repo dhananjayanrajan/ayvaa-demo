@@ -1,19 +1,9 @@
 import { Fragment } from 'react'
 import { motion } from 'motion/react'
-import { Chip, Hero, Kicker, LiveDot } from '@/components/phone/kit'
+import { Chip, Hero, Kicker, LiveDot, StatStrip } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
-import type { ReactNode } from 'react'
 
 const blocks = ['1F', '20', '21', '22', '23']
-
-function HeroCell({ v, l }: { v: ReactNode; l: string }) {
-  return (
-    <div className="flex flex-col gap-1.5 px-3 first:pl-0">
-      <span className="text-[15px] font-extrabold tabular-nums leading-none text-white">{v}</span>
-      <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-100/45">{l}</span>
-    </div>
-  )
-}
 
 interface LedgerChainHeroProps {
   todayCount: number
@@ -91,11 +81,14 @@ export function LedgerChainHero({ todayCount }: LedgerChainHeroProps) {
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-        <HeroCell v={todayCount} l="Today" />
-        <HeroCell v={`${health}%`} l="Health" />
-        <HeroCell v="0" l="Gaps · 90 d" />
-      </div>
+      <StatStrip
+        className="mt-5"
+        cells={[
+          { key: 'today', value: todayCount, label: 'Today' },
+          { key: 'health', value: `${health}%`, label: 'Health' },
+          { key: 'gaps', value: '0', label: 'Gaps · 90 d' },
+        ]}
+      />
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         <Chip intent="neutral" light className="border-transparent">Append-only</Chip>

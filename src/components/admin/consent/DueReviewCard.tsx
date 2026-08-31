@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { CalendarClock, ChevronDown, FileText, Phone } from 'lucide-react'
-import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
+import { Card, Chip, Panel, StatStrip, Tile, rise } from '@/components/phone/kit'
 import { Overline } from '@/components/phone/Overline'
 import { StaticButton } from '@/components/phone/LifecycleButton'
 import { CycleStep } from '@/components/admin/consent/CycleStep'
@@ -80,14 +80,10 @@ export function DueReviewCard({ notify, onViewRecord }: DueReviewCardProps) {
           </div>
 
           <Panel intent="neutral" className="mt-4">
-            <div className="grid grid-cols-3 divide-x divide-[#0B211B]/[0.06]">
-              {facts.map((f) => (
-                <div key={f.key} className="flex min-w-0 flex-col items-center gap-1 px-2 py-3">
-                  <span className="max-w-full truncate text-[14px] font-extrabold tabular-nums leading-none text-[#0B211B]">{f.value}</span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/45">{f.key}</span>
-                </div>
-              ))}
-            </div>
+            <StatStrip
+              light
+              cells={facts.map((f) => ({ key: f.key, value: f.value, label: f.key }))}
+            />
           </Panel>
 
           <div className="mt-3 flex flex-wrap gap-1.5">

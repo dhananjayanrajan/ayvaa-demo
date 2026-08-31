@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Star, TrendingUp, UserCheck } from 'lucide-react'
 import PriceFlow from '@/components/smoothui/price-flow'
-import { Chip, Hero, Kicker, Stat, rise } from '@/components/phone/kit'
+import { Chip, Hero, Kicker, StatStrip, rise } from '@/components/phone/kit'
 import { Sparkline } from '@/components/admin/analytics/Sparkline'
 import { analytics } from '@/data/seed'
 import { cn } from '@/lib/utils'
@@ -65,11 +65,14 @@ export function RevenueHero() {
 
         <Sparkline data={sparkData} />
 
-        <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-          <Stat label="Utilisation" value={analytics.utilisation} dot="bg-emerald-300" />
-          <Stat label="Avg rating" value={analytics.quality} dot="bg-teal-300" />
-          <Stat label="Miss rate" value={analytics.missRate} dot="bg-rose-300/80" />
-        </div>
+        <StatStrip
+          className="mt-5"
+          cells={[
+            { key: 'utilisation', value: analytics.utilisation, label: 'Utilisation', dot: 'bg-emerald-300' },
+            { key: 'quality', value: analytics.quality, label: 'Avg rating', dot: 'bg-teal-300' },
+            { key: 'miss', value: analytics.missRate, label: 'Miss rate', dot: 'bg-rose-300/80' },
+          ]}
+        />
 
         <div className="mt-4 flex flex-wrap gap-1.5">
           <Chip intent="neutral" light icon={UserCheck}>{totalSessions} sessions</Chip>

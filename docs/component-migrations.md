@@ -686,3 +686,25 @@ ExecutionTrail rail now pure gradient (no base color under); focus rings where p
 Grep zero-proof: `rg -ln 'w-px flex-1|flex flex-col items-center' src/components --glob
 '!phone/**'` → exit 1, ZERO matches. No StepList-convertible hand-rolled vertical-rail timelines
 remain.
+
+## Sweep 2b (StatStrip) — CLOSED
+
+Hub: StatStrip added to src/components/phone/kit.tsx (after kit Stat). API: {cells:
+[{key, value: ReactNode, label, dot?, valueClassName?, labelClassName?}], cols=3, light,
+className}. Wrapper: grid divide-x (light: divide-[#0B211B]/[0.06] / dark: divide-white/[0.08])
++ inline gridTemplateColumns repeat(cols,minmax(0,1fr)) (JIT-safe). Dark cell: flex-col
+gap-1.5 px-3 first:pl-0; snip light cell: flex-col items-center gap-1 px-2 py-3. Dark value:
+'flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white';
+snip light value: 'max-w-full truncate text-[14px] font-extrabold tabular-nums leading-none
+text-[#0B211B]'. Dot: h-1.5 w-1.5 rounded-full rendered inside value span. Dark label:
+'text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-100/45'; snip light label:
+'tracking-[0.14em] text-[#0B211B]/45'.
+
+7 conversions (all gate-clean, exit 2 = 33 Category C baseline, zero kit/converted errors):
+AuditHero, TransactionHero, RecheckHero (themed dot+label transitions preserved via
+dot/labelClassName), RevenueHero, SessionSummaryHero, LedgerChainHero (local HeroCell
+deleted, ReactNode import removed), DueReviewCard (light variant). kit Stat now has ZERO
+consumers (flag for removal at final cert; snip NOT deleted now).
+
+Grep zero-proof: `grep -rn 'grid grid-cols-3 divide-x' src/components --exclude-dir=phone`
+→ exit 1, ZERO matches. No hand-rolled divide-x stat strips remain.

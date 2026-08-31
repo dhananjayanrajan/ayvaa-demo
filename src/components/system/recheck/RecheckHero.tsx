@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { Chip } from '@/components/phone/kit'
+import { Chip, StatStrip } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
 import { PHASE_THEME, PhaseHero } from '@/components/phone/PhaseHero'
 import { recheckSubject } from '@/data/system/recheck'
@@ -186,35 +186,14 @@ export function RecheckHero({ phase, waiting, declined, recheckPending, round }:
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-        <div className="flex flex-col gap-1.5 px-3 first:pl-0">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full transition-colors duration-500', t.waitingDot)} />
-            {waiting}
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Waiting
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            {recheckPending}
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Re-check
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-teal-300" />
-            {round}
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Round
-          </div>
-        </div>
-      </div>
+      <StatStrip
+        className="mt-5"
+        cells={[
+          { key: 'waiting', value: waiting, label: 'Waiting', dot: cn('transition-colors duration-500', t.waitingDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'recheck', value: recheckPending, label: 'Re-check', dot: 'bg-amber-400', labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'round', value: round, label: 'Round', dot: 'bg-teal-300', labelClassName: cn('transition-colors duration-500', t.statLabel) },
+        ]}
+      />
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         {t.chips.map((c) => (

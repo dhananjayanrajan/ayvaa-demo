@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { Chip, Meter } from '@/components/phone/kit'
+import { Chip, Meter, StatStrip } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
 import { PHASE_THEME, PhaseHero } from '@/components/phone/PhaseHero'
 import { transactionMeta } from '@/data/system/transactions'
@@ -250,41 +250,14 @@ export function TransactionHero({ phase, doneWrites, failedStep }: TransactionHe
         <Meter value={doneWrites / TOTAL_WRITES} intent={t.meterIntent} className="mt-2 bg-white/10" />
       </div>
 
-      <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-        <div className="flex flex-col gap-1.5 px-3 first:pl-0">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full transition-colors duration-500', t.statDot)} />
-            {doneWrites}
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Writes
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-            0
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Partial
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5 px-3">
-          <div className="flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white">
-            <span
-              aria-hidden
-              className={cn(
-                'h-1.5 w-1.5 rounded-full transition-colors duration-500',
-                phase === 'rolled-back' ? 'bg-rose-300/80' : t.statDot,
-              )}
-            />
-            {outcome}
-          </div>
-          <div className={cn('text-[9px] font-bold uppercase tracking-[0.16em] transition-colors duration-500', t.statLabel)}>
-            Took
-          </div>
-        </div>
-      </div>
+      <StatStrip
+        className="mt-5"
+        cells={[
+          { key: 'writes', value: doneWrites, label: 'Writes', dot: cn('transition-colors duration-500', t.statDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'partial', value: 0, label: 'Partial', dot: 'bg-emerald-300', labelClassName: cn('transition-colors duration-500', t.statLabel) },
+          { key: 'took', value: outcome, label: 'Took', dot: cn('transition-colors duration-500', phase === 'rolled-back' ? 'bg-rose-300/80' : t.statDot), labelClassName: cn('transition-colors duration-500', t.statLabel) },
+        ]}
+      />
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         {t.chips.map((c) => (

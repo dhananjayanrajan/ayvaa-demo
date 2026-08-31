@@ -424,3 +424,17 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Gate standing: 33 errors, pure Category C (baseline unchanged)
 - NEXT: Stage 5 — FactRows/StatStrip extensions + corpus sweep (divide-x stat strips,
   big-number cells, Vault TapStat)
+
+---
+# Revision 21 — Sweep 2b (StatStrip) CLOSED
+
+- StatStrip hub added to phone/kit (dark + light variants, cols, dot, valueClassName/
+  labelClassName)
+- 7 divide-x stat strips converted: AuditHero, TransactionHero, RecheckHero, RevenueHero,
+  SessionSummaryHero, LedgerChainHero (HeroCell deleted), DueReviewCard (light)
+- kit Stat now has zero consumers — flagged for removal at final cert
+- Grep zero-proof: zero `grid grid-cols-3 divide-x` outside phone/
+- Gate standing: 33 errors, pure Category C (baseline unchanged)
+- NEXT: Stage 6 — PhaseShell consolidation (ApprovalCard 4-state incl. slate,
+  WithdrawalCard 2-state rose→emerald, IncidentLinkingCard rose, ReversedOfferTraceCard sky,
+  RollbackTraceCard rose)

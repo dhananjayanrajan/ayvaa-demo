@@ -1,4 +1,4 @@
-import { Chip, Hero, Kicker, Stat } from '@/components/phone/kit'
+import { Chip, Hero, Kicker, StatStrip } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
 
 interface SessionSummaryHeroProps {
@@ -53,11 +53,14 @@ export function SessionSummaryHero({
         </span>
       </h2>
 
-      <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-        <Stat label="Live" value={liveCount} dot={theme.statLive} />
-        <Stat label="Upcoming" value={upcomingCount} dot={theme.statUpcoming} />
-        <Stat label="Total" value={totalCount} dot={theme.statTotal} />
-      </div>
+      <StatStrip
+        className="mt-5"
+        cells={[
+          { key: 'live', value: liveCount, label: 'Live', dot: theme.statLive },
+          { key: 'upcoming', value: upcomingCount, label: 'Upcoming', dot: theme.statUpcoming },
+          { key: 'total', value: totalCount, label: 'Total', dot: theme.statTotal },
+        ]}
+      />
     </Hero>
   )
 }

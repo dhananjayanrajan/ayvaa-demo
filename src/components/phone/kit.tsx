@@ -391,6 +391,60 @@ export function Stat({
   )
 }
 
+export function StatStrip({
+  cells,
+  cols = 3,
+  light = false,
+  className,
+}: {
+  cells: {
+    key?: string
+    value: ReactNode
+    label: string
+    dot?: string
+    valueClassName?: string
+    labelClassName?: string
+  }[]
+  cols?: number
+  light?: boolean
+  className?: string
+}) {
+  return (
+    <div
+      className={cn('grid divide-x', light ? 'divide-[#0B211B]/[0.06]' : 'divide-white/[0.08]', className)}
+      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+    >
+      {cells.map((cell) => (
+        <div
+          key={cell.key ?? cell.label}
+          className={light ? 'flex min-w-0 flex-col items-center gap-1 px-2 py-3' : 'flex flex-col gap-1.5 px-3 first:pl-0'}
+        >
+          <span
+            className={cn(
+              light
+                ? 'max-w-full truncate text-[14px] font-extrabold tabular-nums leading-none text-[#0B211B]'
+                : 'flex items-center gap-1.5 text-[15px] font-extrabold tabular-nums leading-none text-white',
+              cell.valueClassName,
+            )}
+          >
+            {cell.dot && <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', cell.dot)} />}
+            {cell.value}
+          </span>
+          <span
+            className={cn(
+              'text-[9px] font-bold uppercase',
+              light ? 'tracking-[0.14em] text-[#0B211B]/45' : 'tracking-[0.16em] text-emerald-100/45',
+              cell.labelClassName,
+            )}
+          >
+            {cell.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export function Expand({ open, children }: { open: boolean; children: ReactNode }) {
   return (
     <AnimatePresence initial={false}>
