@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, TrendingDown, TrendingUp } from 'lucide-react'
 import { Chip, Panel } from '@/components/phone/kit'
-import { VITAL_READINGS, type VitalReading } from './sheetData'
+import { VITAL_READINGS, type VitalReading } from '@/data/sheetData'
 import { cn } from '@/lib/utils'
 
 type Props = {

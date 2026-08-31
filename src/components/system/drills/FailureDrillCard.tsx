@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { FlaskConical, Settings2 } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
-import { OUTCOME_THEMES } from '@/components/system/drills/drillOutcomeTheme'
+import { OUTCOME_THEMES } from '@/data/drillOutcomeTheme'
 import type { TransactionPhase, DrillRun } from '@/data/system/transactions'
 import { cn } from '@/lib/utils'
 

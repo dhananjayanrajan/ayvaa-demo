@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Download, ReceiptText } from 'lucide-react'
-import type { Invoice } from './types'
+import type { Invoice } from '@/data/partnerBillingTypes'
 
 interface BillingFooterProps {
   latest: Invoice

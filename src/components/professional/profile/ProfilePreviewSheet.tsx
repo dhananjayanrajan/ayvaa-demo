@@ -1,6 +1,6 @@
 import { Eye, Lock, ShieldCheck, X } from 'lucide-react'
 import { Chip, Tile } from '@/components/phone/kit'
-import { PUBLIC_FACTS } from './profileData'
+import { PUBLIC_FACTS } from '@/data/profileData'
 import { motion } from 'motion/react'
 
 type Props = {

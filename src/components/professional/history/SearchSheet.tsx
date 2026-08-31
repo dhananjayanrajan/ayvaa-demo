@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Search, X } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
-import { groupByMonth, searchSessions, type HistorySession } from './historyData'
+import { groupByMonth, searchSessions, type HistorySession } from '@/data/historyData'
 
 type Props = {
   sessions: HistorySession[]

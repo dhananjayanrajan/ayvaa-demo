@@ -1,6 +1,6 @@
 import { ClipboardCheck } from 'lucide-react'
 import { Card } from '@/components/phone/kit'
-import type { UsageItem } from './types'
+import type { UsageItem } from '@/data/partnerBillingTypes'
 
 interface UsageLedgerCardProps {
   usage: UsageItem[]

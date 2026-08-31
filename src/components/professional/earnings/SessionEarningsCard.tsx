@@ -1,5 +1,5 @@
 import { Card } from '@/components/phone/kit'
-import { paidAverage, type SessionRecord } from './sessionRecords'
+import { paidAverage, type SessionRecord } from '@/data/sessionRecords'
 import { EarningRow } from './EarningRow'
 import { PendingSessionRow } from './PendingSessionRow'
 

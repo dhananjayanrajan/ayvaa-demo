@@ -1,5 +1,5 @@
 import { Card } from '@/components/phone/kit'
-import { STEP_ICONS, type SessionStep } from './sessionExecution'
+import { STEP_ICONS, type SessionStep } from '@/data/sessionExecution'
 import { ChecklistRow } from './ChecklistRow'
 
 type Props = {

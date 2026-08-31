@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion } from 'motion/react'
 import { Camera, Check, FileImage } from 'lucide-react'
-import type { SeverityConfig } from './incidentData'
+import type { SeverityConfig } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

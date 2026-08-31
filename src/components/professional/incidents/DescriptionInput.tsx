@@ -1,6 +1,6 @@
 import { Pencil, ShieldCheck } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
-import type { SeverityConfig } from './incidentData'
+import type { SeverityConfig } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

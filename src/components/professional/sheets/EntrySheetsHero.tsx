@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
-import { SHEET_MODES, type SheetMode } from './sheetData'
+import { SHEET_MODES, type SheetMode } from '@/data/sheetData'
 import { cn } from '@/lib/utils'
 
 type Props = {

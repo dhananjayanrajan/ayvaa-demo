@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Check, Lock, Play, type LucideIcon } from 'lucide-react'
 import { Chip, Tile } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
-import type { StepState } from './sessionExecution'
+import type { StepState } from '@/data/sessionExecution'
 import { cn } from '@/lib/utils'
 
 type Props = {

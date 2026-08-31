@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { ShieldAlert } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
 import { PhaseHero } from '@/components/phone/PhaseHero'
-import type { SeverityConfig } from './incidentData'
+import type { SeverityConfig } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

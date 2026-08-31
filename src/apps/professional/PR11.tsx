@@ -17,8 +17,8 @@ import { ProfilePreviewSheet } from '@/components/professional/profile/ProfilePr
 import { CertificationUploadSheet } from '@/components/professional/profile/CertificationUploadSheet'
 import { EditProfileSheet } from '@/components/professional/profile/EditProfileSheet'
 import { UploadConfirmation } from '@/components/professional/profile/UploadConfirmation'
-import { initialsOf } from '@/components/professional/profile/profileData'
-import { parseBank } from '@/components/professional/payouts/payoutData'
+import { initialsOf } from '@/data/profileData'
+import { parseBank } from '@/data/payoutData'
 
 export function PR11() {
   const { notify } = useDemo()

@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Hero, Chip } from '@/components/phone/kit'
 import PriceFlow from '@/components/smoothui/price-flow'
 import { cn } from '@/lib/utils'
-import type { Invoice } from './types'
+import type { Invoice } from '@/data/partnerBillingTypes'
 
 interface BillingHeroProps {
   latest: Invoice

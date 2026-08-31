@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
-import type { HistorySession } from './historyData'
-import { dayOf } from './historyData'
+import type { HistorySession } from '@/data/historyData'
+import { dayOf } from '@/data/historyData'
 import { cn } from '@/lib/utils'
 
 type Props = {

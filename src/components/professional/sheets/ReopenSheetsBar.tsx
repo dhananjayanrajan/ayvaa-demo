@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ClipboardList } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { SHEET_MODES, type SheetMode } from './sheetData'
+import { SHEET_MODES, type SheetMode } from '@/data/sheetData'
 
 type Props = {
   saved: SheetMode[]

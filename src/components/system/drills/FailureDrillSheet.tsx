@@ -3,7 +3,7 @@ import { FlaskConical, Loader2, Play, RotateCcw, TriangleAlert } from 'lucide-re
 import { Chip, Panel, Tile } from '@/components/phone/kit'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { BottomSheet } from '@/components/phone/SheetShell'
-import { OUTCOME_THEMES } from '@/components/system/drills/drillOutcomeTheme'
+import { OUTCOME_THEMES } from '@/data/drillOutcomeTheme'
 import type { TransactionPhase, DrillRun } from '@/data/system/transactions'
 import { cn } from '@/lib/utils'
 

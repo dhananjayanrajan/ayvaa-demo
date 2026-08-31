@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { ReceiptText } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
-import type { Invoice } from './types'
+import type { Invoice } from '@/data/partnerBillingTypes'
 
 interface StatementCarouselProps {
   invoices: Invoice[]

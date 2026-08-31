@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Tile } from '@/components/phone/kit'
-import { QUICK_ACTIONS, STEP_ICONS } from './sessionExecution'
+import { QUICK_ACTIONS, STEP_ICONS } from '@/data/sessionExecution'
 
 type Props = {
   onPressAction: (label: string, body: string) => void

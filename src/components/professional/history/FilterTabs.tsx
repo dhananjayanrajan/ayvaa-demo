@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { FILTERS, type FilterId } from './historyData'
+import { FILTERS, type FilterId } from '@/data/historyData'
 import { cn } from '@/lib/utils'
 
 type Props = {

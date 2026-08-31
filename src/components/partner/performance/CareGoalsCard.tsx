@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ChevronDown, Star } from 'lucide-react'
 import { Card, Chip, Ring } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
-import type { PerformanceData } from './types'
+import type { PerformanceData } from '@/data/partnerPerformanceTypes'
 
 interface CareGoalsCardProps {
   data: PerformanceData

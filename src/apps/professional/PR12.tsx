@@ -22,7 +22,7 @@ import {
   matchesFilter,
   recordToFileLines,
   type FilterId,
-} from '@/components/professional/history/historyData'
+} from '@/data/historyData'
 
 type Sheet = 'none' | 'search'
 

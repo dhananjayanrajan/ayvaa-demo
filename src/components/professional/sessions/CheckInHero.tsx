@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Lock } from 'lucide-react'
 import { Chip, Hero, Kicker, LiveDot } from '@/components/phone/kit'
-import type { SessionStep } from './sessionExecution'
+import type { SessionStep } from '@/data/sessionExecution'
 import { cn } from '@/lib/utils'
 
 type Props = {

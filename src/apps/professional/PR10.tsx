@@ -14,7 +14,7 @@ import { PayoutHistoryCard } from '@/components/professional/payouts/PayoutHisto
 import { ConfirmWithdrawSheet } from '@/components/professional/payouts/ConfirmWithdrawSheet'
 import { AccountSheet } from '@/components/professional/payouts/AccountSheet'
 import { PayoutReceiptSheet } from '@/components/professional/payouts/PayoutReceiptSheet'
-import { parseBank, type Payout, type PayoutAccount } from '@/components/professional/payouts/payoutData'
+import { parseBank, type Payout, type PayoutAccount } from '@/data/payoutData'
 
 type Sheet = 'none' | 'confirm' | 'account' | 'payout'
 

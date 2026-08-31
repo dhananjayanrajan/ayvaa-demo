@@ -1,6 +1,6 @@
 import { Card } from '@/components/phone/kit'
 import { AlertToggleRow } from './AlertToggleRow'
-import { WITHDRAWAL_STEPS } from './payoutData'
+import { WITHDRAWAL_STEPS } from '@/data/payoutData'
 import { cn } from '@/lib/utils'
 
 export function ArrivalTimelineCard() {

@@ -1,5 +1,5 @@
 import { Chip } from '@/components/phone/kit'
-import type { SeverityConfig } from './incidentData'
+import type { SeverityConfig } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

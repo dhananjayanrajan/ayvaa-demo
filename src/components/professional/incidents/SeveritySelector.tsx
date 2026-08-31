@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import type { Severity } from './incidentData'
+import type { Severity } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

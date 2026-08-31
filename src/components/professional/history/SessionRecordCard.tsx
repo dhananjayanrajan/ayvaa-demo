@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ChevronRight, FileText } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
-import type { HistorySession } from './historyData'
+import type { HistorySession } from '@/data/historyData'
 
 type Props = {
   session: HistorySession

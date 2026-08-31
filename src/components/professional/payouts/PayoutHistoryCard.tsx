@@ -1,5 +1,5 @@
 import { Card } from '@/components/phone/kit'
-import type { Payout } from './payoutData'
+import type { Payout } from '@/data/payoutData'
 import { PayoutRow } from './PayoutRow'
 
 type Props = {

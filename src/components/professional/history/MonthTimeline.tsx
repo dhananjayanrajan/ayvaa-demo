@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Chip } from '@/components/phone/kit'
 import { RecordExpansion } from './RecordExpansion'
-import { dayOf, timeOf, type HistorySession } from './historyData'
+import { dayOf, timeOf, type HistorySession } from '@/data/historyData'
 import { cn } from '@/lib/utils'
 
 type Props = {

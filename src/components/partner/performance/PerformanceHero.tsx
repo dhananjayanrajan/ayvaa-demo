@@ -4,7 +4,7 @@ import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { Chip, Hero, Ring } from '@/components/phone/kit'
 import { Stars } from './Stars'
 import { cn } from '@/lib/utils'
-import type { PerformanceData, PerformanceMonth } from './types'
+import type { PerformanceData, PerformanceMonth } from '@/data/partnerPerformanceTypes'
 
 interface PerformanceHeroProps {
   data: PerformanceData

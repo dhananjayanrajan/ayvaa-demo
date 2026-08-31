@@ -160,3 +160,46 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - PartnerPatientHero: last partner emerald hand-rolled hero shell → kit Hero (hairline added per shell unification); useCountUp hook and four-band progress theme preserved as genuinely custom
 - Kept with reasons: PartnerCarePathway (state-machine journey accordion with connector rails), PartnerRecoveryTrajectory (animated SVG chart with play-state, F8-adjacent), StaffList (variant-mode avatar list; chevron-translate violation flagged for ListRow pass), PartnerBillingCard + PartnerReferralCard (navigator cards, ListRow pass; PartnerReferralCard whileHover scale flagged for F4 sweep)
 - Verified: npx tsc --noEmit clean
+
+## B10 (part 2) — Professional history and offers cards
+
+- No rewires — all six verified as single-purpose compositions on existing primitives
+- NotePanel: ruled OUT of QuotePanel absorption (different footer anatomy: caption vs avatar+badge; one caller each — merge would be a props bolt-on)
+- IncidentPanel: DarkPanel-adjacent residual (smaller orb, no kicker tint separation; forcing requires a glow-size prop for one caller)
+- OfferCard: unique urgency-theme state machine with accept/decline lifecycles; whileHover scales flagged for F4 sweep
+- SessionRecordCard, AcceptedOffersCard, DeclinedOffersCard: distinct variants with single callers each
+- Verified: npx tsc --noEmit clean (no emits, read-only stage)
+
+## B10 (part 3) — Professional sessions/payouts/auth cards
+
+- No rewires — six single-purpose compositions verified
+- ArrivalTimelineCard: MiniTimeline-adjacent residual (gradient connector + emerald active-ping vs canonical amber pending; pendingTone prop for one caller = bolt-on economics)
+- StandingCard: light-surface stat trio variant; AccountCard: unique gradient bank-card (sole instance); SessionListCard: divided list (hairlines join divider punch list); LiveSessionCard: unique progress+resume composition; PayoutHistoryCard: thin PayoutRow wrapper
+- StandingCard whileHover scale flagged for F4 sweep
+- Commit policy change per user: small consolidation batches accumulate into the next substantial commit; ledger records completion continuously
+
+## Ruling 2 — Data-module relocation (12 files)
+
+- 10 pure moves (git mv, content unchanged) → src/data/: availabilityData, sessionRecords,
+  historyData, incidentData, payoutData, profileData, sheetData, sessionExecution,
+  performanceData, drillOutcomeTheme
+- 2 forced renames (collision with pre-existing src/data/types.ts, and with each other):
+  partner/performance/types.ts → src/data/partnerPerformanceTypes.ts;
+  partner/billing/types.ts → src/data/partnerBillingTypes.ts
+- Single content edit in the batch: src/data/performanceData.ts line 1 `./types` →
+  `@/data/partnerPerformanceTypes` (a flat move would have silently resolved `./types`
+  to the global src/data/types.ts — the wrong module)
+- Consumers repointed: 53 files (10 app screens incl. PT06's two imports, 43 component/data
+  files; PT06 required a second fix after discovery, see incident below)
+- Incident — sweep gap: performanceData was omitted from the consumer-discovery pattern
+  (fell between the module-name sweep and the two types.ts sweeps); caught by the post-fix
+  retired-path sweep, root-caused, and fixed in a dedicated exchange. Lesson recorded:
+  every moved module must appear by bare filename in discovery; relative blind-spot sweep
+  added to the standard verification set
+- sessionExecution.ts was the 12th module — missed by the original audit list of 11, caught
+  by tree cross-check at coverage-checklist build
+- Observation (not acted on, per minimal-edit rule): incidentData.ts and drillOutcomeTheme.ts
+  import types from @/components/phone/kit — data layer depending on component layer; works
+  under the alias, logged for any future layering decision
+- Verified: npx tsc --noEmit clean (×2 gates); retired-path sweep zero across all 12 old
+  paths; relative-import blind-spot sweep zero; new-path file counts all match expected

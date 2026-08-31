@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import { hoursFor, type DayAvailability } from './availabilityData'
+import { hoursFor, type DayAvailability } from '@/data/availabilityData'
 
 type Props = {
   days: DayAvailability[]

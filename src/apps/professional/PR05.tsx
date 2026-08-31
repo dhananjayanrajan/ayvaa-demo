@@ -13,7 +13,7 @@ import { TimeOffCard } from '@/components/professional/availability/TimeOffCard'
 import { ReliabilityNotice } from '@/components/professional/availability/ReliabilityNotice'
 import { SaveAvailabilityButton, type SaveStatus } from '@/components/professional/availability/SaveAvailabilityButton'
 import { SaveConfirmation } from '@/components/professional/availability/SaveConfirmation'
-import { WINDOWS, hoursFor, type DayAvailability } from '@/components/professional/availability/availabilityData'
+import { WINDOWS, hoursFor, type DayAvailability } from '@/data/availabilityData'
 
 type Days = DayAvailability[]
 

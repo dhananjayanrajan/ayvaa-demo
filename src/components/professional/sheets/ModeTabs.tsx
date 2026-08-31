@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
-import { SHEET_MODES, type SheetMode } from './sheetData'
+import { SHEET_MODES, type SheetMode } from '@/data/sheetData'
 import { cn } from '@/lib/utils'
 
 type Props = {

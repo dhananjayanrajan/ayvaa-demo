@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ReceiptText, X } from 'lucide-react'
-import type { UsageItem } from './types'
+import type { UsageItem } from '@/data/partnerBillingTypes'
 
 interface BillingUsageReportSheetProps {
   usage: UsageItem[]

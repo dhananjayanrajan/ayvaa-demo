@@ -14,7 +14,7 @@ import { SafetyNotice } from '@/components/professional/sessions/SafetyNotice'
 import { IncidentButton } from '@/components/professional/sessions/IncidentButton'
 import { SignOffButton, type SignOffStatus } from '@/components/professional/sessions/SignOffButton'
 import { SignOffConfirmation } from '@/components/professional/sessions/SignOffConfirmation'
-import type { SessionStep, StepState } from '@/components/professional/sessions/sessionExecution'
+import type { SessionStep, StepState } from '@/data/sessionExecution'
 
 const toState = (s: (typeof sessionChecklist)[number]): StepState => {
   if (s.done) return 'done'

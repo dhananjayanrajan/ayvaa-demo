@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Lock, X } from 'lucide-react'
 import { Stars } from './Stars'
-import type { FeedbackEntry } from './types'
+import type { FeedbackEntry } from '@/data/partnerPerformanceTypes'
 
 interface PerformanceFeedbackSheetProps {
   feedback: FeedbackEntry | null

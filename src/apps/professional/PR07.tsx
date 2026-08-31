@@ -23,7 +23,7 @@ import {
   SHEET_MODES,
   type SheetMode,
   type VitalReading,
-} from '@/components/professional/sheets/sheetData'
+} from '@/data/sheetData'
 
 const modeProgress = (
   mode: SheetMode,

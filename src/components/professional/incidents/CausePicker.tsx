@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
-import type { SeverityConfig } from './incidentData'
+import type { SeverityConfig } from '@/data/incidentData'
 import { cn } from '@/lib/utils'
 
 type Props = {

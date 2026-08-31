@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { Card, Chip } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
-import { WINDOWS, type DayAvailability } from './availabilityData'
+import { WINDOWS, type DayAvailability } from '@/data/availabilityData'
 import { DayToggle } from './DayToggle'
 import { WindowOption } from './WindowOption'
 

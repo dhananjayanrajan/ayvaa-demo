@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ClipboardCheck, Download, X } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
-import type { Invoice, UsageItem } from './types'
+import type { Invoice, UsageItem } from '@/data/partnerBillingTypes'
 
 interface BillingInvoiceSheetProps {
   invoice: Invoice

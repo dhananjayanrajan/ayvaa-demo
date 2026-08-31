@@ -11,8 +11,8 @@ import { PerformancePrivacyNote } from '@/components/partner/performance/Perform
 import { PerformanceFeedbackSheet } from '@/components/partner/performance/PerformanceFeedbackSheet'
 import { PerformanceKpiSheet } from '@/components/partner/performance/PerformanceKpiSheet'
 import { PerformanceFooter } from '@/components/partner/performance/PerformanceFooter'
-import { performanceMonths } from '@/components/partner/performance/performanceData'
-import type { PerformanceData, PerformanceMonth, FeedbackEntry } from '@/components/partner/performance/types'
+import { performanceMonths } from '@/data/performanceData'
+import type { PerformanceData, PerformanceMonth, FeedbackEntry } from '@/data/partnerPerformanceTypes'
 import { useDemo } from '@/lib/store'
 import { Target, TrendingUp, UserCheck, Star } from 'lucide-react'
 

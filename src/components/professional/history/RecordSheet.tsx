@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Check, Download, FileText, Loader2, Lock, ShieldCheck, X } from 'lucide-react'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
-import { downloadSessionFile, recordToFileLines, type HistorySession } from './historyData'
+import { downloadSessionFile, recordToFileLines, type HistorySession } from '@/data/historyData'
 import { cn } from '@/lib/utils'
 
 type Status = 'idle' | 'preparing' | 'saved'

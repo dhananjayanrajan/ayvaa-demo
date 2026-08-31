@@ -13,7 +13,7 @@ import { SessionEarningsCard } from '@/components/professional/earnings/SessionE
 import { PayPolicyNotice } from '@/components/professional/earnings/PayPolicyNotice'
 import { PayoutLinkCard } from '@/components/professional/earnings/PayoutLinkCard'
 import { WithdrawButton, type WithdrawStatus } from '@/components/professional/earnings/WithdrawButton'
-import { paidSessions } from '@/components/professional/earnings/sessionRecords'
+import { paidSessions } from '@/data/sessionRecords'
 
 export function PR09() {
   const { notify } = useDemo()

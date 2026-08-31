@@ -2,7 +2,7 @@ import { ShieldAlert, ShieldCheck } from 'lucide-react'
 import { Chip, Kicker } from '@/components/phone/kit'
 import { PHASE_THEME, PhaseHero } from '@/components/phone/PhaseHero'
 import { CareRibbon } from './CareRibbon'
-import type { HistorySession } from './historyData'
+import type { HistorySession } from '@/data/historyData'
 import { cn } from '@/lib/utils'
 
 type Props = {

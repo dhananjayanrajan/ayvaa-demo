@@ -4,7 +4,7 @@ import { SheetShell } from '@/components/phone/SheetShell'
 import { LifecycleButton, CtaNote } from '@/components/phone/LifecycleButton'
 import { DarkPanel } from '@/components/phone/DarkPanel'
 import { FactRows } from '@/components/patient/plan/FactRows'
-import type { PayoutAccount } from './payoutData'
+import type { PayoutAccount } from '@/data/payoutData'
 
 type Props = {
   accounts: PayoutAccount[]

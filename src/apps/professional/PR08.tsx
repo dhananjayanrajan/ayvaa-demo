@@ -17,7 +17,7 @@ import { DescriptionInput } from '@/components/professional/incidents/Descriptio
 import { PhotoAttach } from '@/components/professional/incidents/PhotoAttach'
 import { SubmitButton, type SubmitStatus } from '@/components/professional/incidents/SubmitButton'
 import { SubmittedPanel } from '@/components/professional/incidents/SubmittedPanel'
-import { SEVERITIES, SEVERITY_CONFIG, type Severity } from '@/components/professional/incidents/incidentData'
+import { SEVERITIES, SEVERITY_CONFIG, type Severity } from '@/data/incidentData'
 
 type Photo = { name: string; size: string; url: string }
 

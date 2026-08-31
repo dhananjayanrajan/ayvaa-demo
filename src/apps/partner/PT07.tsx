@@ -11,7 +11,7 @@ import { BillingUsageReportSheet } from '@/components/partner/billing/BillingUsa
 import { BillingFooter } from '@/components/partner/billing/BillingFooter'
 import { invoices, partner, usage } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import type { Invoice } from '@/components/partner/billing/types'
+import type { Invoice } from '@/data/partnerBillingTypes'
 
 type SheetState = { kind: 'invoice'; inv: Invoice } | { kind: 'report' } | null
 

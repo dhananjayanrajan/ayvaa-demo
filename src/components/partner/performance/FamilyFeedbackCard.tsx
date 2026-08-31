@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, Lock } from 'lucide-react'
 import { Stars } from './Stars'
 import { cn } from '@/lib/utils'
-import type { PerformanceData } from './types'
+import type { PerformanceData } from '@/data/partnerPerformanceTypes'
 
 interface FamilyFeedbackCardProps {
   data: PerformanceData
