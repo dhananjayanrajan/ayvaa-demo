@@ -6,7 +6,7 @@ import { OptionRow } from '@/components/phone/OptionRow'
 import { cn } from '@/lib/utils'
 import { dayOptions, fmtINR, scheduleTypes } from '@/data/patientBooking'
 import type { TimeWindow } from '@/data/patientBooking'
-import { Radio } from './Radio'
+import { Radio } from '@/components/phone/Radio'
 
 export function ScheduleCard({
   schedule,

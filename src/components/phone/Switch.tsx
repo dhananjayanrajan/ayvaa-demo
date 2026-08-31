@@ -1,21 +1,26 @@
 import { cn } from '@/lib/utils'
 
-type Props = {
+export function Switch({
+  on,
+  onToggle,
+  ariaLabel,
+  className,
+}: {
   on: boolean
-  label: string
   onToggle: () => void
-}
-
-export function DayToggle({ on, label, onToggle }: Props) {
+  ariaLabel?: string
+  className?: string
+}) {
   return (
     <button
       type="button"
       onClick={onToggle}
-      aria-label={`Toggle ${label}`}
+      aria-label={ariaLabel}
       aria-pressed={on}
       className={cn(
         'relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200',
         on ? 'bg-emerald-500' : 'bg-[#0B211B]/[0.15]',
+        className,
       )}
     >
       <span

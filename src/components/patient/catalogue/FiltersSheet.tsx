@@ -3,7 +3,7 @@ import { SheetShell } from '@/components/phone/SheetShell'
 import { LifecycleButton, CtaNote } from '@/components/phone/LifecycleButton'
 import { filterDefs } from '@/data/patientCatalogue'
 import type { FilterKey } from '@/data/patientCatalogue'
-import { FilterToggleRow } from './FilterToggleRow'
+import { Switch } from '@/components/phone/Switch'
 
 export type ApplyState = 'idle' | 'working' | 'done'
 
@@ -53,12 +53,18 @@ export function FiltersSheet({
     >
       <div className="flex flex-col gap-2">
         {filterDefs.map((def) => (
-          <FilterToggleRow
+          <div
             key={def.key}
-            def={def}
-            on={toggles[def.key]}
-            onToggle={() => onToggle(def.key)}
-          />
+            className="flex items-center gap-3 rounded-2xl bg-[#0B211B]/[0.03] px-4 py-3.5"
+          >
+            <div className="min-w-0 flex-1">
+              <div className="text-[13px] font-bold tracking-tight text-[#0B211B]">{def.label}</div>
+              <div className="mt-0.5 text-pretty text-[10.5px] font-semibold leading-snug text-[#0B211B]/45">
+                {def.sub}
+              </div>
+            </div>
+            <Switch on={toggles[def.key]} onToggle={() => onToggle(def.key)} ariaLabel={def.label} />
+          </div>
         ))}
       </div>
     </SheetShell>

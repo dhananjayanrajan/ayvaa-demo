@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Card, Chip } from '@/components/phone/kit'
 import { cn } from '@/lib/utils'
 import { WINDOWS, type DayAvailability } from '@/data/availabilityData'
-import { DayToggle } from './DayToggle'
+import { Switch } from '@/components/phone/Switch'
 import { WindowOption } from './WindowOption'
 
 type Props = {
@@ -30,7 +30,7 @@ export function DayEditorCard({ day, onToggle, onSelectWindow }: Props) {
         <div className="mt-4 flex items-center gap-3 rounded-2xl bg-[#0B211B]/[0.04] px-4 py-3.5">
           <span className={cn('h-2.5 w-2.5 shrink-0 rounded-full', day.off ? 'bg-[#0B211B]/20' : 'bg-emerald-500')} />
           <span className="min-w-0 flex-1 text-[13px] font-bold text-[#0B211B]/75">Available for offers</span>
-          <DayToggle on={!day.off} label={day.day} onToggle={onToggle} />
+          <Switch on={!day.off} ariaLabel={`Toggle ${day.day}`} onToggle={onToggle} />
         </div>
 
         <AnimatePresence initial={false}>

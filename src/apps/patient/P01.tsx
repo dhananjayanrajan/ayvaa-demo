@@ -12,9 +12,7 @@ import { cn } from '@/lib/utils'
 import { Hero } from '@/components/patient/onboarding/Hero'
 import { SectionHeader } from '@/components/patient/onboarding/SectionHeader'
 import { CredentialCard } from '@/components/patient/onboarding/CredentialCard'
-import { CredentialRow } from '@/components/patient/onboarding/CredentialRow'
-import { EyeToggle } from '@/components/patient/onboarding/EyeToggle'
-import { PasswordMeter } from '@/components/patient/onboarding/PasswordMeter'
+import { Field, EyeToggle, PasswordMeter } from '@/components/phone/Field'
 import { ConsentBlock } from '@/components/patient/onboarding/ConsentBlock'
 import { PrimaryAction } from '@/components/patient/onboarding/PrimaryAction'
 import { SheetShell } from '@/components/phone/SheetShell'
@@ -119,7 +117,7 @@ export function P01() {
                 stepsTotal={TOTAL_STEPS}
                 footerNote="Phone verification with an OTP follows account creation."
               >
-                <CredentialRow
+                <Field
                   icon={User}
                   label="Your full name"
                   htmlFor="p01-name"
@@ -129,7 +127,7 @@ export function P01() {
                   invalidHint="Enter the name on your ID"
                   onChange={(v) => setField('name', v)}
                 />
-                <CredentialRow
+                <Field
                   icon={Mail}
                   label="Email address"
                   htmlFor="p01-email"
@@ -140,7 +138,7 @@ export function P01() {
                   invalidHint="Enter a valid email address"
                   onChange={(v) => setField('email', v)}
                 />
-                <CredentialRow
+                <Field
                   icon={Phone}
                   label="Phone number"
                   htmlFor="p01-phone"
@@ -151,7 +149,7 @@ export function P01() {
                   invalidHint="Enter at least 10 digits"
                   onChange={(v) => setField('phone', v)}
                 />
-                <CredentialRow
+                <Field
                   icon={KeyRound}
                   label="Create a password"
                   htmlFor="p01-password"

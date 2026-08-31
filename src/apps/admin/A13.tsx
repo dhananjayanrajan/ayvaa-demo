@@ -17,7 +17,7 @@ import { Card, Panel, Tile } from '@/components/phone/kit'
 import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { CredentialCard } from '@/components/patient/onboarding/CredentialCard'
-import { CredentialRow } from '@/components/patient/onboarding/CredentialRow'
+import { Field } from '@/components/phone/Field'
 import { SectionHeader } from '@/components/patient/onboarding/SectionHeader'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { useDemo } from '@/lib/store'
@@ -198,7 +198,7 @@ export function A13() {
             stepsTotal={stepsTotal}
             footerNote="Changes are sealed in the audit log after saving."
           >
-            <CredentialRow
+            <Field
               icon={User}
               label="Full name"
               htmlFor="a13-name"
@@ -208,7 +208,7 @@ export function A13() {
               invalidHint="Name must be at least 2 characters"
               onChange={(v) => updateField('name', v)}
             />
-            <CredentialRow
+            <Field
               icon={Phone}
               label="Phone number"
               htmlFor="a13-phone"
@@ -219,7 +219,7 @@ export function A13() {
               invalidHint="Enter a valid phone number"
               onChange={(v) => updateField('phone', v)}
             />
-            <CredentialRow
+            <Field
               icon={Mail}
               label="Email address"
               htmlFor="a13-email"
@@ -230,7 +230,7 @@ export function A13() {
               invalidHint="Enter a valid email address"
               onChange={(v) => updateField('email', v)}
             />
-            <CredentialRow
+            <Field
               icon={MapPin}
               label="Address"
               htmlFor="a13-address"

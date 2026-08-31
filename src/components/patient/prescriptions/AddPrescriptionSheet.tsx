@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, Clock, Droplets, HeartPulse, Pill, Plus, ShieldCheck, Stethoscope } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
+import { Field } from '@/components/phone/Field'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { DarkPanel } from '@/components/phone/DarkPanel'
 import { OptionRow } from '@/components/phone/OptionRow'
@@ -11,54 +11,6 @@ import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
 type Phase = 'idle' | 'working' | 'done'
-
-function FieldRow({
-  icon: Icon,
-  label,
-  value,
-  onChange,
-  placeholder,
-  valid,
-}: {
-  icon: LucideIcon
-  label: string
-  value: string
-  onChange: (value: string) => void
-  placeholder: string
-  valid: boolean
-}) {
-  const inputId = `add-rx-${label.toLowerCase().replace(/\s+/g, '-')}`
-  return (
-    <div className="flex items-center gap-3">
-      <label
-        htmlFor={inputId}
-        className={cn(
-          'grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors duration-300',
-          valid
-            ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_10px_20px_-10px_rgba(16,185,129,0.55)]'
-            : 'bg-[#0B211B]/[0.06] text-[#0B211B]/45',
-        )}
-      >
-        <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />
-      </label>
-      <span className="min-w-0 flex-1">
-        <span className="block text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40">{label}</span>
-        <input
-          id={inputId}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className="mt-0.5 w-full bg-transparent text-[13px] font-bold tracking-tight text-[#0B211B] placeholder:font-semibold placeholder:text-[#0B211B]/25 focus:outline-none"
-        />
-      </span>
-      {valid && (
-        <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
-          <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
-        </span>
-      )}
-    </div>
-  )
-}
 
 export function AddPrescriptionSheet({
   onClose,
@@ -127,21 +79,59 @@ export function AddPrescriptionSheet({
             </span>
           </div>
           <div className="mt-3 flex flex-col gap-3.5">
-            <FieldRow
+            <Field
+              bare
+              labelFor="tile"
+              ariaInvalid={false}
               icon={Pill}
               label="Medication"
+              htmlFor="add-rx-medication"
               value={name}
               onChange={setName}
               placeholder="e.g. Amlodipine"
-              valid={nameOk}
+              state={nameOk ? 'valid' : 'empty'}
+              tileTone={{
+                empty: 'bg-[#0B211B]/[0.06] text-[#0B211B]/45',
+                valid:
+                  'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_10px_20px_-10px_rgba(16,185,129,0.55)]',
+              }}
+              iconClassName="h-[18px] w-[18px]"
+              labelClassName="block text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40"
+              inputClassName="mt-0.5 w-full bg-transparent text-[13px] font-bold tracking-tight text-[#0B211B] outline-none placeholder:font-semibold placeholder:text-[#0B211B]/25 focus:outline-none"
+              trailing={
+                nameOk ? (
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+                    <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
+                  </span>
+                ) : undefined
+              }
             />
-            <FieldRow
+            <Field
+              bare
+              labelFor="tile"
+              ariaInvalid={false}
               icon={Droplets}
               label="Dose"
+              htmlFor="add-rx-dose"
               value={dose}
               onChange={setDose}
               placeholder="e.g. 5 mg"
-              valid={doseOk}
+              state={doseOk ? 'valid' : 'empty'}
+              tileTone={{
+                empty: 'bg-[#0B211B]/[0.06] text-[#0B211B]/45',
+                valid:
+                  'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_10px_20px_-10px_rgba(16,185,129,0.55)]',
+              }}
+              iconClassName="h-[18px] w-[18px]"
+              labelClassName="block text-[9px] font-bold uppercase tracking-[0.14em] text-[#0B211B]/40"
+              inputClassName="mt-0.5 w-full bg-transparent text-[13px] font-bold tracking-tight text-[#0B211B] outline-none placeholder:font-semibold placeholder:text-[#0B211B]/25 focus:outline-none"
+              trailing={
+                doseOk ? (
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+                    <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
+                  </span>
+                ) : undefined
+              }
             />
           </div>
         </div>

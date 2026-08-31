@@ -1,6 +1,5 @@
 import { KeyRound, Mail } from 'lucide-react'
-import { CredentialRow } from '@/components/patient/onboarding/CredentialRow'
-import { EyeToggle } from '@/components/patient/onboarding/EyeToggle'
+import { Field, EyeToggle } from '@/components/phone/Field'
 import type { FieldState } from '@/data/patientOnboarding'
 import { BiometricNote } from './BiometricNote'
 import { SignInButton } from './SignInButton'
@@ -48,7 +47,7 @@ export function PasswordCard({
         </button>
       </div>
       <div className="mt-2">
-        <CredentialRow
+        <Field
           icon={Mail}
           label="Email address"
           htmlFor="p02-email"
@@ -59,7 +58,7 @@ export function PasswordCard({
           invalidHint="Enter a valid email address"
           onChange={onEmailChange}
         />
-        <CredentialRow
+        <Field
           icon={KeyRound}
           label="Password"
           htmlFor="p02-password"

@@ -4,7 +4,7 @@ import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { OptionRow } from '@/components/phone/OptionRow'
 import { fmtINR, timeWindows } from '@/data/patientBooking'
 import type { DurationOption, TimeWindow } from '@/data/patientBooking'
-import { Radio } from './Radio'
+import { Radio } from '@/components/phone/Radio'
 
 export function TimeSheet({
   win,
