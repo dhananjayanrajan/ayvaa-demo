@@ -58,7 +58,7 @@ export function LanguageSheet({ current, list, onApply, onClose }: LanguageSheet
               disabled={phase !== 'idle'}
               title={lang}
               sub={`${count} in range`}
-              accent="sky"
+              tone="sky"
               trailing={<OptionCheck on={isSel} accent="sky" />}
             />
           )

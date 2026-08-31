@@ -1,61 +1,9 @@
 import { motion } from 'motion/react'
-import { Check, MapPin } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { Card, Tile } from '@/components/phone/kit'
-import { SCOPES, type ConsentScope } from '@/data/patientConsent'
+import { OptionRow, OptionCheckBox } from '@/components/phone/OptionRow'
+import { SCOPES } from '@/data/patientConsent'
 import { cn } from '@/lib/utils'
-
-interface ScopeRowProps {
-  scope: ConsentScope
-  granted: boolean
-  disabled: boolean
-  onToggle: () => void
-}
-
-function ScopeRow({ scope, granted, disabled, onToggle }: ScopeRowProps) {
-  const Icon = scope.icon
-  return (
-    <motion.button
-      type="button"
-      whileTap={disabled ? undefined : { scale: 0.99 }}
-      onClick={disabled ? undefined : onToggle}
-      aria-pressed={granted}
-      aria-disabled={disabled}
-      className={cn(
-        'flex w-full items-start gap-3.5 rounded-2xl p-4 text-left transition-colors duration-200',
-        disabled
-          ? 'cursor-not-allowed opacity-60'
-          : granted
-            ? 'bg-emerald-500/[0.06] hover:bg-emerald-500/[0.1]'
-            : 'bg-[#0B211B]/[0.03] hover:bg-[#0B211B]/[0.06]',
-      )}
-    >
-      <Tile icon={Icon} tone={granted ? 'success' : 'neutral'} />
-      <span className="min-w-0 flex-1">
-        <span
-          className={cn(
-            'block text-[13.5px] font-extrabold tracking-tight',
-            granted ? 'text-[#0B211B]' : 'text-[#0B211B]/55',
-          )}
-        >
-          {scope.label}
-        </span>
-        <span className="mt-1 block break-words text-[11.5px] font-medium leading-snug text-[#0B211B]/50">
-          {scope.detail}
-        </span>
-      </span>
-      <span
-        className={cn(
-          'grid h-7 w-7 shrink-0 place-items-center rounded-xl transition-colors duration-300',
-          granted
-            ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_6px_14px_-6px_rgba(16,185,129,0.8)]'
-            : 'bg-[#0B211B]/[0.08] text-transparent',
-        )}
-      >
-        <Check className="h-4 w-4" strokeWidth={3.2} aria-hidden />
-      </span>
-    </motion.button>
-  )
-}
 
 interface ScopesCardProps {
   grantedIds: string[]
@@ -69,15 +17,31 @@ export function ScopesCard({ grantedIds, location, disabled, onToggleScope, onTo
   return (
     <Card>
       <div className="flex flex-col gap-2 p-3">
-        {SCOPES.map((scope) => (
-          <ScopeRow
-            key={scope.id}
-            scope={scope}
-            granted={grantedIds.includes(scope.id)}
-            disabled={disabled}
-            onToggle={() => onToggleScope(scope.id)}
-          />
-        ))}
+        {SCOPES.map((scope) => {
+          const Icon = scope.icon
+          const granted = grantedIds.includes(scope.id)
+          return (
+            <OptionRow
+              key={scope.id}
+              selected={granted}
+              onSelect={() => onToggleScope(scope.id)}
+              disabled={disabled}
+              align="start"
+              tapScale={0.99}
+              className={cn('gap-3.5 p-4 duration-200', disabled && 'cursor-not-allowed opacity-60')}
+              selectedClassName="bg-emerald-500/[0.06] hover:bg-emerald-500/[0.1]"
+              unselectedClassName="bg-[#0B211B]/[0.03] hover:bg-[#0B211B]/[0.06]"
+              leading={<Tile icon={Icon} tone={granted ? 'success' : 'neutral'} />}
+              title={scope.label}
+              titleClassName="block text-[13.5px] font-extrabold tracking-tight"
+              selectedTitleClassName="text-[#0B211B]"
+              unselectedTitleClassName="text-[#0B211B]/55"
+              sub={scope.detail}
+              subClassName="mt-1 block break-words text-[11.5px] font-medium leading-snug text-[#0B211B]/50"
+              trailing={<OptionCheckBox on={granted} />}
+            />
+          )
+        })}
 
         <div
           className={cn(

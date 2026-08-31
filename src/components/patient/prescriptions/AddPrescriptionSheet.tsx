@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { DarkPanel } from '@/components/phone/DarkPanel'
+import { OptionRow } from '@/components/phone/OptionRow'
 import { Meter, MiniBadge } from '@/components/phone/kit'
 import { PRESCRIBERS, RX_SCHEDULES, newPrescription, type Prescription } from '@/data/patientPrescriptions'
 import { useDemo } from '@/lib/store'
@@ -184,39 +185,40 @@ export function AddPrescriptionSheet({
             {PRESCRIBERS.map((d) => {
               const on = prescriber === d
               return (
-                <button
+                <OptionRow
                   key={d}
-                  type="button"
                   role="radio"
-                  aria-checked={on}
-                  onClick={() => setPrescriber(d)}
-                  className={cn(
-                    'flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors',
-                    on ? 'bg-[#0B211B]/[0.07]' : 'bg-white hover:bg-white/80',
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'grid h-9 w-9 shrink-0 place-items-center rounded-xl text-[12px] font-extrabold transition-colors',
-                      on ? 'bg-[#0B211B] text-white' : 'bg-[#0B211B]/[0.06] text-[#0B211B]/55',
-                    )}
-                  >
-                    {d.split(' ').map((part) => part[0]).join('').slice(0, 2)}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-bold tracking-tight text-[#0B211B]">{d}</span>
-                    <span className="block text-[10px] font-semibold text-[#0B211B]/45">Verified prescriber</span>
-                  </span>
-                  {on ? (
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#0B211B] text-white">
-                      <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
+                  selected={on}
+                  onSelect={() => setPrescriber(d)}
+                  tone="neutral"
+                  className="px-3 py-2.5"
+                  leading={
+                    <span
+                      className={cn(
+                        'grid h-9 w-9 shrink-0 place-items-center rounded-xl text-[12px] font-extrabold transition-colors',
+                        on ? 'bg-[#0B211B] text-white' : 'bg-[#0B211B]/[0.06] text-[#0B211B]/55',
+                      )}
+                    >
+                      {d.split(' ').map((part) => part[0]).join('').slice(0, 2)}
                     </span>
-                  ) : (
-                    <MiniBadge icon={ShieldCheck} tone="emerald">
-                      Verified
-                    </MiniBadge>
-                  )}
-                </button>
+                  }
+                  title={d}
+                  titleClassName="block truncate text-[13px] font-bold tracking-tight"
+                  unselectedTitleClassName="text-[#0B211B]"
+                  sub="Verified prescriber"
+                  subClassName="block text-[10px] font-semibold text-[#0B211B]/45"
+                  trailing={
+                    on ? (
+                      <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#0B211B] text-white">
+                        <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
+                      </span>
+                    ) : (
+                      <MiniBadge icon={ShieldCheck} tone="emerald">
+                        Verified
+                      </MiniBadge>
+                    )
+                  }
+                />
               )
             })}
           </div>

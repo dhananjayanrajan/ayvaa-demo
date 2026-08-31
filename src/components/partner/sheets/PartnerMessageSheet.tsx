@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { MessageSquare, Send } from 'lucide-react'
+import { ActionButton } from '@/components/phone/ActionButton'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 
@@ -38,15 +39,14 @@ export function PartnerMessageSheet({ onClose, onSend }: PartnerMessageSheetProp
     >
       <div className="flex flex-wrap gap-2">
         {quickReplies.map((reply) => (
-          <motion.button
+          <ActionButton
             key={reply}
-            type="button"
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setMessage(reply)}
+            status="idle"
+            onPress={() => setMessage(reply)}
+            idleLabel={reply}
+            tapScale={0.95}
             className="rounded-full bg-[#0B211B]/[0.04] px-3 py-1.5 text-[11px] font-bold text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-          >
-            {reply}
-          </motion.button>
+          />
         ))}
       </div>
 

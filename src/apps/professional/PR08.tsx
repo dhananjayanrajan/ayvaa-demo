@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Check, ShieldAlert, X } from 'lucide-react'
+import { Check, Loader2, Send, ShieldAlert, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, Screen } from '@/components/phone/Screen'
 import { Tile, rise, stagger } from '@/components/phone/kit'
@@ -15,11 +15,13 @@ import { TriggerPreview } from '@/components/professional/incidents/TriggerPrevi
 import { CausePicker } from '@/components/professional/incidents/CausePicker'
 import { DescriptionInput } from '@/components/professional/incidents/DescriptionInput'
 import { PhotoAttach } from '@/components/professional/incidents/PhotoAttach'
-import { SubmitButton, type SubmitStatus } from '@/components/professional/incidents/SubmitButton'
+import { ActionButton } from '@/components/phone/ActionButton'
 import { SubmittedPanel } from '@/components/professional/incidents/SubmittedPanel'
 import { SEVERITIES, SEVERITY_CONFIG, type Severity } from '@/data/incidentData'
 
 type Photo = { name: string; size: string; url: string }
+
+type SubmitStatus = 'idle' | 'sealing' | 'sealed'
 
 export function PR08() {
   const { notify } = useDemo()
@@ -206,12 +208,19 @@ export function PR08() {
             </motion.button>
           ) : (
             <>
-              <SubmitButton
-                severityLabel={severity.toLowerCase()}
-                ctaClass={cfg.cta}
-                disabled={!canSubmit}
-                status={status}
+              <ActionButton
+                status={status === 'sealing' ? 'loading' : 'idle'}
                 onPress={submit}
+                disabled={!canSubmit}
+                idleIcon={Send}
+                loadingIcon={Loader2}
+                idleLabel={`Submit ${severity.toLowerCase()} report`}
+                loadingLabel="Sealing report…"
+                className={cn(
+                  'mt-1 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold text-white transition-all',
+                  cfg.cta,
+                  !canSubmit && status === 'idle' && 'opacity-45',
+                )}
               />
               <p className="mt-2.5 text-center text-[10.5px] font-semibold leading-relaxed text-[#0B211B]/45">
                 Due within one hour of the event · {cfg.note}

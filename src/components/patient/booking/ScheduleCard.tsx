@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ChevronRight } from 'lucide-react'
 import { Card } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'
+import { OptionRow } from '@/components/phone/OptionRow'
 import { cn } from '@/lib/utils'
 import { dayOptions, fmtINR, scheduleTypes } from '@/data/patientBooking'
 import type { TimeWindow } from '@/data/patientBooking'
@@ -34,32 +35,16 @@ export function ScheduleCard({
           {scheduleTypes.map((t) => {
             const active = schedule === t.id
             return (
-              <motion.button
+              <OptionRow
                 key={t.id}
-                type="button"
-                whileTap={{ scale: 0.985 }}
-                onClick={() => onSchedule(t.id)}
-                aria-pressed={active}
-                className={cn(
-                  'flex items-center gap-3 rounded-2xl px-4 py-3.5 text-left transition-colors',
-                  active ? 'bg-emerald-500/[0.08]' : 'bg-[#0B211B]/[0.03] hover:bg-[#0B211B]/[0.055]',
-                )}
-              >
-                <Radio active={active} />
-                <span className="min-w-0 flex-1">
-                  <span
-                    className={cn(
-                      'block text-[13px] font-bold leading-snug tracking-tight',
-                      active ? 'text-emerald-800' : 'text-[#0B211B]/70',
-                    )}
-                  >
-                    {t.label}
-                  </span>
-                  <span className="block text-pretty text-[11px] font-semibold leading-snug text-[#0B211B]/45">
-                    {t.sub}
-                  </span>
-                </span>
-              </motion.button>
+                selected={active}
+                onSelect={() => onSchedule(t.id)}
+                fullWidth={false}
+                leading={<Radio active={active} />}
+                title={t.label}
+                sub={t.sub}
+                subClassName="block text-pretty text-[11px] font-semibold leading-snug text-[#0B211B]/45"
+              />
             )
           })}
         </div>
