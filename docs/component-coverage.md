@@ -438,3 +438,18 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - NEXT: Stage 6 — PhaseShell consolidation (ApprovalCard 4-state incl. slate,
   WithdrawalCard 2-state rose→emerald, IncidentLinkingCard rose, ReversedOfferTraceCard sky,
   RollbackTraceCard rose)
+
+---
+# Revision 22 — Sweep 2c (PhaseShell) CLOSED
+
+- 'slate' theme key added to PHASE_THEME/PhaseHeroKey; snip theme prop is structural so callers
+  override border/orbs/hairline/shadow via inline themes
+- 10 shells converted to PhaseHero (5 known residuals + 5 orb-anatomy finds):
+  ApprovalCard, WithdrawalCard, IncidentLinkingCard, ReversedOfferTraceCard, RollbackTraceCard,
+  CaughtUpCard, MatchCard, EstimateCard, ActionCard, ProfilePreviewSheet
+- ProfilePreviewSheet: hand-rolled sheet closed — now SheetShell (F1 gap)
+- IncidentLinkingCard internal timeline → StepList (last vertical-rail timeline)
+- Remaining 'rounded-[26px] border' consumers: ProfileHero + PhotoViewSheet (no orbs, legit)
+- Gate standing: 33 errors, pure Category C (baseline unchanged)
+- NEXT: Stage 7 — StatusStrip universal (DeliveryStrip + CallStrip = animated strips,
+  ConfirmStrip's two-line sibling)

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { Ban, Check, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react'
 import { rise } from '@/components/phone/kit'
 import { StepList } from '@/components/phone/StepList'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { consentWithdrawal } from '@/data/seed'
 import { cn } from '@/lib/utils'
 
@@ -59,32 +60,14 @@ export function WithdrawalCard({ notify }: WithdrawalCardProps) {
 
   return (
     <motion.div variants={rise}>
-      <div
-        className={`relative overflow-hidden rounded-[26px] border transition-all duration-500 ${
+      <PhaseHero
+        theme={
           isSealed
-            ? 'border-emerald-400/20 bg-[#062419] shadow-[0_28px_64px_-30px_rgba(5,150,105,0.6)]'
-            : 'border-rose-200/10 bg-[#230D14] shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]'
-        }`}
+            ? { ...PHASE_THEME.emeraldBright, border: 'border-emerald-400/20', orbA: 'bg-emerald-500/30', orbB: 'bg-teal-400/20', shadow: 'shadow-[0_28px_64px_-30px_rgba(5,150,105,0.6)]' }
+            : { ...PHASE_THEME.rose, shadow: 'shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]' }
+        }
+        className="transition-all duration-500"
       >
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full blur-3xl transition-colors duration-500 ${
-            isSealed ? 'bg-emerald-500/30' : 'bg-rose-500/25'
-          }`}
-        />
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full blur-3xl transition-colors duration-500 ${
-            isSealed ? 'bg-teal-400/20' : 'bg-orange-400/10'
-          }`}
-        />
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r transition-colors duration-500 ${
-            isSealed ? 'from-transparent via-emerald-300/50 to-transparent' : 'from-transparent via-rose-300/40 to-transparent'
-          }`}
-        />
-        <div className="relative p-5">
           <div
             className={`flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] transition-colors duration-500 ${
               isSealed ? 'text-emerald-300' : 'text-rose-200/50'
@@ -320,8 +303,7 @@ export function WithdrawalCard({ notify }: WithdrawalCardProps) {
           >
             Sealing writes the final entry to the audit record — family and caregiver are notified.
           </p>
-        </div>
-      </div>
+      </PhaseHero>
     </motion.div>
   )
 }

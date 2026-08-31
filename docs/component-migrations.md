@@ -708,3 +708,34 @@ consumers (flag for removal at final cert; snip NOT deleted now).
 
 Grep zero-proof: `grep -rn 'grid grid-cols-3 divide-x' src/components --exclude-dir=phone`
 → exit 1, ZERO matches. No hand-rolled divide-x stat strips remain.
+
+## Sweep 2c (PhaseShell) — CLOSED
+
+Hub: 'slate' key added to PHASE_THEME/PhaseHeroKey (border-slate-200/10, shell bg-[#0F172A],
+orbA bg-slate-400/20, orbB bg-slate-300/10, hairline via-slate-300/30). PhaseHero theme prop is
+STRUCTURAL (PhaseHeroTheme object) — callers pass custom themes ({...PHASE_THEME.key,
+border/orbA/orbB/hairline/shadow overrides}) so uniqueness feeds through props, no hub growth.
+
+10 shells converted to PhaseHero (grep zero-proof signature 'rounded-[26px] border' outside
+phone/):
+- 5 known residuals: ApprovalCard (4-state incl slate; snip orbA/orbB overrides for approved),
+  WithdrawalCard (sealed: 3 micro-diff emeraldBright override), IncidentLinkingCard (rose
+  static), ReversedOfferTraceCard (sky), RollbackTraceCard (rose)
+- 5 newly found via grep (orb anatomy h-48/h-40): CaughtUpCard (exact emerald), MatchCard
+  (exact emerald), EstimateCard (exact emerald), ActionCard (amber 3-override), ProfilePreviewSheet
+  (emerald + full SheetShell conversion — closed the F1 gap, was a hand-rolled sheet)
+
+IncidentLinkingCard internal timeline ALSO converted to StepList (was the last unconverted
+vertical-rail timeline).
+
+LEDGERED micro-deviations: WithdrawalCard orb/hairline state-switch color transitions lost on
+sealed toggle (PhaseHero orbs static; snip shell bg/border still transition); snip static shells gained
+transition-colors duration-500 (transition-addition precedent); snip ProfilePreviewSheet sheet micros
+(SheetShell body pt-2 vs pt-3.5, footer pt-3 vs pt-3.5, close aria-label 'Close sheet' vs 'Close
+preview', grabber spacing).
+
+Remaining 'rounded-[26px] border' consumers (legit non-PhaseHero, no orbs): ProfileHero
+(keep-ruled bottom-band), PhotoViewSheet (photo container keep-ruling).
+
+Gate: real gate exit 2 = 33 Category C baseline, zero errors from PhaseHero.tsx or any of the
+10 converted files.

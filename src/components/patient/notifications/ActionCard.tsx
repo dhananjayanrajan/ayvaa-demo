@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ChevronRight, Clock } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { JourneyTime } from '@/components/patient/identity/JourneyTime'
 import type { NotificationEntry } from '@/data/patientNotifications'
 
@@ -14,11 +15,16 @@ export function ActionCard({
   onPress: (entry: NotificationEntry) => void
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[26px] border border-amber-200/10 bg-[#241A0B] shadow-[0_28px_64px_-30px_rgba(60,40,10,0.7)]">
-      <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-amber-400/25 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
-      <div className="relative p-5">
+    <PhaseHero
+      theme={{
+        ...PHASE_THEME.amber,
+        border: 'border-amber-200/10',
+        shell: 'bg-[#241A0B]',
+        hairline: 'via-amber-300/40',
+        shadow: 'shadow-[0_28px_64px_-30px_rgba(60,40,10,0.7)]',
+      }}
+    >
+      <div className="relative">
         <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-amber-200/50">
           <Clock className="h-3 w-3" aria-hidden />
           Needs your action
@@ -77,6 +83,6 @@ export function ActionCard({
           </div>
         </div>
       </div>
-    </div>
+    </PhaseHero>
   )
 }

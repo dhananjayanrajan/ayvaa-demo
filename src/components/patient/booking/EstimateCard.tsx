@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { fmtINR } from '@/data/patientBooking'
 import type { Estimate } from '@/data/patientBooking'
 
@@ -12,10 +13,7 @@ export function EstimateCard({
   lineLabel: string
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[26px] border border-emerald-200/10 bg-[#0B231C] p-5 shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]">
-      <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-emerald-400/25 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-teal-300/15 blur-3xl" />
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent" />
+    <PhaseHero theme={PHASE_THEME.emerald}>
       <div className="relative">
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-2xl bg-white/[0.06] px-3.5 py-2.5">
@@ -87,6 +85,6 @@ export function EstimateCard({
           </motion.span>
         </div>
       </div>
-    </div>
+    </PhaseHero>
   )
 }

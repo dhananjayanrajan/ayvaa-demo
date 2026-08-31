@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { Check, ScrollText, UserCheck, Users } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
 import { StepList } from '@/components/phone/StepList'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { reversalEvents } from '@/data/system/recheck'
 
 interface ReversedOfferTraceCardProps {
@@ -11,13 +12,8 @@ interface ReversedOfferTraceCardProps {
 export function ReversedOfferTraceCard({ onEventTap }: ReversedOfferTraceCardProps) {
   return (
     <motion.div variants={rise}>
-      <div className="relative overflow-hidden rounded-[26px] border border-sky-200/15 bg-[#0B1E2B] shadow-[0_28px_64px_-30px_rgba(8,32,48,0.7)]">
-        <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-sky-500/25 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-blue-400/10 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/40 to-transparent" />
-
-        <div className="relative p-5">
-          <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-sky-200/50">
+      <PhaseHero theme={{ ...PHASE_THEME.sky, shadow: 'shadow-[0_28px_64px_-30px_rgba(8,32,48,0.7)]' }}>
+        <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-sky-200/50">
             <ScrollText className="h-3 w-3" aria-hidden />
             Reversal trace · 9:42 AM
           </div>
@@ -91,8 +87,7 @@ export function ReversedOfferTraceCard({ onEventTap }: ReversedOfferTraceCardPro
             <Chip intent="info" light className="border-transparent">Re-offered round 3</Chip>
             <Chip intent="success" light className="border-transparent">Audit sealed</Chip>
           </div>
-        </div>
-      </div>
+      </PhaseHero>
     </motion.div>
   )
 }

@@ -1,5 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, Link2, PauseCircle, Siren } from 'lucide-react'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
+import { StepList } from '@/components/phone/StepList'
 import { rise } from '@/components/phone/kit'
 import { incidentLinking } from '@/data/seed'
 
@@ -45,20 +47,7 @@ export function IncidentLinkingCard({ delivered = false }: IncidentLinkingCardPr
 
   return (
     <motion.div variants={rise}>
-      <div className="relative overflow-hidden rounded-[26px] border border-rose-200/10 bg-[#230D14] shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-rose-500/25 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose-300/40 to-transparent"
-        />
-        <div className="relative p-5">
+      <PhaseHero theme={{ ...PHASE_THEME.rose, shadow: 'shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]' }}>
           <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-rose-200/50">
             <Link2 className="h-3 w-3" aria-hidden />
             Incident linking · auto-attached
@@ -88,43 +77,39 @@ export function IncidentLinkingCard({ delivered = false }: IncidentLinkingCardPr
               Incident timeline
             </div>
             <div className="mt-3 flex flex-col">
-              {incidents.map((inc, i) => {
-                const last = i === incidents.length - 1
-                const live = inc.tag === 'Live'
-                return (
-                  <div key={inc.title} className="flex gap-3">
-                    <div className="flex flex-col items-center">
+              <StepList
+                nodeStyle="circle"
+                nodeSize="md"
+                theme="dark"
+                steps={incidents.map((inc) => {
+                  const live = inc.tag === 'Live'
+                  return {
+                    key: inc.title,
+                    state: 'done',
+                    node: (
                       <span className="relative grid h-5 w-5 shrink-0 place-items-center">
                         {live ? (
                           <span aria-hidden className="absolute h-5 w-5 animate-ping rounded-full bg-rose-400/40" />
                         ) : null}
-                        <span
-                          className={`h-2.5 w-2.5 rounded-full ${live ? 'bg-rose-300' : 'bg-rose-400/80'}`}
-                        />
+                        <span className={`h-2.5 w-2.5 rounded-full ${live ? 'bg-rose-300' : 'bg-rose-400/80'}`} />
                       </span>
-                      {!last && <span aria-hidden className="my-1 w-px flex-1 bg-white/15" />}
-                    </div>
-                    <div className={`min-w-0 flex-1 ${last ? 'pb-0.5' : 'pb-4'}`}>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="min-w-0 truncate text-[13px] font-bold leading-snug tracking-tight text-white">
-                          {inc.title}
-                        </span>
-                        <span className="shrink-0 text-[10px] font-extrabold tabular-nums text-rose-100/45">
-                          {inc.time}
-                        </span>
-                      </div>
-                      <div className="mt-1 flex items-center justify-between gap-2">
-                        <span className="min-w-0 truncate text-[11px] font-medium text-rose-100/55">
-                          {inc.detail}
-                        </span>
-                        <span className="shrink-0 rounded-full bg-white/[0.07] px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.1em] text-rose-100/60">
-                          {inc.tag}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
+                    ),
+                    title: inc.title,
+                    titleClassName: 'truncate text-[13px]',
+                    time: inc.time,
+                    timeTrailing: true,
+                    timeTrailingClassName: 'font-extrabold tabular-nums text-rose-100/45',
+                    body: inc.detail,
+                    bodyClassName: 'truncate text-[11px] font-medium text-rose-100/55',
+                    trailing: (
+                      <span className="shrink-0 rounded-full bg-white/[0.07] px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-[0.1em] text-rose-100/60">
+                        {inc.tag}
+                      </span>
+                    ),
+                    contentClassName: inc.title === incidents[incidents.length - 1].title ? 'pb-0.5' : undefined,
+                  }
+                })}
+              />
             </div>
           </div>
 
@@ -160,8 +145,7 @@ export function IncidentLinkingCard({ delivered = false }: IncidentLinkingCardPr
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </PhaseHero>
     </motion.div>
   )
 }

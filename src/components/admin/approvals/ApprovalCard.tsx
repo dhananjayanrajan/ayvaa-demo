@@ -19,6 +19,8 @@ import {
 } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
 import { StepList } from '@/components/phone/StepList'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
+import type { PhaseHeroKey, PhaseHeroTheme } from '@/components/phone/PhaseHero'
 import type { Approval } from '@/data/types'
 import { cn } from '@/lib/utils'
 
@@ -54,10 +56,6 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
 
   const theme = isApproved
     ? {
-        shell: 'border-emerald-300/20 bg-[#062419] shadow-[0_28px_64px_-30px_rgba(5,150,105,0.6)]',
-        orbA: 'bg-emerald-500/30',
-        orbB: 'bg-teal-400/20',
-        hairline: 'from-transparent via-emerald-300/50 to-transparent',
         kicker: 'text-emerald-300',
         sub: 'text-emerald-100/90',
         panel: 'bg-emerald-400/[0.08]',
@@ -73,10 +71,6 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
       }
     : isRejected
       ? {
-          shell: 'border-rose-200/10 bg-[#230D14] shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]',
-          orbA: 'bg-rose-500/25',
-          orbB: 'bg-orange-400/10',
-          hairline: 'from-transparent via-rose-300/40 to-transparent',
           kicker: 'text-rose-200',
           sub: 'text-rose-100/90',
           panel: 'bg-rose-400/[0.1]',
@@ -92,10 +86,6 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
         }
       : isUrgent
         ? {
-            shell: 'border-amber-200/15 bg-[#241B0C] shadow-[0_28px_64px_-30px_rgba(60,40,10,0.7)]',
-            orbA: 'bg-amber-400/25',
-            orbB: 'bg-orange-400/12',
-            hairline: 'from-transparent via-amber-200/40 to-transparent',
             kicker: 'text-amber-200',
             sub: 'text-amber-100/90',
             panel: 'bg-amber-400/[0.08]',
@@ -110,10 +100,6 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
             footerIcon: null,
           }
         : {
-            shell: 'border-slate-200/10 bg-[#0F172A] shadow-[0_28px_64px_-30px_rgba(15,23,42,0.7)]',
-            orbA: 'bg-slate-400/20',
-            orbB: 'bg-slate-300/10',
-            hairline: 'from-transparent via-slate-300/30 to-transparent',
             kicker: 'text-slate-200',
             sub: 'text-slate-100/90',
             panel: 'bg-white/[0.06]',
@@ -128,15 +114,24 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
             footerIcon: null,
           }
 
+  const phaseKey: PhaseHeroKey = isApproved ? 'emeraldBright' : isRejected ? 'rose' : isUrgent ? 'amber' : 'slate'
+  const shellTheme: PhaseHeroTheme = {
+    ...PHASE_THEME[phaseKey],
+    ...(isApproved ? { orbA: 'bg-emerald-500/30', orbB: 'bg-teal-400/20' } : {}),
+    shadow: isApproved
+      ? 'shadow-[0_28px_64px_-30px_rgba(5,150,105,0.6)]'
+      : isRejected
+        ? 'shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]'
+        : isUrgent
+          ? 'shadow-[0_28px_64px_-30px_rgba(60,40,10,0.7)]'
+          : 'shadow-[0_28px_64px_-30px_rgba(15,23,42,0.7)]',
+  }
+
   const FooterIcon = theme.footerIcon
 
   return (
     <motion.div variants={rise}>
-      <div className={cn('relative overflow-hidden rounded-[26px] border transition-all duration-500', theme.shell)}>
-        <div aria-hidden className={cn('pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full blur-3xl transition-colors duration-500', theme.orbA)} />
-        <div aria-hidden className={cn('pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full blur-3xl transition-colors duration-500', theme.orbB)} />
-        <div aria-hidden className={cn('pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r to-transparent transition-colors duration-500', theme.hairline)} />
-
+      <PhaseHero theme={shellTheme} className="transition-all duration-500">
         <div className="relative p-5">
           <div className="flex items-start gap-3">
             <AgentAvatar seed={a.name} size={52} />
@@ -313,7 +308,7 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
             </div>
           )}
         </div>
-      </div>
+      </PhaseHero>
     </motion.div>
   )
 }

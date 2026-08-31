@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ShieldCheck, Undo2 } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
 import { StepList } from '@/components/phone/StepList'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { transactionMeta, transactionSteps } from '@/data/system/transactions'
 
 interface RollbackTraceCardProps {
@@ -13,13 +14,8 @@ export function RollbackTraceCard({ failedAt }: RollbackTraceCardProps) {
 
   return (
     <motion.div variants={rise}>
-      <div className="relative overflow-hidden rounded-[26px] border border-rose-200/10 bg-[#230D14] shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]">
-        <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-rose-500/25 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose-300/40 to-transparent" />
-
-        <div className="relative p-5">
-          <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-rose-200/50">
+      <PhaseHero theme={{ ...PHASE_THEME.rose, shadow: 'shadow-[0_28px_64px_-30px_rgba(60,10,25,0.7)]' }}>
+        <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-rose-200/50">
             <Undo2 className="h-3 w-3" aria-hidden />
             Rollback trace · complete
           </div>
@@ -86,8 +82,7 @@ export function RollbackTraceCard({ failedAt }: RollbackTraceCardProps) {
           <p className="mt-2.5 text-[10.5px] font-semibold leading-relaxed text-rose-100/40">
             The family never saw a broken booking. Screens stayed calm while the database healed itself.
           </p>
-        </div>
-      </div>
+      </PhaseHero>
     </motion.div>
   )
 }

@@ -1,14 +1,12 @@
 import { Check } from 'lucide-react'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import type { CaughtUpStats } from '@/data/patientNotifications'
 
 export function CaughtUpCard({ stats }: { stats: CaughtUpStats }) {
   const read = stats.total - stats.unreadCount - stats.actionCount
   return (
-    <div className="relative overflow-hidden rounded-[26px] border border-emerald-200/10 bg-[#0B231C] shadow-[0_28px_64px_-30px_rgba(6,40,30,0.7)]">
-      <div aria-hidden className="pointer-events-none absolute -right-14 -top-16 h-48 w-48 rounded-full bg-emerald-400/25 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-teal-300/15 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent" />
-      <div className="relative p-5">
+    <PhaseHero theme={PHASE_THEME.emerald}>
+      <div className="relative">
         <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-emerald-200/50">
           <Check className="h-3 w-3" aria-hidden />
           All caught up
@@ -50,6 +48,6 @@ export function CaughtUpCard({ stats }: { stats: CaughtUpStats }) {
           </div>
         </div>
       </div>
-    </div>
+    </PhaseHero>
   )
 }

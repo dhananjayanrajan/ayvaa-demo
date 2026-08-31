@@ -18,6 +18,7 @@ export type PhaseHeroKey =
   | 'blue'
   | 'blueDeep'
   | 'emeraldBright'
+  | 'slate'
 
 export const PHASE_THEME: Record<PhaseHeroKey, PhaseHeroTheme> = {
   emerald: {
@@ -68,6 +69,13 @@ export const PHASE_THEME: Record<PhaseHeroKey, PhaseHeroTheme> = {
     orbA: 'bg-emerald-400/30',
     orbB: 'bg-teal-300/20',
     hairline: 'via-emerald-300/50',
+  },
+  slate: {
+    border: 'border-slate-200/10',
+    shell: 'bg-[#0F172A]',
+    orbA: 'bg-slate-400/20',
+    orbB: 'bg-slate-300/10',
+    hairline: 'via-slate-300/30',
   },
 }
 
