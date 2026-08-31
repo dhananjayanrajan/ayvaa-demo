@@ -384,3 +384,14 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   cleaned
 - Gate standing: 47 errors, pure Category C (original latent bugs) — awaiting workstream ruling
 - Row sweep stage 2 resumable on ruling
+
+---
+# Revision 18 — Row sweep stage 2: navigator-card chevron verification (Stage 1)
+
+- CreateAccountCard + PartnerBillingCard: duplicate trailing chevron fixed with
+  `showChevron={false}` (Row default ChevronRight suppressed; CreateAccount keeps its ArrowRight
+  trailing, PartnerBilling keeps amount+Paid chip trailing)
+- Gate standing: 47 errors, pure Category C (unchanged); zero errors from either adapter
+- NEXT: Row sweep stage 2 — list interiors tranche (ServiceRow, MedRow, DocRow, EntryRow,
+  StepRow, ChecklistRow, FieldTaskRow, AddCertificationRow, CertificationRow, alert/staff/
+  referral/device rows, sheet option rows)

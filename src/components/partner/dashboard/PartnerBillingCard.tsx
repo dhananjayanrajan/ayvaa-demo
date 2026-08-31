@@ -34,6 +34,7 @@ export function PartnerBillingCard({ invoiceAmount, invoiceSessions, onViewBilli
             </span>
           }
           className="p-4"
+          showChevron={false}
           hoverClassName="hover:bg-transparent"
           whileTapDisabled
         />

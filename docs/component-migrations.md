@@ -616,3 +616,15 @@ referral/alert/device rows inside B10–B11 keeps), sheet option rows (partner r
   A12 timer leak, Offer type ×4, downloadSessionFile, Blob, StatementButton, StaffHero,
   StaffDetailSheet, PartnerPatientHero, PartnerCarePathway, DeletionQueueList, RecordExpansion,
   SessionDetail/ListCard
+
+## Sweep 1 (Row) — stage 2: navigator-card chevron verification (Stage 1)
+
+- PENDING VERIFICATION RESOLVED: CreateAccountCard and PartnerBillingCard both rendered a
+  duplicate trailing chevron (Row's default `showChevron` renders a ChevronRight when
+  `!expandable`; neither adapter set `showChevron={false}`)
+- CreateAccountCard: original used ArrowRight as trailing affordance — kept ArrowRight as
+  trailing, added `showChevron={false}` (removes the duplicate ChevronRight)
+- PartnerBillingCard: original had NO chevron (amount + Paid chip only) — added
+  `showChevron={false}` (removes the spurious ChevronRight)
+- Verified: real gate (tsc -p tsconfig.app.json) at standing 47 Category C errors; zero errors
+  from either adapter file; both files absent from gate output

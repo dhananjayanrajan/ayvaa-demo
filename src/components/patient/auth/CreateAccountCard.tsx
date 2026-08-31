@@ -16,6 +16,7 @@ export function CreateAccountCard({ onPress }: { onPress: () => void }) {
           subtitle="Cover every loved one under one verified plan"
           subtitleClassName="text-xs"
           trailing={<ArrowRight className="h-4 w-4 shrink-0 text-emerald-600/60" aria-hidden />}
+          showChevron={false}
           className="gap-3.5 p-4"
           hoverClassName="hover:bg-transparent"
           whileTapDisabled
