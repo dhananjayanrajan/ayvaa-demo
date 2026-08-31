@@ -320,3 +320,24 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
   alias; SheetHeader. Self-owned dims preserved where the original had no blur (B4 precedent)
 - Orphan register unchanged: RecordSheet (professional/history) — deletion ruled at B18
 - Verified: this batch is docs-only (zero code changes); last compile gate green at 193675c
+
+## F2 residual — closure (1 rewire, 1 keep, 3 verified, 1 decision) — F2 FAMILY CLOSED
+
+- EntrySheetsHero → PhaseHero: incomplete shell byte-identical to PHASE_THEME.blueDeep,
+  complete shell maps to emeraldBright. Kicker+chip row → HeroTopRow (labelClass carries the
+  blue kicker tint). Gradient heading word kept inline (blue-200 finish ≠ HeroHighlight sky
+  cyan-200 — using it would be a visual change). Normalizations flagged per B5 precedent:
+  complete-state border/orb opacities to canonical emeraldBright values; top hairline gained;
+  shell gains transition-colors duration-500 (theme flip now animates — improvement, flagged)
+- patient/onboarding/Hero → keep-ruled: brand splash (logo lockup, pulsing illustration,
+  trust-cell grid), not stat-hero anatomy; single caller P01. Forcing kit Hero = redesign
+- Ledger gap RESOLVED with evidence: ProfileHero, ReportsHero, RatingHero all on AccentHero +
+  HeroCells/StatusPill — B5 Stage 4 executed but never ledgered; disk is authoritative.
+  All three sit on AccentHero (admin/ui placement debt — strengthens the pending promotion)
+- DECISION CLOSED — gold stays in the HeroAccent map: single consumer (RxHero); collapsing
+  into amber would change a frozen surface's rendered gradient (yellow-200 → orange-200
+  finish), violating the behavior-preservation constraint. One-line revert available at
+  screen-rebuild phase if wanted
+- F2 FINAL: all role heroes processed — on kit Hero / PhaseHero / AccentHero compositions,
+  keep-ruled, or domain-genuine (professional ProfileHero bottom-band)
+- Verified: EntrySheetsHero on PhaseHero by grep; npx tsc --noEmit clean

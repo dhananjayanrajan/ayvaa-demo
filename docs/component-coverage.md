@@ -299,3 +299,15 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - NEXT per sequence: F2 residual — patient/onboarding/Hero.tsx, professional/sheets/
   EntrySheetsHero.tsx (unread), ProfileHero/ReportsHero/RatingHero ledger-gap verification
   (disk grep), Rx gold-vs-amber decision
+
+---
+# Revision 10 — F2 FAMILY CLOSED
+
+- Rewired: EntrySheetsHero → PhaseHero (blueDeep/emeraldBright)
+- Keep-ruled: patient/onboarding/Hero (brand splash, single caller)
+- Verified done (ledger gap closed): ProfileHero, ReportsHero, RatingHero — on AccentHero +
+  HeroCells, B5 Stage 4 confirmed by disk
+- Decision closed: gold stays in HeroAccent map (collapse = visual change on frozen surface;
+  ruled by constraint)
+- NEXT per sequence: placement-debt batch — promote FactRows (patient/plan → phone/) and
+  AccentHero (admin/ui → phone/), then B10 close (30 unread cards)
