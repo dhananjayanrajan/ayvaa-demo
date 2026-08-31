@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { BadgeCheck, Check, Loader2, Quote, Scale, ShieldCheck, Star } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
+import { QuotePanel } from '@/components/phone/QuotePanel'
 import { RATED_VISIT, buildFeedbackRows, ratingLabel } from '@/data/patientRating'
 import { StarPicker } from './StarPicker'
 import { HighlightTags } from './HighlightTags'
@@ -171,15 +172,7 @@ export function RateVisitSheet({
           {note.trim().length > 0 && (
             <div>
               <div className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-[#0B211B]/40">Your note</div>
-              <div className="mt-2 rounded-2xl bg-[#0B231C] p-4">
-                <span className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.16em] text-emerald-200/50">
-                  <Quote className="h-3 w-3" aria-hidden />
-                  Verbatim
-                </span>
-                <p className="mt-2.5 font-serif text-pretty text-[13px] font-medium leading-relaxed text-white/90">
-                  &ldquo;{note.trim()}&rdquo;
-                </p>
-              </div>
+              <QuotePanel className="mt-2" kicker="Verbatim" kickerIcon={Quote} quote={note.trim()} />
             </div>
           )}
 

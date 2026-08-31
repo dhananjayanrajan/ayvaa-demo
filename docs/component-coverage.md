@@ -464,3 +464,16 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Gate standing: 33 errors, pure Category C (baseline unchanged)
 - NEXT: Stage 8 — Quote variants normalization (QuotePanel variants: EscalationTicketCard
   inline quote, NotePanel footer-anatomy decision, FamilyFeedbackCard quote carousel)
+
+---
+# Revision 24 — Sweep 4 (Quote variants) CLOSED
+
+- QuotePanel extended: bare, headerTrailing, glyph, footer, className props
+- 7 quote blocks normalized onto QuotePanel (register's 3 + 4 found via font-serif sweep):
+  EscalationTicketCard, NotePanel history, FamilyFeedbackCard, GoalsCard, CaregiverNoteCard,
+  RateVisitSheet, NotesPanel professional/sheets
+- Keep-ruled: ReviewShell (AccentHero review), RecordSheet (orphan), PartnerClinicalRecommendation
+  (prescription card)
+- Gate standing: 33 errors, pure Category C (baseline unchanged)
+- NEXT: Stage 9 — EmptyState universal (cause-aware: EmptyFilterState pair, EmptyMatches,
+  EmptyTabState, CaughtUpCard, inline empty states)

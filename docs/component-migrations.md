@@ -764,3 +764,36 @@ LEDGERED micro-deviations: Delivery/Call animation unified to ConfirmStrip's can
 play regardless — safe.
 
 Gate: real gate exit 2 = 33 Category C baseline, zero errors from StatusStrip or converted files.
+
+## Sweep 4 (Quote variants) — CLOSED
+
+Hub: QuotePanel extended (phone/QuotePanel.tsx) — added bare (render content only, no outer
+dark-emerald shell, for nesting inside PhaseHero/button shells), headerTrailing (right of kicker
+row), glyph (decorative serif quote glyph on header right), footer (full custom footer override,
+replaces default author footer), className (applied to outer shell). Existing plain output
+byte-identical for the 2 prior consumers (LatestReportCard, ReportsListCard).
+
+7 quote blocks normalized onto QuotePanel:
+- Register's 3: EscalationTicketCard (PhaseHero emerald + QuotePanel bare, kicker 'In her words',
+  glyph, custom footer = divider + quoteBy + Verbatim chip), NotePanel history (PhaseHero emerald
+  + QuotePanel bare, kicker 'Your note' + ShieldCheck, headerTrailing Verbatim chip, footer
+  'Delivered...' note), FamilyFeedbackCard (shell → PhaseHero emerald, carousel + pagination kept
+  as card composition)
+- 4 more found via font-serif sweep: GoalsCard (QuotePanel plain, kicker Verbatim + Quote,
+  author '{CAREGIVER.name}, caregiver'), CaregiverNoteCard (QuotePanel plain, same anatomy),
+  RateVisitSheet (QuotePanel plain className='mt-2', kicker Verbatim + Quote, no author),
+  NotesPanel professional/sheets (QuotePanel bare inside motion.button shell — button can't be
+  PhaseHero div, so shell kept, inner quote content normalized)
+
+LEDGERED micro-deviations: Escalation quote text-[14px] font-semibold→QuotePanel text-[13px]
+font-medium + mt-1→mt-2.5; snip NotePanel history quote text-[13.5px]→13px + kicker icon strokeWidth
+2.5→2; snip CaregiverNoteCard kicker tracking [0.22em]→[0.16em]; snip RateVisitSheet shell rounded-2xl
+(16px)→rounded-[20px]; snip FamilyFeedbackCard shell rounded-[22px]→PhaseHero rounded-[26px] + adds
+orbB + hairline; snip NotesPanel sheets quote text-[13.5px]→13px + kicker tracking [0.18em]→[0.16em].
+
+KEEP-RULED (ledgered): ReviewShell (AccentHero emerald review card — different shell family, not
+dark-emerald quote; snip converting would redesign), RecordSheet (orphan, deleted at Stage 16),
+PartnerClinicalRecommendation (prescription card with Rx glyph, not a quote block — PhaseHero-
+pattern shell, Stage 6/14 territory).
+
+Gate: real gate exit 2 = 33 Category C baseline, zero errors from QuotePanel or converted files.

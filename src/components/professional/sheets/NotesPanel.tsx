@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { Check, ClipboardList } from 'lucide-react'
+import { QuotePanel } from '@/components/phone/QuotePanel'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -21,11 +22,12 @@ export function NotesPanel({ note, quickTags, tags, onToggleTag, onPressNote }: 
       >
         <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
         <div className="relative">
-          <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">
-            <ClipboardList className="h-3 w-3" aria-hidden />
-            Your note · verbatim to family
-          </div>
-          <p className="mt-2 font-serif text-pretty text-[13.5px] font-medium leading-relaxed text-white/90">&ldquo;{note}&rdquo;</p>
+          <QuotePanel
+            bare
+            kicker="Your note · verbatim to family"
+            kickerIcon={ClipboardList}
+            quote={note}
+          />
         </div>
       </motion.button>
 

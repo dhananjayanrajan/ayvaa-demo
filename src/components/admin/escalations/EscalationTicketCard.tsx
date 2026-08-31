@@ -14,6 +14,8 @@ import {
   rise,
 } from '@/components/phone/kit'
 import { Overline } from '@/components/phone/Overline'
+import { QuotePanel } from '@/components/phone/QuotePanel'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import { escalatedTickets } from '@/data/seed'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void
@@ -75,28 +77,27 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
             ))}
           </div>
 
-          <div className="relative mt-4 overflow-hidden rounded-[22px] bg-[#0B231C] p-5 shadow-[0_20px_44px_-24px_rgba(6,40,30,0.7)]">
-            <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
-            <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 to-transparent" />
-            <div className="relative">
-              <div className="flex items-center justify-between">
-                <span className="text-[9px] font-extrabold uppercase tracking-[0.18em] text-emerald-200/50">In her words</span>
-                <span className="select-none font-serif text-4xl leading-none text-emerald-300/40" aria-hidden>
-                  &ldquo;
-                </span>
-              </div>
-              <p className="mt-1 text-pretty text-[14px] font-semibold leading-relaxed text-white/90">{e1.quote}</p>
-              <div aria-hidden className="my-3.5 h-px bg-white/[0.08]" />
-              <div className="flex items-center justify-between gap-2">
-                <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-100/50">
-                  {e1.quoteBy}
-                </span>
-                <Chip intent="success" icon={CheckCircle2}>
-                  Verbatim
-                </Chip>
-              </div>
-            </div>
-          </div>
+          <PhaseHero theme={PHASE_THEME.emerald} className="mt-4">
+            <QuotePanel
+              bare
+              kicker="In her words"
+              glyph
+              quote={e1.quote ?? ''}
+              footer={
+                <>
+                  <div aria-hidden className="my-3.5 h-px bg-white/[0.08]" />
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-100/50">
+                      {e1.quoteBy}
+                    </span>
+                    <Chip intent="success" icon={CheckCircle2}>
+                      Verbatim
+                    </Chip>
+                  </div>
+                </>
+              }
+            />
+          </PhaseHero>
 
           <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.035] p-4">
             <Overline icon={ShieldCheck}>Your decision</Overline>

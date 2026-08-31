@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, Lock } from 'lucide-react'
 import { Stars } from './Stars'
 import { cn } from '@/lib/utils'
+import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
 import type { PerformanceData } from '@/data/partnerPerformanceTypes'
 
 interface FamilyFeedbackCardProps {
@@ -18,8 +19,7 @@ export function FamilyFeedbackCard({ data }: FamilyFeedbackCardProps) {
   const goNext = () => setCurrentIndex((prev) => (prev === data.feedbacks.length - 1 ? 0 : prev + 1))
 
   return (
-    <div className="relative overflow-hidden rounded-[22px] bg-[#0B231C] p-5 shadow-[0_20px_44px_-24px_rgba(6,40,30,0.7)]">
-      <div aria-hidden className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-emerald-400/15 blur-3xl" />
+    <PhaseHero theme={PHASE_THEME.emerald}>
       <div className="relative">
         <div className="flex items-center justify-between">
           <Stars />
@@ -85,6 +85,6 @@ export function FamilyFeedbackCard({ data }: FamilyFeedbackCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </PhaseHero>
   )
 }

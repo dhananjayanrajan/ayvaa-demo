@@ -50,6 +50,21 @@ document plus the DOCTRINE in `project-handoff.md` §3 win.
    strictly-banned constraint: never meddle with utility, animations, data, or state — these
    were intentionally built into each component and must not be lost during the refactor.
 
+10. **Refactor-only mandate — no UI corrections, ever.** The job is NO LONGER to fix minor UI
+    inconsistencies or improve the design per REDESIGN/ANTI-DESIGN by any means. ALL effort,
+    time, and tokens go PURELY to fully refactoring components exactly per `refactor-goals.md`
+    and `refactor-targets.md`, completing all of them extremely well. The end state is a
+    massive transformation of the entire components codebase — from completely independent,
+    specially designed, highly interactive components into a highly reusable framework where
+    EVERY component is fully built on abstracted modular base components while STILL
+    maintaining their extremely customized, tailored output for highly specific purposes as
+    they exist right now. All customization that makes them unique is fed in through the
+    modular components — turning even extremely uniquely built components into a reusable
+    structured framework. Never waste tokens on UI corrections, decision monologues, or
+    recitals back to the user. Tokens are spent on achieving goals, not affirming. Never
+    forget the standing subtasks: commit after each stage and update documents exactly as
+    instructed.
+
 ---
 
 ## 2. THE REAL GATE (binding — from project-handoff §4)
@@ -175,8 +190,8 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 1. ~~Confirm Category C disposition (stage 0)~~ — RESOLVED: park (Stage 15 workstream).
 2. ~~Verify the two navigator-card chevron states (stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-6 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312).
-   Stage 7 (StatusStrip universal) IN PROGRESS — build hub, convert ConfirmStrip/DeliveryStrip/
-   CallStrip, re-point 5 consumers, delete the three strips (grep-verify zero), real gate +
-   grep proofs, ledger, large commit.
+4. Current position: Stages 0-7 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
+   6b02662). Stage 8 (Quote variants normalization) IN PROGRESS — normalize QuotePanel
+   variants across corpus (EscalationTicketCard inline quote, NotePanel footer-anatomy
+   decision, FamilyFeedbackCard quote carousel), real gate + grep proofs, ledger, large commit.
 5. Hold every rule in §1 and §2. The rules exist because each one was paid for.
