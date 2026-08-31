@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { MailCheck } from 'lucide-react'
+import { MailCheck, PhoneCall } from 'lucide-react'
 import { Card, Tile } from '@/components/phone/kit'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import type { CallState } from './SentActions'
 import { SentActions } from './SentActions'
 import { ValidityMeter } from './ValidityMeter'
-import { CallStrip } from './CallStrip'
 
 export function SentCard({
   remaining,
@@ -42,7 +42,11 @@ export function SentCard({
           <SentActions callState={callState} onCall={onCall} />
 
           <AnimatePresence>
-            {callState === 'done' && <CallStrip />}
+            {callState === 'done' && (
+              <StatusStrip icon={PhoneCall} title="Call requested" align="start" className="mt-3 px-3.5">
+                A coordinator calls you within 10 minutes
+              </StatusStrip>
+            )}
           </AnimatePresence>
         </div>
       </Card>

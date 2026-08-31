@@ -14,7 +14,7 @@ import { ChecklistCard } from '@/components/professional/sessions/ChecklistCard'
 import { QuickActionsGrid } from '@/components/professional/sessions/QuickActionsGrid'
 import { IncidentButton } from '@/components/professional/sessions/IncidentButton'
 import { SignOffButton, type SignOffStatus } from '@/components/professional/sessions/SignOffButton'
-import { SignOffConfirmation } from '@/components/professional/sessions/SignOffConfirmation'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import type { SessionStep, StepState } from '@/data/sessionExecution'
 
 const toState = (s: (typeof sessionChecklist)[number]): StepState => {
@@ -129,7 +129,7 @@ export function PR06() {
             <AnimatePresence>
               {status === 'signed' && (
                 <motion.div variants={rise} key="confirmation">
-                  <SignOffConfirmation />
+                  <StatusStrip>Visit signed off · all steps sealed · payment released · family notified</StatusStrip>
                 </motion.div>
               )}
             </AnimatePresence>

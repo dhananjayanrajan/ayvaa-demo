@@ -16,7 +16,7 @@ import { EditProfileButton } from '@/components/professional/profile/EditProfile
 import { ProfilePreviewSheet } from '@/components/professional/profile/ProfilePreviewSheet'
 import { CertificationUploadSheet } from '@/components/professional/profile/CertificationUploadSheet'
 import { EditProfileSheet } from '@/components/professional/profile/EditProfileSheet'
-import { UploadConfirmation } from '@/components/professional/profile/UploadConfirmation'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import { initialsOf } from '@/data/profileData'
 import { parseBank } from '@/data/payoutData'
 
@@ -151,7 +151,12 @@ export function PR11() {
             <AnimatePresence>
               {confirmation && (
                 <motion.div variants={rise} key="confirmation">
-                  <UploadConfirmation certName={confirmation.certName} matchedCategory={confirmation.matchedCategory} />
+                  <StatusStrip>
+                    {confirmation.certName} submitted for review.
+                    {confirmation.matchedCategory
+                      ? ` ${confirmation.matchedCategory} matching activates once verified.`
+                      : ' In review with Ayvaa now.'}
+                  </StatusStrip>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -13,7 +13,7 @@ import { WeekBars } from '@/components/professional/availability/WeekBars'
 import { DayEditorCard } from '@/components/professional/availability/DayEditorCard'
 import { TimeOffCard } from '@/components/professional/availability/TimeOffCard'
 import { SaveAvailabilityButton, type SaveStatus } from '@/components/professional/availability/SaveAvailabilityButton'
-import { SaveConfirmation } from '@/components/professional/availability/SaveConfirmation'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import { WINDOWS, hoursFor, type DayAvailability } from '@/data/availabilityData'
 
 type Days = DayAvailability[]
@@ -100,7 +100,7 @@ export function PR05() {
             <AnimatePresence>
               {status === 'saved' && (
                 <motion.div variants={rise} key="confirmation">
-                  <SaveConfirmation openCount={openCount} />
+                  <StatusStrip>Availability saved · {openCount} days open · visible to matching now</StatusStrip>
                 </motion.div>
               )}
             </AnimatePresence>

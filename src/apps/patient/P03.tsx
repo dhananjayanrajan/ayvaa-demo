@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { MailCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Tile, rise, stagger } from '@/components/phone/kit'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import { JourneyRail } from '@/components/patient/verification/JourneyRail'
 import { OtpInput } from '@/components/patient/verification/OtpInput'
 import { ResendRow } from '@/components/patient/verification/ResendRow'
-import { DeliveryStrip } from '@/components/patient/verification/DeliveryStrip'
 import { VerifyButton } from '@/components/patient/verification/VerifyButton'
 import type { VerifyState } from '@/components/patient/verification/VerifyButton'
 import { NextStepsCard } from '@/components/patient/verification/NextStepsCard'
@@ -133,7 +134,11 @@ export function P03() {
             </motion.div>
 
             <AnimatePresence>
-              {emailDelivered && <DeliveryStrip email={guardian.email} />}
+              {emailDelivered && (
+                <StatusStrip icon={MailCheck} title="Email fallback delivered" align="start" className="px-3.5">
+                  {guardian.email}
+                </StatusStrip>
+              )}
             </AnimatePresence>
 
             <motion.div variants={rise}>
