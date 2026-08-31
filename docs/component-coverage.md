@@ -320,3 +320,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Canonical library now 23 files (21 prior + FactRows + AccentHero)
 - Placement-debt register: EMPTY
 - NEXT per sequence: B10 close — 30 unread cards (professional 18, partner 12)
+
+---
+# Revision 12 — B10/F6b FAMILY CLOSED (48 of 48)
+
+- New canonical: ConfirmStrip (phone/) — library now 24 files
+- Collapsed: SaveConfirmation, UploadConfirmation, SignOffConfirmation
+- Keep-ruled with evidence: 44 remaining prof/partner cards (ledger B10 close section)
+- Near-duplicate pairs logged for rebuild phase: SubmittedPanel/TriggerPreview,
+  BillingFooter/PartnerPatientFooter
+- NEXT per sequence: B11 — admin (24) + system (15) cards

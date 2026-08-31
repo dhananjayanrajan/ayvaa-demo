@@ -356,3 +356,43 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
   work complete; no repair was needed. Lesson: the post-state inspection pattern from Command 39
   is now the standard crash-recovery procedure
 - Verified: TSC CLEAN (formal gate); retired-path sweep zero; counts 17/34 exact
+
+## B10 close — Professional (18) + Partner (12) cards — F6b FAMILY CLOSED
+
+Read batches capped at 6; every file read with consumer map; membership exhausted.
+
+### New canonical
+- components/phone/ConfirmStrip.tsx → new | animated emerald confirmation strip (the animated
+  counterpart to NoteStrip) | replaces 3 byte-identical implementations
+
+### Collapsed onto ConfirmStrip (thin wrappers, paths + signatures preserved, zero screen edits)
+- professional/availability/SaveConfirmation, professional/profile/UploadConfirmation,
+  professional/sessions/SignOffConfirmation (identical motion/classes/icon; only text differed)
+
+### Keep-ruled — professional (15)
+SecurityDevicesCard, PasswordCard (auth composition; patient namesake both-genuine), DayEditorCard
+(DayToggle+WindowOption composite), TimeOffCard, PayoutLinkCard, SessionEarningsCard
+(row composite), RecordExpansion (expansion body; toggle lives in MonthTimeline — not an
+ExpandRow twin), SubmittedPanel + TriggerPreview (near-duplicate pair judged: 4 deltas × 2
+single-callers = bolt-on economics, NotePanel/QuotePanel precedent; rebuild-phase candidate),
+SafetyChecksCard, TermsAcceptanceCard (tri-state progress), OnboardingFooter (tri-state gated),
+CertificationsCard, PreferencesCard (row composites), ChecklistCard
+
+### Keep-ruled — partner (11)
+BillingFooter + PartnerPatientFooter (near-duplicate pair judged, same precedent; damping
+25-vs-17 + focus-ring deltas; rebuild-phase candidate), StatementCarousel (snap carousel),
+UsageLedgerCard, ReferredPatientList (filter + popLayout list), PerformanceFooter (timed
+success lifecycle), CareGoalsCard (spring accordion), FamilyFeedbackCard (quote carousel),
+PerformanceKpis, PartnerClinicalRecommendation (Rx panel), PartnerDischargeRecords (thin
+Section wrapper over frozen smoothui AnimatedFileUpload), StaffApprovalCard
+
+### Punch list additions (visual, rebuild phase)
+whileHover scales: SecurityDevicesCard, PasswordCard ×2, SafetyChecksCard, TermsAcceptanceCard
+×2, OnboardingFooter, BillingFooter ×2, StatementCarousel, PartnerPatientFooter ×2;
+group-hover chevron: PayoutLinkCard, ReferredPatientList; dividers: SafetyChecksCard,
+ReferredPatientList, CareGoalsCard goals list
+
+### Orphan register unchanged: RecordSheet (B18)
+
+- B10 FINAL: 48 of 48 — 1 rewire + 3 collapsed + 44 keep-ruled. F6b closed.
+- Verified: 3/3 ConfirmStrip wrappers by grep; npx tsc --noEmit clean at both gates
