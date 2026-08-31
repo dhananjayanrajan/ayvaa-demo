@@ -1,7 +1,6 @@
-import { motion } from 'motion/react'
 import { ChevronRight, HeartHandshake, ShieldAlert, Siren } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Tile } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 
 type EscalateAction = {
   icon: LucideIcon
@@ -28,23 +27,25 @@ export function EscalateSheet({ onClose, notify }: EscalateSheetProps) {
     <>
       <div className="flex flex-col gap-2">
         {escalateActions.map((a) => (
-          <motion.button
+          <Row
             key={a.label}
-            type="button"
-            whileTap={{ scale: 0.985 }}
+            icon={a.icon}
+            tone={a.tone}
+            tileSize="sm"
+            title={a.label}
+            subtitle={a.sub}
+            surface="inset"
+            padding="even"
+            hoverClassName="hover:bg-[#0B211B]/[0.06]"
+            showChevron={false}
+            trailing={
+              <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            }
             onClick={() => {
               onClose()
               notify({ title: a.label, body: a.body, kind: a.kind })
             }}
-            className="group flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.035] p-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.06]"
-          >
-            <Tile icon={a.icon} tone={a.tone} size="sm" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-[13.5px] font-bold leading-snug tracking-tight text-[#0B211B]">{a.label}</span>
-              <span className="mt-0.5 block text-[11.5px] font-medium leading-relaxed text-[#0B211B]/55">{a.sub}</span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25 transition-transform group-hover:translate-x-0.5" aria-hidden />
-          </motion.button>
+          />
         ))}
       </div>
       <p className="text-center text-[11px] font-medium leading-relaxed text-[#0B211B]/45">

@@ -628,3 +628,24 @@ referral/alert/device rows inside B10–B11 keeps), sheet option rows (partner r
   `showChevron={false}` (removes the spurious ChevronRight)
 - Verified: real gate (tsc -p tsconfig.app.json) at standing 47 Category C errors; zero errors
   from either adapter file; both files absent from gate output
+
+## Sweep 1 (Row) — stage 2: list interiors + card interiors + sheet option rows (CLOSED)
+
+Row hub extended this stage (all backward-compatible, each gated clean before consumers):
+- `align?: 'center' | 'start'` — items-start rows (ServiceRow, AccessLogCard, SafetyChecksCard)
+- `padding?: 'none' | 'inset' | 'comfortable' | 'roomy' | 'even'` — decoupled padding from surface
+- `disabled?: boolean` — locked rows render plain div cursor-not-allowed (ChecklistRow)
+- `titleMeta?: ReactNode` — inline content after title (FieldTaskRow time, SessionListCard Confirmed chip, WhoCard Selected chip)
+- `body?: ReactNode` — extra content after metaNote (AccessLogCard document, SessionListCard location, PrescriptionList stock, ReferredPatientList meter, OfferStatusList meter)
+
+15 conversions this stage (all faithful, gate-clean, zero hand-rolled row signatures remain):
+- Named list rows: AddCertificationRow, ServiceRow, EntryRow, ChecklistRow, MedRow (scheduled branch), StepRow (todo branch), FieldTaskRow
+- Card interiors: UpcomingVisitsCard, WhoCard, PrivacyFactsCard, PlanLinksCard, DocumentsCard (RX_DOCUMENTS rows + upload button), PrescriptionList, SafetyCard, VitalsCard (ReadingRow), ScheduleCard (time-window row), PrescriptionSheet (questions row), CaptureChainCard (Family billing row), EscalateSheet (option rows), StaffList, AccessLogCard, ReferredPatientList, OfferStatusList, SessionListCard, SafetyChecksCard, StateDiffCard (ticket row), AccountActionsSheet (option rows)
+- Sheet option rows: PartnerReferralSheet, PartnerAlertsSheet, PartnerStaffSheet
+
+Deferred to later sweeps (NOT Row): heroes (VaultHero/RatingHero/LiveVisitHero), file tiles (CaptureFileTile/PhotoAttach/CertificationUploadSheet), option/selection rows (ScopesCard/ConsentBlock/ConsentCard/ScheduleCard scheduleTypes/AddPrescriptionSheet PRESCRIBERS → Options sweep), timelines (AuditTimeline/TransactionStepList/PartnerCarePathway/StateDiffCard trail/FailsafeCard steps/RecheckRulesList/CaptureChainCard steps → StepList sweep), form fields (AddPrescriptionSheet FieldRow → Field sweep).
+Row-sweep residuals (need Row extension or special handling, logged for later): AccountSearch (onMouseDown), RetentionPeriodsList + GoalsCard GoalRow (far-right chevron after trailing), NotificationFeed (standalone expandable), ActionCard + ConsentCycleCard scope row (dark hero rows).
+
+LEDGERED micro-deviations: whileTap 0.99/0.97 → 0.985 (Row default) on several; EscalateSheet surface bg/[0.035]→/[0.03]; VitalsCard ReadingRow lost aria-label; dropped row-level whileHover scale on SafetyChecksCard (no-hover-motion precedent); focus-ring additions (precedent).
+
+Verification: real gate exit 2 = 33 Category C errors (baseline unchanged, down from 47 as Category A/B/D closed pre-session); zero errors from Row.tsx or any converted file; grep zero-proof — all 15 converted files have zero `flex w-full items-center gap-3` / `flex w-full items-start gap-3` signatures.

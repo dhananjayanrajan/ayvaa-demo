@@ -17,6 +17,7 @@ import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { Overline } from '@/components/phone/Overline'
+import { Row } from '@/components/phone/Row'
 import { scheduleDiff } from '@/data/system/auditLog'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
@@ -257,24 +258,25 @@ export function StateDiffCard({ verifyPhase }: StateDiffCardProps) {
             </div>
           </Panel>
 
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.985 }}
+          <Row
+            icon={Ticket}
+            tone="warning"
+            tileSize="sm"
+            title="Open ticket t1 in support"
+            subtitle="The conversation that started this change"
+            trailing={
+              <ChevronRight
+                className="h-4 w-4 shrink-0 text-[#0B211B]/25 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600"
+                aria-hidden
+              />
+            }
+            showChevron={false}
+            surface="none"
+            padding="none"
+            className="rounded-2xl bg-[#0B211B]/[0.04]"
+            hoverClassName="hover:bg-[#0B211B]/[0.07]"
             onClick={() => navigate('/patient/p25')}
-            aria-label="Open ticket t1 in support"
-            className="group mt-4 flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.04] px-4 py-3.5 text-left outline-none transition-colors hover:bg-[#0B211B]/[0.07] focus-visible:ring-2 focus-visible:ring-amber-500/50"
-          >
-            <Tile icon={Ticket} tone="warning" size="sm" />
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-[13px] font-bold tracking-tight text-[#0B211B]">
-                Open ticket t1 in support
-              </span>
-              <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/55">
-                The conversation that started this change
-              </span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600" aria-hidden />
-          </motion.button>
+          />
 
           <div
             className={cn(

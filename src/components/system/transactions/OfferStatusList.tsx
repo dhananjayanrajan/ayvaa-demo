@@ -7,12 +7,11 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import {
   Card,
-  Chip,
   Meter,
-  Tile,
   rise,
 } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { dispatchOffers } from '@/data/seed'
 
 type OfferState = 'waiting' | 'declined' | 'recheck'
@@ -53,8 +52,18 @@ export function OfferStatusList({ waiting, declined, recheck, mmss, expiresAt, n
           return (
             <div key={o.id}>
               {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-              <motion.button
-                whileTap={{ scale: 0.985 }}
+              <Row
+                icon={s.icon}
+                tone={s.tile}
+                title={`${count} ${o.label.replace(/^\d+ /, '')}`}
+                titleClassName="text-sm"
+                subtitle={o.state === 'waiting' ? `Expires ${expiresAt} · ${mmss} left` : o.detail}
+                subtitleClassName="text-xs"
+                body={
+                  <Meter value={count / totalOffers} intent={s.intent} delay={0.2 + i * 0.1} className="mt-2 max-w-[160px]" />
+                }
+                chip={{ label: s.chip, intent: s.intent, dot: s.live }}
+                showChevron={false}
                 onClick={() =>
                   notify(
                     o.state === 'waiting'
@@ -64,20 +73,7 @@ export function OfferStatusList({ waiting, declined, recheck, mmss, expiresAt, n
                         : { title: 'Re-checking availability', body: 'Conflict found · availability re-verified now', kind: 'info' },
                   )
                 }
-                className="group flex w-full items-center gap-3 px-4 py-3 text-left"
-              >
-                <Tile icon={s.icon} tone={s.tile} />
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-bold tracking-tight text-[#0B211B]">
-                    {count} {o.label.replace(/^\d+ /, '')}
-                  </div>
-                  <div className="mt-0.5 truncate text-xs font-medium leading-snug text-[#0B211B]/55">
-                    {o.state === 'waiting' ? `Expires ${expiresAt} · ${mmss} left` : o.detail}
-                  </div>
-                  <Meter value={count / totalOffers} intent={s.intent} delay={0.2 + i * 0.1} className="mt-2 max-w-[160px]" />
-                </div>
-                <Chip intent={s.intent} dot={s.live}>{s.chip}</Chip>
-              </motion.button>
+              />
             </div>
           )
         })}

@@ -395,3 +395,18 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - NEXT: Row sweep stage 2 — list interiors tranche (ServiceRow, MedRow, DocRow, EntryRow,
   StepRow, ChecklistRow, FieldTaskRow, AddCertificationRow, CertificationRow, alert/staff/
   referral/device rows, sheet option rows)
+
+---
+# Revision 19 — Row sweep stage 2 CLOSED (list interiors + card interiors + sheet option rows)
+
+- Row hub extended: align, padding, disabled, titleMeta, body (all backward-compatible)
+- 15 conversions this stage; snip all 15 files grep-proven zero hand-rolled row signatures
+- Deferred to later sweeps: heroes, file tiles, option/selection rows (Options), timelines
+  (StepList), form fields (Field), dark hero rows + far-right-chevron rows (Row residuals)
+- Gate standing: 33 errors, pure Category C (baseline unchanged, down from 47 as A/B/D closed)
+- NEXT: Stage 4 — StepList/Timeline universal (evidence: RetryLadder, NoAvailabilityLadder,
+  CycleStep, ExecutionTrail, CaptureChainCard steps, RecheckResolutionCard probes,
+  IncidentTimeline, WithdrawalCard, ApprovalCard, ReversedOffer/Rollback traces, RefundCard,
+  MonthTimeline, AuditTimeline, StepTimeline, LiveStepper, JourneyRail, JourneyTime,
+  DispatchSequence, WizardStepper, PartnerCarePathway, StateDiffCard trail, FailsafeCard steps,
+  RecheckRulesList, TransactionStepList)

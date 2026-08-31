@@ -1,8 +1,8 @@
 import { Bell, CheckCircle2 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Tile, TimeChip } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
 import { SheetShell } from '@/components/phone/SheetShell'
+import { Row } from '@/components/phone/Row'
 
 export interface AlertItem {
   icon: LucideIcon
@@ -33,14 +33,17 @@ export function PartnerAlertsSheet({ alerts, onClose, onMarkAllRead }: PartnerAl
           {alerts.map((a, i) => (
             <div key={a.title}>
               {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-              <div className="flex items-center gap-3 px-1 py-3.5">
-                <Tile icon={a.icon} tone={a.tone} />
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">{a.title}</div>
-                  <div className="mt-0.5 truncate text-xs font-medium text-[#0B211B]/55">{a.body}</div>
-                </div>
-                <TimeChip>{a.time}</TimeChip>
-              </div>
+              <Row
+                icon={a.icon}
+                tone={a.tone}
+                title={a.title}
+                subtitle={a.body}
+                subtitleClassName="truncate text-xs"
+                time={a.time}
+                surface="none"
+                padding="none"
+                className="px-1"
+              />
             </div>
           ))}
         </div>

@@ -13,6 +13,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
 import { FactRows } from '@/components/phone/FactRows'
+import { Row } from '@/components/phone/Row'
 import { captureSteps, paymentMeta } from '@/data/system/payments'
 import type { CaptureIcon, PaymentPhase } from '@/data/system/payments'
 import { useRouter } from '@/lib/router'
@@ -288,26 +289,22 @@ export function CaptureChainCard({
           )}
         </AnimatePresence>
 
-        <motion.button
-          type="button"
-          whileTap={{ scale: 0.985 }}
+        <Row
+          leading={
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-mint text-brand-ink">
+              <Wallet className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+            </span>
+          }
+          title="Family billing"
+          subtitle="The same charge, as Priya sees it"
+          trailing={<span className="shrink-0 text-[11px] font-bold text-emerald-600">Open</span>}
+          surface="none"
+          padding="none"
+          className="mt-4 rounded-2xl bg-[#0B211B]/[0.04]"
+          hoverClassName="hover:bg-[#0B211B]/[0.07]"
+          showChevron={false}
           onClick={() => navigate('/patient/p23')}
-          aria-label="Open family billing history"
-          className="mt-4 flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.04] px-4 py-3.5 text-left outline-none transition-colors hover:bg-[#0B211B]/[0.07] focus-visible:ring-2 focus-visible:ring-emerald-500/50"
-        >
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-mint text-brand-ink">
-            <Wallet className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block truncate text-[13px] font-bold tracking-tight text-[#0B211B]">
-              Family billing
-            </span>
-            <span className="mt-0.5 block truncate text-[11px] font-medium text-[#0B211B]/55">
-              The same charge, as Priya sees it
-            </span>
-          </span>
-          <span className="shrink-0 text-[11px] font-bold text-emerald-600">Open</span>
-        </motion.button>
+        />
       </div>
     </Card>
   )

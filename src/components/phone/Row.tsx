@@ -25,12 +25,14 @@ export interface RowProps {
   labelClassName?: string
   title: string
   titleClassName?: string
+  titleMeta?: ReactNode
   subtitle?: string
   subtitleClassName?: string
   metaLabel?: string
   metaValue?: string
   metaNote?: string
   metaInline?: boolean
+  body?: ReactNode
   trailing?: ReactNode
   trailingClassName?: string
   chip?: RowChip
@@ -38,6 +40,7 @@ export interface RowProps {
   amountNote?: string
   time?: string
   onClick?: () => void
+  disabled?: boolean
   expandable?: boolean
   open?: boolean
   onToggle?: () => void
@@ -46,6 +49,8 @@ export interface RowProps {
   showChevron?: boolean
   chevronInTrailing?: boolean
   tileSize?: 'sm' | 'md' | 'lg'
+  align?: 'center' | 'start'
+  padding?: 'none' | 'inset' | 'comfortable' | 'roomy' | 'even'
   surface?: RowSurface
   surfaceTone?: string
   wrapSurface?: boolean
@@ -113,12 +118,14 @@ export function Row({
   labelClassName,
   title,
   titleClassName,
+  titleMeta,
   subtitle,
   subtitleClassName,
   metaLabel,
   metaValue,
   metaNote,
   metaInline = false,
+  body,
   trailing,
   trailingClassName,
   chip,
@@ -126,6 +133,7 @@ export function Row({
   amountNote,
   time,
   onClick,
+  disabled = false,
   expandable,
   open = false,
   onToggle,
@@ -134,6 +142,8 @@ export function Row({
   showChevron = true,
   chevronInTrailing = false,
   tileSize = 'md',
+  align = 'center',
+  padding,
   surface = 'none',
   surfaceTone,
   wrapSurface = false,
@@ -158,7 +168,7 @@ export function Row({
       </span>
     ) : null)
 
-  const body = (
+  const bodyNode = (
     <span className={cn('min-w-0 flex-1', bodyClassName)}>
       {label && (
         <span className={cn('block text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40', labelClassName)}>
@@ -175,6 +185,7 @@ export function Row({
         >
           {title}
         </span>
+        {titleMeta}
         {expandable && !chevronInTrailing && (
           <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
             <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/35" aria-hidden />
@@ -218,6 +229,7 @@ export function Row({
       {metaNote && (
         <span className="mt-1 block text-pretty text-[10.5px] font-semibold text-[#0B211B]/45">{metaNote}</span>
       )}
+      {body}
     </span>
   )
 
@@ -230,13 +242,29 @@ export function Row({
           ? surfaceTone
           : ''
 
+  const paddingClass =
+    padding === 'inset'
+      ? 'px-2 py-3'
+      : padding === 'comfortable'
+        ? 'px-3.5 py-3'
+        : padding === 'roomy'
+          ? 'px-3 py-3.5'
+          : padding === 'even'
+            ? 'p-3.5'
+            : surface === 'none' && !wrapSurface
+              ? 'px-4 py-3.5'
+              : surfaceClass && !wrapSurface
+                ? 'px-2 py-3'
+                : ''
+
   const shellClass = cn(
-    'flex w-full items-center gap-3 text-left',
+    'flex w-full gap-3 text-left',
+    align === 'start' ? 'items-start' : 'items-center',
     surface === 'none' && !wrapSurface ? surfaceClass : '',
-    surface === 'none' ? 'px-4 py-3.5' : surfaceClass && !wrapSurface ? 'px-2 py-3' : '',
-    (onClick || (expandable && onToggle)) &&
+    paddingClass,
+    ((onClick && !disabled) || (expandable && onToggle)) &&
       cn('group transition-colors duration-200', hoverClassName ?? 'hover:bg-[#0B211B]/[0.02]'),
-    (onClick || (expandable && onToggle)) && 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40',
+    ((onClick && !disabled) || (expandable && onToggle)) && 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40',
     className
   )
 
@@ -249,7 +277,7 @@ export function Row({
   const inner = (
     <>
       {leadingNode}
-      {body}
+      {bodyNode}
       <RowTrailing
         chip={chip}
         amount={amount}
@@ -285,14 +313,18 @@ export function Row({
   )
 
   const result = onClick ? (
-    <motion.button
-      type="button"
-      whileTap={whileTapDisabled ? undefined : { scale: 0.985 }}
-      onClick={onClick}
-      className={shellClass}
-    >
-      {inner}
-    </motion.button>
+    disabled ? (
+      <div className={cn(shellClass, 'cursor-not-allowed')} aria-disabled="true">{inner}</div>
+    ) : (
+      <motion.button
+        type="button"
+        whileTap={whileTapDisabled ? undefined : { scale: 0.985 }}
+        onClick={onClick}
+        className={shellClass}
+      >
+        {inner}
+      </motion.button>
+    )
   ) : expandable && onToggle ? (
     <button type="button" onClick={onToggle} aria-expanded={open} className={cn(shellClass, 'group')}>
       {inner}

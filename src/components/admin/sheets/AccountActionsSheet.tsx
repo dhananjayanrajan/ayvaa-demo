@@ -1,7 +1,6 @@
-import { motion } from 'motion/react'
 import { AlertTriangle, MapPin, SlidersHorizontal } from 'lucide-react'
-import { Tile } from '@/components/phone/kit'
 import { BottomSheet } from '@/components/phone/SheetShell'
+import { Row } from '@/components/phone/Row'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void
 
@@ -48,19 +47,19 @@ export function AccountActionsSheet({ open, onClose, notify, accountName }: Acco
     >
       <div className="flex flex-col gap-2">
         {actions.map((a) => (
-          <motion.button
+          <Row
             key={a.key}
-            type="button"
-            whileTap={{ scale: 0.97 }}
+            icon={a.icon}
+            tone={a.tone}
+            tileSize="sm"
+            title={a.label}
+            subtitle={a.sub}
+            showChevron={false}
+            surface="inset"
+            padding="even"
+            hoverClassName="hover:bg-[#0B211B]/[0.06]"
             onClick={a.onSelect}
-            className="group flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.03] p-3.5 text-left transition-all duration-200 hover:bg-[#0B211B]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-          >
-            <Tile icon={a.icon} tone={a.tone} size="sm" className="transition-transform group-hover:scale-105" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-[13.5px] font-bold leading-snug tracking-tight text-[#0B211B]">{a.label}</span>
-              <span className="mt-0.5 block text-[11.5px] font-medium leading-relaxed text-[#0B211B]/45">{a.sub}</span>
-            </span>
-          </motion.button>
+          />
         ))}
       </div>
     </BottomSheet>

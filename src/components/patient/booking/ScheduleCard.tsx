@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ChevronRight } from 'lucide-react'
 import { Card } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { cn } from '@/lib/utils'
 import { dayOptions, fmtINR, scheduleTypes } from '@/data/patientBooking'
 import type { TimeWindow } from '@/data/patientBooking'
@@ -106,26 +107,22 @@ export function ScheduleCard({
           )}
         </div>
 
-        <div className="mt-4 rounded-2xl bg-[#0B211B]/[0.03]">
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.99 }}
+        <div className="mt-4">
+          <Row
+            leading={
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-emerald-500/10 text-emerald-700">
+                <WinIcon className="h-5 w-5" strokeWidth={2.2} aria-hidden />
+              </span>
+            }
+            title={`${win.label}, ${win.time}`}
+            subtitle={`${durationLabel} per visit, ${fmtINR(durationPrice)}`}
+            surface="inset"
+            className="gap-3.5 px-4 py-3.5"
+            hoverClassName=""
+            showChevron={false}
+            trailing={<ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />}
             onClick={onOpenTime}
-            className="flex w-full items-center gap-3.5 px-4 py-3.5 text-left"
-          >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-emerald-500/10 text-emerald-700">
-              <WinIcon className="h-5 w-5" strokeWidth={2.2} aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[13px] font-bold leading-snug tracking-tight text-[#0B211B]">
-                {win.label}, {win.time}
-              </span>
-              <span className="mt-0.5 block text-pretty text-[11px] font-semibold leading-snug text-[#0B211B]/50">
-                {durationLabel} per visit, {fmtINR(durationPrice)}
-              </span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />
-          </motion.button>
+          />
         </div>
       </div>
     </Card>

@@ -1,6 +1,6 @@
-import { motion } from 'motion/react'
 import { Check, Lock, Play, type LucideIcon } from 'lucide-react'
-import { Chip, Tile } from '@/components/phone/kit'
+import { Tile } from '@/components/phone/kit'
+import { Row, type RowChip } from '@/components/phone/Row'
 import type { TileTone } from '@/components/phone/kit'
 import type { StepState } from '@/data/sessionExecution'
 import { cn } from '@/lib/utils'
@@ -20,60 +20,42 @@ const tileFor = (state: StepState): { tone: TileTone; pulse?: boolean } => {
   return { tone: 'neutral' }
 }
 
-const chipFor = (state: StepState) => {
+const chipFor = (state: StepState): RowChip => {
   switch (state) {
     case 'done':
-      return <Chip intent="success" icon={Check}>Done</Chip>
+      return { label: 'Done', intent: 'success', icon: Check }
     case 'active':
-      return <Chip intent="live" dot>Running</Chip>
+      return { label: 'Running', intent: 'live', dot: true }
     case 'todo':
-      return <Chip intent="info" icon={Play}>Start</Chip>
+      return { label: 'Start', intent: 'info', icon: Play }
     case 'locked':
-      return <Chip intent="neutral" icon={Lock}>Locked</Chip>
+      return { label: 'Locked', intent: 'neutral', icon: Lock }
   }
 }
 
 export function ChecklistRow({ title, body, icon, state, onPress }: Props) {
   const t = tileFor(state)
+  const locked = state === 'locked'
   return (
-    <motion.button
-      type="button"
-      whileTap={{ scale: 0.985 }}
+    <Row
+      leading={
+        <span className="relative shrink-0">
+          <Tile icon={icon} tone={t.tone} />
+          {state === 'active' && (
+            <span aria-hidden className="absolute -inset-1 -z-10 rounded-[18px] bg-blue-500/20 blur-md" />
+          )}
+        </span>
+      }
+      title={title}
+      titleClassName={locked ? 'text-[#0B211B]/40' : undefined}
+      subtitle={body}
+      subtitleClassName={cn('text-[11px] font-semibold', locked ? 'text-[#0B211B]/35' : 'text-[#0B211B]/50')}
+      chip={chipFor(state)}
+      padding="roomy"
+      className={cn(locked && 'cursor-not-allowed', state === 'active' && 'bg-blue-500/[0.05]')}
+      hoverClassName={locked ? undefined : 'hover:bg-[#0B211B]/[0.02]'}
+      disabled={locked}
       onClick={onPress}
-      disabled={state === 'locked'}
-      aria-disabled={state === 'locked'}
-      className={cn(
-        'flex w-full items-center gap-3 rounded-2xl px-3 py-3.5 text-left transition-colors',
-        state !== 'locked' && 'hover:bg-[#0B211B]/[0.02]',
-        state === 'locked' && 'cursor-not-allowed',
-        state === 'active' && 'bg-blue-500/[0.05]',
-      )}
-    >
-      <span className="relative shrink-0">
-        <Tile icon={icon} tone={t.tone} />
-        {state === 'active' && (
-          <span aria-hidden className="absolute -inset-1 -z-10 rounded-[18px] bg-blue-500/20 blur-md" />
-        )}
-      </span>
-      <span className="min-w-0 flex-1">
-        <span
-          className={cn(
-            'block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]',
-            state === 'locked' && 'text-[#0B211B]/40',
-          )}
-        >
-          {title}
-        </span>
-        <span
-          className={cn(
-            'mt-0.5 block truncate text-[11px] font-semibold',
-            state === 'locked' ? 'text-[#0B211B]/35' : 'text-[#0B211B]/50',
-          )}
-        >
-          {body}
-        </span>
-      </span>
-      {chipFor(state)}
-    </motion.button>
+    />
   )
 }

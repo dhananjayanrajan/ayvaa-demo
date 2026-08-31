@@ -2,6 +2,7 @@ import { BadgeCheck } from 'lucide-react'
 import { Chip, TimeChip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import { FactRows } from '@/components/phone/FactRows'
+import { Row } from '@/components/phone/Row'
 import type { VisitStep } from '@/data/patientLiveVisit'
 
 interface StepRowProps {
@@ -15,18 +16,20 @@ export function StepRow({ step, open = false, onToggle }: StepRowProps) {
 
   if (step.state === 'todo') {
     return (
-      <div className="flex items-center gap-3 rounded-2xl bg-[#0B211B]/[0.03] p-3.5">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0B211B]/[0.07] text-[#0B211B]/50">
-          <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-[13px] font-bold tracking-tight text-[#0B211B]/70">{step.title}</span>
-          <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/45">{step.summary}</span>
-        </span>
-        <Chip intent="neutral" className="shrink-0">
-          Upcoming
-        </Chip>
-      </div>
+      <Row
+        leading={
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0B211B]/[0.07] text-[#0B211B]/50">
+            <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />
+          </span>
+        }
+        title={step.title}
+        titleClassName="text-[13px] text-[#0B211B]/70"
+        subtitle={step.summary}
+        subtitleClassName="text-[11px] text-[#0B211B]/45"
+        chip={{ label: 'Upcoming', intent: 'neutral' }}
+        surface="inset"
+        padding="even"
+      />
     )
   }
 

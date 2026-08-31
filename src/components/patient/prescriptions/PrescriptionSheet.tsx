@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { BadgeCheck, Bell, CalendarDays, Check, ChevronRight, Clock, Eye, HeartPulse, Loader2, MessageSquare, Package, Pill, RefreshCw, ShoppingCart } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { FactRows } from '@/components/phone/FactRows'
+import { Row } from '@/components/phone/Row'
 import { Card, Meter, MiniBadge } from '@/components/phone/kit'
 import type { Prescription } from '@/data/patientPrescriptions'
 import { weekTakenOf } from '@/data/patientPrescriptions'
@@ -255,25 +256,24 @@ export function PrescriptionSheet({
         </Card>
 
         <Card className="p-0">
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.97 }}
+          <Row
+            leading={
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-500/[0.12] text-emerald-700">
+                <MessageSquare className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+              </span>
+            }
+            title="Questions about this prescription?"
+            titleClassName="text-[12px]"
+            subtitle={`${rx.prescriber} replies within a few hours`}
+            subtitleClassName="text-[10.5px]"
+            surface="none"
+            padding="none"
+            className="p-4"
+            hoverClassName="hover:bg-[#0B211B]/[0.02]"
+            showChevron={false}
+            trailing={<ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />}
             onClick={onMessage}
-            className="flex w-full items-center gap-3 p-4 text-left transition-colors hover:bg-[#0B211B]/[0.02]"
-          >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-500/[0.12] text-emerald-700">
-              <MessageSquare className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[12px] font-bold tracking-tight text-[#0B211B]">
-                Questions about this prescription?
-              </span>
-              <span className="mt-0.5 block text-[10.5px] font-semibold text-[#0B211B]/45">
-                {rx.prescriber} replies within a few hours
-              </span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />
-          </motion.button>
+          />
         </Card>
 
         <div className="flex items-center gap-2 rounded-xl bg-emerald-500/[0.1] px-3 py-2.5">

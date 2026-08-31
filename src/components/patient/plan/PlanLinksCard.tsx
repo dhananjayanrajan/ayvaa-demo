@@ -1,5 +1,6 @@
 import { CalendarCheck, ChevronRight, MapPin, SlidersHorizontal } from 'lucide-react'
-import { Card, Tile } from '@/components/phone/kit'
+import { Card } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { useRouter } from '@/lib/router'
 import { planLinks } from '@/data/patientCarePlan'
 
@@ -18,19 +19,20 @@ export function PlanLinksCard() {
         {planLinks.map((link) => {
           const { icon: Icon, tone } = linkIcons[link.id as keyof typeof linkIcons]
           return (
-            <button
+            <Row
               key={link.id}
-              type="button"
+              icon={Icon}
+              tone={tone}
+              title={link.title}
+              subtitle={link.sub}
+              surface="inset"
+              padding="comfortable"
+              className="py-3.5"
+              hoverClassName="hover:bg-[#0B211B]/[0.05]"
+              showChevron={false}
+              trailing={<ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />}
               onClick={() => navigate(link.target)}
-              className="flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.03] px-3.5 py-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.05]"
-            >
-              <Tile icon={Icon} tone={tone} />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[13px] font-bold tracking-tight text-[#0B211B]">{link.title}</span>
-                <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/50">{link.sub}</span>
-              </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />
-            </button>
+            />
           )
         })}
       </div>

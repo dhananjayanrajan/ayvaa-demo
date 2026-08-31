@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import type { ChangeEvent } from 'react'
 import { motion } from 'motion/react'
 import { Check, ChevronRight, ClipboardList, FileImage, Loader2, Lock, RefreshCw, Upload } from 'lucide-react'
-import { Card, MiniBadge, Tile, TimeChip } from '@/components/phone/kit'
+import { Card, MiniBadge, TimeChip } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { RX_DOCUMENTS } from '@/data/patientPrescriptions'
 import { formatFileSize } from '@/data/patientIdentity'
 import { useDemo } from '@/lib/store'
@@ -38,42 +39,51 @@ export function DocumentsCard() {
     <Card>
       <div className="flex flex-col gap-1.5 p-4">
         {RX_DOCUMENTS.map((doc) => (
-          <motion.button
+          <Row
             key={doc.title}
-            type="button"
-            whileTap={{ scale: 0.99 }}
+            icon={ClipboardList}
+            tone="neutral"
+            tileSize="lg"
+            title={doc.title}
+            titleClassName="text-[14px] font-extrabold"
+            subtitle={doc.doctor}
+            subtitleClassName="text-[11px] text-[#0B211B]/55"
+            trailing={
+              <span className="flex shrink-0 flex-col items-end gap-1.5">
+                <MiniBadge icon={Lock} tone="amber">
+                  Locked
+                </MiniBadge>
+                <TimeChip>{doc.uploadedAt}</TimeChip>
+              </span>
+            }
+            surface="inset"
+            padding="even"
+            className="gap-3.5"
+            hoverClassName="hover:bg-[#0B211B]/[0.05]"
+            showChevron={false}
             onClick={() => notify({ title: doc.title, body: 'View logged to the audit trail', kind: 'info' })}
-            className="flex w-full items-center gap-3.5 rounded-2xl bg-[#0B211B]/[0.03] p-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.05]"
-          >
-            <Tile icon={ClipboardList} tone="neutral" size="lg" />
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-[14px] font-extrabold tracking-tight text-[#0B211B]">{doc.title}</div>
-              <div className="mt-0.5 truncate text-[11px] font-medium text-[#0B211B]/55">{doc.doctor}</div>
-            </div>
-            <span className="flex shrink-0 flex-col items-end gap-1.5">
-              <MiniBadge icon={Lock} tone="amber">
-                Locked
-              </MiniBadge>
-              <TimeChip>{doc.uploadedAt}</TimeChip>
-            </span>
-          </motion.button>
+          />
         ))}
 
         {phase === 'idle' && (
-          <button
-            type="button"
+          <Row
+            leading={
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#0B211B]/[0.06] text-[#0B211B]/60">
+                <Upload className="h-5 w-5" strokeWidth={2.4} aria-hidden />
+              </span>
+            }
+            title="Upload prescription"
+            titleClassName="text-[14px] font-extrabold"
+            subtitle="Photo or PDF, nurse checked"
+            subtitleClassName="text-[11px] text-[#0B211B]/45"
+            surface="inset"
+            padding="even"
+            className="gap-3.5"
+            hoverClassName="hover:bg-[#0B211B]/[0.05]"
+            showChevron={false}
+            trailing={<ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />}
             onClick={() => inputRef.current?.click()}
-            className="flex w-full items-center gap-3.5 rounded-2xl bg-[#0B211B]/[0.03] p-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.05]"
-          >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#0B211B]/[0.06] text-[#0B211B]/60">
-              <Upload className="h-5 w-5" strokeWidth={2.4} aria-hidden />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[14px] font-extrabold tracking-tight text-[#0B211B]">Upload prescription</span>
-              <span className="mt-0.5 block text-[11px] font-medium text-[#0B211B]/45">Photo or PDF, nurse checked</span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" aria-hidden />
-          </button>
+          />
         )}
 
         {phase === 'scanning' && (

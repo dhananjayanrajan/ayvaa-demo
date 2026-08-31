@@ -1,6 +1,6 @@
-import { motion } from 'motion/react'
 import { Check, ShieldCheck } from 'lucide-react'
-import { Card, Chip, Tile } from '@/components/phone/kit'
+import { Card, Chip } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 
 interface SafetyCheck {
   title: string
@@ -19,26 +19,26 @@ export function SafetyChecksCard({ checks, onCheckClick }: SafetyChecksCardProps
       {checks.map((c, i) => (
         <div key={c.title}>
           {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.985 }}
-            whileHover={{ scale: 1.005 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          <Row
+            icon={ShieldCheck}
+            tone="success"
+            align="start"
+            title={c.title}
+            titleClassName="text-[13.5px] font-bold leading-snug tracking-tight"
+            subtitle={c.body}
+            subtitleClassName="text-[11px] font-semibold leading-snug text-[#0B211B]/45"
+            trailing={
+              <span className="flex shrink-0 flex-col items-end gap-1.5">
+                <Chip intent="success" icon={Check} className="border-transparent">Done</Chip>
+                <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-[#0B211B]/35">{c.when}</span>
+              </span>
+            }
+            showChevron={false}
+            surface="none"
+            padding="none"
+            hoverClassName=""
             onClick={() => onCheckClick(c)}
-            className="flex w-full items-start gap-3 px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-          >
-            <Tile icon={ShieldCheck} tone="success" />
-            <div className="min-w-0 flex-1">
-              <div className="text-[13.5px] font-bold leading-snug tracking-tight text-[#0B211B]">{c.title}</div>
-              <div className="mt-0.5 text-[11px] font-semibold leading-snug text-[#0B211B]/45">{c.body}</div>
-            </div>
-            <div className="flex shrink-0 flex-col items-end gap-1.5">
-              <Chip intent="success" icon={Check} className="border-transparent">
-                Done
-              </Chip>
-              <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-[#0B211B]/35">{c.when}</span>
-            </div>
-          </motion.button>
+          />
         </div>
       ))}
     </Card>

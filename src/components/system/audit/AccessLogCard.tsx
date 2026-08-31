@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { accessEntries } from '@/data/system/auditLog'
 import type { AccessEntry, AccessKind } from '@/data/system/auditLog'
 import { cn } from '@/lib/utils'
@@ -114,38 +115,36 @@ export function AccessLogCard({ filter, flagged, onFilter, onEntryTap }: AccessL
             return (
               <div key={entry.id}>
                 {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.985 }}
-                  onClick={() => onEntryTap(entry)}
-                  className="flex w-full items-start gap-3 px-4 py-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-500/40"
-                >
-                  <Tile icon={Icon} tone={KIND_TILE[entry.kind]} />
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">
-                      {entry.action}
-                    </span>
-                    <span className="mt-0.5 block truncate text-[11px] font-medium text-[#0B211B]/55">
-                      {entry.who}
-                    </span>
+                <Row
+                  icon={Icon}
+                  tone={KIND_TILE[entry.kind]}
+                  align="start"
+                  title={entry.action}
+                  subtitle={entry.who}
+                  subtitleClassName="text-[11px] font-medium"
+                  body={
                     <span className="mt-0.5 block truncate text-[11px] font-medium text-[#0B211B]/45">
                       {entry.document}
                     </span>
-                  </span>
-                  <span className="flex shrink-0 flex-col items-end gap-1.5">
-                    <Chip intent={chip.intent} className="border-transparent">
-                      {chip.label}
-                    </Chip>
-                    {isFlagged && (
-                      <Chip intent="warning" icon={Flag} className="border-transparent">
-                        Flagged
+                  }
+                  trailing={
+                    <span className="flex shrink-0 flex-col items-end gap-1.5">
+                      <Chip intent={chip.intent} className="border-transparent">
+                        {chip.label}
                       </Chip>
-                    )}
-                    <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-[#0B211B]/35">
-                      {entry.time}
+                      {isFlagged && (
+                        <Chip intent="warning" icon={Flag} className="border-transparent">
+                          Flagged
+                        </Chip>
+                      )}
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-[#0B211B]/35">
+                        {entry.time}
+                      </span>
                     </span>
-                  </span>
-                </motion.button>
+                  }
+                  onClick={() => onEntryTap(entry)}
+                  showChevron={false}
+                />
               </div>
             )
           })}

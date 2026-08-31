@@ -1,5 +1,6 @@
 import { ChevronRight, FileText, Send, UserPlus } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
+import { Row } from '@/components/phone/Row'
 
 interface PartnerReferralSheetProps {
   onClose: () => void
@@ -14,6 +15,11 @@ export function PartnerReferralSheet({
   onContinueDraft,
   onViewRecent,
 }: PartnerReferralSheetProps) {
+  const options = [
+    { icon: UserPlus, tile: 'bg-emerald-100 text-emerald-700', title: 'Refer new patient', sub: 'Start a fresh 4-step referral wizard', onSelect: onNewReferral },
+    { icon: FileText, tile: 'bg-amber-100 text-amber-700', title: 'Continue draft', sub: 'Pick up where you left off', onSelect: onContinueDraft },
+    { icon: Send, tile: 'bg-sky-100 text-sky-700', title: 'View recent referrals', sub: 'See all submitted referrals', onSelect: onViewRecent },
+  ]
   return (
     <SheetShell
       icon={UserPlus}
@@ -24,48 +30,25 @@ export function PartnerReferralSheet({
       height="auto"
     >
       <div className="flex flex-col">
-        <button
-          type="button"
-          onClick={onNewReferral}
-          className="flex items-center gap-3 px-1 py-3.5 text-left"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-            <UserPlus className="h-5 w-5" strokeWidth={2.2} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[13.5px] font-bold tracking-tight text-[#0B211B]">Refer new patient</div>
-            <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">Start a fresh 4-step referral wizard</div>
-          </div>
-          <ChevronRight className="h-4 w-4 text-[#0B211B]/30" />
-        </button>
-        <button
-          type="button"
-          onClick={onContinueDraft}
-          className="flex items-center gap-3 px-1 py-3.5 text-left"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700">
-            <FileText className="h-5 w-5" strokeWidth={2.2} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[13.5px] font-bold tracking-tight text-[#0B211B]">Continue draft</div>
-            <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">Pick up where you left off</div>
-          </div>
-          <ChevronRight className="h-4 w-4 text-[#0B211B]/30" />
-        </button>
-        <button
-          type="button"
-          onClick={onViewRecent}
-          className="flex items-center gap-3 px-1 py-3.5 text-left"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-700">
-            <Send className="h-5 w-5" strokeWidth={2.2} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[13.5px] font-bold tracking-tight text-[#0B211B]">View recent referrals</div>
-            <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">See all submitted referrals</div>
-          </div>
-          <ChevronRight className="h-4 w-4 text-[#0B211B]/30" />
-        </button>
+        {options.map((o) => (
+          <Row
+            key={o.title}
+            leading={
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${o.tile}`}>
+                <o.icon className="h-5 w-5" strokeWidth={2.2} />
+              </span>
+            }
+            title={o.title}
+            subtitle={o.sub}
+            subtitleClassName="text-xs"
+            surface="none"
+            padding="none"
+            className="px-1"
+            showChevron={false}
+            trailing={<ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/30" aria-hidden />}
+            onClick={o.onSelect}
+          />
+        ))}
       </div>
     </SheetShell>
   )
