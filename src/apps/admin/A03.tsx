@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { Gavel, Lock, ScrollText } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
@@ -15,7 +16,7 @@ import type { Approval } from '@/data/types'
 import { useDemo } from '@/lib/store'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { ApprovalCard } from '@/components/admin/approvals/ApprovalCard'
-import { GovernanceCard } from '@/components/admin/approvals/GovernanceCard'
+import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { EmptyFilterState } from '@/components/admin/approvals/EmptyFilterState'
 
 export function A03() {
@@ -94,7 +95,18 @@ export function A03() {
 
             {visible.length === 0 && <EmptyFilterState filter={filter} />}
 
-            <GovernanceCard />
+            <motion.div variants={rise}>
+              <InfoListCard
+                icon={Gavel}
+                title="Decisions on the record"
+                subtitle="Approvals and rejections both carry full accountability."
+                items={[
+                  { icon: Gavel, text: 'Who decided, when, on what evidence' },
+                  { icon: ScrollText, text: 'Rejections require a written reason' },
+                  { icon: Lock, text: 'Instantly written to the audit log' },
+                ]}
+              />
+            </motion.div>
 
             <motion.div variants={rise}>
               <EndOfScroll label="End of approvals" />

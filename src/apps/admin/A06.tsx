@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { Ban, CalendarClock, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
@@ -16,7 +17,7 @@ import { consentTracking } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { DueReviewCard } from '@/components/admin/consent/DueReviewCard'
 import { WithdrawalCard } from '@/components/admin/consent/WithdrawalCard'
-import { ConsentLifecycleCard } from '@/components/admin/consent/ConsentLifecycleCard'
+import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { ConsentRecordSheet } from '@/components/admin/sheets/ConsentRecordSheet'
 
 export function A06() {
@@ -70,7 +71,18 @@ export function A06() {
 
             <WithdrawalCard notify={notify} />
 
-            <ConsentLifecycleCard />
+            <motion.div variants={rise}>
+              <InfoListCard
+                icon={ShieldCheck}
+                title="Consent is a living record"
+                subtitle="The ledger enforces itself — no chasing, no expiry surprises."
+                items={[
+                  { icon: CalendarClock, text: 'Re-confirmed every 90 days' },
+                  { icon: Ban, text: 'Withdrawals stop care immediately' },
+                  { icon: ShieldCheck, text: 'Sealed record, immutable' },
+                ]}
+              />
+            </motion.div>
 
             <motion.div variants={rise}>
               <EndOfScroll label="End of consent tracking" />

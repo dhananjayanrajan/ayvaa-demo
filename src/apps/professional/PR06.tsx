@@ -5,6 +5,7 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
+import { StaticButton } from '@/components/phone/LifecycleButton'
 import { lovedOnes, sessions } from '@/data/seed'
 import { sessionChecklist } from '@/data/professionalCare'
 import { useDemo } from '@/lib/store'
@@ -12,7 +13,6 @@ import { useRouter } from '@/lib/router'
 import { CheckInHero } from '@/components/professional/sessions/CheckInHero'
 import { ChecklistCard } from '@/components/professional/sessions/ChecklistCard'
 import { QuickActionsGrid } from '@/components/professional/sessions/QuickActionsGrid'
-import { IncidentButton } from '@/components/professional/sessions/IncidentButton'
 import { SignOffButton, type SignOffStatus } from '@/components/professional/sessions/SignOffButton'
 import { StatusStrip } from '@/components/phone/StatusStrip'
 import type { SessionStep, StepState } from '@/data/sessionExecution'
@@ -148,8 +148,12 @@ export function PR06() {
       </BodyArea>
       <FootBar>
         <div className="flex gap-2.5">
-          <IncidentButton
-            onPress={() => {
+          <StaticButton
+            tone="neutral"
+            icon={ShieldAlert}
+            full={false}
+            className="flex-1"
+            onClick={() => {
               notify({
                 title: 'Incident report opened',
                 body: 'Severity, description and photo · supervisors paged for moderate or worse',
@@ -157,7 +161,9 @@ export function PR06() {
               })
               navigate('/professional/pr08')
             }}
-          />
+          >
+            Incident
+          </StaticButton>
           <SignOffButton remaining={remaining} status={status} onPress={signOff} />
         </div>
       </FootBar>

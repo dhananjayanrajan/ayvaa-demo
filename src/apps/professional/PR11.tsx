@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Eye, ShieldCheck } from 'lucide-react'
+import { Eye, Pencil, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
+import { StaticButton } from '@/components/phone/LifecycleButton'
 import { availability, certifications, professional, professionalSkills } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -12,7 +13,6 @@ import { ProfileHero } from '@/components/professional/profile/ProfileHero'
 import { CertificationsCard, type CertRecord } from '@/components/professional/profile/CertificationsCard'
 import { SkillsCloud, type Skill } from '@/components/professional/profile/SkillsCloud'
 import { PreferencesCard } from '@/components/professional/profile/PreferencesCard'
-import { EditProfileButton } from '@/components/professional/profile/EditProfileButton'
 import { ProfilePreviewSheet } from '@/components/professional/profile/ProfilePreviewSheet'
 import { CertificationUploadSheet } from '@/components/professional/profile/CertificationUploadSheet'
 import { EditProfileSheet } from '@/components/professional/profile/EditProfileSheet'
@@ -190,7 +190,9 @@ export function PR11() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <EditProfileButton onPress={() => setEditOpen(true)} />
+              <StaticButton tone="neutral" icon={Pencil} onClick={() => setEditOpen(true)}>
+                Edit profile details
+              </StaticButton>
             </motion.div>
 
             <motion.div variants={rise}>

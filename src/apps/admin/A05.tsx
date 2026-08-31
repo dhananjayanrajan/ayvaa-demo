@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { Download } from 'lucide-react'
+import { Download, Lock, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
@@ -12,7 +12,7 @@ import { Pager } from '@/components/phone/Pager'
 import { LedgerChainHero } from '@/components/admin/audit/LedgerChainHero'
 import { AuditEntryList } from '@/components/admin/audit/AuditEntryList'
 import { CustomRangePicker } from '@/components/admin/audit/CustomRangePicker'
-import { AppendOnlyCard } from '@/components/admin/audit/AppendOnlyCard'
+import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { ComplianceToolsList } from '@/components/admin/audit/ComplianceToolsList'
 
 const ranges = [
@@ -79,7 +79,18 @@ export function A05() {
               <CustomRangePicker notify={notify} />
             )}
 
-            <AppendOnlyCard />
+            <motion.div variants={rise}>
+              <InfoListCard
+                icon={ShieldCheck}
+                title="Append-only by design"
+                subtitle="Writes are forever — edits are impossible."
+                items={[
+                  { icon: Lock, text: 'No edits, no deletes — for anyone' },
+                  { icon: ShieldCheck, text: 'Sealed and timestamped on write' },
+                  { icon: Download, text: 'Full export, anytime' },
+                ]}
+              />
+            </motion.div>
 
             <motion.div variants={rise}>
               <Section label="Compliance tools" trailing={<Chip intent="info">Deep dives</Chip>} />

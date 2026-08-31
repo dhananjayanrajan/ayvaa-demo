@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ShieldCheck } from 'lucide-react'
+import { ShieldCheck, Star } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { StaticButton } from '@/components/phone/LifecycleButton'
 import { useRouter } from '@/lib/router'
 import { SummaryHero } from '@/components/patient/visits/SummaryHero'
 import { VitalsCard } from '@/components/patient/visits/VitalsCard'
@@ -14,7 +15,6 @@ import { CaregiverNoteCard } from '@/components/patient/visits/CaregiverNoteCard
 import { PaymentCard } from '@/components/patient/visits/PaymentCard'
 import { PaymentSheet } from '@/components/patient/visits/PaymentSheet'
 import { ShareSummaryButton } from '@/components/patient/visits/ShareSummaryButton'
-import { RatingCta } from '@/components/patient/visits/RatingCta'
 import {
   CARE_STEPS,
   SESSION_LEDGER,
@@ -110,7 +110,9 @@ export function P17() {
       </BodyArea>
 
       <FootBar>
-        <RatingCta />
+        <StaticButton tone="amber" icon={Star} onClick={() => navigate('/patient/p18')}>
+          Rate this visit
+        </StaticButton>
       </FootBar>
 
       <AnimatePresence>

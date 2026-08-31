@@ -1,11 +1,12 @@
 import { motion } from 'motion/react'
+import { Lock } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { ReportsHero } from '@/components/patient/reports/ReportsHero'
 import { LatestReportCard } from '@/components/patient/reports/LatestReportCard'
 import { ReportsListCard } from '@/components/patient/reports/ReportsListCard'
-import { SealNote } from '@/components/patient/reports/SealNote'
 import { DownloadAllButton } from '@/components/patient/reports/DownloadAllButton'
 import { REPORTS } from '@/data/patientReports'
 import { useRouter } from '@/lib/router'
@@ -44,7 +45,10 @@ export function P14() {
           </motion.div>
 
           <motion.div variants={rise}>
-            <SealNote />
+            <NoteStrip intent="info" icon={Lock}>
+              Reports are sealed when written and can never be edited afterwards. Opening or downloading one is always
+              logged in your audit record.
+            </NoteStrip>
           </motion.div>
 
           <motion.div variants={rise}>

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Bell, Link2, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
@@ -13,7 +14,7 @@ import { useDemo } from '@/lib/store'
 import { EscalationHeroCard } from '@/components/admin/escalations/EscalationHeroCard'
 import { EscalationTicketCard } from '@/components/admin/escalations/EscalationTicketCard'
 import { RelatedTicketsList } from '@/components/admin/escalations/RelatedTicketsList'
-import { AccountabilityCard } from '@/components/admin/escalations/AccountabilityCard'
+import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 
 export function A08() {
   const { notify } = useDemo()
@@ -40,7 +41,19 @@ export function A08() {
 
             <RelatedTicketsList notify={notify} />
 
-            <AccountabilityCard />
+            <motion.div variants={rise}>
+              <InfoListCard
+                accent="amber"
+                icon={ShieldCheck}
+                title="Every call is on the record"
+                subtitle="Linking is automatic — so is accountability."
+                items={[
+                  { icon: Link2, text: 'Sessions, receipts and messages stay linked' },
+                  { icon: ShieldCheck, text: 'Decisions logged with your name' },
+                  { icon: Bell, text: 'The family sees the outcome' },
+                ]}
+              />
+            </motion.div>
 
             <motion.div variants={rise}>
               <EndOfScroll label="End of escalations" />

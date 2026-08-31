@@ -9,7 +9,7 @@ import { CategoryRail } from '@/components/patient/catalogue/CategoryRail'
 import { ServiceList } from '@/components/patient/catalogue/ServiceList'
 import type { ListedService } from '@/components/patient/catalogue/ServiceList'
 import { MatchCard } from '@/components/patient/catalogue/MatchCard'
-import type { MatchState } from '@/components/patient/catalogue/MatchButton'
+import type { LifecyclePhase } from '@/components/phone/LifecycleButton'
 import { FiltersSheet } from '@/components/patient/catalogue/FiltersSheet'
 import type { ApplyState } from '@/components/patient/catalogue/FiltersSheet'
 import { ServiceSheet } from '@/components/patient/catalogue/ServiceSheet'
@@ -42,7 +42,7 @@ export function P08() {
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [toggles, setToggles] = useState<Record<FilterKey, boolean>>(defaultToggles)
   const [applyState, setApplyState] = useState<ApplyState>('idle')
-  const [matchState, setMatchState] = useState<MatchState>('idle')
+  const [matchState, setMatchState] = useState<LifecyclePhase>('idle')
   const [bookingState, setBookingState] = useState<BookingState>('idle')
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])

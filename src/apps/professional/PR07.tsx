@@ -5,6 +5,7 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
 import { Tile, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
+import { CtaNote } from '@/components/phone/LifecycleButton'
 import { lovedOnes } from '@/data/seed'
 import { medVerification, quickTags, sessionNote } from '@/data/professionalCare'
 import { useDemo } from '@/lib/store'
@@ -15,7 +16,6 @@ import { VitalsPanel } from '@/components/professional/sheets/VitalsPanel'
 import { MedVerificationPanel } from '@/components/professional/sheets/MedVerificationPanel'
 import { NotesPanel } from '@/components/professional/sheets/NotesPanel'
 import { SaveSheetButton, type SaveStatus } from '@/components/professional/sheets/SaveSheetButton'
-import { SheetFooterNote } from '@/components/professional/sheets/SheetFooterNote'
 import { ReopenSheetsBar } from '@/components/professional/sheets/ReopenSheetsBar'
 import {
   MODE_META,
@@ -250,7 +250,7 @@ export function PR07() {
                   status={status}
                   onPress={save}
                 />
-                <SheetFooterNote text={footerNote} />
+                <CtaNote className="text-[10.5px] font-semibold leading-relaxed">{footerNote}</CtaNote>
               </div>
             </motion.div>
           </>

@@ -1,13 +1,12 @@
-import { Sparkles } from 'lucide-react'
+import { ArrowUpDown, Sparkles } from 'lucide-react'
 import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
-import { MatchButton } from './MatchButton'
-import type { MatchState } from './MatchButton'
+import { LifecycleButton, type LifecyclePhase } from '@/components/phone/LifecycleButton'
 
 export function MatchCard({
   state,
   onPress,
 }: {
-  state: MatchState
+  state: LifecyclePhase
   onPress: () => void
 }) {
   return (
@@ -27,7 +26,15 @@ export function MatchCard({
             </p>
           </div>
         </div>
-        <MatchButton state={state} onPress={onPress} />
+        <LifecycleButton
+          phase={state}
+          className="mt-4"
+          idleIcon={ArrowUpDown}
+          idleLabel="Let Ayvaa match the care for me"
+          workingLabel="Preparing your questions"
+          doneLabel="Ready in booking"
+          onPress={onPress}
+        />
       </div>
     </PhaseHero>
   )

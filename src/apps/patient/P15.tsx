@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Filter, ShieldCheck } from 'lucide-react'
+import { Filter, Plus, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
+import { StaticButton } from '@/components/phone/LifecycleButton'
 import { VisitsHero } from '@/components/patient/visits/VisitsHero'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 
@@ -15,7 +16,6 @@ import { CompletedCard } from '@/components/patient/visits/CompletedCard'
 import { MissedCard } from '@/components/patient/visits/MissedCard'
 import { EmptyTabState } from '@/components/patient/visits/EmptyTabState'
 import { FilterSheet } from '@/components/patient/visits/FilterSheet'
-import { AddVisitButton } from '@/components/patient/visits/AddVisitButton'
 import {
   activeFilterCount,
   applyVisitFilters,
@@ -139,7 +139,9 @@ export function P15() {
           </motion.div>
 
           <motion.div variants={rise}>
-            <AddVisitButton />
+            <StaticButton tone="success" icon={Plus} onClick={() => navigate('/patient/p09')}>
+              Book another service
+            </StaticButton>
           </motion.div>
 
           <motion.div variants={rise}>

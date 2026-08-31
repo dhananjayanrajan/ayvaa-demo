@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, CheckCircle2, MailCheck, ReceiptText } from 'lucide-react'
+import { CalendarDays, CheckCircle2, MailCheck, ReceiptText, ShieldCheck } from 'lucide-react'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Section, rise, stagger } from '@/components/phone/kit'
 import { SheetShell } from '@/components/phone/SheetShell'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { DigestHero } from '@/components/patient/auth/DigestHero'
 import { BiometricUnlock } from '@/components/patient/auth/BiometricUnlock'
 import type { ScanState } from '@/components/patient/auth/BiometricUnlock'
 import { PasswordCard } from '@/components/patient/auth/PasswordCard'
 import type { SignInState } from '@/components/patient/auth/SignInButton'
 import { CreateAccountCard } from '@/components/patient/auth/CreateAccountCard'
-import { PrivacyNotePanel } from '@/components/patient/auth/PrivacyNotePanel'
 import { DigestDetail } from '@/components/patient/auth/DigestDetail'
 import { MarkSeenButton } from '@/components/patient/auth/MarkSeenButton'
 import type { SeenState } from '@/components/patient/auth/MarkSeenButton'
@@ -189,7 +189,9 @@ export function P02() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <PrivacyNotePanel />
+              <NoteStrip intent="success" icon={ShieldCheck}>
+                Your family's medical records stay sealed until your identity is verified.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>

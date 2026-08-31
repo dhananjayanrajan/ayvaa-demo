@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { KeyRound, Mail, Phone, Route, ShieldCheck, User } from 'lucide-react'
+import { KeyRound, Mail, Phone, Route, ShieldCheck, User, Fingerprint } from 'lucide-react'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { rise, stagger } from '@/components/phone/kit'
+import { StaticButton, LifecycleButton, type LifecyclePhase } from '@/components/phone/LifecycleButton'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -15,12 +17,8 @@ import { EyeToggle } from '@/components/patient/onboarding/EyeToggle'
 import { PasswordMeter } from '@/components/patient/onboarding/PasswordMeter'
 import { ConsentBlock } from '@/components/patient/onboarding/ConsentBlock'
 import { PrimaryAction } from '@/components/patient/onboarding/PrimaryAction'
-import { SignInAction } from '@/components/patient/onboarding/SignInAction'
-import { AftercarePanel } from '@/components/patient/onboarding/AftercarePanel'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { ReviewSummary } from '@/components/patient/onboarding/ReviewSummary'
-import { CreateButton } from '@/components/patient/onboarding/CreateButton'
-import type { CreateState } from '@/components/patient/onboarding/CreateButton'
 import {
   draftIssues,
   emptyDraft,
@@ -43,7 +41,7 @@ export function P01() {
   const [agreed, setAgreed] = useState(false)
   const [openDocId, setOpenDocId] = useState<string | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
-  const [createState, setCreateState] = useState<CreateState>('idle')
+  const [createState, setCreateState] = useState<LifecyclePhase>('idle')
 
   const issues = draftIssues(draft, agreed)
   const ready = issues.length === 0
@@ -188,7 +186,9 @@ export function P01() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <SignInAction onSignIn={() => navigate('/patient/p02')} />
+              <StaticButton tone="neutral" icon={Fingerprint} onClick={() => navigate('/patient/p02')}>
+                Already have an account? Sign in
+              </StaticButton>
             </motion.div>
 
             <motion.div variants={rise}>
@@ -202,7 +202,9 @@ export function P01() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <AftercarePanel />
+              <NoteStrip intent="success" icon={ShieldCheck}>
+                Guardians verify once. This protects every medical record and consent in your family plan.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>
@@ -236,7 +238,13 @@ export function P01() {
             onClose={closeSheet}
             footer={
               <div className="flex flex-col gap-2.5">
-                <CreateButton state={createState} onPress={confirmCreate} />
+                <LifecycleButton
+                  phase={createState}
+                  idleLabel="Create my account"
+                  workingLabel="Creating your account"
+                  doneLabel="Account created"
+                  onPress={confirmCreate}
+                />
                 <motion.button
                   type="button"
                   whileTap={createState === 'idle' ? { scale: 0.97 } : undefined}

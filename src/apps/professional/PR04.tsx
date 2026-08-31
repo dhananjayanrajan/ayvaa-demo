@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { CalendarDays, Lock, MapPin, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Section, rise, stagger } from '@/components/phone/kit'
@@ -10,7 +11,7 @@ import { SessionListCard } from '@/components/professional/sessions/SessionListC
 import { SessionDetailSheet } from '@/components/professional/sessions/SessionDetailSheet'
 import { FieldTaskRow } from '@/components/professional/sessions/FieldTaskRow'
 import { ReportSheet } from '@/components/professional/sessions/ReportSheet'
-import { SessionPrivacyNote } from '@/components/professional/sessions/SessionPrivacyNote'
+import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { sessions } from '@/data/seed'
 import type { Session } from '@/data/types'
 import { useDemo } from '@/lib/store'
@@ -128,7 +129,16 @@ export function PR04() {
               </>
             )}
 
-            <SessionPrivacyNote />
+            <InfoListCard
+              icon={CalendarDays}
+              title="Session integrity"
+              subtitle="Every visit is availability-checked and logged. Missing a session changes how future offers are ranked."
+              items={[
+                { icon: MapPin, text: 'Locations are shared only after acceptance' },
+                { icon: ShieldCheck, text: 'Attendance affects matching priority' },
+                { icon: Lock, text: 'Session records are sealed and timestamped' },
+              ]}
+            />
 
             <motion.div variants={rise}>
               <EndOfScroll label="End of sessions" />
