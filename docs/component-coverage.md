@@ -330,3 +330,17 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Near-duplicate pairs logged for rebuild phase: SubmittedPanel/TriggerPreview,
   BillingFooter/PartnerPatientFooter
 - NEXT per sequence: B11 — admin (24) + system (15) cards
+
+---
+# Revision 13 — B11/F6c FAMILY CLOSED (39 of 39); F6 cards family fully closed
+
+- All admin + system cards read and keep-ruled with evidence (ledger B11 section)
+- Promotion: Overline (admin/ui → phone/); 9 consumers re-pointed. Library now 25 files
+- InfoListCard + ListRow stay in admin/ui (no cross-role debt; ListRow pass pending)
+- Registrations: EmptyFilterState pair → B12; ExecutionTrail, CycleStep, RetryLadder/
+  NoAvailabilityLadder pairs → F7/B14; CryptoDeletionCard → F14; PhaseHero-adjacent
+  residuals ×5 logged for rebuild phase
+- F6 cards/panels family CLOSED across all roles (B9 + B10 + B11)
+- NEXT per sequence: B12 (F9 filters/tabs/empty states) — FilterTabs ×3, EmptyFilterState
+  pair, EmptyMatches, EmptyTabState, CaughtUpCard, ActiveFilterStrip, FilterBar, VisitTabs,
+  DayFilterBar, ModeTabs, EmptyOffersCard ruling

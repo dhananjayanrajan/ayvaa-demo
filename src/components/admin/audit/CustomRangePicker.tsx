@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import { CalendarDays } from 'lucide-react'
 import { Card, Chip, Section, rise } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import { cn } from '@/lib/utils'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'info' }) => void

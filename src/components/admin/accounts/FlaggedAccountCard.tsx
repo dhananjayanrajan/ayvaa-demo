@@ -5,7 +5,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react'
 import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import { flaggedAccount } from '@/data/seed'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void

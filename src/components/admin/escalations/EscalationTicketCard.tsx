@@ -13,7 +13,7 @@ import {
   Tile,
   rise,
 } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import { escalatedTickets } from '@/data/seed'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void

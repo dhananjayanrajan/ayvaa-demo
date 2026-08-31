@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { CalendarClock, Clock, FileText, Phone, ShieldCheck } from 'lucide-react'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import { FactTile, FactTileGrid } from '@/components/phone/FactTile'
 import { MiniTimeline } from '@/components/phone/MiniTimeline'
 import { BottomSheet } from '@/components/phone/SheetShell'

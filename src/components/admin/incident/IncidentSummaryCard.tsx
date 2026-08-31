@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Card, Chip, rise } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import type { Incident } from '@/data/types'
 
 interface IncidentSummaryCardProps {

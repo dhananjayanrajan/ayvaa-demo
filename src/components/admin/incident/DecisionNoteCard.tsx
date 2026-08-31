@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Lock } from 'lucide-react'
 import { Card, rise } from '@/components/phone/kit'
-import { Overline } from '@/components/admin/ui/Overline'
+import { Overline } from '@/components/phone/Overline'
 import { Textarea } from '@/components/ui/textarea'
 import type { Incident } from '@/data/types'
 

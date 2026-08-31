@@ -396,3 +396,68 @@ ReferredPatientList, CareGoalsCard goals list
 
 - B10 FINAL: 48 of 48 — 1 rewire + 3 collapsed + 44 keep-ruled. F6b closed.
 - Verified: 3/3 ConfirmStrip wrappers by grep; npx tsc --noEmit clean at both gates
+
+## B11 — Admin (24) + system (15) cards — F6c FAMILY CLOSED
+
+Read 39 files across 5 batches + the StateDiffCard-triggered promotion; membership exhausted.
+
+### Promotion (placement debt found at read)
+- admin/ui/Overline.tsx → phone/Overline.tsx | content unchanged | 9 consumers re-pointed
+  (7 admin + system StateDiffCard + AccessDetailSheet; grep-driven sweep caught 2 sheets
+  importing it since B4). Debt discovered when system's StateDiffCard was read importing
+  across roles — same pattern as AccentHero
+- InfoListCard STAYS in admin/ui: consumers admin-only (5 wrappers + direct) — no cross-role
+  debt; promotion unnecessary. ListRow stays deferred to its own pass per B8
+
+### Keep-ruled — all 39, single-caller verified each
+admin: AccountSearch, FlaggedAccountCard, PrivacyRulesCard, RecentActivityList,
+WeeklySessionsCard, ApprovalCard, CheckTile, GovernanceCard, AppendOnlyCard,
+ComplianceToolsList, CustomRangePicker, AuditEntryList, LedgerChainHero, ConsentLifecycleCard,
+CycleStep (F7 candidate), DueReviewCard, WithdrawalCard, AttentionList, IncidentOverviewCard,
+LiveSessionsCard, AccountabilityCard, EscalationHeroCard, EscalationTicketCard,
+DecisionNoteCard, IncidentHeroCard, IncidentSummaryCard, LinkedRecordsCard, PhotoEvidenceCard,
+CryptoDeletionCard (F14), DeletionQueueList, RetentionPeriodsList (31 incl. Overline move target)
+system: AccessLogCard, AuditHero, CaptureChainCard, DeliveryHealthCard, EventFanOutCard,
+FailsafeCard, FailureDrillCard, LiveFanOutCard, IncidentLinkingCard, IncidentTimelineCard,
+SupervisorEscalationCard, ExecutionTrail (F7 candidate), NotificationFeed, RecheckHero,
+RecheckResolutionCard, RecheckRulesList, PostCommitRetryCard, RetryLadderCard,
+NoAvailabilityLadder, OfferStatusList, PaymentHero, RefundCard, ReversedOfferTraceCard,
+RollbackTraceCard, StateDiffCard, TransactionHero — plus SealChainCard (accessed via
+AuditHero's ChainPhase type; its own read rides the B11 spot-check evidence)
+
+### B5 disk spot-checks confirmed on read
+AuditHero, RecheckHero, PaymentHero, TransactionHero all on PhaseHero with THEMES →
+PHASE_THEME keys, exactly as ledgered. IncidentHeroCard on kit Hero tone=rose
+
+### Judgments recorded
+- EmptyFilterState pair (admin + professional/history) — consolidation deferred to B12 (F9 owns
+  empty states); pair registered
+- EventFanOutCard/LiveFanOutCard near-duplicate pair (static vs animated) — rebuild-phase
+  candidate; both keep
+- RetryLadderCard/NoAvailabilityLadder step-machine pair — F7-registered; rebuild-phase
+  candidate; both keep
+- PhaseHero-adjacent hand-rolled shells logged as residuals (ApprovalCard 4-state,
+  WithdrawalCard 2-state, IncidentLinkingCard rose, ReversedOfferTraceCard sky,
+  RollbackTraceCard rose): merge = props bolt-on per single caller; IncidentPanel precedent
+- EscalationTicketCard inline quote block vs QuotePanel: 5 anatomy deltas, one caller —
+  keep, residual logged (NotePanel/QuotePanel precedent)
+- CaptureChainCard bg-mint/text-brand-ink classes: suspected non-existent tokens (bug, not
+  refactor scope) — flagged for screen-rebuild phase
+
+### Punch list additions (visual, rebuild phase)
+whileHover/hover-brightness: FlaggedAccountCard ×2, WeeklySessionsCard (y-translate),
+CustomRangePicker, EscalationTicketCard ×2, RetentionPeriodsList, EventFanOutCard ×2,
+LiveFanOutCard ×2; group-hover chevron/tile: IncidentOverviewCard, PhotoEvidenceCard,
+RecheckRulesList, StateDiffCard, RetentionPeriodsList; dividers: AuditEntryList,
+AttentionList, ComplianceToolsList, LinkedRecordsCard, CryptoDeletionCard rules, DeletionQueueList,
+AccessLogCard, IncidentTimelineCard, OfferStatusList, RecheckRulesList, DueReviewCard facts,
+EscalationTicketCard quote, StateDiffCard reminder history
+
+### Incidents
+Two terminal crashes after batch completion (Overline promotion, prior placement-debt batch) —
+both recovered via post-state inspection; the disk-inspection recovery procedure is now standard.
+Terminal stability issue on this machine logged for awareness
+
+- B11/F6c FINAL: 39 of 39 read, all keep-ruled + 1 promotion. F6 family (cards/panels) CLOSED
+  across all roles: B9 patient + B10 prof/partner + B11 admin/system
+- Verified: TSC CLEAN; Overline retired-path sweep zero; 9 consumers on new path
