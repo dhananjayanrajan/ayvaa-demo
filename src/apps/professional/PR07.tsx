@@ -10,7 +10,7 @@ import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { EntrySheetsHero } from '@/components/professional/sheets/EntrySheetsHero'
 import { SealedNotice } from '@/components/professional/sheets/SealedNotice'
-import { ModeTabs } from '@/components/professional/sheets/ModeTabs'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { VitalsPanel } from '@/components/professional/sheets/VitalsPanel'
 import { MedVerificationPanel } from '@/components/professional/sheets/MedVerificationPanel'
 import { NotesPanel } from '@/components/professional/sheets/NotesPanel'
@@ -196,7 +196,13 @@ export function PR07() {
                 </div>
 
                 <div className="mt-3">
-                  <ModeTabs mode={mode} saved={saved} onSelect={setMode} />
+                  <SegmentedTabs
+                    tabs={SHEET_MODES.map((m) => ({ id: m.id, label: m.label, icon: m.icon, done: saved.includes(m.id) }))}
+                    value={mode}
+                    onChange={(id) => setMode(id as SheetMode)}
+                    layoutId="pr07-mode"
+                    tracking="0.12em"
+                  />
                 </div>
               </div>
 

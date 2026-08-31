@@ -82,8 +82,10 @@ swept (Stage 5, 7 divide-x strips). PhaseShell consolidation closed (Stage 6): s
 timeline→StepList. StatusStrip universal closed (Stage 7). Quote variants closed (Stage 8).
 EmptyState universal closed (Stage 9, REDO under NORMALIZATION MANDATE): pure-config wrappers
 deleted + inlined, genuine domain compositions kept, inline empties converted, Tailwind v4
-source-order hard-constraint fix. Gate standing: 47 errors, pure Category C (baseline unchanged;
-earlier '33' was stale — see §8). Current position: Stage 10 (Tabs/Filters universal).
+source-order hard-constraint fix. SegmentedTabs universal closed (Stage 10): 7 tab/filter-pill
+wrappers deleted + inlined at 9 call sites, ActiveFilterStrip keep-ruled. Gate standing: 33
+errors, pure Category C (baseline unchanged). Current position: Stage 11 (Options/Actions
+universal).
 
 ---
 
@@ -325,17 +327,17 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
 
 ---
 
-## 8. IN-FLIGHT WORK — Stage 9: EmptyState universal ✅ CLOSED (REDO under NORMALIZATION MANDATE)
+## 8. IN-FLIGHT WORK — Stage 10: Tabs/Filters universal ✅ CLOSED
 
-**Stages 0-9 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366,
-0337ae8, 5a86937). Stage 9 CLOSED as a REDO under the NORMALIZATION MANDATE (§3):
-universal `phone/EmptyState.tsx` built; pure-config wrappers (professional/history/EmptyFilterState,
-professional/offers/EmptyOffersCard) DELETED + inlined at call sites (PR12, PR03); genuine domain
-compositions kept (admin EmptyFilterState, EmptyMatches, EmptyTabState); inline empties converted
-(ServiceList, SearchSheet); ruled out (SessionListCard, AccessLogCard); hard-constraint Tailwind v4
-source-order fix (color removed from title/body defaults). 7 consumers. Gate discrepancy ledgered:
-app gate = 47 errors, clean baseline also 47 (earlier '33' stale). Current position: Stage 10
-(Tabs/Filters universal).
+**Stages 0-10 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366,
+0337ae8, 5a86937, babffcf). Stage 10 CLOSED under the NORMALIZATION MANDATE (§3):
+universal `phone/SegmentedTabs.tsx` built (tones emerald/emeraldSolid/dark/white; label micro
+8/9/10px vs normal; count inline/badge/baseline/none; per-tab icon + done-check; twoLine; whileTap
+on/off; role on/off; slot className overrides). 7 wrappers DELETED + inlined at 9 call sites
+(admin FilterBar → A03/A04/A05; records FilterTabs → AuditLogSheet; notifications FilterTabs →
+P07; history FilterTabs → PR12; VisitTabs → P15; ModeTabs → PR07; DayFilterBar → PR04).
+Keep-ruled ActiveFilterStrip (unique sky-tone strip, single consumer). Gate: 33 errors, all
+pre-existing Category C (zero new). Current position: Stage 11 (Options/Actions universal).
 
 **Evidence read (Stage 7):**
 - ConfirmStrip (phone/, canonical): single-line animated emerald strip — Check icon badge
@@ -377,9 +379,8 @@ ledger + coverage, large commit.
 
 ---
 
-## 10. THE REMAINING ROAD (after Stage 9)
+## 10. THE REMAINING ROAD (after Stage 10)
 
-Tabs/Filters (3× FilterTabs, VisitTabs, DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) →
 Options/Actions (ResendRow, SubmitButton severity map, quick-reply chips, referral option rows) →
 Field (forms; onboarding CredentialRow promotion) → Identity (avatars, CaptureTile,
 SelfieCaptureCard, CredentialCards, TrustCell, SkillsCloud) → clinical residuals
@@ -396,7 +397,7 @@ same-family files, normalize folders/names/imports — not nesting-doll re-expor
 2. ~~Get the user's ruling on Category C~~ — RESOLVED: park (Stage 0).
 3. ~~Verify the two navigator-card chevron states~~ — RESOLVED (Stage 1).
 4. ~~Resume Row sweep stage 2, next tranche: the list interiors~~ — CLOSED (Stages 1-3).
-5. Current position: Stages 0-9 CLOSED. Resume Stage 10 (Tabs/Filters universal) under the
+5. Current position: Stages 0-10 CLOSED. Resume Stage 11 (Options/Actions universal) under the
    NORMALIZATION MANDATE (§3): build the universal against the full variation space, then
    NORMALIZE the family — delete pure-config wrappers and inline at call sites, consolidate
    same-family files, normalize folders/names/imports, real gate + grep proofs, ledger, large

@@ -16,7 +16,7 @@ import {
   type AuditFilter,
   type AuditKind,
 } from '@/data/patientRecords'
-import { FilterTabs } from './FilterTabs'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { cn } from '@/lib/utils'
 
 const KIND_ICON: Record<AuditKind, LucideIcon> = {
@@ -70,7 +70,7 @@ export function AuditLogSheet({ entries, initialFilter, onClose, onOpenConsent }
       }
     >
       <div className="flex flex-col gap-5 pb-2">
-        <FilterTabs tabs={tabs} value={filter} onChange={(id) => setFilter(id as AuditFilter)} layoutId="audit-tabs" />
+        <SegmentedTabs tabs={tabs} value={filter} onChange={(id) => setFilter(id as AuditFilter)} layoutId="audit-tabs" tone="dark" label="normal" count="baseline" />
 
         <div className="flex flex-col gap-2.5">
           {rows.map((entry) => {

@@ -13,7 +13,7 @@ import {
 import { approvals } from '@/data/seed'
 import type { Approval } from '@/data/types'
 import { useDemo } from '@/lib/store'
-import { FilterBar } from '@/components/admin/ui/FilterBar'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { ApprovalCard } from '@/components/admin/approvals/ApprovalCard'
 import { GovernanceCard } from '@/components/admin/approvals/GovernanceCard'
 import { EmptyFilterState } from '@/components/admin/approvals/EmptyFilterState'
@@ -71,7 +71,16 @@ export function A03() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <FilterBar value={filter} onChange={setFilter} />
+              <SegmentedTabs
+                tabs={[
+                  { id: 'awaiting', label: 'Awaiting' },
+                  { id: 'approved', label: 'Approved' },
+                  { id: 'rejected', label: 'Rejected' },
+                ]}
+                value={filter}
+                onChange={setFilter}
+                layoutId="filter-bar"
+              />
             </motion.div>
 
             {visible.map((a) => (

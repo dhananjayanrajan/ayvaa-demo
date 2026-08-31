@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Section, rise, stagger } from '@/components/phone/kit'
-import { DayFilterBar } from '@/components/professional/sessions/DayFilterBar'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { SessionSummaryHero } from '@/components/professional/sessions/SessionSummaryHero'
 import { LiveSessionCard } from '@/components/professional/sessions/LiveSessionCard'
 import { SessionListCard } from '@/components/professional/sessions/SessionListCard'
@@ -58,7 +58,22 @@ export function PR04() {
           />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <DayFilterBar value={selectedDay} onChange={setSelectedDay} />
+              <SegmentedTabs
+                tabs={[
+                  { id: 'mon', label: 'Mon', sub: '10' },
+                  { id: 'tue', label: 'Tue', sub: '11' },
+                  { id: 'wed', label: 'Wed', sub: '12' },
+                  { id: 'thu', label: 'Thu', sub: '13' },
+                  { id: 'fri', label: 'Fri', sub: '14' },
+                  { id: 'sat', label: 'Sat', sub: '15' },
+                  { id: 'sun', label: 'Sun', sub: '16' },
+                ]}
+                value={selectedDay}
+                onChange={setSelectedDay}
+                layoutId="pr04-day-filter"
+                twoLine
+                role={false}
+              />
             </motion.div>
 
             <motion.div variants={rise}>

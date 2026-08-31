@@ -8,7 +8,7 @@ import { pastSessions } from '@/data/professionalHistory'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { DossierHero } from '@/components/professional/history/DossierHero'
-import { FilterTabs } from '@/components/professional/history/FilterTabs'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { MonthTimeline } from '@/components/professional/history/MonthTimeline'
 import { EmptyState } from '@/components/phone/EmptyState'
 import { SealedNotice } from '@/components/professional/history/SealedNotice'
@@ -17,6 +17,7 @@ import { SearchSheet } from '@/components/professional/history/SearchSheet'
 import {
   buildTotals,
   downloadFile,
+  FILTERS,
   filterCounts,
   groupByMonth,
   matchesFilter,
@@ -101,7 +102,14 @@ export function PR12() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <FilterTabs filter={filter} counts={counts} onSelect={setFilter} />
+              <SegmentedTabs
+                tabs={FILTERS.map((f) => ({ id: f.id, label: f.label, count: counts[f.id] }))}
+                value={filter}
+                onChange={(id) => setFilter(id as FilterId)}
+                layoutId="pr12-filter"
+                badgeSize="8.5px"
+                count="badge"
+              />
             </motion.div>
 
             {groups.length === 0 ? (

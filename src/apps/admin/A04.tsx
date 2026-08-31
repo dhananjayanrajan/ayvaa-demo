@@ -13,7 +13,7 @@ import {
   stagger,
 } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
-import { FilterBar } from '@/components/admin/ui/FilterBar'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { AccountSearch } from '@/components/admin/accounts/AccountSearch'
 import { FlaggedAccountCard } from '@/components/admin/accounts/FlaggedAccountCard'
 import { RecentActivityList } from '@/components/admin/accounts/RecentActivityList'
@@ -83,11 +83,11 @@ export function A04() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <FilterBar
+              <SegmentedTabs
+                tabs={accountFilters}
                 value={filter}
                 onChange={setFilter}
                 layoutId="a04-filter"
-                items={accountFilters}
               />
             </motion.div>
 

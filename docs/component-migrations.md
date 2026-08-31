@@ -866,3 +866,30 @@ verified) is 47. My changes add ZERO new errors (stash == unstash == 47). The "3
 prior docs is stale/inaccurate; corrected here. Category C workstream (Stage 15) scope is 47, not 33.
 
 Gate: app exit 2 = 47 pre-existing Category C (zero from EmptyState or converted files); node exit 0.
+
+---
+## Sweep 6 (SegmentedTabs) — CLOSED (Stage 10, NORMALIZATION MANDATE)
+
+Built universal `phone/SegmentedTabs.tsx` covering the full tab/filter-pill variation space:
+tones emerald/emeraldSolid/dark/white (active pill style + shell bg + label/badge colors);
+snip label micro (8/9/10px extrabold uppercase + tracking 0.08/0.1/0.12/0.16em) vs normal (12px bold);
+snip count inline (`label · count`) / badge (pill, 8.5/9px) / baseline (records) / none; snip optional
+per-tab icon + done-check (ModeTabs); snip twoLine stacked label+sub (DayFilterBar); snip whileTap on/off;
+snip role semantics on/off; snip className/labelClassName/badgeClassName/iconClassName/subClassName slot
+overrides for exact-compat micro-differences.
+
+DELETED 7 pure-config/domain wrappers, inlined at 9 call sites:
+- admin/ui/FilterBar → A03 (default items), A04 (accountFilters), A05 (ranges)
+- patient/records/FilterTabs → AuditLogSheet (tone=dark, label=normal, count=baseline)
+- patient/notifications/FilterTabs → P07 (tone=white, labelSize=10px, tracking=0.1em, count=inline, whileTap=false)
+- professional/history/FilterTabs → PR12 (badgeSize=8.5px, count=badge; snip FILTERS import added)
+- patient/visits/VisitTabs → P15 (tone=emeraldSolid, labelSize=10px, tracking=0.08em, count=badge, badgeClassName=leading-none; snip VisitTab type inlined)
+- professional/sheets/ModeTabs → PR07 (tracking=0.12em, icon+done per tab)
+- professional/sessions/DayFilterBar → PR04 (twoLine, role=false)
+
+KEEP-RULED: patient/matching/ActiveFilterStrip (unique sky-tone filter strip, single consumer
+P10, no siblings — genuine domain composition, not a segmented tab).
+
+Gate: app = 33 errors, all pre-existing Category C (baseline; snip zero new from this sweep).
+Adoption: 9 consumers. Retired patterns: zero code consumers of FilterBar/FilterTabs/VisitTabs/
+ModeTabs/DayFilterBar.

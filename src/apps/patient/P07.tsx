@@ -6,7 +6,7 @@ import { Card, Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { EntryRow } from '@/components/patient/notifications/EntryRow'
 import { MarkAllReadButton } from '@/components/patient/notifications/MarkAllReadButton'
 import { FeedHero } from '@/components/patient/notifications/FeedHero'
-import { FilterTabs } from '@/components/patient/notifications/FilterTabs'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { ActionCard } from '@/components/patient/notifications/ActionCard'
 import { CaughtUpCard } from '@/components/patient/notifications/CaughtUpCard'
 import { SettingsCard } from '@/components/patient/notifications/SettingsCard'
@@ -63,11 +63,19 @@ export function P07() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <FilterTabs
-                filter={filter}
-                totalCount={stats.total}
-                actionCount={stats.actionCount}
-                onSelect={setFilter}
+              <SegmentedTabs
+                tabs={[
+                  { id: 'all', label: 'Everything', count: stats.total },
+                  { id: 'action', label: 'Needs action', count: stats.actionCount },
+                ]}
+                value={filter}
+                onChange={(f) => setFilter(f as FilterKey)}
+                layoutId="p07-filter-pill"
+                tone="white"
+                labelSize="10px"
+                tracking="0.1em"
+                count="inline"
+                whileTap={false}
               />
             </motion.div>
 

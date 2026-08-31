@@ -5,7 +5,9 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { VisitsHero } from '@/components/patient/visits/VisitsHero'
-import { VisitTabs, type VisitTab } from '@/components/patient/visits/VisitTabs'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
+
+type VisitTab = 'upcoming' | 'completed' | 'missed'
 import { LiveVisitCard } from '@/components/patient/visits/LiveVisitCard'
 import { UpcomingCard } from '@/components/patient/visits/UpcomingCard'
 import { CompletedCard } from '@/components/patient/visits/CompletedCard'
@@ -85,7 +87,21 @@ export function P15() {
           </motion.div>
 
           <motion.div variants={rise}>
-            <VisitTabs active={tab} counts={counts} onSelect={setTab} />
+            <SegmentedTabs
+              tabs={[
+                { id: 'upcoming', label: 'Upcoming' },
+                { id: 'completed', label: 'Done' },
+                { id: 'missed', label: 'Missed' },
+              ]}
+              value={tab}
+              onChange={(id) => setTab(id as VisitTab)}
+              layoutId="p15-tab"
+              tone="emeraldSolid"
+              labelSize="10px"
+              tracking="0.08em"
+              count="badge"
+              badgeClassName="leading-none"
+            />
           </motion.div>
 
           {tab === 'upcoming' && (

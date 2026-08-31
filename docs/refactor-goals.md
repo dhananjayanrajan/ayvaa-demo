@@ -43,9 +43,9 @@
   also serves the goal, since "no force-fitting" is part of it. Under the doctrine reversal,
   keep-rulings are relabeled PENDING DECOMPOSITION; every component is being decomposed into
   universal primitives + thin compositions.
-- **Not yet:** full coverage (the universal-by-universal sweep program is at Stage 10 of 17 —
-  Tabs/Filters; Options/Actions, Field, Identity, clinical residuals remain), the Category C
-  workstream (Stage 15, 47 parked bugs), and B18's final audit — the step that certifies the
+- **Not yet:** full coverage (the universal-by-universal sweep program is at Stage 11 of 17 —
+  Options/Actions; Field, Identity, clinical residuals remain), the Category C workstream
+  (Stage 15, 33 parked bugs), and B18's final audit — the step that certifies the
   "guarantee" bullet before any screen work
   resumes.
 - **Gate:** real gate (tsc -p tsconfig.app.json) standing at 33 errors, pure Category C

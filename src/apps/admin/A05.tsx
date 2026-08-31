@@ -7,7 +7,7 @@ import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { auditEntries } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { FilterBar } from '@/components/admin/ui/FilterBar'
+import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { Pager } from '@/components/phone/Pager'
 import { LedgerChainHero } from '@/components/admin/audit/LedgerChainHero'
 import { AuditEntryList } from '@/components/admin/audit/AuditEntryList'
@@ -50,14 +50,14 @@ export function A05() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <FilterBar
+              <SegmentedTabs
+                tabs={ranges}
                 value={range}
                 onChange={(r) => {
                   setRange(r)
                   setPage(1)
                 }}
                 layoutId="a05-range"
-                items={ranges}
               />
             </motion.div>
 

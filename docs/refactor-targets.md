@@ -237,13 +237,20 @@ AccessLogCard). Hard-constraint Tailwind v4 source-order fix (removed color from
 defaults). 7 consumers. Gate discrepancy ledgered: app gate = 47 errors, clean baseline also 47
 (earlier '33' stale).
 
-### Stage 10 — Tabs/Filters universal
+### Stage 10 — Tabs/Filters universal ✅ CLOSED
 
 | Step | Detail |
 |------|--------|
 | 10.1 | Build SegmentedTabs + FilterBar (3× FilterTabs, VisitTabs, DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) |
 | 10.2 | Sweep corpus adopting it |
 | 10.3 | Real gate + grep proofs + ledger + commit |
+
+**CLOSED:** universal `phone/SegmentedTabs.tsx` built (tones emerald/emeraldSolid/dark/white;
+label micro 8/9/10px vs normal; count inline/badge/baseline/none; per-tab icon + done-check;
+twoLine; whileTap on/off; role on/off; slot className overrides). Deleted 7 wrappers (admin
+FilterBar, records/notifications/history FilterTabs, VisitTabs, ModeTabs, DayFilterBar), inlined
+at 9 call sites. Keep-ruled ActiveFilterStrip (unique sky-tone strip, single consumer). Gate: 33
+errors, all pre-existing Category C (zero new).
 
 ### Stage 11 — Options/Actions universal
 
@@ -344,5 +351,5 @@ defaults). 7 consumers. Gate discrepancy ledgered: app gate = 47 errors, clean b
 1. ~~Confirm Category C disposition (Stage 0)~~ — RESOLVED: park.
 2. ~~Verify the two navigator-card chevron states (Stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (Stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-9 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366, 0337ae8, 5a86937). Stage 9 (EmptyState universal) CLOSED as a REDO under the NORMALIZATION MANDATE. Stage 10 (Tabs/Filters universal) NEXT.
+4. Current position: Stages 0-10 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366, 0337ae8, 5a86937, babffcf). Stage 10 (Tabs/Filters universal) CLOSED under the NORMALIZATION MANDATE. Stage 11 (Options/Actions universal) NEXT.
 5. Hold every rule in `refactor-rules.md` §1 and §2. The rules exist because each one was paid for.

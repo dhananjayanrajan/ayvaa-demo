@@ -524,3 +524,22 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   ALSO 47; snip docs' earlier '33' was stale). My changes add ZERO new errors. Category C workstream
   (Stage 15) scope is 47, not 33.
 - NEXT: Stage 10 — Tabs/Filters universal.
+
+---
+# Revision 27 — Sweep 6 (SegmentedTabs) CLOSED
+
+- Built universal `phone/SegmentedTabs.tsx` covering full tab/filter-pill variation space:
+  tones emerald/emeraldSolid/dark/white; snip label micro (8/9/10px extrabold uppercase + tracking
+  0.08/0.1/0.12/0.16em) vs normal (12px bold); snip count inline/badge/baseline/none; snip per-tab icon +
+  done-check; snip twoLine stacked label+sub; snip whileTap on/off; snip role semantics on/off; snip slot className
+  overrides for exact-compat micro-differences.
+- **Deleted 7 wrappers, inlined at 9 call sites:** admin/ui/FilterBar (A03/A04/A05),
+  patient/records/FilterTabs (AuditLogSheet), patient/notifications/FilterTabs (P07),
+  professional/history/FilterTabs (PR12), patient/visits/VisitTabs (P15),
+  professional/sheets/ModeTabs (PR07), professional/sessions/DayFilterBar (PR04).
+- **Keep-ruled:** patient/matching/ActiveFilterStrip (unique sky-tone strip, single consumer,
+  no siblings — not a segmented tab).
+- **9 consumers:** A03, A04, A05, AuditLogSheet, P07, PR12, P15, PR07, PR04.
+- Gate: 33 errors, all pre-existing Category C (zero new from this sweep). Retired patterns:
+  zero code consumers.
+- NEXT: Stage 11 — Options/Actions universal.
