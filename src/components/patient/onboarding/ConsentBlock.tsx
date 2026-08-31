@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
-import { Check, ChevronDown, Clock, FileText } from 'lucide-react'
-import { Expand } from '@/components/phone/kit'
+import { Check, Clock, FileText } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
+import { Row } from '@/components/phone/Row'
 import { cn } from '@/lib/utils'
 import { termsDocs } from '@/data/patientOnboarding'
 
@@ -42,41 +43,44 @@ export function ConsentBlock({
           const open = openDocId === doc.id
           return (
             <div key={doc.id} className="rounded-2xl bg-[#0B211B]/[0.03]">
-              <button
-                type="button"
-                aria-expanded={open}
-                onClick={() => onSelectDoc(open ? null : doc.id)}
-                className="flex w-full items-center gap-3 px-3 py-2.5 text-left"
-              >
-                <span
-                  className={cn(
-                    'grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors duration-300',
-                    open ? 'bg-blue-500 text-white' : 'bg-blue-500/[0.1] text-blue-600',
-                  )}
-                >
-                  <FileText className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[12px] font-bold tracking-tight text-[#0B211B]">
-                    {doc.title}
+              <Row
+                padding="px-3 py-2.5"
+                leading={
+                  <span
+                    className={cn(
+                      'grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors duration-300',
+                      open ? 'bg-blue-500 text-white' : 'bg-blue-500/[0.1] text-blue-600',
+                    )}
+                  >
+                    <FileText className="h-4 w-4" strokeWidth={2.2} aria-hidden />
                   </span>
-                  <span className="mt-0.5 block text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40">
-                    Versioned document
-                  </span>
-                </span>
-                <motion.span
-                  animate={{ rotate: open ? 180 : 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="shrink-0"
-                >
-                  <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/30" aria-hidden />
-                </motion.span>
-              </button>
-              <Expand open={open}>
-                <p className="px-3.5 pb-3 text-pretty text-[11px] font-medium leading-relaxed text-[#0B211B]/55">
-                  {doc.summary}
-                </p>
-              </Expand>
+                }
+                title={doc.title}
+                titleClassName="text-[12px]"
+                subtitle="Versioned document"
+                subtitleClassName="mt-0.5 text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#0B211B]/40"
+                expandable
+                open={open}
+                onToggle={() => onSelectDoc(open ? null : doc.id)}
+                chevronVisible={false}
+                hoverClassName=""
+                whileTapDisabled
+                trailing={
+                  <motion.span
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="shrink-0"
+                  >
+                    <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/30" aria-hidden />
+                  </motion.span>
+                }
+                expansionPadded={false}
+                expansion={
+                  <p className="px-3.5 pb-3 text-pretty text-[11px] font-medium leading-relaxed text-[#0B211B]/55">
+                    {doc.summary}
+                  </p>
+                }
+              />
             </div>
           )
         })}

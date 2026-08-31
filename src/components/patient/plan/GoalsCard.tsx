@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import { ChevronDown, Quote, Salad } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Quote, Salad } from 'lucide-react'
 import { Card, Chip, Meter, Tile } from '@/components/phone/kit'
 import { QuotePanel } from '@/components/phone/QuotePanel'
+import { Row } from '@/components/phone/Row'
 import { GOALS, CAREGIVER, goalSummary, type Goal, type GoalSession } from '@/data/patientCarePlan'
 import { cn } from '@/lib/utils'
 
@@ -27,13 +28,8 @@ function GoalRow({
   const tone = goal.state === 'met' ? 'success' : 'warning'
 
   return (
-    <div className="rounded-2xl bg-[#0B211B]/[0.03]">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="flex w-full items-center gap-3 p-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.02]"
-      >
+    <Row
+      leading={
         <span
           className={cn(
             'grid h-10 w-10 shrink-0 place-items-center rounded-xl',
@@ -42,61 +38,55 @@ function GoalRow({
         >
           <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden />
         </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-[13px] font-bold leading-snug tracking-tight text-[#0B211B]">{goal.title}</span>
-          <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#0B211B]/50">{goal.result}</span>
-        </span>
-        <span className="flex shrink-0 items-center gap-1.5">
-          <Chip intent={tone} dot={goal.state === 'open'}>
-            {goal.state === 'met' ? 'Met' : 'Open'}
-          </Chip>
-          <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
-            <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/30" aria-hidden />
-          </motion.span>
-        </span>
-      </button>
+      }
+      title={goal.title}
+      titleClassName="text-[13px] leading-snug"
+      subtitle={goal.result}
+      subtitleClassName="mt-0.5 text-[11px] font-medium leading-snug text-[#0B211B]/50"
+      padding="p-3.5"
+      surface="inset"
+      wrapSurface
+      expandable
+      open={open}
+      onToggle={onToggle}
+      chevronInTrailing
+      hoverClassName="hover:bg-[#0B211B]/[0.02]"
+      trailing={
+        <Chip intent={tone} dot={goal.state === 'open'}>
+          {goal.state === 'met' ? 'Met' : 'Open'}
+        </Chip>
+      }
+      expansionPadded={false}
+      expansion={
+        <div className="px-3.5 pb-3.5">
+          <div className="grid grid-cols-3 gap-1.5">
+            {goal.sessions.map((s) => {
+              const t = sessionTone[s.state]
+              return (
+                <motion.button
+                  key={`${s.day}-${s.value}`}
+                  type="button"
+                  whileTap={{ scale: 0.93 }}
+                  onClick={onOpenSession}
+                  className={cn('rounded-xl px-2 py-2 text-center', t.wrap)}
+                >
+                  <span className={cn('block text-[8px] font-extrabold uppercase tracking-[0.14em]', t.day)}>{s.day}</span>
+                  <span className={cn('mt-0.5 block text-[11px] font-bold tabular-nums', t.value)}>{s.value}</span>
+                </motion.button>
+              )
+            })}
+          </div>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="detail"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <div className="px-3.5 pb-3.5">
-              <div className="grid grid-cols-3 gap-1.5">
-                {goal.sessions.map((s) => {
-                  const t = sessionTone[s.state]
-                  return (
-                    <motion.button
-                      key={`${s.day}-${s.value}`}
-                      type="button"
-                      whileTap={{ scale: 0.93 }}
-                      onClick={onOpenSession}
-                      className={cn('rounded-xl px-2 py-2 text-center', t.wrap)}
-                    >
-                      <span className={cn('block text-[8px] font-extrabold uppercase tracking-[0.14em]', t.day)}>{s.day}</span>
-                      <span className={cn('mt-0.5 block text-[11px] font-bold tabular-nums', t.value)}>{s.value}</span>
-                    </motion.button>
-                  )
-                })}
-              </div>
-
-              <QuotePanel
-                kicker="Verbatim"
-                kickerIcon={Quote}
-                quote={goal.note}
-                author={`${CAREGIVER.name}, caregiver`}
-                authorInitial={CAREGIVER.firstName[0]}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          <QuotePanel
+            kicker="Verbatim"
+            kickerIcon={Quote}
+            quote={goal.note}
+            author={`${CAREGIVER.name}, caregiver`}
+            authorInitial={CAREGIVER.firstName[0]}
+          />
+        </div>
+      }
+    />
   )
 }
 

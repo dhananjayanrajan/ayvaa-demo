@@ -1,7 +1,7 @@
-import { motion } from 'motion/react'
 import { ChevronRight, Clock } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { PhaseHero, PHASE_THEME } from '@/components/phone/PhaseHero'
+import { Row } from '@/components/phone/Row'
 import { JourneyTime } from '@/components/patient/identity/JourneyTime'
 import type { NotificationEntry } from '@/data/patientNotifications'
 
@@ -57,27 +57,30 @@ export function ActionCard({
             {entries.map((entry) => {
               const Icon: LucideIcon = entry.icon
               return (
-                <motion.button
+                <Row
                   key={entry.key}
-                  type="button"
-                  whileTap={{ scale: 0.99 }}
+                  dark="white"
+                  padding="px-2 py-2.5"
+                  align="start"
+                  leading={
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-amber-400/15 text-amber-300">
+                      <Icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+                    </span>
+                  }
+                  title={entry.title}
+                  titleClassName="text-[13px]"
+                  subtitle={entry.body}
+                  subtitleClassName="mt-0.5 text-pretty text-[11px] font-medium leading-snug text-amber-100/60"
                   onClick={() => onPress(entry)}
-                  className="flex w-full items-center gap-3 rounded-2xl px-2 py-2.5 text-left transition-colors hover:bg-white/[0.06]"
-                >
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-amber-400/15 text-amber-300">
-                    <Icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-bold tracking-tight text-white">
-                      {entry.title}
-                    </span>
-                    <span className="mt-0.5 block text-pretty text-[11px] font-medium leading-snug text-amber-100/60">
-                      {entry.body}
-                    </span>
-                  </span>
-                  <JourneyTime value={entry.time} tone="amber" />
-                  <ChevronRight className="h-4 w-4 shrink-0 text-amber-200/40" aria-hidden />
-                </motion.button>
+                  whileTapDisabled={false}
+                  showChevron={false}
+                  trailing={
+                    <>
+                      <JourneyTime value={entry.time} tone="amber" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-amber-200/40" aria-hidden />
+                    </>
+                  }
+                />
               )
             })}
           </div>

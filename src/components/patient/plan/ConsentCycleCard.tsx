@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { CalendarClock, Check, ChevronDown, Loader2, ShieldOff } from 'lucide-react'
 import { AccentHero } from '@/components/phone/AccentHero'
+import { Row } from '@/components/phone/Row'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { CONSENT_CYCLE, consentScopeRows, consentSteps } from '@/data/patientCarePlan'
 import { useDemo } from '@/lib/store'
@@ -114,20 +115,25 @@ export function ConsentCycleCard() {
         <DarkCycleStepper steps={consentSteps} />
       </div>
 
-      <button
-        type="button"
+      <Row
+        className="mt-5 rounded-2xl bg-white/[0.06] px-4 py-3.5"
+        dark="white"
+        padding="none"
+        title="What this consent grants"
+        titleClassName="text-[12.5px]"
+        subtitle="Caregiver visits, partner referral, audit trail"
+        subtitleClassName="text-[10.5px] font-semibold text-white/45"
         onClick={() => setScopeOpen((v) => !v)}
-        aria-expanded={scopeOpen}
-        className="mt-5 flex w-full items-center gap-3 rounded-2xl bg-white/[0.06] px-4 py-3.5 text-left transition-colors hover:bg-white/[0.1]"
-      >
-        <span className="min-w-0 flex-1">
-          <span className="block text-[12.5px] font-bold tracking-tight text-white">What this consent grants</span>
-          <span className="block text-[10.5px] font-semibold text-white/45">Caregiver visits, partner referral, audit trail</span>
-        </span>
-        <motion.span animate={{ rotate: scopeOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
-          <ChevronDown className="h-4 w-4 shrink-0 text-white/30" aria-hidden />
-        </motion.span>
-      </button>
+        ariaExpanded={scopeOpen}
+        hoverClassName="hover:bg-white/[0.1]"
+        whileTapDisabled
+        showChevron={false}
+        trailing={
+          <motion.span animate={{ rotate: scopeOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+            <ChevronDown className="h-4 w-4 shrink-0 text-white/30" aria-hidden />
+          </motion.span>
+        }
+      />
 
       <AnimatePresence initial={false}>
         {scopeOpen && (

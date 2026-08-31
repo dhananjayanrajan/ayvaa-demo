@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ChevronRight, ShieldCheck } from 'lucide-react'
 import { AccentHero } from '@/components/phone/AccentHero'
+import { Row } from '@/components/phone/Row'
 import { OfferMeter } from '@/components/patient/matching/OfferMeter'
 import { CONSENT_ITEMS, REVIEW_GUARDIAN, consentProgress, type ConsentId } from '@/data/patientReview'
 import { cn } from '@/lib/utils'
@@ -88,26 +89,31 @@ export function ConsentCard({ approvals, onToggle, onOpenScope }: ConsentCardPro
         })}
       </div>
 
-      <button
-        type="button"
+      <Row
+        className="mt-3 rounded-2xl bg-white/[0.06] px-3.5 py-3"
+        dark="white"
+        padding="none"
+        leading={
+          <span
+            className={cn(
+              'grid h-9 w-9 shrink-0 place-items-center rounded-xl',
+              ready ? 'bg-emerald-400/[0.14] text-emerald-200' : 'bg-amber-400/[0.14] text-amber-200',
+            )}
+          >
+            <ShieldCheck className="h-4 w-4" strokeWidth={2.2} aria-hidden />
+          </span>
+        }
+        title="What each consent grants"
+        titleClassName="text-[12.5px]"
+        subtitle="Withdraw anytime, pauses next visit"
+        subtitleClassName="text-[10.5px] font-semibold text-white/45"
         onClick={onOpenScope}
-        aria-expanded={false}
-        className="mt-3 flex w-full items-center gap-3 rounded-2xl bg-white/[0.06] px-3.5 py-3 text-left transition-colors hover:bg-white/[0.1]"
-      >
-        <span
-          className={cn(
-            'grid h-9 w-9 shrink-0 place-items-center rounded-xl',
-            ready ? 'bg-emerald-400/[0.14] text-emerald-200' : 'bg-amber-400/[0.14] text-amber-200',
-          )}
-        >
-          <ShieldCheck className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-[12.5px] font-bold tracking-tight text-white">What each consent grants</span>
-          <span className="block text-[10.5px] font-semibold text-white/45">Withdraw anytime, pauses next visit</span>
-        </span>
-        <ChevronRight className="h-4 w-4 shrink-0 text-white/25" aria-hidden />
-      </button>
+        ariaExpanded={false}
+        hoverClassName="hover:bg-white/[0.1]"
+        whileTapDisabled
+        showChevron={false}
+        trailing={<ChevronRight className="h-4 w-4 shrink-0 text-white/25" aria-hidden />}
+      />
     </AccentHero>
   )
 }

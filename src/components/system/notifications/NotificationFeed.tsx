@@ -12,8 +12,9 @@ import {
   TimerReset,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Card, Chip, Expand, Tile, rise } from '@/components/phone/kit'
+import { Card, Chip, Expand, rise } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { autoNotifications } from '@/data/system/notifications'
 import { PushPreview } from '@/components/phone/PushPreview'
 
@@ -158,43 +159,42 @@ export function NotificationFeed({ notify, delivered = false }: NotificationFeed
             const open = expandedId === n.id
             return (
               <div key={n.id}>
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.985 }}
+                <Row
+                  align="start"
+                  padding="p-3"
+                  icon={Icon}
+                  tone={tone}
+                  title={n.title}
+                  titleClassName="text-[13px] font-extrabold leading-tight"
+                  subtitle={n.body}
+                  subtitleClassName="mt-1 text-[12px] font-medium leading-snug text-[#0B211B]/55"
                   onClick={() => {
                     setExpandedId(open ? null : n.id)
                     if (!open) notify({ title: n.title, body: `${n.time} · ${n.body}`, kind: 'ok' })
                   }}
                   aria-expanded={open}
-                  className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-[#0B211B]/[0.02]"
-                >
-                  <Tile icon={Icon} tone={tone} />
-                  <div className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-extrabold leading-tight tracking-tight text-[#0B211B]">
-                      {n.title}
+                  showChevron={false}
+                  hoverClassName="hover:bg-[#0B211B]/[0.02]"
+                  trailing={
+                    <span className="flex shrink-0 flex-col items-end">
+                      <span className="flex items-center gap-1">
+                        <Chip intent={incident ? 'danger' : 'success'} icon={Check}>
+                          {incident ? 'Delivered' : 'Sent'}
+                        </Chip>
+                        <motion.span
+                          animate={{ rotate: open ? 180 : 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="flex"
+                        >
+                          <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/25" aria-hidden />
+                        </motion.span>
+                      </span>
+                      <span className="mt-1.5 text-[10px] font-bold tabular-nums text-[#0B211B]/35">
+                        {n.time}
+                      </span>
                     </span>
-                    <p className="mt-1 break-words text-[12px] font-medium leading-snug text-[#0B211B]/55">
-                      {n.body}
-                    </p>
-                  </div>
-                  <div className="flex shrink-0 flex-col items-end">
-                    <div className="flex items-center gap-1">
-                      <Chip intent={incident ? 'danger' : 'success'} icon={Check}>
-                        {incident ? 'Delivered' : 'Sent'}
-                      </Chip>
-                      <motion.span
-                        animate={{ rotate: open ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="flex"
-                      >
-                        <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/25" aria-hidden />
-                      </motion.span>
-                    </div>
-                    <span className="mt-1.5 text-[10px] font-bold tabular-nums text-[#0B211B]/35">
-                      {n.time}
-                    </span>
-                  </div>
-                </motion.button>
+                  }
+                />
                 <Expand open={open}>
                   <motion.div
                     initial={false}

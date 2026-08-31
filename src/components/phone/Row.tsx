@@ -46,18 +46,21 @@ export interface RowProps {
   onToggle?: () => void
   expansion?: ReactNode
   expansionClassName?: string
+  expansionPadded?: boolean
   showChevron?: boolean
+  chevronVisible?: boolean
   chevronInTrailing?: boolean
   tileSize?: 'sm' | 'md' | 'lg'
   align?: 'center' | 'start'
-  padding?: 'none' | 'inset' | 'comfortable' | 'roomy' | 'even'
+  padding?: 'none' | 'inset' | 'comfortable' | 'roomy' | 'even' | (string & {})
   surface?: RowSurface
   surfaceTone?: string
   wrapSurface?: boolean
-  dark?: boolean
+  dark?: boolean | 'white'
   liveDot?: boolean
   fresh?: boolean
   whileTapDisabled?: boolean
+  ariaExpanded?: boolean
   hoverClassName?: string
   className?: string
   bodyClassName?: string
@@ -139,7 +142,9 @@ export function Row({
   onToggle,
   expansion,
   expansionClassName,
+  expansionPadded = true,
   showChevron = true,
+  chevronVisible = true,
   chevronInTrailing = false,
   tileSize = 'md',
   align = 'center',
@@ -151,6 +156,7 @@ export function Row({
   liveDot = false,
   fresh = false,
   whileTapDisabled = false,
+  ariaExpanded,
   hoverClassName,
   className,
   bodyClassName,
@@ -179,14 +185,14 @@ export function Row({
         <span
           className={cn(
             'block truncate text-[13.5px] font-bold tracking-tight',
-            dark ? 'text-emerald-50/90' : 'text-[#0B211B]',
+dark ? (dark === 'white' ? 'text-white' : 'text-emerald-50/90') : 'text-[#0B211B]',
             titleClassName
           )}
         >
           {title}
         </span>
         {titleMeta}
-        {expandable && !chevronInTrailing && (
+        {expandable && !chevronInTrailing && chevronVisible && (
           <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
             <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/35" aria-hidden />
           </motion.span>
@@ -196,7 +202,7 @@ export function Row({
         <span
           className={cn(
             'mt-0.5 block break-words text-[11.5px] font-medium leading-snug',
-            dark ? 'text-emerald-100/70' : 'text-[#0B211B]/55',
+dark ? (dark === 'white' ? 'text-white/45' : 'text-emerald-100/70') : 'text-[#0B211B]/55',
             subtitleClassName
           )}
         >
@@ -251,11 +257,13 @@ export function Row({
           ? 'px-3 py-3.5'
           : padding === 'even'
             ? 'p-3.5'
-            : surface === 'none' && !wrapSurface
-              ? 'px-4 py-3.5'
-              : surfaceClass && !wrapSurface
-                ? 'px-2 py-3'
-                : ''
+            : typeof padding === 'string'
+              ? padding
+              : surface === 'none' && !wrapSurface
+                ? 'px-4 py-3.5'
+                : surfaceClass && !wrapSurface
+                  ? 'px-2 py-3'
+                  : ''
 
   const shellClass = cn(
     'flex w-full gap-3 text-left',
@@ -268,7 +276,7 @@ export function Row({
     className
   )
 
-  const chevronNode = expandable && chevronInTrailing && (
+  const chevronNode = expandable && chevronInTrailing && chevronVisible && (
     <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0">
       <ChevronDown className="h-3.5 w-3.5 text-[#0B211B]/30" aria-hidden />
     </motion.span>
@@ -320,6 +328,7 @@ export function Row({
         type="button"
         whileTap={whileTapDisabled ? undefined : { scale: 0.985 }}
         onClick={onClick}
+        aria-expanded={ariaExpanded}
         className={shellClass}
       >
         {inner}
@@ -354,7 +363,7 @@ export function Row({
           transition={{ duration: 0.28, ease: 'easeInOut' }}
           className="overflow-hidden"
         >
-          <div className={cn('px-4 pb-4', expansionClassName)}>{expansion}</div>
+          <div className={cn(expansionPadded && 'px-4 pb-4', expansionClassName)}>{expansion}</div>
         </motion.div>
       )}
     </AnimatePresence>
