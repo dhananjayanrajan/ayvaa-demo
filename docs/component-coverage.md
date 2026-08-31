@@ -286,3 +286,16 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   Patient F1 remaining is 7 sheets, not 12
 - F1 now 48 of 58 processed (46 rewired, 2 keep-ruled); professional closed 7/7;
   partner closed 14/14; admin closed 3/3; remaining: patient 7
+
+---
+# Revision 9 — F1 FAMILY CLOSED (57 of 57)
+
+- Corrections: ConsentScopeSheet, RateVisitSheet, EmailFallbackSheet, FilterSheet (visits),
+  PaymentSheet, VisitSoFarSheet, VitalsSheet — already canonical, pending → done
+- Family count corrected 58 → 57 (phantom audit miscount closed)
+- F1 FINAL: 40 rewired · 5 keep-ruled · 12 already-canonical · orphan register: RecordSheet (B18)
+- Session rewires: partner 14, professional 7 (21 total; ~500 lines of hand-rolled shell code
+  retired). Canonical SheetShell now covers all three sheet idioms
+- NEXT per sequence: F2 residual — patient/onboarding/Hero.tsx, professional/sheets/
+  EntrySheetsHero.tsx (unread), ProfileHero/ReportsHero/RatingHero ledger-gap verification
+  (disk grep), Rx gold-vs-amber decision

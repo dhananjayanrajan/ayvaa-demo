@@ -302,3 +302,21 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
   (ConsentScopeSheet, RateVisitSheet, EmailFallbackSheet, FilterSheet visits, PaymentSheet,
   VisitSoFarSheet, VitalsSheet)
 - Verified: DeclineOfferSheet on canonical by grep; npx tsc --noEmit clean
+
+## F1 finish — Patient tranches 2+3 (7 corrections) — F1 FAMILY CLOSED
+
+- COVERAGE CORRECTIONS — seven more patient sheets were already canonical consumers,
+  disk-verified at fetch: ConsentScopeSheet, RateVisitSheet, EmailFallbackSheet, FilterSheet
+  (visits), PaymentSheet, VisitSoFarSheet, VitalsSheet. Zero edits required; consumers
+  P03/P12/P15/P16/P17/P18 untouched
+- Combined with the prior batch's five, the audit's entire 12-sheet patient pending-list was
+  stale. Family totals now reconcile: 57 sheet files (the historical "58" contained one phantom
+  entry from audit Discrepancy 1 — "one further miscount" that never had a filename; closed here)
+- F1 FINAL: 57 of 57 processed — 40 rewired (19 pre-session + 21 this session) · 5 keep-ruled
+  (AccountActionsSheet, FailureDrillSheet, CloseSheet, EscalateSheet, PhotoViewSheet) ·
+  12 already-canonical corrections (patient)
+- Canonical end-state: SheetShell height 'full' (icon/title header OR header slot, footer slot)
+  | 'auto' (compact card) | 'scroll' (max-h-88% growing); mount- or open-controlled; BottomSheet
+  alias; SheetHeader. Self-owned dims preserved where the original had no blur (B4 precedent)
+- Orphan register unchanged: RecordSheet (professional/history) — deletion ruled at B18
+- Verified: this batch is docs-only (zero code changes); last compile gate green at 193675c
