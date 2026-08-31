@@ -255,3 +255,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Canonical change: SheetShell height now 'full' | 'auto' | 'scroll'
 - F1 now 33 of 58 processed (31 rewired, 2 keep-ruled); partner 12 of 14; remaining partner:
   PerformanceFeedbackSheet, PerformanceKpiSheet; then professional 7, patient 12, admin 3
+
+---
+# Revision 6 — F1 partner sheets COMPLETE (14 of 14); admin F1 resolved
+
+- Rewired: PerformanceFeedbackSheet, PerformanceKpiSheet (auto, self-owned dims preserved)
+- Keep-ruled with evidence: admin CloseSheet, EscalateSheet, PhotoViewSheet — content
+  fragments; A02 already wraps them in canonical BottomSheet. Admin F1 entry resolved
+- F1 now 36 of 58 processed (34 rewired, 2 keep-ruled from B4); partner closed 14/14;
+  admin closed 3/3; remaining: professional 7, patient 12
+- Canonical: SheetShell height 'full' | 'auto' | 'scroll' — final after this batch

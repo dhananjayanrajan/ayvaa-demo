@@ -249,3 +249,17 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Preserved differences: StaffDetail self-owned dim (no blur); staff rows keep sky-circle
   leading; StaffSheet hairline dividers kept (divider punch list)
 - Verified: 6/6 on canonical by grep; npx tsc --noEmit clean
+
+## F1 finish — Partner sheets, batch 3 of 3 (2 rewired + 3 keep-ruled) — PARTNER F1 CLOSED
+
+- Rewired height="auto" (StaffDetail idiom — canonical surface inside preserved self-owned
+  black/40 no-blur dim + fade wrapper per B4 precedent): PerformanceFeedbackSheet,
+  PerformanceKpiSheet. Consumers: zero screen edits (PT06 unchanged)
+- Normalizations flagged: hand-rolled spring 300/30 → canonical 380/40
+- Keep-ruled with evidence: CloseSheet, EscalateSheet, PhotoViewSheet are content fragments,
+  not shells — consumer A02 already renders all three inside canonical BottomSheet
+  (import from phone/SheetShell, grep-verified). No shell duplication exists in these files;
+  they are the thin-domain-consumer end-state already
+- Partner sheet family final: 14 of 14 processed (14 rewired, 0 keep-ruled-within-partner;
+  admin trio's keep-ruling recorded above under admin)
+- Verified: both rewires on canonical by grep; npx tsc --noEmit clean

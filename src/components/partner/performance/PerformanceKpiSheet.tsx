@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 
 interface Kpi {
@@ -35,35 +36,30 @@ export function PerformanceKpiSheet({ kpi, onClose }: PerformanceKpiSheetProps) 
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          <motion.div
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="relative rounded-t-[28px] bg-white p-5 pb-7 shadow-2xl"
-          >
-            <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-[#0B211B]/10" />
-            <div className="flex items-start gap-4">
-              <span className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl', kpi.iconBg)}>
-                <kpi.icon className="h-6 w-6" strokeWidth={2.4} aria-hidden />
-              </span>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">{kpi.label}</h3>
-                <p className="mt-1 text-2xl font-extrabold tabular-nums text-[#0B211B]">{kpi.value}</p>
+          <SheetShell onClose={onClose} height="auto">
+            <div>
+              <div className="flex items-start gap-4">
+                <span className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl', kpi.iconBg)}>
+                  <kpi.icon className="h-6 w-6" strokeWidth={2.4} aria-hidden />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">{kpi.label}</h3>
+                  <p className="mt-1 text-2xl font-extrabold tabular-nums text-[#0B211B]">{kpi.value}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
+                  aria-label="Close details"
+                >
+                  <X className="h-4 w-4" aria-hidden />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/5 text-[#0B211B]/60 transition-colors hover:bg-[#0B211B]/10 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
-                aria-label="Close details"
-              >
-                <X className="h-4 w-4" aria-hidden />
-              </button>
+              <div className="mt-5 rounded-2xl bg-[#0B211B]/[0.03] p-4">
+                <p className="text-pretty text-[13px] font-medium leading-relaxed text-[#0B211B]/70">{kpi.detail}</p>
+              </div>
             </div>
-            <div className="mt-5 rounded-2xl bg-[#0B211B]/[0.03] p-4">
-              <p className="text-pretty text-[13px] font-medium leading-relaxed text-[#0B211B]/70">{kpi.detail}</p>
-            </div>
-          </motion.div>
+          </SheetShell>
         </motion.div>
       )}
     </AnimatePresence>
