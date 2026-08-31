@@ -3,10 +3,10 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   incident: string
-  resolved: boolean
+  resolved?: boolean
 }
 
-export function IncidentPanel({ incident, resolved }: Props) {
+export function IncidentPanel({ incident, resolved = false }: Props) {
   const shell = resolved
     ? { bg: 'bg-[#241A0B]', glow: 'bg-amber-400/15', overline: 'text-amber-200/60', icon: 'text-amber-200/60', text: 'text-amber-50/90', stripBg: 'bg-white/[0.06]', stripText: 'text-amber-50/80' }
     : { bg: 'bg-[#230D14]', glow: 'bg-rose-400/15', overline: 'text-rose-200/60', icon: 'text-rose-200/60', text: 'text-rose-50/90', stripBg: 'bg-rose-400/[0.12]', stripText: 'text-rose-50/85' }

@@ -95,7 +95,7 @@ export function PR07() {
     timers.current.push(
       setTimeout(() => {
         setSaved((prev) => (prev.includes(mode) ? prev : [...prev, mode]))
-        const messages: Record<SheetMode, { title: string; body: string }> = {
+        const messages: Record<SheetMode, { title: string; body: string; kind: 'ok' }> = {
           vitals: { title: 'Readings saved', body: '128/76 · 72 bpm · 97% · sealed at sign off', kind: 'ok' },
           meds: { title: 'Dose confirmed', body: 'Amlodipine 5 mg given · recorded permanently', kind: 'ok' },
           notes: { title: 'Notes saved', body: 'Written by you alone · sealed at sign off', kind: 'ok' },

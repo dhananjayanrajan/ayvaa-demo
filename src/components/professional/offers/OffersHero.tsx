@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 interface OffersHeroProps {
   activeCount: number
   accepting: boolean
-  round: string
+  round: number
   expiresAt: string
   onToggleAccepting: () => void
 }

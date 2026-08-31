@@ -6,7 +6,7 @@ interface CloseSheetProps {
   onClose: () => void
   notify: (payload: { title: string; body: string; kind: 'ok' }) => void
   onConfirm: () => void
-  decision: string
+  decision?: string
 }
 
 export function CloseSheet({ onClose, notify, onConfirm, decision }: CloseSheetProps) {

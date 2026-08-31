@@ -287,7 +287,7 @@ export function buildStatementLines(receipts: Receipt[]): string {
   return lines.join('\n')
 }
 
-export function downloadStatement(lines: string[]): void {
+export function downloadStatement(lines: string): void {
   const blob = new Blob([lines], { type: 'text/plain' })
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')

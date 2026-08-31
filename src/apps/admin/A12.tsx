@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Check, ChevronDown, FileText, Loader2, ShieldCheck, UserCheck, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
@@ -117,6 +117,9 @@ export function A12() {
     timersRef.current.forEach(clearTimeout)
     timersRef.current = []
   }
+
+  useEffect(() => cleanup, [])
+
 
   const decide = (approve: boolean) => {
     if (working || decision) return

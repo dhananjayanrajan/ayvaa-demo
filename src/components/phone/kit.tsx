@@ -339,9 +339,14 @@ export function Section({ label, trailing }: { label: string; trailing?: ReactNo
   )
 }
 
-export function TimeChip({ children }: { children: ReactNode }) {
+export function TimeChip({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <span className="inline-flex shrink-0 items-center rounded-lg bg-[#0B211B]/[0.05] px-1.5 py-0.5 text-[10px] font-bold tabular-nums tracking-tight text-[#0B211B]/45">
+    <span
+      className={cn(
+        'inline-flex shrink-0 items-center rounded-lg bg-[#0B211B]/[0.05] px-1.5 py-0.5 text-[10px] font-bold tabular-nums tracking-tight text-[#0B211B]/45',
+        className,
+      )}
+    >
       {children}
     </span>
   )

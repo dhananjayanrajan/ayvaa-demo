@@ -55,7 +55,7 @@ const metrics: Metric[] = [
     change: 'judgment',
     intent: 'warning',
     icon: ShieldAlert,
-    details: escalatedTickets.map((t) => ({ k: t.title, v: t.waiting })),
+    details: escalatedTickets.map((t) => ({ k: t.title, v: t.waiting ?? '—' })),
   },
   {
     id: 'flagged',

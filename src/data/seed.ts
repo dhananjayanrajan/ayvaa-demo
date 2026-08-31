@@ -175,6 +175,8 @@ export const professional = {
   bank: 'HDFC Bank · ending 8842',
 }
 
+export type { Offer }
+
 export const offers: Offer[] = [
   { id: 'o1', title: 'Nursing care · recurring', type: 'recurring', expiresIn: '17 min left', rate: '₹4,800 / visit', consentSigned: true, distance: '4.2 km', status: 'active' },
   { id: 'o2', title: 'Post-op care · Mrs. Iyer', type: 'one-time', expiresIn: '1 hr 12 min', rate: '₹5,200', distance: '2.8 km', status: 'active' },
@@ -524,7 +526,7 @@ export const consentWithdrawal = {
   action: 'Confirm closure checklist done',
 }
 
-export const deletionQueue = [
+export const deletionQueue: { label: string; detail: string; state: 'Scheduled' | 'Running' }[] = [
   { label: '142 support tickets', detail: 'Auto-delete April 1', state: 'Scheduled' },
   { label: '38 identity selfies', detail: 'Matched this week · deleted within 24h', state: 'Running' },
 ]

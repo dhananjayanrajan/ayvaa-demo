@@ -24,7 +24,7 @@ interface PartnerPatientHeroProps {
 function useCountUp(target: number, duration = 1000) {
   const [value, setValue] = useState(0)
   const startRef = useRef<number | null>(null)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
     const step = (timestamp: number) => {

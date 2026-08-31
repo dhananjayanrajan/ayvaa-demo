@@ -103,12 +103,12 @@ function stateTone(state: ConsentState) {
   if (state === 'active') return 'emerald' as const
   if (state === 'pending') return 'amber' as const
   if (state === 'withdrawn') return 'rose' as const
-  return 'neutral' as const
+  return 'sky' as const
 }
 
 function versionStatusTone(status: VersionStatus) {
-  if (status === 'current') return 'emerald' as const
-  if (status === 'withdrawn') return 'rose' as const
+  if (status === 'current') return 'success' as const
+  if (status === 'withdrawn') return 'danger' as const
   return 'neutral' as const
 }
 

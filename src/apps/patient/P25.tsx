@@ -155,13 +155,13 @@ export function P25() {
                       <motion.button
                         type="button"
                         whileTap={{ scale: 0.985 }}
-                        onClick={() => navigate(q.to)}
+                        onClick={() => navigate('/patient/p26')}
                         className="group flex w-full items-center gap-3 px-4 py-3.5 text-left"
                       >
                         <Tile icon={Icon} tone={i === 0 ? 'info' : i === 1 ? 'success' : 'warning'} />
                         <div className="min-w-0 flex-1">
-                          <div className="truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">{q.title}</div>
-                          <div className="mt-0.5 truncate text-[11px] font-semibold text-[#0B211B]/45">{q.subtitle}</div>
+                          <div className="truncate text-[13.5px] font-bold tracking-tight text-[#0B211B]">{q.label}</div>
+                          <div className="mt-0.5 truncate text-[11px] font-semibold text-[#0B211B]/45">{q.detail}</div>
                         </div>
                         <ChevronRight
                           className="h-3.5 w-3.5 shrink-0 text-[#0B211B]/20 transition-all group-hover:translate-x-0.5 group-hover:text-emerald-600"

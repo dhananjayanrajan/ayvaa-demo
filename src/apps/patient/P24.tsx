@@ -39,13 +39,13 @@ export function P24() {
     setCards((prev) => prev.filter((c) => c.id !== confirmRemove.id))
     notify({
       title: 'Card removed',
-      body: `${confirmRemove.brand} ending ${confirmRemove.last4} · past receipts unaffected`,
+      body: `${confirmRemove.brand} ending ${confirmRemove.ending} · past receipts unaffected`,
       kind: 'warn',
     })
     setConfirmRemove(null)
   }
 
-  const defaultCard = cards.find((c) => c.default) ?? cards[0]
+  const defaultCard = cards.find((c) => c.isDefault) ?? cards[0]
 
   return (
     <Screen>
@@ -61,10 +61,10 @@ export function P24() {
                   Default card · charged per visit
                 </Kicker>
                 <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-                  {defaultCard ? `${defaultCard.brand} ••${defaultCard.last4}` : 'No card set'}
+                  {defaultCard ? `${defaultCard.brand} ••${defaultCard.ending}` : 'No card set'}
                 </h2>
                 <p className="mt-1 text-[12px] font-medium leading-relaxed text-emerald-100/55">
-                  {defaultCard ? `${defaultCard.holder} · expires ${defaultCard.expires}` : 'Add a card to keep care running'}
+                  {defaultCard ? `${defaultCard.holder} · expires ${defaultCard.expiry}` : 'Add a card to keep care running'}
                 </p>
 
                 <div className="mt-4 rounded-2xl bg-emerald-400/[0.1] p-3.5">
@@ -99,7 +99,7 @@ export function P24() {
                       <span
                         className={cn(
                           'grid h-10 w-10 shrink-0 place-items-center rounded-2xl',
-                          c.default
+                          c.isDefault
                             ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-[0_8px_18px_-8px_rgba(16,185,129,0.7)]'
                             : 'bg-[#0B211B]/[0.05] text-[#0B211B]/50',
                         )}
@@ -109,15 +109,15 @@ export function P24() {
                       <span className="min-w-0 flex-1">
                         <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                           <span className="truncate text-[13px] font-bold tracking-tight text-[#0B211B]">
-                            {c.brand} ••{c.last4}
+                            {c.brand} ••{c.ending}
                           </span>
-                          {c.default && <Chip intent="success" icon={Star}>Default</Chip>}
+                          {c.isDefault && <Chip intent="success" icon={Star}>Default</Chip>}
                         </span>
                         <span className="mt-0.5 block truncate text-[11px] font-medium text-[#0B211B]/50">
-                          Expires {c.expires} · {c.holder}
+                          Expires {c.expiry} · {c.holder}
                         </span>
                       </span>
-                      {!c.default && (
+                      {!c.isDefault && (
                         <span className="shrink-0 text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-emerald-700">
                           Set default
                         </span>
@@ -186,7 +186,7 @@ export function P24() {
             <motion.div variants={rise}>
               <Card>
                 {cards
-                  .filter((c) => !c.default)
+                  .filter((c) => !c.isDefault)
                   .map((c, i) => (
                     <div key={c.id}>
                       {i > 0 && <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />}
@@ -199,7 +199,7 @@ export function P24() {
                         <Tile icon={Trash2} tone="danger" />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-[13px] font-bold tracking-tight text-[#0B211B]">
-                            Remove {c.brand} ••{c.last4}
+                            Remove {c.brand} ••{c.ending}
                           </span>
                           <span className="mt-0.5 block truncate text-[11px] font-medium text-[#0B211B]/50">
                             Past receipts stay unaffected
@@ -348,7 +348,7 @@ export function P24() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">
-                    Remove {confirmRemove.brand} ••{confirmRemove.last4}?
+                    Remove {confirmRemove.brand} ••{confirmRemove.ending}?
                   </div>
                   <div className="mt-0.5 truncate text-xs font-medium text-[#0B211B]/55">This cannot be undone</div>
                 </div>

@@ -10,7 +10,7 @@ import type { TileTone } from '@/components/phone/kit'
 interface PartnerCredentialCardProps {
   partnerName: string
   partnerEmail: string
-  onNotify: (opts: { title: string; body: string; kind?: 'info' | 'ok' }) => void
+  onNotify: (opts: { title: string; body: string; kind: 'ok' | 'warn' | 'error' | 'info' }) => void
 }
 
 function CredentialRow({

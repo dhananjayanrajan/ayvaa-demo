@@ -87,7 +87,7 @@ export type Offer = {
   rate: string
   consentSigned?: boolean
   distance: string
-  status: 'active' | 'declined'
+  status: 'active' | 'declined' | 'accepted'
 }
 
 export type Session = {
@@ -96,7 +96,8 @@ export type Session = {
   time: string
   distance?: string
   status: 'live' | 'upcoming' | 'completed'
-  detail?: string
+  detail: string
+  location?: string
 }
 
 export type AvailabilityDay = {
@@ -132,6 +133,7 @@ export type Referral = {
 }
 
 export type StaffMember = {
+  joinedAt?: string
   id: string
   name: string
   role: string
@@ -152,6 +154,8 @@ export type Invoice = {
 
 export type Incident = {
   id: string
+  title?: string
+  location?: string
   patient: string
   severity: 'critical' | 'minor'
   raised: string

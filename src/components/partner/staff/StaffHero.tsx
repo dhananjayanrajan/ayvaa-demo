@@ -96,7 +96,8 @@ function AnimatedCount({ value }: { value: number }) {
 
 export function StaffHero({ activeMembers, pendingCount, pausedCount, activeFilter, onFilterChange }: StaffHeroProps) {
   const total = activeMembers.length + pendingCount + pausedCount
-  const counts: Record<Exclude<StaffFilter, 'all'>, number> = {
+  const counts: Record<StaffFilter, number> = {
+    all: activeMembers.length + pendingCount + pausedCount,
     active: activeMembers.length,
     pending: pendingCount,
     paused: pausedCount,
