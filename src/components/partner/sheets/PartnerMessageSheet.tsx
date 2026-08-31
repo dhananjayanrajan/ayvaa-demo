@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { MessageSquare, Send } from 'lucide-react'
-import { ActionButton } from '@/components/phone/ActionButton'
+import { ActionButton } from '@/components/phone/ActionPair'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 

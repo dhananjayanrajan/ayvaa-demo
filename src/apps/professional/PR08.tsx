@@ -15,7 +15,7 @@ import { TriggerPreview } from '@/components/professional/incidents/TriggerPrevi
 import { CausePicker } from '@/components/professional/incidents/CausePicker'
 import { DescriptionInput } from '@/components/professional/incidents/DescriptionInput'
 import { PhotoAttach } from '@/components/professional/incidents/PhotoAttach'
-import { ActionButton } from '@/components/phone/ActionButton'
+import { ActionButton } from '@/components/phone/ActionPair'
 import { SubmittedPanel } from '@/components/professional/incidents/SubmittedPanel'
 import { SEVERITIES, SEVERITY_CONFIG, type Severity } from '@/data/incidentData'
 
