@@ -53,7 +53,6 @@ export function LedgerChainHero({ todayCount }: LedgerChainHeroProps) {
                   </motion.span>
                 ) : (
                   <motion.span
-                    whileHover={{ scale: 1.05 }}
                     className={cn(
                       'grid h-9 min-w-0 flex-1 place-items-center rounded-xl text-[10px] font-extrabold tabular-nums ring-1 ring-inset transition-transform duration-200',
                       sealed

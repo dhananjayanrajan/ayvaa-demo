@@ -87,7 +87,6 @@ export function LiveFanOutCard({ run }: LiveFanOutCardProps) {
               return (
                 <motion.div
                   key={d.label}
-                  whileHover={{ y: -2 }}
                   className={cn(
                     'rounded-2xl p-3 transition-colors duration-300',
                     s === 'done'

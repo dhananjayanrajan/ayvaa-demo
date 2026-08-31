@@ -53,7 +53,6 @@ export function BillingHero({ latest, invoices, onSelectInvoice }: BillingHeroPr
               key={inv.month}
               type="button"
               whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               onClick={() => onSelectInvoice(inv)}
               className="group flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1.5 outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/50"

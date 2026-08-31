@@ -11,7 +11,6 @@ export function SecurityDevicesCard({ onOpenDevices }: SecurityDevicesCardProps)
     <motion.button
       type="button"
       whileTap={{ scale: 0.985 }}
-      whileHover={{ scale: 1.005 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       onClick={onOpenDevices}
       className="block w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 rounded-2xl"

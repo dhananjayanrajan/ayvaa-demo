@@ -11,7 +11,6 @@ export function PartnerPatientFooter({ onDischargeFile, onMessageCareTeam }: Par
     <div className="flex gap-2.5">
       <motion.button
         type="button"
-        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         onClick={onDischargeFile}
@@ -22,7 +21,6 @@ export function PartnerPatientFooter({ onDischargeFile, onMessageCareTeam }: Par
       </motion.button>
       <motion.button
         type="button"
-        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         onClick={onMessageCareTeam}

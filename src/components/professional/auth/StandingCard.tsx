@@ -27,7 +27,6 @@ export function StandingCard({ onViewCredentials }: StandingCardProps) {
         <motion.button
           type="button"
           whileTap={{ scale: 0.985 }}
-          whileHover={{ scale: 1.01 }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           onClick={onViewCredentials}
           className="mt-4 flex w-full items-center justify-start gap-1.5 rounded-full bg-gradient-to-r from-emerald-500/[0.12] to-teal-500/[0.12] px-3 py-2.5 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40"

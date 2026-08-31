@@ -36,7 +36,6 @@ export function TermsAcceptanceCard({ terms, agreed, onToggle, allAgreed, progre
               key={t}
               type="button"
               whileTap={{ scale: 0.985 }}
-              whileHover={{ scale: 1.005 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               onClick={() => onToggle(t)}
               className={cn(

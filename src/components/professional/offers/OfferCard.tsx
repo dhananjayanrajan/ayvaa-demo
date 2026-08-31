@@ -165,7 +165,6 @@ export function OfferCard({ offer, onAccept, onDecline }: OfferCardProps) {
           <motion.button
             type="button"
             whileTap={declineLoading ? undefined : { scale: 0.97 }}
-            whileHover={declineLoading ? undefined : { scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={handleDecline}
             disabled={declineLoading || acceptLoading}
@@ -184,7 +183,6 @@ export function OfferCard({ offer, onAccept, onDecline }: OfferCardProps) {
           <motion.button
             type="button"
             whileTap={acceptLoading ? undefined : { scale: 0.97 }}
-            whileHover={acceptLoading ? undefined : { scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={handleAccept}
             disabled={acceptLoading || declineLoading}

@@ -27,7 +27,6 @@ export function OnboardingFooter({ allAgreed, remaining, total, onAccept }: Onbo
     <motion.button
       type="button"
       whileTap={loading || isZero ? undefined : { scale: 0.97 }}
-      whileHover={loading || isZero ? undefined : { scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       onClick={handleClick}
       disabled={loading || isZero}

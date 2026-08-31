@@ -26,7 +26,6 @@ export function ProfessionalHero({ scanning, onUnlock }: ProfessionalHeroProps) 
         <motion.button
           type="button"
           whileTap={{ scale: 0.94 }}
-          whileHover={{ scale: 1.02 }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           onClick={onUnlock}
           aria-label="Unlock with fingerprint"

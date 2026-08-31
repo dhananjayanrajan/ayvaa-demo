@@ -255,7 +255,6 @@ export function WithdrawalCard({ notify }: WithdrawalCardProps) {
 
           <motion.button
             type="button"
-            whileHover={sealState === 'idle' && confirmedReady ? { scale: 1.02 } : undefined}
             whileTap={sealState === 'idle' && confirmedReady ? { scale: 0.97 } : undefined}
             onClick={handleSeal}
             disabled={sealState !== 'idle' || !confirmedReady}

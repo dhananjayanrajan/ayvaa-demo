@@ -129,7 +129,6 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
           <div className="mt-4 flex flex-col gap-2.5">
             <motion.button
               type="button"
-              whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleReply}
               className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)] transition-all duration-200 hover:shadow-[0_22px_40px_-18px_rgba(5,150,105,0.85)] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
@@ -139,7 +138,6 @@ export function EscalationTicketCard({ notify }: EscalationTicketCardProps) {
             </motion.button>
             <motion.button
               type="button"
-              whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               onClick={() =>
                 notify({ title: 'Re-match queued', body: 'A calmer nurse will be offered Friday slot · family not told yet', kind: 'ok' })

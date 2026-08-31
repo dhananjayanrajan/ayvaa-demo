@@ -19,7 +19,6 @@ export function StatementCarousel({ invoices, onSelect }: StatementCarouselProps
             key={inv.month}
             type="button"
             whileTap={{ scale: 0.96 }}
-            whileHover={{ scale: 1.02 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={() => onSelect(inv)}
             className={cn(

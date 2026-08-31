@@ -295,7 +295,6 @@ export function PartnerRecoveryTrajectory({ trajectory }: PartnerRecoveryTraject
                   stroke="#ffffff"
                   strokeWidth={isSelected ? '2' : '1.5'}
                   animate={{ scale: isSelected ? 1.15 : 1 }}
-                  whileHover={{ scale: 1.25 }}
                   transition={{ type: 'spring', stiffness: 350, damping: 22 }}
                 />
               </g>
@@ -324,7 +323,6 @@ export function PartnerRecoveryTrajectory({ trajectory }: PartnerRecoveryTraject
               <motion.button
                 key={t.wk}
                 type="button"
-                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedWeek(t.wk)}
                 className={cn(
@@ -361,7 +359,6 @@ export function PartnerRecoveryTrajectory({ trajectory }: PartnerRecoveryTraject
 
           <motion.button
             type="button"
-            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={isPlaying ? stopPlayback : startPlayback}
             className={cn(

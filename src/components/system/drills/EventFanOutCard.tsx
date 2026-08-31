@@ -42,7 +42,6 @@ export function EventFanOutCard() {
             {destinations.map((d, i) => (
               <motion.div
                 key={d.label}
-                whileHover={{ y: -2 }}
                 className={cn(
                   'rounded-2xl bg-white/[0.06] p-3',
                   i === destinations.length - 1 && 'col-span-2',

@@ -14,7 +14,6 @@ export function BillingFooter({ latest, onDownloadInvoice, onUsageReport }: Bill
       <motion.button
         type="button"
         whileTap={{ scale: 0.97 }}
-        whileHover={{ scale: 1.01 }}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         onClick={onDownloadInvoice}
         className="flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-[#0B211B]/[0.05] py-3.5 text-sm font-bold text-[#0B211B]/75 transition-colors hover:bg-[#0B211B]/[0.08]"
@@ -25,7 +24,6 @@ export function BillingFooter({ latest, onDownloadInvoice, onUsageReport }: Bill
       <motion.button
         type="button"
         whileTap={{ scale: 0.97 }}
-        whileHover={{ scale: 1.01 }}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         onClick={onUsageReport}
         className="flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"

@@ -70,7 +70,6 @@ export function CategoryMixCard() {
                 <motion.button
                   key={m.label}
                   type="button"
-                  whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.985 }}
                   onClick={() => {
                     setSelectedLabel(isSelected ? null : m.label)

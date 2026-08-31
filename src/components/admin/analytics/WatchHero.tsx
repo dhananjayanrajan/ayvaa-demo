@@ -30,7 +30,6 @@ export function WatchHero() {
             <motion.div
               key={i}
               className="group relative flex h-full min-w-0 flex-1 items-end"
-              whileHover={{ scaleY: 1.05 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
               <motion.span

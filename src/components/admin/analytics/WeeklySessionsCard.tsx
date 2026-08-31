@@ -34,7 +34,6 @@ export function WeeklySessionsCard() {
                 <motion.button
                   key={i}
                   type="button"
-                  whileHover={{ y: -4 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     setSelectedWeek(isSelected ? null : i)

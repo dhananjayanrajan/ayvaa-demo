@@ -79,7 +79,6 @@ export function PartnerPatientHero({ patient, onInfo }: PartnerPatientHeroProps)
         <div className="flex items-center gap-2">
           <motion.button
             type="button"
-            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.92 }}
             onClick={onInfo}
             className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/[0.08] text-emerald-200/70 transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"

@@ -25,7 +25,6 @@ export function PartnerReferralCard({ onOpenOptions }: PartnerReferralCardProps)
         <motion.button
           type="button"
           whileTap={{ scale: 0.97 }}
-          whileHover={{ scale: 1.01 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           onClick={onOpenOptions}
           className="mt-4 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"

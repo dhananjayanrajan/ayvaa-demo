@@ -23,7 +23,6 @@ export function DeclinedOffersCard({ declined, onUndoDecline }: DeclinedOffersCa
           <motion.button
             type="button"
             whileTap={{ scale: 0.92 }}
-            whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={() => onUndoDecline(o)}
             className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50 transition-colors hover:bg-[#0B211B]/[0.1] focus-visible:ring-2 focus-visible:ring-emerald-500/40"
