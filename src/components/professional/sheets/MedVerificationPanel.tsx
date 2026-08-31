@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, CheckCircle2, Lock, ScanLine } from 'lucide-react'
 import { Chip, Panel } from '@/components/phone/kit'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -95,14 +96,7 @@ export function MedVerificationPanel({ checks, allChecked, saved, scanned, verif
       </motion.button>
 
       {saved ? (
-        <div className="flex items-center gap-3 rounded-xl bg-emerald-500/[0.08] px-3 py-2.5">
-          <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500">
-            <Check className="h-3 w-3 text-white" strokeWidth={3} aria-hidden />
-          </span>
-          <p className="min-w-0 flex-1 text-[11px] font-bold leading-snug text-emerald-900/80">
-            Dose confirmed · Amlodipine 5 mg given · recorded permanently
-          </p>
-        </div>
+        <StatusStrip>Dose confirmed · Amlodipine 5 mg given · recorded permanently</StatusStrip>
       ) : (
         !allChecked && (
           <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-700">
