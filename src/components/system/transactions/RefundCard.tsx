@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ShieldCheck, Undo2 } from 'lucide-react'
 import { Card, Panel, rise } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { refund, refundEvents } from '@/data/system/payments'
 import { cn } from '@/lib/utils'
 
@@ -73,17 +74,17 @@ export function RefundCard({ onTap }: RefundCardProps) {
               How it happened
             </div>
             <div className="mt-3">
-              {refundEvents.map((e, i) => {
-                const last = i === refundEvents.length - 1
-                return (
-                  <motion.button
-                    key={e.title}
-                    type="button"
-                    whileTap={{ scale: 0.985 }}
-                    onClick={() => onTap(e.time, e.title, e.detail)}
-                    className="flex w-full gap-3.5 text-left outline-none focus-visible:outline-none"
-                  >
-                    <div className="flex flex-col items-center">
+              <StepList
+                nodeStyle="circle"
+                nodeSize="sm"
+                theme="light"
+                activeStyle="ping"
+                steps={refundEvents.map((e, i) => {
+                  const last = i === refundEvents.length - 1
+                  return {
+                    key: e.title,
+                    state: 'done',
+                    node: (
                       <span
                         className={cn(
                           'relative mt-1 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full',
@@ -93,22 +94,18 @@ export function RefundCard({ onTap }: RefundCardProps) {
                         {last && <span aria-hidden className="absolute h-4 w-4 animate-ping rounded-full bg-sky-400/50" />}
                         <Check className="h-2.5 w-2.5 text-white" strokeWidth={4} aria-hidden />
                       </span>
-                      {!last && (
-                        <span aria-hidden className="my-1 w-px flex-1 bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15" />
-                      )}
-                    </div>
-                    <div className={cn('min-w-0 flex-1', !last && 'pb-5')}>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-[13.5px] font-bold tracking-tight text-[#0B211B]">{e.title}</span>
-                        <span className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-wide text-[#0B211B]/40">
-                          {e.time}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-pretty text-[11px] font-medium leading-relaxed text-[#0B211B]/55">{e.detail}</p>
-                    </div>
-                  </motion.button>
-                )
-              })}
+                    ),
+                    railClassName:
+                      'bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15',
+                    title: e.title,
+                    time: e.time,
+                    timeTrailing: true,
+                    body: e.detail,
+                    contentClassName: last ? '' : 'pb-5',
+                    onClick: () => onTap(e.time, e.title, e.detail),
+                  }
+                })}
+              />
             </div>
           </div>
 

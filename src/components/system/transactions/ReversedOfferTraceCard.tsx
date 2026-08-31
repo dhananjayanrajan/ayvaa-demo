@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { Check, ScrollText, UserCheck, Users } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { reversalEvents } from '@/data/system/recheck'
 
 interface ReversedOfferTraceCardProps {
@@ -31,38 +32,33 @@ export function ReversedOfferTraceCard({ onEventTap }: ReversedOfferTraceCardPro
           </p>
 
           <div className="mt-4 rounded-2xl bg-white/[0.06] p-4">
-            <div className="flex flex-col">
-              {reversalEvents.map((e, i) => {
+            <StepList
+              nodeStyle="circle"
+              nodeSize="md"
+              theme="dark"
+              steps={reversalEvents.map((e, i) => {
                 const last = i === reversalEvents.length - 1
-                return (
-                  <motion.button
-                    key={e.title}
-                    type="button"
-                    whileTap={{ scale: 0.985 }}
-                    onClick={() => onEventTap(e.title, `${e.time} · ${e.body}`)}
-                    className="flex gap-3 text-left outline-none focus-visible:outline-none"
-                  >
-                    <div className="flex flex-col items-center">
-                      <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sky-400/90 text-white">
-                        <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
-                      </span>
-                      {!last && <span aria-hidden className="my-1 w-px flex-1 bg-white/15" />}
-                    </div>
-                    <div className={last ? 'min-w-0 flex-1 pb-0.5' : 'min-w-0 flex-1 pb-4'}>
-                      <div className="flex items-baseline justify-between gap-2">
-                        <span className="break-words text-[13px] font-bold tracking-tight text-white">{e.title}</span>
-                        <span className="shrink-0 font-mono text-[9px] font-bold uppercase tracking-wide text-sky-200/50">
-                          {e.time}
-                        </span>
-                      </div>
-                      <div className="mt-0.5 break-words text-[11px] font-medium leading-relaxed text-sky-100/60">
-                        {e.body}
-                      </div>
-                    </div>
-                  </motion.button>
-                )
+                return {
+                  key: e.title,
+                  state: 'done',
+                  node: (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sky-400/90 text-white">
+                      <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
+                    </span>
+                  ),
+                  title: e.title,
+                  titleWrap: true,
+                  titleClassName: 'text-[13px]',
+                  time: e.time,
+                  timeTrailing: true,
+                  timeTrailingClassName: 'text-[9px] text-sky-200/50',
+                  body: e.body,
+                  bodyClassName: 'text-[11px] leading-relaxed text-sky-100/60',
+                  contentClassName: last ? 'pb-0.5' : undefined,
+                  onClick: () => onEventTap(e.title, `${e.time} · ${e.body}`),
+                }
               })}
-            </div>
+            />
           </div>
 
           <div className="mt-4 flex flex-col gap-2.5">

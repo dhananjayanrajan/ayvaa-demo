@@ -1,6 +1,6 @@
-import { motion } from 'motion/react'
 import { Check, Loader2 } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { retryLadder } from '@/data/system/payments'
 import { cn } from '@/lib/utils'
 
@@ -29,19 +29,19 @@ export function RetryLadderCard({ current, onTap }: RetryLadderCardProps) {
         </div>
 
         <div className="mt-4">
-          {retryLadder.map((step, i) => {
-            const done = i < current
-            const active = i === current
-            const last = i === retryLadder.length - 1
-            return (
-              <motion.button
-                key={step.time}
-                type="button"
-                whileTap={{ scale: 0.985 }}
-                onClick={() => onTap(step.time, step.head, step.detail)}
-                className="flex w-full gap-3 text-left outline-none focus-visible:outline-none"
-              >
-                <div className="flex flex-col items-center">
+          <StepList
+            nodeStyle="circle"
+            nodeSize="sm"
+            theme="light"
+            activeStyle="ping"
+            steps={retryLadder.map((step, i) => {
+              const done = i < current
+              const active = i === current
+              const last = i === retryLadder.length - 1
+              return {
+                key: step.time,
+                state: done ? 'done' : active ? 'active' : 'pending',
+                node: (
                   <span
                     className={cn(
                       'relative mt-1 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full',
@@ -58,49 +58,19 @@ export function RetryLadderCard({ current, onTap }: RetryLadderCardProps) {
                       </>
                     )}
                   </span>
-                  {!last && (
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'my-1 w-px flex-1',
-                        done
-                          ? 'bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15'
-                          : 'bg-[#0B211B]/[0.1]',
-                      )}
-                    />
-                  )}
-                </div>
-                <div className={cn('min-w-0 flex-1', !last && 'pb-5')}>
-                  <div className="flex items-center justify-between gap-2">
-                    <span
-                      className={cn(
-                        'text-[13.5px] font-bold tracking-tight transition-colors duration-300',
-                        done || active ? 'text-[#0B211B]' : 'text-[#0B211B]/35',
-                      )}
-                    >
-                      {step.head}
-                    </span>
-                    <span
-                      className={cn(
-                        'shrink-0 font-mono text-[10px] font-bold uppercase tracking-wide transition-colors duration-300',
-                        done || active ? 'text-[#0B211B]/40' : 'text-[#0B211B]/25',
-                      )}
-                    >
-                      {step.time}
-                    </span>
-                  </div>
-                  <p
-                    className={cn(
-                      'mt-1 text-pretty text-[11px] font-medium leading-relaxed transition-colors duration-300',
-                      done || active ? 'text-[#0B211B]/55' : 'text-[#0B211B]/30',
-                    )}
-                  >
-                    {step.detail}
-                  </p>
-                </div>
-              </motion.button>
-            )
-          })}
+                ),
+                railClassName: done
+                  ? 'bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15'
+                  : 'bg-[#0B211B]/[0.1]',
+                title: step.head,
+                time: step.time,
+                timeTrailing: true,
+                body: step.detail,
+                contentClassName: last ? '' : 'pb-5',
+                onClick: () => onTap(step.time, step.head, step.detail),
+              }
+            })}
+          />
         </div>
       </div>
     </Card>

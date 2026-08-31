@@ -1,5 +1,6 @@
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import { Chip } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { RecordExpansion } from './RecordExpansion'
 import { dayOf, timeOf, type HistorySession } from '@/data/historyData'
 import { cn } from '@/lib/utils'
@@ -26,12 +27,15 @@ export function MonthTimeline({ monthFull, sessions, openId, onToggle }: Props) 
 
       <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
         <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
-          {sessions.map((s, i) => {
-            const last = i === sessions.length - 1
-            const open = openId === s.id
-            return (
-              <div key={s.id} className="flex gap-3">
-                <div className="flex flex-col items-center">
+          <StepList
+            nodeStyle="dot"
+            steps={sessions.map((s, i) => {
+              const last = i === sessions.length - 1
+              const open = openId === s.id
+              return {
+                key: s.id,
+                state: 'done',
+                node: (
                   <span
                     className={cn(
                       'relative mt-1.5 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full',
@@ -48,44 +52,33 @@ export function MonthTimeline({ monthFull, sessions, openId, onToggle }: Props) 
                       </>
                     )}
                   </span>
-                  {!last && (
-                    <span
-                      aria-hidden
-                      className={cn('my-1 w-px flex-1', s.incident ? 'bg-amber-400/[0.25]' : 'bg-emerald-500/[0.18]')}
-                    />
-                  )}
-                </div>
-
-                <div className={cn('min-w-0 flex-1', !last && 'pb-5')}>
-                  <button
-                    type="button"
-                    onClick={() => onToggle(open ? null : s.id)}
-                    aria-expanded={open}
-                    className="w-full text-left"
+                ),
+                railClassName: s.incident ? 'bg-amber-400/[0.25]' : 'bg-emerald-500/[0.18]',
+                title: `${monthFull.slice(0, 3)} ${dayOf(s)}`,
+                titleClassName: 'font-mono text-[13px] font-extrabold tabular-nums tracking-tight',
+                titleMeta:
+                  timeOf(s) && (
+                    <span className="ml-1.5 font-bold text-[#0B211B]/40">{timeOf(s)}</span>
+                  ),
+                trailingTitle: (
+                  <Chip
+                    intent={s.incident ? 'warning' : 'success'}
+                    dot={Boolean(s.incident)}
+                    className="shrink-0 whitespace-nowrap"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="min-w-0 truncate font-mono text-[13px] font-extrabold tabular-nums tracking-tight text-[#0B211B]">
-                        {monthFull.slice(0, 3)} {dayOf(s)}
-                        {timeOf(s) && <span className="ml-1.5 font-bold text-[#0B211B]/40">{timeOf(s)}</span>}
-                      </span>
-                      <Chip
-                        intent={s.incident ? 'warning' : 'success'}
-                        dot={Boolean(s.incident)}
-                        className="shrink-0 whitespace-nowrap"
-                      >
-                        {s.incident ? 'Incident' : 'Complete'}
-                      </Chip>
-                    </div>
-                    <p className="mt-1 line-clamp-2 text-pretty text-[12px] font-medium leading-relaxed text-[#0B211B]/55">
-                      {s.detail}
-                    </p>
-                  </button>
-
-                  <AnimatePresence initial={false}>{open && <RecordExpansion key="expansion" session={s} />}</AnimatePresence>
-                </div>
-              </div>
-            )
-          })}
+                    {s.incident ? 'Incident' : 'Complete'}
+                  </Chip>
+                ),
+                body: s.detail,
+                bodyClassName: 'line-clamp-2 text-[12px] font-medium leading-relaxed',
+                contentClassName: last ? '' : 'pb-5',
+                expandable: true,
+                open,
+                onToggle: () => onToggle(open ? null : s.id),
+                expansion: <RecordExpansion session={s} />,
+              }
+            })}
+          />
         </div>
       </motion.div>
     </div>

@@ -14,6 +14,7 @@ import type { LucideIcon } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
 import { FactRows } from '@/components/phone/FactRows'
 import { Row } from '@/components/phone/Row'
+import { StepList } from '@/components/phone/StepList'
 import { captureSteps, paymentMeta } from '@/data/system/payments'
 import type { CaptureIcon, PaymentPhase } from '@/data/system/payments'
 import { useRouter } from '@/lib/router'
@@ -91,94 +92,74 @@ export function CaptureChainCard({
           </Chip>
         </div>
 
-        <div className="mt-4">
-          {captureSteps.map((step, i) => {
+        <StepList
+          className="mt-4"
+          nodeStyle="circle"
+          nodeSize="sm"
+          theme="light"
+          steps={captureSteps.map((step, i) => {
             const state = stateFor(i)
             const Icon = STEP_ICONS[step.icon]
             const last = i === captureSteps.length - 1
-            return (
-              <div key={step.title} className="flex gap-3">
-                <div className="flex flex-col items-center">
+            return {
+              key: step.title,
+              state: state === 'pending' ? 'pending' : state === 'active' ? 'active' : 'done',
+              node: (
+                <span
+                  className={cn(
+                    'relative mt-1 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full',
+                    state === 'done' && 'bg-emerald-500',
+                    state === 'active' && 'bg-white',
+                    state === 'failed' && 'bg-rose-500',
+                    state === 'pending' && 'bg-white ring-1 ring-[#0B211B]/15',
+                  )}
+                >
+                  {state === 'done' && <Check className="h-2.5 w-2.5 text-white" strokeWidth={4} aria-hidden />}
+                  {state === 'active' && (
+                    <>
+                      <span aria-hidden className="absolute h-4 w-4 animate-ping rounded-full bg-emerald-400/50" />
+                      <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
+                    </>
+                  )}
+                  {state === 'failed' && <Lock className="h-2 w-2 text-white" strokeWidth={3.5} aria-hidden />}
+                </span>
+              ),
+              railClassName:
+                state === 'done'
+                  ? 'bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15'
+                  : 'bg-[#0B211B]/[0.1]',
+              title: step.title,
+              titleClassName: 'transition-colors duration-300',
+              trailingTitle: (
+                <span className="flex shrink-0 items-center gap-1.5">
                   <span
                     className={cn(
-                      'relative mt-1 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full',
-                      state === 'done' && 'bg-emerald-500',
-                      state === 'active' && 'bg-white',
-                      state === 'failed' && 'bg-rose-500',
-                      state === 'pending' && 'bg-white ring-1 ring-[#0B211B]/15',
+                      'font-mono text-[10px] font-bold uppercase tracking-wide transition-colors duration-300',
+                      state === 'pending' ? 'text-[#0B211B]/25' : 'text-[#0B211B]/40',
                     )}
                   >
-                    {state === 'done' && <Check className="h-2.5 w-2.5 text-white" strokeWidth={4} aria-hidden />}
-                    {state === 'active' && (
-                      <>
-                        <span aria-hidden className="absolute h-4 w-4 animate-ping rounded-full bg-emerald-400/50" />
-                        <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
-                      </>
-                    )}
-                    {state === 'failed' && <Lock className="h-2 w-2 text-white" strokeWidth={3.5} aria-hidden />}
+                    {step.time}
                   </span>
-                  {!last && (
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'my-1 w-px flex-1',
-                        state === 'done'
-                          ? 'bg-gradient-to-b from-emerald-500/50 via-emerald-400/25 to-emerald-300/15'
-                          : 'bg-[#0B211B]/[0.1]',
-                      )}
-                    />
-                  )}
-                </div>
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.985 }}
-                  onClick={() => onStepTap(step.title, step.detail)}
-                  className={cn('min-w-0 flex-1 text-left outline-none focus-visible:outline-none', !last && 'pb-5')}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span
-                      className={cn(
-                        'text-[13.5px] font-bold tracking-tight transition-colors duration-300',
-                        state === 'pending' ? 'text-[#0B211B]/35' : 'text-[#0B211B]',
-                      )}
-                    >
-                      {step.title}
-                    </span>
-                    <span className="flex shrink-0 items-center gap-1.5">
-                      <span
-                        className={cn(
-                          'font-mono text-[10px] font-bold uppercase tracking-wide transition-colors duration-300',
-                          state === 'pending' ? 'text-[#0B211B]/25' : 'text-[#0B211B]/40',
-                        )}
-                      >
-                        {step.time}
-                      </span>
-                      <Icon
-                        className={cn(
-                          'h-3.5 w-3.5 transition-colors duration-300',
-                          state === 'done' && 'text-emerald-600',
-                          state === 'active' && 'text-emerald-600',
-                          state === 'failed' && 'text-rose-500',
-                          state === 'pending' && 'text-[#0B211B]/20',
-                        )}
-                        strokeWidth={2.2}
-                        aria-hidden
-                      />
-                    </span>
-                  </div>
-                  <p
+                  <Icon
                     className={cn(
-                      'mt-1 text-pretty text-[11px] font-medium leading-relaxed transition-colors duration-300',
-                      state === 'pending' ? 'text-[#0B211B]/30' : 'text-[#0B211B]/55',
+                      'h-3.5 w-3.5 transition-colors duration-300',
+                      state === 'done' && 'text-emerald-600',
+                      state === 'active' && 'text-emerald-600',
+                      state === 'failed' && 'text-rose-500',
+                      state === 'pending' && 'text-[#0B211B]/20',
                     )}
-                  >
-                    {step.detail}
-                  </p>
-                </motion.button>
-              </div>
-            )
+                    strokeWidth={2.2}
+                    aria-hidden
+                  />
+                </span>
+              ),
+              body: step.detail,
+              bodyClassName: 'transition-colors duration-300',
+              contentClassName: last ? '' : 'pb-5',
+              onClick: () => onStepTap(step.title, step.detail),
+            }
           })}
-        </div>
+        />
 
         <div className="mt-2">
           <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#0B211B]/40">

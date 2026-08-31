@@ -12,7 +12,8 @@ import {
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Card, Chip, Tile, TimeChip } from '@/components/phone/kit'
+import { Card, Chip, Tile } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { ladderSteps } from '@/data/system/recheck'
 import type { LadderPhase } from '@/data/system/recheck'
 import { cn } from '@/lib/utils'
@@ -80,66 +81,28 @@ export function NoAvailabilityLadder({ phase, completed, onPlay, onStepTap }: No
           </div>
         </div>
 
-        <div className="mt-3.5 flex flex-col">
-          {ladderSteps.map((step, i) => {
-            const state = stateFor(i)
-            const Icon = STEP_ICONS[i]
-            const last = i === ladderSteps.length - 1
-            return (
-              <motion.button
-                key={step.title}
-                type="button"
-                whileTap={{ scale: 0.985 }}
-                onClick={() => onStepTap(step.title, `${step.time} · ${step.body}`)}
-                className="flex gap-3 text-left outline-none focus-visible:outline-none"
-              >
-                <div className="flex flex-col items-center">
-                  <span
-                    className={cn(
-                      'relative grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors duration-300',
-                      state === 'done' && 'bg-emerald-500 text-white',
-                      state === 'now' && 'bg-amber-400 text-white',
-                      state === 'pending' && 'bg-[#0B211B]/[0.06] text-[#0B211B]/30',
-                    )}
-                  >
-                    {state === 'done' && <Check className="h-4 w-4" strokeWidth={3} aria-hidden />}
-                    {state === 'now' && <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2.6} aria-hidden />}
-                    {state === 'pending' && <Icon className="h-4 w-4" strokeWidth={2.2} aria-hidden />}
-                  </span>
-                  {!last && (
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'my-1 w-px flex-1 transition-colors duration-500',
-                        state === 'done' ? 'bg-emerald-500/30' : 'bg-[#0B211B]/[0.08]',
-                      )}
-                    />
-                  )}
-                </div>
-                <div className={cn('min-w-0 flex-1', last ? 'pb-0.5' : 'pb-3.5')}>
-                  <div className="flex items-center gap-2">
-                    <TimeChip>{step.time}</TimeChip>
-                    <span
-                      className={cn(
-                        'truncate text-[13px] font-bold tracking-tight transition-colors duration-300',
-                        state === 'pending' ? 'text-[#0B211B]/35' : 'text-[#0B211B]',
-                      )}
-                    >
-                      {step.title}
-                    </span>
-                  </div>
-                  <div
-                    className={cn(
-                      'mt-0.5 text-[11px] font-medium leading-snug transition-colors duration-300',
-                      state === 'pending' ? 'text-[#0B211B]/30' : 'text-[#0B211B]/55',
-                    )}
-                  >
-                    {step.body}
-                  </div>
-                </div>
-              </motion.button>
-            )
-          })}
+        <div className="mt-3.5">
+          <StepList
+            nodeStyle="circle"
+            nodeSize="lg"
+            theme="light"
+            activeStyle="spinner"
+            steps={ladderSteps.map((step, i) => {
+              const state = stateFor(i)
+              return {
+                key: step.title,
+                icon: STEP_ICONS[i],
+                state: state === 'now' ? 'active' : state,
+                title: step.title,
+                titleClassName: 'text-[13px]',
+                body: step.body,
+                bodyClassName: 'text-[11px]',
+                time: step.time,
+                contentClassName: i === ladderSteps.length - 1 ? 'pb-0.5' : 'pb-3.5',
+                onClick: () => onStepTap(step.title, `${step.time} · ${step.body}`),
+              }
+            })}
+          />
         </div>
 
         <AnimatePresence>

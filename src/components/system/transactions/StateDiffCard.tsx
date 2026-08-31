@@ -18,6 +18,7 @@ import { Card, Chip, Panel, Tile, rise } from '@/components/phone/kit'
 import type { Intent, TileTone } from '@/components/phone/kit'
 import { Overline } from '@/components/phone/Overline'
 import { Row } from '@/components/phone/Row'
+import { StepList } from '@/components/phone/StepList'
 import { scheduleDiff } from '@/data/system/auditLog'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
@@ -201,61 +202,56 @@ export function StateDiffCard({ verifyPhase }: StateDiffCardProps) {
 
           <Panel intent="neutral" className="mt-3 p-4">
             <Overline>Approval trail</Overline>
-            <div className="mt-4 flex flex-col">
-              {approvalTrail.map((step, i) => {
+            <StepList
+              className="mt-4"
+              nodeStyle="circle"
+              nodeSize="md"
+              theme="light"
+              railClassName="bg-[#0B211B]/10"
+              steps={approvalTrail.map((step, i) => {
                 const last = i === approvalTrail.length - 1
                 const Icon = step.icon
                 const open = expanded === i
-                return (
-                  <div key={step.title} className="flex gap-3">
-                    <div className="flex flex-col items-center">
-                      <span className={cn('grid h-5 w-5 shrink-0 place-items-center rounded-full text-white', step.tone)}>
-                        <Icon className="h-3 w-3" strokeWidth={3} aria-hidden />
-                      </span>
-                      {!last && <span aria-hidden className="my-1 w-px flex-1 bg-[#0B211B]/10" />}
-                    </div>
-                    <div className={cn('min-w-0 flex-1', last ? 'pb-0.5' : 'pb-4')}>
-                      <button
-                        type="button"
-                        onClick={() => setExpanded(open ? null : i)}
-                        className="flex w-full items-baseline justify-between gap-2 text-left outline-none focus-visible:outline-none"
-                      >
-                        <span className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">
-                          {step.title}
-                        </span>
-                        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }} className="shrink-0 self-center">
-                          <ChevronDown className="h-4 w-4 text-[#0B211B]/30" aria-hidden />
-                        </motion.span>
-                      </button>
-                      <div className="mt-0.5 break-words text-[11px] font-medium leading-relaxed text-[#0B211B]/55">
-                        {step.body}
+                return {
+                  key: step.title,
+                  state: 'done',
+                  node: (
+                    <span className={cn('grid h-5 w-5 shrink-0 place-items-center rounded-full text-white', step.tone)}>
+                      <Icon className="h-3 w-3" strokeWidth={3} aria-hidden />
+                    </span>
+                  ),
+                  title: step.title,
+                  titleWrap: true,
+                  titleClassName: 'text-[13px]',
+                  trailingTitle: (
+                    <motion.span
+                      animate={{ rotate: open ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="shrink-0 self-center"
+                    >
+                      <ChevronDown className="h-4 w-4 text-[#0B211B]/30" aria-hidden />
+                    </motion.span>
+                  ),
+                  body: step.body,
+                  bodyClassName: 'text-[11px] leading-relaxed',
+                  contentClassName: last ? 'pb-0.5' : undefined,
+                  expandable: true,
+                  open,
+                  onToggle: () => setExpanded(open ? null : i),
+                  expansion: (
+                    <div className="mt-2.5 rounded-xl bg-amber-500/[0.08] p-3">
+                      <p className="break-words text-[11.5px] font-medium leading-relaxed text-[#0B211B]/80">
+                        {step.detail}
+                      </p>
+                      <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-[#0B211B]/40">
+                        <Check className="h-3 w-3 shrink-0 text-emerald-600" strokeWidth={3} aria-hidden />
+                        {step.meta}
                       </div>
-                      <AnimatePresence>
-                        {open && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25, ease: 'easeInOut' }}
-                            className="overflow-hidden"
-                          >
-                            <div className="mt-2.5 rounded-xl bg-amber-500/[0.08] p-3">
-                              <p className="break-words text-[11.5px] font-medium leading-relaxed text-[#0B211B]/80">
-                                {step.detail}
-                              </p>
-                              <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-[#0B211B]/40">
-                                <Check className="h-3 w-3 shrink-0 text-emerald-600" strokeWidth={3} aria-hidden />
-                                {step.meta}
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
                     </div>
-                  </div>
-                )
+                  ),
+                }
               })}
-            </div>
+            />
           </Panel>
 
           <Row

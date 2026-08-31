@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Ban, Check, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react'
 import { rise } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { consentWithdrawal } from '@/data/seed'
+import { cn } from '@/lib/utils'
 
 type NotifyFn = (payload: { title: string; body: string; kind: 'ok' | 'warn' | 'info' }) => void
 
@@ -174,87 +176,65 @@ export function WithdrawalCard({ notify }: WithdrawalCardProps) {
               Closure checklist
             </div>
             <div className="mt-3 flex flex-col">
-              {closure.map((c, i) => {
-                const last = i === closure.length - 1
-                const isExpanded = expandedItem === c.label
-                return (
-                  <div key={c.label} className="flex gap-3">
-                    <div className="flex flex-col items-center">
-                      {c.done ? (
-                        <span
-                          className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-white transition-all duration-500 ${
-                            isSealed
-                              ? 'bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.5)]'
-                              : 'bg-emerald-400/90'
-                          }`}
-                        >
-                          <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
-                        </span>
-                      ) : (
-                        <span className="relative grid h-5 w-5 shrink-0 place-items-center">
-                          <span aria-hidden className="absolute h-5 w-5 animate-ping rounded-full bg-rose-400/40" />
-                          <span className="relative h-2.5 w-2.5 rounded-full bg-rose-400" />
-                        </span>
-                      )}
-                      {!last && (
-                        <span
-                          aria-hidden
-                          className={`my-1 w-px flex-1 transition-colors duration-500 ${
-                            isSealed ? 'bg-emerald-400/20' : 'bg-white/15'
-                          }`}
-                        />
-                      )}
-                    </div>
-                    <div className={last ? 'min-w-0 flex-1 pb-0.5' : 'min-w-0 flex-1 pb-4'}>
-                      <motion.button
-                        type="button"
-                        onClick={() => setExpandedItem(isExpanded ? null : c.label)}
-                        className="flex w-full items-start justify-between gap-2 text-left focus-visible:outline-none"
-                      >
-                        <span className="min-w-0">
-                          <span className="block break-words text-[13px] font-bold leading-snug tracking-tight text-white">
-                            {c.label}
-                          </span>
-                          <span
-                            className={`mt-0.5 block break-words text-[10px] font-bold uppercase tracking-[0.12em] transition-colors duration-500 ${
-                              isSealed ? 'text-emerald-300' : 'text-rose-100/45'
-                            }`}
-                          >
-                            {c.state}
-                          </span>
-                        </span>
-                        <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.25 }}>
-                          <ChevronDown
-                            className={`h-4 w-4 shrink-0 transition-colors duration-500 ${
-                              isSealed ? 'text-emerald-200/50' : 'text-rose-100/40'
-                            }`}
-                            aria-hidden
-                          />
-                        </motion.span>
-                      </motion.button>
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25, ease: 'easeInOut' }}
-                            className="overflow-hidden"
-                          >
-                            <p
-                              className={`mt-2 break-words text-[11.5px] font-medium leading-relaxed transition-colors duration-500 ${
-                                isSealed ? 'text-emerald-100/70' : 'text-rose-100/60'
-                              }`}
-                            >
-                              {c.detail}
-                            </p>
-                          </motion.div>
+              <StepList
+                nodeStyle="circle"
+                nodeSize="md"
+                theme="dark"
+                steps={closure.map((c, i) => {
+                  const last = i === closure.length - 1
+                  const isExpanded = expandedItem === c.label
+                  return {
+                    key: c.label,
+                    state: c.done ? 'done' : 'pending',
+                    node: c.done ? (
+                      <span
+                        className={cn(
+                          'grid h-5 w-5 shrink-0 place-items-center rounded-full text-white transition-all duration-500',
+                          isSealed ? 'bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.5)]' : 'bg-emerald-400/90'
                         )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                )
-              })}
+                      >
+                        <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
+                      </span>
+                    ) : (
+                      <span className="relative grid h-5 w-5 shrink-0 place-items-center">
+                        <span aria-hidden className="absolute h-5 w-5 animate-ping rounded-full bg-rose-400/40" />
+                        <span className="relative h-2.5 w-2.5 rounded-full bg-rose-400" />
+                      </span>
+                    ),
+                    railClassName: isSealed ? 'bg-emerald-400/20' : 'bg-white/15',
+                    title: c.label,
+                    titleWrap: true,
+                    titleClassName: 'text-[13px] leading-snug tracking-tight',
+                    body: c.state,
+                    bodyClassName: cn(
+                      'text-[10px] font-bold uppercase tracking-[0.12em] transition-colors duration-500',
+                      isSealed ? 'text-emerald-300' : 'text-rose-100/45'
+                    ),
+                    trailingTitle: (
+                      <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                        <ChevronDown
+                          className={cn('h-4 w-4 shrink-0 transition-colors duration-500', isSealed ? 'text-emerald-200/50' : 'text-rose-100/40')}
+                          aria-hidden
+                        />
+                      </motion.span>
+                    ),
+                    expandable: true,
+                    open: isExpanded,
+                    onToggle: () => setExpandedItem(isExpanded ? null : c.label),
+                    expansion: (
+                      <p
+                        className={cn(
+                          'mt-2 break-words text-[11.5px] font-medium leading-relaxed transition-colors duration-500',
+                          isSealed ? 'text-emerald-100/70' : 'text-rose-100/60'
+                        )}
+                      >
+                        {c.detail}
+                      </p>
+                    ),
+                    contentClassName: last ? 'pb-0.5' : undefined,
+                  }
+                })}
+              />
             </div>
           </div>
 

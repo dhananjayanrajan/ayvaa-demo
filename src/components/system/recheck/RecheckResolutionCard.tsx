@@ -3,15 +3,14 @@ import {
   CalendarCheck,
   CalendarClock,
   CalendarX2,
-  Check,
   Loader2,
   ScanSearch,
   SearchCheck,
 } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { probeSteps, recheckSubject } from '@/data/system/recheck'
 import type { RecheckPhase } from '@/data/system/recheck'
-import { cn } from '@/lib/utils'
 
 
 type ProbeVisual = 'pending' | 'active' | 'done'
@@ -100,33 +99,26 @@ export function RecheckResolutionCard({ phase, probeIndex, onRun }: RecheckResol
           </div>
         </div>
 
-        <div className="mt-3 flex flex-col">
-          {probeSteps.map((step, i) => {
-            const state = probeStateFor(i)
-            const last = i === probeSteps.length - 1
-            return (
-              <div key={step.title} className="flex gap-3">
-                <div className="flex flex-col items-center">
-                  <span
-                    className={cn(
-                      'grid h-5 w-5 shrink-0 place-items-center rounded-full transition-colors duration-300',
-                      state === 'done' && 'bg-emerald-500 text-white',
-                      state === 'active' && 'bg-amber-400 text-white',
-                      state === 'pending' && 'bg-[#0B211B]/[0.08] text-transparent',
-                    )}
-                  >
-                    {state === 'done' && <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />}
-                    {state === 'active' && <Loader2 className="h-3 w-3 animate-spin" strokeWidth={3} aria-hidden />}
-                  </span>
-                  {!last && <span aria-hidden className="my-1 w-px flex-1 bg-[#0B211B]/[0.08]" />}
-                </div>
-                <div className={cn('min-w-0 flex-1', last ? 'pb-0.5' : 'pb-3')}>
-                  <div className="text-[12.5px] font-bold tracking-tight text-[#0B211B]">{step.title}</div>
-                  <div className="mt-0.5 text-[11px] font-medium leading-snug text-[#0B211B]/55">{step.body}</div>
-                </div>
-              </div>
-            )
-          })}
+        <div className="mt-3">
+          <StepList
+            nodeStyle="circle"
+            nodeSize="md"
+            theme="light"
+            activeStyle="spinner"
+            railClassName="bg-[#0B211B]/[0.08]"
+            steps={probeSteps.map((step, i) => {
+              const state = probeStateFor(i)
+              return {
+                key: step.title,
+                state: state === 'active' ? 'active' : state,
+                title: step.title,
+                titleClassName: 'text-[12.5px]',
+                body: step.body,
+                bodyClassName: 'text-[11px]',
+                contentClassName: i === probeSteps.length - 1 ? 'pb-0.5' : 'pb-3',
+              }
+            })}
+          />
         </div>
 
         {phase === 'reversed' && (

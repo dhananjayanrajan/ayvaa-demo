@@ -18,6 +18,7 @@ import {
   rise,
 } from '@/components/phone/kit'
 import type { Intent } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import type { Approval } from '@/data/types'
 import { cn } from '@/lib/utils'
 
@@ -186,20 +187,26 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
                 <Meter value={progress} intent={running ? 'warning' : theme.meterIntent} delay={0.2} className="mt-2.5" />
 
                 <div className="mt-4 flex flex-col">
-                  {displayChecks.map((c, i) => {
-                    const meta = checkMeta[c.state] ?? checkMeta.pending
-                    const last = i === displayChecks.length - 1
+                  <StepList
+                    nodeStyle="circle"
+                    nodeSize="md"
+                    theme="dark"
+                    railClassName={theme.accentSoft}
+                    steps={displayChecks.map((c, i) => {
+                      const meta = checkMeta[c.state] ?? checkMeta.pending
+                      const last = i === displayChecks.length - 1
 
-                    const circleClass =
-                      c.state === 'ok'
-                        ? `${theme.accentBg} text-emerald-950`
-                        : c.state === 'running'
-                          ? theme.accentBg
-                          : 'bg-white/20 text-white/60'
+                      const circleClass =
+                        c.state === 'ok'
+                          ? `${theme.accentBg} text-emerald-950`
+                          : c.state === 'running'
+                            ? theme.accentBg
+                            : 'bg-white/20 text-white/60'
 
-                    return (
-                      <div key={c.label} className="flex gap-3">
-                        <div className="flex flex-col items-center">
+                      return {
+                        key: c.label,
+                        state: c.state === 'ok' ? 'done' : c.state === 'running' ? 'active' : 'pending',
+                        node: (
                           <span className={cn('grid h-5 w-5 shrink-0 place-items-center rounded-full', circleClass)}>
                             {c.state === 'ok' ? (
                               <Check className="h-3 w-3" strokeWidth={3.5} aria-hidden />
@@ -212,20 +219,22 @@ export function ApprovalCard({ a, onDecide, decision }: ApprovalCardProps) {
                               <span className="h-2 w-2 rounded-full bg-current" />
                             )}
                           </span>
-                          {!last && <span aria-hidden className={cn('my-1 w-px flex-1', theme.accentSoft)} />}
-                        </div>
-                        <div className={cn('min-w-0 flex-1 pt-1', !last && 'pb-4')}>
-                          <div className="text-[13px] font-bold leading-snug tracking-tight text-white">{c.label}</div>
-                          <div className={cn('mt-0.5 text-[11px] font-semibold', theme.sub)}>{meta.sub}</div>
-                        </div>
-                        <span className="shrink-0 pt-1">
-                          <Chip intent={meta.intent} light dot={meta.dot}>
-                            {meta.chip}
-                          </Chip>
-                        </span>
-                      </div>
-                    )
-                  })}
+                        ),
+                        title: c.label,
+                        titleClassName: 'text-[13px] leading-snug tracking-tight',
+                        body: meta.sub,
+                        bodyClassName: cn('text-[11px] font-semibold', theme.sub),
+                        trailingTitle: (
+                          <span className="pt-1">
+                            <Chip intent={meta.intent} light dot={meta.dot}>
+                              {meta.chip}
+                            </Chip>
+                          </span>
+                        ),
+                        contentClassName: last ? 'pt-1' : 'pt-1 pb-4',
+                      }
+                    })}
+                  />
                 </div>
               </motion.div>
             </Expand>

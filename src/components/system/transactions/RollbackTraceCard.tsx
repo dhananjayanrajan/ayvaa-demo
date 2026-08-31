@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ShieldCheck, Undo2 } from 'lucide-react'
 import { Chip, rise } from '@/components/phone/kit'
+import { StepList } from '@/components/phone/StepList'
 import { transactionMeta, transactionSteps } from '@/data/system/transactions'
 
 interface RollbackTraceCardProps {
@@ -33,52 +34,48 @@ export function RollbackTraceCard({ failedAt }: RollbackTraceCardProps) {
           </p>
 
           <div className="mt-4 rounded-2xl bg-white/[0.06] p-4">
-            <div className="flex flex-col">
-              {undone.map((s, i) => (
-                <div key={s.id} className="flex gap-3">
-                  <div className="flex flex-col items-center">
+            <StepList
+              nodeStyle="circle"
+              nodeSize="md"
+              theme="dark"
+              steps={[
+                ...undone.map((s, i) => ({
+                  key: `${s.id}`,
+                  state: 'done' as const,
+                  node: (
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-rose-400/90 text-white">
                       <Undo2 className="h-3 w-3" strokeWidth={2.6} aria-hidden />
                     </span>
-                    <span aria-hidden className="my-1 w-px flex-1 bg-white/15" />
-                  </div>
-                  <div className="min-w-0 flex-1 pb-4">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <span className="break-words text-[13px] font-bold tracking-tight text-white">
-                        {s.undoTitle}
-                      </span>
-                      <span className="shrink-0 font-mono text-[9px] font-bold uppercase tracking-wide text-rose-200/50">
-                        {40 + i * 80} ms
-                      </span>
-                    </div>
-                    <div className="mt-0.5 break-words text-[11px] font-medium leading-relaxed text-rose-100/60">
-                      {s.undoBody}
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              <div className="flex gap-3">
-                <div className="flex flex-col items-center">
-                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-400 text-white shadow-[0_0_12px_rgba(52,211,153,0.5)]">
-                    <ShieldCheck className="h-3 w-3" strokeWidth={2.6} aria-hidden />
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1 pb-0.5">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span className="break-words text-[13px] font-bold tracking-tight text-white">
-                      Attempt logged
+                  ),
+                  title: s.undoTitle,
+                  titleWrap: true,
+                  titleClassName: 'text-[13px]',
+                  time: `${40 + i * 80} ms`,
+                  timeTrailing: true,
+                  timeTrailingClassName: 'text-[9px] text-rose-200/50',
+                  body: s.undoBody,
+                  bodyClassName: 'text-[11px] leading-relaxed text-rose-100/60',
+                })),
+                {
+                  key: 'attempt-logged',
+                  state: 'done',
+                  node: (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-400 text-white shadow-[0_0_12px_rgba(52,211,153,0.5)]">
+                      <ShieldCheck className="h-3 w-3" strokeWidth={2.6} aria-hidden />
                     </span>
-                    <span className="shrink-0 font-mono text-[9px] font-bold uppercase tracking-wide text-emerald-200/60">
-                      Sealed
-                    </span>
-                  </div>
-                  <div className="mt-0.5 break-words text-[11px] font-medium leading-relaxed text-emerald-100/60">
-                    Even a rolled-back transaction leaves an immutable trace in the audit log.
-                  </div>
-                </div>
-              </div>
-            </div>
+                  ),
+                  title: 'Attempt logged',
+                  titleWrap: true,
+                  titleClassName: 'text-[13px]',
+                  time: 'Sealed',
+                  timeTrailing: true,
+                  timeTrailingClassName: 'text-[9px] text-emerald-200/60',
+                  body: 'Even a rolled-back transaction leaves an immutable trace in the audit log.',
+                  bodyClassName: 'text-[11px] leading-relaxed text-emerald-100/60',
+                  contentClassName: 'pb-0.5',
+                },
+              ]}
+            />
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-1.5">

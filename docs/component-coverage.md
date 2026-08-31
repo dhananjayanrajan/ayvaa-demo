@@ -410,3 +410,17 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   MonthTimeline, AuditTimeline, StepTimeline, LiveStepper, JourneyRail, JourneyTime,
   DispatchSequence, WizardStepper, PartnerCarePathway, StateDiffCard trail, FailsafeCard steps,
   RecheckRulesList, TransactionStepList)
+
+---
+# Revision 20 — Sweep 2 (StepList/Timeline) CLOSED
+
+- StepList universal created (phone/StepList.tsx): nodeStyle tile/circle/dot, theme
+  light/dark, activeStyle spinner/ping, per-item node/rail overrides, time/titleMeta/
+  trailingTitle/contentClassName slots
+- 13 timeline files converted onto StepList; snip RecheckRulesList numbered rail onto Row
+- Residuals logged (single-caller extension debt): IncidentTimelineCard, PartnerCarePathway,
+  horizontal steppers (LiveStepper, WizardStepper, JourneyRail, CycleStep, DarkCycleStepper)
+- Grep zero-proof: zero `w-px flex-1`/`flex flex-col items-center` rail signatures outside phone/
+- Gate standing: 33 errors, pure Category C (baseline unchanged)
+- NEXT: Stage 5 — FactRows/StatStrip extensions + corpus sweep (divide-x stat strips,
+  big-number cells, Vault TapStat)

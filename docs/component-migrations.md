@@ -649,3 +649,40 @@ Row-sweep residuals (need Row extension or special handling, logged for later): 
 LEDGERED micro-deviations: whileTap 0.99/0.97 → 0.985 (Row default) on several; EscalateSheet surface bg/[0.035]→/[0.03]; VitalsCard ReadingRow lost aria-label; dropped row-level whileHover scale on SafetyChecksCard (no-hover-motion precedent); focus-ring additions (precedent).
 
 Verification: real gate exit 2 = 33 Category C errors (baseline unchanged, down from 47 as Category A/B/D closed pre-session); zero errors from Row.tsx or any converted file; grep zero-proof — all 15 converted files have zero `flex w-full items-center gap-3` / `flex w-full items-start gap-3` signatures.
+
+## Sweep 2 (StepList/Timeline) — CLOSED
+
+Hub creation: src/components/phone/StepList.tsx (~318 lines) — universal vertical-rail timeline.
+API: StepList {steps, nodeStyle='circle' |'tile'|'dot', nodeSize='sm'|'md'|'lg', theme='light'|'dark',
+activeStyle='spinner'|'ping', railClassName, className}; StepItem {key, title, body, time,
+timeTrailing, timeTrailingClassName, titleWrap, titleMeta, trailingTitle (far-right, ml-auto),
+itemClassName, chip, trailing, icon, tone, state ('done'|'active'|'pending'), node (full
+override), nodeClassName, railClassName (per-item, REPLACES top-level/auto), onClick,
+expandable, open, onToggle, expansion, titleClassName, bodyClassName, contentClassName
+(controls inter-item gap; default pb-4), className}.
+
+13 conversions (all gate-clean, exit 2 = 33 Category C baseline, zero StepList/converted errors):
+NoAvailabilityLadder, RecheckResolutionCard, RetryLadderCard, RefundCard, DispatchSequence,
+ReversedOfferTraceCard, RollbackTraceCard, ExecutionTrail, WithdrawalCard, ApprovalCard,
+MonthTimeline (nodeStyle=dot), StateDiffCard approval trail, CaptureChainCard capture steps.
+Row-side: RecheckRulesList numbered-rail converted to Row with custom numbered leading
+(01/02/03 + w-px rail + Tile sm in one leading; default chevron = exact match).
+
+Deferred residuals (logged, single-caller extension debt, NOT bolted on):
+- IncidentTimelineCard (system/escalations): continuous absolute rail + bordered white-card
+  content wrapper + ring-4 gradient dots → needs StepList 'continuous rail + bordered content'
+  modes
+- PartnerCarePathway (partner/patient): above-title Step-TimeChip+Chip row + body-hide-when-open
+  + pl-[52px] expansion + absolute rail → needs StepList above-title slot + pl-offset expansion
+- Horizontal steppers (LiveStepper, WizardStepper, JourneyRail, CycleStep, DarkCycleStepper):
+  distinct progress-line pattern, left as-is
+- NotificationFeed (Row residual, logged earlier)
+
+LEDGERED micro-deviations: StepList expansion wrapper hardcoded pb-4 (extra 16px below expanded
+detail — WithdrawalCard, MonthTimeline); non-last item divs get flex-1 (equal stretch); some
+original title rows items-baseline gap-2 → items-center gap-1.5 (ReversedOfferTraceCard);
+ExecutionTrail rail now pure gradient (no base color under); focus rings where previously none.
+
+Grep zero-proof: `rg -ln 'w-px flex-1|flex flex-col items-center' src/components --glob
+'!phone/**'` → exit 1, ZERO matches. No StepList-convertible hand-rolled vertical-rail timelines
+remain.
