@@ -66,7 +66,7 @@ export function CertificationUploadSheet({ category, onClose, onAdded }: Props) 
         footer={
           <div className="flex flex-col gap-2.5">
             <LifecycleButton
-              phase={status}
+              phase={status === 'idle' ? 'idle' : status === 'added' ? 'done' : 'working'}
               tone="accent"
               idleIcon={Upload}
               gated={!file}

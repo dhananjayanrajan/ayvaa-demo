@@ -1,7 +1,6 @@
 import { motion } from 'motion/react'
 import {
   CalendarClock,
-  Check,
   ChevronRight,
   CreditCard,
   LifeBuoy,

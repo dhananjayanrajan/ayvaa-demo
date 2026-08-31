@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Check } from 'lucide-react'
-import { Card, Chip, Tile, TimeChip } from '@/components/phone/kit'
+import { Card, Chip, TimeChip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import { CARE_STEPS } from '@/data/patientVisitSummary'
 

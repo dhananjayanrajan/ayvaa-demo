@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   Bell,
@@ -20,7 +20,6 @@ import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
-import type { TileTone } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'

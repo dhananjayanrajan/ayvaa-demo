@@ -11,7 +11,7 @@ type Props = {
 export function ExportHistoryButton({ status, onPress }: Props) {
   return (
     <LifecycleButton
-      phase={status}
+      phase={status === 'idle' ? 'idle' : status === 'saved' ? 'done' : 'working'}
       idleIcon={Download}
       idleLabel="Export session records"
       workingLabel="Preparing export…"

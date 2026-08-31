@@ -20,8 +20,6 @@ import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
-import type { TileTone } from '@/components/phone/kit'
-import { caregivers, visits } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
@@ -82,9 +80,6 @@ function DarkRow({ k, v }: { k: string; v: string }) {
 export function P26() {
   const { notify } = useDemo()
   const { navigate } = useRouter()
-  const nurse = caregivers[0]
-  const liveVisit = visits.find((v) => v.status === 'live')
-
   const [topic, setTopic] = useState<TopicId>('scheduling')
   const [message, setMessage] = useState('')
   const [photos, setPhotos] = useState<Attach[]>([])

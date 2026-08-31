@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import {
-  Clock,
   Loader2,
   Check,
   X,
@@ -18,8 +17,6 @@ import {
   FileText,
   CheckCircle2,
   ArrowUpRight,
-  User,
-  Home,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'

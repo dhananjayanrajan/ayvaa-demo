@@ -14,20 +14,17 @@ import {
   MapPin,
   Phone,
   Pencil,
-  ScrollText,
   ShieldCheck,
   User,
-  Users,
   X,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { Card, Chip, Hero, Meter, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { guardian, lovedOnes } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { cn } from '@/lib/utils'
 
 type FieldId = 'name' | 'email' | 'phone' | 'address'
 

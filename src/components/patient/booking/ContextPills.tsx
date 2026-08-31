@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { CalendarDays, ChevronRight, Clock } from 'lucide-react'
+import { CalendarDays, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function ContextPills({

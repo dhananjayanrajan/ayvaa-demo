@@ -21,12 +21,6 @@ import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'
 
-const initials = (name: string) =>
-  name
-    .split(' ')
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 2)
 
 export function P24() {
   const { notify } = useDemo()

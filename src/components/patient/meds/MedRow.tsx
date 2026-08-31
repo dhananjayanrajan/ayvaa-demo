@@ -1,5 +1,5 @@
 import { BadgeCheck } from 'lucide-react'
-import { Chip, Tile, TimeChip } from '@/components/phone/kit'
+import { Chip, TimeChip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import { FactRows } from '@/components/phone/FactRows'
 import { buildDoseFacts, type MedDose } from '@/data/patientMeds'

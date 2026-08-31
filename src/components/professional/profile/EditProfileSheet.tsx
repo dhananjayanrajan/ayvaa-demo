@@ -57,7 +57,7 @@ export function EditProfileSheet({ name, role, onClose, onSave }: Props) {
         onClose={onClose}
         footer={
           <LifecycleButton
-            phase={status}
+            phase={status === 'idle' ? 'idle' : status === 'saved' ? 'done' : 'working'}
             tone="accent"
             gated={!dirty}
             idleLabel="Save changes"

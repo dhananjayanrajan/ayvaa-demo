@@ -5,21 +5,14 @@ import {
   CalendarX2,
   Check,
   Loader2,
-  MapPin,
   ScanSearch,
   SearchCheck,
 } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
 import { probeSteps, recheckSubject } from '@/data/system/recheck'
 import type { RecheckPhase } from '@/data/system/recheck'
 import { cn } from '@/lib/utils'
 
-const PROBE_ICONS: Record<string, LucideIcon> = {
-  calendar: CalendarClock,
-  crosscheck: CalendarCheck,
-  travel: MapPin,
-}
 
 type ProbeVisual = 'pending' | 'active' | 'done'
 
@@ -30,7 +23,7 @@ interface RecheckResolutionCardProps {
   onRowTap: (title: string, body: string) => void
 }
 
-export function RecheckResolutionCard({ phase, probeIndex, onRun, onRowTap }: RecheckResolutionCardProps) {
+export function RecheckResolutionCard({ phase, probeIndex, onRun }: RecheckResolutionCardProps) {
   const probeStateFor = (i: number): ProbeVisual => {
     if (phase === 'reversed') return 'done'
     if (phase === 'probing') {
@@ -110,7 +103,6 @@ export function RecheckResolutionCard({ phase, probeIndex, onRun, onRowTap }: Re
         <div className="mt-3 flex flex-col">
           {probeSteps.map((step, i) => {
             const state = probeStateFor(i)
-            const Icon = PROBE_ICONS[step.icon]
             const last = i === probeSteps.length - 1
             return (
               <div key={step.title} className="flex gap-3">

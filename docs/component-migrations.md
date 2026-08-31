@@ -583,3 +583,36 @@ referral/alert/device rows inside B10–B11 keeps), sheet option rows (partner r
 - PENDING USER RULING: B/C/D disposition — recommendation on record: D (mechanical sweep) now,
   B (pre-session rewire artifacts, ours to fix) next, C (behavior-changing original bugs) as
   explicit workstream before B18
+
+## Categories D + B — swept and closed under the real gate
+
+### Category D (unused symbols, ~70 TS6133) — CLOSED
+- Mechanical removal across ~45 files, content-matched edits only
+- INCIDENT: the first sweep batch used blind line-number deletes; one ('22d' on PT02, aimed
+  at TileTone) deleted the LIVE `import { partner, referrals } from '@/data/seed'` — caught
+  by the real gate (10 cascading TS2304), root-caused via git diff, repaired by content-
+  matched replacement. RULE ADOPTED: line-number deletes banned without a prior content read
+  of the exact line; bulk sweeps must content-match
+- TS2367 incident: generic done-state ternary compared 'done' against per-file unions —
+  real gate caught all 5 within one exchange; fixed per-file with the true done-states
+  ('saved' ×4, 'added' ×1)
+- One lint error deliberately survives: A12 'cleanup' — it is the memory-leak fix (timers
+  pushed, never cleared), ruled Category C, not D
+
+### Category B (pre-session rewire artifacts, 5 LifecyclePhase mismatches) — CLOSED
+- ExportHistoryButton, PayoutReceiptSheet, CertificationUploadSheet, EditProfileSheet,
+  SaveSheetButton: `phase={status}` → explicit mapping (idle→idle, per-file done-state→
+  'done', middle states→'working'). Renders changed from broken (invalid phase → component
+  default, since those rewires) to intended — the B tradeoff, ruled by user
+- Also fixed ~15 unused imports left by pre-session B5/B8/B9 rewires (part of D's sweep)
+- Ledger RETRACTION upheld: pre-session "TSC clean at every gate" claims rested on the
+  vacuous root-config gate; these artifacts prove at least some were false
+
+### Standing state after this commit
+- REAL gate (tsc -p tsconfig.app.json): 47 errors, ALL Category C (original-codebase latent
+  bugs, pre-refactor, behavior-affecting — parked for explicit workstream ruling)
+- Category C menu on record: P24 data-model (12), PR07 notify signature (4), P25 QuickRequest
+  (3), A15 tone unions (3), PR04/PR03/A11 (2 each), plus 12 singles incl. A02, A10, PT01,
+  A12 timer leak, Offer type ×4, downloadSessionFile, Blob, StatementButton, StaffHero,
+  StaffDetailSheet, PartnerPatientHero, PartnerCarePathway, DeletionQueueList, RecordExpansion,
+  SessionDetail/ListCard

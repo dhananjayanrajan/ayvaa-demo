@@ -10,7 +10,6 @@ import {
   ShieldAlert,
   User,
   UserRound,
-  X,
 } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'

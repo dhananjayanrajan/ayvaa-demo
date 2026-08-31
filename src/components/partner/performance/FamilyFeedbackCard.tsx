@@ -10,7 +10,7 @@ interface FamilyFeedbackCardProps {
   onOpen: (feedbackIndex: number) => void
 }
 
-export function FamilyFeedbackCard({ data, onOpen }: FamilyFeedbackCardProps) {
+export function FamilyFeedbackCard({ data }: FamilyFeedbackCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const feedback = data.feedbacks[currentIndex]
 

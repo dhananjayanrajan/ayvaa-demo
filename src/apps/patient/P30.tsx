@@ -6,8 +6,6 @@ import {
   ChevronRight,
   HeartPulse,
   Mail,
-  ScrollText,
-  ShieldCheck,
   UserPlus,
   UsersRound,
   X,
@@ -15,7 +13,7 @@ import {
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
-import { guardian, lovedOnes } from '@/data/seed'
+import { lovedOnes } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'

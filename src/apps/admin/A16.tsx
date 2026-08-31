@@ -304,7 +304,7 @@ function HoldsList({ holds, onLift }: { holds: LegalHold[]; onLift: (id: string)
   )
 }
 
-function PurgePreview({ policy }: { policy: RecordType }) {
+function PurgePreview({ policy: _policy }: { policy: RecordType }) {
   const windows = [
     { label: 'Next 30 days', count: 124, pct: 14 },
     { label: 'Next 60 days', count: 318, pct: 37 },

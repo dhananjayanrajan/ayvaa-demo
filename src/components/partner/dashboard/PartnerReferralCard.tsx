@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Send, UserPlus, FileText, ChevronRight } from 'lucide-react'
+import { Send, UserPlus, ChevronRight } from 'lucide-react'
 import { Card, Chip, Tile } from '@/components/phone/kit'
 
 interface PartnerReferralCardProps {

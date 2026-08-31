@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { AlertTriangle, Check, Droplets, HeartPulse, History, MapPin, Phone, Siren, Users, X } from 'lucide-react'
+import { AlertTriangle, Check, Droplets, HeartPulse, History, MapPin, Phone, Siren, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'

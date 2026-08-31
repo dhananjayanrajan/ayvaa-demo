@@ -17,7 +17,6 @@ import { DispatchSequence } from '@/components/patient/review/DispatchSequence'
 import { ShareButton } from '@/components/patient/review/ShareButton'
 import {
   REVIEW_GUARDIAN,
-  REVIEW_MATCH,
   REVIEW_PATIENT,
   consentProgress,
   type ConsentId,

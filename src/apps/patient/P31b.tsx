@@ -13,7 +13,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Stat, Tile, rise, stagger } from '@/components/phone/kit'
+import { Card, Chip, Kicker, Meter, Panel, Section, Stat, Tile, rise, stagger } from '@/components/phone/kit'
 import { redispatch } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'

@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { Clock, ScrollText, ShieldCheck } from 'lucide-react'
+import { Clock, ShieldCheck } from 'lucide-react'
 
 export const VALIDITY_SECONDS = 1800
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Check, ScrollText } from 'lucide-react'
-import { Card, Chip, Tile } from '@/components/phone/kit'
+import { Card, Chip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import { FactRows } from '@/components/phone/FactRows'
 import { useRouter } from '@/lib/router'

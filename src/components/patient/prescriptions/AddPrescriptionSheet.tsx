@@ -181,7 +181,7 @@ export function AddPrescriptionSheet({
             </span>
           </span>
           <div className="mt-2.5 flex flex-col gap-1.5" role="radiogroup" aria-label="Prescribing doctor">
-            {PRESCRIBERS.map((d, i) => {
+            {PRESCRIBERS.map((d) => {
               const on = prescriber === d
               return (
                 <button

@@ -9,7 +9,6 @@ import {
   Link2,
   Loader2,
   Lock,
-  ShieldCheck,
   UserRound,
   X,
 } from 'lucide-react'

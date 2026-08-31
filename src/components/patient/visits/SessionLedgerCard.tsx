@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { Footprints, MapPin } from 'lucide-react'
 import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'

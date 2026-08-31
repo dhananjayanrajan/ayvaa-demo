@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { FileText, HeartPulse, Lock, Pill, ScrollText, ShieldCheck } from 'lucide-react'
+import { FileText, HeartPulse, Lock, Pill, ShieldCheck } from 'lucide-react'
 
 export const VAULT_FACTS = {
   patientFirst: 'Raghav',

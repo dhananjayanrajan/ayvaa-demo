@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CalendarCheck } from 'lucide-react'
-import { Card, Chip, Tile } from '@/components/phone/kit'
+import { Card, Chip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import { QuotePanel } from '@/components/phone/QuotePanel'
 import { FactRows } from '@/components/phone/FactRows'

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, Check, ChevronRight, CircleX, Clock, History, Hourglass, Repeat, Save, ShieldCheck, X } from 'lucide-react'
+import { Check, ChevronRight, CircleX, Clock, History, Hourglass, Repeat, Save, ShieldCheck, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Hero, Kicker, Meter, Panel, Section, Stat, Tile, rise, stagger } from '@/components/phone/kit'

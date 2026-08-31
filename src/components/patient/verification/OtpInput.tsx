@@ -33,7 +33,7 @@ export function OtpInput({
     if (key === 'Backspace' && !value[index] && index > 0) focusCell(index - 1)
   }
 
-  function handlePaste(index: number, raw: string) {
+  function handlePaste(_index: number, raw: string) {
     const digits = raw.replace(/\D/g, '').slice(0, CODE_LENGTH).split('')
     if (!digits.length) return
     const next = Array.from({ length: CODE_LENGTH }, (_, i) => digits[i] ?? '')

@@ -65,7 +65,7 @@ export function PayoutReceiptSheet({ date, amount, sessions, paid, bankName, las
       onClose={onClose}
       footer={
         <LifecycleButton
-          phase={status}
+          phase={status === 'idle' ? 'idle' : status === 'saved' ? 'done' : 'working'}
           idleIcon={Download}
           idleLabel="Download receipt"
           workingLabel="Preparing receipt…"

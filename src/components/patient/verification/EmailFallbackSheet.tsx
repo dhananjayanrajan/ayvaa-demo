@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
 import { Mail } from 'lucide-react'
-import { Tile } from '@/components/phone/kit'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { EmailCodeButton } from './EmailCodeButton'
 import type { EmailSendState } from './EmailCodeButton'

@@ -1,4 +1,4 @@
-import { Check, Camera, Smile } from 'lucide-react'
+import { Camera, Smile } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Meter, Tile } from '@/components/phone/kit'
 import { nextSteps } from '@/data/patientVerification'

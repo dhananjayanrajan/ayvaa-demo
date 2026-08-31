@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Check, ShieldCheck, Undo2 } from 'lucide-react'
-import { Card, Chip, Panel, rise } from '@/components/phone/kit'
+import { Card, Panel, rise } from '@/components/phone/kit'
 import { refund, refundEvents } from '@/data/system/payments'
 import { cn } from '@/lib/utils'
 

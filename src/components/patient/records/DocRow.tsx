@@ -1,5 +1,5 @@
 import { Lock, ShieldCheck } from 'lucide-react'
-import { Card, Chip, Tile, TimeChip } from '@/components/phone/kit'
+import { Card, Chip, TimeChip } from '@/components/phone/kit'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 import type { RecordDoc } from '@/data/patientRecords'
 

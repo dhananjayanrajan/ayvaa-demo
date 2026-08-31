@@ -1,7 +1,6 @@
 import { Check, Pill, ScrollText } from 'lucide-react'
 import { Hero } from '@/components/phone/kit'
 import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
-import { useRouter } from '@/lib/router'
 import { doseRounds } from '@/data/patientDashboard'
 
 export function MedicationCard({
@@ -13,7 +12,6 @@ export function MedicationCard({
   onSchedule: () => void
   onPrescriptions: () => void
 }) {
-  const { navigate } = useRouter()
   const given = doseRounds.filter((r) => r.given).length
   return (
     <Hero tone="amber">

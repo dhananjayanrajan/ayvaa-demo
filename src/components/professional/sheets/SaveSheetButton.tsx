@@ -13,7 +13,7 @@ type Props = {
 export function SaveSheetButton({ label, disabled, status, onPress }: Props) {
   return (
     <LifecycleButton
-      phase={status}
+      phase={status === 'idle' ? 'idle' : status === 'saved' ? 'done' : 'working'}
       className="mt-auto"
       gated={disabled && status === 'idle'}
       idleIcon={CheckCircle2}

@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Phone, RotateCcw } from 'lucide-react'
 import { QuietLifecycleButton } from '@/components/phone/LifecycleButton'

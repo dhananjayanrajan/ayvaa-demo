@@ -6,20 +6,15 @@ import {
   ReceiptText,
   X,
 } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import {
-  Card,
   Chip,
   Section,
-  Tile,
-  TimeChip,
   rise,
   stagger,
 } from '@/components/phone/kit'
-import type { TileTone } from '@/components/phone/kit'
 import { partner, referrals } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'

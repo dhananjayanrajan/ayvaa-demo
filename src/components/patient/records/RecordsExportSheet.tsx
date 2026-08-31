@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { Check, Download, FileText, Loader2, ScrollText } from 'lucide-react'
+import { Check, Download, FileText, Loader2 } from 'lucide-react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { AUDIT_ENTRIES, RECORD_DOCS, VAULT_FACTS, buildExportLines } from '@/data/patientRecords'
 import { useDemo } from '@/lib/store'

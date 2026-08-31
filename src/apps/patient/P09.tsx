@@ -45,7 +45,6 @@ export function P09() {
   }
 
   const person = lovedOnes[who]
-  const cat = bookingCategories.find((c) => c.label === category) ?? bookingCategories[0]
   const dur = durations.find((d) => d.id === duration) ?? durations[0]
   const win = timeWindows.find((w) => w.id === winId) ?? timeWindows[0]
 

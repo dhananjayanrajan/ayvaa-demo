@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { FlaskConical, Loader2, Play, RotateCcw, TriangleAlert } from 'lucide-react'
+import { FlaskConical, Play, RotateCcw, TriangleAlert } from 'lucide-react'
 import { Chip, Panel, Tile } from '@/components/phone/kit'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 import { BottomSheet } from '@/components/phone/SheetShell'

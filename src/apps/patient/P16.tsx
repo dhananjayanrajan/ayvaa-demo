@@ -6,7 +6,6 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
 import {
-  ACTIVE_STEP_META,
   LIVE_VISIT,
   SEAL_TIME,
   VISIT_STEPS,

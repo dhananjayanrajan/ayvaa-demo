@@ -374,3 +374,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   bugs), D (~70 unused-symbol lint) — disposition pending user ruling
 - Sweep 1 stage 2 (corpus adoption) paused mid-flight: 6 navigator cards converted (fixed),
   next tranche held until B/C/D ruled
+
+---
+# Revision 17 — Categories B + D CLOSED under the real gate
+
+- D: ~70 unused symbols removed, content-matched only; PT02 live-import incident repaired;
+  line-delete ban in force
+- B: 5 lifecycle-phase mismatches mapped to intended phases; ~15 pre-session rewire leftovers
+  cleaned
+- Gate standing: 47 errors, pure Category C (original latent bugs) — awaiting workstream ruling
+- Row sweep stage 2 resumable on ruling

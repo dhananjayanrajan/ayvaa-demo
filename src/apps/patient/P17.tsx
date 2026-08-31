@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ShieldCheck, Star } from 'lucide-react'
+import { ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import { Check, Download, Loader2 } from 'lucide-react'
 import type { HistorySession } from '@/data/historyData'
 import { downloadFile, recordToFileLines } from '@/data/historyData'

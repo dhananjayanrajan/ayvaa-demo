@@ -13,7 +13,7 @@ interface RatingHeroProps {
   onOpenSheet: () => void
 }
 
-export function RatingHero({ submitted, stars, highlightCount, note, onOpenSheet }: RatingHeroProps) {
+export function RatingHero({ submitted, stars, highlightCount, onOpenSheet }: RatingHeroProps) {
   return (
     <AccentHero tone={submitted ? 'emerald' : 'amber'}>
       <HeroTopRow
