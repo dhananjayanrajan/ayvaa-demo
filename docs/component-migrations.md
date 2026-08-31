@@ -263,3 +263,24 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Partner sheet family final: 14 of 14 processed (14 rewired, 0 keep-ruled-within-partner;
   admin trio's keep-ruling recorded above under admin)
 - Verified: both rewires on canonical by grep; npx tsc --noEmit clean
+
+## F1 finish — Professional sheets, tranche 1 (6 sheets)
+
+- components/phone/SheetShell.tsx → extended | full mode gains header?: ReactNode slot
+  (symmetric with footer; custom fixed headers + inputs above a scrolling body) | default
+  undefined keeps every existing consumer byte-identical; TSC clean at hub gate
+- Rewired height="scroll": CredentialsSheet, DevicesSheet (max-h-86% idiom → canonical 88%;
+  normalization flagged). whileHover drops on close buttons and Devices sign-out button
+  (no-hover-motion rule)
+- Rewired height="full" + header slot: RecordSheet (mono-kicker custom header), SearchSheet
+  (header incl. search input). Both mount-controlled with self-owned canonical-style dims kept
+  inline per B4 precedent (parent owns AnimatePresence; open-mode would rewire parent exits —
+  behavior change). RecordSheet footer = lifecycle export button; SearchSheet footer = note
+- Rewired height="auto" (StaffDetail idiom, self-owned black/40 dims preserved): ReportSheet,
+  SessionDetailSheet. Spring 300/30 → canonical 380/40 flagged
+- ORPHAN FINDING — new register: RecordSheet has zero consumers (word-boundary grep, both
+  path styles, whole src; only match is ConsentRecordSheet false-positive). Rewire stands;
+  deletion deferred to B18 orphan/vendor sweep
+- Consumers: zero screen edits — all six keep paths and export signatures; PR01/PR04/PR12
+  import lines unchanged
+- Verified: 6/6 on canonical by grep; npx tsc --noEmit clean

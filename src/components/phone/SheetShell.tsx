@@ -16,6 +16,7 @@ export type SheetProps = {
   subtitle?: string
   sub?: string
   height?: 'full' | 'auto' | 'scroll'
+  header?: ReactNode
   onClose: () => void
   footer?: ReactNode
   children: ReactNode
@@ -75,7 +76,7 @@ export function SheetHeader({
   return <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle ?? sub} onClose={onClose} />
 }
 
-function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, children }: {
+function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, header, children }: {
   icon?: LucideIcon
   tone: TileTone
   title?: string
@@ -83,6 +84,7 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, ch
   onClose: () => void
   footer?: ReactNode
   height?: 'full' | 'auto' | 'scroll'
+  header?: ReactNode
   children: ReactNode
 }) {
   if (height === 'auto') {
@@ -132,10 +134,14 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, ch
     >
       <div className="shrink-0 px-5 pt-3">
         <div aria-hidden className="mx-auto h-1.5 w-10 rounded-full bg-[#0B211B]/15" />
-        {(icon || title) && (
-          <div className="pb-3.5 pt-3.5">
-            <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle} onClose={onClose} />
-          </div>
+        {header ? (
+          <div className="pb-3.5 pt-3.5">{header}</div>
+        ) : (
+          (icon || title) && (
+            <div className="pb-3.5 pt-3.5">
+              <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle} onClose={onClose} />
+            </div>
+          )
         )}
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-4 pt-2">{children}</div>
@@ -144,13 +150,14 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, ch
   )
 }
 
-export function SheetShell({ open, tone, tileTone, subtitle, sub, height, ...rest }: SheetProps) {
+export function SheetShell({ open, tone, tileTone, subtitle, sub, height, header, ...rest }: SheetProps) {
   const surface = (
     <SheetSurface
       {...rest}
       tone={tileTone ?? tone ?? 'neutral'}
       subtitle={subtitle ?? sub}
       height={height}
+      header={header}
     />
   )
   if (open === undefined) return surface

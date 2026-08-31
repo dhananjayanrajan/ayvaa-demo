@@ -265,3 +265,14 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - F1 now 36 of 58 processed (34 rewired, 2 keep-ruled from B4); partner closed 14/14;
   admin closed 3/3; remaining: professional 7, patient 12
 - Canonical: SheetShell height 'full' | 'auto' | 'scroll' — final after this batch
+
+---
+# Revision 7 — F1 professional sheets tranche 1 (6 of 7)
+
+- Rewired: CredentialsSheet, DevicesSheet (scroll); RecordSheet, SearchSheet (full + header
+  slot); ReportSheet, SessionDetailSheet (auto, self-owned dims preserved)
+- Canonical change: SheetShell full mode gains header?: ReactNode slot (superset API)
+- NEW REGISTER — orphaned components (zero grep-proven consumers; deletion ruled at B18):
+  RecordSheet (professional/history)
+- F1 now 42 of 58 processed (40 rewired, 2 keep-ruled); professional 6 of 7; remaining:
+  DeclineOfferSheet (prof) + patient 12

@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import { CalendarClock, Loader2, LogOut, Monitor, Smartphone, X } from 'lucide-react'
 import { Chip, Tile } from '@/components/phone/kit'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 
 const devices: { icon: LucideIcon; name: string; where: string; when: string; current: boolean }[] = [
@@ -29,19 +30,8 @@ export function DevicesSheet({ onClose, onSignOutOthers }: DevicesSheetProps) {
   }
 
   return (
-    <motion.div
-      key="devices-sheet"
-      initial={{ y: '100%' }}
-      animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-      className="absolute inset-x-0 bottom-0 z-50 flex max-h-[86%] flex-col rounded-t-[28px] bg-white shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-    >
-      <div className="shrink-0 px-5 pt-4">
-        <div aria-hidden className="mx-auto h-1.5 w-10 rounded-full bg-[#0B211B]/15" />
-      </div>
-
-      <div className="flex min-h-0 flex-1 flex-col gap-3.5 overflow-y-auto px-5 pb-7 pt-3">
+    <SheetShell onClose={onClose} height="scroll">
+      <div className="flex flex-col gap-3.5">
         <div className="flex items-start gap-3">
           <Tile icon={Smartphone} tone="ink" size="lg" />
           <div className="min-w-0 flex-1">
@@ -51,8 +41,6 @@ export function DevicesSheet({ onClose, onSignOutOthers }: DevicesSheetProps) {
           <motion.button
             type="button"
             whileTap={{ scale: 0.92 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             onClick={onClose}
             className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
             aria-label="Close sheet"
@@ -86,8 +74,6 @@ export function DevicesSheet({ onClose, onSignOutOthers }: DevicesSheetProps) {
         <motion.button
           type="button"
           whileTap={signOutLoading ? undefined : { scale: 0.97 }}
-          whileHover={signOutLoading ? undefined : { scale: 1.02 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           onClick={handleSignOut}
           disabled={signOutLoading}
           className={cn(
@@ -112,6 +98,6 @@ export function DevicesSheet({ onClose, onSignOutOthers }: DevicesSheetProps) {
           Sessions auto-expire after 30 days of inactivity
         </div>
       </div>
-    </motion.div>
+    </SheetShell>
   )
 }
