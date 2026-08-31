@@ -1,5 +1,5 @@
-import { ConfirmStrip } from '@/components/phone/ConfirmStrip'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 
 export function SignOffConfirmation() {
-  return <ConfirmStrip>Visit signed off · all steps sealed · payment released · family notified</ConfirmStrip>
+  return <StatusStrip>Visit signed off · all steps sealed · payment released · family notified</StatusStrip>
 }

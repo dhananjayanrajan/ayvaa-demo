@@ -172,7 +172,11 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 
 ## 7. HOW TO START
 
-1. Confirm Category C disposition (stage 0) or proceed on standing recommendation (park).
-2. Verify the two navigator-card chevron states (stage 1).
-3. Resume Row sweep stage 2, next tranche: list interiors (stage 2).
-4. Hold every rule in §1 and §2. The rules exist because each one was paid for.
+1. ~~Confirm Category C disposition (stage 0)~~ — RESOLVED: park (Stage 15 workstream).
+2. ~~Verify the two navigator-card chevron states (stage 1)~~ — RESOLVED.
+3. ~~Resume Row sweep stage 2, next tranche: list interiors (stage 2)~~ — CLOSED (Stages 1-3).
+4. Current position: Stages 0-6 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312).
+   Stage 7 (StatusStrip universal) IN PROGRESS — build hub, convert ConfirmStrip/DeliveryStrip/
+   CallStrip, re-point 5 consumers, delete the three strips (grep-verify zero), real gate +
+   grep proofs, ledger, large commit.
+5. Hold every rule in §1 and §2. The rules exist because each one was paid for.

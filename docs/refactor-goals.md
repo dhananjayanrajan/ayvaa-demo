@@ -20,9 +20,22 @@
 
 ## Where we actually stand against that goal
 
-- **Built:** a real canonical library in `phone/` (21 primitives) plus promoted StatusPill — this is the foundation the goal requires.
-- **Collapsed:** ~70+ genuine duplicate implementations across sheets, heroes, buttons, rows, notices, and cards.
-- **Ruled:** a growing set of domain-genuine components honestly documented as keepers — which also serves the goal, since "no force-fitting" is part of it.
-- **Not yet:** full coverage (F1 sheets are ~35% processed, B10 incomplete, B11–B17 untouched), the 11 data-module moves, the coverage checklist that makes "every file processed" provable, and B18's final audit — the step that certifies the "guarantee" bullet before any screen work resumes.
-
-The distance to done is exactly the corrected chain from my last message. The goal hasn't changed; the discipline slipped; the path back is the coverage checklist first.
+- **Built:** a real canonical library in `phone/` (27 primitives) plus promoted StatusPill —
+  this is the foundation the goal requires. Canonical tier: kit, SheetShell, LifecycleButton,
+  OptionRow, DarkPanel, HeroCells, PhaseHero, FactTile, MiniTimeline, NoteStrip, ExpandRow,
+  QuotePanel, StatusPill, Pager, PhoneFrame, Screen, AppBar, NavBar, PushPreview,
+  ScreenshotButton, Splash, FactRows, AccentHero, Overline, ConfirmStrip, Row, StepList.
+- **Collapsed:** ~70+ genuine duplicate implementations across sheets, heroes, buttons, rows,
+  notices, and cards — plus the universal sweeps (Stages 0-6 closed): Row stage 2 (15
+  conversions), StepList (13 timelines), StatStrip (7 divide-x strips), PhaseShell (10 shells
+  onto PhaseHero + ProfilePreviewSheet sheet gap closed).
+- **Ruled:** a growing set of domain-genuine components honestly documented as keepers — which
+  also serves the goal, since "no force-fitting" is part of it. Under the doctrine reversal,
+  keep-rulings are relabeled PENDING DECOMPOSITION; every component is being decomposed into
+  universal primitives + thin compositions.
+- **Not yet:** full coverage (the universal-by-universal sweep program is at Stage 7 of 17 —
+  StatusStrip in progress; Quote, EmptyState, Tabs/Filters, Options/Actions, Field, Identity,
+  clinical residuals remain), the Category C workstream (Stage 15, 33 parked bugs), and B18's
+  final audit — the step that certifies the "guarantee" bullet before any screen work resumes.
+- **Gate:** real gate (tsc -p tsconfig.app.json) standing at 33 errors, pure Category C
+  (baseline unchanged since Stage 3).

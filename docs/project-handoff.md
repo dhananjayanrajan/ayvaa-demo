@@ -73,16 +73,27 @@ parked for a workstream ruling.
 **Era 6 — Now.** Row sweep stage 2 (corpus adoption) is ~25% complete and paused at the
 Category C disposition decision. The gate is real, the doctrine is set, the method is proven.
 
+**Era 7 — The universal sweeps (Stages 0-6 closed).** Category C ruled PARK (Stage 0). Row
+sweep stage 2 closed (Stages 1-3): chevron verification + 15 list/card/sheet-option
+conversions, Row hub extended (align/padding/disabled/titleMeta/body). StepList universal
+built and swept (Stage 4, 13 timelines + RecheckRulesList→Row). StatStrip added to kit and
+swept (Stage 5, 7 divide-x strips). PhaseShell consolidation closed (Stage 6): slate theme +
+10 shells onto PhaseHero + ProfilePreviewSheet sheet gap closed + IncidentLinkingCard
+timeline→StepList. Gate standing: 33 errors, pure Category C (baseline unchanged). Current
+position: Stage 7 (StatusStrip universal) in progress.
+
 ---
 
 ## 2. WHAT STANDS (verified — do not redo)
 
-- **Canonical library, `components/phone/` — 26 files:** kit, SheetShell, LifecycleButton,
+- **Canonical library, `components/phone/` — 27 files:** kit, SheetShell, LifecycleButton,
   OptionRow, DarkPanel, HeroCells, PhaseHero, FactTile, MiniTimeline, NoteStrip, ExpandRow,
   QuotePanel, StatusPill, Pager, PhoneFrame, Screen, AppBar, NavBar, PushPreview,
   ScreenshotButton, Splash (the original 21) + FactRows, AccentHero, Overline (promotions) +
-  ConfirmStrip, Row (new universals). FactRows is extended (mono variant + className
-  overrides); SheetShell is extended (height: full/auto/scroll, header slot).
+  ConfirmStrip, Row, StepList (new universals). FactRows is extended (mono variant + className
+  overrides); SheetShell is extended (height: full/auto/scroll, header slot); PhaseHero is
+  extended (slate theme key; theme prop is structural — callers pass custom PhaseHeroTheme
+  objects); kit is extended (StatStrip hub).
 - **Pre-session deletions (grep-verified zero consumers, per the audit):** phone/Controls,
   phone/ScreenBlocks, patient/matching/SheetShell, patient/onboarding/SheetShell,
   professional/payouts/SheetShell, admin/ui/BottomSheet, admin/ui/SheetHeader,
@@ -102,7 +113,11 @@ Category C disposition decision. The gate is real, the doctrine is set, the meth
   maps — that evidence base is complete and reusable; the keep-rulings are superseded by the
   doctrine reversal, but the reads are gold.
 - **Row universal stage 1:** 11 conversions + 6 navigator cards live on Row, real-gate clean.
-- **Categories A/B/D of the gate crisis: fixed and closed.**
+- **Row universal stage 2 (Stages 1-3):** chevron verification (CreateAccountCard + PartnerBillingCard `showChevron={false}`) + 15 list/card/sheet-option conversions; Row hub extended (align/padding/disabled/titleMeta/body). Grep zero-proof of hand-rolled row signatures. Commit 2c968b4.
+- **StepList universal (Stage 4):** phone/StepList.tsx built against full variation space; 13 timeline files converted + RecheckRulesList→Row. Grep zero-proof of vertical-rail timelines. Commit 3637fab.
+- **StatStrip (Stage 5):** added to phone/kit; 7 divide-x strips converted; kit Stat now zero-consumer (removal flagged at final cert). Commit 0a024ef.
+- **PhaseShell consolidation (Stage 6):** slate theme + 10 shells onto PhaseHero (5 residuals + 5 orb-anatomy finds); ProfilePreviewSheet sheet gap closed onto SheetShell; IncidentLinkingCard timeline→StepList. Commit ae70312.
+- **Categories A/B/D of the gate crisis: fixed and closed.** Gate standing: 33 errors, pure Category C (baseline unchanged since Stage 3).
 
 ---
 
@@ -165,7 +180,7 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
    Exit codes read DIRECTLY, never piped through `head` unguarded (head swallows exit codes).
    Plain `npx tsc --noEmit` compiles NOTHING (solution-style root config: `"files": []`,
    references only) — this exact mistake invalidated ~30 gates of history. Current standing:
-   47 errors, ALL Category C.
+   33 errors, ALL Category C (down from 47 as A/B/D closed; unchanged since Stage 3).
 2. **A gate that never fails is not a gate.** If a long run of greens occurs, run a negative
    control (deliberately break a file, confirm the gate fails, revert).
 3. **No blind line-number deletes.** A fixed-`Nd` sed once deleted a LIVE import on PT02
@@ -211,7 +226,14 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
   focus-ring additions; ListRow's Tile group-hover scale not reproduced (punch list).
 - **SheetShell:** mount- or open-controlled; height full (h-86%, header slot OR icon/title,
   footer slot) / auto (compact card) / scroll (max-h-88%); BottomSheet alias; SheetHeader.
-- **PhaseHero + PHASE_THEME** (7 keys incl. blueDeep, emeraldBright).
+- **PhaseHero + PHASE_THEME** (8 keys incl. blueDeep, emeraldBright, slate). Theme prop is
+  STRUCTURAL (PhaseHeroTheme object: border/shell/orbA/orbB/hairline/shadow) — callers pass
+  custom themes ({...PHASE_THEME.key, overrides}) so uniqueness feeds through props.
+- **StepList** (phone/StepList.tsx): nodeStyle tile/circle/dot, nodeSize sm/md/lg, theme
+  light/dark, activeStyle spinner/ping, per-item node/rail overrides, time/titleMeta/
+  trailingTitle/contentClassName slots, expandable.
+- **StatStrip** (in phone/kit): dark + light variants, cols, dot, valueClassName/
+  labelClassName overrides.
 - **FactRows:** dark/light + mono + labelClassName/valueClassName overrides.
 - **LifecycleButton family:** LifecycleButton (phases idle/working/done; tones
   success/warning/danger/info/accent), IconLifecycleButton, QuietLifecycleButton,
@@ -236,6 +258,8 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
 - **PhaseHero-adjacent hand-rolled shells (PhaseShell consolidation candidates):**
   ApprovalCard (4-state incl. slate), WithdrawalCard (2-state), IncidentLinkingCard (rose),
   ReversedOfferTraceCard (sky), RollbackTraceCard (rose). All single-caller.
+  **RESOLVED (Stage 6):** all 5 absorbed onto PhaseHero + 5 orb-anatomy finds (CaughtUpCard,
+  MatchCard, EstimateCard, ActionCard, ProfilePreviewSheet). Register now EMPTY.
 - **Reclassifications:** ResendRow → Actions sweep (3-state strip); DeliveryStrip +
   CallStrip → StatusStrip universal (identical animated strips — ConfirmStrip's two-line
   sibling); onboarding CredentialRow → Field universal base (Forms sweep; already
@@ -280,68 +304,74 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
 
 ---
 
-## 8. IN-FLIGHT WORK — Row sweep stage 2 (exact paused point)
+## 8. IN-FLIGHT WORK — Stage 7: StatusStrip universal (exact paused point)
 
-**Done in stage 2:** the six navigator cards (patient PaymentCard, PlanCard, UpcomingCard,
-CreateAccountCard, SettingsCard + partner PartnerBillingCard) converted onto Row; faithfulness
-defects caught and fixed.
+**Stages 0-6 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312). Current position:
+Stage 7 — StatusStrip universal.
 
-**Pending verification before proceeding:** the CreateAccountCard and PartnerBillingCard
-adapters may render duplicate trailing chevrons (Row shows its default chevron unless
-`showChevron={false}`; CreateAccount's original used ArrowRight instead, PartnerBilling's
-had none). Verify both, fix with `showChevron={false}` + trailing as needed.
+**Evidence read (Stage 7):**
+- ConfirmStrip (phone/, canonical): single-line animated emerald strip — Check icon badge
+  (h-5 w-5 rounded-full bg-emerald-500, strokeWidth 3), children as body (text-[11px] font-bold
+  leading-snug text-emerald-900/80), shell `flex items-center gap-3 rounded-xl bg-emerald-500/[0.08]
+  px-3 py-2.5`, animation initial {opacity 0, y:8, scale 0.98} / exit {opacity 0, y:-6} /
+  transition {0.25 easeOut}. 3 consumers: SignOffConfirmation, SaveConfirmation, UploadConfirmation.
+- DeliveryStrip (patient/verification): two-line — MailCheck badge (strokeWidth 2.8), overline
+  'Email fallback delivered' (text-[9px] uppercase tracking-[0.16em] text-emerald-700/60) + body
+  email (text-[12px] font-bold tracking-tight text-emerald-700), shell `flex items-start gap-3
+  rounded-xl bg-emerald-500/[0.08] px-3.5 py-2.5`, animation initial {opacity 0, y:6} / exit
+  {opacity 0, y:-4} (no scale, no transition). Consumer: P03.tsx:136 `{emailDelivered && <DeliveryStrip email={guardian.email} />}` (mount-controlled).
+- CallStrip (patient/recovery): identical to DeliveryStrip but PhoneCall badge (strokeWidth 2.6),
+  overline 'Call requested', body 'A coordinator calls you within 10 minutes', className adds
+  `mt-3`. Consumer: SentCard.tsx:45 `{callState === 'done' && <CallStrip />}` (mount-controlled).
 
-**Next tranches (evidence already read, in the ledger/B-reads):** list interiors —
-ServiceRow, MedRow, DocRow, EntryRow, StepRow, ChecklistRow, FieldTaskRow,
-AddCertificationRow, CertificationRow (professional profile), the alert/staff/referral/
-device rows inside B10–B11 keep-ruled cards, sheet option rows (partner referral options).
-Then the sweep closes with: grep proof of zero remaining hand-rolled row patterns
-(signature: `flex w-full items-center gap-3` + Tile/custom leading + title/subtitle
-anatomy), real gate, ledger, large commit.
+**Design decision (pending implementation):** StatusStrip universal in phone/ absorbing all three.
+Props: {icon?: LucideIcon (default Check), title?: string, children, align?: 'center'|'start',
+className?}. Canonical animation = ConfirmStrip's. Delivery/Call → title + align="start" +
+className="px-3.5" + their icon; ConfirmStrip → <StatusStrip>{children}</StatusStrip>. LEDGERED
+micro-deviations: Delivery/Call animation unified to ConfirmStrip's (y:6→y:8, exit y:-4→y:-6,
+added scale, added 0.25 easeOut transition), icon strokeWidth 2.8/2.6→3. All consumers
+mount-controlled (no AnimatePresence) so exit anims don't visibly play regardless. ConfirmStrip
+deleted after its 3 consumers re-point to StatusStrip (grep-verify zero consumers first).
 
-**Stage-2 lessons (apply immediately):** adapters must pass ONLY real props (the phantom
-amountClassName incident); amount/chip trailing columns with non-default styling go through
-`trailing` ReactNode with exact classes; chevron-bearing originals that shouldn't chevron
-need `showChevron={false}`; outer-card whileTap gestures stay on the card wrapper (Row
-inside with whileTapDisabled) — composition layering, not hub growth.
+**Next:** build StatusStrip hub (own message per rule §4.6), convert ConfirmStrip + DeliveryStrip +
+CallStrip, re-point 5 consumers (P03, SentCard, SignOffConfirmation, SaveConfirmation,
+UploadConfirmation), delete ConfirmStrip/DeliveryStrip/CallStrip (grep-verify zero), real gate
+(expect exit 2 = 33 Category C, zero errors from StatusStrip/converted files), grep zero-proof,
+ledger + coverage, large commit.
 
 ---
 
 ## 9. OPEN DECISIONS (in order)
 
-1. **Category C disposition** (park vs fix now) — recommendation: park, resume Row.
-2. Two navigator-card chevron verifications (§8) — small, mechanical.
-3. Parked for the rebuild phase: gold-vs-amber collapse, CompletedCard chevron restoration.
+1. ~~**Category C disposition** (park vs fix now)~~ — RESOLVED: park (Stage 0). Now Stage 15 workstream.
+2. ~~Two navigator-card chevron verifications (§8)~~ — RESOLVED (Stage 1, commit 00bcba7).
+3. Parked for the rebuild phase: gold-vs-amber collapse, CompletedCard chevron restoration (Stage 16.9).
 
 ---
 
-## 10. THE REMAINING ROAD (after Row stage 2)
+## 10. THE REMAINING ROAD (after Stage 7)
 
-StepList/Timeline universal (evidence: RetryLadder, NoAvailabilityLadder, CycleStep,
-ExecutionTrail, CaptureChainCard steps, RecheckResolutionCard probes, IncidentTimeline,
-WithdrawalCard closure, ApprovalCard verification, ReversedOffer/Rollback traces, RefundCard
-events, MonthTimeline, AuditTimeline, StepTimeline, LiveStepper, JourneyRail, JourneyTime,
-DispatchSequence, WizardStepper — MiniTimeline already canonical) → StatStrip (divide-x
-strips + big-number cells + Vault TapStat) → PhaseShell (absorbs the 5 residuals + slate
-theme + state-dependent content slots) → StatusStrip (Delivery/Call strips) → Quote variants
-→ EmptyState (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty
-states) → Tabs/Filters (3× FilterTabs, VisitTabs, DayFilterBar, ModeTabs, FilterBar,
-ActiveFilterStrip) → Field (forms; onboarding CredentialRow promotion) → Options/Actions
-(ResendRow, SubmitButton severity map, quick-reply chips, referral option rows) → Identity
-(avatars, CaptureTile, SelfieCaptureCard, CredentialCards, TrustCell, SkillsCloud) → clinical
-residuals (MedVerificationPanel, VitalsPanel, NotesPanel, ExecutionTrail-adjacent) → Category
-C workstream (if parked) → **final certification (§3)** → screen rebuilding resumes.
+StatusStrip (in progress) → Quote variants → EmptyState (EmptyFilterState pair, EmptyMatches,
+EmptyTabState, CaughtUpCard, inline empty states) → Tabs/Filters (3× FilterTabs, VisitTabs,
+DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) → Options/Actions (ResendRow, SubmitButton
+severity map, quick-reply chips, referral option rows) → Field (forms; onboarding CredentialRow
+promotion) → Identity (avatars, CaptureTile, SelfieCaptureCard, CredentialCards, TrustCell,
+SkillsCloud) → clinical residuals (MedVerificationPanel, VitalsPanel, NotesPanel,
+ExecutionTrail-adjacent) → Category C workstream (Stage 15) → **final certification (§3)** →
+screen rebuilding resumes.
 
 ---
 
 ## 11. HOW TO START (for the incoming agent)
 
 1. Read this document, the Goal, the tree, the commit log, then tail both docs on disk.
-2. Get the user's ruling on Category C (or proceed on the standing recommendation: park).
-3. Verify the two navigator-card chevron states (§8/§9).
-4. Resume Row sweep stage 2, next tranche: the list interiors. 6-file xclip reads, rulings
-   on arrival, large-chunk conversions, real gate + grep proofs, ledger, large commit.
-5. Hold every rule in §4. The rules exist because each one was paid for.
+2. ~~Get the user's ruling on Category C~~ — RESOLVED: park (Stage 0).
+3. ~~Verify the two navigator-card chevron states~~ — RESOLVED (Stage 1).
+4. ~~Resume Row sweep stage 2, next tranche: the list interiors~~ — CLOSED (Stages 1-3).
+5. Current position: Stages 0-6 CLOSED. Resume Stage 7 (StatusStrip universal) — build hub,
+   convert ConfirmStrip/DeliveryStrip/CallStrip, re-point 5 consumers, delete the three strips
+   (grep-verify zero), real gate + grep proofs, ledger, large commit.
+6. Hold every rule in §4. The rules exist because each one was paid for.
 
 ---
 

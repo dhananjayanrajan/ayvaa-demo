@@ -1,4 +1,4 @@
-import { ConfirmStrip } from '@/components/phone/ConfirmStrip'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 
 type Props = {
   certName: string
@@ -7,9 +7,9 @@ type Props = {
 
 export function UploadConfirmation({ certName, matchedCategory }: Props) {
   return (
-    <ConfirmStrip>
+    <StatusStrip>
       {certName} submitted for review.
       {matchedCategory ? ` ${matchedCategory} matching activates once verified.` : ' In review with Ayvaa now.'}
-    </ConfirmStrip>
+    </StatusStrip>
   )
 }

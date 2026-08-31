@@ -98,20 +98,20 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | Category D (~70 unused symbols) | ✅ | FIXED (content-matched only; PT02 live-import incident repaired; line-delete ban in force) |
 | Category C (47 original latent bugs) | 🔒 | PARKED — disposition ruling pending (Stage 0 below) |
 
-### A10. Row sweep stage 2 — in flight (paused)
+### A10. Row sweep stage 2 — CLOSED (Stages 1-3)
 
 | Step | Status | Detail |
 |------|--------|--------|
 | Six navigator cards converted | ✅ | PaymentCard, PlanCard, UpcomingCard, CreateAccountCard, SettingsCard, PartnerBillingCard |
-| Chevron verification (CreateAccountCard, PartnerBillingCard) | ⏳ | PENDING — may render duplicate trailing chevrons; fix with `showChevron={false}` + trailing |
-| List interiors tranche | ⬜ | ServiceRow, MedRow, DocRow, EntryRow, StepRow, ChecklistRow, FieldTaskRow, AddCertificationRow, CertificationRow, alert/staff/referral/device rows, sheet option rows |
-| Sweep close | ⬜ | Grep zero-proof of hand-rolled row patterns; ledger; large commit |
+| Chevron verification (CreateAccountCard, PartnerBillingCard) | ✅ | Both rendered duplicate trailing chevrons; fixed with `showChevron={false}` (CreateAccount keeps ArrowRight trailing, PartnerBilling keeps amount+Paid chip) |
+| List interiors tranche | ✅ | 15 conversions: named list rows (AddCertificationRow, ServiceRow, EntryRow, ChecklistRow, MedRow scheduled, StepRow todo, FieldTaskRow) + card interiors (UpcomingVisitsCard, WhoCard, PrivacyFactsCard, PlanLinksCard, DocumentsCard, PrescriptionList, SafetyCard, VitalsCard, ScheduleCard, PrescriptionSheet, CaptureChainCard, EscalateSheet, StaffList, AccessLogCard, ReferredPatientList, OfferStatusList, SessionListCard, SafetyChecksCard, StateDiffCard, AccountActionsSheet) + sheet option rows (PartnerReferralSheet, PartnerAlertsSheet, PartnerStaffSheet). Row hub extended: align, padding, disabled, titleMeta, body |
+| Sweep close | ✅ | Grep zero-proof of hand-rolled row signatures across all 15 converted files; ledger; large commit (2c968b4) |
 
 ---
 
 ## PART B — THE REMAINING PROGRESSION (every stage to complete)
 
-### Stage 0 — Category C disposition ruling 🔒
+### Stage 0 — Category C disposition ruling ✅
 
 | Step | Detail |
 |------|--------|
@@ -119,7 +119,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 0.2 | If park: log as pre-certification workstream (Stage 15); resume Row stage 2 |
 | 0.3 | If fix now: reorder Stage 15 to front |
 
-### Stage 1 — Row sweep stage 2: chevron verification
+**RESOLVED:** user ruled PARK. Category C (47 original latent bugs) logged as Stage 15 pre-certification workstream. Row sweep stage 2 resumed. (Gate standing later dropped to 33 as A/B/D closed.)
+
+### Stage 1 — Row sweep stage 2: chevron verification ✅
 
 | Step | Detail |
 |------|--------|
@@ -128,7 +130,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 1.3 | Fix with `showChevron={false}` + trailing ReactNode as needed |
 | 1.4 | Real gate + visual check |
 
-### Stage 2 — Row sweep stage 2: list interiors
+**RESOLVED:** both adapters rendered duplicate trailing chevrons. CreateAccountCard kept ArrowRight trailing + `showChevron={false}`; PartnerBillingCard kept amount+Paid chip + `showChevron={false}`. Real gate exit 2 = 47 Category C, zero errors from either adapter. Commit 00bcba7.
+
+### Stage 2 — Row sweep stage 2: list interiors ✅
 
 | Step | Detail |
 |------|--------|
@@ -144,7 +148,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 2.10 | Convert sheet option rows (partner referral options) |
 | 2.11 | Real gate + grep adoption count after each tranche |
 
-### Stage 3 — Row sweep stage 2: close
+**RESOLVED:** 15 conversions (named list rows + card interiors + sheet option rows). Row hub extended backward-compatibly: `align` (center/start), `padding` (none/inset/comfortable/roomy/even), `disabled`, `titleMeta`, `body`. Deferred to later sweeps (NOT Row): heroes, file tiles, option/selection rows (Options), timelines (StepList), form fields (Field). Row residuals logged: AccountSearch, RetentionPeriodsList/GoalsCard far-right chevron, NotificationFeed, ActionCard/ConsentCycleCard dark hero rows. LEDGERED micro-deviations: whileTap 0.99/0.97→0.985, EscalateSheet surface bg/[0.035]→/[0.03], VitalsCard ReadingRow aria-label lost, SafetyChecksCard row-level whileHover dropped, focus-ring additions.
+
+### Stage 3 — Row sweep stage 2: close ✅
 
 | Step | Detail |
 |------|--------|
@@ -153,7 +159,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 3.3 | Ledger entry (Sweep 1 stage 2 close) |
 | 3.4 | Large conventional commit |
 
-### Stage 4 — StepList/Timeline universal
+**RESOLVED:** grep zero-proof — all 15 converted files have zero `flex w-full items-center gap-3` / `flex w-full items-start gap-3` signatures. Real gate exit 2 = 33 Category C (baseline unchanged, down from 47 as A/B/D closed). Ledger + coverage updated. Commit 2c968b4.
+
+### Stage 4 — StepList/Timeline universal ✅
 
 | Step | Detail |
 |------|--------|
@@ -163,7 +171,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 4.4 | Real gate + grep adoption count + retired-pattern verification |
 | 4.5 | Ledger + large commit |
 
-### Stage 5 — FactRows/StatStrip extensions
+**RESOLVED:** StepList universal built (phone/StepList.tsx, ~318 lines): nodeStyle tile/circle/dot, nodeSize sm/md/lg, theme light/dark, activeStyle spinner/ping, per-item node/rail overrides, time/titleMeta/trailingTitle/contentClassName slots. 13 timeline files converted (NoAvailabilityLadder, RecheckResolutionCard, RetryLadderCard, RefundCard, DispatchSequence, ReversedOfferTraceCard, RollbackTraceCard, ExecutionTrail, WithdrawalCard, ApprovalCard, MonthTimeline dot, StateDiffCard trail, CaptureChainCard steps) + RecheckRulesList numbered-rail → Row. Residuals logged (single-caller extension debt): IncidentTimelineCard, PartnerCarePathway, horizontal steppers (LiveStepper, WizardStepper, JourneyRail, CycleStep, DarkCycleStepper). Grep zero-proof: zero `w-px flex-1`/`flex flex-col items-center` rail signatures outside phone/. LEDGERED micro-deviations: expansion wrapper pb-4, non-last item flex-1, title rows items-baseline→items-center, ExecutionTrail pure-gradient rail, focus rings. Commit 3637fab.
+
+### Stage 5 — FactRows/StatStrip extensions ✅
 
 | Step | Detail |
 |------|--------|
@@ -172,7 +182,9 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 5.3 | Sweep corpus adopting it |
 | 5.4 | Real gate + grep proofs + ledger + commit |
 
-### Stage 6 — PhaseShell consolidation
+**RESOLVED:** StatStrip hub added to phone/kit (dark + light variants, cols, dot, valueClassName/labelClassName). 7 divide-x stat strips converted: AuditHero, TransactionHero, RecheckHero, RevenueHero, SessionSummaryHero, LedgerChainHero (local HeroCell deleted), DueReviewCard (light). kit Stat now ZERO consumers (flagged for removal at final cert). Grep zero-proof: zero `grid grid-cols-3 divide-x` outside phone/. Commit 0a024ef.
+
+### Stage 6 — PhaseShell consolidation ✅
 
 | Step | Detail |
 |------|--------|
@@ -181,13 +193,17 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 6.3 | Sweep corpus adopting it |
 | 6.4 | Real gate + grep proofs + ledger + commit |
 
-### Stage 7 — StatusStrip universal
+**RESOLVED:** 'slate' key added to PHASE_THEME/PhaseHeroKey (border-slate-200/10, shell bg-[#0F172A], orbA bg-slate-400/20, orbB bg-slate-300/10, hairline via-slate-300/30). PhaseHero theme prop is STRUCTURAL (PhaseHeroTheme object) — callers pass custom themes ({...PHASE_THEME.key, overrides}). 10 shells converted to PhaseHero (5 known residuals + 5 orb-anatomy finds via grep 'rounded-[26px] border'): ApprovalCard (4-state incl slate + orbA/orbB overrides for approved), WithdrawalCard (sealed 3-micro-diff emeraldBright override), IncidentLinkingCard (rose static), ReversedOfferTraceCard (sky), RollbackTraceCard (rose), CaughtUpCard (exact emerald), MatchCard (exact emerald), EstimateCard (exact emerald), ActionCard (amber 3-override), ProfilePreviewSheet (emerald + full SheetShell conversion — closed the F1 gap). IncidentLinkingCard internal timeline ALSO converted to StepList (last vertical-rail timeline). Remaining 'rounded-[26px] border' consumers (legit non-PhaseHero, no orbs): ProfileHero, PhotoViewSheet. LEDGERED micro-deviations: WithdrawalCard orb/hairline state-switch color transitions lost, static shells gained transition-colors duration-500, ProfilePreviewSheet sheet micros. Commit ae70312.
+
+### Stage 7 — StatusStrip universal ⏳
 
 | Step | Detail |
 |------|--------|
 | 7.1 | Build StatusStrip (DeliveryStrip + CallStrip — identical animated strips, ConfirmStrip's two-line sibling) |
 | 7.2 | Sweep corpus adopting it |
 | 7.3 | Real gate + grep proofs + ledger + commit |
+
+**IN PROGRESS:** evidence read (ConfirmStrip single-line Check/children; DeliveryStrip + CallStrip two-line overline+body with MailCheck/PhoneCall, identical shell anatomy). Consumers: DeliveryStrip → P03.tsx:136 (mount-controlled), CallStrip → SentCard.tsx:45 (mount-controlled), ConfirmStrip → 3 professional wrappers (SignOffConfirmation, SaveConfirmation, UploadConfirmation). Design pending: StatusStrip universal in phone/ absorbing all three (icon/title/children/align/className), ConfirmStrip's canonical animation, Delivery/Call animation + strokeWidth micro-diffs ledgered.
 
 ### Stage 8 — Quote variants
 
@@ -301,15 +317,16 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 
 ## PART D — OPEN DECISIONS (in order)
 
-1. **Category C disposition** (park vs fix now) — recommendation: park, resume Row.
-2. Two navigator-card chevron verifications (Stage 1).
-3. Parked for rebuild: gold-vs-amber collapse, CompletedCard chevron restoration.
+1. ~~**Category C disposition** (park vs fix now)~~ — RESOLVED: park (Stage 0). Now Stage 15 workstream.
+2. ~~Two navigator-card chevron verifications (Stage 1)~~ — RESOLVED (Stage 1, commit 00bcba7).
+3. Parked for rebuild: gold-vs-amber collapse, CompletedCard chevron restoration (Stage 16.9).
 
 ---
 
 ## PART E — HOW TO START
 
-1. Confirm Category C disposition (Stage 0) or proceed on standing recommendation (park).
-2. Verify the two navigator-card chevron states (Stage 1).
-3. Resume Row sweep stage 2, next tranche: list interiors (Stage 2).
-4. Hold every rule in `refactor-rules.md` §1 and §2. The rules exist because each one was paid for.
+1. ~~Confirm Category C disposition (Stage 0)~~ — RESOLVED: park.
+2. ~~Verify the two navigator-card chevron states (Stage 1)~~ — RESOLVED.
+3. ~~Resume Row sweep stage 2, next tranche: list interiors (Stage 2)~~ — CLOSED (Stages 1-3).
+4. Current position: Stages 0-6 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312). Stage 7 (StatusStrip universal) IN PROGRESS.
+5. Hold every rule in `refactor-rules.md` §1 and §2. The rules exist because each one was paid for.

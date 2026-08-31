@@ -739,3 +739,28 @@ Remaining 'rounded-[26px] border' consumers (legit non-PhaseHero, no orbs): Prof
 
 Gate: real gate exit 2 = 33 Category C baseline, zero errors from PhaseHero.tsx or any of the
 10 converted files.
+
+## Sweep 3 (StatusStrip) — CLOSED
+
+Hub: phone/StatusStrip.tsx — universal animated emerald status strip absorbing ConfirmStrip
+(single-line) + DeliveryStrip + CallStrip (two-line). Props {icon? (default Check), title?,
+children, align? 'center' |'start' (default center), className?}. Canonical animation =
+ConfirmStrip's (initial y:8 scale 0.98, exit y:-6, 0.25 easeOut). Shell cn('flex gap-3 rounded-xl
+bg-emerald-500/[0.08] px-3 py-2.5', align items-center/items-start, className). Icon badge
+h-5 w-5 rounded-full bg-emerald-500 text-white + Icon h-3 w-3 strokeWidth 3. title → two-line
+(overline text-[9px] font-extrabold uppercase tracking-[0.16em] text-emerald-700/60 + body
+mt-0.5 text-[12px] font-bold tracking-tight text-emerald-700); no title → single-line (p text-[11px]
+font-bold leading-snug text-emerald-900/80).
+
+Conversions: ConfirmStrip DELETED (3 professional consumers re-pointed to StatusStrip:
+SignOffConfirmation, SaveConfirmation, UploadConfirmation — byte-identical single-line).
+DeliveryStrip → StatusStrip icon=MailCheck title='Email fallback delivered' align=start
+className='px-3.5' (consumer P03). CallStrip → StatusStrip icon=PhoneCall title='Call requested'
+align=start className='mt-3 px-3.5' (consumer SentCard).
+
+LEDGERED micro-deviations: Delivery/Call animation unified to ConfirmStrip's canonical
+(y:6→y:8, exit y:-4→y:-6, added scale, added 0.25 easeOut transition); icon strokeWidth
+2.8/2.6→3. All consumers mount-controlled (no AnimatePresence) so exit anims never visibly
+play regardless — safe.
+
+Gate: real gate exit 2 = 33 Category C baseline, zero errors from StatusStrip or converted files.

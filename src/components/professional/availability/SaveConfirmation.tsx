@@ -1,9 +1,9 @@
-import { ConfirmStrip } from '@/components/phone/ConfirmStrip'
+import { StatusStrip } from '@/components/phone/StatusStrip'
 
 type Props = {
   openCount: number
 }
 
 export function SaveConfirmation({ openCount }: Props) {
-  return <ConfirmStrip>Availability saved · {openCount} days open · visible to matching now</ConfirmStrip>
+  return <StatusStrip>Availability saved · {openCount} days open · visible to matching now</StatusStrip>
 }

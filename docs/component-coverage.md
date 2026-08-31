@@ -453,3 +453,14 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Gate standing: 33 errors, pure Category C (baseline unchanged)
 - NEXT: Stage 7 — StatusStrip universal (DeliveryStrip + CallStrip = animated strips,
   ConfirmStrip's two-line sibling)
+
+---
+# Revision 23 — Sweep 3 (StatusStrip) CLOSED
+
+- phone/StatusStrip.tsx universal: absorbs ConfirmStrip (single-line) + DeliveryStrip + CallStrip
+  (two-line) via icon/title/align/className props
+- ConfirmStrip DELETED (3 professional consumers re-pointed); snip DeliveryStrip + CallStrip now
+  thin StatusStrip wrappers
+- Gate standing: 33 errors, pure Category C (baseline unchanged)
+- NEXT: Stage 8 — Quote variants normalization (QuotePanel variants: EscalationTicketCard
+  inline quote, NotePanel footer-anatomy decision, FamilyFeedbackCard quote carousel)
