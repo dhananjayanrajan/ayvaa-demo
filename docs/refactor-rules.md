@@ -65,6 +65,21 @@ document plus the DOCTRINE in `project-handoff.md` §3 win.
     forget the standing subtasks: commit after each stage and update documents exactly as
     instructed.
 
+11. **MASSIVE NORMALIZATION, not nesting dolls (user correction, binding).** A massive refactor
+    is NOT mild edits, and it is NOT moving code into a universal and leaving a thin wrapper
+    file that just re-renders it with props ("Russian nesting dolls"). It means a massive
+    normalization of the components themselves: their folders, their file names, and every
+    import that points at them. Concretely: (a) a specific component that has become a pure
+    prop-config of a universal (no domain logic, no data sourcing, no multi-call-site value)
+    is DELETED and its config inlined at the call site(s) — the wrapper file is removed, not
+    kept as a one-line re-export; (b) a specific component that retains genuine domain logic
+    is KEPT but its file is normalized (correct folder, correct name, every import re-pointed
+    to the canonical location); (c) same-family components are CONSOLIDATED into a single
+    canonical file where they share a pattern. The end state is a genuinely smaller, navigable
+    tree — component count must fall, folders coherent, names canonical. Hard constraint
+    unchanged: identical rendered output for identical props — normalization changes WHERE code
+    lives and HOW it is named/imported, never WHAT it renders.
+
 ---
 
 ## 2. THE REAL GATE (binding — from project-handoff §4)
@@ -108,6 +123,15 @@ document plus the DOCTRINE in `project-handoff.md` §3 win.
   observed variation space, with rich variant props and exact-compat className overrides at
   every slot, never designed from one caller's shape. (2) Specific components as PURE
   COMPOSITION — arrangement + data + domain logic, zero hand-rolled pattern instances.
+- **NORMALIZATION MANDATE (user correction, binding — supersedes the nesting-doll reading):**
+  the refactor is NOT satisfied by moving code into a universal and leaving a thin wrapper
+  file that just re-renders it with props. It means a MASSIVE NORMALIZATION of the components
+  themselves: folders, file names, and every import. Pure-config wrappers are DELETED and
+  inlined at call sites; same-family files are CONSOLIDATED into one canonical file; folders
+  and names are made coherent; every import is re-pointed. End state = genuinely smaller,
+  navigable tree; component count must fall. Identical rendered output for identical props
+  unchanged — normalization changes WHERE code lives and HOW it is named/imported, never WHAT
+  it renders.
 - **Family-close rule:** a component is done only when it is pure composition. "Keep" is
   legitimate only for what is genuinely composition after decomposition.
 - **Hard constraint:** identical rendered output for identical props. Abstraction via variant
@@ -147,7 +171,7 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 | 6 | **PhaseShell consolidation** | Absorb 5 residuals (ApprovalCard, WithdrawalCard, IncidentLinkingCard, ReversedOfferTraceCard, RollbackTraceCard) + slate theme + state-dependent content slots. | Real gate + grep proofs |
 | 7 | **StatusStrip universal** | Build StatusStrip (DeliveryStrip + CallStrip — identical animated strips, ConfirmStrip's two-line sibling). Sweep corpus. | Real gate + grep proofs |
 | 8 | **Quote variants** | Normalize QuotePanel variants across corpus. | Real gate + grep proofs |
-| 9 | **EmptyState universal** | Build cause-aware EmptyState (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty states). Sweep corpus. | Real gate + grep proofs |
+| 9 | **EmptyState universal** | Build cause-aware EmptyState (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty states). Sweep corpus. **REDO under NORMALIZATION MANDATE:** delete pure-config wrappers and inline at call sites, consolidate same-family files, normalize folders/names/imports. | Real gate + grep proofs |
 | 10 | **Tabs/Filters universal** | Build SegmentedTabs + FilterBar (3× FilterTabs, VisitTabs, DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip). Sweep corpus. | Real gate + grep proofs |
 | 11 | **Options/Actions universal** | Build OptionRow tones + ActionPair (ResendRow, SubmitButton severity map, quick-reply chips, referral option rows). Sweep corpus. | Real gate + grep proofs |
 | 12 | **Field (forms) universal** | Build Field universal base (onboarding CredentialRow promotion; P01/A13/PasswordCard promotion debt). Sweep corpus. | Real gate + grep proofs |
@@ -191,7 +215,8 @@ where required, ledger + coverage update (rule §1.4), and a large conventional 
 2. ~~Verify the two navigator-card chevron states (stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (stage 2)~~ — CLOSED (Stages 1-3).
 4. Current position: Stages 0-8 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312,
-   6b02662, e75c366). Stage 9 (EmptyState universal) NEXT — build cause-aware EmptyState
-   (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty states),
-   real gate + grep proofs, ledger, large commit.
+   6b02662, e75c366). Stage 9 (EmptyState universal) NEXT as a REDO under the NORMALIZATION
+   MANDATE (§1.11, §3): the universal is built; delete pure-config wrappers and inline at call
+   sites, consolidate same-family files, normalize folders/names/imports, real gate + grep
+   proofs, ledger, large commit.
 5. Hold every rule in §1 and §2. The rules exist because each one was paid for.

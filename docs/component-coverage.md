@@ -477,3 +477,19 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
 - Gate standing: 33 errors, pure Category C (baseline unchanged)
 - NEXT: Stage 9 — EmptyState universal (cause-aware: EmptyFilterState pair, EmptyMatches,
   EmptyTabState, CaughtUpCard, inline empty states)
+
+---
+# Revision 25 — NORMALIZATION MANDATE (doctrine correction)
+
+- **User ruling:** massive refactor = massive normalization of components, their folders, file
+  names, and imports — NOT moving code into a universal and leaving thin "Russian nesting doll"
+  re-export wrappers.
+- **Binding rule added** to refactor-rules §1.11 + §3 and project-handoff §3: pure-config
+  wrappers are DELETED and inlined at call sites; same-family files are CONSOLIDATED into one
+  canonical file; folders/names/imports normalized; component count must fall.
+- **Impact:** Stage 9 (EmptyState) initial sweep's nesting-doll wrappers (EmptyFilterState ×2,
+  EmptyMatches, EmptyTabState, EmptyOffersCard) are being REDONE as real normalization. All
+  prior stages subject to the same lens at B18.
+- Gate standing: 33 errors, pure Category C (baseline unchanged).
+- NEXT: Stage 9 REDO — normalize the EmptyState family (delete pure-config wrappers, inline at
+  call sites, consolidate, fix imports).

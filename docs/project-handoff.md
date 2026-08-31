@@ -79,21 +79,24 @@ conversions, Row hub extended (align/padding/disabled/titleMeta/body). StepList 
 built and swept (Stage 4, 13 timelines + RecheckRulesList→Row). StatStrip added to kit and
 swept (Stage 5, 7 divide-x strips). PhaseShell consolidation closed (Stage 6): slate theme +
 10 shells onto PhaseHero + ProfilePreviewSheet sheet gap closed + IncidentLinkingCard
-timeline→StepList. Gate standing: 33 errors, pure Category C (baseline unchanged). Current
-position: Stage 7 (StatusStrip universal) in progress.
+timeline→StepList. StatusStrip universal closed (Stage 7). Quote variants closed (Stage 8).
+Gate standing: 33 errors, pure Category C (baseline unchanged). Current position: Stage 9
+(EmptyState universal) — REDO under the NORMALIZATION MANDATE (see §3): the initial Stage 9
+sweep produced nesting-doll wrappers and is being redone as real folder/file/import
+normalization.
 
 ---
 
 ## 2. WHAT STANDS (verified — do not redo)
 
-- **Canonical library, `components/phone/` — 27 files:** kit, SheetShell, LifecycleButton,
+- **Canonical library, `components/phone/` — 28 files:** kit, SheetShell, LifecycleButton,
   OptionRow, DarkPanel, HeroCells, PhaseHero, FactTile, MiniTimeline, NoteStrip, ExpandRow,
   QuotePanel, StatusPill, Pager, PhoneFrame, Screen, AppBar, NavBar, PushPreview,
   ScreenshotButton, Splash (the original 21) + FactRows, AccentHero, Overline (promotions) +
-  ConfirmStrip, Row, StepList (new universals). FactRows is extended (mono variant + className
-  overrides); SheetShell is extended (height: full/auto/scroll, header slot); PhaseHero is
-  extended (slate theme key; theme prop is structural — callers pass custom PhaseHeroTheme
-  objects); kit is extended (StatStrip hub).
+  ConfirmStrip, Row, StepList, StatusStrip, EmptyState (new universals). FactRows is extended
+  (mono variant + className overrides); SheetShell is extended (height: full/auto/scroll,
+  header slot); PhaseHero is extended (slate theme key; theme prop is structural — callers
+  pass custom PhaseHeroTheme objects); kit is extended (StatStrip hub).
 - **Pre-session deletions (grep-verified zero consumers, per the audit):** phone/Controls,
   phone/ScreenBlocks, patient/matching/SheetShell, patient/onboarding/SheetShell,
   professional/payouts/SheetShell, admin/ui/BottomSheet, admin/ui/SheetHeader,
@@ -141,6 +144,24 @@ position: Stage 7 (StatusStrip universal) in progress.
    exact-compat className overrides at every slot, never designed from one caller's shape.
 2. **Specific components** — domain files that remain, but as PURE COMPOSITION: arrangement
    + data + domain logic. Zero hand-rolled pattern instances inside them.
+
+**NORMALIZATION MANDATE (user correction, binding — supersedes the nesting-doll reading):**
+The refactor is NOT satisfied by moving code into a universal and leaving a thin wrapper
+file that just re-renders it with props ("Russian nesting dolls"). A massive refactor means
+a MASSIVE NORMALIZATION of the components themselves: their folders, their file names, and
+every import that points at them. Concretely:
+- A specific component that has become a pure prop-config of a universal (no domain logic,
+  no data sourcing, no multi-call-site value) is DELETED, and its config is inlined at the
+  call site(s) — the wrapper file itself is removed, not kept as a one-line re-export.
+- A specific component that retains genuine domain logic (data sourcing, cause branching,
+  multi-caller sharing) is KEPT, but its file is normalized: correct folder, correct name,
+  and every import across `apps/` and `components/` re-pointed to the canonical location.
+- Same-family components are CONSOLIDATED into a single canonical file where they share a
+  pattern, rather than scattered as N near-identical files in N folders.
+- The end state is a genuinely smaller, navigable tree — not the same tree with imports
+  swapped. Component count must fall, folders must be coherent, names must be canonical.
+- Hard constraint unchanged: identical rendered output for identical props. Normalization
+  changes WHERE code lives and HOW it is named/imported, never WHAT it renders.
 
 **Family-close rule (binding):** a component is done only when it is pure composition.
 "Keep" is legitimate only for what is genuinely composition after decomposition.
@@ -304,10 +325,14 @@ coverage tracker at 100% under the composition rule. Only then does screen rebui
 
 ---
 
-## 8. IN-FLIGHT WORK — Stage 7: StatusStrip universal (exact paused point)
+## 8. IN-FLIGHT WORK — Stage 9: EmptyState universal (REDO under NORMALIZATION MANDATE)
 
-**Stages 0-6 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312). Current position:
-Stage 7 — StatusStrip universal.
+**Stages 0-8 CLOSED** (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366).
+Current position: Stage 9 — EmptyState universal, being REDONE because the initial sweep
+produced nesting-doll wrappers (see §3 NORMALIZATION MANDATE). The universal
+`phone/EmptyState.tsx` is built and verified; the sweep must now NORMALIZE the family —
+delete pure-config wrappers and inline at call sites, consolidate same-family files, fix
+folders/names/imports — instead of leaving thin re-export wrappers.
 
 **Evidence read (Stage 7):**
 - ConfirmStrip (phone/, canonical): single-line animated emerald strip — Check icon badge
@@ -349,16 +374,17 @@ ledger + coverage, large commit.
 
 ---
 
-## 10. THE REMAINING ROAD (after Stage 7)
+## 10. THE REMAINING ROAD (after Stage 9)
 
-StatusStrip (in progress) → Quote variants → EmptyState (EmptyFilterState pair, EmptyMatches,
-EmptyTabState, CaughtUpCard, inline empty states) → Tabs/Filters (3× FilterTabs, VisitTabs,
+EmptyState (REDO under normalization) → Tabs/Filters (3× FilterTabs, VisitTabs,
 DayFilterBar, ModeTabs, FilterBar, ActiveFilterStrip) → Options/Actions (ResendRow, SubmitButton
 severity map, quick-reply chips, referral option rows) → Field (forms; onboarding CredentialRow
 promotion) → Identity (avatars, CaptureTile, SelfieCaptureCard, CredentialCards, TrustCell,
 SkillsCloud) → clinical residuals (MedVerificationPanel, VitalsPanel, NotesPanel,
 ExecutionTrail-adjacent) → Category C workstream (Stage 15) → **final certification (§3)** →
-screen rebuilding resumes.
+screen rebuilding resumes. EVERY remaining stage applies the NORMALIZATION MANDATE (§3): delete
+pure-config wrappers and inline, consolidate same-family files, normalize folders/names/imports —
+not nesting-doll re-exports.
 
 ---
 
@@ -368,9 +394,10 @@ screen rebuilding resumes.
 2. ~~Get the user's ruling on Category C~~ — RESOLVED: park (Stage 0).
 3. ~~Verify the two navigator-card chevron states~~ — RESOLVED (Stage 1).
 4. ~~Resume Row sweep stage 2, next tranche: the list interiors~~ — CLOSED (Stages 1-3).
-5. Current position: Stages 0-6 CLOSED. Resume Stage 7 (StatusStrip universal) — build hub,
-   convert ConfirmStrip/DeliveryStrip/CallStrip, re-point 5 consumers, delete the three strips
-   (grep-verify zero), real gate + grep proofs, ledger, large commit.
+5. Current position: Stages 0-8 CLOSED. Resume Stage 9 (EmptyState universal) as a REDO under
+   the NORMALIZATION MANDATE (§3): the universal is built; delete pure-config wrappers and
+   inline at call sites, consolidate same-family files, normalize folders/names/imports, real
+   gate + grep proofs, ledger, large commit.
 6. Hold every rule in §4. The rules exist because each one was paid for.
 
 ---

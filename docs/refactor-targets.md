@@ -195,7 +195,7 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 
 **RESOLVED:** 'slate' key added to PHASE_THEME/PhaseHeroKey (border-slate-200/10, shell bg-[#0F172A], orbA bg-slate-400/20, orbB bg-slate-300/10, hairline via-slate-300/30). PhaseHero theme prop is STRUCTURAL (PhaseHeroTheme object) — callers pass custom themes ({...PHASE_THEME.key, overrides}). 10 shells converted to PhaseHero (5 known residuals + 5 orb-anatomy finds via grep 'rounded-[26px] border'): ApprovalCard (4-state incl slate + orbA/orbB overrides for approved), WithdrawalCard (sealed 3-micro-diff emeraldBright override), IncidentLinkingCard (rose static), ReversedOfferTraceCard (sky), RollbackTraceCard (rose), CaughtUpCard (exact emerald), MatchCard (exact emerald), EstimateCard (exact emerald), ActionCard (amber 3-override), ProfilePreviewSheet (emerald + full SheetShell conversion — closed the F1 gap). IncidentLinkingCard internal timeline ALSO converted to StepList (last vertical-rail timeline). Remaining 'rounded-[26px] border' consumers (legit non-PhaseHero, no orbs): ProfileHero, PhotoViewSheet. LEDGERED micro-deviations: WithdrawalCard orb/hairline state-switch color transitions lost, static shells gained transition-colors duration-500, ProfilePreviewSheet sheet micros. Commit ae70312.
 
-### Stage 7 — StatusStrip universal ⏳
+### Stage 7 — StatusStrip universal ✅ CLOSED
 
 | Step | Detail |
 |------|--------|
@@ -203,9 +203,12 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 7.2 | Sweep corpus adopting it |
 | 7.3 | Real gate + grep proofs + ledger + commit |
 
-**IN PROGRESS:** evidence read (ConfirmStrip single-line Check/children; DeliveryStrip + CallStrip two-line overline+body with MailCheck/PhoneCall, identical shell anatomy). Consumers: DeliveryStrip → P03.tsx:136 (mount-controlled), CallStrip → SentCard.tsx:45 (mount-controlled), ConfirmStrip → 3 professional wrappers (SignOffConfirmation, SaveConfirmation, UploadConfirmation). Design pending: StatusStrip universal in phone/ absorbing all three (icon/title/children/align/className), ConfirmStrip's canonical animation, Delivery/Call animation + strokeWidth micro-diffs ledgered.
+**CLOSED (commit 6b02662):** phone/StatusStrip.tsx universal (icon/title/children/align/className),
+ConfirmStrip's canonical animation. ConfirmStrip DELETED (3 professional consumers re-pointed);
+DeliveryStrip + CallStrip → StatusStrip wrappers. LEDGERED micro-deviations: animation unified,
+icon strokeWidth 2.8/2.6→3.
 
-### Stage 8 — Quote variants
+### Stage 8 — Quote variants ✅ CLOSED
 
 | Step | Detail |
 |------|--------|
@@ -213,13 +216,20 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 | 8.2 | Sweep corpus adopting it |
 | 8.3 | Real gate + grep proofs + ledger + commit |
 
-### Stage 9 — EmptyState universal
+**CLOSED (commit e75c366):** QuotePanel extended (bare/headerTrailing/glyph/footer/className);
+7 quote blocks normalized. Keep-ruled: ReviewShell, RecordSheet (orphan), PartnerClinicalRecommendation.
+
+### Stage 9 — EmptyState universal ⏳ REDO under NORMALIZATION MANDATE
 
 | Step | Detail |
 |------|--------|
 | 9.1 | Build cause-aware EmptyState (EmptyFilterState pair, EmptyMatches, EmptyTabState, CaughtUpCard, inline empty states; ServiceList is the exemplar) |
-| 9.2 | Sweep corpus adopting it |
+| 9.2 | Sweep corpus adopting it — **as REAL NORMALIZATION**: delete pure-config wrappers and inline at call sites, consolidate same-family files, normalize folders/names/imports (NOT nesting-doll re-exports) |
 | 9.3 | Real gate + grep proofs + ledger + commit |
+
+**IN PROGRESS (REDO):** universal `phone/EmptyState.tsx` built and verified. The initial sweep
+produced nesting-doll wrappers (EmptyFilterState ×2, EmptyMatches, EmptyTabState, EmptyOffersCard
+as thin re-exports) — being redone as real normalization per the NORMALIZATION MANDATE.
 
 ### Stage 10 — Tabs/Filters universal
 
@@ -328,5 +338,5 @@ ledger (`component-migrations.md`) is the append-only history; the coverage trac
 1. ~~Confirm Category C disposition (Stage 0)~~ — RESOLVED: park.
 2. ~~Verify the two navigator-card chevron states (Stage 1)~~ — RESOLVED.
 3. ~~Resume Row sweep stage 2, next tranche: list interiors (Stage 2)~~ — CLOSED (Stages 1-3).
-4. Current position: Stages 0-6 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312). Stage 7 (StatusStrip universal) IN PROGRESS.
+4. Current position: Stages 0-8 CLOSED (commits 00bcba7, 2c968b4, 3637fab, 0a024ef, ae70312, 6b02662, e75c366). Stage 9 (EmptyState universal) IN PROGRESS as a REDO under the NORMALIZATION MANDATE — delete pure-config wrappers and inline, consolidate same-family files, normalize folders/names/imports.
 5. Hold every rule in `refactor-rules.md` §1 and §2. The rules exist because each one was paid for.

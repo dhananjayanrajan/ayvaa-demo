@@ -797,3 +797,29 @@ PartnerClinicalRecommendation (prescription card with Rx glyph, not a quote bloc
 pattern shell, Stage 6/14 territory).
 
 Gate: real gate exit 2 = 33 Category C baseline, zero errors from QuotePanel or converted files.
+
+## CORRECTION — NORMALIZATION MANDATE (user ruling, supersedes nesting-doll reading)
+
+**User (verbatim intent):** "Massive refactor does not just mean making mild edits. It means a
+massive normalization of components, their folders, file names, correcting all imports as well.
+What use is the massive refactor if its just moving the code to another file and replacing it
+with imports like russian nesting dolls?"
+
+**Ruling:** The refactor is NOT satisfied by moving code into a universal and leaving a thin
+wrapper file that just re-renders it with props. It means a MASSIVE NORMALIZATION of the
+components themselves: folders, file names, and every import. Concretely:
+- Pure-config wrappers (a specific component that is now just a prop-config of a universal,
+  with no domain logic / data sourcing / multi-call-site value) are DELETED and their config
+  INLINED at the call site(s). The wrapper file is removed, not kept as a one-line re-export.
+- Same-family components are CONSOLIDATED into a single canonical file where they share a
+  pattern, rather than scattered as N near-identical files in N folders.
+- Folders and names are normalized to be coherent; every import across apps/ and components/
+  is re-pointed to the canonical location.
+- End state = genuinely smaller, navigable tree; component count must fall.
+- Hard constraint unchanged: identical rendered output for identical props. Normalization
+  changes WHERE code lives and HOW it is named/imported, never WHAT it renders.
+
+**Impact:** The initial Stage 9 (EmptyState) sweep produced nesting-doll wrappers
+(EmptyFilterState ×2, EmptyMatches, EmptyTabState, EmptyOffersCard as thin re-exports). These
+are being REDONE as real normalization. All prior stages (0-8) are subject to the same
+normalization lens at final certification (B18): any thin wrapper left behind is a defect.
