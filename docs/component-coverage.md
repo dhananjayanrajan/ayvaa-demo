@@ -276,3 +276,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   RecordSheet (professional/history)
 - F1 now 42 of 58 processed (40 rewired, 2 keep-ruled); professional 6 of 7; remaining:
   DeclineOfferSheet (prof) + patient 12
+
+---
+# Revision 8 — Professional F1 COMPLETE (7 of 7); patient pending-list corrected
+
+- Rewired: DeclineOfferSheet (scroll, self-owned dim preserved)
+- CORRECTION: MessageSheet, PrescriptionSheet, OfferSheet (profile), AuditLogSheet,
+  RecordsExportSheet were already canonical consumers — disk-verified, moved pending → done.
+  Patient F1 remaining is 7 sheets, not 12
+- F1 now 48 of 58 processed (46 rewired, 2 keep-ruled); professional closed 7/7;
+  partner closed 14/14; admin closed 3/3; remaining: patient 7

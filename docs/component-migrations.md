@@ -284,3 +284,21 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
 - Consumers: zero screen edits — all six keep paths and export signatures; PR01/PR04/PR12
   import lines unchanged
 - Verified: 6/6 on canonical by grep; npx tsc --noEmit clean
+
+## F1 finish — Professional tranche 2 + patient correction (1 rewire + 5 corrections) — PROFESSIONAL F1 CLOSED
+
+- Rewired height="scroll" (StaffDetail idiom — canonical surface inside preserved self-owned
+  black/40 dim + fade wrapper): DeclineOfferSheet. Consumer PR03 untouched (path + signature
+  preserved). Spring 300/30 → canonical 380/40 flagged; whileHover drops on close/accept
+  buttons (no-hover-motion rule); whileTap kept
+- COVERAGE CORRECTION — five patient sheets were never pending: MessageSheet, PrescriptionSheet,
+  OfferSheet (profile), AuditLogSheet, RecordsExportSheet each already import and correctly use
+  canonical SheetShell (full API: icon/title/tone/footer) — disk-verified at fetch. Origin
+  unclear (post-B2 build or unledgered rewire); audit §5 pending list and coverage doc inherited
+  the error. Ruled: already done, no action. Lesson: checklist pending-lists are verified
+  against disk at fetch, never trusted
+- Professional sheet family final: 7 of 7 (7 rewired)
+- F1 total after this batch: 48 of 58 processed (46 rewired, 2 keep-ruled); remaining patient: 7
+  (ConsentScopeSheet, RateVisitSheet, EmailFallbackSheet, FilterSheet visits, PaymentSheet,
+  VisitSoFarSheet, VitalsSheet)
+- Verified: DeclineOfferSheet on canonical by grep; npx tsc --noEmit clean

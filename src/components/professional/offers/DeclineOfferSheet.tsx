@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Check, Loader2, Send, X } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
+import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 import type { Offer } from '@/data/seed'
 
@@ -51,74 +52,56 @@ export function DeclineOfferSheet({ offer, onClose, onAccept, onDecline }: Decli
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          <motion.div
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="relative flex max-h-[88%] flex-col rounded-t-[28px] bg-white shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
-          >
-            <div className="shrink-0 px-5 pt-4">
-              <div className="mx-auto h-1.5 w-10 rounded-full bg-[#0B211B]/15" />
-            </div>
-
-            <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pb-7 pt-3">
-              <div className="flex items-start gap-3">
-                <Tile icon={Check} tone="warning" size="lg" />
-                <div className="min-w-0 flex-1">
-                  <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Decline this offer?</div>
-                  <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
-                    {offer.title} · the slot is re-offered to other professionals immediately. No penalty on your priority.
-                  </div>
+          <SheetShell onClose={onClose} height="scroll">
+            <div className="flex items-start gap-3">
+              <Tile icon={Check} tone="warning" size="lg" />
+              <div className="min-w-0 flex-1">
+                <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Decline this offer?</div>
+                <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
+                  {offer.title} · the slot is re-offered to other professionals immediately. No penalty on your priority.
                 </div>
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.92 }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                  onClick={onClose}
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
-                  aria-label="Keep offer"
-                >
-                  <X className="h-4 w-4" aria-hidden />
-                </motion.button>
               </div>
-
               <motion.button
                 type="button"
-                whileTap={acceptLoading ? undefined : { scale: 0.97 }}
-                whileHover={acceptLoading ? undefined : { scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                onClick={handleAccept}
-                disabled={acceptLoading || declineLoading}
-                className={cn(
-                  'mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]',
-                  acceptLoading && 'opacity-80',
-                )}
+                whileTap={{ scale: 0.92 }}
+                onClick={onClose}
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
+                aria-label="Keep offer"
               >
-                {acceptLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                ) : (
-                  <Send className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-                )}
-                {acceptLoading ? 'Accepting…' : 'Actually, accept it'}
-              </motion.button>
-              <motion.button
-                type="button"
-                whileTap={declineLoading ? undefined : { scale: 0.97 }}
-                whileHover={declineLoading ? undefined : { scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                onClick={handleDecline}
-                disabled={declineLoading || acceptLoading}
-                className={cn(
-                  'mt-2 w-full rounded-2xl bg-rose-500/10 py-3.5 text-sm font-bold text-rose-600',
-                  declineLoading && 'opacity-70',
-                )}
-              >
-                {declineLoading ? 'Declining…' : 'Yes, decline'}
+                <X className="h-4 w-4" aria-hidden />
               </motion.button>
             </div>
-          </motion.div>
+
+            <motion.button
+              type="button"
+              whileTap={acceptLoading ? undefined : { scale: 0.97 }}
+              onClick={handleAccept}
+              disabled={acceptLoading || declineLoading}
+              className={cn(
+                'mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]',
+                acceptLoading && 'opacity-80',
+              )}
+            >
+              {acceptLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+              ) : (
+                <Send className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
+              )}
+              {acceptLoading ? 'Accepting…' : 'Actually, accept it'}
+            </motion.button>
+            <motion.button
+              type="button"
+              whileTap={declineLoading ? undefined : { scale: 0.97 }}
+              onClick={handleDecline}
+              disabled={declineLoading || acceptLoading}
+              className={cn(
+                'mt-2 w-full rounded-2xl bg-rose-500/10 py-3.5 text-sm font-bold text-rose-600',
+                declineLoading && 'opacity-70',
+              )}
+            >
+              {declineLoading ? 'Declining…' : 'Yes, decline'}
+            </motion.button>
+          </SheetShell>
         </motion.div>
       )}
     </AnimatePresence>
