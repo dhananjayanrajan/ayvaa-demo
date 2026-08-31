@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
 import { LiveDot } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'

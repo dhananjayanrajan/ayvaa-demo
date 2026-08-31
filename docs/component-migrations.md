@@ -547,3 +547,39 @@ Navigator cards (PaymentCard, PlanCard, UpcomingCard, CreateAccountCard, Setting
 PartnerBillingCard, PartnerReferralCard — deferred since B8/B9), list interiors (ServiceRow,
 MedRow, DocRow, EntryRow, StepRow, ChecklistRow, FieldTaskRow, AddCertificationRow, staff/
 referral/alert/device rows inside B10–B11 keeps), sheet option rows (partner referral options)
+
+## INCIDENT — THE VACUOUS GATE (severity: critical, process-wide)
+
+- REVELATION: root tsconfig.json is solution-style ("files": [], references only). Plain
+  `npx tsc --noEmit` compiles ZERO files and exits 0. Every "TSC CLEAN" this session (~30
+  gates) — and, almost certainly, the pre-session agent's "clean at every gate" ledger claims —
+  was vacuous. The gate could not fail, so it verified nothing
+- DISCOVERY PATH: Command 83's clipboard inspection contradicted a "CLEAN" gate (missing import
+  + phantom prop on disk). Disk-state inspection confirmed both errors on disk. Hypothesis
+  (solution-style root tsconfig) confirmed by reading tsconfig.json. Real check: 
+  `npx tsc --noEmit -p tsconfig.app.json` (include: ["src"])
+- FULL INVENTORY (real gate): 129 errors / 85 files, categorized:
+  A) THIS SESSION (10 errors): broken PaymentCard/PartnerBillingCard adapters (phantom
+     amountClassName prop, missing ReceiptText import), CaptureChainCard import-insertion sed
+     that silently never matched (line form mismatch), 4 unused imports — ALL FIXED AND
+     VERIFIED (129 → 119, Category A zero)
+  B) PRE-SESSION REWIRE ARTIFACTS (~20): 5 LifecyclePhase mismatches ('saved'/'verifying'/
+     'saving' never valid phases — B4/B6 rewired files), ~15 unused imports left by B5/B8/B9
+     rewires. Latent on disk since those batches; ledger's "clean at every gate" claims for
+     them rest on the vacuous gate — RETRACTION of those claims pending real-gate verification
+  C) ORIGINAL CODEBASE LATENT BUGS (~15, pre-refactor): P24 data-model mismatches (c.default
+     always undefined — "Default" chip never rendered), P25 QuickRequest fields, A11 Incident
+     fields, 4× Offer type imports from seed, downloadSessionFile never exported, Blob type,
+     StaffHero Record index, TimeChip className prop, useRef arg, onNotify kind variance,
+     IncidentPanel resolved prop, DeletionQueueList state type
+  D) UNUSED-SYMBOL LINT (~70 TS6133): screens mostly; zero runtime impact
+- PROCESS RULE CHANGED: the compile gate is now and permanently
+  `npx tsc --noEmit -p tsconfig.app.json` + `-p tsconfig.node.json`, exit codes read directly,
+  never piped through head unguarded (the "app exit: 0" earlier in this incident was a head-
+  swallowed exit code — a second instrument error caught during the same investigation)
+- LESSON: a gate that has never failed once in ~30 runs is not a gate. Exit-code verification
+  and periodic negative-control checks (deliberately broken file → gate must fail) are now part
+  of the standard protocol
+- PENDING USER RULING: B/C/D disposition — recommendation on record: D (mechanical sweep) now,
+  B (pre-session rewire artifacts, ours to fix) next, C (behavior-changing original bugs) as
+  explicit workstream before B18

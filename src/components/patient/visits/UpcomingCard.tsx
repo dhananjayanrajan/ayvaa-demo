@@ -1,6 +1,6 @@
-import { motion } from 'motion/react'
-import { CalendarDays, ChevronRight } from 'lucide-react'
-import { Card, Chip, Tile } from '@/components/phone/kit'
+import { CalendarDays } from 'lucide-react'
+import { Card } from '@/components/phone/kit'
+import { Row } from '@/components/phone/Row'
 import { useRouter } from '@/lib/router'
 import { applyVisitFilters, upcomingSubtitle, upcomingVisits, type VisitFilters } from '@/data/patientVisits'
 import { EmptyTabState } from './EmptyTabState'
@@ -19,29 +19,21 @@ export function UpcomingCard({ filters, onClearFilters }: { filters: VisitFilter
         {list.map((v) => {
           const pending = v.status === 'pending'
           return (
-            <motion.button
+            <Row
               key={v.id}
-              type="button"
-              whileTap={{ scale: 0.985 }}
+              icon={CalendarDays}
+              tone={pending ? 'warning' : 'success'}
+              title={`${v.day}, ${v.date}`}
+              subtitle={upcomingSubtitle(v)}
+              subtitleClassName="text-[11px] font-semibold leading-snug text-[#0B211B]/45"
+              chip={{ label: pending ? 'Pending' : 'Confirmed', intent: pending ? 'warning' : 'success', dot: pending }}
+              surface="inset"
+              surfaceTone="rounded-2xl bg-[#0B211B]/[0.03]"
+              wrapSurface
+              className="p-3.5"
+              hoverClassName="hover:bg-[#0B211B]/[0.05]"
               onClick={() => navigate(v.status === 'live' ? '/patient/p16' : '/patient/p17')}
-              className="flex w-full items-center gap-3 rounded-2xl bg-[#0B211B]/[0.03] p-3.5 text-left transition-colors hover:bg-[#0B211B]/[0.05]"
-            >
-              <Tile icon={CalendarDays} tone={pending ? 'warning' : 'success'} />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[13.5px] font-bold tracking-tight text-[#0B211B]">
-                  {v.day}, {v.date}
-                </span>
-                <span className="mt-0.5 block text-[11px] font-semibold leading-snug text-[#0B211B]/45">
-                  {upcomingSubtitle(v)}
-                </span>
-              </span>
-              <span className="flex shrink-0 items-center gap-1.5">
-                <Chip intent={pending ? 'warning' : 'success'} dot={pending}>
-                  {pending ? 'Pending' : 'Confirmed'}
-                </Chip>
-                <ChevronRight className="h-3.5 w-3.5 text-[#0B211B]/20" aria-hidden />
-              </span>
-            </motion.button>
+            />
           )
         })}
       </div>

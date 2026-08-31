@@ -3,6 +3,8 @@ import { motion } from 'motion/react'
 import { Building2, Eye, EyeOff, KeyRound, Mail } from 'lucide-react'
 import { Chip } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'
+import type { LucideIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
 import type { TileTone } from '@/components/phone/kit'
 
 interface PartnerCredentialCardProps {
@@ -11,26 +13,24 @@ interface PartnerCredentialCardProps {
   onNotify: (opts: { title: string; body: string; kind?: 'info' | 'ok' }) => void
 }
 
-export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: PartnerCredentialCardProps) {
-  const [showPass, setShowPass] = useState(false)
-
-  const credentialRow = ({
-    icon,
-    tone,
-    label,
-    value,
-    mono = false,
-    onClick,
-    trailing,
-  }: {
-    icon: Parameters<typeof Row>[0] extends { icon?: infer I } ? I : never
-    tone: TileTone
-    label: string
-    value: string
-    mono?: boolean
-    onClick: () => void
-    trailing?: React.ReactNode
-  }) => (
+function CredentialRow({
+  icon,
+  tone,
+  label,
+  value,
+  mono = false,
+  onClick,
+  trailing,
+}: {
+  icon: LucideIcon
+  tone: TileTone
+  label: string
+  value: string
+  mono?: boolean
+  onClick: () => void
+  trailing?: ReactNode
+}) {
+  return (
     <Row
       icon={icon}
       tone={tone}
@@ -43,32 +43,36 @@ export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: P
       showChevron={false}
     />
   )
+}
+
+export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: PartnerCredentialCardProps) {
+  const [showPass, setShowPass] = useState(false)
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-[#0B211B]/[0.06] bg-white shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
-      {credentialRow({
-        icon: Building2,
-        tone: 'neutral',
-        label: 'Organisation',
-        value: partnerName,
-        onClick: () => onNotify({ title: 'Organisation', body: `${partnerName} · provisioned by admin`, kind: 'info' }),
-      })}
+      <CredentialRow
+        icon={Building2}
+        tone="neutral"
+        label="Organisation"
+        value={partnerName}
+        onClick={() => onNotify({ title: 'Organisation', body: `${partnerName} · provisioned by admin`, kind: 'info' })}
+      />
       <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-      {credentialRow({
-        icon: Mail,
-        tone: 'info',
-        label: 'Work email',
-        value: partnerEmail,
-        onClick: () => onNotify({ title: 'Work email', body: `${partnerEmail} · access last used today`, kind: 'info' }),
-      })}
+      <CredentialRow
+        icon={Mail}
+        tone="info"
+        label="Work email"
+        value={partnerEmail}
+        onClick={() => onNotify({ title: 'Work email', body: `${partnerEmail} · access last used today`, kind: 'info' })}
+      />
       <div aria-hidden className="mx-4 h-px bg-[#0B211B]/[0.05]" />
-      {credentialRow({
-        icon: KeyRound,
-        tone: 'success',
-        label: 'Password',
-        value: showPass ? 'sunrise-care-2026' : '••••••••••',
-        mono: true,
-        onClick: () => setShowPass((v) => !v),
+      <CredentialRow
+        icon={KeyRound}
+        tone="success"
+        label="Password"
+        value={showPass ? 'sunrise-care-2026' : '••••••••••'}
+        mono
+        onClick={() => setShowPass((v) => !v)}
         trailing={
           <motion.span
             whileTap={{ scale: 0.9 }}
@@ -84,8 +88,8 @@ export function PartnerCredentialCard({ partnerName, partnerEmail, onNotify }: P
           >
             {showPass ? <EyeOff className="h-4 w-4" aria-hidden /> : <Eye className="h-4 w-4" aria-hidden />}
           </motion.span>
-        },
-      })}
+        }
+      />
       <div className="flex items-center justify-between bg-[#0B211B]/[0.03] px-4 py-3">
         <span className="min-w-0 truncate text-[10.5px] font-semibold text-[#0B211B]/50">
           Two-factor is enforced by your organisation

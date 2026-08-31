@@ -364,3 +364,13 @@ compile, vendor flag list, deferred decisions, 100% certification) → screen re
   rewritten, 1 via FactRows)
 - Reclassified: ResendRow→F4; Delivery/CallStrip→StatusStrip(F3); onboarding CredentialRow→Field(F10)
 - NEXT: Sweep 1 stage 2 (corpus adoption), then StepList/Timeline sweep
+
+---
+# Revision 16 — vacuous-gate incident; Category A repaired; Row sweep resumable
+
+- Real gate adopted: tsc -p tsconfig.app.json (+ node config), direct exit codes
+- Category A (this session's 10 errors) fixed and verified zero
+- Remaining 119 errors: B (~20 pre-session rewire artifacts), C (~15 original-codebase latent
+  bugs), D (~70 unused-symbol lint) — disposition pending user ruling
+- Sweep 1 stage 2 (corpus adoption) paused mid-flight: 6 navigator cards converted (fixed),
+  next tranche held until B/C/D ruled

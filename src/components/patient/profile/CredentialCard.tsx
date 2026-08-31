@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BadgeCheck, FileCheck2, HeartPulse, ShieldCheck, type LucideIcon } from 'lucide-react'
-import { Card, Chip } from '@/components/phone/kit'
+import { Card } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'
 import type { Credential } from '@/data/patientCaregiverProfile'
 

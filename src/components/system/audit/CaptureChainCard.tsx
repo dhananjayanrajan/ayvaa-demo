@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip } from '@/components/phone/kit'
+import { FactRows } from '@/components/phone/FactRows'
 import { captureSteps, paymentMeta } from '@/data/system/payments'
 import type { CaptureIcon, PaymentPhase } from '@/data/system/payments'
 import { useRouter } from '@/lib/router'
