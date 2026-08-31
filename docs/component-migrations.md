@@ -203,3 +203,26 @@ Append-only. One section per batch. Format: old path → new path | merged-into 
   under the alias, logged for any future layering decision
 - Verified: npx tsc --noEmit clean (×2 gates); retired-path sweep zero across all 12 old
   paths; relative-import blind-spot sweep zero; new-path file counts all match expected
+
+## F1 finish — Partner sheets, batch 1 of 3 (6 sheets)
+
+- components/phone/SheetShell.tsx → extended | height prop ('full' default | 'auto' content-height
+  mode: flex-col gap-3.5 p-5 pb-7, grabber + compact header inline, children/footer inline) |
+  existing API untouched; TSC clean at hub gate before any consumer ran
+- Six compact hand-rolled shells (identical retired idiom: y-100% spring bounce 0.12/0.45s,
+  rounded-t-[28px] bg-white p-5 pb-7, grabber, X-button header) → SheetShell height="auto":
+  PartnerAlertsSheet, PartnerBillingSheet, PartnerDischargeFileSheet, PartnerInfoSheet,
+  PartnerMessageSheet, PartnerReferralSheet
+- Consumers: zero screen edits required — all six keep paths and export signatures; PT02/PT03/PT04
+  import lines unchanged
+- PartnerInfoSheet: self-controlled mode via open={!!data}; custom emerald-circle header kept as
+  children (dynamic icon — shell header unused, no leading escape-hatch prop added); dim layer now
+  canonical
+- Preserved differences: referral option rows kept custom (amber/sky circles — OptionRow force-fit
+  would be a bolt-on); alerts hairline dividers kept (divider punch list)
+- Normalizations flagged: spring bounce 0.12/0.45s → canonical 380/40 (B2 precedent); whileHover
+  scales dropped on DischargeFile view/download buttons and Message quick-reply chips (no-hover-motion
+  rule, B6 precedent); whileTap kept; Message send-button conditional whileHover scale dropped
+- Punch list additions (visual, rebuild phase): PartnerAlertsSheet row dividers; hover states on
+  referral rows
+- Verified: 6/6 on canonical by grep; npx tsc --noEmit clean

@@ -1,8 +1,8 @@
-import { motion } from 'motion/react'
-import { Bell, CheckCircle2, X } from 'lucide-react'
+import { Bell, CheckCircle2 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Tile, TimeChip } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
+import { SheetShell } from '@/components/phone/SheetShell'
 
 export interface AlertItem {
   icon: LucideIcon
@@ -20,31 +20,14 @@ interface PartnerAlertsSheetProps {
 
 export function PartnerAlertsSheet({ alerts, onClose, onMarkAllRead }: PartnerAlertsSheetProps) {
   return (
-    <motion.div
-      key="alerts-sheet"
-      initial={{ y: '100%' }}
-      animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', bounce: 0.12, duration: 0.45 }}
-      className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
+    <SheetShell
+      icon={Bell}
+      tone="warning"
+      title="Partner alerts"
+      subtitle="Everything that moved while you were away"
+      onClose={onClose}
+      height="auto"
     >
-      <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
-      <div className="flex items-start gap-3">
-        <Tile icon={Bell} tone="warning" size="lg" />
-        <div className="min-w-0 flex-1">
-          <div className="text-[15px] font-extrabold tracking-tight text-[#0B211B]">Partner alerts</div>
-          <div className="mt-0.5 text-xs font-medium text-[#0B211B]/55">Everything that moved while you were away</div>
-        </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0B211B]/[0.05] text-[#0B211B]/50"
-          aria-label="Close alerts"
-        >
-          <X className="h-4 w-4" aria-hidden />
-        </button>
-      </div>
-
       {alerts.length > 0 ? (
         <div className="flex flex-col">
           {alerts.map((a, i) => (
@@ -81,6 +64,6 @@ export function PartnerAlertsSheet({ alerts, onClose, onMarkAllRead }: PartnerAl
       <p className="text-center text-[10.5px] font-semibold text-[#0B211B]/45">
         Alerts are quiet between 9 PM and 8 AM unless urgent.
       </p>
-    </motion.div>
+    </SheetShell>
   )
 }

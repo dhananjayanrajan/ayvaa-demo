@@ -235,3 +235,13 @@ F1 finish (partner first, 6-file reads) → F2 residual (2 heroes + ProfileHero/
 RatingHero verification + gold/amber decision) → placement-debt batch (FactRows, AccentHero)
 → B10 close (30 unread) → B11 → B12 → B13 → B14 → B15 → B16 → B17 → B18 (sweep, dedup audit,
 compile, vendor flag list, deferred decisions, 100% certification) → screen rebuild resumes.
+
+---
+# Revision 4 — F1 partner sheets batch 1 (6 of 14)
+
+- Rewired onto SheetShell height="auto": PartnerAlertsSheet, PartnerBillingSheet,
+  PartnerDischargeFileSheet, PartnerInfoSheet, PartnerMessageSheet, PartnerReferralSheet
+- F1 now 27 of 58 processed (25 rewired, 2 keep-ruled); partner 6 of 14; remaining:
+  PartnerSessionsSheet, PartnerStaffSheet, PartnerStatsSheet, StaffDetailSheet,
+  BillingInvoiceSheet, BillingUsageReportSheet, PerformanceFeedbackSheet, PerformanceKpiSheet
+- Canonical change: SheetShell gains height ('full' | 'auto') — superset API, no consumer breakage

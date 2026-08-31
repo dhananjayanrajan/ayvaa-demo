@@ -15,6 +15,7 @@ export type SheetProps = {
   title?: string
   subtitle?: string
   sub?: string
+  height?: 'full' | 'auto'
   onClose: () => void
   footer?: ReactNode
   children: ReactNode
@@ -26,17 +27,19 @@ function SheetHeaderRow({
   title,
   subtitle,
   onClose,
+  compact,
 }: {
   icon?: LucideIcon
   tone: TileTone
   title?: string
   subtitle?: string
   onClose: () => void
+  compact?: boolean
 }) {
   return (
     <div className="flex items-start gap-3">
       {Icon && <Tile icon={Icon} tone={tone} size="lg" />}
-      <div className="min-w-0 flex-1 pt-0.5">
+      <div className={compact ? 'min-w-0 flex-1' : 'min-w-0 flex-1 pt-0.5'}>
         {title && (
           <div className="break-words text-[15px] font-extrabold leading-snug tracking-tight text-[#0B211B]">{title}</div>
         )}
@@ -72,15 +75,34 @@ export function SheetHeader({
   return <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle ?? sub} onClose={onClose} />
 }
 
-function SheetSurface({ icon, tone, title, subtitle, onClose, footer, children }: {
+function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, children }: {
   icon?: LucideIcon
   tone: TileTone
   title?: string
   subtitle?: string
   onClose: () => void
   footer?: ReactNode
+  height?: 'full' | 'auto'
   children: ReactNode
 }) {
+  if (height === 'auto') {
+    return (
+      <motion.div
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={SHEET_SPRING}
+        className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
+      >
+        <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
+        {(icon || title) && (
+          <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle} onClose={onClose} compact />
+        )}
+        {children}
+        {footer}
+      </motion.div>
+    )
+  }
   return (
     <motion.div
       initial={{ y: '100%' }}
@@ -103,12 +125,13 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, children }
   )
 }
 
-export function SheetShell({ open, tone, tileTone, subtitle, sub, ...rest }: SheetProps) {
+export function SheetShell({ open, tone, tileTone, subtitle, sub, height, ...rest }: SheetProps) {
   const surface = (
     <SheetSurface
       {...rest}
       tone={tileTone ?? tone ?? 'neutral'}
       subtitle={subtitle ?? sub}
+      height={height}
     />
   )
   if (open === undefined) return surface
