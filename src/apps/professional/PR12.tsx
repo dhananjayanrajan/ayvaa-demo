@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Search } from 'lucide-react'
+import { Lock, Search } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { pastSessions } from '@/data/professionalHistory'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -11,7 +12,6 @@ import { DossierHero } from '@/components/professional/history/DossierHero'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { MonthTimeline } from '@/components/professional/history/MonthTimeline'
 import { EmptyState } from '@/components/phone/EmptyState'
-import { SealedNotice } from '@/components/professional/history/SealedNotice'
 import { ExportHistoryButton, type ExportStatus } from '@/components/professional/history/ExportHistoryButton'
 import { SearchSheet } from '@/components/professional/history/SearchSheet'
 import {
@@ -139,7 +139,9 @@ export function PR12() {
             )}
 
             <motion.div variants={rise}>
-              <SealedNotice />
+              <NoteStrip intent="info" icon={Lock}>
+                Past records are sealed. Your evidence of care delivered, shareable with hospitals or partners only with consent.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>

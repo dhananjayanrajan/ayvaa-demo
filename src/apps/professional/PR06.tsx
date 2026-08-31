@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { ShieldAlert } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { lovedOnes, sessions } from '@/data/seed'
 import { sessionChecklist } from '@/data/professionalCare'
 import { useDemo } from '@/lib/store'
@@ -10,7 +12,6 @@ import { useRouter } from '@/lib/router'
 import { CheckInHero } from '@/components/professional/sessions/CheckInHero'
 import { ChecklistCard } from '@/components/professional/sessions/ChecklistCard'
 import { QuickActionsGrid } from '@/components/professional/sessions/QuickActionsGrid'
-import { SafetyNotice } from '@/components/professional/sessions/SafetyNotice'
 import { IncidentButton } from '@/components/professional/sessions/IncidentButton'
 import { SignOffButton, type SignOffStatus } from '@/components/professional/sessions/SignOffButton'
 import { SignOffConfirmation } from '@/components/professional/sessions/SignOffConfirmation'
@@ -134,7 +135,9 @@ export function PR06() {
             </AnimatePresence>
 
             <motion.div variants={rise}>
-              <SafetyNotice patientName={father.name.split(' ')[0]} />
+              <NoteStrip intent="warning" icon={ShieldAlert}>
+                Patient safety first. If anything looks wrong with {father.name.split(' ')[0]}, use Report incident — care stops until it is handled.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>

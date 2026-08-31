@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { X } from 'lucide-react'
+import { Lock, X } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, FootBar, Screen } from '@/components/phone/Screen'
 import { Tile, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { lovedOnes } from '@/data/seed'
 import { medVerification, quickTags, sessionNote } from '@/data/professionalCare'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { EntrySheetsHero } from '@/components/professional/sheets/EntrySheetsHero'
-import { SealedNotice } from '@/components/professional/sheets/SealedNotice'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { VitalsPanel } from '@/components/professional/sheets/VitalsPanel'
 import { MedVerificationPanel } from '@/components/professional/sheets/MedVerificationPanel'
@@ -144,7 +144,9 @@ export function PR07() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <SealedNotice />
+              <NoteStrip intent="info" icon={Lock}>
+                Tap a sheet to record. Entries open as sheets and are sealed once the visit is signed off.
+              </NoteStrip>
             </motion.div>
           </motion.div>
         </div>

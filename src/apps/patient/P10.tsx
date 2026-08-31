@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowRight, Check, Loader2 } from 'lucide-react'
+import { ArrowRight, Check, Loader2, Workflow } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { MatchHero } from '@/components/patient/matching/MatchHero'
 import { MatchCard } from '@/components/patient/matching/MatchCard'
 import { ActiveFilterStrip } from '@/components/patient/matching/ActiveFilterStrip'
 import { EmptyMatches } from '@/components/patient/matching/EmptyMatches'
-import { RecheckNote } from '@/components/patient/matching/RecheckNote'
 import { LanguageSheet } from '@/components/patient/matching/LanguageSheet'
 import {
   MATCH_CAREGIVERS,
@@ -142,7 +142,9 @@ export function P10() {
           )}
 
           <motion.div variants={rise}>
-            <RecheckNote />
+            <NoteStrip intent="info" icon={Workflow}>
+              When a caregiver accepts, we re-check their current availability before confirming your session.
+            </NoteStrip>
           </motion.div>
           <motion.div variants={rise}>
             <EndOfScroll label="End of matches" />

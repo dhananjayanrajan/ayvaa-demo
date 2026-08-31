@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Filter } from 'lucide-react'
+import { Filter, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { VisitsHero } from '@/components/patient/visits/VisitsHero'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 
@@ -14,7 +15,6 @@ import { CompletedCard } from '@/components/patient/visits/CompletedCard'
 import { MissedCard } from '@/components/patient/visits/MissedCard'
 import { EmptyTabState } from '@/components/patient/visits/EmptyTabState'
 import { FilterSheet } from '@/components/patient/visits/FilterSheet'
-import { VerificationNote } from '@/components/patient/visits/VerificationNote'
 import { AddVisitButton } from '@/components/patient/visits/AddVisitButton'
 import {
   activeFilterCount,
@@ -133,7 +133,9 @@ export function P15() {
           )}
 
           <motion.div variants={rise}>
-            <VerificationNote />
+            <NoteStrip intent="info" icon={ShieldCheck}>
+              Every visit on this list is verified by GPS check-in. What happened is recorded, sealed and shared with you.
+            </NoteStrip>
           </motion.div>
 
           <motion.div variants={rise}>

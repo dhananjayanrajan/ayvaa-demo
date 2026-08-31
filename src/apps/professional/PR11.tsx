@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Eye } from 'lucide-react'
+import { Eye, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { availability, certifications, professional, professionalSkills } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -12,7 +13,6 @@ import { CertificationsCard, type CertRecord } from '@/components/professional/p
 import { SkillsCloud, type Skill } from '@/components/professional/profile/SkillsCloud'
 import { PreferencesCard } from '@/components/professional/profile/PreferencesCard'
 import { EditProfileButton } from '@/components/professional/profile/EditProfileButton'
-import { PrivacyNotice } from '@/components/professional/profile/PrivacyNotice'
 import { ProfilePreviewSheet } from '@/components/professional/profile/ProfilePreviewSheet'
 import { CertificationUploadSheet } from '@/components/professional/profile/CertificationUploadSheet'
 import { EditProfileSheet } from '@/components/professional/profile/EditProfileSheet'
@@ -189,7 +189,9 @@ export function PR11() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <PrivacyNotice />
+              <NoteStrip intent="info" icon={ShieldCheck}>
+                Families see your verified facts only. Licence status, experience and rating. Documents stay sealed with Ayvaa.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>

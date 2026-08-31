@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowRight, BadgeCheck, Check, Loader2, Route } from 'lucide-react'
+import { ArrowRight, BadgeCheck, Check, Loader2, Lock, Route } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { InfoListCard } from '@/components/admin/ui/InfoListCard'
 import { ProfileHero } from '@/components/patient/profile/ProfileHero'
 import { CredentialCard } from '@/components/patient/profile/CredentialCard'
 import { ReviewShell } from '@/components/patient/profile/ReviewShell'
 import { CareHistoryCard } from '@/components/patient/profile/CareHistoryCard'
-import { ConsentNote } from '@/components/patient/profile/ConsentNote'
 import { OfferSheet } from '@/components/patient/profile/OfferSheet'
 import {
   PROFILE,
@@ -122,7 +122,9 @@ export function P11() {
           </motion.div>
 
           <motion.div variants={rise}>
-            <ConsentNote firstName={PROFILE.firstName} />
+            <NoteStrip intent="success" icon={Lock}>
+              {PROFILE.firstName} delivers care only under your signed consent and care plan. Every visit is verified and logged.
+            </NoteStrip>
           </motion.div>
 
           <motion.div variants={rise}>

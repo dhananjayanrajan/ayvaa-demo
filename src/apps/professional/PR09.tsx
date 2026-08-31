@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { Download } from 'lucide-react'
+import { Download, ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { earnings, payouts, professional } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { EarningsHero } from '@/components/professional/earnings/EarningsHero'
 import { RatingStrip } from '@/components/professional/earnings/RatingStrip'
 import { SessionEarningsCard } from '@/components/professional/earnings/SessionEarningsCard'
-import { PayPolicyNotice } from '@/components/professional/earnings/PayPolicyNotice'
 import { PayoutLinkCard } from '@/components/professional/earnings/PayoutLinkCard'
 import { WithdrawButton, type WithdrawStatus } from '@/components/professional/earnings/WithdrawButton'
 import { paidSessions } from '@/data/sessionRecords'
@@ -90,7 +90,9 @@ export function PR09() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <PayPolicyNotice />
+              <NoteStrip intent="info" icon={ShieldCheck}>
+                A session pays only after sign-off. This keeps earnings honest for you and families alike — every rupee traces to a completed visit.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>

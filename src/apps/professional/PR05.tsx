@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { ShieldCheck } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { NoteStrip } from '@/components/phone/NoteStrip'
 import { availability } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
@@ -10,7 +12,6 @@ import { AvailabilityHero } from '@/components/professional/availability/Availab
 import { WeekBars } from '@/components/professional/availability/WeekBars'
 import { DayEditorCard } from '@/components/professional/availability/DayEditorCard'
 import { TimeOffCard } from '@/components/professional/availability/TimeOffCard'
-import { ReliabilityNotice } from '@/components/professional/availability/ReliabilityNotice'
 import { SaveAvailabilityButton, type SaveStatus } from '@/components/professional/availability/SaveAvailabilityButton'
 import { SaveConfirmation } from '@/components/professional/availability/SaveConfirmation'
 import { WINDOWS, hoursFor, type DayAvailability } from '@/data/availabilityData'
@@ -117,7 +118,9 @@ export function PR05() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <ReliabilityNotice message="Priority stays high when windows are honest. Declining after accepting, or missing sessions, lowers your match rank." />
+              <NoteStrip intent="warning" icon={ShieldCheck}>
+                Priority stays high when windows are honest. Declining after accepting, or missing sessions, lowers your match rank.
+              </NoteStrip>
             </motion.div>
 
             <motion.div variants={rise}>
