@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -24,7 +24,16 @@ interface StatusPillProps {
 export function StatusPill({ tone, label, live = false, icon, className }: StatusPillProps) {
   const t = pillTones[tone]
   const { emit } = useFramework()
-  useEffect(() => { if (live) emit('statusPill.live', { tone, label }) }, [emit, live, tone, label])
+  const hasMountedRef = useRef(false)
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      emit('statusPill.mounted', { tone, label, live })
+    }
+  }, [emit, label, live, tone])
+  useEffect(() => {
+    if (live) emit('statusPill.live', { tone, label })
+  }, [emit, live, tone, label])
   return (
     <span
       className={cn(
