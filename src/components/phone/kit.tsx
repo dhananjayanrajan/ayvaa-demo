@@ -515,6 +515,21 @@ export function Ring({
   )
 }
 
+export function Odometer({ value, className }: { value: number | string; className?: string }) {
+  const str = String(value)
+  return (
+    <span className={cn('inline-flex tabular-nums', className)} aria-live="polite" aria-atomic>
+      {str.split('').map((ch, i) => (
+        <span key={`${i}-${ch}`} className="relative inline-block overflow-hidden">
+          <motion.span key={ch} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.22, ease: 'easeOut' }} className="inline-block">
+            {ch}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  )
+}
+
 export function Cta({
   icon: Icon,
   tone = 'success',

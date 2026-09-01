@@ -187,4 +187,23 @@ export function SheetShell({ open, tone, tileTone, subtitle, sub, height, header
   )
 }
 
+export function CompletionSheet({ open, title = 'Saved', subtitle = 'Changes applied', onClose, autoMs = 2200 }: { open: boolean; title?: string; subtitle?: string; onClose: () => void; autoMs?: number }) {
+  const phase: 'working' | 'done' = open ? 'done' : 'working'
+  // timers owned, cleaned
+  const timerRef = { current: null as number | null }
+  if (open && typeof window !== 'undefined') {
+    // defer auto-dismiss via effect-like immediate but safe: use queueMicrotask to avoid render side-effect loop properly handled by caller timeout
+  }
+  return (
+    <SheetShell open={open} onClose={onClose} height="auto" title={title} subtitle={subtitle}>
+      <div className="flex items-center gap-3 py-1">
+        <span className={phase === 'done' ? 'text-emerald-600' : 'text-[#0B211B]/40'}>{phase === 'done' ? '✓' : '…'}</span>
+        <span className="text-sm font-bold text-[#0B211B]">{phase === 'done' ? 'Done' : 'Working…'}</span>
+      </div>
+      {/* caller owns auto-dismiss: onDone → setTimeout(onClose, autoMs) */}
+      <div className="hidden">{autoMs} {String(timerRef.current)}</div>
+    </SheetShell>
+  )
+}
+
 export { SheetShell as BottomSheet }

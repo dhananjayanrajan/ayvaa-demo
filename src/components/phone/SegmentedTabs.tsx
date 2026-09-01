@@ -132,10 +132,23 @@ export function SegmentedTabs({
 
   const labelTransition = tone === 'white' ? 'transition-colors duration-200' : ''
 
+  const idx = Math.max(0, tabs.findIndex((t) => t.id === value))
+  const onSwipe = (dir: 1 | -1) => {
+    const next = idx + dir
+    if (next >= 0 && next < tabs.length) onChange(tabs[next].id)
+  }
   return (
-    <div
+    <motion.div
       role={role ? 'tablist' : undefined}
-      className={cn('flex gap-1 rounded-full p-1', SHELL_ALIGN[tone], SHELL[tone], className)}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.18}
+      dragMomentum={false}
+      onDragEnd={(_, info) => {
+        if (info.offset.x < -44 || info.velocity.x < -600) onSwipe(1)
+        else if (info.offset.x > 44 || info.velocity.x > 600) onSwipe(-1)
+      }}
+      className={cn('flex gap-1 rounded-full p-1 touch-pan-y', SHELL_ALIGN[tone], SHELL[tone], className)}
     >
       {tabs.map((tab) => {
         const active = value === tab.id
@@ -223,6 +236,6 @@ export function SegmentedTabs({
           </motion.button>
         )
       })}
-    </div>
+    </motion.div>
   )
 }
