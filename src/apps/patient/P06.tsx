@@ -5,15 +5,13 @@ import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
-import {
-  NotificationBell,
-  LiveHero,
-  QuickActions,
-  UpcomingVisitsCard,
-  MedicationCard,
-  RecoveryCard,
-  LiveVisitSheet,
-} from '@/components/home/HomeSet'
+import { NotificationBell } from '@/components/patient/dashboard/NotificationBell'
+import { LiveHero } from '@/components/patient/dashboard/LiveHero'
+import { QuickActions } from '@/components/patient/dashboard/QuickActions'
+import { UpcomingVisitsCard } from '@/components/patient/dashboard/UpcomingVisitsCard'
+import { MedicationCard } from '@/components/patient/dashboard/MedicationCard'
+import { RecoveryCard } from '@/components/patient/dashboard/RecoveryCard'
+import { LiveVisitSheet } from '@/components/patient/dashboard/LiveVisitSheet'
 import { buildDashboardFacts } from '@/data/patientDashboard'
 import { guardian } from '@/data/seed'
 import { useDemo } from '@/lib/store'
