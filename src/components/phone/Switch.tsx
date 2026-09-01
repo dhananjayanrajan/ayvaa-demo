@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 export function Switch({
   on,
@@ -11,10 +12,15 @@ export function Switch({
   ariaLabel?: string
   className?: string
 }) {
+  const { emit } = useFramework()
+  const handleToggle = () => {
+    emit('switch.toggled', { on: !on })
+    onToggle()
+  }
   return (
     <button
       type="button"
-      onClick={onToggle}
+      onClick={handleToggle}
       aria-label={ariaLabel}
       aria-pressed={on}
       className={cn(
