@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
-import { Activity, CalendarCheck, Check, ChevronRight, Loader2, MapPin, Phone, Pill, ScrollText } from 'lucide-react'
-import { Card, Hero, Meter } from '@/components/phone/kit'
-import { DarkPanel } from '@/components/phone/DarkPanel'
-import { HeroTopRow, HeroHighlight } from '@/components/phone/HeroCells'
-import { Row } from '@/components/phone/Row'
-import { SheetShell } from '@/components/phone/SheetShell'
-import type { DashboardFacts, VisitRow } from '@/data/patientDashboard'
-import { carePlan } from '@/data/seed'
-import { doseRounds, liveSteps, quickActions } from '@/data/patientDashboard'
+import { AnimatePresence, motion } from 'motion/react'
+import type { LucideIcon } from 'lucide-react'
+import { Activity, AlertTriangle, BarChart3, CalendarCheck, Check, ChevronRight, Hourglass, Loader2, MapPin, Phone, Pill, ReceiptText, ScrollText, Send, ShieldCheck, Stethoscope, UserCheck, UserPlus, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useDemo } from '@/lib/store'
+import type { TileTone } from '@/components/phone/kit'
+import { Card, Chip, Hero, LiveDot, Meter, Tile, TimeChip, rise } from '@/components/phone/kit'
+import type { DashboardFacts, VisitRow } from '@/data/patientDashboard'
+import { doseRounds, liveSteps, quickActions } from '@/data/patientDashboard'
+import { SheetShell } from '@/components/phone/SheetShell'
+import { DarkPanel } from '@/components/phone/DarkPanel'
 import { useRouter } from '@/lib/router'
+import { HeroHighlight, HeroTopRow } from '@/components/phone/HeroCells'
+import { adminAttention, adminMetrics, carePlan } from '@/data/seed'
+import { Row } from '@/components/phone/Row'
+import { ListRow } from '@/components/admin/ui/ListRow'
+import AgentAvatar from '@/components/smoothui/agent-avatar'
 
 export type CallPhase = 'idle' | 'connecting' | 'connected'
 
@@ -533,5 +537,483 @@ export function UpcomingVisitsCard({
         ))}
       </div>
     </Card>
+  )
+}
+
+export function AttentionList() {
+  const { notify, dispatch } = useDemo()
+  const { navigate } = useRouter()
+
+  const attention: { icon: LucideIcon; tone: TileTone; onClick: () => void }[] = [
+    {
+      icon: Hourglass,
+      tone: 'warning',
+      onClick: () =>
+        notify({
+          title: 'Dispatch round in progress',
+          body: `Round ${dispatch.round} · ${dispatch.waiting} offers waiting · expires ${dispatch.expiresAt}`,
+          kind: 'info',
+        }),
+    },
+    { icon: UserCheck, tone: 'success', onClick: () => navigate('/admin/a03') },
+    { icon: ShieldCheck, tone: 'ink', onClick: () => navigate('/admin/a06') },
+  ]
+
+  return (
+    <motion.div variants={rise}>
+      <Card>
+        {attention.map((a, i) => (
+          <div key={adminAttention[i].title}>
+            <ListRow
+              icon={a.icon}
+              tone={a.tone}
+              title={adminAttention[i].title}
+              subtitle={adminAttention[i].body}
+              onClick={a.onClick}
+            />
+          </div>
+        ))}
+      </Card>
+    </motion.div>
+  )
+}
+
+export function IncidentOverviewCard() {
+  const { navigate } = useRouter()
+  return (
+    <motion.div variants={rise}>
+      <motion.button
+        type="button"
+        whileTap={{ scale: 0.985 }}
+        onClick={() => navigate('/admin/a02')}
+        className="group block w-full text-left"
+      >
+        <Card intent="danger">
+          <div className="flex items-center gap-3 p-4">
+            <Tile icon={AlertTriangle} tone="danger" size="lg" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
+                {adminMetrics.openIncidents} open incidents
+              </span>
+              <span className="mt-0.5 block text-xs font-medium text-[#0B211B]/55">
+                One is critical · tap to open the incident room
+              </span>
+            </span>
+            <ChevronRight
+              className="h-4 w-4 shrink-0 text-rose-500/60 transition-transform group-hover:translate-x-0.5"
+              aria-hidden
+            />
+          </div>
+        </Card>
+      </motion.button>
+    </motion.div>
+  )
+}
+
+export function LiveSessionsCard() {
+  return (
+    <motion.div variants={rise}>
+      <Card intent="success">
+        <div className="flex items-center gap-3 p-5">
+          <Tile icon={Activity} tone="live" size="lg" />
+          <div className="min-w-0 flex-1">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
+              {adminMetrics.liveSessions} sessions live right now
+            </div>
+            <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
+              GPS-verified check-ins across Hyderabad
+            </div>
+          </div>
+          <Chip intent="live" dot>Live</Chip>
+        </div>
+      </Card>
+    </motion.div>
+  )
+}
+
+interface PartnerBillingCardProps {
+  invoiceAmount: string
+  invoiceSessions: string
+  onViewBilling: () => void
+}
+
+export function PartnerBillingCard({ invoiceAmount, invoiceSessions, onViewBilling }: PartnerBillingCardProps) {
+  return (
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.985 }}
+      onClick={onViewBilling}
+      className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2"
+    >
+      <Card>
+        <Row
+          icon={ReceiptText}
+          tone={'emerald' as TileTone}
+          tileSize="lg"
+          title="February invoice"
+          titleClassName="text-sm font-extrabold leading-snug"
+          subtitle={invoiceSessions}
+          subtitleClassName="text-xs"
+          trailing={
+            <span className="flex shrink-0 flex-col items-end gap-1.5">
+              <span className="font-mono text-[14px] font-black tabular-nums tracking-tight text-[#0B211B]">{invoiceAmount}</span>
+              <Chip intent="success" className="border-transparent">Paid</Chip>
+            </span>
+          }
+          className="p-4"
+          showChevron={false}
+          hoverClassName="hover:bg-transparent"
+          whileTapDisabled
+        />
+      </Card>
+    </motion.button>
+  )
+}
+
+function QuickTile({
+  icon,
+  tone,
+  label,
+  value,
+  onClick,
+}: {
+  icon: LucideIcon
+  tone: TileTone
+  label: string
+  value: string
+  onClick: () => void
+}) {
+  return (
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      onClick={onClick}
+      className="flex min-w-0 flex-1 flex-col items-start gap-2.5 rounded-2xl bg-[#0B211B]/[0.04] p-3.5 transition-colors hover:bg-[#0B211B]/[0.07]"
+    >
+      <Tile icon={icon} tone={tone} size="sm" />
+      <span className="min-w-0">
+        <span className="block truncate text-[12px] font-extrabold tracking-tight text-[#0B211B]">{label}</span>
+        <span className="mt-0.5 block truncate text-[9.5px] font-bold text-[#0B211B]/45">{value}</span>
+      </span>
+    </motion.button>
+  )
+}
+
+interface PartnerQuickActionsProps {
+  staffCount: number
+  sessionsCount: number
+  onStaffClick: () => void
+  onBillingClick: () => void
+  onSessionsClick: () => void
+}
+
+export function PartnerQuickActions({
+  staffCount,
+  sessionsCount,
+  onStaffClick,
+  onBillingClick,
+  onSessionsClick,
+}: PartnerQuickActionsProps) {
+  return (
+    <div className="flex gap-2.5">
+      <QuickTile
+        icon={Users}
+        tone="info"
+        label="Staff"
+        value={`${staffCount} on Ayvaa`}
+        onClick={onStaffClick}
+      />
+      <QuickTile
+        icon={ReceiptText}
+        tone="warning"
+        label="Billing"
+        value="Up to date"
+        onClick={onBillingClick}
+      />
+      <QuickTile
+        icon={Stethoscope}
+        tone="ink"
+        label="Sessions"
+        value={`${sessionsCount} done`}
+        onClick={onSessionsClick}
+      />
+    </div>
+  )
+}
+
+interface PartnerReferralCardProps {
+  onOpenOptions: () => void
+}
+
+export function PartnerReferralCard({ onOpenOptions }: PartnerReferralCardProps) {
+  return (
+    <Card intent="success">
+      <div className="p-4">
+        <div className="flex items-center gap-3">
+          <Tile icon={UserPlus} tone="live" size="lg" />
+          <div className="min-w-0 flex-1">
+            <div className="text-sm font-extrabold leading-snug tracking-tight text-[#0B211B]">
+              Refer a patient for home care
+            </div>
+            <div className="mt-0.5 text-xs font-medium leading-relaxed text-[#0B211B]/55">
+              4-step wizard · guardian consents before matching
+            </div>
+          </div>
+          <Chip intent="success" className="border-transparent">2 min</Chip>
+        </div>
+        <motion.button
+          type="button"
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          onClick={onOpenOptions}
+          className="mt-4 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.75)]"
+        >
+          <Send className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
+          Start referral
+        </motion.button>
+        <button
+          type="button"
+          onClick={onOpenOptions}
+          className="mt-2 flex w-full items-center justify-center gap-1 text-xs font-bold text-emerald-700"
+        >
+          More options
+          <ChevronRight className="h-3.5 w-3.5" />
+        </button>
+      </div>
+    </Card>
+  )
+}
+
+interface PartnerStatsHeroProps {
+  partner: {
+    name: string
+    location: string
+    referred: number
+    activeCare: number
+    staffOnAyvaa: number
+    sessionsThisMonth: number
+  }
+  referrals: { status: 'active' | 'matching' }[]
+  onOpenActivity: () => void
+}
+
+export function PartnerStatsHero({ partner, referrals, onOpenActivity }: PartnerStatsHeroProps) {
+  const activeCount = referrals.filter((r) => r.status === 'active').length
+  const matchingCount = referrals.length - activeCount
+
+  const rail = [
+    { label: 'Referred', value: partner.referred, width: 1, tone: 'success' as const },
+    { label: 'Matching', value: matchingCount, width: Math.max(0.15, matchingCount / Math.max(1, partner.referred)), tone: 'warning' as const },
+    { label: 'Staff', value: partner.staffOnAyvaa, width: Math.min(1, partner.staffOnAyvaa / 20), tone: 'info' as const },
+  ]
+
+  return (
+    <Hero>
+      <div className="flex items-center gap-3">
+        <span className="relative shrink-0">
+          <span aria-hidden className="absolute -inset-1 rounded-full bg-emerald-400/15 blur-md" />
+          <span className="relative block">
+            <AgentAvatar seed="sunrise" size={38} />
+          </span>
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-[13px] font-extrabold tracking-tight text-white">Sunrise Multispeciality</div>
+          <div className="flex items-center gap-1.5 text-[9.5px] font-bold text-emerald-100/45">
+            <LiveDot className="text-emerald-300" />
+            Care partner since 2024
+          </div>
+        </div>
+        <Chip intent="live" light dot className="border-transparent">
+          Live
+        </Chip>
+      </div>
+
+      <div className="mt-5 flex items-start justify-between gap-5">
+        <div className="min-w-0 shrink">
+          <span className="block bg-gradient-to-br from-emerald-200 via-teal-200 to-emerald-300 bg-clip-text text-[54px] font-black leading-none tracking-tighter text-transparent">
+            {partner.activeCare}
+          </span>
+          <span className="mt-1.5 block text-[10px] font-extrabold uppercase tracking-[0.16em] text-emerald-100/45">
+            patients in care
+          </span>
+          <Chip intent="success" light icon={UserPlus} className="mt-2.5 border-transparent">
+            +2 this week
+          </Chip>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col gap-3 pt-1">
+          {rail.map((m) => (
+            <div key={m.label}>
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-100/50">{m.label}</span>
+                <span className="text-[11px] font-extrabold tabular-nums text-emerald-50/85">{m.value}</span>
+              </div>
+              <div className="mt-1 h-1 overflow-hidden rounded-full bg-white/[0.08]">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${m.width * 100}%` }}
+                  transition={{ duration: 0.7, ease: 'easeOut' }}
+                  className={cn(
+                    'h-full rounded-full bg-gradient-to-r',
+                    m.tone === 'success' && 'from-emerald-400 to-teal-300',
+                    m.tone === 'warning' && 'from-amber-400 to-orange-300',
+                    m.tone === 'info' && 'from-sky-400 to-blue-300',
+                  )}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={onOpenActivity}
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white/[0.06] px-3.5 py-3 text-[11px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/70 transition-colors hover:bg-white/[0.1]"
+      >
+        <BarChart3 className="h-4 w-4" strokeWidth={2.2} />
+        View weekly activity
+      </button>
+
+      <div className="mt-3 flex items-center rounded-2xl bg-white/[0.06] px-3.5 py-3">
+        <div className="flex min-w-0 items-center gap-1.5">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300" />
+          <span className="truncate text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/60">
+            {partner.referred} referred
+          </span>
+        </div>
+        <span aria-hidden className="relative mx-2.5 h-px w-6 shrink-0 bg-emerald-300/40">
+          <motion.span
+            className="absolute -top-[3px] h-[7px] w-[7px] rounded-full bg-teal-300"
+            animate={{ x: [-4, 26], opacity: [0, 1, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </span>
+        <div className="flex min-w-0 items-center gap-1.5">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300" />
+          <span className="truncate text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/60">
+            {partner.activeCare} in care
+          </span>
+        </div>
+        <span aria-hidden className="relative mx-2.5 h-px w-6 shrink-0 bg-emerald-300/40">
+          <motion.span
+            className="absolute -top-[3px] h-[7px] w-[7px] rounded-full bg-sky-300"
+            animate={{ x: [-4, 26], opacity: [0, 1, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, delay: 0.5, ease: 'easeInOut' }}
+          />
+        </span>
+        <div className="flex min-w-0 items-center gap-1.5">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-sky-300" />
+          <span className="truncate text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-100/60">
+            {partner.sessionsThisMonth} sessions
+          </span>
+        </div>
+      </div>
+    </Hero>
+  )
+}
+
+interface Referral {
+  id: string
+  name: string
+  age: number
+  condition: string
+  caregiver?: string
+  status: 'active' | 'matching'
+  progress: string
+  visits: string
+}
+
+interface ReferredPatientListProps {
+  referrals: Referral[]
+  onSelectReferral: (id: string) => void
+}
+
+export function ReferredPatientList({ referrals, onSelectReferral }: ReferredPatientListProps) {
+  const [filter, setFilter] = useState<'all' | 'active' | 'matching'>('all')
+
+  const filtered = referrals.filter((r) => {
+    if (filter === 'all') return true
+    return r.status === filter
+  })
+
+  const tabs = [
+    { key: 'all', label: 'All' },
+    { key: 'active', label: 'Active' },
+    { key: 'matching', label: 'Matching' },
+  ] as const
+
+  return (
+    <div>
+      <div className="mb-3 flex rounded-xl bg-[#0B211B]/[0.05] p-1">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            type="button"
+            onClick={() => setFilter(tab.key)}
+            className={cn(
+              'relative flex-1 rounded-lg py-1.5 text-[11px] font-extrabold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40',
+              filter === tab.key ? 'text-white' : 'text-[#0B211B]/50 hover:text-[#0B211B]',
+            )}
+          >
+            {filter === tab.key && (
+              <motion.span
+                layoutId="referralFilter"
+                className="absolute inset-0 rounded-lg bg-emerald-500 shadow-sm"
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <Card>
+        <AnimatePresence mode="popLayout">
+          {filtered.map((r) => {
+            const active = r.status === 'active'
+            return (
+              <motion.div
+                key={r.id}
+                layout
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Row
+                  leading={<AgentAvatar seed={r.name} size={44} />}
+                  title={`${r.name} · ${r.age}`}
+                  titleClassName="leading-snug"
+                  subtitle={`${r.condition} · ${r.caregiver ?? 'Awaiting match'}`}
+                  subtitleClassName="text-[11px] font-semibold"
+                  body={
+                    <div className="mt-2 flex items-center gap-2">
+                      <Meter
+                        value={active ? 0.33 : 0.12}
+                        intent={active ? 'success' : 'warning'}
+                        delay={0.1}
+                        className="w-20"
+                      />
+                      <span className="text-[9px] font-extrabold uppercase tracking-wide text-[#0B211B]/40">{r.progress}</span>
+                    </div>
+                  }
+                  trailing={
+                    <span className="flex shrink-0 flex-col items-end gap-1.5">
+                      <Chip intent={active ? 'success' : 'warning'} dot={!active} className="border-transparent">
+                        {active ? 'Active' : 'Matching'}
+                      </Chip>
+                      <TimeChip>{r.visits}</TimeChip>
+                    </span>
+                  }
+                  onClick={() => onSelectReferral(r.id)}
+                />
+              </motion.div>
+            )
+          })}
+        </AnimatePresence>
+      </Card>
+    </div>
   )
 }
