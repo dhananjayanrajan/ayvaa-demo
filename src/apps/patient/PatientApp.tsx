@@ -41,7 +41,6 @@ import { P31b } from './P31b'
 import { P32 } from './P32'
 import { P33 } from './P33'
 import { P34 } from './P34'
-import { P99 } from './P99'
 import { cn } from '@/lib/utils'
 
 type Tab = { id: string; label: string; icon: LucideIcon }
@@ -217,7 +216,6 @@ export function PatientApp({ path }: { path: string }) {
                   {screen === 'p32' && <P32 />}
                   {screen === 'p33' && <P33 />}
                   {screen === 'p34' && <P34 />}
-                  {screen === 'p99' && <P99 />}
                 </motion.div>
               </AnimatePresence>
               {withNav.includes(screen) && (
