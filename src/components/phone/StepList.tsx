@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Check, ChevronDown, Loader2 } from 'lucide-react'
 import { Tile, Chip, TimeChip } from '@/components/phone/kit'
 import type { TileTone, Intent } from '@/components/phone/kit'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 import { cn } from '@/lib/utils'
 
 export type StepState = 'done' | 'active' | 'pending'
@@ -189,12 +190,18 @@ export function StepList({
   railClassName,
   className,
 }: StepListProps) {
+  const { emit } = useFramework()
   return (
     <div className={cn('flex flex-col', className)}>
       {steps.map((item, i) => {
         const isLast = i === steps.length - 1
         const interactive = (item.onClick) || (item.expandable && item.onToggle)
         const done = item.state === 'done'
+        const handlePress = () => {
+          emit(item.expandable ? 'step.toggled' : 'step.pressed', { key: item.key, title: item.title, open: !item.open })
+          if (item.onClick) item.onClick()
+          else if (item.onToggle) item.onToggle()
+        }
 
         const rail =
           isLast ? null : (
@@ -276,7 +283,7 @@ export function StepList({
           <motion.button
             type="button"
             whileTap={{ scale: 0.985 }}
-            onClick={item.onClick ?? item.onToggle}
+            onClick={handlePress}
             aria-expanded={item.expandable ? item.open : undefined}
             className={cn('flex w-full items-start gap-3 text-left', item.className)}
           >
