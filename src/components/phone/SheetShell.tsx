@@ -1,11 +1,15 @@
+import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Tile } from '@/components/phone/kit'
 import type { TileTone } from '@/components/phone/kit'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 const SHEET_SPRING = { type: 'spring', stiffness: 380, damping: 40 } as const
+const SHEET_SPRING_SOFT = { type: 'spring', stiffness: 300, damping: 30 } as const
+const SHEET_SPRING_BOUNCE = { type: 'spring', stiffness: 500, damping: 40 } as const
 
 export type SheetProps = {
   open?: boolean
@@ -16,6 +20,7 @@ export type SheetProps = {
   subtitle?: string
   sub?: string
   height?: 'full' | 'auto' | 'scroll'
+  spring?: 'default' | 'soft' | 'bounce'
   header?: ReactNode
   onClose: () => void
   footer?: ReactNode
@@ -76,7 +81,7 @@ export function SheetHeader({
   return <SheetHeaderRow icon={icon} tone={tone} title={title} subtitle={subtitle ?? sub} onClose={onClose} />
 }
 
-function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, header, children }: {
+function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, spring, header, children }: {
   icon?: LucideIcon
   tone: TileTone
   title?: string
@@ -84,16 +89,18 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, he
   onClose: () => void
   footer?: ReactNode
   height?: 'full' | 'auto' | 'scroll'
+  spring?: 'default' | 'soft' | 'bounce'
   header?: ReactNode
   children: ReactNode
 }) {
+  const motionSpring = spring === 'soft' ? SHEET_SPRING_SOFT : spring === 'bounce' ? SHEET_SPRING_BOUNCE : SHEET_SPRING
   if (height === 'auto') {
     return (
       <motion.div
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
-        transition={SHEET_SPRING}
+        transition={motionSpring}
         className="absolute inset-x-0 bottom-0 z-50 flex flex-col gap-3.5 rounded-t-[28px] bg-white p-5 pb-7 shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
       >
         <div aria-hidden className="mx-auto h-1.5 w-10 shrink-0 rounded-full bg-[#0B211B]/15" />
@@ -111,7 +118,7 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, he
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
-        transition={SHEET_SPRING}
+        transition={motionSpring}
         className="absolute inset-x-0 bottom-0 z-50 flex max-h-[88%] flex-col rounded-t-[28px] bg-white shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
       >
         <div className="shrink-0 px-5 pt-4">
@@ -129,7 +136,7 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, he
       initial={{ y: '100%' }}
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
-      transition={SHEET_SPRING}
+      transition={motionSpring}
       drag="y"
       dragConstraints={{ top: 0, bottom: 0 }}
       dragElastic={0.22}
@@ -157,13 +164,27 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, he
   )
 }
 
-export function SheetShell({ open, tone, tileTone, subtitle, sub, height, header, ...rest }: SheetProps) {
+export function SheetShell({ open, tone, tileTone, subtitle, sub, height, spring, header, ...rest }: SheetProps) {
+  const { emit } = useFramework()
+  const onClose = rest.onClose
+  const handleClose = () => {
+    emit('sheet.dismissed', { title: rest.title })
+    onClose()
+  }
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') handleClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, onClose])
   const surface = (
     <SheetSurface
       {...rest}
+      onClose={handleClose}
       tone={tileTone ?? tone ?? 'neutral'}
       subtitle={subtitle ?? sub}
       height={height}
+      spring={spring}
       header={header}
     />
   )
@@ -188,20 +209,23 @@ export function SheetShell({ open, tone, tileTone, subtitle, sub, height, header
 }
 
 export function CompletionSheet({ open, title = 'Saved', subtitle = 'Changes applied', onClose, autoMs = 2200 }: { open: boolean; title?: string; subtitle?: string; onClose: () => void; autoMs?: number }) {
-  const phase: 'working' | 'done' = open ? 'done' : 'working'
-  // timers owned, cleaned
-  const timerRef = { current: null as number | null }
-  if (open && typeof window !== 'undefined') {
-    // defer auto-dismiss via effect-like immediate but safe: use queueMicrotask to avoid render side-effect loop properly handled by caller timeout
-  }
+  const { emit } = useFramework()
+  const t = useRef<number | null>(null)
+  useEffect(() => {
+    if (!open) return
+    emit('sheet.completed', { title })
+    t.current = window.setTimeout(() => { emit('sheet.dismissed', { title }); onClose() }, autoMs)
+    return () => { if (t.current) window.clearTimeout(t.current) }
+  }, [open, autoMs, onClose, title, emit])
   return (
     <SheetShell open={open} onClose={onClose} height="auto" title={title} subtitle={subtitle}>
       <div className="flex items-center gap-3 py-1">
-        <span className={phase === 'done' ? 'text-emerald-600' : 'text-[#0B211B]/40'}>{phase === 'done' ? '✓' : '…'}</span>
-        <span className="text-sm font-bold text-[#0B211B]">{phase === 'done' ? 'Done' : 'Working…'}</span>
+        <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-500 text-white">
+          <motion.span initial={{ scale: 0 }} animate={{ scale: open ? 1 : 0 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }}>✓</motion.span>
+        </span>
+        <span className="text-sm font-bold tracking-tight text-[#0B211B]">{title}</span>
       </div>
-      {/* caller owns auto-dismiss: onDone → setTimeout(onClose, autoMs) */}
-      <div className="hidden">{autoMs} {String(timerRef.current)}</div>
+      <div className="mt-1 text-xs font-medium leading-relaxed text-[#0B211B]/55">{subtitle}</div>
     </SheetShell>
   )
 }
