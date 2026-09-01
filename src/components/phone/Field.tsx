@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { Eye, EyeOff } from 'lucide-react'
 import type { ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 import { cn } from '@/lib/utils'
 
 export type FieldState = 'empty' | 'invalid' | 'valid'
@@ -71,6 +72,7 @@ export function Field({
   /** bare: no outer px-4 py-3 padding (embedded rows own their spacing). */
   bare?: boolean
 }) {
+  const { emit } = useFramework()
   const tones = { ...DEFAULT_TILE, ...tileTone }
 
   const tileInner = (
@@ -106,7 +108,8 @@ export function Field({
             type={type}
             value={value}
             placeholder={placeholder}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => { const v = e.target.value; emit('field.changed', { id: htmlFor, value: v, state }); onChange(v) }}
+            onFocus={() => emit('field.focus', { id: htmlFor })}
             aria-invalid={ariaInvalid === false ? undefined : state === 'invalid'}
             className={cn(inputClassName ?? INPUT_BASE, mono && 'font-mono tracking-normal')}
           />
