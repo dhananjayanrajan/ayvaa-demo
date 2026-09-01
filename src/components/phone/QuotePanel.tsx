@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { Quote } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -73,7 +73,13 @@ export function QuotePanel({
   )
 
   const { emit } = useFramework()
-  useEffect(() => { emit('quotePanel.mounted', { quote }) }, [emit, quote])
+  const mounted = useRef(false)
+  useEffect(() => {
+    if (mounted.current) return
+    mounted.current = true
+    emit('quotePanel.mounted', { quote })
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once
+  }, [])
   if (bare) return body
   return <div className={cn('rounded-[20px] bg-[#0B231C] p-4', className)}>{body}</div>
 }
