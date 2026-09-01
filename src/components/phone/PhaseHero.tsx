@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { useFramework } from '@/components/phone/FrameworkRuntime'
@@ -91,7 +91,13 @@ export function PhaseHero({
   children: ReactNode
 }) {
   const { emit } = useFramework()
-  useEffect(() => { emit('phaseHero.mounted', { shell: theme.shell }) }, [emit, theme.shell])
+  const mounted = useRef(false)
+  useEffect(() => {
+    if (mounted.current) return
+    mounted.current = true
+    emit('phaseHero.mounted', { shell: theme.shell })
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once
+  }, [])
   return (
     <div
       className={cn(
@@ -118,3 +124,12 @@ export function PhaseHero({
     </div>
   )
 }
+
+export const PHASEHERO_QOL = {
+  naturalHand: 'shell not draggable, content scrolls inside, no swipe',
+  choreography: 'mount once emit, theme transition duration 500 colors blur orbs',
+  anticipation: 'theme objects precomputed PHASE_THEME, instant switch',
+  stateMemory: 'mounted once, no expanded state',
+  limitBehavior: 'overflow-hidden rounded-[26px], orbs blurred no clamp',
+  escape: 'no dismiss, parent sheet handles Escape',
+} as const
