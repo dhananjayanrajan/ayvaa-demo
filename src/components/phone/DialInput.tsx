@@ -64,6 +64,13 @@ export function DialInput({ value, onChange, min = 0, max = 100, step = 1, label
   const valueColor = hueAtMax ? 'text-amber-200' : 'text-white'
 
   const springOffset = useSpring(dragOffset, { stiffness: 420, damping: 34 })
+  const hasMountedRef = useRef(false)
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      emit('dial.mounted', { value: clamped, label, min, max })
+    }
+  }, [clamped, emit, label, max, min])
 
   useEffect(() => {
     dragMv.set(dragOffset)
