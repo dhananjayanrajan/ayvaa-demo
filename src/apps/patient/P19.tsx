@@ -16,11 +16,7 @@ import {
   sealedMedsOf,
   type MedDose,
 } from '@/data/patientMeds'
-import { MedsHero } from '@/components/patient/meds/MedsHero'
-import { DueDoseCard } from '@/components/patient/meds/DueDoseCard'
-import { MedLogCard } from '@/components/patient/meds/MedLogCard'
-import { RefillCard } from '@/components/patient/meds/RefillCard'
-import { DoseDetailSheet } from '@/components/patient/meds/DoseDetailSheet'
+import { MedsHero, DueDoseCard, MedLogCard, RefillCard, DoseDetailSheet } from '@/components/meds/MedsSet'
 
 export function P19() {
   const { notify } = useDemo()
