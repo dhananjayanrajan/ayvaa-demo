@@ -130,6 +130,13 @@ function SheetSurface({ icon, tone, title, subtitle, onClose, footer, height, he
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={SHEET_SPRING}
+      drag="y"
+      dragConstraints={{ top: 0, bottom: 0 }}
+      dragElastic={0.22}
+      dragMomentum={false}
+      onDragEnd={(_: unknown, info: { offset: { y: number }; velocity: { y: number } }) => {
+        if (info.offset.y > 96 || info.velocity.y > 900) onClose()
+      }}
       className="absolute inset-x-0 bottom-0 z-50 flex h-[86%] flex-col overflow-hidden rounded-t-[28px] bg-white shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.35)]"
     >
       <div className="shrink-0 px-5 pt-3">
