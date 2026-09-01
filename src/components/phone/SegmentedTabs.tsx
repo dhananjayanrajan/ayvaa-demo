@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { Check, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 export type SegTone = 'emerald' | 'emeraldSolid' | 'dark' | 'white'
 export type SegLabel = 'micro' | 'normal'
@@ -133,13 +135,32 @@ export function SegmentedTabs({
   const labelTransition = tone === 'white' ? 'transition-colors duration-200' : ''
 
   const idx = Math.max(0, tabs.findIndex((t) => t.id === value))
+  const { emit } = useFramework()
+  const listRef = useRef<HTMLDivElement>(null)
+  const prevRef = useRef(value)
+  useEffect(() => {
+    if (prevRef.current !== value) { emit('tabs.changed', { layoutId, value, prev: prevRef.current }); prevRef.current = value }
+  }, [value, layoutId, emit])
+  const handleChange = (id: string) => { if (id !== value) { emit('tabs.select', { layoutId, id }); onChange(id) } }
   const onSwipe = (dir: 1 | -1) => {
     const next = idx + dir
-    if (next >= 0 && next < tabs.length) onChange(tabs[next].id)
+    if (next >= 0 && next < tabs.length) handleChange(tabs[next].id)
+  }
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault()
+      onSwipe(e.key === 'ArrowRight' ? 1 : -1)
+      const nextIdx = e.key === 'ArrowRight' ? Math.min(tabs.length - 1, idx + 1) : Math.max(0, idx - 1)
+      const btn = listRef.current?.querySelectorAll('button')[nextIdx] as HTMLButtonElement | undefined
+      btn?.focus()
+    }
   }
   return (
     <motion.div
+      ref={listRef as never}
       role={role ? 'tablist' : undefined}
+      tabIndex={role ? 0 : undefined}
+      onKeyDown={role ? onKeyDown : undefined}
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.18}
@@ -162,7 +183,7 @@ export function SegmentedTabs({
             role={role ? 'tab' : undefined}
             aria-selected={role ? active : undefined}
             whileTap={whileTap ? { scale: 0.95 } : undefined}
-            onClick={() => onChange(tab.id)}
+            onClick={() => handleChange(tab.id)}
             className={cn(
               'relative flex-1 rounded-full',
               BUTTON[tone],
