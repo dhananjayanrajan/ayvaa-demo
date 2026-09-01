@@ -1020,3 +1020,4 @@ export function StandingCard({ onViewCredentials }: StandingCardProps) {
     </div>
   )
 }
+export { PasswordCard_Patient as PasswordCard }

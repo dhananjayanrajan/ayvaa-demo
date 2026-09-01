@@ -608,3 +608,4 @@ export function TrustCell({
     </div>
   )
 }
+export { PatientHero as Hero }

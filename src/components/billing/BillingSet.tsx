@@ -47,13 +47,13 @@ export function BillingFooter({ latest, onDownloadInvoice, onUsageReport }: Bill
   )
 }
 
-interface BillingHeroProps {
+interface BillingHeroProps_Partner {
   latest: Invoice
   invoices: Invoice[]
   onSelectInvoice: (invoice: Invoice) => void
 }
 
-export function BillingHero_Partner({ latest, invoices, onSelectInvoice }: BillingHeroProps) {
+export function BillingHero_Partner({ latest, invoices, onSelectInvoice }: BillingHeroProps_Partner) {
   const latestAmount = Number(latest.amount.replace(/[^\d.]/g, ''))
   const maxAmount = Math.max(...invoices.map((i) => Number(i.amount.replace(/[^\d.]/g, '')) || 0))
 
@@ -124,11 +124,11 @@ export function BillingHero_Partner({ latest, invoices, onSelectInvoice }: Billi
   )
 }
 
-interface BillingHeroProps {
+interface BillingHeroProps_Patient {
   receipts: Receipt[]
 }
 
-export function BillingHero_Patient({ receipts }: BillingHeroProps) {
+export function BillingHero_Patient({ receipts }: BillingHeroProps_Patient) {
   const charged = chargedOf(receipts)
   const refunded = refundedOf(receipts)
   const net = netOf(receipts)

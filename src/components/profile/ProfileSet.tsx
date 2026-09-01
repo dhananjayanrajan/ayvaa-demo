@@ -964,3 +964,4 @@ export function SkillsCloud({ skills, addLabel, onPressSkill, onPressAdd }: Prop
     </div>
   )
 }
+export { ProfileHero_Patient as ProfileHero }
