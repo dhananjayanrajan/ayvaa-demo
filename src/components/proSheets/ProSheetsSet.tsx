@@ -9,7 +9,6 @@ import { StatusStrip } from '@/components/phone/StatusStrip'
 import { QuotePanel } from '@/components/phone/QuotePanel'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 
-// ── EntrySheetsHero.tsx ──
 type Props_EntrySheetsHero = {
   saved: SheetMode[]
   activeMode: SheetMode
@@ -106,7 +105,6 @@ export function EntrySheetsHero({ saved, activeMode, activeProgress }: Props_Ent
   )
 }
 
-// ── MedVerificationPanel.tsx ──
 type Props_MedVerificationPanel = {
   checks: string[]
   allChecked: boolean
@@ -221,7 +219,6 @@ export function MedVerificationPanel({ checks, allChecked, saved, scanned, verif
   )
 }
 
-// ── NotesPanel.tsx ──
 type Props_NotesPanel = {
   note: string
   quickTags: string[]
@@ -276,7 +273,6 @@ export function NotesPanel({ note, quickTags, tags, onToggleTag, onPressNote }: 
   )
 }
 
-// ── ReopenSheetsBar.tsx ──
 type Props_ReopenSheetsBar = {
   saved: SheetMode[]
   onPress: () => void
@@ -318,7 +314,6 @@ export function ReopenSheetsBar({ saved, onPress }: Props_ReopenSheetsBar) {
   )
 }
 
-// ── SaveSheetButton.tsx ──
 export type SaveStatus = 'idle' | 'saving' | 'saved'
 
 type Props_SaveSheetButton = {
@@ -343,7 +338,6 @@ export function SaveSheetButton({ label, disabled, status, onPress }: Props_Save
   )
 }
 
-// ── VitalsPanel.tsx ──
 type Props_VitalsPanel = {
   recorded: string[]
   onRecord: (reading: VitalReading) => void

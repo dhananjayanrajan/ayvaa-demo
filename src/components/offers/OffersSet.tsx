@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from 'motion/react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import { cn } from '@/lib/utils'
 
-// ── AcceptedOffersCard.tsx ──
 interface AcceptedOffersCardProps {
   accepted: Offer[]
 }
@@ -32,7 +31,6 @@ export function AcceptedOffersCard({ accepted }: AcceptedOffersCardProps) {
   )
 }
 
-// ── DeclineOfferSheet.tsx ──
 interface DeclineOfferSheetProps {
   offer: Offer | null
   onClose: () => void
@@ -135,7 +133,6 @@ export function DeclineOfferSheet({ offer, onClose, onAccept, onDecline }: Decli
   )
 }
 
-// ── DeclinedOffersCard.tsx ──
 interface DeclinedOffersCardProps {
   declined: Offer[]
   onUndoDecline: (offer: Offer) => void
@@ -169,7 +166,6 @@ export function DeclinedOffersCard({ declined, onUndoDecline }: DeclinedOffersCa
   )
 }
 
-// ── OfferCard.tsx ──
 const typeLabel: Record<string, string> = {
   recurring: 'Recurring care',
   'one-time': 'One-time visit',
@@ -369,7 +365,6 @@ export function OfferCard({ offer, onAccept, onDecline }: OfferCardProps) {
   )
 }
 
-// ── OffersHero.tsx ──
 interface OffersHeroProps {
   activeCount: number
   accepting: boolean

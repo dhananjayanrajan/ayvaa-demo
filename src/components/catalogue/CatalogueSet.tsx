@@ -14,7 +14,6 @@ import { factNearby, filterDefs, nearbyByService, sheetFacts } from '@/data/pati
 import type { Service } from '@/data/services'
 import { cn } from '@/lib/utils'
 
-// ── CatalogueHero.tsx ──
 export function CatalogueHero({
   query,
   matchCount,
@@ -62,7 +61,6 @@ export function CatalogueHero({
   )
 }
 
-// ── CategoryRail.tsx ──
 export function CategoryRail({
   chips,
   category,
@@ -106,7 +104,6 @@ export function CategoryRail({
   )
 }
 
-// ── FiltersSheet.tsx ──
 export type ApplyState = 'idle' | 'working' | 'done'
 
 export function FiltersSheet({
@@ -173,7 +170,6 @@ export function FiltersSheet({
   )
 }
 
-// ── MatchCard.tsx ──
 export function MatchCard({
   state,
   onPress,
@@ -212,7 +208,6 @@ export function MatchCard({
   )
 }
 
-// ── ServiceList.tsx ──
 export type ListedService = {
   service: Service
   icon: LucideIcon
@@ -286,7 +281,6 @@ export function ServiceList({
   )
 }
 
-// ── ServiceRow.tsx ──
 export function ServiceRow({
   service,
   icon: Icon,
@@ -327,7 +321,6 @@ export function ServiceRow({
   )
 }
 
-// ── ServiceSheet.tsx ──
 export type BookingState = 'idle' | 'working' | 'done'
 
 export function ServiceSheet({

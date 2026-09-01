@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils'
 import { Card, Chip, Hero, Kicker, Meter } from '@/components/phone/kit'
 import { Row } from '@/components/phone/Row'
 
-// ── OnboardingFooter.tsx ──
 interface OnboardingFooterProps {
   allAgreed: boolean
   remaining: number
@@ -63,7 +62,6 @@ export function OnboardingFooter({ allAgreed, remaining, total, onAccept }: Onbo
   )
 }
 
-// ── OnboardingHero.tsx ──
 interface OnboardingHeroProps {
   name: string
   role: string
@@ -154,7 +152,6 @@ export function OnboardingHero({ name, role, licence, initials }: OnboardingHero
   )
 }
 
-// ── SafetyChecksCard.tsx ──
 interface SafetyCheck {
   title: string
   body: string
@@ -197,7 +194,6 @@ export function SafetyChecksCard({ checks, onCheckClick }: SafetyChecksCardProps
   )
 }
 
-// ── TermsAcceptanceCard.tsx ──
 interface TermsAcceptanceCardProps {
   terms: string[]
   agreed: string[]

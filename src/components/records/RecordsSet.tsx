@@ -13,7 +13,6 @@ import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroHighlight, HeroTopRow } from '@/components/phone/HeroCells'
 
-// ── AuditLogSheet.tsx ──
 const KIND_ICON: Record<AuditKind, LucideIcon> = {
   view: Eye,
   change: PenLine,
@@ -142,7 +141,6 @@ export function AuditLogSheet({ entries, initialFilter, onClose, onOpenConsent }
   )
 }
 
-// ── AuditTimeline.tsx ──
 const KIND_UI: Record<AuditKind, { icon: LucideIcon; tile: string }> = {
   view: { icon: Eye, tile: 'bg-sky-500/[0.12] text-sky-600' },
   change: { icon: PenLine, tile: 'bg-emerald-500 text-white' },
@@ -272,7 +270,6 @@ export function AuditTimeline({ entries, freshId, onOpenAll }: AuditTimelineProp
   )
 }
 
-// ── DarkTimeChip.tsx ──
 export function DarkTimeChip({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex shrink-0 items-center rounded-lg bg-white/[0.08] px-1.5 py-0.5 text-[10px] font-bold tabular-nums tracking-tight text-emerald-100/70">
@@ -281,7 +278,6 @@ export function DarkTimeChip({ children }: { children: ReactNode }) {
   )
 }
 
-// ── DocRow.tsx ──
 interface DocRowProps {
   doc: RecordDoc
   open: boolean
@@ -357,7 +353,6 @@ export function DocRow({ doc, open, onToggle, onRequireConsent }: DocRowProps) {
   )
 }
 
-// ── LedgerBar.tsx ──
 const SEGMENT: Record<AuditKind, string> = {
   view: 'bg-sky-500',
   change: 'bg-emerald-500',
@@ -421,7 +416,6 @@ export function LedgerBar({ entries, freshId, onSelect }: LedgerBarProps) {
   )
 }
 
-// ── RecordsCard.tsx ──
 interface RecordsCardProps {
   docs: RecordDoc[]
   onRequireConsent: () => void
@@ -471,7 +465,6 @@ export function RecordsCard({ docs, onRequireConsent }: RecordsCardProps) {
   )
 }
 
-// ── RecordsExportSheet.tsx ──
 type Phase = 'idle' | 'working' | 'done'
 
 interface RecordsExportSheetProps {
@@ -612,7 +605,6 @@ export function RecordsExportSheet({ onClose }: RecordsExportSheetProps) {
   )
 }
 
-// ── VaultHero.tsx ──
 const VAULT_KIND_UI: Record<AuditKind, { icon: LucideIcon; tile: string }> = {
   view: { icon: Eye, tile: 'bg-sky-400/[0.16] text-sky-200' },
   change: { icon: PenLine, tile: 'bg-emerald-400/[0.18] text-emerald-200' },

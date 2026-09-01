@@ -15,7 +15,6 @@ import { Card, Chip, Meter, Tile } from '@/components/phone/kit'
 import { QuotePanel } from '@/components/phone/QuotePanel'
 import { HeroHighlight, HeroTopRow, StatCell } from '@/components/phone/HeroCells'
 
-// ── CaregiverSheet.tsx ──
 interface CaregiverSheetProps {
   onClose: () => void
 }
@@ -87,7 +86,6 @@ export function CaregiverSheet({ onClose }: CaregiverSheetProps) {
   )
 }
 
-// ── ConsentCycleCard.tsx ──
 function DarkCycleStepper({ steps }: { steps: { label: string; sub: string; done: boolean }[] }) {
   const n = steps.length
   const doneCount = steps.filter((s) => s.done).length
@@ -305,7 +303,6 @@ export function ConsentCycleCard() {
   )
 }
 
-// ── ConsentSheet.tsx ──
 interface ConsentSheetProps {
   onClose: () => void
 }
@@ -371,7 +368,6 @@ export function ConsentSheet({ onClose }: ConsentSheetProps) {
   )
 }
 
-// ── DayDetailCard.tsx ──
 interface DayDetailCardProps {
   day: VisitDay
   onOpenVisit: () => void
@@ -482,7 +478,6 @@ export function DayDetailCard({ day, onOpenVisit, onOpenSummary }: DayDetailCard
   )
 }
 
-// ── GoalsCard.tsx ──
 const sessionTone: Record<GoalSession['state'], { wrap: string; day: string; value: string }> = {
   met: { wrap: 'bg-emerald-500/[0.08]', day: 'text-emerald-700/60', value: 'text-emerald-800' },
   missed: { wrap: 'bg-rose-500/[0.07]', day: 'text-rose-500/70', value: 'text-rose-600' },
@@ -618,7 +613,6 @@ export function GoalsCard({ onOpenSession }: { onOpenSession: () => void }) {
   )
 }
 
-// ── PlanHero.tsx ──
 export function PlanHero() {
   const goals = goalSummary()
   const visits = completedVisits()
@@ -666,7 +660,6 @@ export function PlanHero() {
   )
 }
 
-// ── PlanLinksCard.tsx ──
 const linkIcons = {
   reports: { icon: CalendarCheck, tone: 'info' as const },
   timeline: { icon: MapPin, tone: 'success' as const },
@@ -703,7 +696,6 @@ export function PlanLinksCard() {
   )
 }
 
-// ── TrendsCard.tsx ──
 const cx = (index: number, count: number) => (300 / count) * (index + 0.5)
 
 const headerLabel: Record<MetricId, string> = {
@@ -926,7 +918,6 @@ export function TrendsCard() {
   )
 }
 
-// ── VisitSheet.tsx ──
 interface VisitSheetProps {
   day: VisitDay
   onOpenCaregiver: () => void
@@ -984,7 +975,6 @@ export function VisitSheet({ day, onOpenCaregiver, onClose }: VisitSheetProps) {
   )
 }
 
-// ── WeekVisitsCard.tsx ──
 interface WeekVisitsCardProps {
   selected: number
   onSelect: (index: number) => void

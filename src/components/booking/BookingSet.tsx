@@ -14,7 +14,6 @@ import { bookingCategories, dayOptions, fmtINR, scheduleTypes, timeWindows, wiza
 import { lovedOnes } from '@/data/seed'
 import { cn } from '@/lib/utils'
 
-// ── BookingHero.tsx ──
 interface BookingHeroProps {
   estimate: Estimate
   summaryLine: string
@@ -91,7 +90,6 @@ export function BookingHero({
   )
 }
 
-// ── CategoryGrid.tsx ──
 export function CategoryGrid({
   category,
   onSelect,
@@ -158,7 +156,6 @@ export function CategoryGrid({
   )
 }
 
-// ── ContextPills.tsx ──
 export function ContextPills({
   lovedFirstName,
   category,
@@ -237,7 +234,6 @@ export function ContextPills({
   )
 }
 
-// ── ContinueButton.tsx ──
 export type ContinueState = 'idle' | 'working' | 'done'
 
 export function ContinueButton({
@@ -262,7 +258,6 @@ export function ContinueButton({
   )
 }
 
-// ── EstimateCard.tsx ──
 export function EstimateCard({
   estimate,
   cadence,
@@ -349,7 +344,6 @@ export function EstimateCard({
   )
 }
 
-// ── ScheduleCard.tsx ──
 export function ScheduleCard({
   schedule,
   days,
@@ -456,7 +450,6 @@ export function ScheduleCard({
   )
 }
 
-// ── TimeSheet.tsx ──
 export function TimeSheet({
   win,
   duration,
@@ -539,7 +532,6 @@ export function TimeSheet({
   )
 }
 
-// ── WhoCard.tsx ──
 export function WhoCard({ who, onOpen }: { who: number; onOpen: () => void }) {
   const person = lovedOnes[who]
   return (
@@ -575,7 +567,6 @@ export function WhoCard({ who, onOpen }: { who: number; onOpen: () => void }) {
   )
 }
 
-// ── WhoSheet.tsx ──
 export function WhoSheet({
   who,
   onPick,
@@ -624,7 +615,6 @@ export function WhoSheet({
   )
 }
 
-// ── WizardStepper.tsx ──
 export function WizardStepper({ activeIndex }: { activeIndex: number }) {
   return (
     <div>

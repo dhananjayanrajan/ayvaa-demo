@@ -8,7 +8,6 @@ import { Card, Hero } from '@/components/phone/kit'
 import type { CaughtUpStats, NotificationEntry } from '@/data/patientNotifications'
 import { JourneyTime } from '@/components/patient/identity/JourneyTime'
 
-// ── ActionCard.tsx ──
 export function ActionCard({
   entries,
   oldestLabel,
@@ -94,7 +93,6 @@ export function ActionCard({
   )
 }
 
-// ── CaughtUpCard.tsx ──
 export function CaughtUpCard({ stats }: { stats: CaughtUpStats }) {
   const read = stats.total - stats.unreadCount - stats.actionCount
   return (
@@ -145,7 +143,6 @@ export function CaughtUpCard({ stats }: { stats: CaughtUpStats }) {
   )
 }
 
-// ── EntryRow.tsx ──
 export function EntryRow({
   entry,
   unread,
@@ -175,7 +172,6 @@ export function EntryRow({
   )
 }
 
-// ── FeedHero.tsx ──
 export function FeedHero({
   total,
   actionCount,
@@ -215,7 +211,6 @@ export function FeedHero({
   )
 }
 
-// ── MarkAllReadButton.tsx ──
 export function MarkAllReadButton({
   unreadCount,
   onPress,
@@ -236,7 +231,6 @@ export function MarkAllReadButton({
   )
 }
 
-// ── SettingsCard.tsx ──
 export function SettingsCard({ onPress }: { onPress: () => void }) {
   return (
     <motion.button type="button" whileTap={{ scale: 0.99 }} onClick={onPress} className="block w-full text-left">

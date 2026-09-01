@@ -16,7 +16,6 @@ import { FactRows } from '@/components/phone/FactRows'
 import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroHighlight, HeroTopRow } from '@/components/phone/HeroCells'
 
-// ── AddPrescriptionSheet.tsx ──
 type Phase_AddPrescriptionSheet = 'idle' | 'working' | 'done'
 
 export function AddPrescriptionSheet({
@@ -268,7 +267,6 @@ export function AddPrescriptionSheet({
   )
 }
 
-// ── DocumentsCard.tsx ──
 type Phase_DocumentsCard = 'idle' | 'scanning' | 'done'
 
 interface UploadedFile {
@@ -407,7 +405,6 @@ export function DocumentsCard() {
   )
 }
 
-// ── MessageSheet.tsx ──
 type ChatMessage = { from: 'doctor' | 'family'; text: string; time: string }
 
 export function MessageSheet({ prescriber, onClose }: { prescriber: string; onClose: () => void }) {
@@ -496,7 +493,6 @@ export function MessageSheet({ prescriber, onClose }: { prescriber: string; onCl
   )
 }
 
-// ── PrescriptionList.tsx ──
 export function PrescriptionList({
   prescriptions,
   reminded,
@@ -539,7 +535,6 @@ export function PrescriptionList({
   )
 }
 
-// ── PrescriptionSheet.tsx ──
 type Phase_PrescriptionSheet = 'idle' | 'working' | 'done'
 
 const DAY_LETTERS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
@@ -818,7 +813,6 @@ export function PrescriptionSheet({
   )
 }
 
-// ── RefillCard.tsx ──
 type Phase_RefillCard = 'idle' | 'working' | 'done'
 
 export function RefillCard({ rx, onRefilled }: { rx: Prescription; onRefilled: () => void }) {
@@ -945,7 +939,6 @@ export function RefillCard({ rx, onRefilled }: { rx: Prescription; onRefilled: (
   )
 }
 
-// ── RxHero.tsx ──
 type HeroTone = 'emerald' | 'sky' | 'amber' | 'rose'
 
 const TONE: Record<

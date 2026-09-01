@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input'
 import { PHASE_THEME, PhaseHero } from '@/components/phone/PhaseHero'
 import { PUBLIC_FACTS } from '@/data/profileData'
 
-// ── AddCertificationRow.tsx ──
 type Props_AddCertificationRow = {
   onPress: () => void
 }
@@ -35,7 +34,6 @@ export function AddCertificationRow({ onPress }: Props_AddCertificationRow) {
   )
 }
 
-// ── CertificationRow.tsx ──
 type Props_CertificationRow = {
   name: string
   valid: boolean
@@ -69,7 +67,6 @@ export function CertificationRow({ name, valid, isNew }: Props_CertificationRow)
   )
 }
 
-// ── CertificationUploadSheet.tsx ──
 type Status_CertificationUploadSheet = 'idle' | 'verifying' | 'added'
 
 type PickedFile = { name: string; size: string; kind: 'image' | 'pdf' }
@@ -213,7 +210,6 @@ export function CertificationUploadSheet({ category, onClose, onAdded }: Props_C
   )
 }
 
-// ── CertificationsCard.tsx ──
 export type CertRecord = {
   name: string
   valid: boolean
@@ -240,7 +236,6 @@ export function CertificationsCard({ items, onAdd }: Props_CertificationsCard) {
   )
 }
 
-// ── EditProfileSheet.tsx ──
 type Status_EditProfileSheet = 'idle' | 'saving' | 'saved'
 
 type Props_EditProfileSheet = {
@@ -332,7 +327,6 @@ export function EditProfileSheet({ name, role, onClose, onSave }: Props_EditProf
   )
 }
 
-// ── PreferenceRow.tsx ──
 type Props_PreferenceRow = {
   icon: LucideIcon
   tone: TileTone
@@ -378,7 +372,6 @@ function ChevronRightLegacy() {
   )
 }
 
-// ── PreferencesCard.tsx ──
 type Props_PreferencesCard = {
   openDays: number
   firstOpenDay: string | null
@@ -422,7 +415,6 @@ export function PreferencesCard({
   )
 }
 
-// ── ProfileHero.tsx ──
 type Props_ProfileHero = {
   name: string
   role: string
@@ -509,7 +501,6 @@ export function ProfileHero({ name, role, initials, rating, visits, years, openD
   )
 }
 
-// ── ProfilePreviewSheet.tsx ──
 type Props_ProfilePreviewSheet = {
   name: string
   role: string
@@ -584,7 +575,6 @@ export function ProfilePreviewSheet({ name, role, initials, onClose, onConfirm }
   )
 }
 
-// ── SkillsCloud.tsx ──
 export type Skill = {
   label: string
   matched: boolean

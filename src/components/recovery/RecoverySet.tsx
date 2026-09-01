@@ -9,7 +9,6 @@ import { LifecycleButton, QuietLifecycleButton } from '@/components/phone/Lifecy
 import type { SendState } from '@/data/patientRecovery'
 import { StatusStrip } from '@/components/phone/StatusStrip'
 
-// ── GuaranteesCard.tsx ──
 export function GuaranteesCard() {
   return (
     <Card>
@@ -35,7 +34,6 @@ export function GuaranteesCard() {
   )
 }
 
-// ── RecoveryFoot.tsx ──
 export function RecoveryFoot({ onBack }: { onBack: () => void }) {
   return (
     <motion.button
@@ -50,7 +48,6 @@ export function RecoveryFoot({ onBack }: { onBack: () => void }) {
   )
 }
 
-// ── RecoveryHero.tsx ──
 export function RecoveryHero() {
   return (
     <Hero>
@@ -85,7 +82,6 @@ export function RecoveryHero() {
   )
 }
 
-// ── SafetyCard.tsx ──
 export function SafetyCard() {
   const [openKey, setOpenKey] = useState<string | null>(null)
   return (
@@ -120,7 +116,6 @@ export function SafetyCard() {
   )
 }
 
-// ── SendLinkButton.tsx ──
 export function SendLinkButton({
   state,
   expired,
@@ -142,7 +137,6 @@ export function SendLinkButton({
   )
 }
 
-// ── SentActions.tsx ──
 export type CallState = 'idle' | 'working' | 'done'
 
 export function SentActions({
@@ -175,7 +169,6 @@ export function SentActions({
   )
 }
 
-// ── SentCard.tsx ──
 export function SentCard({
   remaining,
   callState,
@@ -224,7 +217,6 @@ export function SentCard({
   )
 }
 
-// ── ValidityMeter.tsx ──
 export function ValidityMeter({ remaining }: { remaining: number }) {
   const expired = remaining <= 0
   return (

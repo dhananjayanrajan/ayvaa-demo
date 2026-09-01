@@ -13,7 +13,6 @@ import { useState } from 'react'
 import { SheetShell } from '@/components/phone/SheetShell'
 import type { Session } from '@/data/types'
 
-// ── CheckInHero.tsx ──
 type Props_CheckInHero = {
   checkInTime: string
   doneCount: number
@@ -93,7 +92,6 @@ export function CheckInHero({ checkInTime, doneCount, total, runningLabel, steps
   )
 }
 
-// ── ChecklistCard.tsx ──
 type Props_ChecklistCard = {
   steps: SessionStep[]
   onPressStep: (step: SessionStep) => void
@@ -121,7 +119,6 @@ export function ChecklistCard({ steps, onPressStep }: Props_ChecklistCard) {
   )
 }
 
-// ── ChecklistRow.tsx ──
 type Props_ChecklistRow = {
   title: string
   body: string
@@ -177,7 +174,6 @@ export function ChecklistRow({ title, body, icon, state, onPress }: Props_Checkl
   )
 }
 
-// ── FieldTaskRow.tsx ──
 interface FieldTaskRowProps {
   title: string
   time: string
@@ -210,7 +206,6 @@ export function FieldTaskRow({ title, time, detail, onReportClick }: FieldTaskRo
   )
 }
 
-// ── LiveSessionCard.tsx ──
 interface LiveSessionCardProps {
   title: string
   detail: string
@@ -295,7 +290,6 @@ export function LiveSessionCard({
   )
 }
 
-// ── QuickActionsGrid.tsx ──
 type Props_QuickActionsGrid = {
   onPressAction: (label: string, body: string) => void
 }
@@ -322,7 +316,6 @@ export function QuickActionsGrid({ onPressAction }: Props_QuickActionsGrid) {
   )
 }
 
-// ── ReportSheet.tsx ──
 interface ReportSheetProps {
   open: boolean
   onClose: () => void
@@ -385,7 +378,6 @@ export function ReportSheet({ open, onClose, onSubmit }: ReportSheetProps) {
   )
 }
 
-// ── SessionDetailSheet.tsx ──
 function sessionIcon(title: string): LucideIcon {
   if (title.includes('insulin')) return Syringe
   if (title.includes('wellness')) return Home
@@ -466,8 +458,6 @@ export function SessionDetailSheet({ session, onClose, onCall, onDirections }: S
   )
 }
 
-// ── SessionListCard.tsx ──
-
 function sessionTone(title: string): TileTone {
   if (title.includes('insulin')) return 'info'
   if (title.includes('wellness')) return 'success'
@@ -524,7 +514,6 @@ export function SessionListCard({ sessions, onSessionClick }: SessionListCardPro
   )
 }
 
-// ── SessionSummaryHero.tsx ──
 interface SessionSummaryHeroProps {
   dateLabel: string
   liveCount: number
@@ -589,7 +578,6 @@ export function SessionSummaryHero({
   )
 }
 
-// ── SignOffButton.tsx ──
 export type SignOffStatus = 'idle' | 'signing' | 'signed'
 
 type Props_SignOffButton = {

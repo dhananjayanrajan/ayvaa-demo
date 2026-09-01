@@ -10,7 +10,6 @@ import { SheetShell } from '@/components/phone/SheetShell'
 import { StatusPill } from '@/components/phone/StatusPill'
 import { LANGUAGE_OPTIONS, MATCH_REQUEST, initialsOf, offerSummary, speakersIn, type MatchCaregiver, type OfferState } from '@/data/patientMatching'
 
-// ── ActiveFilterStrip.tsx ──
 interface ActiveFilterStripProps {
   label: string
   onClear: () => void
@@ -39,7 +38,6 @@ export function ActiveFilterStrip({ label, onClear }: ActiveFilterStripProps) {
   )
 }
 
-// ── EmptyMatches.tsx ──
 interface EmptyMatchesProps {
   language: string
   onClear: () => void
@@ -65,7 +63,6 @@ export function EmptyMatches({ language, onClear }: EmptyMatchesProps) {
   )
 }
 
-// ── LanguageSheet.tsx ──
 interface LanguageSheetProps {
   current: string
   list: MatchCaregiver[]
@@ -129,7 +126,6 @@ export function LanguageSheet({ current, list, onApply, onClose }: LanguageSheet
   )
 }
 
-// ── MatchCard.tsx ──
 interface MatchCardProps {
   caregiver: MatchCaregiver
   state: OfferState
@@ -291,7 +287,6 @@ export function MatchCard({ caregiver, state, leading, highlightLanguage, onSend
   )
 }
 
-// ── MatchHero.tsx ──
 interface MatchHeroProps {
   inRange: number
   total: number
@@ -398,7 +393,6 @@ export function MatchHero({
   )
 }
 
-// ── OfferMeter.tsx ──
 interface OfferMeterProps {
   value: number
   fillClass: string

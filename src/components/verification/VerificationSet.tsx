@@ -7,7 +7,6 @@ import { Fragment, useRef, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { Card, Chip, Meter, Tile } from '@/components/phone/kit'
 
-// ── EmailCodeButton.tsx ──
 export type EmailSendState = 'idle' | 'working' | 'done'
 
 export function EmailCodeButton({
@@ -46,7 +45,6 @@ export function EmailCodeButton({
   )
 }
 
-// ── EmailFallbackSheet.tsx ──
 export function EmailFallbackSheet({
   email,
   sendState,
@@ -98,7 +96,6 @@ export function EmailFallbackSheet({
   )
 }
 
-// ── JourneyRail.tsx ──
 export function JourneyRail({ activeIndex }: { activeIndex: number }) {
   return (
     <div className="flex items-start">
@@ -147,7 +144,6 @@ export function JourneyRail({ activeIndex }: { activeIndex: number }) {
   )
 }
 
-// ── NextStepsCard.tsx ──
 const stepIcons: Record<string, LucideIcon> = {
   id: Camera,
   selfie: Smile,
@@ -188,7 +184,6 @@ export function NextStepsCard({ doneSteps, totalSteps }: { doneSteps: number; to
   )
 }
 
-// ── OtpInput.tsx ──
 export function OtpInput({
   value,
   onChange,
@@ -266,7 +261,6 @@ export function OtpInput({
   )
 }
 
-// ── VerifyButton.tsx ──
 export type VerifyState = 'idle' | 'working' | 'done'
 
 export function VerifyButton({

@@ -14,7 +14,6 @@ import { LifecycleButton, StaticButton } from '@/components/phone/LifecycleButto
 import { buildDoseFacts, formatWindow, type MedDose, type PartCell } from '@/data/patientMeds'
 import { cn } from '@/lib/utils'
 
-// ── MedsHero (from patient/meds/MedsHero, tone-map whole-surface flip emerald↔amber) ──
 export function MedsHero({ patientFirst, sealedCount, total, complete, partCells }: { patientFirst: string; sealedCount: number; total: number; complete: boolean; partCells: PartCell[] }) {
   const n = partCells.length
   const doneCount = partCells.filter((c) => c.status === 'done').length
@@ -38,7 +37,6 @@ export function MedsHero({ patientFirst, sealedCount, total, complete, partCells
   )
 }
 
-// ── MedRow (state-branched: scheduled=quiet inset, sealed=expandable) ──
 export function MedRow({ med, open = false, onToggle }: { med: MedDose; open?: boolean; onToggle?: () => void }) {
   const Icon = med.icon
   if (med.state === 'scheduled') return <Row leading={<span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0B211B]/[0.07] text-[#0B211B]/50"><Icon className="h-[18px] w-[18px]" strokeWidth={2.2} aria-hidden /></span>} title={`${med.name} ${med.dose}`} titleClassName="text-[13px] text-[#0B211B]/70" subtitle={`${med.purpose}, nurse administered`} subtitleClassName="text-[11px] text-[#0B211B]/45" chip={{ label: med.window, intent: 'neutral' }} surface="inset" padding="even" />
@@ -50,7 +48,6 @@ export function MedRow({ med, open = false, onToggle }: { med: MedDose; open?: b
   )
 }
 
-// ── MedLogCard (exclusive accordion, derived counts) ──
 export function MedLogCard({ sealed, upcoming, nurseFirst }: { sealed: MedDose[]; upcoming: MedDose[]; nurseFirst: string }) {
   const [openId, setOpenId] = useState<string | null>(null)
   const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id))
@@ -68,7 +65,6 @@ export function MedLogCard({ sealed, upcoming, nurseFirst }: { sealed: MedDose[]
   )
 }
 
-// ── DueDoseCard (live countdown, dark panel, interaction strip, LifecycleButton) ──
 export function DueDoseCard({ med, stepIndex, stepsTotal, nurseFirst, nudgePhase, onNudge, onDetail }: { med: MedDose; stepIndex: number; stepsTotal: number; nurseFirst: string; nudgePhase: 'idle' | 'working' | 'done'; onNudge: () => void; onDetail: () => void }) {
   const [left, setLeft] = useState(18 * 60 + 24)
   useEffect(() => { const id = setInterval(() => setLeft((s) => Math.max(0, s - 1)), 1000); return () => clearInterval(id) }, [])
@@ -86,7 +82,6 @@ export function DueDoseCard({ med, stepIndex, stepsTotal, nurseFirst, nudgePhase
   )
 }
 
-// ── RefillCard (lifecycle + staged notify + confirmation strip) ──
 export function RefillCard({ medName, dose, dosesLeft, eveningWindow }: { medName: string; dose: string; dosesLeft: number; eveningWindow: string }) {
   const [phase, setPhase] = useState<'idle' | 'working' | 'done'>('idle')
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
@@ -104,7 +99,6 @@ export function RefillCard({ medName, dose, dosesLeft, eveningWindow }: { medNam
   )
 }
 
-// ── DoseDetailSheet (3-zone SheetShell, DarkPanel amber, lifecycle footer) ──
 export function DoseDetailSheet({ med, nurseFirst, nudgePhase, onNudge, onClose }: { med: MedDose; nurseFirst: string; nudgePhase: 'idle' | 'working' | 'done'; onNudge: () => void; onClose: () => void }) {
   return (
     <SheetShell icon={Pill} tone="info" title={med.name} subtitle={`${med.dose}, due ${med.dueAt ?? med.window}`} onClose={onClose} footer={<div><LifecycleButton phase={nudgePhase} tone="warning" idleIcon={BellRing} idleLabel={`Nudge ${nurseFirst}`} workingLabel="Notifying…" doneLabel="Nurse notified" onPress={onNudge} /><p className="mt-2 text-center text-[10px] font-bold text-[#0B211B]/45">Given only after verification against the prescription</p></div>}>

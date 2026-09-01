@@ -6,7 +6,6 @@ import { Chip } from '@/components/phone/kit'
 import { termsDocs, trustPoints } from '@/data/patientOnboarding'
 import { cn } from '@/lib/utils'
 
-// ── ConsentBlock.tsx ──
 export function ConsentBlock({
   accepted,
   onToggle,
@@ -121,7 +120,6 @@ export function ConsentBlock({
   )
 }
 
-// ── Hero.tsx ──
 const cell = {
   hidden: { opacity: 0, y: 8 },
   show: { opacity: 1, y: 0 },
@@ -195,7 +193,6 @@ export function Hero() {
   )
 }
 
-// ── PrimaryAction.tsx ──
 export function PrimaryAction({
   ready,
   onPress,
@@ -232,7 +229,6 @@ export function PrimaryAction({
   )
 }
 
-// ── ReviewSummary.tsx ──
 export type ReviewEntry = { label: string; value: string }
 
 export function ReviewSummary({
@@ -273,7 +269,6 @@ export function ReviewSummary({
   )
 }
 
-// ── SectionHeader.tsx ──
 export function SectionHeader({
   label,
   done,
@@ -303,7 +298,6 @@ export function SectionHeader({
   )
 }
 
-// ── TrustCell.tsx ──
 export function TrustCell({
   icon: Icon,
   label,

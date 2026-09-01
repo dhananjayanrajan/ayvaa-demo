@@ -12,7 +12,6 @@ import { useEffect, useRef, useState } from 'react'
 import { EmptyState } from '@/components/phone/EmptyState'
 import { SheetShell } from '@/components/phone/SheetShell'
 
-// ── CareRibbon.tsx ──
 type Props_CareRibbon = {
   sessions: HistorySession[]
   onOpenSession: (s: HistorySession) => void
@@ -72,7 +71,6 @@ export function CareRibbon({ sessions, onOpenSession }: Props_CareRibbon) {
   )
 }
 
-// ── DossierHero.tsx ──
 type Props_DossierHero = {
   sessions: HistorySession[]
   totals: { sessions: number; notes: number; incidents: number }
@@ -149,7 +147,6 @@ export function DossierHero({ sessions, totals, sinceMonth, chartId, onOpenSessi
   )
 }
 
-// ── ExportHistoryButton.tsx ──
 export type ExportStatus = 'idle' | 'preparing' | 'saved'
 
 type Props_ExportHistoryButton = {
@@ -170,7 +167,6 @@ export function ExportHistoryButton({ status, onPress }: Props_ExportHistoryButt
   )
 }
 
-// ── IncidentPanel.tsx ──
 type Props_IncidentPanel = {
   incident: string
   resolved?: boolean
@@ -217,7 +213,6 @@ export function IncidentPanel({ incident, resolved = false }: Props_IncidentPane
   )
 }
 
-// ── MonthTimeline.tsx ──
 type Props_MonthTimeline = {
   monthFull: string
   sessions: HistorySession[]
@@ -298,7 +293,6 @@ export function MonthTimeline({ monthFull, sessions, openId, onToggle }: Props_M
   )
 }
 
-// ── NotePanel.tsx ──
 type Props_NotePanel = {
   note: string
 }
@@ -326,7 +320,6 @@ export function NotePanel({ note }: Props_NotePanel) {
   )
 }
 
-// ── RecordExpansion.tsx ──
 type Status = 'idle' | 'preparing' | 'saved'
 
 type Props_RecordExpansion = {
@@ -398,7 +391,6 @@ export function RecordExpansion({ session }: Props_RecordExpansion) {
   )
 }
 
-// ── SearchSheet.tsx ──
 type Props_SearchSheet = {
   sessions: HistorySession[]
   query: string
@@ -524,7 +516,6 @@ export function SearchSheet({ sessions, query, onQueryChange, onClose, onOpenSes
   )
 }
 
-// ── SessionRecordCard.tsx ──
 type Props_SessionRecordCard = {
   session: HistorySession
   onOpen: () => void

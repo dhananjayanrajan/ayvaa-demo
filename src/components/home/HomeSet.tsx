@@ -13,7 +13,6 @@ import { cn } from '@/lib/utils'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 
-// ── CallButton.tsx ──
 export type CallPhase = 'idle' | 'connecting' | 'connected'
 
 const styles: Record<CallPhase, { dark?: boolean; className: string }> = {
@@ -85,8 +84,6 @@ export function CallButton({
   )
 }
 
-
-// ── LiveHero.tsx ──
 export function LiveHero({
   facts,
   onOpenSheet,
@@ -156,8 +153,6 @@ export function LiveHero({
   )
 }
 
-
-// ── LiveStepper.tsx ──
 export function LiveStepper({ onPress }: { onPress: () => void }) {
   const doneCount = liveSteps.filter((s) => s.state === 'done').length
   const progressPct = ((doneCount + 1 - 1) / (liveSteps.length - 1)) * 100
@@ -223,8 +218,6 @@ export function LiveStepper({ onPress }: { onPress: () => void }) {
   )
 }
 
-
-// ── LiveVisitSheet.tsx ──
 export function LiveVisitSheet({
   lovedFirstName,
   caregiverFullName,
@@ -295,8 +288,6 @@ export function LiveVisitSheet({
   )
 }
 
-
-// ── MedicationCard.tsx ──
 export function MedicationCard({
   caregiverFirstName,
   onSchedule,
@@ -384,8 +375,6 @@ export function MedicationCard({
   )
 }
 
-
-// ── NotificationBell.tsx ──
 export function NotificationBell({ onPress }: { onPress: () => void }) {
   return (
     <motion.button
@@ -404,8 +393,6 @@ export function NotificationBell({ onPress }: { onPress: () => void }) {
   )
 }
 
-
-// ── QuickActions.tsx ──
 export function QuickActions({ onPress }: { onPress: (to: string) => void }) {
   return (
     <div className="rounded-3xl border border-[#0B211B]/[0.06] bg-white p-2 shadow-[0_1px_2px_rgba(11,33,27,0.06),0_20px_44px_-24px_rgba(11,33,27,0.28)]">
@@ -458,8 +445,6 @@ export function QuickActions({ onPress }: { onPress: (to: string) => void }) {
   )
 }
 
-
-// ── RecoveryCard.tsx ──
 export function RecoveryCard({
   onPlan,
   onReports,
@@ -514,8 +499,6 @@ export function RecoveryCard({
   )
 }
 
-
-// ── UpcomingVisitsCard.tsx ──
 export function UpcomingVisitsCard({
   rows,
   onOpen,
@@ -552,4 +535,3 @@ export function UpcomingVisitsCard({
     </Card>
   )
 }
-

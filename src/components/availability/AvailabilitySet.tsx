@@ -7,7 +7,6 @@ import { WINDOWS, hoursFor, type DayAvailability } from '@/data/availabilityData
 import { Switch } from '@/components/phone/Switch'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 
-// ── AvailabilityHero.tsx ──
 type Props_AvailabilityHero = {
   openCount: number
   weeklyHours: number
@@ -54,7 +53,6 @@ export function AvailabilityHero({ openCount, weeklyHours, peakDay, dirty, child
   )
 }
 
-// ── DayEditorCard.tsx ──
 type Props_DayEditorCard = {
   day: DayAvailability
   onToggle: () => void
@@ -111,7 +109,6 @@ export function DayEditorCard({ day, onToggle, onSelectWindow }: Props_DayEditor
   )
 }
 
-// ── SaveAvailabilityButton.tsx ──
 export type SaveStatus = 'idle' | 'saving' | 'saved'
 
 type Props_SaveAvailabilityButton = {
@@ -135,7 +132,6 @@ export function SaveAvailabilityButton({ label, status, disabled, onPress }: Pro
   )
 }
 
-// ── TimeOffCard.tsx ──
 type Props_TimeOffCard = {
   range: string
   note: string
@@ -159,7 +155,6 @@ export function TimeOffCard({ range, note, onPress }: Props_TimeOffCard) {
   )
 }
 
-// ── WeekBars.tsx ──
 type Props_WeekBars = {
   days: DayAvailability[]
   selected: number
@@ -220,7 +215,6 @@ export function WeekBars({ days, selected, onSelect }: Props_WeekBars) {
   )
 }
 
-// ── WindowOption.tsx ──
 type Props_WindowOption = {
   label: string
   time: string

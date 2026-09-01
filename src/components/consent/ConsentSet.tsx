@@ -13,7 +13,6 @@ import { CONSENT, SCOPES, WITHDRAW_CONSEQUENCES } from '@/data/patientConsent'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
-// ── ConsentHero.tsx ──
 const HERO_TONE = {
   sealed: {
     pillTone: 'emerald' as const,
@@ -158,7 +157,6 @@ export function ConsentHero({
   )
 }
 
-// ── ScopesCard.tsx ──
 interface ScopesCardProps {
   grantedIds: string[]
   location: boolean
@@ -245,7 +243,6 @@ export function ScopesCard({ grantedIds, location, disabled, onToggleScope, onTo
   )
 }
 
-// ── WithdrawCard.tsx ──
 interface WithdrawCardProps {
   requested: boolean
   onOpen: () => void
@@ -336,7 +333,6 @@ export function WithdrawCard({ requested, onOpen, onCancel }: WithdrawCardProps)
   )
 }
 
-// ── WithdrawSheet.tsx ──
 type Phase = 'idle' | 'working' | 'done'
 
 interface WithdrawSheetProps {

@@ -7,7 +7,6 @@ import { motion } from 'motion/react'
 import { paidAverage, type SessionRecord } from '@/data/sessionRecords'
 import { LifecycleButton } from '@/components/phone/LifecycleButton'
 
-// ── EarningRow.tsx ──
 type Props_EarningRow = {
   patient: string
   day: string
@@ -35,7 +34,6 @@ export function EarningRow({ patient, day, time, amount, onPress }: Props_Earnin
   )
 }
 
-// ── EarningsHero.tsx ──
 type Props_EarningsHero = {
   available: string
   status: WithdrawStatus
@@ -116,7 +114,6 @@ export function EarningsHero({ available, status, thisWeek, sessions, nextPayout
   )
 }
 
-// ── PayoutLinkCard.tsx ──
 type Props_PayoutLinkCard = {
   bank: string
   account: string
@@ -158,7 +155,6 @@ export function PayoutLinkCard({ bank, account, payoutCount, onPress }: Props_Pa
   )
 }
 
-// ── PendingSessionRow.tsx ──
 type Props_PendingSessionRow = {
   patient: string
   when: string
@@ -186,7 +182,6 @@ export function PendingSessionRow({ patient, when, note }: Props_PendingSessionR
   )
 }
 
-// ── RatingStrip.tsx ──
 type Props_RatingStrip = {
   rating: number
   count: number
@@ -209,7 +204,6 @@ export function RatingStrip({ rating, count }: Props_RatingStrip) {
   )
 }
 
-// ── SessionEarningsCard.tsx ──
 type Props_SessionEarningsCard = {
   sessions: SessionRecord[]
   onPressSession: (session: SessionRecord) => void
@@ -241,7 +235,6 @@ export function SessionEarningsCard({ sessions, onPressSession }: Props_SessionE
   )
 }
 
-// ── WithdrawButton.tsx ──
 export type WithdrawStatus = 'idle' | 'processing' | 'confirmed'
 
 type Props_WithdrawButton = {

@@ -8,7 +8,6 @@ import type { CapturePhase } from '@/data/patientIdentity'
 import { clearedSteps, faceMatchConfidence, faceMatchLabel, formatFileSize, privacyFacts } from '@/data/patientIdentity'
 import { cn } from '@/lib/utils'
 
-// ── CaptureFileTile.tsx ──
 export function CaptureFileTile({
   name,
   size,
@@ -43,7 +42,6 @@ export function CaptureFileTile({
   )
 }
 
-// ── CaptureTile.tsx ──
 export function CaptureTile({ phase, onPress }: { phase: CapturePhase; onPress: () => void }) {
   return (
     <motion.button
@@ -88,7 +86,6 @@ export function CaptureTile({ phase, onPress }: { phase: CapturePhase; onPress: 
   )
 }
 
-// ── ConfidencePanel.tsx ──
 export function ConfidencePanel() {
   return (
     <motion.div
@@ -120,7 +117,6 @@ export function ConfidencePanel() {
   )
 }
 
-// ── FinishBar.tsx ──
 export type FinishState = 'idle' | 'working' | 'done'
 
 export function FinishBar({
@@ -158,7 +154,6 @@ export function FinishBar({
   )
 }
 
-// ── IdentityHero.tsx ──
 export function IdentityHero({ phase }: { phase: CapturePhase }) {
   const done = phase === 'done'
   return (
@@ -258,7 +253,6 @@ export function IdentityHero({ phase }: { phase: CapturePhase }) {
   )
 }
 
-// ── JourneyTime.tsx ──
 export type JourneyTone = 'emerald' | 'amber'
 
 const tones: Record<JourneyTone, string> = {
@@ -285,7 +279,6 @@ export function JourneyTime({
   )
 }
 
-// ── PrivacyFactsCard.tsx ──
 export function PrivacyFactsCard() {
   const [openKey, setOpenKey] = useState<string | null>(null)
   return (
@@ -321,7 +314,6 @@ export function PrivacyFactsCard() {
   )
 }
 
-// ── SelfieCaptureCard.tsx ──
 type CapturedFile = { name: string; size: string; url: string }
 
 export function SelfieCaptureCard({

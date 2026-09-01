@@ -7,7 +7,6 @@ import { Chip } from '@/components/phone/kit'
 import { PhaseHero } from '@/components/phone/PhaseHero'
 import { useRef } from 'react'
 
-// ── CausePicker.tsx ──
 type Props_CausePicker = {
   causes: string[]
   cause: string
@@ -44,7 +43,6 @@ export function CausePicker({ causes, cause, config, onSelect }: Props_CausePick
   )
 }
 
-// ── DescriptionInput.tsx ──
 type Props_DescriptionInput = {
   draft: string
   config: SeverityConfig
@@ -95,7 +93,6 @@ export function DescriptionInput({ draft, config, onChange }: Props_DescriptionI
   )
 }
 
-// ── IncidentHero.tsx ──
 type Props_IncidentHero = {
   config: SeverityConfig
 }
@@ -142,7 +139,6 @@ export function IncidentHero({ config }: Props_IncidentHero) {
   )
 }
 
-// ── PhotoAttach.tsx ──
 type Props_PhotoAttach = {
   photo: { name: string; size: string } | null
   config: SeverityConfig
@@ -203,7 +199,6 @@ export function PhotoAttach({ photo, config, onAttach }: Props_PhotoAttach) {
   )
 }
 
-// ── SeveritySelector.tsx ──
 type Props_SeveritySelector = {
   severities: Severity[]
   severity: Severity
@@ -241,7 +236,6 @@ export function SeveritySelector({ severities, severity, onSelect }: Props_Sever
   )
 }
 
-// ── SubmittedPanel.tsx ──
 type Props_SubmittedPanel = {
   severity: string
   config: SeverityConfig
@@ -286,7 +280,6 @@ export function SubmittedPanel({ severity, config, photo }: Props_SubmittedPanel
   )
 }
 
-// ── TriggerPreview.tsx ──
 type Props_TriggerPreview = {
   config: SeverityConfig
   severity: string

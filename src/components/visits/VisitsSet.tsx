@@ -21,7 +21,6 @@ import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroHighlight, HeroTopRow, StatCell } from '@/components/phone/HeroCells'
 import { Row } from '@/components/phone/Row'
 
-// ── CareDeliveredCard.tsx ──
 export function CareDeliveredCard() {
   const [openId, setOpenId] = useState<string | null>(null)
 
@@ -72,7 +71,6 @@ export function CareDeliveredCard() {
   )
 }
 
-// ── CaregiverCard.tsx ──
 interface CaregiverCardProps {
   elapsedSeconds: number
 }
@@ -176,7 +174,6 @@ export function CaregiverCard({ elapsedSeconds }: CaregiverCardProps) {
   )
 }
 
-// ── CaregiverNoteCard.tsx ──
 export function CaregiverNoteCard() {
   return (
     <Card>
@@ -193,7 +190,6 @@ export function CaregiverNoteCard() {
   )
 }
 
-// ── CompletedCard.tsx ──
 interface CompletedCardProps {
   filters: VisitFilters
   onClearFilters: () => void
@@ -278,7 +274,6 @@ export function CompletedCard({ filters, onClearFilters }: CompletedCardProps) {
   )
 }
 
-// ── ConnectButton.tsx ──
 interface ConnectButtonProps {
   icon: LucideIcon
   label: string
@@ -356,7 +351,6 @@ export function ConnectButton({
   )
 }
 
-// ── EmptyTabState.tsx ──
 interface EmptyTabStateProps {
   cause: 'filters' | 'all-good'
   label: string
@@ -401,7 +395,6 @@ export function EmptyTabState({ cause, label, onClearFilters }: EmptyTabStatePro
   )
 }
 
-// ── FilterSheet.tsx ──
 interface FilterSheetProps {
   initial: VisitFilters
   visibleCount: number
@@ -520,7 +513,6 @@ export function FilterSheet({ initial, visibleCount, onApply, onClose }: FilterS
   )
 }
 
-// ── LiveStepCard.tsx ──
 interface LiveStepCardProps {
   step: VisitStep
   stepIndex: number
@@ -643,7 +635,6 @@ export function LiveStepCard({ step, stepIndex, stepsTotal, lapsDone }: LiveStep
   )
 }
 
-// ── LiveVisitCard.tsx ──
 export function LiveVisitCard() {
   const { navigate } = useRouter()
   if (!LIVE_VISIT_Visits) return null
@@ -686,7 +677,6 @@ export function LiveVisitCard() {
   )
 }
 
-// ── LiveVisitHero.tsx ──
 interface LiveVisitHeroProps {
   patientFirst: string
   startedAt: string
@@ -785,7 +775,6 @@ export function LiveVisitHero({
   )
 }
 
-// ── MissedCard.tsx ──
 export function MissedCard() {
   const list = missedVisits()
   const visit = list[0]
@@ -821,7 +810,6 @@ export function MissedCard() {
   )
 }
 
-// ── PaymentCard.tsx ──
 export function PaymentCard({ onPress }: { onPress: () => void }) {
   return (
     <Card>
@@ -848,7 +836,6 @@ export function PaymentCard({ onPress }: { onPress: () => void }) {
   )
 }
 
-// ── PaymentSheet.tsx ──
 type Phase_PaymentSheet = 'idle' | 'working' | 'done'
 
 export function PaymentSheet({ onClose }: { onClose: () => void }) {
@@ -942,7 +929,6 @@ export function PaymentSheet({ onClose }: { onClose: () => void }) {
   )
 }
 
-// ── PlanCard.tsx ──
 export function PlanCard() {
   const { navigate } = useRouter()
 
@@ -966,7 +952,6 @@ export function PlanCard() {
   )
 }
 
-// ── SessionLedgerCard.tsx ──
 function TimeCell({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
     <div className="rounded-2xl bg-white/[0.06] px-3.5 py-3">
@@ -1037,7 +1022,6 @@ export function SessionLedgerCard() {
   )
 }
 
-// ── ShareSummaryButton.tsx ──
 export function ShareSummaryButton() {
   const { notify } = useDemo()
   const [phase, setPhase] = useState<'idle' | 'working' | 'done'>('idle')
@@ -1068,7 +1052,6 @@ export function ShareSummaryButton() {
   )
 }
 
-// ── StepRow.tsx ──
 interface StepRowProps {
   step: VisitStep
   open?: boolean
@@ -1128,7 +1111,6 @@ export function StepRow({ step, open = false, onToggle }: StepRowProps) {
   )
 }
 
-// ── StepTimeline.tsx ──
 interface StepTimelineProps {
   steps: VisitStep[]
 }
@@ -1188,7 +1170,6 @@ export function StepTimeline({ steps }: StepTimelineProps) {
   )
 }
 
-// ── SummaryHero.tsx ──
 type Phase_SummaryHero = 'idle' | 'working' | 'done'
 
 export function SummaryHero() {
@@ -1304,7 +1285,6 @@ export function SummaryHero() {
   )
 }
 
-// ── UpcomingCard.tsx ──
 export function UpcomingCard({ filters, onClearFilters }: { filters: VisitFilters; onClearFilters: () => void }) {
   const { navigate } = useRouter()
   const list = applyVisitFilters(upcomingVisits(), filters)
@@ -1341,7 +1321,6 @@ export function UpcomingCard({ filters, onClearFilters }: { filters: VisitFilter
   )
 }
 
-// ── VisitSoFarSheet.tsx ──
 interface VisitSoFarSheetProps {
   elapsedSeconds: number
   ledger: LedgerRow[]
@@ -1430,7 +1409,6 @@ export function VisitSoFarSheet({ elapsedSeconds, ledger, onClose, onOpenLog }: 
   )
 }
 
-// ── VisitsHero.tsx ──
 export function VisitsHero() {
   const upcoming = upcomingVisits()
   const missed = missedVisits()
@@ -1474,7 +1452,6 @@ export function VisitsHero() {
   )
 }
 
-// ── VitalsCard.tsx ──
 interface VitalsCardProps {
   onSelect: (reading: VitalReading) => void
 }
@@ -1512,7 +1489,6 @@ export function VitalsCard({ onSelect }: VitalsCardProps) {
   )
 }
 
-// ── VitalsSheet.tsx ──
 type Phase_VitalsSheet = 'idle' | 'working' | 'done'
 
 export function VitalsSheet({ reading, onClose }: { reading: VitalReading; onClose: () => void }) {

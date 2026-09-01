@@ -8,7 +8,6 @@ import { digestEntries } from '@/data/patientAuth'
 import type { FieldState } from '@/data/patientOnboarding'
 import { cn } from '@/lib/utils'
 
-// ── BiometricNote.tsx ──
 export function BiometricNote() {
   return (
     <div className="flex items-center justify-between bg-[#0B211B]/[0.03] px-4 py-3">
@@ -23,7 +22,6 @@ export function BiometricNote() {
   )
 }
 
-// ── BiometricUnlock.tsx ──
 export type ScanState = 'idle' | 'scanning' | 'matched'
 
 export function BiometricUnlock({
@@ -102,7 +100,6 @@ export function BiometricUnlock({
   )
 }
 
-// ── CreateAccountCard.tsx ──
 export function CreateAccountCard({ onPress }: { onPress: () => void }) {
   return (
     <motion.button type="button" whileTap={{ scale: 0.985 }} onClick={onPress} className="block w-full text-left">
@@ -126,7 +123,6 @@ export function CreateAccountCard({ onPress }: { onPress: () => void }) {
   )
 }
 
-// ── DigestDetail.tsx ──
 export function DigestDetail({
   summary,
   facts,
@@ -165,7 +161,6 @@ export function DigestDetail({
   )
 }
 
-// ── DigestHero.tsx ──
 export function DigestHero({
   reviewedKeys,
   onOpenEntry,
@@ -202,7 +197,6 @@ export function DigestHero({
   )
 }
 
-// ── DigestRow.tsx ──
 const toneTile: Record<DigestEntry['tone'], string> = {
   emerald: 'bg-emerald-400/15 text-emerald-200',
   teal: 'bg-teal-400/15 text-emerald-200',
@@ -258,7 +252,6 @@ export function DigestRow({
   )
 }
 
-// ── MarkSeenButton.tsx ──
 export type SeenState = 'idle' | 'working' | 'done'
 
 export function MarkSeenButton({
@@ -297,7 +290,6 @@ export function MarkSeenButton({
   )
 }
 
-// ── PasswordCard.tsx ──
 export function PasswordCard({
   email,
   emailState,
@@ -373,7 +365,6 @@ export function PasswordCard({
   )
 }
 
-// ── ResetInfo.tsx ──
 export function ResetInfo({ email, validity }: { email: string; validity: string }) {
   return (
     <div className="rounded-2xl bg-[#0B231C] p-4">
@@ -399,7 +390,6 @@ export function ResetInfo({ email, validity }: { email: string; validity: string
   )
 }
 
-// ── SendResetButton.tsx ──
 export type SendState = 'idle' | 'working' | 'done'
 
 export function SendResetButton({
@@ -438,7 +428,6 @@ export function SendResetButton({
   )
 }
 
-// ── SignInButton.tsx ──
 export type SignInState = 'idle' | 'working' | 'done'
 
 export function SignInButton({

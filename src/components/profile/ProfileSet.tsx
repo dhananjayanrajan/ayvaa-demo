@@ -11,7 +11,6 @@ import { StatusPill } from '@/components/phone/StatusPill'
 import { HeroTopRow } from '@/components/phone/HeroCells'
 import { initialsOf, type OfferState } from '@/data/patientMatching'
 
-// ── CareHistoryCard.tsx ──
 export function CareHistoryCard() {
   const total = totalSessions()
 
@@ -53,7 +52,6 @@ export function CareHistoryCard() {
   )
 }
 
-// ── CredentialCard.tsx ──
 const rowIcons: Record<string, LucideIcon> = {
   'rn-licence': ShieldCheck,
   background: FileCheck2,
@@ -131,7 +129,6 @@ export function CredentialCard({ credentials }: { credentials: Credential[] }) {
   )
 }
 
-// ── OfferSheet.tsx ──
 interface OfferRow {
   label: string
   value: string
@@ -248,7 +245,6 @@ export function OfferSheet({ firstName, rows, onSent, onClose }: OfferSheetProps
   )
 }
 
-// ── ProfileHero.tsx ──
 interface ProfileHeroProps {
   name: string
   role: string
@@ -321,7 +317,6 @@ export function ProfileHero({ name, role, years, rating, visits, onTime, offer }
   )
 }
 
-// ── ReviewShell.tsx ──
 export function ReviewShell({ review }: { review: Review }) {
   return (
     <AccentHero tone="emerald">

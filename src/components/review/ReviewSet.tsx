@@ -18,7 +18,6 @@ import { useEffect, useRef, useState } from 'react'
 import { QuotePanel } from '@/components/phone/QuotePanel'
 import { IconLifecycleButton } from '@/components/phone/LifecycleButton'
 
-// ── BookingRecordCard.tsx ──
 export function BookingRecordCard() {
   return (
     <AccentHero tone="emerald">
@@ -39,7 +38,6 @@ export function BookingRecordCard() {
   )
 }
 
-// ── ConfirmedHero.tsx ──
 export function ConfirmedHero({ patientFirstName }: { patientFirstName: string }) {
   return (
     <AccentHero tone="emerald">
@@ -78,7 +76,6 @@ export function ConfirmedHero({ patientFirstName }: { patientFirstName: string }
   )
 }
 
-// ── ConsentCard.tsx ──
 interface ConsentCardProps {
   approvals: Record<ConsentId, boolean>
   onToggle: (id: ConsentId) => void
@@ -191,7 +188,6 @@ export function ConsentCard({ approvals, onToggle, onOpenScope }: ConsentCardPro
   )
 }
 
-// ── ConsentScopeSheet.tsx ──
 interface ConsentScopeSheetProps {
   onClose: () => void
 }
@@ -237,7 +233,6 @@ export function ConsentScopeSheet({ onClose }: ConsentScopeSheetProps) {
   )
 }
 
-// ── DispatchSequence.tsx ──
 export function DispatchSequence() {
   return (
     <AccentHero tone="emerald">
@@ -293,7 +288,6 @@ export function DispatchSequence() {
   )
 }
 
-// ── HighlightTags.tsx ──
 interface HighlightTagsProps {
   selected: string[]
   onToggle: (tag: string) => void
@@ -328,7 +322,6 @@ export function HighlightTags({ selected, onToggle }: HighlightTagsProps) {
   )
 }
 
-// ── PatientCard.tsx ──
 export function PatientCard() {
   return (
     <Card>
@@ -376,7 +369,6 @@ export function PatientCard() {
   )
 }
 
-// ── PaymentCard.tsx ──
 export function PaymentCard() {
   const { navigate } = useRouter()
 
@@ -398,7 +390,6 @@ export function PaymentCard() {
   )
 }
 
-// ── RateVisitSheet.tsx ──
 interface RateVisitSheetProps {
   submitted: boolean
   stars: number
@@ -629,7 +620,6 @@ export function RateVisitSheet({
   )
 }
 
-// ── RatingHero.tsx ──
 interface RatingHeroProps {
   submitted: boolean
   stars: number
@@ -704,7 +694,6 @@ export function RatingHero({ submitted, stars, highlightCount, onOpenSheet }: Ra
   )
 }
 
-// ── ReviewHero.tsx ──
 export function ReviewHero({ guardianFirstName }: { guardianFirstName: string }) {
   return (
     <AccentHero tone="emerald">
@@ -762,7 +751,6 @@ export function ReviewHero({ guardianFirstName }: { guardianFirstName: string })
   )
 }
 
-// ── ReviewMatchCard.tsx ──
 export function ReviewMatchCard() {
   const { navigate } = useRouter()
 
@@ -817,7 +805,6 @@ export function ReviewMatchCard() {
   )
 }
 
-// ── ShareButton.tsx ──
 export function ShareButton() {
   const [phase, setPhase] = useState<'idle' | 'done'>('idle')
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -840,7 +827,6 @@ export function ShareButton() {
   )
 }
 
-// ── StarPicker.tsx ──
 interface StarPickerProps {
   value: number | null
   onChange: (stars: number) => void
@@ -880,7 +866,6 @@ export function StarPicker({ value, onChange }: StarPickerProps) {
   )
 }
 
-// ── SummaryCard.tsx ──
 export function SummaryCard() {
   return (
     <Card>
@@ -891,7 +876,6 @@ export function SummaryCard() {
   )
 }
 
-// ── VisitRecordCard.tsx ──
 const visitRecordRows = [
   { label: 'Checked in', value: RATED_VISIT.checkInAt },
   { label: 'Sign-off', value: RATED_VISIT.signOffAt },

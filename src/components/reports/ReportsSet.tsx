@@ -13,7 +13,6 @@ import { AccentHero } from '@/components/phone/AccentHero'
 import { HeroHighlight, HeroTopRow } from '@/components/phone/HeroCells'
 import { ExpandRow } from '@/components/phone/ExpandRow'
 
-// ── DownloadAllButton.tsx ──
 export function DownloadAllButton() {
   const { notify } = useDemo()
   const [phase, setPhase] = useState<'idle' | 'working' | 'done'>('idle')
@@ -47,7 +46,6 @@ export function DownloadAllButton() {
   )
 }
 
-// ── DownloadReportButton.tsx ──
 interface DownloadReportButtonProps {
   report: CareReport
   variant?: 'primary' | 'ghost'
@@ -122,7 +120,6 @@ export function DownloadReportButton({ report, variant = 'primary', label = 'Dow
   )
 }
 
-// ── LatestReportCard.tsx ──
 export function LatestReportCard() {
   const { navigate } = useRouter()
   const report = REPORTS_LATEST
@@ -173,7 +170,6 @@ export function LatestReportCard() {
   )
 }
 
-// ── ReportsHero.tsx ──
 export function ReportsHero() {
   const visits = totalReportedVisits()
 
@@ -237,7 +233,6 @@ export function ReportsHero() {
   )
 }
 
-// ── ReportsListCard.tsx ──
 function ReportRow({ report, open, onToggle }: { report: CareReport; open: boolean; onToggle: () => void }) {
   return (
     <ExpandRow

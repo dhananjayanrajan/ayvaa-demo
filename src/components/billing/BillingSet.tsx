@@ -10,7 +10,6 @@ import { MARCH, budgetPct, buildLedgerRows, buildStatementLines, chargedOf, down
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
-// ── BillingHero.tsx ──
 interface BillingHeroProps {
   receipts: Receipt[]
 }
@@ -97,7 +96,6 @@ export function BillingHero({ receipts }: BillingHeroProps) {
   )
 }
 
-// ── LedgerCard.tsx ──
 interface LedgerCardProps {
   receipts: Receipt[]
 }
@@ -124,7 +122,6 @@ export function LedgerCard({ receipts }: LedgerCardProps) {
   )
 }
 
-// ── ReceiptList.tsx ──
 interface ReceiptListProps {
   receipts: Receipt[]
 }
@@ -146,7 +143,6 @@ export function ReceiptList({ receipts }: ReceiptListProps) {
   )
 }
 
-// ── ReceiptRow.tsx ──
 interface ReceiptRowProps {
   receipt: Receipt
   open: boolean
@@ -207,7 +203,6 @@ export function ReceiptRow({ receipt, open, onToggle }: ReceiptRowProps) {
   )
 }
 
-// ── ReceiptTicket.tsx ──
 const BADGE_TONE: Record<Receipt['ticket']['badgeTone'], { icon: LucideIcon; tone: 'emerald' | 'amber' | 'sky' }> = {
   emerald: { icon: BadgeCheck, tone: 'emerald' },
   amber: { icon: Undo2, tone: 'amber' },
@@ -270,7 +265,6 @@ export function ReceiptTicket({ receipt }: ReceiptTicketProps) {
   )
 }
 
-// ── StatementButton.tsx ──
 type Phase = 'idle' | 'working' | 'done'
 
 interface StatementButtonProps {
