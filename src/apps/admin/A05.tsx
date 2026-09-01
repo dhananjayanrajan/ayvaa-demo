@@ -9,11 +9,11 @@ import { auditEntries } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { Pager } from '@/components/phone/Pager'
-import { LedgerChainHero } from '@/components/admin/audit/LedgerChainHero'
-import { AuditEntryList } from '@/components/admin/audit/AuditEntryList'
-import { CustomRangePicker } from '@/components/admin/audit/CustomRangePicker'
-import { InfoListCard } from '@/components/admin/ui/InfoListCard'
-import { ComplianceToolsList } from '@/components/admin/audit/ComplianceToolsList'
+import { LedgerChainHero } from '@/components/audit/AuditSet'
+import { AuditEntryList } from '@/components/audit/AuditSet'
+import { CustomRangePicker } from '@/components/audit/AuditSet'
+import { InfoListCard } from '@/components/ui/UiSet'
+import { ComplianceToolsList } from '@/components/audit/AuditSet'
 
 const ranges = [
   { id: 'today', label: 'Today' },

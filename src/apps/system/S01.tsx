@@ -22,7 +22,7 @@ import {
 import { systemTrail } from '@/data/system/executionTrail'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
-import { ExecutionTrail } from '@/components/system/execution/ExecutionTrail'
+import { ExecutionTrail } from '@/components/execution/ExecutionSet'
 
 const escalation: { label: string; sub: string }[] = [
   { label: 'Incident raised', sub: 'Detected automatically' },

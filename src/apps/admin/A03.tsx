@@ -15,9 +15,9 @@ import { approvals } from '@/data/seed'
 import type { Approval } from '@/data/types'
 import { useDemo } from '@/lib/store'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
-import { ApprovalCard } from '@/components/admin/approvals/ApprovalCard'
-import { InfoListCard } from '@/components/admin/ui/InfoListCard'
-import { EmptyFilterState } from '@/components/admin/approvals/EmptyFilterState'
+import { ApprovalCard } from '@/components/approvals/ApprovalsSet'
+import { InfoListCard } from '@/components/ui/UiSet'
+import { EmptyFilterState } from '@/components/approvals/ApprovalsSet'
 
 export function A03() {
   const { notify } = useDemo()

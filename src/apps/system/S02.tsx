@@ -18,9 +18,9 @@ import {
   stagger,
 } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
-import { OfferStatusList } from '@/components/system/transactions/OfferStatusList'
-import { RecheckRulesList } from '@/components/system/recheck/RecheckRulesList'
-import { FailsafeCard } from '@/components/system/drills/FailsafeCard'
+import { OfferStatusList } from '@/components/transactions/TransactionsSet'
+import { RecheckRulesList } from '@/components/recheck/RecheckSet'
+import { FailsafeCard } from '@/components/drills/DrillsSet'
 
 export function S02() {
   const { dispatch, setDispatch, notify } = useDemo()

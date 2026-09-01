@@ -6,16 +6,16 @@ import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
 import { StaticButton } from '@/components/phone/LifecycleButton'
-import { VisitsHero } from '@/components/patient/visits/VisitsHero'
+import { VisitsHero } from '@/components/visits/VisitsSet'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 
 type VisitTab = 'upcoming' | 'completed' | 'missed'
-import { LiveVisitCard } from '@/components/patient/visits/LiveVisitCard'
-import { UpcomingCard } from '@/components/patient/visits/UpcomingCard'
-import { CompletedCard } from '@/components/patient/visits/CompletedCard'
-import { MissedCard } from '@/components/patient/visits/MissedCard'
-import { EmptyTabState } from '@/components/patient/visits/EmptyTabState'
-import { FilterSheet } from '@/components/patient/visits/FilterSheet'
+import { LiveVisitCard } from '@/components/visits/VisitsSet'
+import { UpcomingCard } from '@/components/visits/VisitsSet'
+import { CompletedCard } from '@/components/visits/VisitsSet'
+import { MissedCard } from '@/components/visits/VisitsSet'
+import { EmptyTabState } from '@/components/visits/VisitsSet'
+import { FilterSheet } from '@/components/visits/VisitsSet'
 import {
   activeFilterCount,
   applyVisitFilters,

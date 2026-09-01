@@ -17,12 +17,12 @@ import {
   formatElapsed,
   type VisitStep,
 } from '@/data/patientLiveVisit'
-import { LiveVisitHero } from '@/components/patient/visits/LiveVisitHero'
-import { LiveStepCard } from '@/components/patient/visits/LiveStepCard'
-import { StepTimeline } from '@/components/patient/visits/StepTimeline'
-import { CaregiverCard } from '@/components/patient/visits/CaregiverCard'
-import { PlanCard } from '@/components/patient/visits/PlanCard'
-import { VisitSoFarSheet } from '@/components/patient/visits/VisitSoFarSheet'
+import { LiveVisitHero } from '@/components/visits/VisitsSet'
+import { LiveStepCard } from '@/components/visits/VisitsSet'
+import { StepTimeline } from '@/components/visits/VisitsSet'
+import { CaregiverCard } from '@/components/visits/VisitsSet'
+import { PlanCard } from '@/components/visits/VisitsSet'
+import { VisitSoFarSheet } from '@/components/visits/VisitsSet'
 import { useDemo } from '@/lib/store'
 
 const LAP_INTERVAL_MS = 9000

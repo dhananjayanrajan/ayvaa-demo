@@ -15,10 +15,10 @@ import {
 } from '@/components/phone/kit'
 import { consentTracking } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { DueReviewCard } from '@/components/admin/consent/DueReviewCard'
-import { WithdrawalCard } from '@/components/admin/consent/WithdrawalCard'
-import { InfoListCard } from '@/components/admin/ui/InfoListCard'
-import { ConsentRecordSheet } from '@/components/admin/sheets/ConsentRecordSheet'
+import { DueReviewCard } from '@/components/consent/ConsentSet'
+import { WithdrawalCard } from '@/components/consent/ConsentSet'
+import { InfoListCard } from '@/components/ui/UiSet'
+import { ConsentRecordSheet } from '@/components/sheets/SheetsSet'
 
 export function A06() {
   const { notify } = useDemo()

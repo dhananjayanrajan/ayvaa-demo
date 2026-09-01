@@ -8,12 +8,12 @@ import { NoteStrip } from '@/components/phone/NoteStrip'
 import { pastSessions } from '@/data/professionalHistory'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { DossierHero } from '@/components/professional/history/DossierHero'
+import { DossierHero } from '@/components/history/HistorySet'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
-import { MonthTimeline } from '@/components/professional/history/MonthTimeline'
+import { MonthTimeline } from '@/components/history/HistorySet'
 import { EmptyState } from '@/components/phone/EmptyState'
-import { ExportHistoryButton, type ExportStatus } from '@/components/professional/history/ExportHistoryButton'
-import { SearchSheet } from '@/components/professional/history/SearchSheet'
+import { ExportHistoryButton, type ExportStatus } from '@/components/history/HistorySet'
+import { SearchSheet } from '@/components/history/HistorySet'
 import {
   buildTotals,
   downloadFile,

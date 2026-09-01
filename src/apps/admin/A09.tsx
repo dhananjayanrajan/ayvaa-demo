@@ -4,10 +4,10 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Chip, Panel, Section, rise, stagger } from '@/components/phone/kit'
 import { analytics } from '@/data/seed'
-import { RevenueHero } from '@/components/admin/analytics/RevenueHero'
-import { WeeklySessionsCard } from '@/components/admin/analytics/WeeklySessionsCard'
-import { CategoryMixCard } from '@/components/admin/analytics/CategoryMixCard'
-import { WatchHero } from '@/components/admin/analytics/WatchHero'
+import { RevenueHero } from '@/components/analytics/AnalyticsSet'
+import { WeeklySessionsCard } from '@/components/analytics/AnalyticsSet'
+import { CategoryMixCard } from '@/components/analytics/AnalyticsSet'
+import { WatchHero } from '@/components/analytics/AnalyticsSet'
 
 export function A09() {
   const totalWeek = analytics.weekly.reduce((a, b) => a + b, 0)

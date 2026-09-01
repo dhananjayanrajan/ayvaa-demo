@@ -11,10 +11,10 @@ import {
 } from '@/components/phone/kit'
 import { deletionQueue, retentionPolicies } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { VaultHeroCard } from '@/components/admin/retention/VaultHeroCard'
-import { RetentionPeriodsList } from '@/components/admin/retention/RetentionPeriodsList'
-import { DeletionQueueList } from '@/components/admin/retention/DeletionQueueList'
-import { CryptoDeletionCard } from '@/components/admin/retention/CryptoDeletionCard'
+import { VaultHeroCard } from '@/components/retention/RetentionSet'
+import { RetentionPeriodsList } from '@/components/retention/RetentionSet'
+import { DeletionQueueList } from '@/components/retention/RetentionSet'
+import { CryptoDeletionCard } from '@/components/retention/RetentionSet'
 
 export function A07() {
   const { notify } = useDemo()

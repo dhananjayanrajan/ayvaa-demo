@@ -5,10 +5,10 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { Card, Chip, Section, Tile, rise, stagger } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
 import { MARCH, RECEIPTS } from '@/data/patientBilling'
-import { BillingHero } from '@/components/patient/billing/BillingHero'
-import { ReceiptList } from '@/components/patient/billing/ReceiptList'
-import { LedgerCard } from '@/components/patient/billing/LedgerCard'
-import { StatementButton } from '@/components/patient/billing/StatementButton'
+import { BillingHero_Patient as BillingHero } from '@/components/billing/BillingSet'
+import { ReceiptList } from '@/components/billing/BillingSet'
+import { LedgerCard } from '@/components/billing/BillingSet'
+import { StatementButton } from '@/components/billing/BillingSet'
 
 export function P23() {
   const { navigate } = useRouter()

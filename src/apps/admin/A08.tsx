@@ -11,10 +11,10 @@ import {
 } from '@/components/phone/kit'
 import { escalatedTickets } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { EscalationHeroCard } from '@/components/admin/escalations/EscalationHeroCard'
-import { EscalationTicketCard } from '@/components/admin/escalations/EscalationTicketCard'
-import { RelatedTicketsList } from '@/components/admin/escalations/RelatedTicketsList'
-import { InfoListCard } from '@/components/admin/ui/InfoListCard'
+import { EscalationHeroCard } from '@/components/escalations/EscalationsSet'
+import { EscalationTicketCard } from '@/components/escalations/EscalationsSet'
+import { RelatedTicketsList } from '@/components/escalations/EscalationsSet'
+import { InfoListCard } from '@/components/ui/UiSet'
 
 export function A08() {
   const { notify } = useDemo()

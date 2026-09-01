@@ -6,9 +6,9 @@ import { Section, rise, stagger } from '@/components/phone/kit'
 import { useRouter } from '@/lib/router'
 import { useDemo } from '@/lib/store'
 import { RATED_VISIT } from '@/data/patientRating'
-import { RatingHero } from '@/components/patient/review/RatingHero'
-import { VisitRecordCard } from '@/components/patient/review/VisitRecordCard'
-import { RateVisitSheet } from '@/components/patient/review/RateVisitSheet'
+import { RatingHero } from '@/components/review/ReviewSet'
+import { VisitRecordCard } from '@/components/review/ReviewSet'
+import { RateVisitSheet } from '@/components/review/ReviewSet'
 
 export function P18() {
   const { notify } = useDemo()

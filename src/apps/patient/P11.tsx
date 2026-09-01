@@ -5,12 +5,12 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
-import { InfoListCard } from '@/components/admin/ui/InfoListCard'
-import { ProfileHero } from '@/components/patient/profile/ProfileHero'
-import { CredentialCard } from '@/components/patient/profile/CredentialCard'
-import { ReviewShell } from '@/components/patient/profile/ReviewShell'
-import { CareHistoryCard } from '@/components/patient/profile/CareHistoryCard'
-import { OfferSheet } from '@/components/patient/profile/OfferSheet'
+import { InfoListCard } from '@/components/ui/UiSet'
+import { ProfileHero_Patient as ProfileHero } from '@/components/profile/ProfileSet'
+import { CredentialCard } from '@/components/profile/ProfileSet'
+import { ReviewShell } from '@/components/profile/ProfileSet'
+import { CareHistoryCard } from '@/components/profile/ProfileSet'
+import { OfferSheet } from '@/components/profile/ProfileSet'
 import {
   PROFILE,
   CREDENTIALS,

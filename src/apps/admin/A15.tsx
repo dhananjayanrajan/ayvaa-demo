@@ -17,7 +17,7 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Scree
 import { Card, Chip, Expand, Panel, Tile } from '@/components/phone/kit'
 import { AccentHero } from '@/components/phone/AccentHero'
 import { StatusPill } from '@/components/phone/StatusPill'
-import { SectionHeader } from '@/components/patient/onboarding/SectionHeader'
+import { SectionHeader } from '@/components/onboarding/OnboardingSet'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { cn } from '@/lib/utils'

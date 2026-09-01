@@ -17,11 +17,11 @@ import {
   type AuditEntry,
   type AuditFilter,
 } from '@/data/patientRecords'
-import { VaultHero } from '@/components/patient/records/VaultHero'
-import { RecordsCard } from '@/components/patient/records/RecordsCard'
-import { AuditTimeline } from '@/components/patient/records/AuditTimeline'
-import { AuditLogSheet } from '@/components/patient/records/AuditLogSheet'
-import { RecordsExportSheet } from '@/components/patient/records/RecordsExportSheet'
+import { VaultHero } from '@/components/records/RecordsSet'
+import { RecordsCard } from '@/components/records/RecordsSet'
+import { AuditTimeline } from '@/components/records/RecordsSet'
+import { AuditLogSheet } from '@/components/records/RecordsSet'
+import { RecordsExportSheet } from '@/components/records/RecordsSet'
 
 type SheetId = 'none' | 'log' | 'export'
 

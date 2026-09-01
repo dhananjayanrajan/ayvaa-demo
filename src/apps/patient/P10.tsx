@@ -5,11 +5,11 @@ import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
 import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { NoteStrip } from '@/components/phone/NoteStrip'
-import { MatchHero } from '@/components/patient/matching/MatchHero'
-import { MatchCard } from '@/components/patient/matching/MatchCard'
-import { ActiveFilterStrip } from '@/components/patient/matching/ActiveFilterStrip'
-import { EmptyMatches } from '@/components/patient/matching/EmptyMatches'
-import { LanguageSheet } from '@/components/patient/matching/LanguageSheet'
+import { MatchHero } from '@/components/matching/MatchingSet'
+import { MatchCard } from '@/components/matching/MatchingSet'
+import { ActiveFilterStrip } from '@/components/matching/MatchingSet'
+import { EmptyMatches } from '@/components/matching/MatchingSet'
+import { LanguageSheet } from '@/components/matching/MatchingSet'
 import {
   MATCH_CAREGIVERS,
   MATCH_REQUEST,

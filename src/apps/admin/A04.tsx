@@ -14,11 +14,11 @@ import {
 } from '@/components/phone/kit'
 import { useDemo } from '@/lib/store'
 import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
-import { AccountSearch } from '@/components/admin/accounts/AccountSearch'
-import { FlaggedAccountCard } from '@/components/admin/accounts/FlaggedAccountCard'
-import { RecentActivityList } from '@/components/admin/accounts/RecentActivityList'
-import { PrivacyRulesCard } from '@/components/admin/accounts/PrivacyRulesCard'
-import { AccountActionsSheet } from '@/components/admin/sheets/AccountActionsSheet'
+import { AccountSearch } from '@/components/accounts/AccountsSet'
+import { FlaggedAccountCard } from '@/components/accounts/AccountsSet'
+import { RecentActivityList } from '@/components/accounts/AccountsSet'
+import { PrivacyRulesCard } from '@/components/accounts/AccountsSet'
+import { AccountActionsSheet } from '@/components/sheets/SheetsSet'
 import { recentActivity, flaggedAccount } from '@/data/seed'
 
 const accountFilters = [
