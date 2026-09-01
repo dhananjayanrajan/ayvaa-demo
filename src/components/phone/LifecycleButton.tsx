@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { Check, Loader2 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 import { cn } from '@/lib/utils'
 
 export type LifecyclePhase = 'idle' | 'working' | 'done'
@@ -43,15 +44,20 @@ export function LifecycleButton({
   onPress?: () => void
   className?: string
 }) {
+  const { emit } = useFramework()
   const idle = phase === 'idle'
   const working = phase === 'working'
   const done = phase === 'done'
   const actionable = idle && !gated
+  const handlePress = () => {
+    emit('lifecycle.pressed', { idleLabel, tone, phase })
+    onPress?.()
+  }
   return (
     <motion.button
       type="button"
       whileTap={actionable ? { scale: 0.97 } : undefined}
-      onClick={actionable ? onPress : undefined}
+      onClick={actionable ? handlePress : undefined}
       disabled={!actionable}
       aria-disabled={!actionable}
       className={cn(
@@ -95,16 +101,21 @@ export function IconLifecycleButton({
   onPress?: () => void
   className?: string
 }) {
+  const { emit } = useFramework()
   const idle = phase === 'idle'
   const working = phase === 'working'
   const done = phase === 'done'
   const actionable = idle
   const px = `${size}px`
+  const handlePress = () => {
+    emit('lifecycle.iconPressed', { ariaLabel, phase })
+    onPress?.()
+  }
   return (
     <motion.button
       type="button"
       whileTap={actionable ? { scale: 0.9 } : undefined}
-      onClick={actionable ? onPress : undefined}
+      onClick={actionable ? handlePress : undefined}
       disabled={!actionable}
       aria-disabled={!actionable}
       aria-label={done ? `${ariaLabel} (done)` : ariaLabel}
@@ -149,15 +160,20 @@ export function QuietLifecycleButton({
   onPress?: () => void
   className?: string
 }) {
+  const { emit } = useFramework()
   const idle = phase === 'idle'
   const working = phase === 'working'
   const done = phase === 'done'
   const actionable = idle
+  const handlePress = () => {
+    emit('lifecycle.quietPressed', { idleLabel, phase })
+    onPress?.()
+  }
   return (
     <motion.button
       type="button"
       whileTap={actionable ? { scale: 0.97 } : undefined}
-      onClick={actionable ? onPress : undefined}
+      onClick={actionable ? handlePress : undefined}
       disabled={!actionable}
       aria-disabled={!actionable}
       className={cn(
@@ -195,11 +211,16 @@ export function StaticButton({
   children: ReactNode
   className?: string
 }) {
+  const { emit } = useFramework()
+  const handleClick = () => {
+    emit('lifecycle.staticPressed', { tone })
+    onClick?.()
+  }
   return (
     <motion.button
       type="button"
       whileTap={{ scale: 0.97 }}
-      onClick={onClick}
+      onClick={handleClick}
       className={cn(
         'flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl py-3.5 text-sm font-bold transition-colors',
         full && 'w-full',

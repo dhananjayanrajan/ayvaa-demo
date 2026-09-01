@@ -1,14 +1,17 @@
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 type StatusStripProps = {
   icon?: LucideIcon
   title?: string
   children: ReactNode
   align?: 'center' | 'start'
+  tone?: 'emerald' | 'amber' | 'neutral'
   className?: string
 }
 
@@ -17,8 +20,13 @@ export function StatusStrip({
   title,
   children,
   align = 'center',
+  tone = 'emerald',
   className,
 }: StatusStripProps) {
+  const { emit } = useFramework()
+  useEffect(() => { emit('statusStrip.mounted', { title }) }, [emit, title])
+  const toneMap = tone === 'amber' ? 'bg-amber-500/[0.08]' : tone === 'neutral' ? 'bg-[#0B211B]/[0.06]' : 'bg-emerald-500/[0.08]'
+  const iconTone = tone === 'amber' ? 'bg-amber-500' : tone === 'neutral' ? 'bg-[#0B211B]/70' : 'bg-emerald-500'
   return (
     <motion.div
       initial={{ opacity: 0, y: 8, scale: 0.98 }}
@@ -26,12 +34,13 @@ export function StatusStrip({
       exit={{ opacity: 0, y: -6 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'flex gap-3 rounded-xl bg-emerald-500/[0.08] px-3 py-2.5',
+        'flex gap-3 rounded-xl px-3 py-2.5',
+        toneMap,
         align === 'center' ? 'items-center' : 'items-start',
         className,
       )}
     >
-      <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+      <span className={cn('grid h-5 w-5 shrink-0 place-items-center rounded-full text-white', iconTone)}>
         <Icon className="h-3 w-3" strokeWidth={3} aria-hidden />
       </span>
       {title ? (

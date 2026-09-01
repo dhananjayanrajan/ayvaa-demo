@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 export type DialInputProps = {
   value: number
@@ -27,6 +28,7 @@ function rubberClamp(delta: number, over: number, factor = 0.35) {
 }
 
 export function DialInput({ value, onChange, min = 0, max = 100, step = 1, label = 'Value', unit, id }: DialInputProps) {
+  const { emit } = useFramework()
   const range = max - min
   const count = Math.floor(range / step) + 1
   const index = Math.round((clamp(value, min, max) - min) / step)
@@ -69,8 +71,11 @@ export function DialInput({ value, onChange, min = 0, max = 100, step = 1, label
 
   const commit = useCallback((idx: number) => {
     const v = clamp(min + idx * step, min, max)
-    if (v !== clamped) onChange(v)
-  }, [min, max, step, clamped, onChange])
+    if (v !== clamped) {
+      onChange(v)
+      emit('dial.changed', { value: v, label })
+    }
+  }, [min, max, step, clamped, onChange, emit, label])
 
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     const el = containerRef.current

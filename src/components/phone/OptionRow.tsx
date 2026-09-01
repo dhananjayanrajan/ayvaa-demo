@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 import { cn } from '@/lib/utils'
 
 export type OptionTone = 'emerald' | 'sky' | 'neutral' | 'dark'
@@ -100,6 +101,11 @@ export function OptionRow({
   selectedTitleClassName?: string
   unselectedTitleClassName?: string
 }) {
+  const { emit } = useFramework()
+  const handleSelect = () => {
+    emit('option.selected', { title, selected: !selected, tone })
+    onSelect()
+  }
   return (
     <motion.button
       type="button"
@@ -107,7 +113,7 @@ export function OptionRow({
       aria-checked={role === 'radio' ? selected : undefined}
       aria-pressed={role === 'radio' ? undefined : selected}
       whileTap={disabled ? undefined : { scale: tapScale }}
-      onClick={disabled ? undefined : onSelect}
+      onClick={disabled ? undefined : handleSelect}
       disabled={disabled}
       className={cn(
         'flex gap-3 rounded-2xl px-4 py-3.5 text-left transition-colors',

@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 export type PhaseHeroTheme = {
   border: string
@@ -88,6 +90,8 @@ export function PhaseHero({
   className?: string
   children: ReactNode
 }) {
+  const { emit } = useFramework()
+  useEffect(() => { emit('phaseHero.mounted', { shell: theme.shell }) }, [emit, theme.shell])
   return (
     <div
       className={cn(

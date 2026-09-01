@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 type PillTone = 'sky' | 'amber' | 'emerald' | 'rose'
 
@@ -21,6 +23,8 @@ interface StatusPillProps {
 
 export function StatusPill({ tone, label, live = false, icon, className }: StatusPillProps) {
   const t = pillTones[tone]
+  const { emit } = useFramework()
+  useEffect(() => { if (live) emit('statusPill.live', { tone, label }) }, [emit, live, tone, label])
   return (
     <span
       className={cn(

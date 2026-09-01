@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { Quote } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 
 export function QuotePanel({
   quote,
@@ -70,6 +72,8 @@ export function QuotePanel({
     </>
   )
 
+  const { emit } = useFramework()
+  useEffect(() => { emit('quotePanel.mounted', { quote }) }, [emit, quote])
   if (bare) return body
   return <div className={cn('rounded-[20px] bg-[#0B231C] p-4', className)}>{body}</div>
 }
