@@ -18,6 +18,13 @@ export function ConnectButton({
   const { notify, emit } = useFramework()
   const [phase, setPhase] = useState<ConnectPhase>('idle')
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+  const hasMountedRef = useRef(false)
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      emit('connectButton.mounted', { name, light, label })
+    }
+  }, [emit, label, light, name])
   useEffect(() => () => timers.current.forEach(clearTimeout), [])
 
   function call() {
