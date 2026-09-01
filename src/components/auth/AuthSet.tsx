@@ -1,0 +1,10 @@
+// L3 Auth domain set — merges patient auth primitives
+export { CreateAccountCard } from '@/components/patient/auth/CreateAccountCard'
+export { PasswordCard } from '@/components/patient/auth/PasswordCard'
+export { DigestHero } from '@/components/patient/auth/DigestHero'
+export { DigestRow } from '@/components/patient/auth/DigestRow'
+export { DigestDetail } from '@/components/patient/auth/DigestDetail'
+export { BiometricUnlock } from '@/components/patient/auth/BiometricUnlock'
+export { BiometricNote } from '@/components/patient/auth/BiometricNote'
+export { SignInButton } from '@/components/patient/auth/SignInButton'
+export { SendResetButton } from '@/components/patient/auth/SendResetButton'
