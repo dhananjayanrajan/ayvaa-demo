@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import { Tile, Chip, TimeChip } from '@/components/phone/kit'
 import type { TileTone, Intent } from '@/components/phone/kit'
+import { useFramework } from '@/components/phone/FrameworkRuntime'
 import { cn } from '@/lib/utils'
 
 export type RowSurface = 'none' | 'inset' | 'live' | 'tint'
@@ -161,6 +162,16 @@ export function Row({
   className,
   bodyClassName,
 }: RowProps) {
+  const { emit } = useFramework()
+  const handleClick = () => {
+    if (disabled) return
+    emit('row.pressed', { title })
+    onClick?.()
+  }
+  const handleToggle = () => {
+    emit('row.toggled', { title, open: !open })
+    onToggle?.()
+  }
   const Icon = icon
 
   const leadingNode =
@@ -327,7 +338,7 @@ dark ? (dark === 'white' ? 'text-white/45' : 'text-emerald-100/70') : 'text-[#0B
       <motion.button
         type="button"
         whileTap={whileTapDisabled ? undefined : { scale: 0.985 }}
-        onClick={onClick}
+        onClick={handleClick}
         aria-expanded={ariaExpanded}
         className={shellClass}
       >
@@ -335,7 +346,7 @@ dark ? (dark === 'white' ? 'text-white/45' : 'text-emerald-100/70') : 'text-[#0B
       </motion.button>
     )
   ) : expandable && onToggle ? (
-    <button type="button" onClick={onToggle} aria-expanded={open} className={cn(shellClass, 'group')}>
+    <button type="button" onClick={handleToggle} aria-expanded={open} className={cn(shellClass, 'group')}>
       {inner}
     </button>
   ) : (
