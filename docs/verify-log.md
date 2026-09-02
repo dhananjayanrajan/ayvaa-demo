@@ -68,3 +68,12 @@ Format per design-system §9.4. Verdicts are written only from real run output; 
 - Deleted uncommitted: src/framework/atoms (tokens/resolve/kit) + verify/framework-tree.test.ts + verify/tokens.test.ts (sole atoms consumers). Grep-gate: zero code references remain. Mined-file C8 stands as demand evidence; the pre-built seed it scoped is void.
 - Post-deletion gate green at commit time (this entry written inside the gated commit block): app 0 node 0 verify 0 — suite back to proven 16/16.
 - Runtime + harness + mining committed as evidence pending re-assessment from scratch per R14. Commits local only — not pushed.
+
+## M0 round 7 — commits landed — hashes recorded
+
+- 29627fe docs(policy) R13/R14 — 6 files — contract with R14 recorded is in history
+- 13f17c1 chore(verify) gate boundary — 6 files
+- 6ebb636 feat(runtime) runtime core — 7 files
+- 29d4006 test(verify) self-proving harness — 8 files
+- 5c67966 feat(mining) miner + mined evidence — 4 files — curated visit-summary in history
+- All local, unpushed. Suite 16/16 at commit time. Atoms absent from all commit file lists — void ruling honored in history.
