@@ -77,3 +77,8 @@ Format per design-system §9.4. Verdicts are written only from real run output; 
 - 29d4006 test(verify) self-proving harness — 8 files
 - 5c67966 feat(mining) miner + mined evidence — 4 files — curated visit-summary in history
 - All local, unpushed. Suite 16/16 at commit time. Atoms absent from all commit file lists — void ruling honored in history.
+
+## Gate confirmation post-R15
+
+- App + node tsc exit 0 — GATE-CLEAN pasted by user; ledger claim now evidence-backed.
+- vitest found pre-existing at fd07612 baseline (line 58) — removal during R15 sweep exceeded ruling scope (this-era additions only); restored to baseline.

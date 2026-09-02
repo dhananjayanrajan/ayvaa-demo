@@ -38,19 +38,8 @@ REDESIGN.md
 ANTI-DESIGN.md
 PREPERATION.md
 
-# Local agentic checkup loops
-loops
 
-# Docs policy (R13): contract + evidence ledger + product spine are tracked;
-# superseded-era docs stay local, ignored, mined for requirements only
+# Docs policy (R13, amended): suite + product spine tracked;
+# old canon stays local as mining seed until the suite completes
 docs/anti-design.md
 docs/redesign.md
-docs/framework-plan.md
-docs/framework-progress.md
-docs/component-coverage.md
-docs/preperation.md
-docs/project-handoff.md
-docs/refactor-goals.md
-docs/refactor-rules.md
-docs/refactor-targets.md
-docs/unused-vendor-flag-list.md
