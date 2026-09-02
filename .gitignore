@@ -41,5 +41,16 @@ PREPERATION.md
 # Local agentic checkup loops
 loops
 
-# Refactor documents (no longer pushed)
-docs/
+# Docs policy (R13): contract + evidence ledger + product spine are tracked;
+# superseded-era docs stay local, ignored, mined for requirements only
+docs/anti-design.md
+docs/redesign.md
+docs/framework-plan.md
+docs/framework-progress.md
+docs/component-coverage.md
+docs/preperation.md
+docs/project-handoff.md
+docs/refactor-goals.md
+docs/refactor-rules.md
+docs/refactor-targets.md
+docs/unused-vendor-flag-list.md
