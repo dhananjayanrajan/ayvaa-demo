@@ -28,5 +28,6 @@
     }
   },
   "include": ["src"],
-  "exclude": ["src/components/smoothui", "src/lib/smoothui-data"]
+  "exclude": [
+    "src/framework/verify","src/components/smoothui", "src/lib/smoothui-data"]
 }
