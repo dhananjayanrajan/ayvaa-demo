@@ -1,9 +1,9 @@
 # AYVAA DESIGN SYSTEM — MASTER DOCUMENT
 
-**Version:** 2.0 — full rewrite of v1.0 per R15. The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
+**Version:** 2.1 — R13 amended (evidence ledger retired). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
 **Authority:** User intent is supreme. Where this document conflicts with any prior artifact (README, framework-plan v2, migration ledgers, REDESIGN.md, ANTI-DESIGN.md, progress logs), **this document wins**. Amendment only via §6.
 **Audience:** A fresh session with no prior context. This suite plus the repository are the complete world.
-**Location:** `docs/design-system.md` (this master). Detail documents land one at a time per §4. Evidence ledger: `docs/verify-log.md` (R13).
+**Location:** `docs/design-system.md` (this master). Detail documents land one at a time per §4.
 
 ---
 
@@ -81,7 +81,7 @@ Status: **ACTIVE** governs now · **PARKED** is decided but belongs to the build
 | R10 | SUPERSEDED (2.0 rewrite) | Two-movement document structure — replaced by the suite architecture (§4). |
 | R11 | ACTIVE (amended) | Demo-first, native-ready. The demo repo is the specification for the real project: every rebuilt screen keeps its screen ID and workflow mapping; workflow/screen/coverage docs are the cross-reference spine; no speculative abstraction layer is built. The v1.0 import-gate machinery is moot under R15; the surviving principle is platform-neutral *thinking* — semantics, data contracts, and component contracts are written without web-only assumptions. |
 | R12 | ACTIVE | Semantic foundation ratified as drafted: urgency = time-criticality, not clinical danger; stakes precedence person-safety > binding > elevated > routine > informational; tones from universal + clinical convention; ONE content register. |
-| R13 | ACTIVE | Documentation tracking: the suite, the evidence ledger, and the product spine (`docs/workflows.md`, `docs/screens.md`, `docs/coverage.md`) are git-tracked; superseded-era docs stay local and gitignored — mining seed only. New docs tracked unless ruled otherwise. |
+| R13 | ACTIVE (amended 2.1) | Documentation tracking: the suite and the product spine (`docs/workflows.md`, `docs/screens.md`, `docs/coverage.md`) are git-tracked. The evidence ledger (`docs/verify-log.md`) is retired — evidence lives in git history and the amendment log. Old canon (`docs/redesign.md`, `docs/anti-design.md`) stays local and gitignored as mining seed until the suite completes, then is deleted. New docs tracked unless ruled otherwise. |
 | R14 | ACTIVE | A seed is a decision. Concrete values enter the suite only with evidence and user approval; nothing is invented silently. |
 | R15 | ACTIVE | The goal is a component design documentation suite, not a UI framework. No framework code, no runtime, no harness, no shared infrastructure — ever. Component state management is a per-component pattern decision, not a platform. The v1.0 §9 verification protocol and §10 build program are superseded. |
 
@@ -195,7 +195,7 @@ A new pattern is admitted only through the construction procedure (09): a semant
 
 ### I8 — Canon authority & concreteness
 
-This suite supersedes REDESIGN.md and ANTI-DESIGN.md as canon; they remain mining seed (R6). Rules carry strength — **MUST** (binding) or **SHOULD** (guidance) — and every rule is written concrete enough that two builders reach the same output; a rule that cannot meet that bar is demoted to guidance (anti-F8). Values are **sealed** (decided, provenance stated) or **open** (owned by a named document, decided in the build phase with evidence and user approval per R14). Nothing is invented silently.
+This suite supersedes REDESIGN.md and ANTI-DESIGN.md as canon; they remain mining seed (R6) and are deleted once the suite is complete. Rules carry strength — **MUST** (binding) or **SHOULD** (guidance) — and every rule is written concrete enough that two builders reach the same output; a rule that cannot meet that bar is demoted to guidance (anti-F8). Values are **sealed** (decided, provenance stated) or **open** (owned by a named document, decided in the build phase with evidence and user approval per R14). Nothing is invented silently.
 
 ### I9 — Determinism & code hygiene
 
@@ -401,3 +401,4 @@ The superseded v1.0 protocol (V1–V7, harness mechanics, seeded-defect calibrat
 - **R15**: documents-only deliverable — no framework code, runtime, harness, or shared infrastructure, ever; R1–R3 superseded; v1.0 §9/§10 retired (build program recoverable from git history for the build conversation, to be re-ratified there).
 - **F9 + I0**: deliverable-creep failure added with its standing rule — from the deviation audit.
 - **2.0 rewrite**: master restructured as suite index; invariants rewritten as pattern disciplines (I0–I12); expectation map lightened; verification protocol replaced by §5; suite architecture §4 added.
+- **2.1**: R13 amended — evidence ledger retired, `docs/verify-log.md` deleted; superseded-era docs and dead tooling purged; canon seed expiry stated in I8 (user ruling during suite writing).
