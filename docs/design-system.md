@@ -1,6 +1,6 @@
 # AYVAA DESIGN SYSTEM — MASTER DOCUMENT
 
-**Version:** 2.3 — catalog complete; R29–R33 integrated; R16–R28 ratification pending (§6 walk). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
+**Version:** 2.4 — catalog complete; R29–R33 integrated; R16–R28 ratified (§6 walk). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
 **Authority:** User intent is supreme. Where this document conflicts with any prior artifact (README, framework-plan v2, migration ledgers, REDESIGN.md, ANTI-DESIGN.md, progress logs), **this document wins**. Amendment only via §6.
 **Audience:** A fresh session with no prior context. This suite plus the repository are the complete world.
 **Location:** `docs/design-system.md` (this master). Detail documents land one at a time per §4.
@@ -89,6 +89,19 @@ Status: **ACTIVE** governs now · **PARKED** is decided but belongs to the build
 | R31 | ACTIVE | PageHero's phase map is internal to the component; canonical phase specs are materialized from the 02 §5 treatments as data-layer constants; screens pass a phase key + typed data and vary composition, never tone semantics. The light-mode hero variant exists; its exact values are walkthrough-owned. |
 | R32 | ACTIVE | Catalog closure: every register row names real catalog entries. StarPicker is admitted (07c §10); countdown presentation is Meter's ticking variant (07d §10); bank-account fields and capture tiles are declared assemblies; trend-at-a-glance charts are the ChartBars spark variant (07d §14). |
 | R33 | ACTIVE | The tone seam: data-layer derivations return semantic classification (`normal`/`borderline`/`abnormal`), never tone tokens; the one-map translates classification → tone via 02. |
+| R16 | ACTIVE | 02-states-and-semantics ratified — full derivation matrix, intensity ladder values, the three axes in full, per-entity UI treatment. |
+| R17 | ACTIVE | 03-content ratified — voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks. |
+| R18 | ACTIVE | 04-interaction ratified — triggers, gestures, keyboard, the a11y standard, QoL catalog, gating. |
+| R19 | ACTIVE | 05-motion ratified — durations, springs per origin, entrance/exit doctrine, choreography, effects. |
+| R20 | ACTIVE | 06-data ratified — typed contracts, parsing, derivation, wiring the three axes, act resolution. |
+| R21 | ACTIVE | 07a-components-shells ratified — catalog 1/6: shells & chrome. |
+| R22 | ACTIVE | 07b-components-lists ratified — catalog 2/6: rows, lists & disclosure. |
+| R23 | ACTIVE | 07c-components-controls ratified — catalog 3/6: controls & inputs. |
+| R24 | ACTIVE | 07d-components-displays ratified — catalog 4/6: data displays. |
+| R25 | ACTIVE | 07e-components-care-domains ratified — catalog 5/6: care-delivery compositions. |
+| R26 | ACTIVE | 07f-components-platform-domains ratified — catalog 6/6: platform & shared compositions. |
+| R27 | ACTIVE | 08-composition ratified — screen assembly, page-level rules, forbidden content. |
+| R28 | ACTIVE | 09-construction ratified — the procedure: any imagined component → built accurately from the suite; pattern admission. |
 
 Numbering convention: detail documents reserve their ratification ruling number at proposal time (cited in their status headers, R16–R28); it is entered in this registry on ratification.
 
@@ -333,20 +346,20 @@ User ruling: "multiple documents, extremely clear ones with details separated fo
 | Document | Owns completely | Status |
 |---|---|---|
 | `design-system.md` (master) | Mission, expectations, failure ledger, rulings, invariants, semantic foundation, precedence | this rewrite |
-| `01-design-language.md` | Layout, grid, alignment, spacing rhythm, radius, surfaces & elevation, color realization (the values behind §3.3), typography, iconography | written — proposed |
-| `02-states-and-semantics.md` | Full derivation matrix, intensity ladder values, the three axes in full, per-entity UI treatment, open items | written — proposed (R16) |
-| `03-content.md` | Voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks | written — proposed (R17) |
-| `04-interaction.md` | Triggers, gestures, keyboard, the a11y standard, QoL catalog, gating | written — proposed (R18) |
-| `05-motion.md` | Durations, springs per origin, entrance/exit doctrine, choreography, effects | written — proposed (R19) |
-| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes, act resolution | written — proposed (R20) |
-| `07a-components-shells.md` | Catalog 1/6: shells & chrome — frame, screen, bars, splash, sections, panels, SheetShell, PageHero, HeroCells, ToastHost | written — proposed (R21) |
-| `07b-components-lists.md` | Catalog 2/6: rows, lists & disclosure — Row, ExpandRow, OptionRow, StepList, rails, EmptyState, StreamList | written — proposed (R22) |
-| `07c-components-controls.md` | Catalog 3/6: controls & inputs — Field, OTP, Switch, Checkbox, Tabs, StarPicker, LifecycleButton, DialInput, pickers | written — proposed (R23) |
-| `07d-components-displays.md` | Catalog 4/6: data displays — chips, facts, strips, meters, rings, tiles, ChartBars, Skeleton | written — proposed (R24) |
-| `07e-components-care-domains.md` | Catalog 5/6: care-delivery compositions — matching, booking, visits, meds, consent, records, billing | written — proposed (R25) |
-| `07f-components-platform-domains.md` | Catalog 6/6: platform & shared — offers, sessions, approvals, incidents, auth, admin, system | written — proposed (R26) |
-| `08-composition.md` | Screen assembly, page-level rules, forbidden content | written — proposed (R27) |
-| `09-construction.md` | The procedure: any imagined component → built accurately from the suite; pattern admission | written — proposed (R28) |
+| `01-design-language.md` | Layout, grid, alignment, spacing rhythm, radius, surfaces & elevation, color realization (the values behind §3.3), typography, iconography | written — ratified |
+| `02-states-and-semantics.md` | Full derivation matrix, intensity ladder values, the three axes in full, per-entity UI treatment, open items | written — ratified (R16) |
+| `03-content.md` | Voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks | written — ratified (R17) |
+| `04-interaction.md` | Triggers, gestures, keyboard, the a11y standard, QoL catalog, gating | written — ratified (R18) |
+| `05-motion.md` | Durations, springs per origin, entrance/exit doctrine, choreography, effects | written — ratified (R19) |
+| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes, act resolution | written — ratified (R20) |
+| `07a-components-shells.md` | Catalog 1/6: shells & chrome — frame, screen, bars, splash, sections, panels, SheetShell, PageHero, HeroCells, ToastHost | written — ratified (R21) |
+| `07b-components-lists.md` | Catalog 2/6: rows, lists & disclosure — Row, ExpandRow, OptionRow, StepList, rails, EmptyState, StreamList | written — ratified (R22) |
+| `07c-components-controls.md` | Catalog 3/6: controls & inputs — Field, OTP, Switch, Checkbox, Tabs, StarPicker, LifecycleButton, DialInput, pickers | written — ratified (R23) |
+| `07d-components-displays.md` | Catalog 4/6: data displays — chips, facts, strips, meters, rings, tiles, ChartBars, Skeleton | written — ratified (R24) |
+| `07e-components-care-domains.md` | Catalog 5/6: care-delivery compositions — matching, booking, visits, meds, consent, records, billing | written — ratified (R25) |
+| `07f-components-platform-domains.md` | Catalog 6/6: platform & shared — offers, sessions, approvals, incidents, auth, admin, system | written — ratified (R26) |
+| `08-composition.md` | Screen assembly, page-level rules, forbidden content | written — ratified (R27) |
+| `09-construction.md` | The procedure: any imagined component → built accurately from the suite; pattern admission | written — ratified (R28) |
 
 A document that outgrows readability splits during writing — recorded at split time. Recorded split: `07` → `07a`–`07f` (catalog scale); `01` held whole.
 
@@ -416,3 +429,4 @@ The superseded v1.0 protocol (V1–V7, harness mechanics, seeded-defect calibrat
 - **2.1**: R13 amended — evidence ledger retired, `docs/verify-log.md` deleted; superseded-era docs and dead tooling purged; canon seed expiry stated in I8 (user ruling during suite writing).
 - **2.2**: catalog completion — `07` split to `07a`–`07f` recorded; index statuses synced; ChartBars + Skeleton (07d) and ToastHost (07a) admitted; dangling references closed (05 shimmer → 07d §15, 02 loading → 07d §15, 07f analytics → 07d, 06 notify → 07a §11); tone-arrival rule widened to cover data-layer derivation; part numbering corrected; register debris removed. Pre-ratification completion — no ruling changed.
 - **2.3**: R29–R33 recorded — the binding-class fork (02 §3.3), act resolution as controlled data (06 §7), PageHero phase-map authority (07a §9), catalog closure lint (R32), the tone seam (R33) — and the suite swept for internal consistency. Detail documents reissued with the fixes integrated; their R16–R28 seals remain pending.
+- **2.4**: R16–R28 ratified — the full detail suite (02–09, 07a–07f) sealed in one consolidated pass. The ruling registry now carries R16–R28 as ACTIVE. The suite is complete and self-contained; the build phase begins from the exemplars (R8).
