@@ -1,6 +1,6 @@
 # 07b — COMPONENT CATALOG: ROWS, LISTS & DISCLOSURE
 
-**Part 2 of 5** of the component catalog. **Owns completely:** every catalog pattern that presents an ordered collection — rows, expandable rows, option rows, timelines, rails, accordions (exclusive groups), empty states, streamed-list hosts.
+**Part 2 of 6** of the component catalog. **Owns completely:** every catalog pattern that presents an ordered collection — rows, expandable rows, option rows, timelines, rails, accordions (exclusive groups), empty states, streamed-list hosts.
 **Status:** v1.0 — proposed. Ratification seals as R22.
 **Provenance:** [R]/[C]/[M]/[D] as before. **M** = MUST · **S** = SHOULD.
 

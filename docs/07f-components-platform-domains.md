@@ -90,7 +90,7 @@
 | ConsentTracking | admin | DueReviewCard + CycleStep + WithdrawalCard | consent entity at fleet scale [M] |
 | RetentionPolicyEditor | admin | PolicyEditor (Field set) + DeletionQueueList + CryptoDeletionCard | **theme re-mapped [D]: corpus emerald/teal was decoration drift — policy surfaces read neutral/attention by state (draft/applied/enforcing), positive only on applied-confirm** |
 | EscalationDesk | admin | EscalationHeroCard + EscalationTicketCard + SLA timers | SLA countdowns tick; breach flips state [M] |
-| AnalyticsSurfaces | admin | RevenueHero + charts per 01 §10.4 + ReportBuilder sheet | every visual encodes real data; scheduled reports via LifecycleButton |
+| AnalyticsSurfaces | admin | RevenueHero + ChartBars (07d) + ReportBuilder sheet | every visual encodes real data; scheduled reports via LifecycleButton |
 | TransactionConsole | system | TransactionStepList + StateDiffCard + RollbackTraceCard + PaymentHero | operator view of S04/S07 laws — **system surfaces obey every law in this suite; observing does not exempt** [M] |
 | RecheckConsole | system | RecheckHero + RulesList + ResolutionCard | observer of §1.1's arc [M] |
 | NotificationDelivery | system | NotificationFeed + IncidentTimelineCard + DeliveryHealthCard | per-channel delivery states [M] |

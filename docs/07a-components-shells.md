@@ -1,7 +1,7 @@
 # 07a — COMPONENT CATALOG: SHELLS & CHROME
 
-**Part 1 of 5** of the component catalog (07a shells/chrome · 07b rows/lists/disclosure · 07c controls/inputs · 07d data displays · 07e domain compositions).
-**Owns completely:** every catalog pattern whose job is structure — the screen frame, bars, sheets, sections, panels, hero shells, and the cells that compose them. Behavior-bearing entries declare their behavior; pure structure entries declare why they have none.
+**Part 1 of 6** of the component catalog (07a shells/chrome · 07b rows/lists/disclosure · 07c controls/inputs · 07d data displays · 07e care domains · 07f platform domains).
+**Owns completely:** every catalog pattern whose job is structure — the screen frame, bars, sheets, toasts, sections, panels, hero shells, and the cells that compose them. Behavior-bearing entries declare their behavior; pure structure entries declare why they have none.
 **Status:** v1.0 — proposed. Ratification seals as R21.
 **Provenance:** [R] = ratified · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 
@@ -9,7 +9,7 @@
 
 ## 0 — The entry format
 
-Every catalog entry in 07a–07e uses this skeleton [D — the standard]:
+Every catalog entry in 07a–07f uses this skeleton [D — the standard]:
 
 1. **Identity** — name · layer (per master I1) · classification (structure / behavior-bearing per I4) · one-line purpose.
 2. **Anatomy** — the structure, in 01's language.
@@ -134,14 +134,25 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 
 ---
 
-## 11 — Catalog-wide composition rules (07a)
+## 11 — ToastHost
+
+**Identity** — behavior-bearing · universals · the transient outcome-report overlay: ambient confirmations for outcomes not visible where the user stands. The presentation half of the notify contract (06 §4.4).
+**Anatomy** [D] — compact dark ink card (`#0B231C`-family, `rounded-2xl`) floating above all surfaces including sheets — dark carries its own depth, so no shadow-rule conflict (01 §6.3): tone-tinted icon Tile (`h-8`) · title (bold, ≤4 words — 03 §3) · body (≤1 sentence) · optional single action label (family accent text). Stack: top of frame, max 3, newest on top, older compress.
+**Mechanics [D]** — ToastHost mounts ONCE per screen (chrome slot, sibling to the sheet AnimatePresence) and provides `notify({ title, body, tone?, action? })` via context — master I3's one sanctioned chrome-level cross-tree concern. It owns the queue and its timers (self-cleaning); screens never touch them (08 §7.2). Auto-dismiss 2.8s ambient, extended to 5s while an action is offered. Enter: y −12 + opacity; exit: fade + collapse — AnimatePresence throughout (05 catalog `gentle`). Tap dismisses or activates; swipe-up dismisses (04 §3.3 light drag).
+**Props (Host)** — data: none · config: none · provides: notify context. **Props (Toast)** — data: `title`, `body?`, `action?: { label, onPress }` · config: `tone` · state: internal (`entering → visible → exiting`).
+**State map** — per-toast lifecycle only; the queue is steady-state structure. Tone renders as tile + accent only — the card stays ink; a toast IS an outcome statement, tinted by its meaning (positive/attention/risk).
+**Declaration** — Q-rows: Q1, Q13 (haptic on binding outcomes when configured) · gestures: tap act/dismiss, swipe-up dismiss · a11y: `aria-live=polite` (assertive reserved for person-safety — 04 §6); announced once, never re-announced on re-render; auto-dismiss pauses while hovered/focused [D].
+**THE LAW** — a toast NEVER substitutes for a visible state change (06 §4.4): if the outcome lands where the user is looking, the in-place arc (02 §4.1) carries it and no toast fires. Toasts exist for out-of-view and ambient outcomes — share complete, background record, dispatch events.
+**Composition** — one host per screen; composites notify via context (never prop chains, never screen-owned queues); PushPreview stays a separate demo surface (a toast is in-app; a push is system-level).
+
+## 12 — Catalog-wide composition rules (07a)
 
 - **[M]** Shells and chrome never contain domain data logic — content arrives as typed props or slots from 07e compositions.
 - **[M]** One fact, one place: bands own their counts (§6); heroes own their narrative; sheets own their outcome flips — no cross-restatement.
 - **[M]** Every 07a entry is reusable across roles (patient/professional/partner/admin/system) with ZERO role conditionals — role variation is data and composition (07e), never config flags [F4 fence].
 - **[D]** The catalog admits NO new chrome without the 09 construction procedure; "one more wrapper" is how 410 files happened.
 
-## 12 — Open items (07a)
+## 13 — Open items (07a)
 
 | Item | Status | Owner |
 |---|---|---|
@@ -149,3 +160,4 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 | Splash durations | OPEN [D proposed] | walkthrough |
 | PageHero light-mode variant | OPEN [D proposed] | walkthrough |
 | AppBar closed-anatomy amendment path (new trailing type) | governed by 09 admission | 09 |
+| Toast durations (2.8s ambient / 5s with action) | SEALED [D] — vetoable | user |

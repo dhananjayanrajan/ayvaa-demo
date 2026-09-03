@@ -1,6 +1,6 @@
 # 07c — COMPONENT CATALOG: CONTROLS & INPUTS
 
-**Part 3 of 5** of the component catalog. **Owns completely:** every catalog pattern that takes input — fields, toggles, selections, tabs, action buttons, the dial, steppers, pickers, search surfaces.
+**Part 3 of 6** of the component catalog. **Owns completely:** every catalog pattern that takes input — fields, toggles, selections, tabs, action buttons, the dial, steppers, pickers, search surfaces.
 **Status:** v1.0 — proposed. Ratification seals as R23.
 **Provenance:** [R]/[C]/[M]/[D] as before. **M** = MUST · **S** = SHOULD.
 

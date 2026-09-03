@@ -117,7 +117,7 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 | CredentialsCheck detail | matching | ExpandRow + FactRows + StatusPill | background-check facts [C] |
 | ScheduleCard / WhoSheet | booking | TimeSheet + Field + OptionRow | wizard steps [M] |
 | PrescriptionRow / RxList | meds | Row + ExpandRow + Meter (days left) | expiry attention → risk [R] |
-| AddPrescriptionSheet | meds | Field + HoldConfirm? no — LifecycleButton | upload real files (06 §6) |
+| AddPrescriptionSheet | meds | Field + file tile + LifecycleButton | upload real files (06 §6) |
 | RecordsVault | records | PageHero + DocRow list + AuditTimeline + SearchSheet | consent-gated; **`missing` data-state exemplar item lives here** (02 §1.3 — open, exemplar 3) |
 | AuditTimeline | records | MiniTimeline + StatusPill | access history; every entry = who/what/when [C] |
 | RecordsExportSheet | records | SheetShell + LifecycleButton | real Blob export (06 §6.2) |
@@ -125,7 +125,7 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 | WithdrawalCeremony | consent | PageHero risk + HoldConfirmButton | binding arc §3.3 [R] |
 | BillingLedger | billing | Section bands + ReceiptRow + StatStrip | visit-linked [C] |
 | InvoiceDetail | billing | SheetShell + FactRows + LifecycleButton | tax breakdown [C] |
-| EmergencyActions | patient | action-first surface + HoldConfirm? no — direct call ConnectButton | call-first [C] |
+| EmergencyActions | patient | action-first call surface + ConnectButton (direct dial) | call-first [C] |
 | SupportTicket flow | support | SheetShell + Field + StreamList replies | SLA states per 02 informational |
 | NotificationFeed | notifications | StreamList + Row + FilterSheet | read state fans out; mark-all one pass [M] |
 | ProfileEditor | profile | Field set + LifecycleButton | inline edit, dirty-check gating [C] |

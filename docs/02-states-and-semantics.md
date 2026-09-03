@@ -33,7 +33,7 @@ What the data feeding the component is doing, independent of any user interactio
 | State | Definition | Rendering law |
 |---|---|---|
 | empty | no data exists and none is expected or applicable | quiet; if a list view, cause-diagnosing empty state (§3.6) [C] |
-| loading | expected data, arriving | skeleton in place at the same anatomy — never a full-screen block; control-level async uses the lifecycle state, not a screen skeleton [D] |
+| loading | expected data, arriving | skeleton (the Skeleton primitive, 07d §15) in place at the same anatomy — never a full-screen block; control-level async uses the lifecycle state, not a screen skeleton [D] |
 | partial | some entries/fields real, others absent or pending | show real values, mark pending ones explicitly — never fabricate, never leave silent gaps [D] |
 | stale | data present but past its freshness contract | quiet freshness marker + refresh path — never silently presented as current [D] |
 | conflict | two sources disagree | surface both values and the disagreement — never pick silently [D] |

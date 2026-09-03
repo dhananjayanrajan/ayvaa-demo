@@ -1,6 +1,6 @@
 # 07d — COMPONENT CATALOG: DATA DISPLAYS
 
-**Part 4 of 5** of the component catalog. **Owns completely:** every catalog pattern whose job is stating facts — chips, pills, fact rows, quotes, strips, notes, meters, rings, tiles, stat bands, live dots.
+**Part 4 of 6** of the component catalog. **Owns completely:** every catalog pattern whose job is stating facts — chips, pills, fact rows, quotes, strips, notes, meters, rings, tiles, stat bands, live dots, charts, skeletons.
 **Status:** v1.0 — proposed. Ratification seals as R24.
 **Provenance:** [R]/[C]/[M]/[D] as before. **M** = MUST · **S** = SHOULD.
 
@@ -19,6 +19,7 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 | a trend or progress | **Meter / Ring** | adherence 4 of 7 |
 | a spoken artifact | **QuotePanel** | caregiver's verbatim note |
 | ambient guidance or aftermath | **NoteStrip** / **StatusStrip** | "what happens now" |
+| a series over categories | **ChartBars** | weekly sessions |
 
 - **[M]** Never two carriers for one fact: a paid fact is a chip OR a tile mark OR a stamp — never stacked expressions (AP28/29).
 - **[M]** The dominant meaning never demotes to a chip, and a chip never promotes to a shell (02 §3.5 as component law).
@@ -30,7 +31,7 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 **Props** — data: `label` (≤3 words, 03 §3) · config: `tone`, `mode`, `dot?`, `live?`, `icon?` · slots: none.
 **State map** — static (tone IS the state statement; arriving via config from the owner's map).
 **Declaration** — non-interactive; icon-only chips carry `aria-label` naming the state [C]; tone announced in label when meaning-bearing ("Overdue" reads as is; a red dot alone reads via label).
-**Composition** — light surfaces; row meta columns; NEVER on dark shells (07d §7 contrast law — StatusPill there).
+**Composition** — light surfaces; row meta columns; NEVER on dark shells (01 §7.7 contrast law — StatusPill there).
 
 ## 3 — StatusPill
 
@@ -131,14 +132,33 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 **Declaration** — `aria-hidden`; the live state announces via the owning component's label.
 **Composition** — Chip (dot/live), StatusPill (live), MiniTimeline halos, active steps; never a live dot on a non-live surface (affordance promises behavior — 04 §1.1 inverse).
 
-## 14 — Catalog-wide rules (07d)
+## 14 — ChartBars
+
+**Identity** — structure (data-encoding) · atoms-tier · the categorical bar chart — quantity-over-categories (01 §10.4's first encoding law).
+**Anatomy** [C — canon §4.7 exact] — one shared grid, one alignment rule (01 §3.5); per column: full-height track (`rounded-full`, neutral wash) + fill (`rounded-full`, family tone per bar, height = share of max) · value above the bar (meta, bold, tabular — lands per Q4/Q14) · category label below (micro) — the axis row is the ONLY legend. Active bar: brighter fill + glow (a state signal, 05 §1.2) — outlines, rings, and hover-translate are banned as active markers (canon).
+**Props** — data: `bars: { id, label, value, tone? }[]` (tones resolved by the data layer's derivation — §16 rule), `activeId?` · callback: `onBarTap?` — same-record law: every entry point lands on the same record state (01 §10.4) · config: `mode`, `regionHeight?` (fixed px, default 96 — the region never resizes per data [D]).
+**State map** — static; tones arrive per bar via data; active via config.
+**Declaration** — Q-rows: Q1 (when tappable), Q4, Q14 · a11y: group `role="img"` + `aria-label` summarizing the series; tappable bars announce "label, value" · keyboard: bars tabbable when tappable · gestures: tap.
+**Composition** — fills grow origin-bottom 0→value, `fill` duration, staggered (05 §4.1 — accumulation expressed); bars comparing identical values are decoration → deleted; a chart never restates the list it accompanies (one fact, one place); composed by analytics and weekly-summary surfaces (07f).
+
+## 15 — Skeleton
+
+**Identity** — structure · atoms · the loading data-state presentation — 02 §1.3's loading law made concrete.
+**Anatomy** [D] — blocks occupying the REAL anatomy of the content they stand in: same shape, radius, dimensions. Variants: `line` (h-3/h-4, width fraction) · `tile` (h-8/h-10, rounded-xl) · `row` (tile + two lines — the Row anatomy) · `card` (padded block set). Wash: `bg-ink/[0.06]` light · `bg-white/[0.06]` dark — neutral ONLY: loading is a data state, not a meaning; never tone-tinted.
+**Motion** [D — seals 05 §8's open item] — opacity breathe 1 → 0.55 → 1, 1.2s easeInOut, infinite; reduced-motion renders the static wash (05 §5 collapse).
+**Props** — config: `variant`, `width?` (line), `count?` (row stacks) · data: none · slots: none · NO tone prop (the neutral law above).
+**State map** — static; the breathe is ambient and owned here.
+**Declaration** — a11y: container `aria-busy` with "Loading" announced once; skeleton blocks `aria-hidden` · non-interactive.
+**Composition** — never a spinner replacing a layout, never a full-screen block (02 §1.3); the swap to real content runs the entrance motion (05 §4.1) — the swap IS the loading→content transition, no extra flourish.
+
+## 16 — Catalog-wide rules (07d)
 
 - **[M]** Displays encode data or are deleted — no decorative dot stacks, avatar piles, node rows, legends (01 §10.4 at component level).
 - **[M]** All numerals tabular (01 §10.1); all formatted values arrive formatted (06 §1) — a display component formats nothing.
-- **[M]** Tone always arrives via config from the owner's one-map; a display never derives its own tone from data — derivation belongs to the data layer (vitalIntent) [M — the mined precedent as the boundary].
+- **[M]** Tone arrives resolved — from the owner's map via config, or from a data-layer derivation riding the data itself (the `vitalIntent` pattern, §5) — a display never derives tone at render [M — the mined precedent as the boundary].
 - **[M]** Displays never fetch, never parse, never decide — they state.
 
-## 15 — Open items (07d)
+## 17 — Open items (07d)
 
 | Item | Status | Owner |
 |---|---|---|
@@ -146,3 +166,5 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 | QuotePanel serif stack (exact family) | OPEN | 01 typography follow-up |
 | Meter tick cadence (countdown variant) | OPEN — host-owned | 07e |
 | Ring size variants beyond ≤84px | OPEN | 09 admission |
+| ChartBars region height (96px default) | SEALED [D] — vetoable | user |
+| Skeleton breathe cycle (1.2s — sealed at §15) | SEALED [D] — vetoable | user |

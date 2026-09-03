@@ -55,7 +55,7 @@ Every component's props fall into five closed categories [D — the contract 07 
 
 4.3 **[M]** Data axis arrives as data props; where a component renders across data states, it declares a `dataState` marker prop typed to 02 §1.3 (`'empty' | 'loading' | 'partial' | 'stale' | 'conflict' | 'missing'`) — the component renders each distinctly (02 §1.3 laws); it never guesses from `undefined`.
 
-4.4 **[M]** Notifications report outcomes; they never replace visible state change (Q-row Q8's arc is the state change). An `onNotify`-style callback may exist for ambient reporting — a component whose ONLY effect is a notify is a dead control (04 §1.4).
+4.4 **[M]** Notifications report outcomes; they never replace visible state change (Q-row Q8's arc is the state change). An `onNotify`-style callback may exist for ambient reporting (delivered via the ToastHost context, 07a §11) — a component whose ONLY effect is a notify is a dead control (04 §1.4).
 
 ## 5 — Lists & streams
 

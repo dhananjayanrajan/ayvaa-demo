@@ -103,7 +103,7 @@ Stages 2–6 are declared as one variant chain on the component's map — not fi
 ### 4.6 Effects
 
 - **[C]** Shell ambiance (glow orbs, hairline, deep shadow) is STATIC structure that recolors with state via transition-colors — orbs never animate position or opacity on their own.
-- **[D]** Loading skeletons (02 §1.3): subtle shimmer or opacity breathe at `base` rhythm — skeletons occupy the real anatomy (never a spinner replacing a layout). Shimmer value: OPEN (§8).
+- **[D]** Loading skeletons (02 §1.3): opacity breathe per the Skeleton entry (07d §15) — skeletons occupy the real anatomy (never a spinner replacing a layout).
 - **[C]** Press feedback: whileTap scale 0.985 on all interactive rows/blocks [M — five drift scales in census collapse to this one]. Hover: tint step only — hover-translate lifts are banned as affordance on data surfaces (01 §6.1).
 
 ---
@@ -140,7 +140,7 @@ No static transitions · motion carries state meaning · finger owns drag · con
 |---|---|---|
 | `pop` spring exact pairing (400/16 vs 400/22) | OPEN — miner rerun owed [M gap] | build phase, first odometer entry |
 | `dial` spring constants | OPEN — DialInput 07 entry | build phase |
-| Shimmer implementation + duration | OPEN | 07 skeleton entry |
+| Skeleton breathe — sealed at 07d §15 (1→0.55→1, 1.2s) | SEALED [D] — vetoable | user |
 | Tab per-tone springs: keep three vs collapse one | SEALED [C] keep-three — vetoable | user |
 | Color-flip 300/500 split | SEALED [D] — vetoable | user |
 | Odometer implementation approach (per-digit roll vs count-up) | OPEN | 07 numeric entries |

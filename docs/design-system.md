@@ -1,6 +1,6 @@
 # AYVAA DESIGN SYSTEM — MASTER DOCUMENT
 
-**Version:** 2.1 — R13 amended (evidence ledger retired). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
+**Version:** 2.2 — catalog completed and synced (07 split recorded; ChartBars, Skeleton, ToastHost admitted; all references closed). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
 **Authority:** User intent is supreme. Where this document conflicts with any prior artifact (README, framework-plan v2, migration ledgers, REDESIGN.md, ANTI-DESIGN.md, progress logs), **this document wins**. Amendment only via §6.
 **Audience:** A fresh session with no prior context. This suite plus the repository are the complete world.
 **Location:** `docs/design-system.md` (this master). Detail documents land one at a time per §4.
@@ -326,17 +326,22 @@ User ruling: "multiple documents, extremely clear ones with details separated fo
 | Document | Owns completely | Status |
 |---|---|---|
 | `design-system.md` (master) | Mission, expectations, failure ledger, rulings, invariants, semantic foundation, precedence | this rewrite |
-| `01-design-language.md` | Layout, grid, alignment, spacing rhythm, radius, surfaces & elevation, color realization (the values behind §3.3), typography, iconography | next |
-| `02-states-and-semantics.md` | Full derivation matrix, intensity ladder values, the three axes in full, per-entity UI treatment, open items | pending |
-| `03-content.md` | Voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks | pending |
-| `04-interaction.md` | Triggers, gestures, keyboard, the a11y standard, QoL catalog, gating | pending |
-| `05-motion.md` | Durations, springs per origin, entrance/exit doctrine, choreography, effects | pending |
-| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes | pending |
-| `07-components.md` | The catalog: per pattern — anatomy, props contract, states, variants, QoL, a11y, motion | pending |
-| `08-composition.md` | Screen assembly, page-level rules, forbidden content | pending |
-| `09-construction.md` | The procedure: any imagined component → built accurately from the suite; pattern admission | pending |
+| `01-design-language.md` | Layout, grid, alignment, spacing rhythm, radius, surfaces & elevation, color realization (the values behind §3.3), typography, iconography | written — proposed |
+| `02-states-and-semantics.md` | Full derivation matrix, intensity ladder values, the three axes in full, per-entity UI treatment, open items | written — proposed (R16) |
+| `03-content.md` | Voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks | written — proposed (R17) |
+| `04-interaction.md` | Triggers, gestures, keyboard, the a11y standard, QoL catalog, gating | written — proposed (R18) |
+| `05-motion.md` | Durations, springs per origin, entrance/exit doctrine, choreography, effects | written — proposed (R19) |
+| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes | written — proposed (R20) |
+| `07a-components-shells.md` | Catalog 1/6: shells & chrome — frame, screen, bars, splash, sections, panels, SheetShell, PageHero, HeroCells, ToastHost | written — proposed (R21) |
+| `07b-components-lists.md` | Catalog 2/6: rows, lists & disclosure — Row, ExpandRow, OptionRow, StepList, rails, EmptyState, StreamList | written — proposed (R22) |
+| `07c-components-controls.md` | Catalog 3/6: controls & inputs — Field, OTP, Switch, Checkbox, Tabs, LifecycleButton, DialInput, pickers | written — proposed (R23) |
+| `07d-components-displays.md` | Catalog 4/6: data displays — chips, facts, strips, meters, rings, tiles, ChartBars, Skeleton | written — proposed (R24) |
+| `07e-components-care-domains.md` | Catalog 5/6: care-delivery compositions — matching, booking, visits, meds, consent, records, billing | written — proposed (R25) |
+| `07f-components-platform-domains.md` | Catalog 6/6: platform & shared — offers, sessions, approvals, incidents, auth, admin, system | written — proposed (R26) |
+| `08-composition.md` | Screen assembly, page-level rules, forbidden content | written — proposed (R27) |
+| `09-construction.md` | The procedure: any imagined component → built accurately from the suite; pattern admission | written — proposed (R28) |
 
-A document that outgrows readability splits during writing (likely 01 into layout/type/color; 07 per component family) — recorded at split time.
+A document that outgrows readability splits during writing — recorded at split time. Recorded split: `07` → `07a`–`07f` (catalog scale); `01` held whole.
 
 ### 4.3 Precedence
 
@@ -402,3 +407,4 @@ The superseded v1.0 protocol (V1–V7, harness mechanics, seeded-defect calibrat
 - **F9 + I0**: deliverable-creep failure added with its standing rule — from the deviation audit.
 - **2.0 rewrite**: master restructured as suite index; invariants rewritten as pattern disciplines (I0–I12); expectation map lightened; verification protocol replaced by §5; suite architecture §4 added.
 - **2.1**: R13 amended — evidence ledger retired, `docs/verify-log.md` deleted; superseded-era docs and dead tooling purged; canon seed expiry stated in I8 (user ruling during suite writing).
+- **2.2**: catalog completion — `07` split to `07a`–`07f` recorded; index statuses synced; ChartBars + Skeleton (07d) and ToastHost (07a) admitted; dangling references closed (05 shimmer → 07d §15, 02 loading → 07d §15, 07f analytics → 07d, 06 notify → 07a §11); tone-arrival rule widened to cover data-layer derivation; part numbering corrected; register debris removed. Pre-ratification completion — no ruling changed.
