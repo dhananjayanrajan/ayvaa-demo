@@ -1,31 +1,22 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  ShieldAlert,
-} from 'lucide-react'
+import { CheckCircle2, ShieldAlert } from 'lucide-react'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import {
-  Chip,
-  Section,
-  rise,
-  stagger,
-} from '@/components/phone/kit'
-import { incidents } from '@/data/seed'
+import { Chip, Section, rise, stagger } from '@/components/phone/kit'
+import { a02Incident } from '@/data/admin/a02Data'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { IncidentHeroCard } from '@/components/incident/IncidentSet'
-import { IncidentSummaryCard } from '@/components/incident/IncidentSet'
-import { PhotoEvidenceCard } from '@/components/incident/IncidentSet'
-import { LinkedRecordsCard } from '@/components/incident/IncidentSet'
-import { DecisionNoteCard } from '@/components/incident/IncidentSet'
-import { PhotoViewSheet } from '@/components/sheets/SheetsSet'
-import { EscalateSheet } from '@/components/sheets/SheetsSet'
-import { CloseSheet } from '@/components/sheets/SheetsSet'
-import { StaticButton } from '@/components/phone/LifecycleButton'
+import { IncidentHeroCard } from '@/components/admin/incident/IncidentHeroCard'
+import { IncidentSummaryCard } from '@/components/admin/incident/IncidentSummaryCard'
+import { PhotoEvidenceCard } from '@/components/admin/incident/PhotoEvidenceCard'
+import { LinkedRecordsCard } from '@/components/admin/incident/LinkedRecordsCard'
+import { DecisionNoteCard } from '@/components/admin/incident/DecisionNoteCard'
+import { EscalateSheet } from '@/components/admin/sheets/EscalateSheet'
+import { CloseSheet } from '@/components/admin/sheets/CloseSheet'
 import { BottomSheet } from '@/components/phone/SheetShell'
+import { IncidentActions } from '@/components/admin/actions/IncidentActions'
+import { PhotoOverlay } from '@/components/admin/overlays/PhotoOverlay'
 
 type Sheet = 'none' | 'photo' | 'escalate' | 'close'
 
@@ -33,7 +24,7 @@ export function A02() {
   const { notify } = useDemo()
   const { navigate } = useRouter()
   const [sheet, setSheet] = useState<Sheet>('none')
-  const inc = incidents[0]
+  const inc = a02Incident
 
   return (
     <Screen>
@@ -72,31 +63,11 @@ export function A02() {
       </BodyArea>
 
       <FootBar>
-        <div className="flex gap-2.5">
-          <StaticButton tone="danger" icon={ArrowUpRight} onClick={() => setSheet('escalate')}>
-            Escalate higher
-          </StaticButton>
-          <StaticButton tone="success" icon={CheckCircle2} onClick={() => setSheet('close')}>
-            Close incident
-          </StaticButton>
-        </div>
+        <IncidentActions onEscalate={() => setSheet('escalate')} onClose={() => setSheet('close')} />
       </FootBar>
 
       <AnimatePresence>
-        {sheet === 'photo' && (
-          <motion.div
-            key="photo"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex flex-col bg-[rgba(10,18,15,0.94)] p-5 pb-7 backdrop-blur-sm"
-          >
-            <PhotoViewSheet
-              onClose={() => setSheet('none')}
-              notify={notify}
-            />
-          </motion.div>
-        )}
+        <PhotoOverlay open={sheet === 'photo'} onClose={() => setSheet('none')} notify={notify} />
       </AnimatePresence>
 
       <BottomSheet

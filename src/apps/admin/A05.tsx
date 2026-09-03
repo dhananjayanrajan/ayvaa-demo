@@ -1,27 +1,19 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { Download, Lock, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
 import { Card, Chip, Section, rise, stagger } from '@/components/phone/kit'
-import { auditEntries } from '@/data/seed'
+import { auditEntries, PAGE_SIZE } from '@/data/admin/a05Data'
 import { useDemo } from '@/lib/store'
-import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
 import { Pager } from '@/components/phone/Pager'
-import { LedgerChainHero } from '@/components/audit/AuditSet'
-import { AuditEntryList } from '@/components/audit/AuditSet'
-import { CustomRangePicker } from '@/components/audit/AuditSet'
-import { InfoListCard } from '@/components/ui/UiSet'
-import { ComplianceToolsList } from '@/components/audit/AuditSet'
-
-const ranges = [
-  { id: 'today', label: 'Today' },
-  { id: 'week', label: 'This week' },
-  { id: 'custom', label: 'Custom' },
-]
-
-const PAGE_SIZE = 4
+import { LedgerChainHero } from '@/components/admin/audit/LedgerChainHero'
+import { AuditEntryList } from '@/components/admin/audit/AuditEntryList'
+import { CustomRangePicker } from '@/components/admin/audit/CustomRangePicker'
+import { ComplianceToolsList } from '@/components/admin/audit/ComplianceToolsList'
+import { LedgerRangeFilter } from '@/components/admin/filters/LedgerRangeFilter'
+import { LedgerExportAction } from '@/components/admin/actions/LedgerExportAction'
+import { AppendOnlyCard } from '@/components/admin/assurance/AppendOnlyCard'
 
 export function A05() {
   const { notify } = useDemo()
@@ -50,15 +42,7 @@ export function A05() {
             </motion.div>
 
             <motion.div variants={rise}>
-              <SegmentedTabs
-                tabs={ranges}
-                value={range}
-                onChange={(r) => {
-                  setRange(r)
-                  setPage(1)
-                }}
-                layoutId="a05-range"
-              />
+              <LedgerRangeFilter value={range} onChange={setRange} onResetPage={() => setPage(1)} />
             </motion.div>
 
             {range !== 'custom' ? (
@@ -80,16 +64,7 @@ export function A05() {
             )}
 
             <motion.div variants={rise}>
-              <InfoListCard
-                icon={ShieldCheck}
-                title="Append-only by design"
-                subtitle="Writes are forever — edits are impossible."
-                items={[
-                  { icon: Lock, text: 'No edits, no deletes — for anyone' },
-                  { icon: ShieldCheck, text: 'Sealed and timestamped on write' },
-                  { icon: Download, text: 'Full export, anytime' },
-                ]}
-              />
+              <AppendOnlyCard />
             </motion.div>
 
             <motion.div variants={rise}>
@@ -99,15 +74,7 @@ export function A05() {
             <ComplianceToolsList />
 
             <motion.div variants={rise}>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.97 }}
-                onClick={() => notify({ title: 'Export queued', body: "Today's log will be emailed to you", kind: 'info' })}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3.5 text-[13px] font-bold text-white shadow-[0_14px_28px_-14px_rgba(16,185,129,0.75)]"
-              >
-                <Download className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-                Export today's log
-              </motion.button>
+              <LedgerExportAction onClick={() => notify({ title: 'Export queued', body: "Today's log will be emailed to you", kind: 'info' })} />
             </motion.div>
 
             <motion.div variants={rise}>

@@ -1,23 +1,17 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { Gavel, Lock, ScrollText } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import {
-  Chip,
-  Hero,
-  Kicker,
-  rise,
-  stagger,
-} from '@/components/phone/kit'
-import { approvals } from '@/data/seed'
+import { rise, stagger } from '@/components/phone/kit'
+import { approvals } from '@/data/admin/a03Data'
 import type { Approval } from '@/data/types'
 import { useDemo } from '@/lib/store'
-import { SegmentedTabs } from '@/components/phone/SegmentedTabs'
-import { ApprovalCard } from '@/components/approvals/ApprovalsSet'
-import { InfoListCard } from '@/components/ui/UiSet'
-import { EmptyFilterState } from '@/components/approvals/ApprovalsSet'
+import { ApprovalCard } from '@/components/admin/approvals/ApprovalCard'
+import { EmptyFilterState } from '@/components/admin/approvals/EmptyFilterState'
+import { ApprovalsHero } from '@/components/admin/heroes/ApprovalsHero'
+import { ApprovalsFilter } from '@/components/admin/filters/ApprovalsFilter'
+import { AccountabilityCard } from '@/components/admin/assurance/AccountabilityCard'
 
 export function A03() {
   const { notify } = useDemo()
@@ -55,33 +49,11 @@ export function A03() {
           <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <Hero>
-                <Kicker>Approvals · evidence-backed</Kicker>
-                <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-                  Humans decide,{' '}
-                  <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">evidence backs it</span>
-                </h2>
-                <p className="mt-1 text-[12px] font-medium leading-relaxed text-emerald-100/55">
-                  Licence, identity and history are verified before you ever see the file.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  <Chip intent="neutral" light>{pendingCount} awaiting</Chip>
-                  <Chip intent="success" light>Auto checks live</Chip>
-                </div>
-              </Hero>
+              <ApprovalsHero pendingCount={pendingCount} />
             </motion.div>
 
             <motion.div variants={rise}>
-              <SegmentedTabs
-                tabs={[
-                  { id: 'awaiting', label: 'Awaiting' },
-                  { id: 'approved', label: 'Approved' },
-                  { id: 'rejected', label: 'Rejected' },
-                ]}
-                value={filter}
-                onChange={setFilter}
-                layoutId="filter-bar"
-              />
+              <ApprovalsFilter value={filter} onChange={setFilter} />
             </motion.div>
 
             {visible.map((a) => (
@@ -96,16 +68,7 @@ export function A03() {
             {visible.length === 0 && <EmptyFilterState filter={filter} />}
 
             <motion.div variants={rise}>
-              <InfoListCard
-                icon={Gavel}
-                title="Decisions on the record"
-                subtitle="Approvals and rejections both carry full accountability."
-                items={[
-                  { icon: Gavel, text: 'Who decided, when, on what evidence' },
-                  { icon: ScrollText, text: 'Rejections require a written reason' },
-                  { icon: Lock, text: 'Instantly written to the audit log' },
-                ]}
-              />
+              <AccountabilityCard />
             </motion.div>
 
             <motion.div variants={rise}>
