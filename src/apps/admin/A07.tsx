@@ -1,8 +1,8 @@
 import { motion } from 'motion/react'
-import { Download } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
+import { PolicyExportAction } from '@/components/admin/actions/PolicyExportAction'
 import {
   Chip,
   Section,
@@ -56,15 +56,7 @@ export function A07() {
         </div>
       </BodyArea>
       <FootBar>
-        <motion.button
-          type="button"
-          whileTap={{ scale: 0.97 }}
-          onClick={() => notify({ title: 'Policy export queued', body: 'Full retention policy will be emailed to you', kind: 'info' })}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-bold text-white shadow-[0_18px_36px_-18px_rgba(5,150,105,0.7)]"
-        >
-          <Download className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
-          Export policy
-        </motion.button>
+        <PolicyExportAction onExport={() => notify({ title: 'Policy export queued', body: 'Full retention policy will be emailed to you', kind: 'info' })} />
       </FootBar>
     </Screen>
   )

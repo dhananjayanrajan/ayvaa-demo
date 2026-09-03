@@ -4,17 +4,10 @@ import { Ban, CalendarClock, ShieldCheck } from 'lucide-react'
 import AgentAvatar from '@/components/smoothui/agent-avatar'
 import { AppBar } from '@/components/phone/AppBar'
 import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import {
-  Chip,
-  Hero,
-  Kicker,
-  Section,
-  Stat,
-  rise,
-  stagger,
-} from '@/components/phone/kit'
+import { Chip, Section, rise, stagger } from '@/components/phone/kit'
 import { consentTracking } from '@/data/seed'
 import { useDemo } from '@/lib/store'
+import { ConsentHero } from '@/components/admin/heroes/ConsentHero'
 import { DueReviewCard } from '@/components/consent/ConsentSet'
 import { WithdrawalCard } from '@/components/consent/ConsentSet'
 import { InfoListCard } from '@/components/ui/UiSet'
@@ -36,27 +29,7 @@ export function A06() {
           <div aria-hidden className="pointer-events-none absolute inset-x-6 -top-12 h-52 rounded-full bg-emerald-400/[0.16] blur-3xl" />
           <motion.div variants={stagger} initial="hidden" animate="show" className="relative flex flex-col gap-4 pt-1">
             <motion.div variants={rise}>
-              <Hero>
-                <Kicker>Consent ledger · 90-day cycle</Kicker>
-                <h2 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
-                  Consent,{' '}
-                  <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">never stale</span>
-                </h2>
-                <p className="mt-1 text-[12px] font-medium leading-relaxed text-emerald-100/55">
-                  Every consent renews on a clock the system enforces.
-                </p>
-
-                <div className="mt-5 grid grid-cols-3 divide-x divide-white/[0.08]">
-                  <Stat label="Active" value={consentTracking.active} dot="bg-emerald-300" />
-                  <Stat label="Due" value={consentTracking.due} dot="bg-amber-300" />
-                  <Stat label="Withdrawn" value={consentTracking.withdrawn} dot="bg-rose-300/80" />
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  <Chip intent="neutral" light>Auto reminders on</Chip>
-                  <Chip intent="success" light>Ledger sealed</Chip>
-                </div>
-              </Hero>
+              <ConsentHero active={consentTracking.active} due={consentTracking.due} withdrawn={consentTracking.withdrawn} />
             </motion.div>
 
             <motion.div variants={rise}>
