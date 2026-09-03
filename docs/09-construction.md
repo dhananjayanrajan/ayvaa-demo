@@ -24,7 +24,7 @@ Every construction question has exactly one owning document. Ambiguity resolves 
 | What does it look like — spacing, type, color values? | 01 (closed scales) |
 | How does it take input — gestures, keyboard, a11y? | 04 (+ 07 entry of each primitive) |
 | How does it move? | 05 (catalog + doctrine) |
-| Where does data come from, what derives where? | 06 (boundary, taxonomy) |
+| Where does data come from, what derives where? | 06 (boundary, taxonomy, act resolution) |
 | What is the whole state→presentation map? | 02 §4.2 format, per entry in 07 |
 | May this be a NEW component at all? | §4 gate here |
 | Which layer does it live in? | master I1 |
@@ -39,13 +39,13 @@ Seven phases, in order. Each has an exit criterion; skipping a phase is how drif
 
 **Phase C — Anatomy.** Assemble from primitives (07a–07d) per the map's compositions. Place the pattern in its layer (master I1: atoms/universals/composites/domain). Apply 01's closed scales exactly — nothing invented. Exit: anatomy expressible entirely in catalog references + closed values.
 
-**Phase D — Behavior.** Model the lifecycle completely (master I2): states, events, timeout paths, return paths (undo/cancel/handback — no dead ends); clocks owned once (07e §3.4); interaction via 04 (Q-rows, gestures, keyboard, a11y, gating mechanics). Exit: every 04 §2 trigger has a response; every state has a return; no screen will need to own behavior (08 §7.2).
+**Phase D — Behavior.** Model the lifecycle completely (master I2): states, events, timeout paths, return paths (undo/cancel/handback — no dead ends); clocks owned once (07e §3.4); resolution owned by the flow's data (06 §7); interaction via 04 (Q-rows, gestures, keyboard, a11y, gating mechanics). Exit: every 04 §2 trigger has a response; every state has a return; no screen will need to own behavior (08 §7.2).
 
-**Phase E — Data.** Define the props contract in 06 §4's five categories; every derivation at the data layer (06 §3.1 — functions of state); parsing once; `dataState` markers where data varies; formatted values arrive formatted. Exit: zero parsing/derivation/formatting left at render.
+**Phase E — Data.** Define the props contract in 06 §4's five categories; every derivation at the data layer (06 §3.1 — functions of state, returning classification never tone); parsing once; `dataState` markers where data varies; formatted values arrive formatted; failable acts declare their resolution contract (06 §7). Exit: zero parsing/derivation/formatting left at render, and no timer-owned resolution anywhere.
 
-**Phase F — Motion.** Assign per-state motion from the 05 catalogs (durations, springs by role); the map drives it (master I5); choreograph concurrent moments as one chain (05 §4.3); reduced-motion collapse declared. Exit: no invented values, no CSS-layout motion, no competing loops.
+**Phase F — Motion.** Assign per-state motion from the 05 catalogs (durations, springs by role); the map drives it (master I5); choreograph concurrent moments as one chain (05 §4.3 — including the failed branch); reduced-motion collapse declared. Exit: no invented values, no CSS-layout motion, no competing loops.
 
-**Phase G — Verify.** Master §5 in rising order: tsc · grep the mechanical rules (08 §9 register for screens; 06 §7 for components) · captures at every state (the map is the shot list) · walkthrough — interactives face the DialInput bar (07c §9); screens face the reconstruction test (08 §1.2) and the live law (08 §7). Exit: the user has SEEN it (master I12 — nothing is done until then).
+**Phase G — Verify.** Master §5 in rising order: tsc · grep the mechanical rules (08 §9 register for screens; 06 §8 for components) · captures at every state (the map is the shot list) · walkthrough — interactives face the DialInput bar (07c §9); screens face the reconstruction test (08 §1.2) and the live law (08 §7). Exit: the user has SEEN it (master I12 — nothing is done until then).
 
 ## 4 — The admission gate
 
@@ -59,6 +59,8 @@ A new component exists only if ALL hold [M — master I7 + 07e §1]:
 6. **User approval** — the gate's final act is always yours.
 
 **Denied ≠ dead:** a denial routes to assembly (worked example 1) or to a data-layer derivation — the need is still served, just at the right layer.
+
+**The slot fence [D]:** `children` is legitimate ONLY on a universal whose pattern IS containment — frame, screen body, sheet middle, panel surface, hero centerpiece. The test: the slot receives composed catalog content, never domain semantics — domain meaning enters as typed data on composites inside, never through the slot. A slot carrying an entity contract is a config-driven mega-component in disguise (master I7).
 
 **Admission output:** the decision record (§5) becomes the new 07 entry draft — documentation debt is paid at admission, never after.
 
@@ -86,14 +88,14 @@ The artifact the procedure produces — and by design it IS the 07a §0 entry fo
 
 Master 0.7's conditions, as the concrete remaining acts:
 
-- (a)/(b)/(c) — **met as of this document** (every dimension owned; rules concrete; values sealed-with-provenance or open-with-owner).
+- (a)/(b)/(c) — **met as of this document**: every dimension a component decision touches is owned (act resolution closed at 06 §7); every rule is concrete enough for two builders to reach the same output (the binding fork at 02 §3.3, the tone seam at 06 §2.4); every value is sealed with provenance or open with a named owner (the capture threshold is sealed-mechanism/open-value per R14).
 - (d) — proven by the walkthrough pass, not by claim.
 - (e) — **yours**: each detail document carries a proposed ruling number (01 open · 02→R16 · 03→R17 · 04→R18 · 05→R19 · 06→R20 · 07a→R21 · 07b→R22 · 07c→R23 · 07d→R24 · 07e→R25 · 07f→R26 · 08→R27 · this→R28). Walk, veto the flagged [D] calls, ratify each.
 - On the last ratification: master amendment log records suite completion + version bump; `redesign.md`/`anti-design.md` are deleted; the suite is the whole world (master §6.4).
 
 ## 9 — Rule index (MUST summary)
 
-Seven phases in order, each with its exit · semantics before pixels · assembly test decides component-hood · denied routes to the right layer · admission pays its documentation debt · the decision record is the 07 entry · open values seal with evidence only · walkthrough is the final authority for everything.
+Seven phases in order, each with its exit · semantics before pixels · assembly test decides component-hood · the slot fence bounds `children` · denied routes to the right layer · admission pays its documentation debt · the decision record is the 07 entry · open values seal with evidence only · walkthrough is the final authority for everything.
 
 ## 10 — Open items
 

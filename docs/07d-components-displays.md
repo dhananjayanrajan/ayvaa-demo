@@ -17,6 +17,7 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 | a point-in-time | **TimeChip** | "2:00 PM" |
 | a labeled value | **FactRow** / StatCell | "Amount · ₹2,400" |
 | a trend or progress | **Meter / Ring** | adherence 4 of 7 |
+| a trend over categories at a glance | **ChartBars** `spark` variant (§14) | weekly sessions sparkline |
 | a spoken artifact | **QuotePanel** | caregiver's verbatim note |
 | ambient guidance or aftermath | **NoteStrip** / **StatusStrip** | "what happens now" |
 | a series over categories | **ChartBars** | weekly sessions |
@@ -98,12 +99,12 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 
 ## 10 — Meter
 
-**Identity** — structure (data-encoding) · atoms · linear progress/fraction.
+**Identity** — structure (data-encoding) · atoms · linear progress/fraction — and the house COUNTDOWN presentation (ticking variant).
 **Anatomy** [C] — track + fill (`rounded-full` family); fill width = value; tint follows state hue; animates scaleX origin-left, `fill` duration (05 §4.1); ticking variant where time is the data (02 §4.4 — static bar where it should move is a defect, AP46).
 **Props** — data: `value`, `max`, `label?` · config: `tone`, `mode`, `animated?`, `ticking?` (countdown variant: fill shrinks with time, zero flips STATE) · slots: none.
 **State map** — static (the value IS the state); ticking variant owned by the host's clock.
 **Declaration** — a11y: `role="progressbar"`/`aria-valuenow`; countdown announces remaining.
-**Composition** — offer windows, refill levels, setup strips (04 §5.4), dose arcs; bars comparing identical values are deleted (01 §10.4).
+**Composition** — offer windows (07e §5 — countdown = Meter ticking), refill levels, setup strips (04 §5.4), dose arcs; bars comparing identical values are deleted (01 §10.4).
 
 ## 11 — Ring
 
@@ -128,24 +129,25 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 **Identity** — structure · atoms · the live signal.
 **Anatomy** [C] — `h-2 w-2 rounded-full`; live = pulse (opacity [1, 0.4, 1], 1.6s — 05 §4.5); settled = static.
 **Props** — config: `tone`, `mode`, `live` · data: none.
-**State map** — static vs pulsing; the pulse IS the statement — a static dot labeled "live" is a contradiction (Q12).
+**State map** — static vs pulsing; the pulse IS the statement — a static dot labeled "live" is a contradiction (Q12; reduced-motion excepted, 05 §5).
 **Declaration** — `aria-hidden`; the live state announces via the owning component's label.
 **Composition** — Chip (dot/live), StatusPill (live), MiniTimeline halos, active steps; never a live dot on a non-live surface (affordance promises behavior — 04 §1.1 inverse).
 
 ## 14 — ChartBars
 
-**Identity** — structure (data-encoding) · atoms-tier · the categorical bar chart — quantity-over-categories (01 §10.4's first encoding law).
+**Identity** — structure (data-encoding) · atoms-tier · the categorical bar chart — quantity-over-categories (01 §10.4's first encoding law) — with the spark variant for trend-at-a-glance.
 **Anatomy** [C — canon §4.7 exact] — one shared grid, one alignment rule (01 §3.5); per column: full-height track (`rounded-full`, neutral wash) + fill (`rounded-full`, family tone per bar, height = share of max) · value above the bar (meta, bold, tabular — lands per Q4/Q14) · category label below (micro) — the axis row is the ONLY legend. Active bar: brighter fill + glow (a state signal, 05 §1.2) — outlines, rings, and hover-translate are banned as active markers (canon).
-**Props** — data: `bars: { id, label, value, tone? }[]` (tones resolved by the data layer's derivation — §16 rule), `activeId?` · callback: `onBarTap?` — same-record law: every entry point lands on the same record state (01 §10.4) · config: `mode`, `regionHeight?` (fixed px, default 96 — the region never resizes per data [D]).
+**Props** — data: `bars: { id, label, value, tone? }[]` (tones resolved by the data layer's classification — §16 rule) · callback: `onBarTap?` — same-record law: every entry point lands on the same record state (01 §10.4) · config: `mode`, `variant?: 'bars' | 'spark'`, `regionHeight?` (fixed px, default 96 — the region never resizes per data [D]).
+**Spark variant** [D — the trend carrier]: same encoding, minimal chrome — NO axis row, no value labels, fixed 24–32px height, single tone (the surface's family), non-interactive; states a trend fact where a chart's footprint would crowd (hero bands, stat contexts, AnalyticsSurfaces trend rows). A spark never carries the primary reading — the number it trends is always stated beside it (01 §10.4).
 **State map** — static; tones arrive per bar via data; active via config.
-**Declaration** — Q-rows: Q1 (when tappable), Q4, Q14 · a11y: group `role="img"` + `aria-label` summarizing the series; tappable bars announce "label, value" · keyboard: bars tabbable when tappable · gestures: tap.
+**Declaration** — bars variant: Q1 (when tappable), Q4, Q14 · a11y: group `role="img"` + `aria-label` summarizing the series; tappable bars announce "label, value" · keyboard: bars tabbable when tappable · gestures: tap. Spark variant: `aria-hidden` decorative (the stated number beside it carries the data) · non-interactive.
 **Composition** — fills grow origin-bottom 0→value, `fill` duration, staggered (05 §4.1 — accumulation expressed); bars comparing identical values are decoration → deleted; a chart never restates the list it accompanies (one fact, one place); composed by analytics and weekly-summary surfaces (07f).
 
 ## 15 — Skeleton
 
 **Identity** — structure · atoms · the loading data-state presentation — 02 §1.3's loading law made concrete.
 **Anatomy** [D] — blocks occupying the REAL anatomy of the content they stand in: same shape, radius, dimensions. Variants: `line` (h-3/h-4, width fraction) · `tile` (h-8/h-10, rounded-xl) · `row` (tile + two lines — the Row anatomy) · `card` (padded block set). Wash: `bg-ink/[0.06]` light · `bg-white/[0.06]` dark — neutral ONLY: loading is a data state, not a meaning; never tone-tinted.
-**Motion** [D — seals 05 §8's open item] — opacity breathe 1 → 0.55 → 1, 1.2s easeInOut, infinite; reduced-motion renders the static wash (05 §5 collapse).
+**Motion** [D] — opacity breathe 1 → 0.55 → 1, 1.2s easeInOut, infinite; reduced-motion renders the static wash (05 §5 collapse).
 **Props** — config: `variant`, `width?` (line), `count?` (row stacks) · data: none · slots: none · NO tone prop (the neutral law above).
 **State map** — static; the breathe is ambient and owned here.
 **Declaration** — a11y: container `aria-busy` with "Loading" announced once; skeleton blocks `aria-hidden` · non-interactive.
@@ -155,7 +157,7 @@ A fact's weight decides WHICH primitive states it. One status statement per surf
 
 - **[M]** Displays encode data or are deleted — no decorative dot stacks, avatar piles, node rows, legends (01 §10.4 at component level).
 - **[M]** All numerals tabular (01 §10.1); all formatted values arrive formatted (06 §1) — a display component formats nothing.
-- **[M]** Tone arrives resolved — from the owner's map via config, or from a data-layer derivation riding the data itself (the `vitalIntent` pattern, §5) — a display never derives tone at render [M — the mined precedent as the boundary].
+- **[M]** Tone arrives resolved — from the owner's map via config, or from a data-layer CLASSIFICATION riding the data (the `vitalIntent` pattern, §5 — semantic levels the owner's map translates via 02; never tone tokens, 06 §2.4) — a display never derives tone at render [M — the mined precedent as the boundary].
 - **[M]** Displays never fetch, never parse, never decide — they state.
 
 ## 17 — Open items (07d)

@@ -1,7 +1,7 @@
 # 08 — COMPOSITION: SCREENS & PAGES
 
 **Owns completely:** what a screen is and may contain, screen-level state ownership, page architecture (bands), page-level laws, sheet & overlay mounting, navigation discipline, the screen-life law, the screen manifest, and the forbidden-content register.
-**Status:** v1.0 — proposed. Ratification seals as R27. Amends 07a §9 on one point (§2, flagged).
+**Status:** v1.0 — proposed. Ratification seals as R27.
 **Provenance:** [R] = ratified · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 **Strength:** **M** = MUST · **S** = SHOULD.
 
@@ -25,13 +25,14 @@ State lives at the lowest owner that can own it; lifted only for cross-component
 |---|---|---|
 | what is open (sheet, expansion, tab) | **screen** | `openSheet`, `openId`, `activeTab` |
 | interaction axis | components (NEVER props — 06 §4.1) | hover, focus, press |
-| component arcs (working→done timing) | composites | LifecycleButton, SheetShell done |
+| arc presentation (working→done→failed choreography) | composites | LifecycleButton, SheetShell done |
+| act resolution (did the act succeed?) | the flow — controlled `status` (06 §7) | payment lifecycle → PaymentSheet |
 | clocks (ticking values) | highest displaying composition (07e §3.4) | LiveVisit elapsed |
 | persisted record state | data layer, re-derived by parents | sealed, submitted, verified |
 | derivations (counts, filters, formats) | data layer (06 §3) | `applyVisitFilters`, `consentProgress` |
 | presentation maps (tone/composition per state) | **components** | PageHero phases, MatchCard cardTone |
 
-**Erratum — amends 07a §9 [D]:** PageHero's phase map is owned INTERNALLY by the component; the screen passes `phase: stateKey` + typed data. A screen holding presentation tables violates 1.1. (07a's "map as a prop" line is corrected by this section.)
+**PageHero's phase map** is internal to the component (07a §9): canonical phase specs are materialized from the 02 §5 treatments as data-layer constants; the screen passes `phase: stateKey` + typed data. A screen holding a presentation table violates 1.1.
 
 ## 3 — Page architecture
 
@@ -61,9 +62,9 @@ State lives at the lowest owner that can own it; lifted only for cross-component
 
 5.1 **[C]** Sheets are their own component files — screens NEVER contain sheet JSX [C §14.6].
 
-5.2 **[M — crash class]** A sheet mounts DIRECTLY under the screen-level `AnimatePresence` with a key — never inside an outer positioned `motion.div` (the wrapper becomes the containing block and collapses the sheet to zero height — AP66, 06 §7 register).
+5.2 **[M — crash class]** A sheet mounts DIRECTLY under the screen-level `AnimatePresence` with a key — never inside an outer positioned `motion.div` (the wrapper becomes the containing block and collapses the sheet to zero height — AP66, 06 §8 register).
 
-5.3 **[C]** Per-entry keys carry the parameter when entry should reset per param (`key={`log-${filter}`}`); `initial*` props land the right tab; inner per-mode state persists (Q10).
+5.3 **[C]** Per-entry keys carry the parameter when entry should reset per param (`key={`log-${filter}`}`); `initial*` props land the right tab; inner per-modality state persists (Q10).
 
 5.4 **[C]** The dim layer: tappable (closes), `fast` fade, mounted/unmounted WITH the sheet inside the same AnimatePresence — permanent overlays are banned (AP23). Close buttons DISMISS, never navigate.
 
@@ -83,7 +84,7 @@ State lives at the lowest owner that can own it; lifted only for cross-component
 
 7.1 **[M/R — A8]** Every screen demonstrates its lifecycle: user action → arc → fan-out. Consequences are STAGED THROUGH actions, never run on independent loops beside them (05 §1.4).
 
-7.2 **[M/D]** Screens own NOTHING behavioral — no timers, no streams, no arcs. A `setTimeout` in a screen file is a defect (07e §3.5: clocks live in compositions, cadences in StreamList, simulation data in data modules). **This is the wrapper pattern's ban at its source.**
+7.2 **[M/D]** Screens own NOTHING behavioral — no timers, no streams, no arcs, no resolution ownership. A `setTimeout` in a screen file is a defect (07e §3.5: clocks live in compositions, cadences in StreamList, simulation data in data modules, resolution in the flow's data — 06 §7). **This is the wrapper pattern's ban at its source.**
 
 7.3 **[C]** A frozen screen is a broken promise (AP63): enumerate what would change in reality and wire it. Enumerating is the manifest's job (§8); the life is the compositions' job (§2 ownership).
 
@@ -107,7 +108,7 @@ Comments are banned (I9), so the screen declaration is TYPED DATA — the R11 sp
 
 ## 9 — Forbidden content (screen register)
 
-**[M]** A screen file NEVER contains: component JSX definitions (inline components rendering UI) · presentation maps (components own them — §2 erratum) · hand-tuned motion props (05 is the components' law) · sheet JSX (§5.1) · legacy `@/components/` imports · parsing/derivation at render (06 §1) · magic literals (06 §1.2) · module-scope references to props (06 §7) · duplicate keys (06 §5) · timers or streams (§7.2) · permanent overlays (§5.4) · raw HTML · viewport assumptions (01 §1.1) · decoration without data meaning (01 §10.4) · role conditionals (§1.4) · unread manifest (§8).
+**[M]** A screen file NEVER contains: component JSX definitions (inline components rendering UI) · presentation maps (components own them — §2) · hand-tuned motion props (05 is the components' law) · sheet JSX (§5.1) · legacy `@/components/` imports · parsing/derivation at render (06 §1) · magic literals (06 §1.2) · module-scope references to props (06 §8) · duplicate keys (06 §5) · timers or streams (§7.2) · resolution logic (06 §7 — the flow owns it) · permanent overlays (§5.4) · raw HTML · viewport assumptions (01 §1.1) · decoration without data meaning (01 §10.4) · role conditionals (§1.4) · unread manifest (§8).
 
 ## 10 — Rule index (MUST summary)
 

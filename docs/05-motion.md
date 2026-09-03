@@ -34,9 +34,9 @@ Closed set [M/D — census: 0.32×2, 0.2, 0.25, 0.45]. Arbitrary durations are d
 | `entrance` | 0.32s | rise entrances, height reveals (easeInOut), staggered children |
 | `fill` | 0.45s | chart bars, continuity segments, meter fills (easeOut, origin-left) |
 
-**Color flips** [D — proposal]: the ONE permitted CSS transition is `transition-colors` — `duration-300` on light surfaces, `duration-500` on whole-shell flips (shell + orbs + hairline + tiles recolor together, 01 §6.2). `transition: all` banned everywhere (I9). Layout/transform motion MUST go through motion variants, never CSS.
+**Color flips** [D — sealed, vetoable]: the ONE permitted CSS transition is `transition-colors` — `duration-300` on light surfaces, `duration-500` on whole-shell flips (shell + orbs + hairline + tiles recolor together, 01 §6.2). `transition: all` banned everywhere (I9). Layout/transform motion MUST go through motion variants, never CSS.
 
-**Fixed intervals** [C/M]: stagger `0.05s` per child · live pulse cycle `1.6s` · completion auto-dismiss `850ms` after done · hold-to-confirm ring `600ms` (04 §3.4).
+**Fixed intervals** [C/M]: stagger `0.05s` per child · live pulse cycle `1.6s` · completion auto-dismiss `850ms` after done (any user input cancels the pending dismissal [D]) · hold-to-confirm ring `600ms` (04 §3.4).
 
 ---
 
@@ -55,6 +55,7 @@ Per role. [C] canon attested · [M] census attested (pairing inference flagged) 
 | `dial` | calibration-owned | DialInput detent snap — owned by its 07 entry [R8 spirit] |
 
 - **[M]** The tab family stays per-tone — three distinct springs is the canon fidelity ruling (per-tone restoration commit history); collapsing to one is a veto, not a drift fix.
+- **[D]** Tone→spring map (publishes the sealed keep-three): `positive` → tabA · `attention`/`risk` → tabB · `active`/`neutral` → tabC. A tab pill's spring follows its surface's dominant family (02 §3.5) — tone families carry different perceptual mass, and the snap is part of the surface's voice.
 - **[D]** Assignment rule: components pick the spring whose ROLE matches (weight of the moving surface), never a spring that "looks right" per screen. The catalog is the closed set.
 
 ---
@@ -88,6 +89,8 @@ Per role. [C] canon attested · [M] census attested (pairing inference flagged) 
 
 Stages 2–6 are declared as one variant chain on the component's map — not five separately-timed effects. Timers self-clean on unmount; navigation (if any) waits for done to land.
 
+**The failed branch runs the same chain** [M — R30's law at motion level]: resolution arrives as data (06 §7 — never a timer); `failed` flips tone AND composition to risk in the same pass (never color alone), the recovery surface (retry/refund per 02 §5.7) enters as part of the chain, and retry re-enters at working. No independent error loop beside the chain (§1.4).
+
 ### 4.4 Value motion
 
 - **[C]** Numeric changes land visibly: odometer/count-up for money and counters (Q4/Q14); `key`-remount fade/slide where odometer is overkill. A number that swaps silently is a missed animation.
@@ -96,7 +99,7 @@ Stages 2–6 are declared as one variant chain on the component's map — not fi
 
 ### 4.5 Live motion
 
-- **[C]** Live dots pulse: opacity [1, 0.4, 1], 1.6s, repeat Infinity — pulse IS the live signal; a static dot marked "live" is a contradiction.
+- **[C]** Live dots pulse: opacity [1, 0.4, 1], 1.6s, repeat Infinity — pulse IS the live signal; a static dot marked "live" is a contradiction (reduced-motion excepted: §5 — the dot remains, the pulse stops).
 - **[C]** The latest segment/entry in a sequence carries brightness + glow — glow here is a state signal (recency), permitted by 1.2.
 - **[M]** Ticking surfaces (elapsed timers, streaming ledgers) animate per-entry, staggered — never re-render the whole list's motion on each tick.
 
@@ -124,13 +127,13 @@ Declared per component in 07; the collapse behavior is the default, exceptions m
 
 ## 6 — Banned-motion register
 
-**[M/C/R]** Each banned pattern cites its law: `transition: all` (I9) · CSS transitions on transform/layout (§2) · unified springs across origins (§1.5) · hover-translate as data affordance (§4.6) · silent value swaps (§4.4) · independent animation loops beside staged consequences (§1.4, A8) · decoration motion with no state meaning (§1.2) · layout thrash in hot paths (§1.6) · hard-cut state changes (§1.1) · five drift tap-scales (§4.6 — one remains) · permanent ambient animation (§4.6).
+**[M/C/R]** Each banned pattern cites its law: `transition: all` (I9) · CSS transitions on transform/layout (§2) · unified springs across origins (§1.5) · hover-translate as data affordance (§4.6) · silent value swaps (§4.4) · independent animation loops beside staged consequences (§1.4, A8) · decoration motion with no state meaning (§1.2) · layout thrash in hot paths (§1.6) · hard-cut state changes (§1.1) · five drift tap-scales (§4.6 — one remains) · permanent ambient animation (§4.6) · timer-based resolution flips (06 §7 — resolution is data, the chain only presents it).
 
 ---
 
 ## 7 — Rule index (MUST summary)
 
-No static transitions · motion carries state meaning · finger owns drag · concurrent = one choreography · per-origin springs from the closed catalog · closed duration scale · transition-colors is the only CSS transition (300 light / 500 shell) · AnimatePresence everywhere · completion chain is one variant chain, timers self-clean · odometer on changed values · pulse on live, zero flips state · tap 0.985 everywhere · reduced-motion collapses to fades, function intact.
+No static transitions · motion carries state meaning · finger owns drag · concurrent = one choreography · per-origin springs from the closed catalog · closed duration scale · transition-colors is the only CSS transition (300 light / 500 shell) · AnimatePresence everywhere · completion chain is one variant chain, timers self-clean, failure runs the same chain to risk with resolution as data (06 §7) · odometer on changed values · pulse on live, zero flips state · tap 0.985 everywhere · reduced-motion collapses to fades, function intact.
 
 ---
 
@@ -141,6 +144,6 @@ No static transitions · motion carries state meaning · finger owns drag · con
 | `pop` spring exact pairing (400/16 vs 400/22) | OPEN — miner rerun owed [M gap] | build phase, first odometer entry |
 | `dial` spring constants | OPEN — DialInput 07 entry | build phase |
 | Skeleton breathe — sealed at 07d §15 (1→0.55→1, 1.2s) | SEALED [D] — vetoable | user |
-| Tab per-tone springs: keep three vs collapse one | SEALED [C] keep-three — vetoable | user |
+| Tab per-tone springs: keep three vs collapse one | SEALED [C] keep-three — vetoable; map published at §3 | user |
 | Color-flip 300/500 split | SEALED [D] — vetoable | user |
 | Odometer implementation approach (per-digit roll vs count-up) | OPEN | 07 numeric entries |

@@ -1,6 +1,6 @@
 # 04 — INTERACTION
 
-**Owns completely:** the trigger taxonomy, gesture specs, keyboard standard, the a11y standard, the QoL catalog (default-on behaviors with conditions), gating mechanics, hold-to-confirm, and per-pattern interaction requirements.
+**Owns completely:** the trigger taxonomy, gesture specs, keyboard standard, the a11y standard, the QoL catalog (default-on behaviors with conditions), gating mechanics, hold-to-confirm, and the per-pattern declaration standard (§7; instances live in the 07 entries).
 **Status:** v1.0 — proposed. [D] expansions vetoable; ratification seals as R18.
 **Provenance:** [R] = ratified foundation · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 **Strength:** **M** = MUST · **S** = SHOULD.
@@ -21,13 +21,14 @@
 
 Every input a component may receive, closed set [D — from your brainstorm list, corrected]:
 
-**User input:** tap/press · long-press/hold · double-tap (rare, opt-in only) · swipe (directional, paged) · drag (free, constrained, or detach) · scroll · keyboard · voice/screenreader activation (via a11y layer).
+**User input:** tap/press · hover (pointer surfaces — 02 §1.1's law) · long-press/hold · double-tap (rare, opt-in only) · swipe (directional, paged) · drag (free, constrained, or detach) · scroll · keyboard · voice/screenreader activation (via a11y layer).
 
 **Data input:** prop/state change · live stream entry · clock crossing a threshold · dependency signal from another component (via lifted state, per master I3).
 
 **System input:** focus (keyboard nav, screen reader) · reduced-motion preference (05 §7) · secure storage / biometric availability (rare, device-level).
 
 - **[M]** No silent rows: every implemented trigger appears in its component's interaction declaration (07 format); every trigger has a defined response. A trigger with no response is either deleted from the component or given one.
+- **[D]** Deferrals are recorded, not omissions: pinch (§3.5) and context-menu (long-press territory, §3.4) are owned deferrals — a future admission through 09 decides them.
 - **[M]** Touch targets: minimum 44px effective height on all interactive elements [D — platform standard]; inline text links sized to their line.
 
 ## 3 — Gestures
@@ -46,7 +47,7 @@ The primary trigger. **[C]** Tap feedback on all interactive rows: scale 0.985 (
 ### 3.4 Hold (long-press)
 **[D — decides D3]** Two uses, both opt-in per component:
 - **Progressive disclosure** (S): context actions on rows — only where a tap already opens the row (hold adds, never replaces).
-- **Hold-to-confirm** for binding-stakes ceremony: reserved for the highest-cost irreversible acts ONLY — withdrawal of consent, payment capture above a threshold. The hold (600ms) with a filling ring + haptic-on-availability, then the binding arc proceeds. The button itself states the consequence; the hold is the friction, not a second confirm dialog. Release early = spring back, nothing happens. **Not** applied to payment below threshold or any medium-weight verb (03 §2) — a plain button plus stated consequences suffices; over-ceremony trains users to stop reading.
+- **Hold-to-confirm** for binding-stakes ceremony: reserved for binding-DESTRUCTIVE acts ONLY (02 §3.3) — consent withdrawal, payment capture at/above the capture threshold. The threshold is an entity-module constant (06 §2.3; value open, §8). The hold (600ms) with a filling ring + haptic-on-availability, then the binding arc proceeds. The button itself states the consequence; the hold is the friction, not a second confirm dialog. Release early = spring back, nothing happens. Binding-COMMITTING acts (consent seal, visit seal) and medium-weight verbs never hold (03 §2) — a plain button plus stated consequences suffices; over-ceremony trains users to stop reading.
 - **[M]** Hold, like every trigger, declares itself: the affordance states "hold to withdraw" — never a hidden gesture.
 
 ### 3.5 Pinch
@@ -78,7 +79,7 @@ Default-on behaviors. Each row: the behavior, its trigger condition, and where i
 | Q8 | Completion choreography | every consequential action (02 §4.1 arc) | composites |
 | Q8b | Auto-dismiss confirmation with dim-unblur | sheets that complete an act | SheetShell |
 | Q9 | Cause-diagnosing empty states | every list | list primitives |
-| Q10 | Persisted per-mode state (reopen never resets) | every tabbed/sheet state owner | composites |
+| Q10 | Persisted per-modality state (reopen never resets) | every tabbed/sheet state owner | composites |
 | Q11 | Just-added state for streamed entries (tint + live chip until superseded) | every streamed list | list primitives |
 | Q12 | Live pulse on live dots | every live state | LiveDot |
 | Q13 | Haptics where meaningful (on hold-complete, on done of binding acts) | device supports; demo simulates | composites, opt-out |
@@ -86,6 +87,7 @@ Default-on behaviors. Each row: the behavior, its trigger condition, and where i
 
 - **[M]** Q-rows are inherited by composition, not re-wired per screen. A screen discovering it needs to hand-wire a Q-row means the component is at the wrong layer — fix the layer.
 - **[D]** Q13 haptics: demo-level = no-op; declared so the build phase implements, not invents.
+- **[D]** Q4/Q14 precedence: a changed value that is numeric-over-time (money, counts, timers) renders Q4 (odometer/count-up); every other changed display value (dates, labels, states) renders Q14 (key-remount). 05 §4.4 owns the mechanics.
 
 ## 5 — Gating mechanics
 
@@ -101,14 +103,14 @@ Default-on behaviors. Each row: the behavior, its trigger condition, and where i
 
 ## 6 — A11y standard
 
-- **[M]** Semantics before styling: buttons are buttons (`<button>`), rows are buttons with `role` where they act as one, toggles `aria-pressed`, tabs `role=tablist/tab` + `aria-selected`, radios `role=radiogroup/radio` + `aria-checked`, expansions `aria-expanded` + the visible rotating chevron [C].
+- **[M]** Semantics before styling: buttons are buttons (`<button>`), rows that act as buttons are `<button>`s or carry `role="button"`, toggles `aria-pressed`, tabs `role=tablist/tab` + `aria-selected`, radios `role=radiogroup/radio` + `aria-checked`, expansions `aria-expanded` + the visible rotating chevron [C].
 - **[M]** Every icon-only control carries `aria-label` naming its action; every icon-only status chip carries `aria-label` naming the state.
 - **[M]** Focus-visible ring on every interactive element; focus moves predictably (into sheets on open, back to trigger on close); focus is never trapped without Esc.
 - **[M]** Live regions: streamed entries and status flips announce (`aria-live=polite`); urgent escalations (person-safety) announce assertively [D].
 - **[M]** Disabled/working states set both `disabled`/`aria-disabled` and their visual mute together.
 - **[S]** Reduced-motion behavior is declared per component (05 §7); interaction still completes — only the motion simplifies.
 
-## 7 — Per-pattern requirements (preview of 07 format)
+## 7 — Per-pattern declaration standard (the 07 format)
 
 Every 07 entry declares: applicable Q-rows · gesture set · keyboard map · a11y roles · gating conditions. Example shape:
 
@@ -119,10 +121,11 @@ Every 07 entry declares: applicable Q-rows · gesture set · keyboard map · a11
 | Item | Status | Owner |
 |---|---|---|
 | Hold-to-confirm keyboard alternative (hold vs Enter-hold) | OPEN | 07 binding entries |
+| Capture threshold (hold-to-confirm gate) | OPEN — mechanism sealed (entity-module constant, 06 §2.3) | build phase |
 | Haptic map per act | OPEN | build phase |
 | Double-tap uses (if any exist) | OPEN — likely none | 07 audit |
 | Touch-target audit for inline chips as controls | OPEN | 07 |
 
 ## 9 — Rule index (MUST summary)
 
-Everything visible responds · instant feedback · QoL default-on and inherited · no dead controls · no silent triggers · 44px targets · swipe pre-staged + direction-locked · drag follows finger with spring-back · hold declares itself · full keyboard equivalence · a11y roles before styling · gating states reason in itself, derives live, never resets · blocking locks and states why · Q-rows never hand-wired by screens.
+Everything visible responds · hover registers on pointer surfaces · instant feedback · QoL default-on and inherited · no dead controls · no silent triggers · deferrals recorded, not silent · 44px targets · swipe pre-staged + direction-locked · drag follows finger with spring-back · hold declares itself, destructive acts only · full keyboard equivalence · a11y roles before styling · gating states reason in itself, derives live, never resets · blocking locks and states why · numeric-over-time changes odometer (Q4), other changed values key-remount (Q14) · Q-rows never hand-wired by screens.

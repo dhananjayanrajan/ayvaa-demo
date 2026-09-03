@@ -11,10 +11,10 @@
 
 Every catalog entry in 07a–07f uses this skeleton [D — the standard]:
 
-1. **Identity** — name · layer (per master I1) · classification (structure / behavior-bearing per I4) · one-line purpose.
+1. **Identity** — name · layer (per master I1) · classification (structure / controlled / behavior-bearing per I4) · one-line purpose. *Controlled* = takes input with no lifecycle beyond its own interaction — the value lives with its owner (06 §4.2), so a controlled input may sit at atoms tier (Switch, Checkbox, StarPicker); behavior ownership per I1 means owning state of record, which controlled inputs do not. *Behavior-bearing* = owns an arc or flow above the I4 threshold.
 2. **Anatomy** — the structure, in 01's language.
 3. **Props contract** — per 06 §4 categories: data / state / callback / config / slots. Variant unions declared; suffix forks banned.
-4. **State map** — the one-map table (02 §4.2): state → tone · intensity · mode · composition · copy intent. Structure-only entries state "static" and why.
+4. **State map** — the one-map table (02 §4.2): state → tone · intensity · mode · composition · copy intent. A column may be elided only where constant across ALL states of the pattern (`const: X`) or genuinely inapplicable (`—`); where a pattern class's presentation channels carry other names (a button's fill/copy/exit), the map keeps its columns under those channel names — the requirement is that ONE table derives every state's tone, composition, and copy, not the column labels. Structure-only entries state "static" and why.
 5. **Declaration block** — Q-rows (04 §4) · gestures · keyboard · a11y · gating. "—" where genuinely inapplicable.
 6. **Composition rules** — what may compose it, what it composes, what it must never do.
 7. **Provenance & open items.**
@@ -31,7 +31,7 @@ Layer discipline applies: atoms live under these shells (they consume nothing up
 **State map** — static (a frame owns no state; boot/page splash lives in Splash, not here).
 **Declaration** — Q-rows: — · gestures: — · keyboard: — · a11y: `role="application"` container, decorative.
 **Composition** — wraps every demo screen; never rendered by real-product surfaces; never contains more than one Screen.
-**Open** — exact frame dimensions [D: 390×844-class]; whether page-transition splash mounts here or in Screen.
+**Open** — exact frame dimensions [D: 390×844-class]. (Splash mounting is Screen's law, §2.)
 
 ## 2 — Screen (+ BodyArea, FootBar)
 
@@ -57,7 +57,7 @@ Layer discipline applies: atoms live under these shells (they consume nothing up
 **Anatomy** [C] — 3–5 primary destinations, icon + label; active state = SOLID deep family fill (`bg-{hue}-600`), never light `500→400` gradient [C §14.4]; badge dots where a destination holds actionable state (count derives from data — one source).
 **Props** — data: `items: {id, label, icon, badgeCount?}[]`, `activeId` · callback: `onNavigate(id)` · config: `tone` (screen family) · slots: none.
 **State map** — static (active is controlled; no internal lifecycle).
-**Declaration** — Q-rows: Q1, Q6 · gestures: tap; SWIPE BETWEEN TABS IS NOT A NAVBAR BEHAVIOR (nav is explicit tap — swipe-paging belongs to content surfaces, §7 SheetShell/07c SegmentedTabs) · keyboard: `tablist` semantics, arrow keys rove [C] · a11y: `navigation` landmark, `aria-current="page"`.
+**Declaration** — Q-rows: Q1, Q6 · gestures: tap; SWIPE BETWEEN TABS IS NOT A NAVBAR BEHAVIOR (nav is explicit tap — swipe-paging belongs to content surfaces, §7 SheetShell/07c SegmentedTabs) · keyboard: arrow keys move between destinations [C] · a11y: `navigation` landmark; destinations are links with `aria-current="page"` — never tablist semantics (tabs are in-page: 07c SegmentedTabs).
 **Composition** — one per screen; owned by Screen's foot zone; never duplicated inside sheets.
 
 ## 5 — Splash
@@ -83,7 +83,7 @@ Layer discipline applies: atoms live under these shells (they consume nothing up
 
 **Identity** — structure · atoms-tier · contained surfaces inside cards and shells.
 **Anatomy** [C] — `Panel`: `rounded-2xl` + wash per tone/mode (01 §7.3 table). `DarkPanel`: the shell inner panel — `bg-white/[0.06]` neutral or `bg-{hue}-400/[0.10–0.15]` accented; flat (no orbs/shadows — expansions inside shells render flat, 01 §6.2).
-**Props** — data: `children` · config: `tone?`, `mode` · slots: `children` only.
+**Props** — data: none · config: `tone?`, `mode` · slots: `children` only.
 **State map** — static (tone arrives via config; state flips happen at the shell/card level, not the panel).
 **Declaration** — non-interactive; no Q-rows.
 **Composition** — panels never nest inside panels inside a shell (one containment level, 01 §6.2 — this entry enforces it). A panel is never tappable; a tappable contained surface is a row (07b) or tap cell (§10).
@@ -98,9 +98,9 @@ Layer discipline applies: atoms live under these shells (they consume nothing up
 2. **Middle** — `min-h-0 flex-1 overflow-y-auto overscroll-contain`. The only scrolling zone.
 3. **Pinned footer** — primary action (+ footnote). Never scrolls.
 Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not resize the frame); `overflow-hidden`; `rounded-[26px]` top corners per shell tone.
-**Mounting law** [C — crash class] — mounts DIRECTLY under the screen-level `AnimatePresence` with a key; never inside an outer positioned `motion.div` (the wrapper becomes the containing block and collapses the sheet to zero height — 06 §7 register). Per-entry keys include the parameter when entry should reset per param (`key={`log-${filter}`}`); `initial*` props land the right tab.
+**Mounting law** [C — crash class] — mounts DIRECTLY under the screen-level `AnimatePresence` with a key; never inside an outer positioned `motion.div` (the wrapper becomes the containing block and collapses the sheet to zero height — 06 §8 register). Per-entry keys include the parameter when entry should reset per param (`key={`log-${filter}`}`); `initial*` props land the right tab.
 **Dim** — `bg-[rgba(15,26,22,0.45–0.5)] backdrop-blur-[2px]`, tappable (closes), fades `fast`, mounted/unmounted with the sheet inside the same AnimatePresence — never permanent [C, AP23].
-**Props** — data: `title`, `subtitle?`, content via slots · state: `open` (controlled by screen; the SHEET owns nothing persisted except per-mode inner state, Q10) · callback: `onClose`, `onComplete?` · config: `tone` (drives header tile + shell wash; flips with outcome — see map) · slots: `headerMeta?`, `children` (middle), `footer` (pinned).
+**Props** — data: `title`, `subtitle?`, content via slots · state: `open` (controlled by screen; the SHEET owns nothing persisted except per-modality inner state, Q10) · callback: `onClose`, `onComplete?` · config: `tone` (drives header tile + shell wash; flips with outcome — see map) · slots: `headerMeta?`, `children` (middle), `footer` (pinned).
 **State map** [C — PaymentSheet/RateVisitSheet/VitalsSheet census]:
 
 | State | Tone | Composition | Copy intent |
@@ -110,7 +110,7 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 | done | **positive flip** | header tile + footer flip; confirmation state | "Consent sealed" pattern |
 | dismissed | — | unmount choreography | — |
 
-**Declaration** — Q-rows: **Q2** (drag-to-dismiss: vertical drag on grabber/header; follows finger; past threshold → dismiss on `sheet` spring; short release → spring back) · **Q8b** (completion: done → `850ms` hold → auto-dismiss → dim fades + unblurs — 05 §4.3 chain) · **Q10** (per-mode inner state persists per entry parameter) · Q6 (Esc dismisses — never navigates; focus moves INTO the sheet on open, returns to trigger on close; `role="dialog"`, `aria-modal`, labelled by title) · gestures: drag (§3.3), tap dim, scroll middle only (direction-locked) · keyboard: Esc, Enter on footer CTA, Tab cycles inside · gating: footer CTA gate derives from content validity, states its reason (04 §5).
+**Declaration** — Q-rows: **Q2** (drag-to-dismiss: vertical drag on grabber/header; follows finger; past threshold → dismiss on `sheet` spring; short release → spring back) · **Q8b** (completion: done → `850ms` hold → auto-dismiss → dim fades + unblurs — 05 §4.3 chain) · **Q10** (per-modality inner state persists per entry parameter) · Q6 (Esc dismisses — never navigates; focus moves INTO the sheet on open, returns to trigger on close; `role="dialog"`, `aria-modal`, labelled by title) · gestures: drag (§3.3), tap dim, scroll middle only (direction-locked) · keyboard: Esc, Enter on footer CTA, Tab cycles inside · gating: footer CTA gate derives from content validity, states its reason (04 §5).
 **Composition rules** — one sheet frame per domain per screen (reused by all that screen's sheets [C]); sheets are their own component files — screens never contain sheet JSX [C §14.6]; sheet-to-sheet switching keeps ONE mounted frame; content components (07e) fill middle/footer. The sheet NEVER hosts drag-to-dismiss inside its middle content.
 **Open** — 86% height vs taller variant for full-page flows [D: keep 86%, full-page is a Screen, not a sheet]; drag threshold value [D proposal: 96px or 25% of height].
 
@@ -118,11 +118,11 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 
 **Identity** — behavior-bearing (tone-flipping) · universals · Mode B immersive shell for screen heroes and stake surfaces (02 §3.4's three triggers). The canon's AccentHero/PhaseHero are one family; the catalog admits **PageHero** with tone-driven phases — variant Props union, not two components [D — merge per master I7; the suffix-era split is F4 heritage].
 **Anatomy** [C — full spec in 01 §6.2] — `rounded-[26px]` shell · hue-tinted deep bg · border `{hue}-200/10` · deep colored shadow · two glow orbs (static, recolor with state) · top hairline · overline row (kicker left + derived counter/step right) · 19px gradient headline with key phrase · one-line subtitle · 2-column stat-band cell grid (glass cells) · full-width tap cells ONLY for facts editable on this screen · footer strip for the money/total fact. ONE containment level max.
-**Props** — data: `overline`, `headline`, `highlight` (the gradient phrase), `subtitle?`, `stats: {label, value}[]`, `facts?: {...}[]` (typed cell-sized facts — 03 §4) · callback: `onFactTap?` (only for editable-fact cells) · config: `phase` (the state key), `phases: Record<state, PhaseSpec>` — **the one-map table as a prop** [D — the shell derives ALL tone/composition from the phase map per I5; PhaseSpec: `{tone, mode:'dark', headline gradient, pill, panel, meter, hint, tile, button, busy}`] · slots: `children?` (the centerpiece — lives directly on the shell, never in a nested panel).
-**State map** — THE phase map IS the state map; the shell renders `phases[phase]` whole-surface (01 §6.2 partial-flip ban). Compositions differ per phase where the phase demands it (idle = send button / pending = status strip / accepted = confirmation strip — census-attested MatchCard arc).
+**Props** — data: `overline`, `headline`, `highlight` (the gradient phrase), `subtitle?`, `stats: {label, value}[]`, `facts?: {...}[]` (typed cell-sized facts — 03 §4) · callback: `onFactTap?` (only for editable-fact cells) · config: `phase` (the state key), `mode: 'dark' | 'light'` (the light variant is sealed [D]; exact flat-tone values are walkthrough-tunable) — **the phase map is INTERNAL to the component**: canonical PhaseSpecs per entity lifecycle state are materialized from the 02 §5 treatments as data-layer constants (06 §2.3) and consumed by the component; screens pass `phase: stateKey` + typed data and vary COMPOSITION (which cells, which story) — never tone semantics. A screen holding a presentation table violates 08 §1.1. PhaseSpec: `{tone, mode, headline gradient, pill, panel, meter, hint, tile, button, busy}` · slots: `children?` (the centerpiece — lives directly on the shell, never in a nested panel).
+**State map** — THE phase map IS the state map (internal, canonical); the shell renders the spec for `phase` whole-surface (01 §6.2 partial-flip ban). Compositions differ per phase where the phase demands it (idle = send button / pending = status strip / accepted = confirmation strip — census-attested MatchCard arc).
 **Declaration** — Q-rows: Q1 (tap cells), Q6, Q12 (live phases) · gestures: tap cells only · keyboard: tap cells tabbable · a11y: headline is `h1`-equivalent per screen; orbs/hairline `aria-hidden`; phase flips announce politely.
-**Composition rules** — screens restructure the hero per their story — same shell, same type scale, DIFFERENT composition per screen (the variation rule [C §14.2]: an archive lists contents as a ledger, a live session leads with its narrative row); cloning the anatomy wholesale across siblings is banned (AP51). Heroes never scroll internally.
-**Open** — orb opacity/blur exact values (01 §13); whether `PageHero` also serves light-mode heroes (canon heroes were Mode B; light heroes were ad-hoc stacks) [D proposal: yes — `mode: 'light'` variant renders flat, tone via accent; sealed by walkthrough].
+**Composition rules** — screens restructure the hero per their story — same shell, same type scale, DIFFERENT composition per screen; composition varies, tone semantics never do (the phase spec is canonical, derived from 02 §5) — the variation rule [C §14.2]: an archive lists contents as a ledger, a live session leads with its narrative row. Cloning the anatomy wholesale across siblings is banned (AP51). Heroes never scroll internally.
+**Open** — orb opacity/blur exact values (01 §13); light-mode flat-tone exact values.
 
 ## 10 — HeroCells
 
@@ -138,7 +138,7 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 
 **Identity** — behavior-bearing · universals · the transient outcome-report overlay: ambient confirmations for outcomes not visible where the user stands. The presentation half of the notify contract (06 §4.4).
 **Anatomy** [D] — compact dark ink card (`#0B231C`-family, `rounded-2xl`) floating above all surfaces including sheets — dark carries its own depth, so no shadow-rule conflict (01 §6.3): tone-tinted icon Tile (`h-8`) · title (bold, ≤4 words — 03 §3) · body (≤1 sentence) · optional single action label (family accent text). Stack: top of frame, max 3, newest on top, older compress.
-**Mechanics [D]** — ToastHost mounts ONCE per screen (chrome slot, sibling to the sheet AnimatePresence) and provides `notify({ title, body, tone?, action? })` via context — master I3's one sanctioned chrome-level cross-tree concern. It owns the queue and its timers (self-cleaning); screens never touch them (08 §7.2). Auto-dismiss 2.8s ambient, extended to 5s while an action is offered. Enter: y −12 + opacity; exit: fade + collapse — AnimatePresence throughout (05 catalog `gentle`). Tap dismisses or activates; swipe-up dismisses (04 §3.3 light drag).
+**Mechanics [D]** — ToastHost mounts ONCE per screen (chrome slot, sibling to the sheet AnimatePresence) and provides `notify({ title, body, tone?, action? })` via context — the chrome-level cross-tree concern sanctioned by master I3 ("context for genuine cross-tree concerns"). It owns the queue and its timers (self-cleaning); screens never touch them (08 §7.2). Auto-dismiss 2.8s ambient, extended to 5s while an action is offered. Enter: y −12 + opacity; exit: fade + collapse — AnimatePresence throughout (05 catalog `gentle`). Tap dismisses or activates; swipe-up dismisses (04 §3.3 light drag).
 **Props (Host)** — data: none · config: none · provides: notify context. **Props (Toast)** — data: `title`, `body?`, `action?: { label, onPress }` · config: `tone` · state: internal (`entering → visible → exiting`).
 **State map** — per-toast lifecycle only; the queue is steady-state structure. Tone renders as tile + accent only — the card stays ink; a toast IS an outcome statement, tinted by its meaning (positive/attention/risk).
 **Declaration** — Q-rows: Q1, Q13 (haptic on binding outcomes when configured) · gestures: tap act/dismiss, swipe-up dismiss · a11y: `aria-live=polite` (assertive reserved for person-safety — 04 §6); announced once, never re-announced on re-render; auto-dismiss pauses while hovered/focused [D].
@@ -158,6 +158,6 @@ Frame: fixed height `h-[86%]` — **never `max-h`** (tab swaps inside must not r
 |---|---|---|
 | Sheet drag threshold (96px vs 25%) | OPEN [D proposed] | walkthrough |
 | Splash durations | OPEN [D proposed] | walkthrough |
-| PageHero light-mode variant | OPEN [D proposed] | walkthrough |
+| PageHero light-mode exact values (flat tone/accent) | OPEN — variant sealed [D] | walkthrough |
 | AppBar closed-anatomy amendment path (new trailing type) | governed by 09 admission | 09 |
 | Toast durations (2.8s ambient / 5s with action) | SEALED [D] — vetoable | user |

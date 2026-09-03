@@ -19,7 +19,7 @@
 
 2.1 **[C]** A screen is a vertical stack: AppBar → optional hero band → content bands → NavBar. No overlapping layers except dim + sheet (which mount transiently, never permanently).
 
-2.2 **[C/M]** Content bands are announced by a Section marker: hue-carrying accent bar + uppercase micro-label + hairline + trailing state pill. A Section's trailing pill carries ONLY a two-word state ("3 of 5 sealed", "Locked") — never actions, never links. Actions live in full-width buttons below (the long-content rule, §9.6). Divider-style centered labels are banned.
+2.2 **[C/M]** Content bands are announced by a Section marker: hue-carrying accent bar + uppercase micro-label + hairline + trailing state pill. A Section's trailing pill carries ONLY a state statement within the pill budget ("3 of 5 sealed", "Locked" — 03 §3) — never actions, never links. Actions live in full-width buttons below (the long-content rule, §9.6). Divider-style centered labels are banned.
 
 2.3 **[C]** One fact, one place. If the Section trailing pill states a count, no card inside that band repeats it — not in a header, not in a hero strip.
 
@@ -81,7 +81,7 @@
 
 ### 6.2 Mode B — dark immersive shell
 
-- **[C]** Reserved by STAKES, not hue — the reservation rule (binding decisions, person-safety live surfaces, screen heroes) is owned by 02 §3; this section defines the anatomy.
+- **[C]** Reserved by STAKES, not hue — the reservation rule (binding-destruction ceremonies, person-safety live surfaces, screen heroes) is owned by 02 §3.4; this section defines the anatomy.
 - **[C]** Shell anatomy: `rounded-[26px]`, `border-{hue}-200/10`, hue-tinted deep background (hex table §8.4), deep colored shadow `shadow-[0_28px_64px_-30px_rgba(...)]` derived from the shell hue, two ambient blurred glow orbs (`blur-3xl`, off-right-top and off-bottom-left), top hairline `h-px bg-gradient-to-r from-transparent via-{hue}-300/40 to-transparent`. Shell, orbs, hairline, border all recolor together on state change (`transition-colors duration-300/500`) — a partial flip (chip only) is a defect.
 - **[C]** ONE containment level maximum inside a shell: the centerpiece lives directly on the shell. A footer group may join via the single allowed `h-px bg-white/[0.08]` hairline. Panels-in-panels-in-shells are banned.
 - **[C]** Inner panels: `bg-white/[0.06]` (neutral) or `bg-{hue}-400/[0.10–0.15]` (accented). Expansions inside shells render FLAT dark mini-panels — no orbs, no shadows.
@@ -129,6 +129,7 @@ Chip ink on dark chips: `#04241A`-family (dark ink on solid mid-hue). Busy-state
 - **[C]** One dominant family per card, derived from state (derivation matrix → 02). Secondary meanings demote to chips/links.
 - **[C]** Emerald = completion only. Selection is NOT success — selectable chips/tags take the card's dominant family, never emerald. Sky is pending-decision/informational; sky never defaults controls on an emerald-themed screen.
 - **[C]** Rose appears only on genuinely dangerous/lost states; amber only on true pending/warning. Mild informational rose accents (interaction warnings) stay light-tint; high-stakes danger is full rose shell.
+- **[D — sealed with R8]** Continuous-input exception: DialInput's detent bar maps range position to hue (emerald → amber at limit) as a POSITIONAL signal, not a completion claim. Discrete state surfaces remain fully bound by this law.
 
 ### 7.7 Contrast rules
 
@@ -156,7 +157,7 @@ Chip ink on dark chips: `#04241A`-family (dark ink on solid mid-hue). Busy-state
 | stat band value | 20 | ×2 |
 | hero amount | 38 | the single exception [C] |
 
-Half-steps are banned and map DOWN: `10.5→10`, `11.5→11`, `12.5→12`, `13.5→13`, `9.5→9`, `8→9`. The census carries 75 half-step uses — they are the drift this scale deletes. Screens do not invent sizes.
+Half-steps are banned and map DOWN: `10.5→10`, `11.5→11`, `12.5→12`, `13.5→13`, `9.5→9`, `8→9`. The census carries 75 half-step uses — they are the drift this scale deletes. Screens do not invent sizes. The hero amount's currency prefix (18px, §8.4) is a sealed sub-role of the hero-amount composite, not an independent size [D].
 
 ### 8.2 Weights
 
@@ -174,7 +175,7 @@ Half-steps are banned and map DOWN: `10.5→10`, `11.5→11`, `12.5→12`, `13.5
 
 - **[C]** `break-words` on any free text; `truncate` ONLY on row titles sharing a line with fixed-width elements. Truncation must never hide state — status lives in chips, not truncated titles.
 - **[C]** A label word never sits inside its value ("Supervisors paged: near fall…" is banned). Label and value are always separate lines; label-above-value is the default pairing.
-- **[C]** Dates are parsed into day/month/time fields at the data layer and reassembled in reading order — never sliced from raw strings at render.
+- **[C]** Dates are parsed into day/month/time fields at the data layer and reassembled in reading order — never sliced from raw strings at render (mechanism: 06 §6.3).
 
 ---
 

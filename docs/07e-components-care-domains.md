@@ -2,7 +2,7 @@
 
 **Part 5a of 6** of the component catalog (07e care delivery · 07f platform domains). **Owns completely:** every catalog composition that wires healthcare entities to composites and flows for care delivery — matching, booking, visits, meds, consent, records, billing.
 **Status:** v1.0 — proposed. Ratification seals as R25.
-**Provenance:** [R]/[C]/[M]/[D] as before. **M** = MUST · **S** = SHOULD.
+**Provenance:** [R] = ratified · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 
 ---
 
@@ -27,11 +27,11 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 
 3.2 **[M]** Naming: noun-typed by what is presented with the closed intent suffixes (`VisitCard`, `DoseRow`, `ConsentScopeSheet`). Name collisions resolved by naming by ROLE IN FLOW, not by screen (§4.10).
 
-3.3 **[M]** Ownership split — **screen**: which step/sheet is open, persisted record state, navigation · **composition**: its internal arcs (action timing, staged consequences), its data-state rendering · **flow spanning screens** (booking): the family declares the step contract + what persists at each step (D4) — the screens coordinate through that contract.
+3.3 **[M]** Ownership split — **screen**: which step/sheet is open, persisted record state, navigation · **composition**: arc presentation and staged consequences (timing is presentation — resolution arrives via the flow's data, 06 §7), its data-state rendering · **flow spanning screens** (booking): the family declares the step contract + what persists at each step (D4) — the screens coordinate through that contract.
 
 3.4 **[M/D] Clock ownership:** a live/ticking value is owned ONCE by the highest composition displaying it; children receive derived or formatted values. Two siblings ticking the same clock is a defect. (Resolves the census question: LiveVisitHero takes `elapsedSeconds` — in the catalog, the LiveVisit family owns the clock, the hero receives it.)
 
-3.5 **[M/D] Demo life (A8 mechanics):** every screen lives by STAGED CONSEQUENCE — user action → arc → fan-out. Simulation cadences (streamed entries) live in compositions (StreamList, StreamList-hosting families); clocks in their owning composition (3.4); simulation data lives in data modules. **Screens never hand-roll simulation timers** — that is the wrapper pattern reborn. Independent animation loops beside staged consequences are banned (05 §1.4).
+3.5 **[M/D] Demo life (A8 mechanics):** every screen lives by STAGED CONSEQUENCE — user action → arc → fan-out. Simulation cadences (streamed entries) live in compositions (StreamList, StreamList-hosting families); clocks in their owning composition (3.4); simulation data lives in data modules. **Screens never hand-roll simulation timers** — that is the wrapper pattern reborn. Simulation drives arc resolution as DATA: a demo flow feeds `status` through composition-declared constants (06 §7.1) — never a control-internal clock. Independent animation loops beside staged consequences are banned (05 §1.4).
 
 ---
 
@@ -48,14 +48,14 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 
 **Identity** — booking · booking request · the multi-step care request (P09→P12).
 **Recipe** [C/M] — Stepper (progress) + category grid + ScheduleCard (TimeSheet) + EstimateCard + WhoSheet + ReviewSummary (FactRows) + consent block + LifecycleButton confirm.
-**Flow** [M/D] — steps: category → schedule → who → review+consent → confirm. Each step gates the next (04 §5); per-step state persists (D4 — returning keeps entries); the confirm is medium-weight (LifecycleButton), the CONSENT inside is the binding act (§4.3's arc) — weights never blend. Success hands to matching (§4.1).
+**Flow** [M/D] — steps: category → schedule → who → review+consent → confirm. Each step gates the next (04 §5); per-step state persists (D4 — returning keeps entries); the confirm is medium-weight (LifecycleButton), the CONSENT inside is the binding-COMMITTING act (§4.3 — heavy verb, light surface) — weights never blend. Success hands to matching (§4.1).
 **Declaration** — deltas: Q10 per-step persistence; wizard declares its step contract (03 §3 naming per step).
 
 ### 4.3 ConsentCard + ConsentScopeSheet
 
 **Identity** — consent · consent entity (02 §5.3) · pending/seal split made tangible.
 **Recipe** [M — census] — Row list (scopes) + Switch-free approvals (`approvals: Record<ConsentId, boolean>` state) + Meter (consentProgress — single source) + ConsentScopeSheet (SheetShell + OptionRow set) + LifecycleButton seal.
-**Flow** [R/M] — edits create PENDING changes ("2 pending" chip on the sealed surface); **seal commits** ("Seal 2 changes" → "Sealing your consent" → "Consent sealed"); care runs on the sealed version; gated state IS the reason ("No pending changes to seal") [M]; withdrawal = HoldConfirmButton + risk-shell ceremony (07c §8, 02 §3.3). Scopes never flip the sealed record instantly (AP71).
+**Flow** [R/M] — edits create PENDING changes ("2 pending" chip on the sealed surface); **seal commits** ("Seal 2 changes" → "Sealing your consent" → "Consent sealed") — the binding-COMMITTING class (02 §3.3): light-surface confirm, concrete consequences stated, heavy verb, no shell, no hold; care runs on the sealed version; gated state IS the reason ("No pending changes to seal") [M]; withdrawal = HoldConfirmButton + risk-shell ceremony — the binding-DESTRUCTIVE class (07c §8, 02 §3.3). Scopes never flip the sealed record instantly (AP71).
 **Declaration** — deltas: pending/sealed duality visible on one surface; Q10 per-scope persistence.
 
 ### 4.4 DoseRow + DoseSchedule
@@ -68,7 +68,7 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 ### 4.5 VitalsCard + VitalsSheet
 
 **Identity** — visits · vital readings (visit records) · presentation + input.
-**Recipe** [M — the I5 precedent] — per-reading rows with tone from `vitalIntent(reading)` (data-layer derivation — the mined derived-tone pattern); VitalsSheet: Field inputs + review state → record arc.
+**Recipe** [M — the I5 precedent] — per-reading rows with tone translated from `vitalIntent(reading)` classification (data-layer classification — `normal`/`borderline`/`abnormal`; the owning map translates via 02 §4.2, 06 §2.4 — the data layer never assigns tone tokens); VitalsSheet: Field inputs + review state → record arc.
 **Flow** [D] — normal = neutral · borderline = attention · abnormal = risk + "discuss/link incident" path (02 person-safety hook). Input review state persists per session (Q10).
 **Declaration** — deltas: units exact + attached (03 §4); abnormal announces assertively (04 §6).
 
@@ -96,15 +96,15 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 ### 4.9 RateVisitSheet
 
 **Identity** — review · visit rating · private modal flow.
-**Recipe** [M — census] — SheetShell + StarPicker (controlled) + HighlightTags (multi-select, family hue — never emerald) + Field note + LifecycleButton submit; RatingHero mirrors submitted state.
+**Recipe** [M — census] — SheetShell + StarPicker (07c §10, controlled) + HighlightTags (multi-select, family hue — never emerald) + Field note + LifecycleButton submit; RatingHero mirrors submitted state.
 **Flow** [M] — submitted persists (Q10 — reopen shows done); draft state persists per entry; private: no sharing nags.
 **Declaration** — deltas: ratings are informational stakes; submitted = positive.
 
 ### 4.10 PaymentSheet + the PaymentCard resolution
 
-**Identity** — billing · payment entity (02 §5.7) · the confirm-arc sheet.
-**Recipe** [M] — SheetShell + FactRows breakdown + method row + LifecycleButton ("Pay ₹{amount}" → "Processing payment" → "Payment complete") · failed = risk + retry in place.
-**Flow** [M] — per-method mode state persists (Q10); estimates labeled exactly until final (03 §6); money never ambiguous.
+**Identity** — billing · payment entity (02 §5.7) · the capture-arc sheet — the binding-DESTRUCTIVE ceremony surface (02 §3.3).
+**Recipe** [M] — SheetShell whose pre-commit composition is the risk-shell ceremony: consequences stated concretely before the act (what captures, when it settles, how it reverses), the FactRows breakdown, method row; the confirm control is HoldConfirmButton at/above the capture threshold (entity-module constant, 06 §2.3; value OPEN — 07c §15) and LifecycleButton below it. Arc copy: "Pay ₹{amount}" → "Processing payment" → "Payment complete" (03 §8 — the act is capture; the control labels it Pay).
+**Flow** [M] — resolution via controlled `status` derived from the payment record's lifecycle (02 §5.7, 06 §7 — never a timer); the failed branch runs the completion chain to risk (05 §4.3): the recovery surface (retry/refund) enters as part of the chain, retry re-enters at working (06 §7.4); per-method mode state persists (Q10); estimates labeled exactly until final (03 §6); money never ambiguous.
 **C7 resolution [D]** — the corpus's two `PaymentCard`s were different compositions: **PaymentMethodCard** (method + action — review/checkout context) and **PaymentBreakdownCard** (fact breakdown — summary context). Named by role in flow (3.2); NOT converged — different compositions, A3 rule.
 
 ## 5 — Recipe register (care delivery)
@@ -112,7 +112,7 @@ The corpus died by promoting screen fragments to components. The catalog admits 
 | Composition | Domain | Assembles from | Treatment/notes |
 |---|---|---|---|
 | DispatchSequence | matching | Stepper + StepList | dispatch steps [M] |
-| OfferList / OfferExpiredState | matching | Row + Countdown + EmptyState | expiry recovery mandatory [R] |
+| OfferList / OfferExpiredState | matching | Row + Meter (ticking countdown, 07d §10) + EmptyState | expiry recovery mandatory [R] |
 | CaregiverProfile dossier | matching | PageHero light + FactRows + CredentialCard | verified dossier [C] |
 | CredentialsCheck detail | matching | ExpandRow + FactRows + StatusPill | background-check facts [C] |
 | ScheduleCard / WhoSheet | booking | TimeSheet + Field + OptionRow | wizard steps [M] |

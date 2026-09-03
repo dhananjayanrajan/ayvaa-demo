@@ -2,7 +2,7 @@
 
 **Part 6 of 6** of the component catalog. **Owns completely:** professional operations (offers, sessions, availability, earnings), shared care-ops (incidents), partner surfaces, admin oversight, system observation surfaces, and the auth/identity families.
 **Status:** v1.0 — proposed. Ratification seals as R26.
-**Provenance:** [R]/[C]/[M]/[D] as before. **M** = MUST · **S** = SHOULD.
+**Provenance:** [R] = ratified · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 **Qualification:** the 07e §1 bar applies verbatim. Two-tier entries (07e §2) apply.
 
 ---
@@ -35,7 +35,7 @@
 ### 1.4 IdentityVerificationJourney
 
 **Identity** — shared (patient + professional) · verification entity (02 §5.6) · the multi-step identity flow.
-**Recipe** [M — census P03/P04/PR02] — OTP step (OtpInput + ticking validity) → document step (real file capture tiles, 06 §6) → selfie step (capture + confidence feedback) → submitted state → in-review (active chip) → verified/rejected (+ reason, resubmit path).
+**Recipe** [M — census P03/P04/PR02] — OTP step (OtpInput + ticking validity) → document step (capture tiles — declared assembly: Tile + real file facts per 06 §6.1) → selfie step (capture + confidence feedback) → submitted state → in-review (active chip) → verified/rejected (+ reason, resubmit path).
 **Flow** [R] — each step gates the next (04 §5); rejection states the reason and the resubmit path (02 §5.6 — never a dead end); pending state persists across sessions (D4 — returning shows in-review, never resets to start).
 **Declaration** — deltas: journey position announces ("Step 2 of 3"); capture surfaces are real inputs (fake capture buttons banned, AP27).
 
@@ -51,7 +51,7 @@
 **Identity** — shared care-ops · incident entity (02 §5.4) · severity-driven reporting.
 **Recipe** [M — census PR08 + P31] — CausePicker (typed causes) + SeveritySelector (severity-driven hue system [M — the whole-surface tone-map precedent]) + DescriptionInput (real textarea, dirty-gated) + PhotoAttach (real files, 06 §6.2) + optional witness row → submitted panel → escalation (notify supervisor [M]).
 **Flow** [R] — severity drives intensity (02 §6: higher severity steps toward shell for person-safety), never tone (risk throughout — tone steps at meaning boundaries); submission = the report exists + escalation affordance; admin triage continues the entity lifecycle (A02/A11 — same record, different role surface).
-**Placement note** [D] — admitted in 07f despite care-delivery subject matter because the flow spans three roles (professional reports, patient reports, admin triages): cross-role shared → platform-shared family. Cross-referenced from 07e §5.4.
+**Placement note** [D] — admitted in 07f despite care-delivery subject matter because the flow spans three roles (professional reports, patient reports, admin triages): cross-role shared → platform-shared family. Cross-referenced from 07e (MissedCard §4.6 — incidents link back to visits; VisitSummary §4.8).
 
 ---
 
@@ -78,7 +78,7 @@
 | ProfessionalProfile | pro ops | PageHero light + CertificationsCard + AddCertificationRow | just-added rows (Q11) [M]; skills cloud; preferences |
 | SessionHistoryDossier | pro ops | DossierHero + ContinuityBar + MonthTimeline + ExpandRow records | continuity-bar per story [M — PR12] |
 | EarningsWallet | pro ops | StatStrip + SessionEarningsCard + RatingStrip + filters | payout entity: accrued state [M] |
-| PayoutFlow | pro ops | SheetShell + FactRows + BankAccount Form + LifecycleButton ("Withdraw ₹{n}") | payout arc 02 §5.8; receipt on done [M] |
+| PayoutFlow | pro ops | SheetShell + FactRows + BankAccountFieldSet (declared assembly: Field set + validation, 07c §1) + LifecycleButton ("Transfer ₹{n}") | payout arc 02 §5.8; receipt on done [M] |
 | PartnerHub | partner | PageHero + ReferredPatientList + PartnerQuickActions + billing card | live pipeline [M] |
 | ReferralWizard | partner | BookingWizard contract (07e §4.2) + PartnerCareCategoryGrid + ClinicalRecommendation + DischargeRecords | 4-step; same per-step persistence law [M] — NOT a second wizard implementation |
 | PartnerPatientChart | partner | PageHero + RecoveryTrajectory + CareGoalsCard + consent note | referral consent gates chart depth [M] |
@@ -90,7 +90,7 @@
 | ConsentTracking | admin | DueReviewCard + CycleStep + WithdrawalCard | consent entity at fleet scale [M] |
 | RetentionPolicyEditor | admin | PolicyEditor (Field set) + DeletionQueueList + CryptoDeletionCard | **theme re-mapped [D]: corpus emerald/teal was decoration drift — policy surfaces read neutral/attention by state (draft/applied/enforcing), positive only on applied-confirm** |
 | EscalationDesk | admin | EscalationHeroCard + EscalationTicketCard + SLA timers | SLA countdowns tick; breach flips state [M] |
-| AnalyticsSurfaces | admin | RevenueHero + ChartBars (07d) + ReportBuilder sheet | every visual encodes real data; scheduled reports via LifecycleButton |
+| AnalyticsSurfaces | admin | RevenueHero + ChartBars / spark variant (07d §14) + ReportBuilder sheet | every visual encodes real data; scheduled reports via LifecycleButton |
 | TransactionConsole | system | TransactionStepList + StateDiffCard + RollbackTraceCard + PaymentHero | operator view of S04/S07 laws — **system surfaces obey every law in this suite; observing does not exempt** [M] |
 | RecheckConsole | system | RecheckHero + RulesList + ResolutionCard | observer of §1.1's arc [M] |
 | NotificationDelivery | system | NotificationFeed + IncidentTimelineCard + DeliveryHealthCard | per-channel delivery states [M] |
@@ -104,7 +104,7 @@
 - **[M]** Shared patterns are built ONCE (§1.5/§1.6): a role surface consuming the shared composition adds role data, never a role fork (F4 fence at composition level).
 - **[M]** System/observer surfaces obey every law in this suite — observation is a presentation context, not an exemption (the corpus's system screens drifted looser; that drift is dead).
 - **[M]** Professional working surfaces (§1.1–1.3) are safety-relevant: every gate states what's missing, every blocked path gives the way forward, abandonment routes to incident — never silent.
-- **[M]** Money compositions (payouts, partner billing) run the payment-arc copy bank (03 §8) — "Withdraw ₹{n}", never bare "Confirm".
+- **[M]** Money compositions (payouts, partner billing) run the payment-arc copy bank (03 §8) — "Transfer ₹{n}", never bare "Confirm" (`withdraw` is reserved for the consent act, 03 §2).
 - **[M]** Demo-only surfaces (failure drills) are marked as such in data, never styled differently — tone follows state, not specialness (02 §3.5).
 
 ## 5 — Open items (07f)

@@ -10,7 +10,7 @@
 
 **Identity** — behavior-bearing (press, optional disclosure) · universals · THE house list entry — census-attested in every domain (feeds, visits, meds, offers, records). The most composed-with pattern in the corpus.
 **Anatomy** [C/M — canon §4.1 exact] — fixed-width icon Tile left (`h-8` small rows, `h-10` header rows) · flexible content column (`flex-1 min-w-0`, `pt-0.5` on h-10) · fixed meta column right (`flex flex-col items-end`: chip + chevron row, then TimeChip beneath). Title row: title `flex-1 min-w-0 truncate` · body wraps FULL content-column width on its own line(s). Content column spacing `gap-3`, rows `py-3`.
-**Props** — data: `title`, `body?`, `time?`, `icon?` · state: `open?`, `selected?` (optional-controlled, 06 §4.2) · callback: `onToggle?`, `onPress?` · config: `tone` (state hue — the row's chip carries the state; a neutral tile may carry TYPE), `variant: 'surface' | 'inset' | 'live' | 'tint'` (census-attested defaults) · slots: `leading?` (overrides tile), `trailing?` (meta column extras), `expansion?` (→ becomes expandable, §2 mechanics).
+**Props** — data: `title`, `body?`, `time?`, `icon?` · state: `open?`, `selected?` (optional-controlled, 06 §4.2) · callback: `onToggle?`, `onPress?` · config: `tone` (state hue — the row's chip carries the state; a neutral tile may carry TYPE), `variant: 'surface' | 'inset' | 'live' | 'tint'` (census-attested defaults) · slots: `leading?` (overrides tile), `trailing?` (meta column extras), `expansion?` (typed union per §2 — renders through ExpandRow's mechanics; ReactNode banned).
 **State map** [C]:
 
 | State | Tone carrier | Composition | Copy intent |
@@ -22,17 +22,16 @@
 
 **Declaration** — Q-rows: Q1, Q6, Q9 (when hosting empty), Q12 (live variants) · gestures: tap (press or toggle — never both), swipe NOT default (rows don't page; action-swipe is a 07e decision, must pass 09 admission) · keyboard: row is a button; Enter/Space; `aria-expanded` when expandable · a11y: `role="button"` where it acts, icon `aria-hidden`, chip states `aria-label` when icon-only · gating: locked rows (02 §4.3) render muted + `cursor-not-allowed` + reason.
 **Composition rules** — one status statement per row (tile = type OR chip = state, never both saying state) [C]; body text never wraps around chips/times [C]; rows compose FactRows/expansions inside their expansion slot, never hand-rolled meta stacks. **A Row never contains another interactive element** — the whole row is one control; nested controls need the expansion slot with their own semantics.
-**Open** — action-swipe on rows (delete/archive) — OPEN, likely banned for safety-surface rows; 09 decides.
 
 ## 2 — ExpandRow
 
 **Identity** — behavior-bearing · universals · the disclosure pattern: preview/anchor row that reveals NEW information inline.
 **Anatomy** [C] — anchor row (Row anatomy) + contained expansion panel: `rounded-2xl bg-ink/[0.03] p-3` (light) at FULL card width — never deep-indented [C]; rotating chevron (`rotate 180`, `base` duration) — visible affordance mandatory [C, AP80]; `aria-expanded` + stated promise ("Tap an entry for its actor detail") [C §15.13].
 **Content laws** [C] — expansion reveals NEW information, never a repeat of the row. Structure inside: preview/anchor element first, then meta rows sharing ONE gutter (same icon-container width + gap-3 — vertical alignment law, 01 §3). Designed artifacts: verbatim notes as serif quotes in a flat dark mini-panel ("Verbatim" chip); incident narratives as hue-matched flat mini-shells with outcome strip. NO orbs/shadows inside expansions [C].
-**Props** — data: anchor fields + `expansion: typed structure` (NOT ReactNode — expansions are typed composites: `{vitals?[], note?{text,author,at}, narrative?{...}, metaRows?[]}`) · state: `open?` · callback: `onToggle?` · config: `tone`.
+**Props** — data: anchor fields + `expansion: typed structure` (NOT ReactNode — expansions are typed composites: `{vitals?[], note?{text,author,at}, narrative?{...}, metaRows?[]}`; the union extends only by 09 admission — a recurring fourth shape is an admission, never a ReactNode escape hatch) · state: `open?` · callback: `onToggle?` · config: `tone`.
 **State map** — `closed → open` (height 0→auto + opacity, `entrance` easeInOut — 05 §4.1/4.2).
 **Declaration** — Q-rows: Q1, Q6 · gestures: tap anchor · keyboard: Enter/Space toggle, Esc closes · a11y: button semantics on anchor, `aria-expanded`, `aria-controls`.
-**Composition** — the canonical hosts: CareDeliveredCard (CARE_STEPS), StepRow (visit steps), record rows, incident narratives. **Bottom sheets are for global/screen actions — row inspection expands inline where the row lives** [C §4.4]. An expansion that only repeats the row is deleted.
+**Composition** — Row's `expansion?` slot DELEGATES here: ExpandRow is the expansion mechanism, not a competing row [D]. The canonical hosts: CareDeliveredCard (CARE_STEPS), StepRow (visit steps), record rows, incident narratives. **Bottom sheets are for global/screen actions — row inspection expands inline where the row lives** [C §4.4]. An expansion that only repeats the row is deleted.
 
 ## 3 — OptionRow
 
@@ -47,7 +46,7 @@
 
 **Identity** — behavior-bearing (per-step state, disclosure) · universals · ordered step presentation with per-step lifecycle (the visit/dose arc renderer).
 **Anatomy** [C §15.8 — state-branched rows] — container on a shared left rail; rows render their STATE as different COMPOSITIONS: `todo` rows are quiet static entries (neutral chip, NO accordion) · `done` rows are full ExpandRows (state-hued tile, status chip, TimeChip, readings panel + confirmation strip in expansion) · `active` row is the emphasized entry (live dot, family wash).
-**Props** — data: `steps: VisitStep[]` (typed: `{id, label, detail?, state, readings?, recordedAt?}`), `activeStep?` · state: `openId?` (exclusive at container) · callback: `onToggleStep?` · config: `tone`.
+**Props** — data: `steps: Step[]` (generic contract: `{id, label, detail?, state, readings?, recordedAt?}` — domain instances (`VisitStep`, `DoseStep`) name it at the data layer per 06), `activeStep?` · state: `openId?` (exclusive at container) · callback: `onToggleStep?` · config: `tone`.
 **State map** — per-row state from data (`todo/active/done` — the 02 dose/visit arcs); container is stateless beyond openId.
 **Declaration** — Q-rows: Q1, Q6, Q11 (when steps stream in) · a11y: ordered list semantics; per-row per ExpandRow.
 **Composition** — sealed/derived counts derive via 06 §3.1 helpers (`sealedStepsOf(steps)` — corpus-attested); the container never recomputes row states. TimeChip on done rows, live dot on active.

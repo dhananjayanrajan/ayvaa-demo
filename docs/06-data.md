@@ -1,6 +1,6 @@
 # 06 — DATA
 
-**Owns completely:** the data-layer boundary, module anatomy and conventions, derivation discipline, the props taxonomy wiring the three state axes, list/stream mechanics, file & object handling, and the code-hygiene defect-class register.
+**Owns completely:** the data-layer boundary, module anatomy and conventions, derivation discipline, the props taxonomy wiring the three state axes, list/stream mechanics, file & object handling, act resolution & retry, and the code-hygiene defect-class register.
 **Status:** v1.0 — proposed. Serves master I6/I3 and 02's axes. [D] expansions vetoable; ratification seals as R20.
 **Provenance:** [R] = ratified foundation · [C] = old canon (spirit) · [M] = mined evidence · [D] = derived — vetoable.
 **Strength:** **M** = MUST · **S** = SHOULD.
@@ -21,11 +21,11 @@
 
 2.1 **[C]** One module per domain: types → constants → parsers → derived builders. Layout of directories is a build-phase decision (master I1); the discipline is the contract.
 
-2.2 **[M/D]** Export convention: `const`-arrow for parsers and builders (census: the corpus data modules carry zero `export function` — all const-arrow), `type`/`interface` PascalCase, constants SCREAMING_SNAKE. Named exports only; every name a consumer imports must exist — re-verify the export list whenever a consumer is written (missing-import is a crash class, §7).
+2.2 **[M/D]** Export convention: `const`-arrow for parsers and builders (census: the corpus data modules carry zero `export function` — all const-arrow), `type`/`interface` PascalCase, constants SCREAMING_SNAKE. Named exports only; every name a consumer imports must exist — re-verify the export list whenever a consumer is written (missing-import is a crash class, §8).
 
 2.3 **[C]** Constants that never move (cycle lengths, thresholds, consequence copy, money prefixes, debounce intervals) live beside the helpers that use them — entity thresholds per 02 §4.4 are entity-module constants.
 
-2.4 **[M/D]** Types are shape-honest: `VitalReading` carries `{ kind, value, unit, trend, takenAt }` — not loose strings a component must interpret. If a component needs to ask "what tone is this?", the answer is a derived field from the data layer (`vitalIntent(reading)` — the mined precedent for 02's derivation), not a component-side lookup.
+2.4 **[M/D]** Types are shape-honest: `VitalReading` carries `{ kind, value, unit, trend, takenAt }` — not loose strings a component must interpret. If a component needs to ask "what tone is this?", the answer is a derived field from the data layer (`vitalIntent(reading)` — the mined precedent for 02's derivation), not a component-side lookup. **Derivations return CLASSIFICATION, never tone tokens [D]:** `vitalIntent(reading)` returns `'normal' | 'borderline' | 'abnormal'` — semantic levels the owning component's one-map translates via 02 (§4.2 there). The data layer never assigns tone; the map is the single meaning→presentation translation point.
 
 ## 3 — Derivation discipline
 
@@ -49,6 +49,8 @@ Every component's props fall into five closed categories [D — the contract 07 
 | **config** | tokens only — tone/size/variant/mode | token-typed | `tone: Tone`, `variant?: 'soft'\|'solid'\|'quiet'\|'icon'` |
 | **slots** | structure placeholders | slot nouns | universals only (master I7): `leading`, `trailing`, `expansion`, `meta` |
 
+A data-layer function passed as a prop (`search(records, query)` — SearchSheet) is a **data** prop: a reference into the data layer, not a sixth category [D].
+
 4.1 **[M]** Interaction axis is NEVER props — hover/focus/press are the component's internal states. A component taking `isHovered` as a prop is malformed.
 
 4.2 **[M/D]** Lifecycle axis ownership follows the record: the component owns its transient lifecycle (working/done of an in-flight action — self-cleaning timers, 02 §4); the parent owns the persisted record state, passed down as **state props** and updated via callbacks. Controlled (`value`/`onChange` — StarPicker) is the default for anything that persists; **optional-controlled** (`open?`, `onToggle?` with internal default — StepRow, census-attested) where a component is useful standalone but lift-able for exclusive groups (one `openId` at the card container).
@@ -59,7 +61,7 @@ Every component's props fall into five closed categories [D — the contract 07 
 
 ## 5 — Lists & streams
 
-5.1 **[M]** Streamed/appended entries get unique ids minted per insertion — `${baseId}-${seq}` from a monotonic counter. Reusing a fixed id pool duplicates React keys and, under layout animations, crashes with an infinite render loop (the corpus's worst crash class — §7).
+5.1 **[M]** Streamed/appended entries get unique ids minted per insertion — `${baseId}-${seq}` from a monotonic counter. Reusing a fixed id pool duplicates React keys and, under layout animations, crashes with an infinite render loop (the corpus's worst crash class — §8).
 
 5.2 **[M]** State updates that touch multiple related slices are ONE atomic `setState` (prepend fresh + clear stale flags in the same pass) — never two chained updates that can render an intermediate lie.
 
@@ -71,11 +73,21 @@ Every component's props fall into five closed categories [D — the contract 07 
 
 6.1 **[C]** Attachments are real: hidden `<input type="file">` + ref; the file tile shows real name/size on the icon-tile recipe — never a thumbnail, never a fake button.
 
-6.2 **[M]** Object URLs: created on attach, revoked on replace AND on unmount — every create has a revoke path (leak class, §7). Exports: content → Blob → object URL → programmatic download click → revoke, with the preparing→saved lifecycle (03 bank).
+6.2 **[M]** Object URLs: created on attach, revoked on replace AND on unmount — every create has a revoke path (leak class, §8). Exports: content → Blob → object URL → programmatic download click → revoke, with the preparing→saved lifecycle (03 bank).
 
 6.3 **[M]** Dates: parsed into day/month/time fields at the data layer; reading order reassembly is presentation (01 §8.5) — the component never slices `"Mar 13, 2:00 PM"` from a raw string.
 
-## 7 — The defect-class register
+## 7 — Act resolution & retry
+
+7.1 **[M]** An act's resolution is DATA, never a timer. Arc-bearing controls (LifecycleButton, HoldConfirmButton, ConnectButton) receive the outcome as a controlled `status` input (`'idle' | 'working' | 'done' | 'failed'`) owned by the flow; presentation derives from it (07c §6). A working→done flip that fires on a schedule is a defect — demo simulations drive `status` through composition-declared constants (07e §3.5), declared as simulation data.
+
+7.2 **[M]** Resolution is single-source: for payment, `status` derives from the payment record's lifecycle (02 §5.7); for seal, from the consent record's pending/sealed state (02 §5.3). The control holds no parallel lifecycle of record — its internal timing (press feedback, the done-hold before handback) is presentation.
+
+7.3 **[M]** Timeouts are declared per flow: the flow awaiting resolution owns a timeout constant (data module, §2.3); on expiry it transitions the record to failed with D2 copy — what happened + the way out. A silent spinner past a timeout is a defect (02 §4.4).
+
+7.4 **[M]** Retry re-enters the arc at working: the failed surface's recovery control dispatches the SAME act — no second control lineage. Every failable act declares its failed line in the 03 bank row it uses.
+
+## 8 — The defect-class register
 
 Known crash/defect classes from the corpus, each with its owning law. Mechanically checkable ones are grep/lint targets at build time; all are walkthrough checks.
 
@@ -84,22 +96,23 @@ Known crash/defect classes from the corpus, each with its owning law. Mechanical
 | Parse-at-render (slicing display strings) | §1.1 | 06 |
 | Magic literals in components | §1.2, §3.3 | 06 |
 | Duplicate derived facts (two computations of one count) | §3.2 | 06 |
-| Module-scope constants referencing component props (import-time ReferenceError) | component code derives inline — module scope never sees props | 06 |
+| Module-scope constants referencing component props (import-time ReferenceError) | §2.3/§3.3 — constants live beside the helpers that use them; render code derives inline | 06 |
 | Missing named imports from data modules | §2.2 write-time rule | 06 |
 | Side effects fired inside state updaters or render | compute next state, set it, then fire | 06 |
 | Duplicate keys in streamed lists (infinite-render crash) | §5.1 | 06 |
 | Unrevoked object URLs | §6.2 | 06 |
 | Lowercase component-typed props rendered as `<icon />` | component props holding components are PascalCase-destructured | 06 |
 | Config-driven mega-components (`ReactNode` slot cards) | master I7 | master |
+| Timer-based resolution flips (working→done on a schedule) | §7.1 | 06 |
 | Sheets collapsed by their own positioning wrapper | mount sheet directly under AnimatePresence with key | 08 |
 | Kit components on wrong-surface contrast | 01 §7.7 | 01 |
 | `React.createElement`-style dynamic tag construction | never — components are static identifiers | 06 |
 
-## 8 — Rule index (MUST summary)
+## 9 — Rule index (MUST summary)
 
-Parse once at the data layer · clean typed fields in · derived facts as functions of state · single-source derivation · zero magic literals · constants beside helpers · shared helpers have one home · props in five closed categories · interaction axis never props · controlled by default, optional-controlled for lift-able · dataState marker typed to 02 · notify never replaces state · unique minted ids · atomic updates · stable keys · real file inputs · every object URL revoked · no module-scope prop references · no side effects in updaters.
+Parse once at the data layer · clean typed fields in · derived facts as functions of state · derivations return classification, never tone · single-source derivation · zero magic literals · constants beside helpers · shared helpers have one home · props in five closed categories · interaction axis never props · controlled by default, optional-controlled for lift-able · dataState marker typed to 02 · notify never replaces state · unique minted ids · atomic updates · stable keys · real file inputs · every object URL revoked · no module-scope prop references · no side effects in updaters · act resolution is data, never a timer.
 
-## 9 — Open items
+## 10 — Open items
 
 | Item | Status | Owner |
 |---|---|---|

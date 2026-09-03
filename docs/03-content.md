@@ -28,8 +28,10 @@ Verb weight MUST match stakes — the verb is the first signal of how much an ac
 | Weight | Verbs | Reserved for |
 |---|---|---|
 | Heavy (binding) | **seal, capture, withdraw** | irreversible commits: consent seal, payment capture, consent withdrawal. A heavy verb always renders in the binding arc (02 §3.3) |
-| Medium (consequential, recoverable) | schedule, reschedule, request, report, record | visits, bookings, incidents, doses, vitals |
+| Medium (consequential, recoverable) | schedule, reschedule, request, report, record, transfer | visits, bookings, incidents, doses, vitals; payout transfer (money moves with a visible lifecycle — 02 §5.8) |
 | Light (reversible) | save, edit, select, add, remove, export, share | drafts, filters, prefs, downloads |
+
+**[D]** The tiers are CLOSED sets: a verb not listed does not carry that weight, and a new heavy or medium verb requires a 03 amendment. Canonical strays from the corpus reconcile as: "Mark dose taken" is **record** (medium); "Submit for review" is **request** (medium); "Pay ₹{n}" is the capture act's surface verb — the act is capture (heavy, binding arc 02 §3.3), the control labels it Pay. Payout movement is **transfer**, never `withdraw` — that verb is reserved for the consent act (02 §5.8).
 
 - **[M]** "Seal" is the house verb for committing pending changes to a sealed record — never "submit" or "confirm" for that act (corpus: "Seal 2 changes", "No pending changes to seal").
 - **[D]** Verb distinctions (I4/D5): **cancel** = before effect (free); **abort** = kill in-flight (only where killing is meaningful); **undo** = restore prior state, always paired with what it restores ("Undo 1 change"); **renew/re-** = forward recovery of a lapsed thing.
@@ -60,7 +62,7 @@ Length by surface type [D, from C trailing-pill law]:
 - **[D]** Counts in prose are numerals: "2 visits", "3 of 5 sealed". Words only in fixed idioms ("one place").
 - **[M]** Part-of-whole is always "N of M" — never "3/5" in prose, never "3 out of a possible 5".
 - **[M]** Units exact and attached where precision matters: "500 mg", "98/64", "98.2°". Units never abbreviated inconsistently within a screen.
-- **[D]** Distances plain ("14 nearby" style is cell-sized at the data layer; the full detail lives in a full-width row — 01 §3, 07).
+- **[D]** Distances render as cell-sized facts derived at the data layer ("2.4 km away"); full detail lives in a full-width row (01 §3, 07).
 
 ## 5 — Time
 
@@ -104,13 +106,13 @@ The action arc (02 §4.1) with its lines. Every behavioral component's one-map t
 
 | Entity | idle | working | done | failed / recovery |
 |---|---|---|---|---|
-| Visit seal | "Seal visit summary" | "Sealing visit summary" | "Visit sealed" | — (seal doesn't fail; async retry per 06) |
+| Visit seal | "Seal visit summary" | "Sealing visit summary" | "Visit sealed" | — (retries per 06 §7; failure renders the 07c §6 failed arc) |
 | Dose | "Mark dose taken" | "Recording" | "Dose recorded, 8:12 AM" | refusal: "Refusal recorded" + reason slot |
 | Consent | "Seal {n} changes" | "Sealing your consent" | "Consent sealed" | withdrawal: binding arc copy (02 §3.3) |
 | Payment | "Pay ₹{amount}" | "Processing payment" | "Payment complete" | "didn't go through — no money left your account" |
 | Booking | "Request care" | "Sending request" | "Request sent — matching now" | no-offer: "No match yet — {n} alternatives" (mandatory surface) |
 | Verification | "Submit for review" | "Submitting" | "Submitted — review in progress" | rejected: "Not approved — {reason}. Resubmit" |
-| Payout | "Withdraw ₹{amount}" | "Withdrawing" | "Withdrawal requested" | — (in-transit is a state, not a failure) |
+| Payout | "Transfer ₹{amount}" | "Transferring" | "Transfer requested" | — (in-transit is a state, not a failure) |
 | Incident | "Report incident" | "Reporting" | "Incident reported" | — (escalation is a link, not an error) |
 
 - **[M]** Gating reasons never duplicate a hint strip — the control is the reason (02 §4.1); a hint exists only for multi-field gates where one control can't carry it.
@@ -118,7 +120,7 @@ The action arc (02 §4.1) with its lines. Every behavioral component's one-map t
 
 ## 9 — Empty & recovery copy
 
-- **[M/C]** Empty states diagnose cause — each cause its own copy, icon, action: search miss ("Nothing matches '{query}'" → "Reset search"), filter exclusion ("Your filters hide every service" → "Clear all filters"), genuinely nothing ("No visits yet" → "Request care").
+- **[M/C]** Empty states diagnose cause (the canonical cause taxonomy is 02 §3.6; this section owns the copy) — each cause its own copy, icon, action: search miss ("Nothing matches '{query}'" → "Reset search"), filter exclusion ("Your filters hide every service" → "Clear all filters"), genuinely nothing ("No visits yet" → "Request care").
 - **[M/R]** Every risk state ships its recovery in the same view, same voice — the way out is never a separate doc, modal, or "contact support" dead end unless the workflow truly requires a human (then: the human's name/role, not "support").
 - **[D]** Recovery actions get forward verbs ("Request new matches", "Renew now", "Retry payment") — never "Go back".
 
@@ -138,7 +140,7 @@ The action arc (02 §4.1) with its lines. Every behavioral component's one-map t
 
 ## 11 — Rule index (MUST summary)
 
-One register, no switching · verb weight matches stakes, heavy verbs reserved · no bare Submit/Confirm/OK · numerals derive from data · "N of M" · units exact · absolute time primary · countdowns tick, zero flips state · money exact + prefixed, estimates labeled · no raw IDs, last-4 only · no-blame · no "error" — fact + way out · confirmation restates consequences · empty states diagnose cause · every risk ships recovery · budgets per surface · working/done narrate the same verb.
+One register, no switching · verb weight matches stakes, tiers are closed sets, heavy verbs reserved · no bare Submit/Confirm/OK · numerals derive from data · "N of M" · units exact · absolute time primary · countdowns tick, zero flips state · money exact + prefixed, estimates labeled · no raw IDs, last-4 only · no-blame · no "error" — fact + way out · confirmation restates consequences · empty states diagnose cause · every risk ships recovery · budgets per surface · working/done narrate the same verb.
 
 ## 12 — Open items
 

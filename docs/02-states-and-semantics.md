@@ -17,7 +17,7 @@ Every component carries up to three independent state axes. They are declared se
 |---|---|---|
 | rest | untouched | the component's base presentation |
 | hover | pointer intent | MUST visibly register — a tint change lighter than or equal to the base is a defect; contained rows step [0.03] → [0.06] [C] |
-| focus | keyboard/screenfocus | MUST render `focus-visible` ring on every interactive element — never removed, never invisible [M] |
+| focus | keyboard/screen focus | MUST render `focus-visible` ring on every interactive element — never removed, never invisible [M] |
 | active / pressed | finger down | tap feedback per 05 (scale 0.985 seed) [C] |
 | disabled | not available | muted fill, `cursor-not-allowed`, `aria-disabled`, and the reason stated in the control itself — never silent [C] |
 | working | async in flight | the control's lifecycle state (§4), not a global block [M] |
@@ -37,7 +37,9 @@ What the data feeding the component is doing, independent of any user interactio
 | partial | some entries/fields real, others absent or pending | show real values, mark pending ones explicitly — never fabricate, never leave silent gaps [D] |
 | stale | data present but past its freshness contract | quiet freshness marker + refresh path — never silently presented as current [D] |
 | conflict | two sources disagree | surface both values and the disagreement — never pick silently [D] |
-| missing | the workflow expects a record; it is absent; absence carries consequence | MUST state: what's missing, what it blocks, the path to create/request it. Tone: attention. Escalates to risk when the block actively prevents scheduled care. Distinct from empty (nothing expected) and loading (arriving) — the distinction MUST be visible [D — defines the previously open item] |
+| missing | the workflow expects a record; it is absent; absence carries consequence | MUST state: what's missing, what it blocks, the path to create/request it. Tone: attention. Escalates to risk when the block actively prevents scheduled care. Distinct from empty (nothing expected) and loading (arriving) — the distinction MUST be visible [D] |
+
+Carriers [D]: loading → Skeleton (07d §15) · missing → the missing-path block (RecordsVault exemplar, 07e §5) · stale/conflict → NoteStrip carrying the freshness fact or both values · partial → explicit per-field pending markers on the owning component. A data state without a carrier is a catalog gap (09 admission).
 
 ### 1.4 Independence rules
 
@@ -46,16 +48,20 @@ What the data feeding the component is doing, independent of any user interactio
 
 ---
 
-## 2 — The derivation matrix
+## 2 — (reserved — the matrix begins at §3)
 
-### 2.1 How derivation works
+---
+
+## 3 — The derivation matrix
+
+### 3.1 How derivation works
 
 Tone (which meaning), intensity (wash/chip/fill/shell), and mode (light/shell) derive from state — never chosen by taste. Order of authority [D]:
 
 1. **Entity lifecycle treatment (§5)** — where an entity defines its state's treatment, it wins.
 2. **The binding arc (§3.3)** — binding-stakes surfaces follow the ceremony arc, not the grid.
 3. **The generic matrix (§3.2)** — the fallback for any state not covered above.
-4. **Completion override** — lifecycle done/verified/sealed reads `positive` always, everywhere [R].
+4. **Completion override** — lifecycle done/verified/sealed reads `positive` on the live surface, always; historical records of risk events may keep a risk-toned event chip on an informational record (§5.4) [R].
 
 ### 3.2 — The generic matrix
 
@@ -77,25 +83,29 @@ Notes:
 
 ### 3.3 — The binding arc
 
-Binding stakes (consent acts, payments, withdrawal) are urgency-independent until failure. They follow the ceremony arc, not the grid [R/D]:
+Binding stakes are urgency-independent until failure. They follow the ceremony arc, not the grid [R/D]. **The binding-class fork:** binding-DESTRUCTIVE acts — the act destroys or exposes what exists (consent withdrawal, payment capture at/above the capture threshold, deletion) — run the FULL ceremony: risk shell pre-commit, hold-to-confirm at/above the act's threshold (an entity-module constant per entity — 06 §2.3). Binding-COMMITTING acts — the act writes a sealed record without destroying anything (consent seal, visit seal) — confirm on a light surface: the control states the concrete consequence, LifecycleButton carries it, the heavy verb still marks the act (03 §2). The shell is reserved for destruction and exposure — ceremony on every binding act trains users to stop reading (04 §3.4):
 
 | Phase | Treatment |
 |---|---|
-| pre-commit | **risk shell** — Mode B ceremony; consequences stated concretely before the act; the action control is the ceremony's center [R] |
+| pre-commit | **risk shell** — Mode B ceremony; consequences stated concretely before the act; the action control is the ceremony's center (HoldConfirmButton at/above threshold — 07c §8) [R] |
 | in-flight | working lifecycle state inside the shell; inputs lock, stating why [R — A5] |
 | committed | **positive** — the confirmation surface flips (sheet header, strip, or card per composition); the persisted record reads positive thereafter [R] |
-| failed (e.g. payment) | risk chip + recovery surface (retry/refund path) — money never ambiguous [R] |
+| failed (e.g. payment) | risk chip + recovery surface (retry/refund path — 06 §7) — money never ambiguous [D] |
 | reversed (refund/withdrawal-cancelled) | states the fact plainly; refund completion reads positive [D] |
+
+- Binding-COMMITTING acts (seal) run the standard action arc (§4.1) with the concrete consequence stated at the control — they never enter the shell. The table above describes the destructive ceremony; committing acts share the committed/failed/reversed rows as-is.
+- **[M]** Resolution is data, never a timer: the flow owns the working→done/failed transition through the record's lifecycle (06 §7).
+- Payment capture's pre-commit surface is binding-destructive — §5.7 renders the record lifecycle from authorization onward.
 
 ### 3.4 — Mode selection (light card vs dark shell)
 
 Shell is triggered by exactly three conditions — never by hue preference [D, from C]:
 
-1. **Stakes binding, pre-commit** — the ceremony.
+1. **Stakes binding, pre-commit (destructive)** — the ceremony.
 2. **Stakes person-safety, live** — the escalation surface.
 3. **The screen's hero/identity card** — heroes may carry Mode B regardless of stakes (identity weight).
 
-Everything else is a light card. A shell on any other surface is a defect.
+Everything else is a light card. A shell on any other surface is a defect. Transient chrome — toasts, splash overlays — is exempt: neither card nor shell; its dark ink carries its own depth (07a §11) [D].
 
 ### 3.5 — Dominant meaning & precedence
 
@@ -132,26 +142,28 @@ Every behavioral component holds ONE source of truth mapping state → presentat
 |---|---|---|---|---|---|
 | …per state… | token | wash/chip/fill/shell | light/shell | which structure renders | working/done/gated lines |
 
-Scattered `state === 'x' ? class : class` conditionals across a component body are banned — presentation derives from the map, or is co-located with the state it mirrors; never duplicated [R — I5/A10]. The map drives tone AND composition AND copy intent together, so whole-surface flips (01 §6.2) fall out mechanically.
+Scattered `state === 'x' ? class : class` conditionals across a component body are banned — presentation derives from the map, or is co-located with the state it mirrors; never duplicated [R — I5/A10]. The map drives tone AND composition AND copy intent together, so whole-surface flips (01 §6.2) fall out mechanically. Matrix inputs may arrive as data-layer classifications (e.g. `vitalIntent` levels); the map translates classification → tone — the data layer never assigns tone tokens (06 §2.4).
 
 ### 4.3 Blocking & return paths
 
 - **[M]** Blocking states lock the inputs they protect: rows muted, toggles guarded, cursor-not-allowed — and the CTA states why ("Sealing locked during withdrawal").
 - **[M]** Every stateful flow has its return path: undo (restores the prior sealed state + notifies), cancel (before effect), abort (kills in-flight — a distinct verb, only where killing is meaningful), handback after done. No dead-end states.
-- **[M]** State persists with its owner at the correct scope: reopening a tab, sheet, or screen never resets persisted state; done derives from the persisted record so re-entry shows done (D4). Per-mode state persists per mode.
+- **[M]** State persists with its owner at the correct scope: reopening a tab, sheet, or screen never resets persisted state; done derives from the persisted record so re-entry shows done (D4). Per-modality state persists per modality (sheet/screen/tab — Q10 scope).
 
 ### 4.4 Time-driven state
 
 - **[M]** Countdowns tick; a decaying value MUST move (static bar where time is the data is a defect). Absolute time is primary ("2:00 PM today"), relative secondary ("in 20 min") [R — 03].
 - **[M]** Hitting zero flips STATE — hue + copy + recovery path — never color alone.
 - **[M]** Thresholds (when `soon` begins, when `overdue` begins) are per-entity data (§5), never universal constants [R].
-- **[M]** Async paths declare their timeout behavior: a timeout transitions to failed with copy stating what happened and the way out — never a silent spinner (D2).
+- **[M]** Async paths declare their timeout behavior: a timeout transitions to failed with copy stating what happened and the way out — never a silent spinner (D2); the timeout constant lives with the flow (06 §7.3), and the working→done/failed transition itself is owned by the flow's data, never a timer (06 §7.1).
 
 ---
 
 ## 5 — Per-entity UI treatment
 
 Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity defines a state, it overrides the generic matrix. Intensity steps per the escalation law (§6). [D — the treatments; lifecycles themselves are R]
+
+**Derived states are marked ⊕**: cross-products of lifecycle × urgency that render through the escalation law (§6) — they never extend the ratified lifecycle enums (master §3.5).
 
 ### 5.1 Visit / Session
 
@@ -173,7 +185,7 @@ Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity d
 | due | attention fill (working dose surface) | the eye lands here [R example] |
 | taken | positive chip | sealed record |
 | refused | risk chip + recorded reason | refusal is first-class, never silent absence [R — MAR] |
-| overdue | risk chip + nudge arc | escalates on the clock |
+| overdue ⊕ | risk chip + nudge arc | derived (due × overdue) — escalates on the clock |
 | missed | risk chip + escalation | consequence stated |
 
 ### 5.3 Consent
@@ -184,7 +196,7 @@ Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity d
 | offered / awaiting signature | active chip | awaiting the signer |
 | signed / active | positive chip + sealed record | **care runs on the sealed version** [R] |
 | pending changes | attention chip ("2 pending") on the positive sealed surface | the split is visible: sealed vs pending never blend [R] |
-| expiring | attention chip → fill as window closes | threshold = entity data |
+| expiring ⊕ | attention chip → fill as window closes | derived (active × soon/now); threshold = entity data |
 | withdrawal ceremony | risk shell (binding arc §3.3) | consequences concrete, pre-commit |
 | withdrawn | risk chip, historical record | states the fact + date |
 | renewed | positive chip | |
@@ -194,7 +206,7 @@ Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity d
 | State | Treatment | Notes |
 |---|---|---|
 | reported / triaged / investigating | risk shell, live, escalation affordance | person-safety [R]; severity scales intensity (§6), never tone |
-| resolved | positive confirmation; record reads informational with risk-toned event chip | closed, not hidden |
+| resolved | positive confirmation; record reads informational with risk-toned event chip | closed, not hidden — the completion signal stays positive; the historical event keeps its risk-toned chip |
 | links | incident always links back to visit/plan [R] | |
 
 ### 5.5 Booking request
@@ -212,9 +224,9 @@ Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity d
 |---|---|---|
 | submitted / in-review | active chip | |
 | verified | positive chip + expiry micro-fact | expiry is scheduled urgency [R] |
-| renewal window (soon) | attention chip | |
-| expiring (now) | attention fill | |
-| lapsed (missed) | risk chip + renew path | blocks work — consequence stated |
+| renewal window (soon) ⊕ | attention chip | derived (verified × soon) |
+| expiring (now) ⊕ | attention fill | derived (verified × now) |
+| lapsed (missed) ⊕ | risk chip + renew path | derived (verified × missed) — blocks work, consequence stated |
 | rejected | risk chip + resubmit path | reason stated |
 
 ### 5.7 Payment
@@ -227,12 +239,14 @@ Entity lifecycles [R — master §3.5] rendered as treatments. Where an entity d
 | failed | risk chip + retry/refund surface | "no money left your account" — the way out, same breath [R — 03] |
 | refunded | positive chip | money returned is a good outcome [D] |
 
+Capture commit: the pre-commit capture surface is binding-DESTRUCTIVE — risk-shell ceremony per §3.3 (HoldConfirmButton at/above the capture threshold, LifecycleButton below it). The rows here render the record lifecycle from authorization onward.
+
 ### 5.8 Payout
 
 | State | Treatment | Notes |
 |---|---|---|
 | accrued | neutral wash (balance fact) | |
-| withdrawn / requested | active chip | |
+| requested | active chip | the act is a transfer — `withdraw` is reserved for the consent act (03 §2) |
 | in-transit | active chip, live | visible state, never a black box [R] |
 | settled | positive chip | |
 
@@ -257,7 +271,7 @@ Two independent scalars govern loudness [D]:
 
 ## 7 — Rule index (MUST summary)
 
-Three axes declared separately, each rendered distinctly · data state never silent · missing ≠ empty ≠ loading visible · derivation order: entity > binding arc > matrix > completion override · completion always positive · shell only on three triggers · precedence person-safety > binding > elevated > routine > informational, ties by urgency · dominant meaning owns surface, secondary demotes · empty states diagnose cause · action arc with stated reasons, narration, handback · one-map rule per behavioral component · blocking locks inputs and states why · return paths always · persistence across reopen · countdowns tick, zero flips state · thresholds are entity data · timeouts declare themselves · intensity scales with magnitude, tone steps at meaning boundaries · recovery paths simultaneous with risk.
+Three axes declared separately, each rendered distinctly · data state never silent, every state with a carrier · missing ≠ empty ≠ loading visible · derivation order: entity > binding arc > matrix > completion override · completion always positive on the live surface · shell only on three triggers (destructive ceremony, person-safety, hero) · binding fork: destructive ceremony, committing confirm · precedence person-safety > binding > elevated > routine > informational, ties by urgency · dominant meaning owns surface, secondary demotes · empty states diagnose cause · action arc with stated reasons, narration, handback · one-map rule per behavioral component, classification → tone only via the map · blocking locks inputs and states why · return paths always · persistence across reopen, per modality · countdowns tick, zero flips state · thresholds are entity data · resolution is data, never a timer · intensity scales with magnitude, tone steps at meaning boundaries · recovery paths simultaneous with risk.
 
 ---
 
@@ -266,7 +280,7 @@ Three axes declared separately, each rendered distinctly · data state never sil
 | Item | Status | Owner |
 |---|---|---|
 | Per-entity threshold values (when `soon` begins per entity) | OPEN | build phase — entity data modules |
+| Capture threshold value (hold-to-confirm gate) | OPEN — mechanism SEALED (entity-module constant, 06 §2.3) | build phase |
 | Severity ladder exact levels (incident) | OPEN | 07 incident entry |
-| Hold-to-confirm for binding ceremony | OPEN (candidate) | 04 |
-| Copy banks per state (working/done/gated lines) | OPEN | 03 |
+| Copy banks per state (working/done/gated lines) | OPEN — bank delivered (03 §8); per-screen slots open | 03 |
 | Live-streaming semantics (unique ids, atomic prepend) | OPEN | 07 live entries + 06 |

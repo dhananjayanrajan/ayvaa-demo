@@ -1,6 +1,6 @@
 # AYVAA DESIGN SYSTEM — MASTER DOCUMENT
 
-**Version:** 2.2 — catalog completed and synced (07 split recorded; ChartBars, Skeleton, ToastHost admitted; all references closed). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
+**Version:** 2.3 — catalog complete; R29–R33 integrated; R16–R28 ratification pending (§6 walk). The deliverable of this phase is a documentation suite; no framework code, runtime, harness, or shared infrastructure exists or will be produced by it.
 **Authority:** User intent is supreme. Where this document conflicts with any prior artifact (README, framework-plan v2, migration ledgers, REDESIGN.md, ANTI-DESIGN.md, progress logs), **this document wins**. Amendment only via §6.
 **Audience:** A fresh session with no prior context. This suite plus the repository are the complete world.
 **Location:** `docs/design-system.md` (this master). Detail documents land one at a time per §4.
@@ -84,6 +84,13 @@ Status: **ACTIVE** governs now · **PARKED** is decided but belongs to the build
 | R13 | ACTIVE (amended 2.1) | Documentation tracking: the suite and the product spine (`docs/workflows.md`, `docs/screens.md`, `docs/coverage.md`) are git-tracked. The evidence ledger (`docs/verify-log.md`) is retired — evidence lives in git history and the amendment log. Old canon (`docs/redesign.md`, `docs/anti-design.md`) stays local and gitignored as mining seed until the suite completes, then is deleted. New docs tracked unless ruled otherwise. |
 | R14 | ACTIVE | A seed is a decision. Concrete values enter the suite only with evidence and user approval; nothing is invented silently. |
 | R15 | ACTIVE | The goal is a component design documentation suite, not a UI framework. No framework code, no runtime, no harness, no shared infrastructure — ever. Component state management is a per-component pattern decision, not a platform. The v1.0 §9 verification protocol and §10 build program are superseded. |
+| R29 | ACTIVE | Binding-class fork. Binding-DESTRUCTIVE acts — the act destroys or exposes what exists (consent withdrawal, payment capture at or above the capture threshold, deletion) — run the full ceremony: risk shell pre-commit; hold-to-confirm at/above the act's threshold. Binding-COMMITTING acts — the act writes a sealed record without destroying anything (consent seal, visit seal) — confirm on a light surface: concrete consequences stated, heavy verb, no shell. The capture threshold is an entity-module constant (06 §2.3); value open per R14. |
+| R30 | ACTIVE | Act resolution is data, never a timer. Arc-bearing controls take the outcome as a controlled `status` input owned by the flow; timeouts and retry mechanics are owned by 06 §7; the failed branch choreographs as part of the completion chain (05 §4.3). |
+| R31 | ACTIVE | PageHero's phase map is internal to the component; canonical phase specs are materialized from the 02 §5 treatments as data-layer constants; screens pass a phase key + typed data and vary composition, never tone semantics. The light-mode hero variant exists; its exact values are walkthrough-owned. |
+| R32 | ACTIVE | Catalog closure: every register row names real catalog entries. StarPicker is admitted (07c §10); countdown presentation is Meter's ticking variant (07d §10); bank-account fields and capture tiles are declared assemblies; trend-at-a-glance charts are the ChartBars spark variant (07d §14). |
+| R33 | ACTIVE | The tone seam: data-layer derivations return semantic classification (`normal`/`borderline`/`abnormal`), never tone tokens; the one-map translates classification → tone via 02. |
+
+Numbering convention: detail documents reserve their ratification ruling number at proposal time (cited in their status headers, R16–R28); it is entered in this registry on ratification.
 
 ### 0.7 Success Condition — documentation phase
 
@@ -169,7 +176,7 @@ Components owning time, async, gating, or multi-step flow model their lifecycle 
 
 ### I5 — State decides, presentation executes
 
-Every behavioral component holds ONE source of truth mapping state → presentation: the tone surface, the composition branches, and the motion variants all derive from it. States that need different structures get different compositions; hand-maintained presentation tables that mirror state by hand are defects waiting to desync — derive, or co-locate with the state itself, never duplicate (A10/D7). Springs come from the motion document (05), per-origin, never unified. No CSS transitions for state-driven motion.
+Every behavioral component holds ONE source of truth mapping state → presentation: the tone surface, the composition branches, and the motion variants all derive from it. States that need different structures get different compositions; hand-maintained presentation tables that mirror state by hand are defects waiting to desync — derive, or co-locate with the state itself, never duplicate (A10/D7). Springs come from the motion document (05), per-origin, never unified. No CSS transitions for state-driven motion — the single exception is `transition-colors` for tone crossfades (05 §2).
 
 ### I6 — Data discipline & the three state axes
 
@@ -177,7 +184,7 @@ Components receive clean typed fields; parsing and derivation happen at the data
 
 - **Interaction** — rest / hover / focus / active / disabled.
 - **Lifecycle** — the component's own state (e.g., idle → working → done → failed).
-- **Data** — empty / loading / partial / stale / conflict; `missing` (expected-yet-absent, carrying consequence) is an open item owned by 02.
+- **Data** — empty / loading / partial / stale / conflict / missing (expected-yet-absent, carrying consequence — 02 §1.3).
 
 Conflating axes or staying silent about data state is a defect.
 
@@ -188,7 +195,7 @@ Conflating axes or staying silent about data state is a defect.
 The catalog (07) is the complete set of component patterns that exist. Nothing ships outside it.
 
 - **Parametric variation within one composition → variant Props union** (single export).
-- **Different compositions → separate purpose-built components sharing primitives.** Never one config-driven mega-component: `ReactNode`/boolean-flag slot cards are banned. Slots belong to structural universals only.
+- **Different compositions → separate purpose-built components sharing primitives.** Never one config-driven mega-component: `ReactNode`/boolean-flag slot cards are banned. Slots belong to structural universals only — the slot fence is at 09 §4.
 - Suffix forks (`*_Patient`) are prohibited (F4).
 
 A new pattern is admitted only through the construction procedure (09): a semantic contract fitting §3, full anatomy per I2, user approval. Otherwise: compose the existing catalog.
@@ -199,7 +206,7 @@ This suite supersedes REDESIGN.md and ANTI-DESIGN.md as canon; they remain minin
 
 ### I9 — Determinism & code hygiene
 
-Identical props + identical data → identical rendered output. No render-time randomness or wall-clock reads — the component's state owns its clock. No code comments. No `transition: all`. No CSS bypassing tokens.
+Identical props + identical data + identical state → identical rendered output. State-derived motion (ticking countdowns, pulses) is not a violation; render-time randomness and wall-clock reads are — the component's state owns its clock. No code comments. No `transition: all`. No CSS bypassing tokens.
 
 ### I10 — Working discipline
 
@@ -211,7 +218,7 @@ React, Vite, TypeScript, Tailwind, radix/shadcn, and framer-motion are substrate
 
 ### I12 — Verification
 
-Standing checks, in rising order of authority: tsc (both configs) after every landing; grep where a rule is mechanically checkable; captures where a claim is visual; and the user's walkthrough, which is final. Nothing is done until the user has seen it. A landed unit without user eyes is not landed (F3's standing rule).
+Owned by §5 — the single home of the verification philosophy; this invariant is the pointer. Four checks in rising authority: tsc · grep · captures · the user's walkthrough, which is final. Nothing is done until the user has seen it. A landed unit without user eyes is not landed (F3's standing rule).
 
 ---
 
@@ -264,7 +271,7 @@ Derived from natural universal understanding + clinical convention (user ruling)
 
 Selection and active controls take the surface's **dominant family hue**, never `positive` (selection is not success).
 
-**Intensity ladder per token** (names binding; values open → 02): `wash` (tinted panel) → `chip` (solid pill) → `fill` (active control) → `shell` (dark immersive surface). Shell is reserved: **binding decisions and person-safety live surfaces**. Mode (light card vs dark shell) is a function of *stakes*, not hue.
+**Intensity ladder per token** (names binding; values open → 02): `wash` (tinted panel) → `chip` (solid pill) → `fill` (active control) → `shell` (dark immersive surface). Shell is reserved: **binding-destruction ceremonies, person-safety live surfaces, and the screen hero** — three triggers, full law at 02 §3.4. Mode (light card vs dark shell) is a function of *stakes*, not hue.
 
 ### 3.4 Derivation rule — tone from state
 
@@ -272,9 +279,9 @@ Anchors now; full matrix expands in 02:
 
 - Urgency rising, stakes ≤ routine: `neutral → active → attention`, intensifying wash → chip → fill.
 - Urgency `overdue`/`missed`: `risk` **with a mandatory recovery path surfaced** — a missed state with no way forward is a defect (I2.8).
-- Stakes `binding`, pre-commit: `risk` ceremony (shell, consequences stated); post-commit: `positive` sealed.
+- Stakes `binding`, pre-commit: `risk` ceremony for binding-DESTRUCTIVE acts (shell, consequences stated, hold at/above the act's threshold); binding-COMMITTING acts confirm on a light surface with stated consequences — the fork is 02 §3.3; post-commit: `positive` sealed.
 - Stakes `person-safety`: `risk` live surface with escalation affordance, regardless of anything else on screen.
-- Lifecycle done/verified/sealed: `positive` — always, everywhere.
+- Lifecycle done/verified/sealed: `positive` on the live surface, always. Historical records of a risk event may keep a risk-toned event chip on an informational record (resolved-incident history) — the completion signal itself never changes meaning (02 §5.4).
 - **Dominant meaning owns the surface**; secondary meanings demote to chips/links. Precedence: person-safety > binding > elevated > routine > informational; ties broken by urgency. (This makes "one dominant hue per card" a computable rule, not taste.)
 
 ### 3.5 Canonical entity lifecycles — the domain grammar (E1)
@@ -290,7 +297,7 @@ The system knows Ayvaa's first-class entities semantically; components type agai
 | Booking request | requested → matching → offered → accepted → scheduled \| expired/no-offer | no-offer owes the alternatives/recovery surface — never a dead end |
 | Verification / Credential | submitted → in-review → verified \| rejected | expiry is scheduled urgency; renewal window opens before lapse |
 | Payment | estimated → authorized → capturing → captured \| failed → refunded | money never ambiguous; failed owes the retry/refund surface |
-| Payout | accrued → withdrawn → in-transit → settled | in-transit is a visible state, not a black box |
+| Payout | accrued → requested → in-transit → settled | in-transit is a visible state, not a black box; the act is a transfer — `withdraw` is reserved for the consent act (03 §2) |
 
 Extension only by I7 admission.
 
@@ -311,7 +318,7 @@ One voice everywhere: plain, precise, warm-professional. A professional trusts i
 
 ### 3.7 Provenance & open items
 
-Seeds carried from the old canon as spirit only (R6, I8): hue intent semantics, positive-done-only, copy-is-the-interface, missed-state recovery paths, long-content line rule, one-fact-one-place. **Open values** (decided in the build phase with evidence + approval, R14): full derivation matrix and per-entity thresholds (02), intensity ladder values (02), the `missing` data state (02), copy banks (03). Every sealed item states its provenance.
+Seeds carried from the old canon as spirit only (R6, I8): hue intent semantics, positive-done-only, copy-is-the-interface, missed-state recovery paths, long-content line rule, one-fact-one-place. **Open values** (decided in the build phase with evidence + approval, R14): full derivation matrix and per-entity thresholds (02), intensity ladder values (01 §7.3 — meanings in 02 §3.3), copy banks (03). The `missing` data state is defined (02 §1.3), with its RecordsVault exemplar open (07e §5). The capture threshold's mechanism is sealed — an entity-module constant (06 §2.3) — with its value open per R14. Every sealed item states its provenance.
 
 ---
 
@@ -331,10 +338,10 @@ User ruling: "multiple documents, extremely clear ones with details separated fo
 | `03-content.md` | Voice, copy rules expanded with patterns, numbers/time/money/privacy, copy banks | written — proposed (R17) |
 | `04-interaction.md` | Triggers, gestures, keyboard, the a11y standard, QoL catalog, gating | written — proposed (R18) |
 | `05-motion.md` | Durations, springs per origin, entrance/exit doctrine, choreography, effects | written — proposed (R19) |
-| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes | written — proposed (R20) |
+| `06-data.md` | Typed contracts, parsing, derivation, wiring the three axes, act resolution | written — proposed (R20) |
 | `07a-components-shells.md` | Catalog 1/6: shells & chrome — frame, screen, bars, splash, sections, panels, SheetShell, PageHero, HeroCells, ToastHost | written — proposed (R21) |
 | `07b-components-lists.md` | Catalog 2/6: rows, lists & disclosure — Row, ExpandRow, OptionRow, StepList, rails, EmptyState, StreamList | written — proposed (R22) |
-| `07c-components-controls.md` | Catalog 3/6: controls & inputs — Field, OTP, Switch, Checkbox, Tabs, LifecycleButton, DialInput, pickers | written — proposed (R23) |
+| `07c-components-controls.md` | Catalog 3/6: controls & inputs — Field, OTP, Switch, Checkbox, Tabs, StarPicker, LifecycleButton, DialInput, pickers | written — proposed (R23) |
 | `07d-components-displays.md` | Catalog 4/6: data displays — chips, facts, strips, meters, rings, tiles, ChartBars, Skeleton | written — proposed (R24) |
 | `07e-components-care-domains.md` | Catalog 5/6: care-delivery compositions — matching, booking, visits, meds, consent, records, billing | written — proposed (R25) |
 | `07f-components-platform-domains.md` | Catalog 6/6: platform & shared — offers, sessions, approvals, incidents, auth, admin, system | written — proposed (R26) |
@@ -396,10 +403,10 @@ The superseded v1.0 protocol (V1–V7, harness mechanics, seeded-defect calibrat
 - **A10/D7**: presentation derives from state; hand-maintained tone tables banned — now I5.
 - **D1**: field validation lifecycle `empty → invalid → valid` — now I2.
 - **D2**: async timeout transitions declared — now I2.3/I4.
-- **D3**: hold-to-confirm candidate for binding ceremony — open, owned by 04.
+- **D3**: hold-to-confirm candidate for binding ceremony — decided, owned by 04 §3.4.
 - **D4**: persistence-across-reopen — now I2.9.
 - **D5**: typed verb vocabulary; cancel ≠ abort — now I4.
-- **D6**: `missing` data-state open item — owned by 02; gesture vocabulary completeness → 04.
+- **D6**: `missing` data-state — defined at 02 §1.3.
 - **R12**: semantic foundation ratified (urgency ≠ clinical danger; stakes precedence; tones from universal + clinical convention; one register).
 - **R13**: docs tracking policy — suite, ledger, spine tracked; superseded-era docs ignored.
 - **R14**: a seed is a decision — values need evidence + approval.
@@ -408,3 +415,4 @@ The superseded v1.0 protocol (V1–V7, harness mechanics, seeded-defect calibrat
 - **2.0 rewrite**: master restructured as suite index; invariants rewritten as pattern disciplines (I0–I12); expectation map lightened; verification protocol replaced by §5; suite architecture §4 added.
 - **2.1**: R13 amended — evidence ledger retired, `docs/verify-log.md` deleted; superseded-era docs and dead tooling purged; canon seed expiry stated in I8 (user ruling during suite writing).
 - **2.2**: catalog completion — `07` split to `07a`–`07f` recorded; index statuses synced; ChartBars + Skeleton (07d) and ToastHost (07a) admitted; dangling references closed (05 shimmer → 07d §15, 02 loading → 07d §15, 07f analytics → 07d, 06 notify → 07a §11); tone-arrival rule widened to cover data-layer derivation; part numbering corrected; register debris removed. Pre-ratification completion — no ruling changed.
+- **2.3**: R29–R33 recorded — the binding-class fork (02 §3.3), act resolution as controlled data (06 §7), PageHero phase-map authority (07a §9), catalog closure lint (R32), the tone seam (R33) — and the suite swept for internal consistency. Detail documents reissued with the fixes integrated; their R16–R28 seals remain pending.
