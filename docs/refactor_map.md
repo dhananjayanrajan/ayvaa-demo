@@ -1,23 +1,20 @@
-# Refactor Map — src/apps → src/components / src/data
+# Refactor Progression
 
-| Screen | Source File | Extracted Components (src/components) | Data Extracted (src/data) | Merge or New | Status | Notes |
-|--------|-------------|---------------------------------------|---------------------------|--------------|--------|-------|
-| A01 | src/apps/admin/A01.tsx | src/components/admin/heroes/OperationsHero.tsx (composes metrics/OperationsMetrics + status/OperationsStatus) — 3-layer normalized; dashboard cards to admin/dashboard/* | src/data/admin/a01Data.ts — adminMetrics, adminAttention | New + Merge | Done | Component-focused: heroes/metrics/status split, no A0X prefix, tsc clean |
-| A02 | src/apps/admin/A02.tsx | src/components/admin/actions/IncidentActions.tsx + overlays/PhotoOverlay.tsx — 2-layer normalized; incident cards to admin/incident/*, sheets to admin/sheets/* | src/data/admin/a02Data.ts — a02Incident + incidents | New + Merge | Done | Component-focused: actions/overlays layers |
-| A03 | src/apps/admin/A03.tsx | src/components/admin/heroes/ApprovalsHero.tsx + filters/ApprovalsFilter.tsx + assurance/AccountabilityCard.tsx — 3-layer normalized | src/data/admin/a03Data.ts — approvals + a03FilterTabs | New + Merge | Done | Component-focused: heroes/filters/assurance |
-| A04 | src/apps/admin/A04.tsx | src/components/admin/heroes/DirectoryHero.tsx (composes metrics/DirectoryMetrics + status/DirectoryStatus) — 3-layer normalized | src/data/admin/a04Data.ts — accountFilters, filterRoleMap, flaggedAccount, recentActivity | New + Merge | Done | Component-focused: heroes/metrics/status |
-| A05 | src/apps/admin/A05.tsx | src/components/admin/filters/LedgerRangeFilter.tsx + actions/LedgerExportAction.tsx + assurance/AppendOnlyCard.tsx — 3-layer normalized; LedgerChainHero/AuditEntryList/CustomRangePicker/ComplianceToolsList to admin/audit/* | src/data/admin/a05Data.ts — ranges, PAGE_SIZE, auditEntries | New + Merge | Done | Component-focused: filters/actions/assurance |
-| A06 | src/apps/admin/A06.tsx | src/components/admin/heroes/ConsentHero.tsx (composes metrics/ConsentMetrics + status/ConsentStatus) — 3-layer normalized | — | New | Done | Component-focused: heroes/metrics/status |
-| A07 | src/apps/admin/A07.tsx | src/components/admin/actions/PolicyExportAction.tsx — single action layer | — | New | Done | Component-focused: actions |
-| A08 | src/apps/admin/A08.tsx | Existing EscalationsSet (EscalationHeroCard, EscalationTicketCard, RelatedTicketsList) — no new extraction | — | Review | Done | Already componentized, no redundancy |
-| A09 | src/apps/admin/A09.tsx | Existing AnalyticsSet (RevenueHero, WeeklySessionsCard, CategoryMixCard, WatchHero) — no new extraction | — | Review | Done | Already componentized |
-| A10 | src/apps/admin/A10.tsx | src/components/admin/heroes/CommandHero.tsx + metrics/CommandStrip.tsx + metrics/CommandEditor.tsx + assurance/MetricDetailCard.tsx + actions/CommandActions.tsx — 5-layer normalized | src/data/admin/a10Data.ts — metrics, defaultVisible, heroStats, changeChipIntent | New + Merge | Done | Component-focused: heroes/metrics/assurance/actions + data extraction |
-| A11 | src/apps/admin/A11.tsx | src/components/admin/heroes/CaseHero.tsx + pickers/InvestigatorPicker.tsx + actions/CaseAssignAction.tsx — 3-layer normalized | src/data/admin/a11Data.ts — investigators, a11IncidentFallback | New | Done | Component-focused: heroes/pickers/actions, tsc clean |
-| A12 | src/apps/admin/A12.tsx | src/components/admin/heroes/ApplicationHero.tsx + lists/DocumentList.tsx + lists/VerificationList.tsx + actions/ApplicationDecision.tsx — 4-layer normalized | src/data/admin/a12Data.ts — application, documents, checks, TONE | New | Done | Component-focused: heroes/lists/actions |
-| A13 | src/apps/admin/A13.tsx | src/components/admin/heroes/UserDetailHero.tsx + forms/ProfileEditor.tsx + actions/AccountActions.tsx — 3-layer normalized; sheets retained | src/data/admin/a13Data.ts — user, mergeTargets, TONE | New | Done | Component-focused: heroes/forms/actions |
-| A14 | src/apps/admin/A14.tsx | src/components/admin/heroes/SealedRecordHero.tsx + lists/RecordTimeline.tsx — 2-layer normalized | src/data/admin/a14Data.ts — sealedRecord, recordEntries | New | Done | Component-focused: heroes/lists |
-| A15 | src/apps/admin/A15.tsx | src/components/admin/heroes/ConsentRecordHero.tsx + lists/VersionHistory.tsx — 2-layer normalized; access log inline + sheets retained | src/data/admin/a15Data.ts — record, versions, accessEntries, stateTone | New | Done | Component-focused: heroes/lists, tsc clean |
-| A16 | src/apps/admin/A16.tsx | src/components/admin/heroes/RetentionHero.tsx + lists/HoldsList.tsx + metrics/PurgePreview.tsx + lists/RetentionAuditTimeline.tsx + sheets/EditPolicySheet.tsx + sheets/PlaceHoldSheet.tsx — 6-layer normalized | src/data/admin/a16Data.ts — INITIAL_POLICY, HOLDS, AUDIT_EVENTS, PATIENTS, PRESETS | New | Done | Component-focused: heroes/lists/metrics/sheets, 991→~60 lines |
-| A17 | src/apps/admin/A17.tsx | src/components/admin/heroes/SlaHero.tsx + lists/EscalationRail.tsx + sheets/SlaSheets.tsx (ContactSheet+AssignSheet) — 3-layer normalized | src/data/admin/a17Data.ts — ESCALATIONS, CONTACTS | New | Done | Component-focused: heroes/lists/sheets, 883→~45 lines |
-| A18 | src/apps/admin/A18.tsx | src/components/admin/forms/ReportBuilder.tsx + lists/ScheduledReports.tsx + sheets/ReportSheets.tsx + actions/ReportSaveAction.tsx — 4-layer normalized; heroes/ReportHero placeholder retained | src/data/admin/a18Data.ts — metricOptions, timeRanges, frequencies, initialReports + helpers | New | Done | Component-focused: forms/lists/sheets/actions, 816→~55 lines |
-| AdminApp | src/apps/admin/AdminApp.tsx | src/components/admin/navigation/AdminTabBar.tsx (tabs+withNav+TabBar) + shells/AdminShell.tsx (ambient bg + PhoneFrame + Splash routing) — 2-layer normalized | — | New | Done | Component-focused: navigation/shells, 181→~32 lines |
+## Completed Pages
+
+- `src/apps/admin/A01.tsx` — Operations console
+  - Extracted `src/components/admin/dashboard/OperationsHero.tsx`
+  - Reused existing admin dashboard components (`IncidentOverviewCard`, `AttentionList`, `LiveSessionsCard`)
+  - Preserved all data and state wiring
+
+- `src/apps/admin/A02.tsx` — Incident detail
+  - Extracted `src/components/admin/incident/IncidentActionBar.tsx`
+  - Switched to dedicated admin incident components under `src/components/admin/incident/`
+  - Switched to dedicated admin sheet components under `src/components/admin/sheets/`
+  - Preserved all incident state, routing, and notification flows
+
+- `src/apps/admin/A03.tsx` — Professional approvals
+  - Extracted `src/components/admin/approvals/ApprovalsHero.tsx`
+  - Switched to dedicated admin approval components under `src/components/admin/approvals/`
+  - Switched to dedicated admin UI component under `src/components/admin/ui/`
+  - Preserved all approval decision, filter, and notification flows
