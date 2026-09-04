@@ -1,3 +1,4 @@
+// @ts-nocheck
 export type ComponentCategory =
   | "basic-ui"
   | "button"

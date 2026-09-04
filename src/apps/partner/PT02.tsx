@@ -6,29 +6,29 @@ import {
   ReceiptText,
   X,
 } from 'lucide-react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
 import {
   Chip,
   Section,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { partner, referrals } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
-import { PartnerStatsHero } from '@/components/home/HomeSet'
-import { PartnerReferralCard } from '@/components/home/HomeSet'
-import { PartnerQuickActions } from '@/components/home/HomeSet'
-import { ReferredPatientList } from '@/components/home/HomeSet'
-import { PartnerBillingCard } from '@/components/home/HomeSet'
-import { PartnerAlertsSheet, type AlertItem } from '@/components/sheets/SheetsSet'
-import { PartnerStatsSheet } from '@/components/sheets/SheetsSet'
-import { PartnerReferralSheet } from '@/components/sheets/SheetsSet'
-import { PartnerStaffSheet } from '@/components/sheets/SheetsSet'
-import { PartnerBillingSheet } from '@/components/sheets/SheetsSet'
-import { PartnerSessionsSheet } from '@/components/sheets/SheetsSet'
+import { PartnerStatsHero } from '@/components/patterns/heroes/partner-stats-hero'
+import { PartnerReferralCard } from '@/components/patterns/cards/partner-referral-card'
+import { PartnerQuickActions } from '@/components/patterns/actions/partner-quick-actions'
+import { ReferredPatientList } from '@/components/patterns/lists/referred-patient-list'
+import { PartnerBillingCard } from '@/components/patterns/cards/partner-billing-card'
+import { PartnerAlertsSheet, type AlertItem } from '@/components/patterns/sheets/partner-alerts-sheet'
+import { PartnerStatsSheet } from '@/components/patterns/sheets/partner-stats-sheet'
+import { PartnerReferralSheet } from '@/components/patterns/sheets/partner-referral-sheet'
+import { PartnerStaffSheet } from '@/components/patterns/sheets/partner-staff-sheet'
+import { PartnerBillingSheet } from '@/components/patterns/sheets/partner-billing-sheet'
+import { PartnerSessionsSheet } from '@/components/patterns/sheets/partner-sessions-sheet'
 
 const initialAlerts: AlertItem[] = [
   { icon: CheckCircle2, tone: 'success', title: 'Offer accepted', body: 'Ramesh Rao · caregiver confirmed for Friday', time: '8:12 AM' },

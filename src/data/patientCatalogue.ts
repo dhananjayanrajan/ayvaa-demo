@@ -9,7 +9,7 @@ import {
   Sparkles,
   Stethoscope,
 } from 'lucide-react'
-import type { TileTone } from '@/components/phone/kit'
+import type { TileTone } from '@/components/base/phone/kit'
 import { services, type Service } from '@/data/services'
 
 export function iconFor(s: Service): LucideIcon {

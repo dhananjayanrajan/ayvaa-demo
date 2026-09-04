@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from '@/lib/router'
-import { AdminShell } from '@/components/admin/shells/AdminShell'
+import { AdminShell } from '@/components/patterns/misc/admin-shell'
 import { A01 } from './A01'
 import { A02 } from './A02'
 import { A03 } from './A03'

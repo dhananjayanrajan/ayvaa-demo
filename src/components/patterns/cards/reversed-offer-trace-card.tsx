@@ -1,0 +1,93 @@
+import { motion } from 'motion/react'
+import { Check, ScrollText, UserCheck, Users } from 'lucide-react'
+import { Chip, rise } from '@/components/base/phone/kit'
+import { StepList } from '@/components/base/phone/step-list'
+import { PhaseHero, PHASE_THEME } from '@/components/base/phone/phase-hero'
+import { reversalEvents } from '@/data/system/recheck'
+
+interface ReversedOfferTraceCardProps {
+  onEventTap: (title: string, body: string) => void
+}
+
+export function ReversedOfferTraceCard({ onEventTap }: ReversedOfferTraceCardProps) {
+  return (
+    <motion.div variants={rise}>
+      <PhaseHero theme={{ ...PHASE_THEME.sky, shadow: 'shadow-[0_28px_64px_-30px_rgba(8,32,48,0.7)]' }}>
+        <div className="flex items-center gap-1.5 text-[9px] font-extrabold uppercase tracking-[0.22em] text-sky-200/50">
+            <ScrollText className="h-3 w-3" aria-hidden />
+            Reversal trace · 9:42 AM
+          </div>
+          <h3 className="mt-2 text-balance text-[19px] font-extrabold leading-snug tracking-tight text-white">
+            Reversed,{' '}
+            <span className="bg-gradient-to-r from-sky-300 to-blue-200 bg-clip-text text-transparent">
+              nothing broken
+            </span>
+          </h3>
+          <p className="mt-1.5 text-pretty text-[12px] font-medium leading-relaxed text-sky-100/60">
+            The conflict was caught before it could touch the family or the professional's record.
+          </p>
+
+          <div className="mt-4 rounded-2xl bg-white/[0.06] p-4">
+            <StepList
+              nodeStyle="circle"
+              nodeSize="md"
+              theme="dark"
+              steps={reversalEvents.map((e, i) => {
+                const last = i === reversalEvents.length - 1
+                return {
+                  key: e.title,
+                  state: 'done',
+                  node: (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sky-400/90 text-white">
+                      <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
+                    </span>
+                  ),
+                  title: e.title,
+                  titleWrap: true,
+                  titleClassName: 'text-[13px]',
+                  time: e.time,
+                  timeTrailing: true,
+                  timeTrailingClassName: 'text-[9px] text-sky-200/50',
+                  body: e.body,
+                  bodyClassName: 'text-[11px] leading-relaxed text-sky-100/60',
+                  contentClassName: last ? 'pb-0.5' : undefined,
+                  onClick: () => onEventTap(e.title, `${e.time} · ${e.body}`),
+                }
+              })}
+            />
+          </div>
+
+          <div className="mt-4 flex flex-col gap-2.5">
+            <div className="flex items-start gap-2.5 rounded-2xl bg-white/[0.05] px-3.5 py-3">
+              <UserCheck className="mt-0.5 h-4 w-4 shrink-0 text-sky-200" aria-hidden />
+              <div className="min-w-0 flex-1">
+                <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-sky-200/70">
+                  What Suresh sees
+                </div>
+                <p className="mt-1 break-words text-[11.5px] font-medium leading-relaxed text-sky-100/70">
+                  Offer reversed · no penalty · his Friday window stays intact for shorter visits.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-2.5 rounded-2xl bg-white/[0.05] px-3.5 py-3">
+              <Users className="mt-0.5 h-4 w-4 shrink-0 text-sky-200" aria-hidden />
+              <div className="min-w-0 flex-1">
+                <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-sky-200/70">
+                  What the family sees
+                </div>
+                <p className="mt-1 break-words text-[11.5px] font-medium leading-relaxed text-sky-100/70">
+                  New offers going out · nothing else changed · the visit time never moved.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center gap-1.5">
+            <Chip intent="success" light className="border-transparent">No penalty applied</Chip>
+            <Chip intent="info" light className="border-transparent">Re-offered round 3</Chip>
+            <Chip intent="success" light className="border-transparent">Audit sealed</Chip>
+          </div>
+      </PhaseHero>
+    </motion.div>
+  )
+}

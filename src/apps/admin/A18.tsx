@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { BarChart3 } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Chip, Section, Panel, Tile } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
+import { Chip, Section, Panel, Tile } from '@/components/base/phone/kit'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { initialReports, frequencyLabel, type MetricId, type TimeRange, type Frequency, type Delivery, type ScheduledReport } from '@/data/admin/a18Data'
-import { ReportBuilder } from '@/components/admin/forms/ReportBuilder'
-import { ScheduledReports } from '@/components/admin/lists/ScheduledReports'
-import { ReportSheets } from '@/components/admin/sheets/ReportSheets'
-import { ReportSaveAction } from '@/components/admin/actions/ReportSaveAction'
+import { ReportBuilder } from '@/components/patterns/forms/report-builder'
+import { ScheduledReports } from '@/components/patterns/lists/scheduled-reports'
+import { ReportSheets } from '@/components/patterns/sheets/report-sheets'
+import { ReportSaveAction } from '@/components/patterns/actions/report-save-action'
 
 export function A18() {
   const { notify } = useDemo()

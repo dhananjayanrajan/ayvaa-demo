@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Section, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Section, rise, stagger } from '@/components/base/phone/kit'
 import { useRouter } from '@/lib/router'
 import { useDemo } from '@/lib/store'
 import { RATED_VISIT } from '@/data/patientRating'
-import { RatingHero } from '@/components/review/ReviewSet'
-import { VisitRecordCard } from '@/components/review/ReviewSet'
-import { RateVisitSheet } from '@/components/review/ReviewSet'
+import { RatingHero } from '@/components/patterns/heroes/rating-hero'
+import { VisitRecordCard } from '@/components/patterns/cards/visit-record-card'
+import { RateVisitSheet } from '@/components/patterns/sheets/rate-visit-sheet'
 
 export function P18() {
   const { notify } = useDemo()

@@ -1,20 +1,20 @@
 import { motion } from 'motion/react'
 import { Bell, Link2, ShieldCheck } from 'lucide-react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
 import {
   Chip,
   Section,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { escalatedTickets } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { EscalationHeroCard } from '@/components/escalations/EscalationsSet'
-import { EscalationTicketCard } from '@/components/escalations/EscalationsSet'
-import { RelatedTicketsList } from '@/components/escalations/EscalationsSet'
-import { InfoListCard } from '@/components/ui/UiSet'
+import { EscalationHeroCard } from '@/components/patterns/heroes/escalation-hero-card'
+import { EscalationTicketCard } from '@/components/patterns/cards/escalation-ticket-card'
+import { RelatedTicketsList } from '@/components/patterns/lists/related-tickets-list'
+import { InfoListCard } from '@/components/patterns/cards/info-list-card'
 
 export function A08() {
   const { notify } = useDemo()

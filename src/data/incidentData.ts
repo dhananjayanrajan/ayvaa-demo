@@ -1,5 +1,5 @@
 import { BellRing, Eye, FileCheck2, HeartPulse, PauseCircle, Siren, Users, type LucideIcon } from 'lucide-react'
-import type { Intent, TileTone } from '@/components/phone/kit'
+import type { Intent, TileTone } from '@/components/base/phone/kit'
 
 export type Severity = 'Minor' | 'Moderate' | 'Critical'
 

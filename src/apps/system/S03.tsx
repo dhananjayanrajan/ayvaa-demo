@@ -1,8 +1,8 @@
 import { motion } from 'motion/react'
 import { BellRing } from 'lucide-react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
 import {
   Chip,
   Hero,
@@ -13,13 +13,13 @@ import {
   Stat,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { autoNotifications } from '@/data/system/notifications'
 import { useDemo } from '@/lib/store'
-import { PushPreview } from '@/components/phone/PushPreview'
-import { NotificationFeed } from '@/components/notifications/NotificationsSet'
-import { IncidentLinkingCard } from '@/components/escalations/EscalationsSet'
-import { EventFanOutCard } from '@/components/drills/DrillsSet'
+import { PushPreview } from '@/components/base/phone/push-preview'
+import { NotificationFeed } from '@/components/patterns/lists/notification-feed'
+import { IncidentLinkingCard } from '@/components/patterns/cards/incident-linking-card'
+import { EventFanOutCard } from '@/components/patterns/cards/event-fan-out-card'
 
 export function S03() {
   const { notify } = useDemo()

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Download } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Section, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Section, rise, stagger } from '@/components/base/phone/kit'
 import { useRouter } from '@/lib/router'
 import { useDemo } from '@/lib/store'
 import {
@@ -17,11 +17,11 @@ import {
   type AuditEntry,
   type AuditFilter,
 } from '@/data/patientRecords'
-import { VaultHero } from '@/components/records/RecordsSet'
-import { RecordsCard } from '@/components/records/RecordsSet'
-import { AuditTimeline } from '@/components/records/RecordsSet'
-import { AuditLogSheet } from '@/components/records/RecordsSet'
-import { RecordsExportSheet } from '@/components/records/RecordsSet'
+import { VaultHero } from '@/components/patterns/heroes/vault-hero'
+import { RecordsCard } from '@/components/patterns/cards/records-card'
+import { AuditTimeline } from '@/components/patterns/lists/audit-timeline'
+import { AuditLogSheet } from '@/components/patterns/sheets/audit-log-sheet'
+import { RecordsExportSheet } from '@/components/patterns/sheets/records-export-sheet'
 
 type SheetId = 'none' | 'log' | 'export'
 

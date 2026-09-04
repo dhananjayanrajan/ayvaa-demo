@@ -1,13 +1,13 @@
 import { motion } from 'motion/react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Chip, Panel, Section, rise, stagger } from '@/components/phone/kit'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Chip, Panel, Section, rise, stagger } from '@/components/base/phone/kit'
 import { analytics } from '@/data/seed'
-import { RevenueHero } from '@/components/analytics/AnalyticsSet'
-import { WeeklySessionsCard } from '@/components/analytics/AnalyticsSet'
-import { CategoryMixCard } from '@/components/analytics/AnalyticsSet'
-import { WatchHero } from '@/components/analytics/AnalyticsSet'
+import { RevenueHero } from '@/components/patterns/heroes/revenue-hero'
+import { WeeklySessionsCard } from '@/components/patterns/cards/weekly-sessions-card'
+import { CategoryMixCard } from '@/components/patterns/cards/category-mix-card'
+import { WatchHero } from '@/components/patterns/heroes/watch-hero'
 
 export function A09() {
   const totalWeek = analytics.weekly.reduce((a, b) => a + b, 0)

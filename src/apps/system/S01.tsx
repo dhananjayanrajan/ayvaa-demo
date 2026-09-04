@@ -3,9 +3,9 @@ import {
   ShieldCheck,
   Zap,
 } from 'lucide-react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
 import {
   Card,
   Chip,
@@ -18,11 +18,11 @@ import {
   Tile,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { systemTrail } from '@/data/system/executionTrail'
 import { useDemo } from '@/lib/store'
 import { cn } from '@/lib/utils'
-import { ExecutionTrail } from '@/components/execution/ExecutionSet'
+import { ExecutionTrail } from '@/components/patterns/lists/execution-trail'
 
 const escalation: { label: string; sub: string }[] = [
   { label: 'Incident raised', sub: 'Detected automatically' },

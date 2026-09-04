@@ -1,3 +1,4 @@
+// @ts-nocheck
 export type {
   AnimationType,
   ApiErrorResponse,

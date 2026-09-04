@@ -1,13 +1,13 @@
 import { motion } from 'motion/react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Chip, LiveChip, Section, rise, stagger } from '@/components/phone/kit'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Chip, LiveChip, Section, rise, stagger } from '@/components/base/phone/kit'
 import { adminAttention, adminMetrics } from '@/data/admin/a01Data'
-import { IncidentOverviewCard } from '@/components/admin/dashboard/IncidentOverviewCard'
-import { AttentionList } from '@/components/admin/dashboard/AttentionList'
-import { LiveSessionsCard } from '@/components/admin/dashboard/LiveSessionsCard'
-import { OperationsHero } from '@/components/admin/heroes/OperationsHero'
+import { IncidentOverviewCard } from '@/components/patterns/cards/incident-overview-card'
+import { AttentionList } from '@/components/patterns/lists/attention-list'
+import { LiveSessionsCard } from '@/components/patterns/cards/live-sessions-card'
+import { OperationsHero } from '@/components/patterns/heroes/operations-hero'
 
 export function A01() {
   return (

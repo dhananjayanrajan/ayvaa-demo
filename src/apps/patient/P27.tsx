@@ -10,9 +10,9 @@ import {
   Send,
   ShieldCheck,
 } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
+import { Card, Chip, Panel, Section, Tile, rise, stagger } from '@/components/base/phone/kit'
 import { supportChat, supportTickets } from '@/data/seed'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'

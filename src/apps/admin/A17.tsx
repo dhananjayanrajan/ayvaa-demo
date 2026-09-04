@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { AnimatePresence } from 'motion/react'
-import { AppBar } from '@/components/phone/AppBar'
-import { Screen } from '@/components/phone/Screen'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { Screen } from '@/components/base/phone/screen'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { ESCALATIONS } from '@/data/admin/a17Data'
-import { SlaHero } from '@/components/admin/heroes/SlaHero'
-import { EscalationRail } from '@/components/admin/lists/EscalationRail'
-import { ContactSheet, AssignSheet } from '@/components/admin/sheets/SlaSheets'
+import { SlaHero } from '@/components/patterns/heroes/sla-hero'
+import { EscalationRail } from '@/components/patterns/lists/escalation-rail'
+import { ContactSheet, AssignSheet } from '@/components/patterns/sheets/sla-sheets'
 
 export function A17() {
   const { navigate } = useRouter()

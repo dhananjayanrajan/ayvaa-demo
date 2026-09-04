@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Clock, ScrollText, Siren } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
+import { Panel, Section, Tile, rise, stagger } from '@/components/base/phone/kit'
 import { useRouter } from '@/lib/router'
 import {
   LIVE_VISIT,
@@ -17,12 +17,12 @@ import {
   formatElapsed,
   type VisitStep,
 } from '@/data/patientLiveVisit'
-import { LiveVisitHero } from '@/components/visits/VisitsSet'
-import { LiveStepCard } from '@/components/visits/VisitsSet'
-import { StepTimeline } from '@/components/visits/VisitsSet'
-import { CaregiverCard } from '@/components/visits/VisitsSet'
-import { PlanCard } from '@/components/visits/VisitsSet'
-import { VisitSoFarSheet } from '@/components/visits/VisitsSet'
+import { LiveVisitHero } from '@/components/patterns/heroes/live-visit-hero'
+import { LiveStepCard } from '@/components/patterns/cards/live-step-card'
+import { StepTimeline } from '@/components/patterns/lists/step-timeline'
+import { CaregiverCard } from '@/components/patterns/cards/caregiver-card'
+import { PlanCard } from '@/components/patterns/cards/plan-card'
+import { VisitSoFarSheet } from '@/components/patterns/sheets/visit-so-far-sheet'
 import { useDemo } from '@/lib/store'
 
 const LAP_INTERVAL_MS = 9000

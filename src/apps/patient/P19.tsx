@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Plus, ShieldCheck } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Chip, Panel, Section, Tile, rise, stagger } from '@/components/base/phone/kit'
 import { useRouter } from '@/lib/router'
 import { useDemo } from '@/lib/store'
 import {
@@ -16,7 +16,11 @@ import {
   sealedMedsOf,
   type MedDose,
 } from '@/data/patientMeds'
-import { MedsHero, DueDoseCard, MedLogCard, RefillCard, DoseDetailSheet } from '@/components/meds/MedsSet'
+import { MedsHero } from '@/components/patterns/heroes/meds-hero'
+import { DueDoseCard } from '@/components/patterns/cards/due-dose-card'
+import { MedLogCard } from '@/components/patterns/cards/med-log-card'
+import { RefillCard } from '@/components/patterns/cards/meds-refill-card'
+import { DoseDetailSheet } from '@/components/patterns/sheets/dose-detail-sheet'
 
 export function P19() {
   const { notify } = useDemo()

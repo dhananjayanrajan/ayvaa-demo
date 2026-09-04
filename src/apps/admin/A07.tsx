@@ -1,20 +1,20 @@
 import { motion } from 'motion/react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { PolicyExportAction } from '@/components/admin/actions/PolicyExportAction'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
+import { PolicyExportAction } from '@/components/patterns/actions/policy-export-action'
 import {
   Chip,
   Section,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { deletionQueue, retentionPolicies } from '@/data/seed'
 import { useDemo } from '@/lib/store'
-import { VaultHeroCard } from '@/components/retention/RetentionSet'
-import { RetentionPeriodsList } from '@/components/retention/RetentionSet'
-import { DeletionQueueList } from '@/components/retention/RetentionSet'
-import { CryptoDeletionCard } from '@/components/retention/RetentionSet'
+import { VaultHeroCard } from '@/components/patterns/cards/vault-hero-card'
+import { RetentionPeriodsList } from '@/components/patterns/lists/retention-periods-list'
+import { DeletionQueueList } from '@/components/patterns/lists/deletion-queue-list'
+import { CryptoDeletionCard } from '@/components/patterns/cards/crypto-deletion-card'
 
 export function A07() {
   const { notify } = useDemo()

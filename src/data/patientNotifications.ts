@@ -7,7 +7,7 @@ import {
   ShieldCheck,
   Star,
 } from 'lucide-react'
-import type { TileTone } from '@/components/phone/kit'
+import type { TileTone } from '@/components/base/phone/kit'
 import { consent, lovedOnes, medications, payouts, visits } from '@/data/seed'
 
 export type NotificationEntry = {

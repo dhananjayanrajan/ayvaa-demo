@@ -1,14 +1,14 @@
 import { motion } from 'motion/react'
 import { ChevronRight, CreditCard } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Section, Tile, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
+import { Card, Chip, Section, Tile, rise, stagger } from '@/components/base/phone/kit'
 import { useRouter } from '@/lib/router'
 import { MARCH, RECEIPTS } from '@/data/patientBilling'
-import { BillingHero_Patient as BillingHero } from '@/components/billing/BillingSet'
-import { ReceiptList } from '@/components/billing/BillingSet'
-import { LedgerCard } from '@/components/billing/BillingSet'
-import { StatementButton } from '@/components/billing/BillingSet'
+import { BillingHero } from '@/components/patterns/heroes/billing-hero'
+import { ReceiptList } from '@/components/patterns/lists/receipt-list'
+import { LedgerCard } from '@/components/patterns/cards/ledger-card'
+import { StatementButton } from '@/components/patterns/actions/statement-button'
 
 export function P23() {
   const { navigate } = useRouter()

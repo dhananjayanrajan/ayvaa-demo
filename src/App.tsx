@@ -1,5 +1,6 @@
 import { RouterProvider, useRouter } from '@/lib/router'
 import { DemoProvider } from '@/lib/store'
+import { FrameworkProvider } from '@/components/base/phone/framework-runtime'
 import { Launcher } from '@/presentation/Launcher'
 import { SystemApp } from '@/apps/system/SystemApp'
 import { PartnerApp } from '@/apps/partner/PartnerApp'
@@ -21,7 +22,9 @@ export default function App() {
   return (
     <RouterProvider>
       <DemoProvider>
-        <Routes />
+        <FrameworkProvider>
+          <Routes />
+        </FrameworkProvider>
       </DemoProvider>
     </RouterProvider>
   )

@@ -9,9 +9,9 @@ import {
   Siren,
   UserSearch,
 } from 'lucide-react'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
-import { Card, Chip, Hero, Kicker, Panel, Section, Stat, Tile, TimeChip, rise, stagger } from '@/components/phone/kit'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
+import { Card, Chip, Hero, Kicker, Panel, Section, Stat, Tile, TimeChip, rise, stagger } from '@/components/base/phone/kit'
 import { supportTickets } from '@/data/seed'
 import { supportQuickRequests } from '@/data/patientBilling'
 import { useDemo } from '@/lib/store'

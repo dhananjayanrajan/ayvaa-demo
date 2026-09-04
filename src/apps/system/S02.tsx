@@ -4,9 +4,9 @@ import {
   MapPin,
   RefreshCw,
 } from 'lucide-react'
-import AgentAvatar from '@/components/smoothui/agent-avatar'
-import { AppBar } from '@/components/phone/AppBar'
-import { BodyArea, EndOfScroll, Screen } from '@/components/phone/Screen'
+import AgentAvatar from '@/components/base/smoothui/agent-avatar'
+import { AppBar } from '@/components/base/phone/app-bar'
+import { BodyArea, EndOfScroll, Screen } from '@/components/base/phone/screen'
 import {
   Chip,
   Hero,
@@ -16,11 +16,11 @@ import {
   Section,
   rise,
   stagger,
-} from '@/components/phone/kit'
+} from '@/components/base/phone/kit'
 import { useDemo } from '@/lib/store'
-import { OfferStatusList } from '@/components/transactions/TransactionsSet'
-import { RecheckRulesList } from '@/components/recheck/RecheckSet'
-import { FailsafeCard } from '@/components/drills/DrillsSet'
+import { OfferStatusList } from '@/components/patterns/lists/offer-status-list'
+import { RecheckRulesList } from '@/components/patterns/lists/recheck-rules-list'
+import { FailsafeCard } from '@/components/patterns/cards/failsafe-card'
 
 export function S02() {
   const { dispatch, setDispatch, notify } = useDemo()
