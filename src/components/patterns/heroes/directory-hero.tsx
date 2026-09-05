@@ -1,5 +1,5 @@
 import { Hero, Kicker } from '@/components/base/phone/kit'
-import { AccountSearch } from '@/components/patterns/forms/account-search'
+import { AccountSearch } from '@/components/patterns/forms'
 import { DirectoryMetrics } from '@/components/patterns/metrics/directory-metrics'
 import { DirectoryStatus } from '@/components/patterns/misc/directory-status'
 

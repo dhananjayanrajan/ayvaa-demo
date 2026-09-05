@@ -11,7 +11,7 @@ import { LedgerChainHero } from '@/components/patterns/heroes/ledger-chain-hero'
 import { AuditEntryList } from '@/components/patterns/lists/audit-entry-list'
 import { CustomRangePicker } from '@/components/patterns/pickers/custom-range-picker'
 import { ComplianceToolsList } from '@/components/patterns/lists/compliance-tools-list'
-import { LedgerRangeFilter } from '@/components/patterns/forms/ledger-range-filter'
+import { LedgerRangeFilter } from '@/components/patterns/forms'
 import { ExportActionButton } from '@/components/patterns/actions'
 import { AppendOnlyCard } from '@/components/patterns/cards/compliance-info-cards'
 

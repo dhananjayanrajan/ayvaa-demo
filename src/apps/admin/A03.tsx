@@ -10,7 +10,7 @@ import { useDemo } from '@/lib/store'
 import { ApprovalCard } from '@/components/patterns/cards/approval-card'
 import { EmptyFilterState } from '@/components/patterns/misc/empty-filter-state'
 import { ApprovalsHero } from '@/components/patterns/heroes/approvals-hero'
-import { ApprovalsFilter } from '@/components/patterns/forms/approvals-filter'
+import { ApprovalsFilter } from '@/components/patterns/forms'
 import { AccountabilityCard } from '@/components/patterns/cards/compliance-info-cards'
 
 export function A03() {

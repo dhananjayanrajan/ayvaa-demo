@@ -10,7 +10,7 @@ import { defaultVisible, heroStats, metrics } from '@/data/admin/a10Data'
 import type { MetricId } from '@/data/admin/a10Data'
 import { CommandHero } from '@/components/patterns/heroes/command-hero'
 import { CommandStrip } from '@/components/patterns/metrics/command-strip'
-import { CommandEditor } from '@/components/patterns/forms/command-editor'
+import { CommandEditor } from '@/components/patterns/forms'
 import { MetricDetailCard } from '@/components/patterns/cards/metric-detail-card'
 import { CommandActions } from '@/components/patterns/actions'
 
