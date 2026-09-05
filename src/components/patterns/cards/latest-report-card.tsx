@@ -3,7 +3,7 @@ import { Card, Chip, Tile } from '@/components/base/phone/kit'
 import { QuotePanel } from '@/components/base/phone/quote-panel'
 import { FactRows } from '@/components/base/phone/fact-rows'
 import { useRouter } from '@/lib/router'
-import { DownloadReportButton } from '../actions/download-report-button'
+import { DownloadReportButton } from '../actions'
 import { REPORTS_LATEST } from '@/data/patientReports'
 
 export function LatestReportCard() {

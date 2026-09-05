@@ -1,7 +1,7 @@
 import { Check, ShieldCheck, Wallet } from 'lucide-react'
 import { Chip } from '@/components/base/phone/kit'
 import { PHASE_THEME, PhaseHero } from '@/components/base/phone/phase-hero'
-import type { WithdrawStatus } from '../actions/withdraw-button'
+import type { WithdrawStatus } from '../actions'
 import { cn } from '@/lib/utils'
 
 type Props = {

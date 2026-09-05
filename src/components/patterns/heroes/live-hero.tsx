@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { MapPin } from 'lucide-react'
 import { Hero } from '@/components/base/phone/kit'
-import { CallButton } from '../actions/call-button'
+import { CallButton } from '../actions'
 import { LiveStepper } from '../misc/live-stepper'
 import type { DashboardFacts } from '@/data/patientDashboard'
 

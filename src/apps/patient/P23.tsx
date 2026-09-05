@@ -8,7 +8,7 @@ import { MARCH, RECEIPTS } from '@/data/patientBilling'
 import { BillingHero } from '@/components/patterns/heroes/billing-hero'
 import { ReceiptList } from '@/components/patterns/lists/receipt-list'
 import { LedgerCard } from '@/components/patterns/cards/ledger-card'
-import { StatementButton } from '@/components/patterns/actions/statement-button'
+import { StatementButton } from '@/components/patterns/actions'
 
 export function P23() {
   const { navigate } = useRouter()

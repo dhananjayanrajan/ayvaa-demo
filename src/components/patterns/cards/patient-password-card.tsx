@@ -2,8 +2,8 @@ import { KeyRound, Mail } from 'lucide-react'
 import { Field, EyeToggle } from '@/components/base/phone/field'
 import type { FieldState } from '@/data/patientOnboarding'
 import { BiometricNote } from './biometric-note'
-import { SignInButton } from '../actions/sign-in-button'
-import type { SignInState } from '../actions/sign-in-button'
+import { SignInButton } from '../actions'
+import type { SignInState } from '../actions'
 
 export function PasswordCard({
   email,
@@ -81,4 +81,4 @@ export function PasswordCard({
 }
 
 export { PasswordCard as PasswordCard_Patient }
-export type { SignInState } from '../actions/sign-in-button'
+export type { SignInState } from '../actions'

@@ -6,7 +6,7 @@ import type { MergeTarget } from '@/data/admin/a13Data'
 
 type MergeState = 'idle' | 'selecting' | 'merged'
 
-type Props = {
+type AccountActionsProps = {
   status: 'active' | 'suspended'
   mergeState: MergeState
   mergeTargets: MergeTarget[]
@@ -18,17 +18,27 @@ type Props = {
   onConfirmMerge: () => void
 }
 
-export function AccountActions({ status, mergeState, mergeTargets, selectedTarget, merging, onSuspend, onToggleMerge, onSelectTarget, onConfirmMerge }: Props) {
+export function AccountActions({ status, mergeState, mergeTargets, selectedTarget, merging, onSuspend, onToggleMerge, onSelectTarget, onConfirmMerge }: AccountActionsProps) {
   return (
     <>
       <SectionHeader label="Account actions" done={false} trailing="Role" />
       <Card>
         <div className="flex flex-col gap-2 p-2">
           <button type="button" onClick={onSuspend} disabled={status === 'suspended'} className={cn('flex items-center gap-3 rounded-2xl bg-rose-500/[0.06] px-3 py-3 text-left transition-colors', status !== 'suspended' && 'hover:bg-rose-500/[0.1]', status === 'suspended' && 'cursor-not-allowed opacity-60')}>
-            <Tile icon={ShieldAlert} tone="danger" /><div className="min-w-0 flex-1"><div className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">Suspend account</div><div className="mt-0.5 break-words text-[11px] font-medium text-[#0B211B]/55">{status === 'suspended' ? 'Account is suspended' : 'Revoke all access immediately'}</div></div><ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" />
+            <Tile icon={ShieldAlert} tone="danger" />
+            <div className="min-w-0 flex-1">
+              <div className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">Suspend account</div>
+              <div className="mt-0.5 break-words text-[11px] font-medium text-[#0B211B]/55">{status === 'suspended' ? 'Account is suspended' : 'Revoke all access immediately'}</div>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" />
           </button>
           <button type="button" onClick={onToggleMerge} disabled={mergeState === 'merged'} className={cn('flex items-center gap-3 rounded-2xl bg-amber-500/[0.06] px-3 py-3 text-left transition-colors', mergeState !== 'merged' && 'hover:bg-amber-500/[0.1]', mergeState === 'merged' && 'cursor-not-allowed opacity-60')}>
-            <Tile icon={UserRound} tone="warning" /><div className="min-w-0 flex-1"><div className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">Merge account</div><div className="mt-0.5 break-words text-[11px] font-medium text-[#0B211B]/55">{mergeState === 'merged' ? 'Accounts merged' : 'Combine with another guardian record'}</div></div><ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" />
+            <Tile icon={UserRound} tone="warning" />
+            <div className="min-w-0 flex-1">
+              <div className="break-words text-[13px] font-bold tracking-tight text-[#0B211B]">Merge account</div>
+              <div className="mt-0.5 break-words text-[11px] font-medium text-[#0B211B]/55">{mergeState === 'merged' ? 'Accounts merged' : 'Combine with another guardian record'}</div>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-[#0B211B]/25" />
           </button>
           {mergeState === 'selecting' && (
             <div className="rounded-2xl bg-amber-500/[0.06] p-3">

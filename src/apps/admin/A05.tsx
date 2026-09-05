@@ -12,8 +12,8 @@ import { AuditEntryList } from '@/components/patterns/lists/audit-entry-list'
 import { CustomRangePicker } from '@/components/patterns/pickers/custom-range-picker'
 import { ComplianceToolsList } from '@/components/patterns/lists/compliance-tools-list'
 import { LedgerRangeFilter } from '@/components/patterns/forms/ledger-range-filter'
-import { LedgerExportAction } from '@/components/patterns/actions/ledger-export-action'
-import { AppendOnlyCard } from '@/components/patterns/cards/append-only-card'
+import { ExportActionButton } from '@/components/patterns/actions'
+import { AppendOnlyCard } from '@/components/patterns/cards/compliance-info-cards'
 
 export function A05() {
   const { notify } = useDemo()
@@ -74,7 +74,7 @@ export function A05() {
             <ComplianceToolsList />
 
             <motion.div variants={rise}>
-              <LedgerExportAction onClick={() => notify({ title: 'Export queued', body: "Today's log will be emailed to you", kind: 'info' })} />
+              <ExportActionButton label="Export today's log" onClick={() => notify({ title: 'Export queued', body: "Today's log will be emailed to you", kind: 'info' })} />
             </motion.div>
 
             <motion.div variants={rise}>

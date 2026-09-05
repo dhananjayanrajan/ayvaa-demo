@@ -11,8 +11,8 @@ import { ScheduleCard } from '@/components/patterns/cards/schedule-card'
 import { EstimateCard } from '@/components/patterns/cards/estimate-card'
 import { WhoSheet } from '@/components/patterns/sheets/who-sheet'
 import { TimeSheet } from '@/components/patterns/sheets/time-sheet'
-import { ContinueButton } from '@/components/patterns/actions/continue-button'
-import type { ContinueState } from '@/components/patterns/actions/continue-button'
+import { ContinueButton } from '@/components/patterns/actions'
+import type { ContinueState } from '@/components/patterns/actions'
 import {
   bookingCategories,
   bookingSummaryLine,

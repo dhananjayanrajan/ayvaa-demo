@@ -15,7 +15,7 @@ import { DecisionNoteCard } from '@/components/patterns/cards/decision-note-card
 import { EscalateSheet } from '@/components/patterns/sheets/escalate-sheet'
 import { CloseSheet } from '@/components/patterns/sheets/close-sheet'
 import { BottomSheet } from '@/components/base/phone/sheet-shell'
-import { IncidentActions } from '@/components/patterns/actions/incident-actions'
+import { IncidentActions } from '@/components/patterns/actions'
 import { PhotoOverlay } from '@/components/patterns/overlays/photo-overlay'
 
 type Sheet = 'none' | 'photo' | 'escalate' | 'close'

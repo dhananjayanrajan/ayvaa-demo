@@ -1,8 +1,8 @@
 import { motion } from 'motion/react'
 import { Mail } from 'lucide-react'
 import { SheetShell } from '@/components/base/phone/sheet-shell'
-import { EmailCodeButton } from '../actions/email-code-button'
-import type { EmailSendState } from '../actions/email-code-button'
+import { EmailCodeButton } from '../actions'
+import type { EmailSendState } from '../actions'
 import { emailFallbackSubtitle } from '@/data/patientVerification'
 import { cn } from '@/lib/utils'
 
@@ -57,4 +57,4 @@ export function EmailFallbackSheet({
   )
 }
 
-export type { EmailSendState } from '../actions/email-code-button'
+export type { EmailSendState } from '../actions'

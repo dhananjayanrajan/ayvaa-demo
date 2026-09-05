@@ -14,7 +14,7 @@ import { ConsentScopeSheet } from '@/components/patterns/sheets/consent-scope-sh
 import { ConfirmedHero } from '@/components/patterns/heroes/confirmed-hero'
 import { BookingRecordCard } from '@/components/patterns/cards/booking-record-card'
 import { DispatchSequence } from '@/components/patterns/misc/dispatch-sequence'
-import { ShareButton } from '@/components/patterns/actions/share-button'
+import { ShareButton } from '@/components/patterns/actions'
 import {
   REVIEW_GUARDIAN,
   REVIEW_PATIENT,

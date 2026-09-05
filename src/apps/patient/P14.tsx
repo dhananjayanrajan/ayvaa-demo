@@ -7,7 +7,7 @@ import { NoteStrip } from '@/components/base/phone/note-strip'
 import { ReportsHero } from '@/components/patterns/heroes/reports-hero'
 import { LatestReportCard } from '@/components/patterns/cards/latest-report-card'
 import { ReportsListCard } from '@/components/patterns/cards/reports-list-card'
-import { DownloadAllButton } from '@/components/patterns/actions/download-all-button'
+import { DownloadAllButton } from '@/components/patterns/actions'
 import { REPORTS } from '@/data/patientReports'
 import { useRouter } from '@/lib/router'
 

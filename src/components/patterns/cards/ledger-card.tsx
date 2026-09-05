@@ -1,4 +1,4 @@
-import { StatementButton } from '../actions/statement-button'
+import { StatementButton } from '../actions'
 import { buildLedgerRows, type Receipt } from '@/data/patientBilling'
 
 interface LedgerCardProps {

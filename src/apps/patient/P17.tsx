@@ -14,7 +14,7 @@ import { CareDeliveredCard } from '@/components/patterns/cards/care-delivered-ca
 import { CaregiverNoteCard } from '@/components/patterns/cards/caregiver-note-card'
 import { PaymentCard } from '@/components/patterns/cards/payment-card'
 import { PaymentSheet } from '@/components/patterns/sheets/payment-sheet'
-import { ShareSummaryButton } from '@/components/patterns/actions/share-summary-button'
+import { ShareSummaryButton } from '@/components/patterns/actions'
 import {
   CARE_STEPS,
   SESSION_LEDGER,

@@ -5,7 +5,7 @@ import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/
 import { Card, Chip, Panel, Section, Tile } from '@/components/base/phone/kit'
 import { CaseHero } from '@/components/patterns/heroes/case-hero'
 import { InvestigatorPicker } from '@/components/patterns/pickers/investigator-picker'
-import { CaseAssignAction } from '@/components/patterns/actions/case-assign-action'
+import { CaseAssignAction } from '@/components/patterns/actions'
 import { useDemo } from '@/lib/store'
 import { useRouter } from '@/lib/router'
 import { incidents } from '@/data/seed'
@@ -73,7 +73,7 @@ export function A11() {
           <EndOfScroll label="End of incident case file" />
         </div>
       </BodyArea>
-      <FootBar><CaseAssignAction selectedId={selectedInv} assigning={assigning} assigned={assigned} onAssign={assignInvestigator} /></FootBar>
+      <FootBar><CaseAssignAction selectedId={selectedInv} assigning={assigning} assigned={assigned} onPress={assignInvestigator} /></FootBar>
     </Screen>
   )
 }

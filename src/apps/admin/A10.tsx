@@ -12,7 +12,7 @@ import { CommandHero } from '@/components/patterns/heroes/command-hero'
 import { CommandStrip } from '@/components/patterns/metrics/command-strip'
 import { CommandEditor } from '@/components/patterns/forms/command-editor'
 import { MetricDetailCard } from '@/components/patterns/cards/metric-detail-card'
-import { CommandActions } from '@/components/patterns/actions/command-actions'
+import { CommandActions } from '@/components/patterns/actions'
 
 export function A10() {
   const { notify } = useDemo()

@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import AgentAvatar from '@/components/base/smoothui/agent-avatar'
 import { AppBar } from '@/components/base/phone/app-bar'
 import { BodyArea, EndOfScroll, FootBar, Screen } from '@/components/base/phone/screen'
-import { PolicyExportAction } from '@/components/patterns/actions/policy-export-action'
+import { ExportActionButton } from '@/components/patterns/actions'
 import {
   Chip,
   Section,
@@ -56,7 +56,7 @@ export function A07() {
         </div>
       </BodyArea>
       <FootBar>
-        <PolicyExportAction onExport={() => notify({ title: 'Policy export queued', body: 'Full retention policy will be emailed to you', kind: 'info' })} />
+        <ExportActionButton label="Export policy" onClick={() => notify({ title: 'Policy export queued', body: 'Full retention policy will be emailed to you', kind: 'info' })} />
       </FootBar>
     </Screen>
   )

@@ -3,7 +3,7 @@ import { MessageSquare, Phone, Radio } from 'lucide-react'
 import { Card, LiveDot } from '@/components/base/phone/kit'
 import { DarkPanel } from '@/components/base/phone/dark-panel'
 import { QuietLifecycleButton } from '@/components/base/phone/lifecycle-button'
-import { ConnectButton } from '../actions/connect-button'
+import { ConnectButton } from '../actions'
 import { LIVE_VISIT, formatElapsed } from '@/data/patientLiveVisit'
 import { useDemo } from '@/lib/store'
 

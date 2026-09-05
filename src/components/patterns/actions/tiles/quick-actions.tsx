@@ -29,20 +29,10 @@ export function QuickActions({ onPress }: { onPress: (to: string) => void }) {
                 <Icon className="h-4.5 w-4.5" strokeWidth={2.4} aria-hidden />
               </span>
               <span className="min-w-0 flex-1">
-                <span
-                  className={cn(
-                    'block truncate text-[12.5px] font-extrabold tracking-tight',
-                    action.labelClass,
-                  )}
-                >
+                <span className={cn('block truncate text-[12.5px] font-extrabold tracking-tight', action.labelClass)}>
                   {action.label}
                 </span>
-                <span
-                  className={cn(
-                    'mt-0.5 block truncate text-[9px] font-extrabold uppercase tracking-[0.1em]',
-                    action.subClass,
-                  )}
-                >
+                <span className={cn('mt-0.5 block truncate text-[9px] font-extrabold uppercase tracking-[0.1em]', action.subClass)}>
                   {action.sub}
                 </span>
               </span>

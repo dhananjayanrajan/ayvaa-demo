@@ -14,7 +14,7 @@ import { SectionHeader } from '@/components/patterns/misc/section-header'
 import { CredentialCard } from '@/components/base/phone/credential-card'
 import { Field, EyeToggle, PasswordMeter } from '@/components/base/phone/field'
 import { ConsentBlock } from '@/components/patterns/misc/consent-block'
-import { PrimaryAction } from '@/components/patterns/actions/primary-action'
+import { PrimaryAction } from '@/components/patterns/actions'
 import { SheetShell } from '@/components/base/phone/sheet-shell'
 import { ReviewSummary } from '@/components/patterns/cards/review-summary'
 import {

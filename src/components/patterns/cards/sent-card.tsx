@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { MailCheck, PhoneCall } from 'lucide-react'
 import { Card, Tile } from '@/components/base/phone/kit'
 import { StatusStrip } from '@/components/base/phone/status-strip'
-import type { CallState } from '../actions/sent-actions'
-import { SentActions } from '../actions/sent-actions'
+import type { CallState } from '../actions'
+import { SentActions } from '../actions'
 import { ValidityMeter } from './validity-meter'
 
 export function SentCard({
@@ -54,4 +54,4 @@ export function SentCard({
   )
 }
 
-export type { CallState } from '../actions/sent-actions'
+export type { CallState } from '../actions'

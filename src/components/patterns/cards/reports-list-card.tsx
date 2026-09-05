@@ -4,7 +4,7 @@ import { Card, Chip } from '@/components/base/phone/kit'
 import { ExpandRow } from '@/components/base/phone/expand-row'
 import { QuotePanel } from '@/components/base/phone/quote-panel'
 import { FactRows } from '@/components/base/phone/fact-rows'
-import { DownloadReportButton } from '../actions/download-report-button'
+import { DownloadReportButton } from '../actions'
 import { REPORTS, type CareReport } from '@/data/patientReports'
 
 function ReportRow({ report, open, onToggle }: { report: CareReport; open: boolean; onToggle: () => void }) {

@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { MapPin } from 'lucide-react'
 import { SheetShell } from '@/components/base/phone/sheet-shell'
 import { DarkPanel } from '@/components/base/phone/dark-panel'
-import { CallButton } from '../actions/call-button'
+import { CallButton } from '../actions'
 import { liveSteps } from '@/data/patientDashboard'
 import { useRouter } from '@/lib/router'
 

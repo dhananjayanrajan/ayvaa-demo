@@ -11,7 +11,7 @@ import { ApprovalCard } from '@/components/patterns/cards/approval-card'
 import { EmptyFilterState } from '@/components/patterns/misc/empty-filter-state'
 import { ApprovalsHero } from '@/components/patterns/heroes/approvals-hero'
 import { ApprovalsFilter } from '@/components/patterns/forms/approvals-filter'
-import { AccountabilityCard } from '@/components/patterns/cards/accountability-card'
+import { AccountabilityCard } from '@/components/patterns/cards/compliance-info-cards'
 
 export function A03() {
   const { notify } = useDemo()

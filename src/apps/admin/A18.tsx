@@ -9,7 +9,7 @@ import { initialReports, frequencyLabel, type MetricId, type TimeRange, type Fre
 import { ReportBuilder } from '@/components/patterns/forms/report-builder'
 import { ScheduledReports } from '@/components/patterns/lists/scheduled-reports'
 import { ReportSheets } from '@/components/patterns/sheets/report-sheets'
-import { ReportSaveAction } from '@/components/patterns/actions/report-save-action'
+import { ReportSaveAction } from '@/components/patterns/actions'
 
 export function A18() {
   const { notify } = useDemo()
@@ -59,7 +59,7 @@ export function A18() {
           <EndOfScroll label="End of report builder" />
         </div>
       </BodyArea>
-      <FootBar><ReportSaveAction isValid={isValid} saveState={saveState} onSave={saveReport} /></FootBar>
+      <FootBar><ReportSaveAction isValid={isValid} saveState={saveState} onPress={saveReport} /></FootBar>
       <ReportSheets sheetOpen={sheetOpen} setSheetOpen={setSheetOpen} timeRange={timeRange} setTimeRange={setTimeRange} frequency={frequency} setFrequency={setFrequency} deleteTargetReport={deleteTargetReport} deleteReport={deleteReport} setDeleteTargetId={setDeleteTargetId} />
     </Screen>
   )
